@@ -7,3 +7,9 @@ outputs/
 *.safetensors
 *.npz
 *answer_tape*.jsonl
+
+# Required public development/calibration fixtures for the pre-unseal CPU audit.
+!/arg03_preunseal/data/
+/arg03_preunseal/data/*
+!/arg03_preunseal/data/dev96_compact.json
+!/arg03_preunseal/data/gramian_compact.json
