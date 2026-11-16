@@ -364,6 +364,66 @@ def test_campaign_summary_statistical_primitives(tmp_path):
     assert clean["excluded_sha256"] == {"sudoku_items256.json": "abc123", "eval.csv": "def456"}
 
 
+@pytest.mark.parametrize("source_path, basename", [
+    (r"C:\Users\alice\private\receipt.json", "receipt.json"),
+    ("C:/Users/alice/private/receipt.json", "receipt.json"),
+    (r"C:\Users/alice\private/receipt.json", "receipt.json"),
+    (r"\\server\share\private\receipt.json", "receipt.json"),
+    ("/home/alice/private/receipt.json", "receipt.json"),
+    (r"..\private\receipt.json", "receipt.json"),
+    ("../private/receipt.json", "receipt.json"),
+    ("C:receipt.json", "receipt.json"),
+    ("C:\\Users\\alice\\tools\\", "tools"),
+    ("/home/alice/tools/", "tools"),
+    ("receipt.json", "receipt.json"),
+])
+def test_campaign_manifest_path_fields_are_portable(source_path, basename):
+    from mechinterp.dark_fiber_gyms import campaign_summary as CS
+
+    digest = "a" * 64
+    dirty = {"source_csv": source_path, "source_runner": source_path,
+             "excluded_sha256": {source_path: digest}}
+    assert CS._sanitize_manifest_paths(dirty) == {
+        "source_csv": basename, "source_runner": basename,
+        "excluded_sha256": {basename: digest},
+    }
+
+
+def test_campaign_manifest_nested_paths_preserve_metadata():
+    import copy
+    from mechinterp.dark_fiber_gyms import campaign_summary as CS
+
+    dirty = {
+        "receipts": [{
+            r"C:\Users\alice\private\windows.csv": "a" * 64,
+            "/home/alice/private/posix.csv": "b" * 64,
+            r"\\server\share\private\network.csv": "c" * 64,
+            "nested": {"source_runner": "/home/alice/tools/runner/"},
+        }],
+        "case_id": "arg03:development:signed:00001",
+        "response/displacement": 1.25,
+        "https://example.org/schema": {"sha256": "d" * 64},
+        "enabled": True,
+        "missing": None,
+    }
+    original = copy.deepcopy(dirty)
+    clean = CS._sanitize_manifest_paths(dirty)
+    assert clean == {
+        "receipts": [{
+            "windows.csv": "a" * 64,
+            "posix.csv": "b" * 64,
+            "network.csv": "c" * 64,
+            "nested": {"source_runner": "runner"},
+        }],
+        "case_id": "arg03:development:signed:00001",
+        "response/displacement": 1.25,
+        "https://example.org/schema": {"sha256": "d" * 64},
+        "enabled": True,
+        "missing": None,
+    }
+    assert dirty == original
+
+
 def test_streamed_nanbeige_loop_bit_exact():
     """Verify StreamedNanbeigeLoop with layer staging produces bit-exact outputs vs full resident."""
     import copy
