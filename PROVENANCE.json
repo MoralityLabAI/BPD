@@ -1,0 +1,35 @@
+{
+  "heldout_arg03_test_sealed": true,
+  "heldout_arg03_test_sha256": "ddd580212da5a5ea4f5fea740b515dd191b39e7a501d3e31b45944a666e7c8b5",
+  "public_vpd_mirror_commit": "02afb413759355468752ed24038792aef3eceab3",
+  "public_vpd_mirror_url": "https://github.com/MoralityLabAI/VPD/tree/main/output/supplements/loopscope04_arg03",
+  "repository": "MoralityLabAI/BPD",
+  "schema": "moralitylab.bpd.provenance.v1",
+  "source_commits_looped_transformers": {
+    "arg03_fable_preunseal_audit_branch": {
+      "branch": "audit/arg03-preunseal-fable-20261115",
+      "commit": "6c1997622341b7015b2d99befa9deda07692e59f"
+    },
+    "bpd_fable_preflight_branch": {
+      "branch": "fix/bpd-fable-preflight-20261115",
+      "commit": "fb7b1e9"
+    },
+    "bpd_historical_gate_receipts_branch": {
+      "branch": "feat/mechinterp-bpd",
+      "commit": "9f3711b",
+      "registration_commit": "49c7207"
+    },
+    "bpd_lean_curriculum_v2_commit": {
+      "branch": "main",
+      "commit": "e244b96"
+    },
+    "dark_fibers_campaign_branch": {
+      "branch": "research/causal-dark-fibers-arg03-20261115",
+      "commit": "bf8fecad7d210306a38e909ef0366ceeefefd521"
+    },
+    "main_foundations": {
+      "branch": "main",
+      "commit": "88b99b9"
+    }
+  }
+}
