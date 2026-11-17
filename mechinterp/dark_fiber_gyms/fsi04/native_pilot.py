@@ -88,6 +88,8 @@ def native_case(TS,model,row,*,patch_step=4,horizon=32,sigma=.35,seed=2026111744
             final_pred=model.digit_logits(h_all).argmax(dim=-1).add(1).cpu().tolist()
     if final_pred is None:raise AssertionError("no continuation")
     answer=[int(c) for c in row["answer"]]
+    blank_indices=[i for i,c in enumerate(row["question"]) if c=="."]
+    if not blank_indices:raise ValueError("Sudoku causal pilot needs missing cells")
     clean=final_pred[0]
     outcomes={}
     for i,k in enumerate(ARMS):
@@ -95,10 +97,19 @@ def native_case(TS,model,row,*,patch_step=4,horizon=32,sigma=.35,seed=2026111744
         gained=sum(z!=a and v==a for z,v,a in zip(clean,pred,answer))
         lost=sum(z==a and v!=a for z,v,a in zip(clean,pred,answer))
         correct=sum(v==a for v,a in zip(pred,answer))
+        gained_blank=sum(clean[j]!=answer[j] and pred[j]==answer[j] for j in blank_indices)
+        lost_blank=sum(clean[j]==answer[j] and pred[j]!=answer[j] for j in blank_indices)
+        correct_blank=sum(pred[j]==answer[j] for j in blank_indices)
         assert correct-sum(z==a for z,a in zip(clean,answer))==gained-lost
+        assert correct_blank-sum(clean[j]==answer[j] for j in blank_indices)==gained_blank-lost_blank
         outcomes[k]={"correct_cells":int(correct),"exact":bool(pred==answer),
                      "gained_cells_vs_clean":int(gained),"lost_cells_vs_clean":int(lost),
                      "net_cells_vs_clean":int(gained-lost),
+                     "missing_cells_total":len(blank_indices),
+                     "missing_cells_correct":int(correct_blank),
+                     "missing_gained_vs_clean":int(gained_blank),
+                     "missing_lost_vs_clean":int(lost_blank),
+                     "missing_net_vs_clean":int(gained_blank-lost_blank),
                      "first_successor_cos_to_donor":first_cos[k]}
     if outcomes["self_control"]!=dict(outcomes["clean"],first_successor_cos_to_donor=first_cos["self_control"]):
         # The first-successor cosine is zero for both clean and self.
