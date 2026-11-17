@@ -6,7 +6,7 @@ two-feature diagonal read mixtures.
 
 The finite structural support weights come from the unchanged PD06 source.
 When independent active amplitudes have continuous densities, the mixed
-direction e_i +/- e_j is exactly zero only when both latent coordinates are
+direction supported on both e_i and e_j is exactly zero only when both coordinates are
 inactive. This conditional measure argument is stated in the written note;
 the kernel checks below certify the finite support combinatorics.
 
