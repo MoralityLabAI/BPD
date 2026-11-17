@@ -1,0 +1,84 @@
+name: BPD-SF02 registered fresh-root CPU replay
+
+on:
+  push:
+    branches:
+      - "research/bpd-sf02-*"
+    paths:
+      - ".github/workflows/bpd-sf02-registered-run.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  registered-cpu:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pinned CPU torch
+        run: python -m pip install "torch==2.5.1" "numpy>=1.26"
+      - name: Verify locked scientific source hashes
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          base = Path("mechinterp/bpd/theory/sf02_secret_circuit")
+          lock = json.loads((base / "LOCK.json").read_text())
+          for key, path in [
+              ("protocol_blob_sha", "PROTOCOL.md"),
+              ("experiment_blob_sha", "experiment.py"),
+              ("native_parity_blob_sha", "native_parity.py"),
+              ("engineering_tests_blob_sha", "tests/test_experiment.py"),
+          ]:
+              got = subprocess.check_output(["git", "hash-object", str(base/path)], text=True).strip()
+              expected = lock[key]
+              assert got == expected, f"{path}: {got} != locked {expected}"
+          assert lock["fresh_roots"] == [1013, 1019, 1021, 1031, 1033, 1039, 1049, 1051]
+          print("SF02 source LOCK VERIFIED")
+          PY
+      - name: Replay eight freshly locked independent roots
+        run: |
+          python -m mechinterp.bpd.theory.sf02_secret_circuit.experiment \
+            --seeds 1013 1019 1021 1031 1033 1039 1049 1051 \
+            --teacher-steps 850 --factor-steps 400 --pairs 384 \
+            --out /tmp/sf02_registered_hosted.json
+      - name: Check frozen root-level gates, keep all failures
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          obj=json.load(open("/tmp/sf02_registered_hosted.json"))
+          rows=obj["rows"]
+          assert len(rows)==8 and [r["seed"] for r in rows]==[1013,1019,1021,1031,1033,1039,1049,1051]
+          passed=0
+          engineering_all=True
+          for r in rows:
+              science=(r["auth_eligible"]>=100 and r["auth_recovery"]>=.60
+                   and r["auth_recovery"]-r["sham_recovery_best"]>=.20
+                   and r["full_dark_recovery"]>=.90 and r["auth_all_factor_recovery"]>=.90)
+              engineering=(r["teacher_readout1_mae"]<=.08 and r["teacher_readout2_mae"]<=.08
+                   and r["factor_weight_mse"]<=1e-4 and r["gauge_full_max_error"]<=2e-5
+                   and r["max_immediate_readout_change"]<=1e-6)
+              passed+=science
+              engineering_all &= engineering
+              print(json.dumps({"seed":r["seed"],"auth_eligible":r["auth_eligible"],
+                "auth_recovery":r["auth_recovery"],"best_sham":r["sham_recovery_best"],
+                "full_dark":r["full_dark_recovery"],"factor_mse":r["factor_weight_mse"],
+                "public_partial_drift":r["public_absolute_effect"],
+                "public_null_drift":r["public_null_effect_mean"],
+                "engineering_pass":engineering,"science_pass":science}))
+          print(json.dumps({"science_root_gate_passed":passed>=6,"science_roots":passed,
+            "engineering_all_passed":engineering_all,
+            "evidence_class":"exploratory synthetic, not 95/95 calibrated"}))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bpd-sf02-registered-eight-root-raw-json
+          path: /tmp/sf02_registered_hosted.json
