@@ -16,15 +16,23 @@ jobs:
           python-version: '3.12'
       - name: Tests (stdlib; no weights)
         run: python -m unittest mechinterp.bpd.experiments.amm01_agent_memory.test_experiment -v
-      - name: Replay locked development receipt
+      - name: Reconstruct all development cases and compare locked digest
         run: |
-          if test -f mechinterp/bpd/experiments/amm01_agent_memory/results/DEVELOPMENT.json; then
-            python -m mechinterp.bpd.experiments.amm01_agent_memory.experiment --phase development --check mechinterp/bpd/experiments/amm01_agent_memory/results/DEVELOPMENT.json
-          fi
-      - name: Replay locked confirmation receipt
+          python -m mechinterp.bpd.experiments.amm01_agent_memory.verify \
+            --lock mechinterp/bpd/experiments/amm01_agent_memory/results/DEVELOPMENT_LOCK.json
+      - name: EvalMath pinned strict preflight exact replay
         run: |
-          if test -f mechinterp/bpd/experiments/amm01_agent_memory/results/PREFLIGHT.json && test -f mechinterp/bpd/experiments/amm01_agent_memory/results/CONFIRMATION.json; then
-            python -m mechinterp.bpd.experiments.amm01_agent_memory.experiment --phase confirmation --preflight mechinterp/bpd/experiments/amm01_agent_memory/results/PREFLIGHT.json --check mechinterp/bpd/experiments/amm01_agent_memory/results/CONFIRMATION.json
+          curl -fsSL https://raw.githubusercontent.com/MoralityLabAI/EvalMath/2fdd5fe3f499070b63c474a2455f0e2c00fc55a8/skills/evalmath-mechinterp-power/scripts/preflight.py -o /tmp/evalmath_preflight.py
+          python -m mechinterp.bpd.experiments.amm01_agent_memory.experiment --phase development --out /tmp/amm01_dev.json
+          python -c 'import json; d=json.load(open("/tmp/amm01_dev.json")); json.dump(d["evalmath_preflight_input"],open("/tmp/amm01_pilot.json","w"))'
+          python /tmp/evalmath_preflight.py --pilot /tmp/amm01_pilot.json --strict --out /tmp/amm01_preflight.json
+          python -c 'import json; a=json.load(open("/tmp/amm01_preflight.json")); b=json.load(open("mechinterp/bpd/experiments/amm01_agent_memory/results/PREFLIGHT.json")); assert a==b, "EvalMath preflight diverged"'
+      - name: Reconstruct prospective confirmation after preflight gate
+        run: |
+          if test -f mechinterp/bpd/experiments/amm01_agent_memory/results/CONFIRMATION_LOCK.json; then
+            python -m mechinterp.bpd.experiments.amm01_agent_memory.verify \
+              --lock mechinterp/bpd/experiments/amm01_agent_memory/results/CONFIRMATION_LOCK.json \
+              --preflight mechinterp/bpd/experiments/amm01_agent_memory/results/PREFLIGHT.json
           else
-            echo 'SOURCE ONLY: no confirmation receipt committed'
+            echo 'SOURCE ONLY: confirmation not yet scored'
           fi
