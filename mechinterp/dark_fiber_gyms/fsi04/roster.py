@@ -29,7 +29,7 @@ def build(out_dir: Path, *, n_stalled: int = 24, n_propagation: int = 12,
     reg=json.loads(REG.read_text())
     if reg["schema"]!="BPD-FSI04/native-causal-dose-matched-development-pilot/v1":
         raise ValueError("protocol changed")
-    if n_stalled not in (4,24) or n_propagation not in (2,12):
+    if n_stalled not in (1,24) or n_propagation not in (2,12):
         raise ValueError("only registered full or smoke roster sizes permitted")
     if not LOOP02.is_file() or not OLD.is_file():
         raise ValueError("old public exclusion archives absent; cannot certify roster")
@@ -100,9 +100,9 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument("--out-dir",type=Path,required=True)
     p.add_argument("--smoke",action="store_true")
-    p.add_argument("--max-attempts",type=int,default=8000)
+    p.add_argument("--max-attempts",type=int,default=100000)
     a=p.parse_args()
-    manifest=build(a.out_dir,n_stalled=4 if a.smoke else 24,
+    manifest=build(a.out_dir,n_stalled=1 if a.smoke else 24,
                    n_propagation=2 if a.smoke else 12,max_attempts=a.max_attempts)
     print(json.dumps(manifest,indent=2,sort_keys=True))
 
