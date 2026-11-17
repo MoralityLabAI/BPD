@@ -8,4 +8,4 @@ From repository root:
 python -m pytest -q mechinterp/bpd/experiments/sf01/test_information.py
 ```
 
-The nine mathematical sanity tests use no trained model, private data or API keys. The information utilities return **bits**, while BPD commonly uses KL in **nats**. Empirical leakage claims will require independent-root uncertainty, correctly specified observer context, and prospective matched-fiber interventions.
+The ten mathematical sanity tests use no trained model, private data or API keys. The information utilities return **bits**, while BPD commonly uses KL in **nats**. Empirical leakage claims will require independent-root uncertainty, correctly specified observer context, and prospective matched-fiber interventions.
