@@ -33,7 +33,7 @@ jobs:
         run: |
           if test -f mechinterp/bpd/experiments/amm01_agent_memory/results/CONFIRM_FRESH_LOCK.json; then
             python -m mechinterp.bpd.experiments.amm01_agent_memory.verify \
-              --lock mechinterp/bpd/experiments/amm01_agent_memory/results/CONFIRMATION_LOCK.json \
+              --lock mechinterp/bpd/experiments/amm01_agent_memory/results/CONFIRM_FRESH_LOCK.json \
               --preflight mechinterp/bpd/experiments/amm01_agent_memory/results/PREFLIGHT.json
           else
             echo 'SOURCE ONLY: confirmation not yet scored'
