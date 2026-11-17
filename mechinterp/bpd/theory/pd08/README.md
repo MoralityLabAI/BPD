@@ -9,3 +9,12 @@ The five arms are a trained read-coefficient threshold, a trained raw-input inde
 Primary success requires at least 18/24 seed recoveries with a single component alignment across all six heldout families, at least six net wins of the read gate over the raw gate, and exact McNemar p<=0.05. A separate strict output MSE and four-pass exact support gate applies per seed.
 
 The first scientific cohort is released only after source CI passes and an `EXECUTE_LOCK.json` pins the audited experiment source. The dedicated workflow writes the original 120-arm JSON receipt and preserves a scientific failure unchanged. These remain controlled synthetic and partly count-supervised experiments, without a claim of complete unsupervised mechanistic identification.
+
+
+## First registered result, 17 November 2026
+
+[RESULTS_20261117.md](RESULTS_20261117.md) preserves a scientific **PASS** for the frozen primary hypothesis: trained read-threshold gating recovered 23/24 seed-level six-family mechanisms after count-supervised factor discovery, while a matched raw-input independent MLP recovered 0/24. There were 23 read-only paired successes and no raw-only successes; exact two-sided McNemar p=2.384185791015625e-7.
+
+The [complete unmodified 120-arm JSON](https://github.com/MoralityLabAI/BPD/actions/runs/44114726057/artifacts/14342451949), SHA256 73704fd7eeef67930b7913ebdcf81d0fc748039898f7e797d86bc410ae683483, and [24-seed CSV](PER_SEED_20261117.csv) are archived with [independent source-only result replay](test_published_results.py).
+
+A fixed read threshold 0.5, using the same learned frozen factors, also recovered 23/24 seeds and executed every held-out support perfectly in the 23 sufficiently aligned dictionaries. Trained thresholds approached 0.75 and added some false-offs. Seed 1237 failed stage-one factor discovery, which even an oracle-support gate could not rescue. These findings are conditional on the stage-one cardinality supervision, not evidence of a wholly unsupervised neural mechanism.
