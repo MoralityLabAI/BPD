@@ -1,0 +1,62 @@
+name: BPD v3 source-only tests
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/v3/**'
+      - 'mechinterp/bpd/tests/test_v3_floor_and_basis.py'
+      - 'mechinterp/bpd/tests/test_v3_uncertainty.py'
+      - '.github/workflows/bpd-v3-sourceonly.yml'
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/v3/**'
+      - 'mechinterp/bpd/tests/test_v3_floor_and_basis.py'
+      - 'mechinterp/bpd/tests/test_v3_uncertainty.py'
+      - '.github/workflows/bpd-v3-sourceonly.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install source-only dependencies
+        run: python -m pip install 'numpy>=1.26' 'pytest>=8.0'
+      - name: Test identities and exact certificates
+        # The shared neural conftest imports torch. Isolate the source-only suite.
+        run: |
+          mkdir -p /tmp/bpd-v3-tests
+          cp mechinterp/bpd/tests/test_v3_floor_and_basis.py mechinterp/bpd/tests/test_v3_uncertainty.py /tmp/bpd-v3-tests/
+          PYTHONPATH="$PWD" python - <<'PY'
+          import pathlib
+          import sys
+          import types
+          import pytest
+          stub = types.ModuleType("mechinterp.bpd")
+          stub.__path__ = [str(pathlib.Path("mechinterp/bpd").resolve())]
+          sys.modules["mechinterp.bpd"] = stub
+          raise SystemExit(pytest.main(["-q", "/tmp/bpd-v3-tests"]))
+          PY
+      - name: Produce reproducible synthetic receipt
+        run: python mechinterp/bpd/v3/floor_and_basis.py --smoke --out /tmp/bpd_v3_synthetic_smoke.json
+      - name: Validate declared synthetic evidence boundary
+        run: |
+          python - <<'PY'
+          import json
+          x = json.load(open('/tmp/bpd_v3_synthetic_smoke.json'))['synthetic']
+          assert x['label'] == 'SYNTHETIC_SOURCE_ONLY'
+          assert x['native_gaoxin492'].startswith('PENDING')
+          assert x['native_yagizdevre'].startswith('PENDING')
+          print('JS floor toy:', x['floor']['j_delta_nats_per_cell'])
+          print('risk identity residual:', x['floor']['risk_identity_residual'])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bpd-v3-synthetic-only-receipt
+          path: /tmp/bpd_v3_synthetic_smoke.json
