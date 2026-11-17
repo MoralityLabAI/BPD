@@ -58,6 +58,8 @@ jobs:
         run: |
           python -m pytest -q mechinterp/bpd/theory/pd02/test_experiment.py
           python -m pytest -q mechinterp/bpd/theory/pd02/test_published_results.py
+      - name: Check PD03 excluded-seed gate engineering before science lock
+        run: python -m pytest -q mechinterp/bpd/theory/pd03/test_experiment.py
       - name: Verify source module syntax
         run: |
           python -m compileall -q mechinterp/bpd
