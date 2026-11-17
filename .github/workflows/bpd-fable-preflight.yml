@@ -54,6 +54,9 @@ jobs:
           path: /tmp/bpd-pd01-results.json
           retention-days: 30
           if-no-files-found: warn
+      - name: BPD-PD-02 excluded-seed hard-mask engineering smoke
+        run: |
+          python -m pytest -q mechinterp/bpd/theory/pd02/test_experiment.py
       - name: Verify source module syntax
         run: |
           python -m compileall -q mechinterp/bpd
