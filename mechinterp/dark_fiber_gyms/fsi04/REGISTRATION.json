@@ -1,0 +1,79 @@
+{
+  "schema": "BPD-FSI04/native-causal-dose-matched-development-pilot/v1",
+  "frozen_date": "2026-11-17",
+  "purpose": "pilot physical-dose matched donor fiber causal recovery on S4 stalled Sudoku, then EvalMath variation/power gate before confirmation",
+  "evidence_scope": "exploratory development only; historical checkpoint/dose chosen using previously published native receipts; no confirmation claims on this pilot",
+  "models": [
+    {
+      "tag": "yagizdevre",
+      "sha256": "d67723394a7fe439f1fa498b58196399ee89cd82a794c7da9ce0a8cc3df7fa39",
+      "role": "primary path-dependent checkpoint"
+    },
+    {
+      "tag": "gaoxin492",
+      "sha256": "932b5e0df4e90021c21a064d4e716154086c46fda7afa676ea294484a30e38c3",
+      "role": "heterogeneity replication"
+    }
+  ],
+  "test_seal": "ARG-03-N 168-case held-out test: never read without separate authorization",
+  "sampling": {
+    "source": "new independently MRV generated, solver unique Sudoku, collision screened against available published LOOPSCOPE02 puzzles and SHA IDs from LOOPSCOPE04 representative roster",
+    "seed": 2026111744,
+    "n_stalled_pilot": 24,
+    "n_propagation_negative_controls": 12,
+    "planned_independent_roots": 36,
+    "eval_mode": "fresh_development",
+    "prior_board_exclusions": [
+      "mechinterp/loopscope02/results/benchmark_bundle.json",
+      "supplements/loopscope04_arg03_receipts/loopscope04/rep_eval_strata.json"
+    ],
+    "public_prior_automorphism_limitation": "Historical LOOPSCOPE04 has IDs without raw puzzles; enforce hash disjointness there; full isomorphism only for accessible puzzle sources."
+  },
+  "intervention": {
+    "mode": "same-board correlated donor at patch step",
+    "patch_step": 4,
+    "sigma": 0.35,
+    "horizon": 32,
+    "fp32": true,
+    "readout_parity_atol": 0.001,
+    "arms": [
+      "clean",
+      "donor_joint",
+      "random_joint_dose_matched",
+      "self_control"
+    ],
+    "geometry": "donor z_H head-orthogonal sphere transplant; sham random head-orthogonal tangent rotated to exact donor-vs-recipient per-cell geodesic angle; sham z_L Euclidean displacement norm matched per cell to donor z_L delta; keep prefix unchanged"
+  },
+  "analysis": {
+    "independent_unit": "source Sudoku puzzle root (both checkpoints on same root)",
+    "primary_stratum": "S4_stalled",
+    "primary_contrast": "donor_joint.correct_cells - clean.correct_cells per board /81, primary yagizdevre; compare random sham separately",
+    "secondary_contrasts": [
+      "donor_joint vs random_joint_dose_matched on corrected-cell proportion",
+      "donor vs random first-successor cosine to independent donor continuation",
+      "gaoxin492 independent checkpoint under same roots",
+      "exact_solve donor versus clean and random (descriptive)"
+    ],
+    "science_min_effect": "0.10",
+    "target_effect": "0.15",
+    "measurement_resolution": "0.012345679012345678",
+    "sham_quantile": "0.95",
+    "sham_confidence": "0.95",
+    "alpha": "0.05",
+    "planned_comparisons": 2,
+    "confirm_units_planned": 256,
+    "heldout_sealed": true,
+    "pilot_from_development_only": true,
+    "units_independent": true,
+    "sham_floor_source": "one max absolute sham-vs-clean correct-cell effect per root; 95th percentile 95% upper tolerance requires >=59 independent roots"
+  },
+  "stop_rules": [
+    "fail if any intervention pre-readout full-head mismatch > 0.001 or state dose mismatch > 0.002 on unclipped nonzero cells",
+    "fail if pilot lacks actual S4 roots",
+    "with 24 pilot roots sham 95th/95% tolerance is uncalibrated: no confirmation",
+    "redesign if target effect <= observed/conservative sham floor or if sham mean corruption exceeds 0.05",
+    "never label scalar logit response as task correction"
+  ],
+  "reporting": "archive per-root all arms, correct_cells, clean/corrected/corrupted counts, actual zH and zL dose errors, checkpoint SHA, code/roster SHA, source-hashed status; report true corrections separately from random harm",
+  "compute": "native checkpoints must exist locally; no automatic weight download; CPU source-only and Sudoku generator work without checkpoints"
+}
