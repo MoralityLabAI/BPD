@@ -454,14 +454,16 @@ def _summarize_arg03_tape(tape_path: Path) -> dict:
 
 def _sanitize_manifest_paths(obj):
     """Replace machine-local filesystem paths with portable basenames while preserving digests."""
+    # Normalise Windows and POSIX separators irrespective of the CI host OS.
+    basename = lambda name: Path(str(name).replace(chr(92), '/')).name
     if isinstance(obj, dict):
         out = {}
         for k, v in obj.items():
-            clean_k = Path(k).name if ("\\" in str(k) or "/" in str(k)) and ":" in str(k) else k
+            clean_k = basename(k) if ("\\" in str(k) or "/" in str(k)) and ":" in str(k) else k
             if k in ("source_csv", "source_runner") and isinstance(v, str) and ("\\" in v or "/" in v):
-                out[clean_k] = Path(v).name
+                out[clean_k] = basename(v)
             elif k == "excluded_sha256" and isinstance(v, dict):
-                out[clean_k] = {Path(pk).name: pv for pk, pv in v.items()}
+                out[clean_k] = {basename(pk): pv for pk, pv in v.items()}
             else:
                 out[clean_k] = _sanitize_manifest_paths(v)
         return out
