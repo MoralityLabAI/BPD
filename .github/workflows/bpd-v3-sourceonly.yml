@@ -58,6 +58,20 @@ jobs:
           print('JS floor toy:', x['floor']['j_delta_nats_per_cell'])
           print('risk identity residual:', x['floor']['risk_identity_residual'])
           PY
+      - name: Parse BASIS-01 Windows PowerShell local runner
+        shell: pwsh
+        run: |
+          $tokens = $null
+          $errors = $null
+          [System.Management.Automation.Language.Parser]::ParseFile(
+              (Resolve-Path 'mechinterp/bpd/v3/run_basis01.ps1').Path,
+              [ref]$tokens, [ref]$errors
+          ) | Out-Null
+          if ($errors.Count -gt 0) {
+            $errors | Format-Table | Out-String | Write-Host
+            throw 'PowerShell parse errors in BASIS-01 local runner'
+          }
+          Write-Host 'BASIS-01 PowerShell runbook parsed'
       - uses: actions/upload-artifact@v4
         with:
           name: bpd-v3-synthetic-only-receipt
