@@ -1,0 +1,27 @@
+{
+  "experiment": "BPD-AMM-03",
+  "phase": "training",
+  "training_memory_sha256": "e22ce9bd2dfbbbcf90ba0502a847477835f275b2099f8d79816c35534a7d0e56",
+  "pooled_action": 1,
+  "ridge_coefficients": [
+    -0.1648510753519894,
+    0.5110893118442783,
+    1.5898182996219363,
+    -1.1234027201925187,
+    0.3637413141525426,
+    -0.25260957759933395,
+    -0.04054370845599737
+  ],
+  "component_training_hits": {
+    "0": 4176,
+    "1": 4403
+  },
+  "n_independent_training_roots": 64,
+  "donor_pairs_per_root": 96,
+  "source_sha256": {
+    "experiment.py": "4310c6612986f432f702957e7c6d5387f39e38d32c21bd65b05a833179804500",
+    "models.py": "69b5a0c9688efa048ff9e5fb7308fbc2c8bfe15d0b274a9cf61b00b28af8f967"
+  },
+  "source_freeze_commit": "905b7172a6c74e53e164afbdedf72f515a333464",
+  "evidence": "training-only selected policy, before development scoring"
+}
