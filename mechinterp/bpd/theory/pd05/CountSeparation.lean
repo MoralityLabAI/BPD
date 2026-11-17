@@ -20,12 +20,12 @@ def countFromMagnitudes (a b : Nat) : Nat :=
 
 theorem one_active_first (a : Nat) (hmax : a ≤ 125) :
     countFromMagnitudes a 0 = 1 := by
-  have h : a + 0 < 138 := by omega
+  have h : a < 138 := by omega
   simp [countFromMagnitudes, h]
 
 theorem one_active_second (b : Nat) (hmax : b ≤ 125) :
     countFromMagnitudes 0 b = 1 := by
-  have h : 0 + b < 138 := by omega
+  have h : b < 138 := by omega
   simp [countFromMagnitudes, h]
 
 theorem two_active (a b : Nat)
