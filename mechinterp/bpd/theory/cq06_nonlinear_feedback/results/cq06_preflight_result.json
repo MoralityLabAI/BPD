@@ -1,0 +1,30 @@
+{
+  "approx_resolvable_effect": 0.2297161521537649,
+  "approx_worlds_for_80pct_power": 8,
+  "decision": "READY_FOR_CONFIRMATION",
+  "experiment_id": "BPD-CQ-06-59ROOT-MANIFOLD-PREFLIGHT",
+  "independent_unit": "one independently rotated and retrained physical/BPD/feedback world",
+  "limits": "Normal-based power is planning only. Root and sham independence, symmetry, readout sealing, and the scientific effect floor require independent audits. Repeated outcomes within a root are never additional worlds.",
+  "mean_pilot_effect": 0.1585010593220339,
+  "mechanistic_variation_floor": 0.15,
+  "observed_worst_sham": 0.1015625,
+  "order_statistic_rank": 59,
+  "pilot_world_sigma": 0.13184270394878359,
+  "pilot_worlds": 59,
+  "planned_comparisons": 2,
+  "planned_confirmation_worlds": 26,
+  "reasons": [],
+  "registered_source_lock": {
+    "AMENDMENTS.md": "e8ca345bbc53a36c2fceb68bb08e2676d7c56a03",
+    "PROTOCOL.md": "d7585bdd7f263eaea5a7d1c3dae74d88bbeab210",
+    "REGISTRATION.json": "142040bfcb662b4a7919927630c07e1e1a50c21c",
+    "evalmath_preflight.py": "c22c4bc3f79407291cac981020536b6dabd3a771",
+    "experiment.py": "6f9e03268ea5c3d8a706ee547b8e76da296e86e7",
+    "reference.py": "96e255319579dd33f16c396a1f812c3924adef9a",
+    "tests/test_experiment.py": "e89136818dd7ffad677f5c929a4af2f93592546e"
+  },
+  "schema": "EvalMath/mechinterp-power-preflight/v1",
+  "sham_source_sha256": "142f1814b4759538c2ac179daa7c30250c2efc87081704579ab133611627a129",
+  "target_effect": 0.3,
+  "upper_sham_quantile": 0.1015625
+}
