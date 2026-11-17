@@ -11,6 +11,6 @@ The source generator and its exact 24-configuration conditional enumeration were
 \mathbb E[Y_d]=\tfrac12v_{j_o}+\tfrac12v_m,
 \]
 
-conditional on numeric values, history length, observed role and the declared sampling law. In the high-contrast stratum the weights are proportional to the exact source-oracle admission indicators for the original source's prior value and the other two sources, as documented in THE0RY (see [THEORY.md](THEORY.md)).
+conditional on numeric values, history length, observed role and the declared sampling law. In the high-contrast stratum the weights are proportional to the exact source-oracle admission indicators for the original source's prior value and the other two sources, as documented in [THEORY.md](THEORY.md).
 
 The model-root reservation remains \`6101..6159\` calibration and \`7101..7132\` confirmation, with **zero new-root evaluations**. The prior failure is preserved; no threshold, teacher result, source cohort or frozen donor generator was replaced.
