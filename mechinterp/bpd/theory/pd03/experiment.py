@@ -48,15 +48,39 @@ def dictionary_frozen(arm: str) -> bool:
     return arm.endswith("_frozen")
 
 
+class TopOneSTE(torch.autograd.Function):
+    """Exact one-hot forward, softmax-Jacobian straight-through gradient."""
+
+    @staticmethod
+    def forward(ctx, logits):
+        soft = logits.softmax(dim=-1)
+        ctx.save_for_backward(soft)
+        return F.one_hot(logits.argmax(dim=-1), num_classes=2).to(logits.dtype)
+
+    @staticmethod
+    def backward(ctx, grad_output):
+        (soft,) = ctx.saved_tensors
+        mean_grad = (grad_output * soft).sum(dim=-1, keepdim=True)
+        return soft * (grad_output - mean_grad)
+
+
+class ThresholdSTE(torch.autograd.Function):
+    """Exact zero-or-one forward, sigmoid-probability STE in backward."""
+
+    @staticmethod
+    def forward(ctx, probability, threshold):
+        return (probability >= threshold).to(probability.dtype)
+
+    @staticmethod
+    def backward(ctx, grad_output):
+        return grad_output, None
+
+
 def gate_mask(logits: torch.Tensor, mode: str, *, threshold: float = .5) -> torch.Tensor:
-    probs = logits.sigmoid()
     if mode == "top1":
-        continuous = logits.softmax(dim=-1)
-        hard = F.one_hot(logits.argmax(dim=-1), num_classes=2).to(logits.dtype)
-        return hard + continuous - continuous.detach()
+        return TopOneSTE.apply(logits)
     if mode in ("margin", "hard"):
-        hard = (probs >= threshold).to(dtype=probs.dtype)
-        return hard + probs - probs.detach()
+        return ThresholdSTE.apply(logits.sigmoid(), threshold)
     raise ValueError(mode)
 
 
