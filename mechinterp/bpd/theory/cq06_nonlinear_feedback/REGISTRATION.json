@@ -1,0 +1,71 @@
+{
+  "schema": "bpd.cq06.prospective.v1",
+  "date": "2026-11-18",
+  "experiment": "CQ-06 nonlinear delayed-state causal quotient",
+  "registration_commit_first": "070b4f6ff558e54353ca07648dd3fcd2e54ac2aa",
+  "independent_unit": "newly orthogonally rotated input world, independently trained physical tanh recurrence, separate BPD factors and feedback controller",
+  "development_seeds": [
+    997,
+    1009,
+    1013,
+    1021,
+    1033,
+    1039,
+    1049,
+    1051
+  ],
+  "sham_calibration": {
+    "start": 4001,
+    "step": 2,
+    "count": 59
+  },
+  "confirmation": {
+    "start": 6001,
+    "step": 2,
+    "count": 26,
+    "withheld_until_preflight_ready": true
+  },
+  "per_model_task_cases": 256,
+  "per_model_donor_pairs": 128,
+  "actual_independent_roots_target": 26,
+  "physical_rank": 4,
+  "state_dim": 12,
+  "teacher_steps": 850,
+  "factor_steps": 600,
+  "gate_steps": 500,
+  "first_pass_active_components": 4,
+  "primary_arm": "dark_bpd",
+  "primary_null_arm": "manifold_dark_1",
+  "independent_sham_pair": [
+    "manifold_dark_1",
+    "manifold_dark_2"
+  ],
+  "secondary_arm": "dark_bpd_feedback_minus_dark_bpd_frozen",
+  "scientific_min_effect": 0.15,
+  "power_planning_target": 0.3,
+  "alpha": 0.05,
+  "registered_comparisons": 2,
+  "family_alpha_each_one_sided": 0.025,
+  "sham_quantile": 0.95,
+  "sham_confidence": 0.95,
+  "min_sham_independent_roots": 59,
+  "report_scope": "synthetic parity sign and nonlinear tanh RNN family only",
+  "controls": [
+    "full_bpd",
+    "physical_teacher",
+    "myopic_paired_z_50pct_ceiling",
+    "algebraic_oracle",
+    "input_only_planner",
+    "best_calibrated_two_constant_masks",
+    "same_cardinality_random_masks",
+    "same_dose_random_dark_1",
+    "same_dose_random_dark_2",
+    "same_dose_manifold_dark_1",
+    "same_dose_manifold_dark_2",
+    "sham",
+    "current_visible",
+    "raw_two_component_patch",
+    "full_donor_state"
+  ],
+  "protected_material": "ARG-03-N 168-case test remains sealed and untouched"
+}
