@@ -84,6 +84,8 @@ jobs:
         run: |
           python -m pytest -q mechinterp/bpd/theory/pd07/test_experiment.py
           python -m pytest -q mechinterp/bpd/theory/pd07/test_published_results.py
+      - name: PD08 excluded-seed staged factor-freezing and gate matching
+        run: python -m pytest -q mechinterp/bpd/theory/pd08/test_experiment.py
       - name: Verify source module syntax
         run: |
           python -m compileall -q mechinterp/bpd
