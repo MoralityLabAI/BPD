@@ -1,0 +1,427 @@
+{
+  "backend": "independent",
+  "eligible_total": 1024,
+  "factor_steps": 360,
+  "pairs_per_seed": 128,
+  "python": "3.13.5",
+  "registered_outcome": {
+    "engineering_valid": true,
+    "science_gate": true,
+    "seed_passes": 6
+  },
+  "rows": [
+    {
+      "calibration_scores": [
+        0.5561862587928772,
+        0.44373220205307007
+      ],
+      "clean_n": 128,
+      "current_visible_preserved": {
+        "dark_native": 128,
+        "full_state": 128,
+        "native": 0,
+        "other_component": 0,
+        "random_dark": 128,
+        "sham": 128,
+        "visible": 0
+      },
+      "delayed_observable_rank": 2,
+      "factor_update_norms": [
+        1.7832070589065552,
+        1.2581095695495605
+      ],
+      "future_native_effect_mean": 0.21009871363639832,
+      "gauge_full_write_error": 5.960464477539063e-08,
+      "gauge_singleton_drift": 0.38733258843421936,
+      "max_norm_error": 5.960464477539063e-08,
+      "native_parity_max": null,
+      "pairs": 128,
+      "right_after_first_current_effect_mean": 0.21570342779159546,
+      "seed": 607,
+      "selected_component": 0,
+      "student_mse": 7.557300341076711e-10,
+      "teacher_mse": 7.558337289381711e-10,
+      "transfer": {
+        "dark_native": 0,
+        "full_state": 128,
+        "native": 0,
+        "other_component": 0,
+        "random_dark": 23,
+        "sham": 0,
+        "visible": 0
+      }
+    },
+    {
+      "calibration_scores": [
+        0.029237564653158188,
+        0.970650851726532
+      ],
+      "clean_n": 128,
+      "current_visible_preserved": {
+        "dark_native": 128,
+        "full_state": 128,
+        "native": 0,
+        "other_component": 0,
+        "random_dark": 128,
+        "sham": 128,
+        "visible": 0
+      },
+      "delayed_observable_rank": 2,
+      "factor_update_norms": [
+        2.016627073287964,
+        2.254295587539673
+      ],
+      "future_native_effect_mean": 0.35699525475502014,
+      "gauge_full_write_error": 8.940696716308594e-08,
+      "gauge_singleton_drift": 0.237434983253479,
+      "max_norm_error": 5.960464477539063e-08,
+      "native_parity_max": null,
+      "pairs": 128,
+      "right_after_first_current_effect_mean": 0.15408185124397278,
+      "seed": 613,
+      "selected_component": 1,
+      "student_mse": 4.5188530695128293e-10,
+      "teacher_mse": 4.532234032517124e-10,
+      "transfer": {
+        "dark_native": 128,
+        "full_state": 128,
+        "native": 128,
+        "other_component": 0,
+        "random_dark": 27,
+        "sham": 0,
+        "visible": 0
+      }
+    },
+    {
+      "calibration_scores": [
+        0.7856464385986328,
+        0.21429969370365143
+      ],
+      "clean_n": 128,
+      "current_visible_preserved": {
+        "dark_native": 128,
+        "full_state": 128,
+        "native": 0,
+        "other_component": 0,
+        "random_dark": 128,
+        "sham": 128,
+        "visible": 0
+      },
+      "delayed_observable_rank": 2,
+      "factor_update_norms": [
+        1.5208587646484375,
+        1.1841883659362793
+      ],
+      "future_native_effect_mean": 0.29525822401046753,
+      "gauge_full_write_error": 5.960464477539063e-08,
+      "gauge_singleton_drift": 0.3116779923439026,
+      "max_norm_error": 5.960464477539063e-08,
+      "native_parity_max": null,
+      "pairs": 128,
+      "right_after_first_current_effect_mean": 0.16488201916217804,
+      "seed": 617,
+      "selected_component": 0,
+      "student_mse": 2.2944716959738543e-10,
+      "teacher_mse": 2.2977325597750564e-10,
+      "transfer": {
+        "dark_native": 128,
+        "full_state": 128,
+        "native": 128,
+        "other_component": 0,
+        "random_dark": 35,
+        "sham": 0,
+        "visible": 0
+      }
+    },
+    {
+      "calibration_scores": [
+        0.9802168607711792,
+        0.019728558138012886
+      ],
+      "clean_n": 128,
+      "current_visible_preserved": {
+        "dark_native": 128,
+        "full_state": 128,
+        "native": 128,
+        "other_component": 0,
+        "random_dark": 128,
+        "sham": 128,
+        "visible": 0
+      },
+      "delayed_observable_rank": 2,
+      "factor_update_norms": [
+        1.214379906654358,
+        1.7497913837432861
+      ],
+      "future_native_effect_mean": 0.3692111074924469,
+      "gauge_full_write_error": 5.960464477539063e-08,
+      "gauge_singleton_drift": 0.43357041478157043,
+      "max_norm_error": 1.1920928955078125e-07,
+      "native_parity_max": null,
+      "pairs": 128,
+      "right_after_first_current_effect_mean": 0.024363787844777107,
+      "seed": 619,
+      "selected_component": 0,
+      "student_mse": 2.909434360098828e-10,
+      "teacher_mse": 2.909364971159789e-10,
+      "transfer": {
+        "dark_native": 128,
+        "full_state": 128,
+        "native": 128,
+        "other_component": 0,
+        "random_dark": 26,
+        "sham": 0,
+        "visible": 0
+      }
+    },
+    {
+      "calibration_scores": [
+        1.0362247228622437,
+        0.0362616591155529
+      ],
+      "clean_n": 128,
+      "current_visible_preserved": {
+        "dark_native": 128,
+        "full_state": 128,
+        "native": 0,
+        "other_component": 0,
+        "random_dark": 128,
+        "sham": 128,
+        "visible": 0
+      },
+      "delayed_observable_rank": 2,
+      "factor_update_norms": [
+        2.342766523361206,
+        1.5259878635406494
+      ],
+      "future_native_effect_mean": 0.39279061555862427,
+      "gauge_full_write_error": 1.043081283569336e-07,
+      "gauge_singleton_drift": 0.5336342453956604,
+      "max_norm_error": 1.1920928955078125e-07,
+      "native_parity_max": null,
+      "pairs": 128,
+      "right_after_first_current_effect_mean": 0.12773428857326508,
+      "seed": 631,
+      "selected_component": 0,
+      "student_mse": 2.8235788707142717e-10,
+      "teacher_mse": 2.801078813341462e-10,
+      "transfer": {
+        "dark_native": 128,
+        "full_state": 128,
+        "native": 128,
+        "other_component": 0,
+        "random_dark": 21,
+        "sham": 0,
+        "visible": 0
+      }
+    },
+    {
+      "calibration_scores": [
+        0.8737030029296875,
+        0.12624533474445343
+      ],
+      "clean_n": 128,
+      "current_visible_preserved": {
+        "dark_native": 128,
+        "full_state": 128,
+        "native": 57,
+        "other_component": 0,
+        "random_dark": 128,
+        "sham": 128,
+        "visible": 0
+      },
+      "delayed_observable_rank": 2,
+      "factor_update_norms": [
+        1.6499762535095215,
+        2.1903445720672607
+      ],
+      "future_native_effect_mean": 0.32459309697151184,
+      "gauge_full_write_error": 5.960464477539063e-08,
+      "gauge_singleton_drift": 0.3198305368423462,
+      "max_norm_error": 5.960464477539063e-08,
+      "native_parity_max": null,
+      "pairs": 128,
+      "right_after_first_current_effect_mean": 0.05077284947037697,
+      "seed": 641,
+      "selected_component": 0,
+      "student_mse": 1.0280213486035805e-10,
+      "teacher_mse": 1.0269252809225193e-10,
+      "transfer": {
+        "dark_native": 128,
+        "full_state": 128,
+        "native": 128,
+        "other_component": 15,
+        "random_dark": 19,
+        "sham": 0,
+        "visible": 0
+      }
+    },
+    {
+      "calibration_scores": [
+        0.3612078130245209,
+        0.6387392282485962
+      ],
+      "clean_n": 128,
+      "current_visible_preserved": {
+        "dark_native": 128,
+        "full_state": 128,
+        "native": 0,
+        "other_component": 0,
+        "random_dark": 128,
+        "sham": 128,
+        "visible": 0
+      },
+      "delayed_observable_rank": 2,
+      "factor_update_norms": [
+        1.16416597366333,
+        2.212817430496216
+      ],
+      "future_native_effect_mean": 0.239852175116539,
+      "gauge_full_write_error": 8.940696716308594e-08,
+      "gauge_singleton_drift": 0.27105021476745605,
+      "max_norm_error": 2.9802322387695312e-08,
+      "native_parity_max": null,
+      "pairs": 128,
+      "right_after_first_current_effect_mean": 0.16551822423934937,
+      "seed": 643,
+      "selected_component": 1,
+      "student_mse": 2.7213567510564474e-10,
+      "teacher_mse": 2.7196683793917487e-10,
+      "transfer": {
+        "dark_native": 2,
+        "full_state": 128,
+        "native": 30,
+        "other_component": 0,
+        "random_dark": 0,
+        "sham": 0,
+        "visible": 0
+      }
+    },
+    {
+      "calibration_scores": [
+        1.021883487701416,
+        0.02193455956876278
+      ],
+      "clean_n": 128,
+      "current_visible_preserved": {
+        "dark_native": 128,
+        "full_state": 128,
+        "native": 53,
+        "other_component": 0,
+        "random_dark": 128,
+        "sham": 128,
+        "visible": 0
+      },
+      "delayed_observable_rank": 2,
+      "factor_update_norms": [
+        1.6970398426055908,
+        1.7751346826553345
+      ],
+      "future_native_effect_mean": 0.3785579800605774,
+      "gauge_full_write_error": 7.450580596923828e-08,
+      "gauge_singleton_drift": 0.4086243510246277,
+      "max_norm_error": 2.9802322387695312e-08,
+      "native_parity_max": null,
+      "pairs": 128,
+      "right_after_first_current_effect_mean": 0.05183061957359314,
+      "seed": 647,
+      "selected_component": 0,
+      "student_mse": 3.8328651363883637e-10,
+      "teacher_mse": 3.828661832017133e-10,
+      "transfer": {
+        "dark_native": 128,
+        "full_state": 128,
+        "native": 128,
+        "other_component": 0,
+        "random_dark": 35,
+        "sham": 0,
+        "visible": 0
+      }
+    }
+  ],
+  "runtime_seconds": 4.721580635000009,
+  "schema": "bpd.cq03.learned_recurrence.v1",
+  "scope": "synthetic rank-two trained linear recurrence; independent copy targets, not pretrained RMP or ARG03",
+  "seeds": [
+    607,
+    613,
+    617,
+    619,
+    631,
+    641,
+    643,
+    647
+  ],
+  "source_lock": {
+    "protocol_sha256": "4af8c39ef22d359bbedca9fae8bde0e122692008dd8822621743881fba2850c6",
+    "seed_roster": [
+      607,
+      613,
+      617,
+      619,
+      631,
+      641,
+      643,
+      647
+    ],
+    "source_sha256": {
+      "PROTOCOL.md": "4af8c39ef22d359bbedca9fae8bde0e122692008dd8822621743881fba2850c6",
+      "experiment.py": "b63a5e589dbd9a0c3869a3a1090f4d13f6e412cf10d341bc0bd9859e320714f7"
+    }
+  },
+  "success_counts": {
+    "dark_native": 770,
+    "full_state": 1024,
+    "native": 798,
+    "other_component": 15,
+    "random_dark": 186,
+    "sham": 0,
+    "visible": 0
+  },
+  "summary": {
+    "clean_by_seed": [
+      128,
+      128,
+      128,
+      128,
+      128,
+      128,
+      128,
+      128
+    ],
+    "eligible_total": 1024,
+    "gauge_singleton_drift_by_seed": [
+      0.38733258843421936,
+      0.237434983253479,
+      0.3116779923439026,
+      0.43357041478157043,
+      0.5336342453956604,
+      0.3198305368423462,
+      0.27105021476745605,
+      0.4086243510246277
+    ],
+    "max_full_gauge_error": 1.043081283569336e-07,
+    "max_norm_error": 1.1920928955078125e-07,
+    "observable_rank_by_seed": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+    ],
+    "success_counts": {
+      "dark_native": 770,
+      "full_state": 1024,
+      "native": 798,
+      "other_component": 15,
+      "random_dark": 186,
+      "sham": 0,
+      "visible": 0
+    }
+  },
+  "teacher_steps": 520,
+  "torch": "2.10.0+cpu"
+}
