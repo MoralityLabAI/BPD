@@ -1,0 +1,79 @@
+name: BPD-PD-07 first registered factor-read transfer cohort
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/theory/pd07/EXECUTE_LOCK.json'
+permissions:
+  contents: read
+jobs:
+  first-frozen-source-cohort:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify frozen model source and exactly one registered release
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json, subprocess
+          root=Path('mechinterp/bpd/theory/pd07')
+          config=json.loads((root/'CONFIG.json').read_text())
+          lock=json.loads((root/'EXECUTE_LOCK.json').read_text())
+          assert config['study_id']==lock['study_id']=='BPD-PD-07'
+          assert lock['execution']=='first_registered_full_cohort'
+          assert len(config['seeds'])==lock['seeds']==24
+          assert len(config['arms'])==lock['arms_per_seed']==6
+          assert config['success']['primary_arm']=='read_coupled'
+          assert config['success']['control_arm']=='raw_independent'
+          sha=lock['source_commit_sha']
+          subprocess.run(['git','merge-base','--is-ancestor',sha,'HEAD'],check=True)
+          files=[str(root/p) for p in ('CONFIG.json','PROTOCOL.md',
+                  'experiment.py','test_experiment.py')]
+          subprocess.run(['git','diff','--exit-code',sha,'HEAD','--',*files],check=True)
+          print('PD07 source SHA verified:',sha)
+          PY
+      - name: Install pinned PyTorch CPU and excluded-seed tests
+        run: |
+          python -m pip install --disable-pip-version-check pytest
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Verify excluded-seed read gates, gradient and hidden label isolation
+        run: python -m pytest -q mechinterp/bpd/theory/pd07/test_experiment.py
+      - name: Execute 24 fresh rotated seed pairs across six arms
+        run: python -m mechinterp.bpd.theory.pd07.experiment --out /tmp/bpd-pd07-first-run.json
+      - name: Validate complete source-locked 144-arm scientific receipt
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          r=json.loads(Path('/tmp/bpd-pd07-first-run.json').read_text())
+          config=json.loads(Path('mechinterp/bpd/theory/pd07/CONFIG.json').read_text())
+          assert r['study_id']=='BPD-PD-07'
+          assert r['summary']['registered'] and r['summary']['seed_count']==24
+          assert len(r['arms'])==144
+          assert len({(a['seed'],a['arm']) for a in r['arms']})==144
+          assert {a['seed'] for a in r['arms']}==set(config['seeds'])
+          assert {a['arm'] for a in r['arms']}=={x['key'] for x in config['arms']}
+          assert len({a['rotation_sha256'] for a in r['arms']})==24
+          assert all(set(a['heldout']['per_family'])==set(config['source']['evaluation_families'])
+                     for a in r['arms'])
+          assert all(all(d['mask_binary'] for d in a['heldout']['per_family'].values())
+                     for a in r['arms'])
+          assert all(a['factor_update_norm']>0 for a in r['arms'] if not a['frozen_planted'])
+          assert all(a['factor_update_norm']==0 for a in r['arms'] if a['frozen_planted'])
+          print('PD07 registered scientific result:',r['summary']['preregistered_primary_passed'])
+          print('Per-arm seed recovery:',r['summary']['success_by_arm'])
+          print('Paired McNemar:',r['summary']['McNemar_exact_two_sided_p'])
+          PY
+      - name: Preserve unmodified PD07 first-run JSON including scientific failures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bpd-pd07-first-run-${{ github.run_id }}
+          path: /tmp/bpd-pd07-first-run.json
+          retention-days: 60
+          if-no-files-found: warn
