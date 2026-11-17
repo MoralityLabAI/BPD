@@ -4,7 +4,7 @@ import unittest
 import torch
 
 from mechinterp.bpd.theory.sf05b_source_families.source_families import (
-    HELDOUT_TEMPLATES, change_last_source, make_batch, target_from_records,
+    HELDOUT_TEMPLATES, _blind_mean, change_last_source, make_batch, target_from_records,
 )
 
 
@@ -85,12 +85,14 @@ class SourceFamilies(unittest.TestCase):
 
     def test_source_blind_prediction_cannot_see_changed_tag(self):
         a = make_batch(1509, 300, "heldout")
-        _, new_target, _ = change_last_source(a, 2309)
+        donor_events, new_target, _ = change_last_source(a, 2309)
         # The source-blind estimate receives the values, length, role and
         # public scalar, all byte-for-byte identical in this counterfactual.
         self.assertTrue(torch.isfinite(a.source_blind_conditional_mean).all())
         self.assertTrue((a.target != new_target).any().item())
-        self.assertTrue(torch.equal(a.values, a.values.clone()))
+        blind_from_donor = _blind_mean(donor_events[:, :, 3], a.lengths,
+                                       a.query_role, a.public_value, 'heldout')
+        self.assertTrue(torch.equal(a.source_blind_conditional_mean, blind_from_donor))
 
 
 if __name__ == "__main__":
