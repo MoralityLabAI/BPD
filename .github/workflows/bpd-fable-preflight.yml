@@ -106,8 +106,10 @@ jobs:
         run: |
           python -m pytest -q mechinterp/bpd/theory/pd12/test_experiment.py
           python -m pytest -q mechinterp/bpd/theory/pd12/test_published_results.py
-      - name: PD13 excluded-seed 16D clustered pair-priority and sample-volume audit
-        run: python -m pytest -q mechinterp/bpd/theory/pd13/test_experiment.py
+      - name: PD13 source-only engineering and first-run scientific receipt replay
+        run: |
+          python -m pytest -q mechinterp/bpd/theory/pd13/test_experiment.py
+          python -m pytest -q mechinterp/bpd/theory/pd13/test_published_results.py
       - name: Verify source module syntax
         run: |
           python -m compileall -q mechinterp/bpd
