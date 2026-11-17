@@ -1,0 +1,88 @@
+name: BPD-PD-08 first registered two-stage frozen-read gate transfer
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/theory/pd08/EXECUTE_LOCK.json'
+permissions:
+  contents: read
+jobs:
+  source-locked-two-stage-cohort:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Confirm frozen source and first registered experiment
+        run: |
+          python - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          root=Path('mechinterp/bpd/theory/pd08')
+          lock=json.loads((root/'EXECUTE_LOCK.json').read_text())
+          cfg=json.loads((root/'CONFIG.json').read_text())
+          assert lock['study_id']==cfg['study_id']=='BPD-PD-08'
+          assert lock['execution']=='first_registered_full_cohort'
+          assert lock['seeds']==len(cfg['seeds'])==24
+          assert lock['arms_per_seed']==len(cfg['arms'])==5
+          assert cfg['scoring']['primary_arm']=='read_trained'
+          assert cfg['scoring']['control_arm']=='raw_independent'
+          sha=lock['source_commit_sha']
+          subprocess.run(['git','merge-base','--is-ancestor',sha,'HEAD'],check=True)
+          paths=[str(root/x) for x in
+                 ('CONFIG.json','PROTOCOL.md','experiment.py','test_experiment.py')]
+          subprocess.run(['git','diff','--exit-code',sha,'HEAD','--',*paths],check=True)
+          print('PD08 source locked:',sha)
+          PY
+      - name: Install pinned CPU Torch and regression dependencies
+        run: |
+          python -m pip install --disable-pip-version-check pytest numpy
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Audit excluded-seed factor training and strict stage2 freezing
+        run: python -m pytest -q mechinterp/bpd/theory/pd08/test_experiment.py
+      - name: Execute one shared factor discovery per seed, then five frozen-factor arms
+        run: python -m mechinterp.bpd.theory.pd08.experiment --out /tmp/bpd-pd08-first-run.json
+      - name: Validate exactly 24 discovery snapshots and 120 frozen-gate receipts
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('/tmp/bpd-pd08-first-run.json').read_text())
+          cfg=json.loads(Path('mechinterp/bpd/theory/pd08/CONFIG.json').read_text())
+          assert r['study_id']=='BPD-PD-08'
+          assert r['summary']['registered']
+          assert len(r['first_stage'])==24
+          assert len(r['arms'])==120
+          assert {x['source_seed'] for x in r['first_stage']}==set(cfg['seeds'])
+          assert {x['seed'] for x in r['arms']}==set(cfg['seeds'])
+          assert {x['arm'] for x in r['arms']}=={a['key'] for a in cfg['arms']}
+          assert len({(x['seed'],x['arm']) for x in r['arms']})==120
+          assert all(x['factor_update_norm']>0 and x['first_factor_grad_norm']>0
+                     for x in r['first_stage'])
+          assert all(x['factors_bitwise_frozen'] for x in r['arms'])
+          assert all(set(x['heldout']['per_family'])==set(cfg['source']['family_order'])
+                     for x in r['arms'])
+          assert all(all(v['exact_binary'] for v in x['heldout']['per_family'].values())
+                     for x in r['arms'])
+          for seed in cfg['seeds']:
+              arms=[x for x in r['arms'] if x['seed']==seed and x['arm']!='read_planted_frozen']
+              snapshot={x['actual_factor_sha256'] for x in arms}
+              assert len(snapshot)==1
+              assert snapshot.pop()==next(x['factor_sha256'] for x in r['first_stage']
+                                         if x['source_seed']==seed)
+          print('PD08 preregistered scientific criterion:',
+                 r['summary']['primary_passed'])
+          print('PD08 seed success:',r['summary']['success_by_arm'])
+          print('PD08 exact paired McNemar:',r['summary']['McNemar_exact_two_sided_p'])
+          PY
+      - name: Preserve full unmodified PD08 first-run JSON even on scientific FAIL
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bpd-pd08-first-run-${{ github.run_id }}
+          path: /tmp/bpd-pd08-first-run.json
+          retention-days: 60
+          if-no-files-found: warn
