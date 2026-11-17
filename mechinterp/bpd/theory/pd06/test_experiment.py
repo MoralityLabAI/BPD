@@ -90,6 +90,7 @@ def test_unlabelled_gate_is_invariant_to_corrupted_label_argument():
     bpd,gate,q,_,_=build(SMOKE,frozen_planted=False)
     x,mask,_=sample_batch(torch.Generator().manual_seed(101009),10,q,family="train")
     poisoned=torch.zeros_like(mask)
+    poisoned[...,0]=1.0  # A valid but deliberately incorrect singleton label.
     # Source labels are passed for optional supervision, but the unsupervised
     # execution path must be fully insensitive to their values.
     y1, m1, _,_=masked_rollout(bpd,gate,x,mask,"unsupervised_topk")
