@@ -2,7 +2,7 @@
 from __future__ import annotations
 import json,os,tempfile,unittest,sys
 from pathlib import Path
-sys.path.insert(0,str(Path(__file__).resolve().parent))
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 from fsi03_native_audit import audit,FILES,ANGLES,case_value
 
 
