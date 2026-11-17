@@ -1,0 +1,82 @@
+name: BPD-PD-08 first staged dictionary-to-read-gate transfer
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/theory/pd08/EXECUTE_LOCK.json'
+permissions:
+  contents: read
+jobs:
+  first-registered-cohort:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify frozen staged experiment source and library dependencies
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json,subprocess
+          root=Path('mechinterp/bpd/theory/pd08')
+          cfg=json.loads((root/'CONFIG.json').read_text())
+          lock=json.loads((root/'EXECUTE_LOCK.json').read_text())
+          assert cfg['study_id']==lock['study_id']=='BPD-PD-08'
+          assert lock['execution']=='first_registered_full_cohort'
+          assert len(cfg['seeds'])==lock['seeds']==24
+          assert len(cfg['arms'])==lock['arms_per_seed']==6
+          assert cfg['success']['primary_arm']=='read_refit'
+          assert cfg['success']['control_arm']=='raw_refit'
+          base=lock['source_commit_sha']
+          subprocess.run(['git','merge-base','--is-ancestor',base,'HEAD'],check=True)
+          protected=[str(root/x) for x in
+                     ('CONFIG.json','PROTOCOL.md','experiment.py','test_experiment.py')]
+          protected+=['mechinterp/bpd/theory/pd06/experiment.py',
+                      'mechinterp/bpd/theory/pd07/experiment.py']
+          subprocess.run(['git','diff','--exit-code',base,'HEAD','--',*protected],check=True)
+          print('PD08 stage1/2 source and dependency SHA verified:',base)
+          PY
+      - name: Install frozen CPU Torch and testing runtime
+        run: |
+          python -m pip install --disable-pip-version-check pytest 'numpy>=1.26'
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Recheck excluded-seed stage1 count and stage2 bitwise-factor freezing
+        run: python -m pytest -q mechinterp/bpd/theory/pd08/test_experiment.py
+      - name: Execute 24 count-pretrained seed-rotation pairs and six stage2 arms
+        run: python -m mechinterp.bpd.theory.pd08.experiment --out /tmp/bpd-pd08-first-run.json
+      - name: Audit original full model and paired-result receipt
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          r=json.loads(Path('/tmp/bpd-pd08-first-run.json').read_text())
+          c=json.loads(Path('mechinterp/bpd/theory/pd08/CONFIG.json').read_text())
+          assert r['study_id']=='BPD-PD-08'
+          assert r['summary']['registered'] and r['summary']['seed_count']==24
+          assert len(r['arms'])==24*6==144
+          assert len({(x['seed'],x['arm']) for x in r['arms']})==144
+          assert {x['seed'] for x in r['arms']}==set(c['seeds'])
+          assert {x['arm'] for x in r['arms']}=={a['key'] for a in c['arms']}
+          assert all(x['factor_bitwise_frozen'] for x in r['arms'])
+          assert all(x['stage1_factor_update']>0 and
+                     x['stage1_first_factor_gradient']>0 for x in r['arms'])
+          assert all(set(x['heldout']['per_family'])==
+                     set(c['source']['eval_families']) for x in r['arms'])
+          assert all(all(p['mask_binary'] for p in x['heldout']['per_family'].values())
+                     for x in r['arms'])
+          assert len({x['rotation_sha256'] for x in r['arms']})==24
+          print('Scientific gate:',r['summary']['preregistered_primary_passed'])
+          print('Success counts:',r['summary']['success_by_arm'])
+          print('Exact paired McNemar:',r['summary']['McNemar_exact_two_sided_p'])
+          PY
+      - name: Archive original full first-run science receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bpd-pd08-first-run-${{ github.run_id }}
+          path: /tmp/bpd-pd08-first-run.json
+          retention-days: 60
+          if-no-files-found: warn
