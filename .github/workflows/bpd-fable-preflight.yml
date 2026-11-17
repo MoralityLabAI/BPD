@@ -70,6 +70,8 @@ jobs:
         run: |
           python -m pytest -q mechinterp/bpd/theory/pd05/test_experiment.py
           python -m pytest -q mechinterp/bpd/theory/pd05/test_published_results.py
+      - name: PD06 excluded-seed rotated support and gradient audit
+        run: python -m pytest -q mechinterp/bpd/theory/pd06/test_experiment.py
       - name: Verify source module syntax
         run: |
           python -m compileall -q mechinterp/bpd
