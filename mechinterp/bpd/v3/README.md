@@ -38,12 +38,15 @@ The saved B4 v2 archive has factors `(V,U)` but lacks the causal-importance netw
 Create another local NPZ with `W` shaped `[d_out,d_in]` and independent clean/dither-pooled module inputs `inputs` shaped `[N,d_in]` for one selected matrix. Run:
 
 ```bash
-python mechinterp/bpd/v3/floor_and_basis.py \
+python mechinterp/bpd/v3/score_exported_basis.py \
   --matrix-npz /local/down_proj_0_inputs.npz \
+  --chunk-size 256 \
   --out runs/bpd_v3/down_proj_0_basis.json
 ```
 
 Each basis is an **exact** decomposition `(V U)^T=W`. The current gate reads its own input, switches off an ascending contribution prefix, and certifies all partial ablations of those switched-off components under the specified output seminorm. The three budgets are fractions `{0.01,0.03,0.10}` of the true module output norm.
+
+The previous `floor_and_basis.py` matrix scorer remains as an independent small-instance oracle. The streaming scorer verifies matrix-file SHA-256 when supplied, uses one full SVD per module, checks the period-7 phase tags, and reports near-null write directions separately. For a full-row-rank `down_proj` of shape 512×1536, the input-complete right-SVD contains 1,024 directions in the numerical kernel of W, which must be disclosed when comparing active counts. These are structural null writes rather than learned sparse features.
 
 For `down_proj`, the **input-complete** neuron basis uses `C=d_in` (typically 1,536), whereas the **output-complete** SVD uses `C=d_out` (typically 512). Compare active counts within equal C first and report both component counts for cross-form comparisons. `mean_logit_kl` in this source-only module is a softmax diagnostic of the **module output vector**. It is not the native digit-head or behavioral KL through the recursive model. Delayed Gramian norm arguments are local linear certificates; nonlinear transport needs a curvature remainder.
 
