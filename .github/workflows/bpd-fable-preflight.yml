@@ -94,6 +94,10 @@ jobs:
           python -m pytest -q mechinterp/bpd/theory/pd09/test_published_results.py
           python -m pytest -q mechinterp/bpd/theory/pd09/test_landscape.py
           python -m mechinterp.bpd.theory.pd09.landscape_audit --out /tmp/bpd-pd09-landscape-posthoc.json
+      - name: PD10 source smoke and independent first-run 24-seed replay
+        run: |
+          python -m pytest -q mechinterp/bpd/theory/pd10/test_experiment.py
+          python -m pytest -q mechinterp/bpd/theory/pd10/test_published_results.py
       - name: Verify source module syntax
         run: |
           python -m compileall -q mechinterp/bpd

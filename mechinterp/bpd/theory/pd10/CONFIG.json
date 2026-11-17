@@ -1,0 +1,199 @@
+{
+  "study_id": "BPD-PD-10",
+  "registered_date": "2026-11-17",
+  "status": "prospective_before_all_PD10_training",
+  "predecessor": {
+    "pd09_merge_sha": "fe995e7ddad0e783c7e5ac2afbeb75900f91fa53",
+    "pd09_primary_success": 0,
+    "pd09_fixed_success": 0,
+    "pd09_supervised_positive_success": 24,
+    "first_run": 44119049953,
+    "posthoc_pairmix": "24/24 annealed seeds had two aligned source axes and a ~45deg mixed axis pair",
+    "smooth_landscape_crossover_sigma": 0.43
+  },
+  "hypothesis": "Cold-start Gaussian near-zero hyperplane-mass optimization at sigma 0.15 recovers 4D rotated sparse factors more reliably than starting with sigma 0.6 and annealing later.",
+  "seeds": [
+    1481,
+    1483,
+    1487,
+    1489,
+    1493,
+    1499,
+    1511,
+    1523,
+    1531,
+    1543,
+    1549,
+    1553,
+    1559,
+    1567,
+    1571,
+    1579,
+    1583,
+    1597,
+    1601,
+    1607,
+    1609,
+    1613,
+    1619,
+    1621
+  ],
+  "excluded_engineering_seed": 2011,
+  "generator": {
+    "source": "PD06 rotation_for_seed/sample_batch unchanged",
+    "x": "observed dense x=aQ.T",
+    "train_supports": "PD06 k1/k2/k3, withheld pairs and triple excluded",
+    "eval_families": [
+      "k1_seen",
+      "k2_seen",
+      "k2_unseen",
+      "k3_seen",
+      "k3_unseen",
+      "transition_unseen"
+    ],
+    "train_generator_offset": 100000,
+    "heldout_generator_offset": 200000,
+    "heldout_family_stride": 10000,
+    "train_batch": 32,
+    "heldout_boards_per_family": 192,
+    "rotation_seed_offset": 900000
+  },
+  "model": {
+    "physical": "BPDModel TiedComponentLinear bias-free I4 with 4 rank-one factors",
+    "orthogonal": "differentiable QR with V=QR(A), U=V.T",
+    "initial_raw_A": "PD06 random V factors matched within seed",
+    "zero_ablation": true,
+    "zero_delta_mask": true,
+    "sphere_rescale": false,
+    "gate_evaluation": "exact binary 1[abs(x@normalized_V)>=0.5] through physical BPD shared wrapper",
+    "no_post_training_gate_fit": true
+  },
+  "arms": [
+    {
+      "key": "cold015",
+      "type": "unsupervised_orthogonal",
+      "sigma_segments": [
+        0.15,
+        0.15,
+        0.15
+      ],
+      "uses_true_Q_for_initialization": false,
+      "uses_count_labels": false
+    },
+    {
+      "key": "cold030",
+      "type": "unsupervised_orthogonal",
+      "sigma_segments": [
+        0.3,
+        0.3,
+        0.3
+      ],
+      "uses_true_Q_for_initialization": false,
+      "uses_count_labels": false
+    },
+    {
+      "key": "warm030_to015",
+      "type": "unsupervised_orthogonal",
+      "sigma_segments": [
+        0.3,
+        0.15,
+        0.15
+      ],
+      "uses_true_Q_for_initialization": false,
+      "uses_count_labels": false
+    },
+    {
+      "key": "anneal060_030_015",
+      "type": "unsupervised_orthogonal",
+      "sigma_segments": [
+        0.6,
+        0.3,
+        0.15
+      ],
+      "uses_true_Q_for_initialization": false,
+      "uses_count_labels": false
+    },
+    {
+      "key": "privileged_pairmix015",
+      "type": "Q_initialized_diagnostic",
+      "sigma_segments": [
+        0.15,
+        0.15,
+        0.15
+      ],
+      "uses_true_Q_for_initialization": true,
+      "uses_count_labels": false,
+      "mixed_indices": [
+        0,
+        1
+      ],
+      "initial_mix_angle_deg": 42
+    },
+    {
+      "key": "count_supervised_positive",
+      "type": "PD06_count_supervised",
+      "uses_true_Q_for_initialization": false,
+      "uses_count_labels": true
+    }
+  ],
+  "training": {
+    "steps": 360,
+    "lr": 0.025,
+    "weight_decay": 0,
+    "batch_size": 32,
+    "segments": [
+      [
+        0,
+        119
+      ],
+      [
+        120,
+        239
+      ],
+      [
+        240,
+        359
+      ]
+    ],
+    "smooth_mass": "mean(1-exp(-0.5*(x@V/sigma)^2))",
+    "orthogonal_QR_sign": "diagonal of R positive",
+    "no_count_or_support_training_labels_for_unlabelled_arms": true
+  },
+  "scoring": {
+    "read_mean_cos_min": 0.9,
+    "total_MSE_max": 0.03,
+    "seen_family_MSE_max": 0.04,
+    "unseen_family_MSE_max": 0.06,
+    "seen_fourpass_support_min": 0.8,
+    "unseen_fourpass_support_min": 0.7,
+    "trainable_first_step_grad_positive": true,
+    "trainable_parameter_update_positive": true,
+    "mask_binary_required": true,
+    "primary_arm": "cold015",
+    "primary_control": "anneal060_030_015",
+    "primary_min_successes": 18,
+    "primary_net_paired_wins_min": 6,
+    "primary_exact_two_sided_McNemar_p_max": 0.05,
+    "margin_diagnostic_per_read_cos_min": 0.99333
+  },
+  "reporting": {
+    "paired_seed_unit": "model seed + independent rotation",
+    "per_seed_and_arm_rows": true,
+    "all_144_arms": true,
+    "Wilson95": true,
+    "exact_McNemar": true,
+    "per_family_support_metrics": true,
+    "sharp_pairmixed_diagnostics": true,
+    "privileged_Q_init_separate": true,
+    "original_pd09_frozen": true
+  },
+  "runtime": {
+    "platform": "ubuntu-24.04",
+    "python": "3.12",
+    "torch": "2.5.1+cpu",
+    "cpu_threads": 1,
+    "process_RSS_limit_GiB": 3,
+    "workflow_timeout_minutes": 20,
+    "first_source_locked_run_only": true
+  }
+}

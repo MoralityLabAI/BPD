@@ -1,0 +1,12 @@
+{
+  "study_id": "BPD-PD-10",
+  "execution": "first_registered_full_cohort",
+  "registered_date": "2026-11-17",
+  "source_commit_sha": "d61c27052392126764b9053ccb3e48c1848f753d",
+  "seeds": 24,
+  "arms_per_seed": 6,
+  "engineering_smoke_seed": 2011,
+  "preflight_run_id": 44124347120,
+  "preflight_conclusion": "SUCCESS source-only cold sigma/mixed-pair engineering tests before science",
+  "evidence_policy": "Preserve original first completed 144-arm JSON and registered scientific PASS or FAIL unchanged"
+}
