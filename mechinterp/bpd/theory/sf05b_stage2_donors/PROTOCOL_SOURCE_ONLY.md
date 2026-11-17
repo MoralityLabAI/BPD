@@ -31,7 +31,7 @@ Draw an independent base record seed and a distinct donor source-switch seed. Se
 - Authorized query role belongs to \`{s,t}\`; public cohort always queries U.
 - Query role and source tag choices use deterministic local seeded RNG streams independent of teacher/factor/policy parameters.
 - The original Stage 0 last-write-wins target oracle recomputes both outputs exactly, including overwrite and absent-source cases.
-- The **source-blind squared-error conditional mean**, calculated from ordered numeric values, history length, public scalar and common query role, is identical for recipient and donor; it is unchanged by the last source flip.
+- The source-blind squared-error conditional means must be **recomputed under this source-aware sampling law**, because selecting the query role from {s,t} correlates the visible role with the otherwise hidden source-label assignment. The Stage 0 uniform-query blind mean must not be reused as a Bayes-optimal reference. For the heldout template, enumerate all six label permutations, both distinct donor-source choices, and both authorized role selections, conditional on the observed query role. In the high-contrast stratum also condition on the exact acceptance event |recipient target - donor target|≥0.30 before averaging. Report recipient and donor blind conditional means independently, and prove their transformation behavior under the donor-source flip using exact enumeration. For the independent U-query cohort both Bayes means equal the public scalar.
 - Train/heldout structural source families remain disjoint in event counts and overwrite-template support, while source-ID alphabet remains shared.
 
 ## Evidence and future science boundary
