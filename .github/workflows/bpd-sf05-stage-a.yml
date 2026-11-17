@@ -1,0 +1,83 @@
+name: BPD-SF05 public-safe intersection source and excluded-root pilot
+
+on:
+  pull_request:
+    paths:
+      - "mechinterp/bpd/theory/sf05_public_safe/**"
+      - ".github/workflows/bpd-sf05-stage-a.yml"
+  push:
+    branches:
+      - "research/bpd-sf05-*"
+    paths:
+      - "mechinterp/bpd/theory/sf05_public_safe/**"
+      - ".github/workflows/bpd-sf05-stage-a.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-and-excluded:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install CPU test dependency
+        run: python -m pip install "torch==2.5.1"
+      - name: Verify frozen Stage-A blobs and protected source
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          root=Path('mechinterp/bpd/theory/sf05_public_safe')
+          data=json.loads((root/'LOCK.json').read_text())
+          assert data['stage']=='A_EXCLUDED_ROOTS_ONLY'
+          assert data['allowable_seeds']==[901,902]
+          assert data['scientific_roots_evaluated']==0
+          assert data['diagnostic_pairs_per_seed']==512
+          for name, expected in data['files'].items():
+              got=subprocess.check_output(['git','hash-object',str(root/name)],text=True).strip()
+              assert got==expected, f'{name}: SHA mismatch {got} != {expected}'
+          upstream=subprocess.check_output(['git','hash-object',
+             'mechinterp/bpd/theory/sf04_source_binding/experiment.py'],text=True).strip()
+          assert upstream==data['imported_sf04_experiment_blob_sha']
+          print("SF05 SOURCE LOCK PASS; restricted to excluded seeds 901 and 902")
+          PY
+      - name: Verify exact intersection geometry and SF04 adapter
+        run: python -m unittest discover -s mechinterp/bpd/theory/sf05_public_safe/tests -v
+      - name: Execute excluded engineering roots only
+        run: |
+          python -m mechinterp.bpd.theory.sf05_public_safe.stage_a \
+            --seeds 901 902 --shams 16 --out /tmp/sf05_stage_a_hosted.json
+      - name: Record engineering geometry and source provenance
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          a=json.load(open('/tmp/sf05_stage_a_hosted.json'))
+          assert a['roots']==[901,902] and len(a['rows'])==2
+          for row in a['rows']:
+              assert row['evidence_class']=='excluded-root development diagnostic'
+              assert row['authorized_eligible'] > 0
+              for name, arm in row['arm_results'].items():
+                  assert arm['max_current_readout_error'] <= 1e-6, name
+                  assert arm['max_public_tangent_error'] <= 1e-5, name
+                  print(json.dumps({
+                      'seed':row['seed'],'arm':name,
+                      'authorized_raw':arm['authorized_raw_dark_recovery'],
+                      'authorized_safe':arm['authorized_public_tangent_safe_recovery'],
+                      'public_raw':arm['finite_public_raw_mean_abs_change'],
+                      'public_safe':arm['finite_public_safe_mean_abs_change'],
+                      'removed_ratio':arm['mean_norm_removed_ratio'],
+                  }))
+          print('SF05 stage A engineering geometry PASS; SCIENTIFIC GATE NOT APPLICABLE')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sf05-excluded-root-tangent-safety-diagnostics
+          path: /tmp/sf05_stage_a_hosted.json
