@@ -1,0 +1,92 @@
+name: BPD-PD-05 prospective count-supervision and STE cohort
+
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/theory/pd05/EXECUTE_LOCK.json'
+
+permissions:
+  contents: read
+
+jobs:
+  first-registered-cohort:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Enforce frozen source ancestry and original study registration
+        run: |
+          python - <<'PY'
+          import json,subprocess
+          from pathlib import Path
+          root=Path('mechinterp/bpd/theory/pd05')
+          lock=json.loads((root/'EXECUTE_LOCK.json').read_text())
+          cfg=json.loads((root/'CONFIG.json').read_text())
+          assert lock['study_id']==cfg['study_id']=='BPD-PD-05'
+          assert lock['execution']=='first_registered_full_cohort'
+          assert len(cfg['seeds'])==lock['seeds']==24
+          assert len(cfg['arms'])==lock['arms_per_seed']==8
+          assert cfg['status']=='prospective_protocol_locked_before_pd05_model_training'
+          original=lock['source_commit_sha']
+          subprocess.run(['git','merge-base','--is-ancestor',original,'HEAD'],check=True)
+          protected=[str(root/f) for f in
+            ('CONFIG.json','PROTOCOL.md','experiment.py','test_experiment.py')]
+          subprocess.run(['git','diff','--exit-code',original,'HEAD','--',
+                          *protected],check=True)
+          print('PD05 source pinned:',original)
+          PY
+      - name: Install CPU Torch 2.5.1 and pytest
+        run: |
+          python -m pip install --disable-pip-version-check pytest
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Verify excluded-seed gradients, mask forward and count labels
+        run: python -m pytest -q mechinterp/bpd/theory/pd05/test_experiment.py
+      - name: Execute 24 fixed seeds and eight registered arms
+        run: python -m mechinterp.bpd.theory.pd05.experiment --out /tmp/bpd-pd05-first-run.json
+      - name: Verify complete scientific receipt and matching initialization
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('/tmp/bpd-pd05-first-run.json').read_text())
+          cfg=json.loads(Path('mechinterp/bpd/theory/pd05/CONFIG.json').read_text())
+          assert r['study_id']=='BPD-PD-05'
+          assert r['summary']['full_registered_cohort']
+          assert len(r['arms'])==24*8==192
+          assert {row['seed'] for row in r['arms']}==set(cfg['seeds'])
+          assert {row['arm'] for row in r['arms']}=={
+            arm['key'] for arm in cfg['arms']}
+          assert len({(row['seed'],row['arm']) for row in r['arms']})==192
+          assert all(set(row['heldout']['per_family'])==
+                     set(cfg['source']['families']) for row in r['arms'])
+          assert all(all(v['actual_forward_binary'] for v in row['heldout']['per_family'].values())
+                     for row in r['arms'])
+          assert all(row['factor_update_norm']>0 for row in r['arms']
+                     if not row['frozen_factors'])
+          assert all(row['factor_update_norm']==0 for row in r['arms']
+                     if row['frozen_factors'])
+          assert all(row['first_count_grad_norm']>0 for row in r['arms']
+                     if next(spec['count_supervision'] for spec in cfg['arms']
+                        if spec['key']==row['arm']))
+          assert all(len(row['calibration_candidates'])==7 for row in r['arms']
+                     if row['arm']=='calibrated_independent')
+          assert all(len(row['calibration_candidates'])==0 for row in r['arms']
+                     if row['arm']!='calibrated_independent')
+          print('Registered PD05 scientific verdict:',
+                r['summary']['registered_primary_passed'])
+          print('All-arm success counts:',r['summary']['success_by_arm'])
+          print('Exact seed-paired p:',r['summary']['McNemar_exact_two_sided_p'])
+          PY
+      - name: Archive original first-run JSON for independent verification
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bpd-pd05-first-run-${{ github.run_id }}
+          path: /tmp/bpd-pd05-first-run.json
+          retention-days: 60
+          if-no-files-found: warn
