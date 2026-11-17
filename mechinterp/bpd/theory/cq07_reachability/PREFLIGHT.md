@@ -1,0 +1,10 @@
+# CQ-07 mechanistic-resolution preflight: a stopping result
+
+[EvalMath skill](https://github.com/MoralityLabAI/EvalMath/tree/main/skills/evalmath-mechinterp-power) strict preflight executed on eight previously exposed and independently re-trained development roots. The pilot effect is the count difference between BPD constrained-tanh states and genuinely reachable, jointly head/dose-matched clean states, divided by 128 donor pairs per root. Every root's difference was **zero**. The matched direction sham is the difference between the two independent clean-reservoir controls on their common-feasible subset; each root also produced zero. Source sign and donor target did **not** enter reservoir selection.
+
+Input file: [results/cq07_preflight_input.json](results/cq07_preflight_input.json). Output file: [results/cq07_preflight_result.json](results/cq07_preflight_result.json). Strict exit code **2**, decision **REDESIGN_OR_PILOT_ONLY**. The observation-based target-effect planning estimate is 0.0, while the physical minimum is 0.15. Planned comparison count is 2 at overall alpha .05. Twenty-six hypothetical confirmation roots have not been sealed or generated. The sample maximum of eight clean-control sham differences cannot establish a nonparametric population 95th-percentile/95%-confidence tolerance bound, which requires at least 59 independent calibration roots.
+
+The preflight reasons are 
+`heldout_unsealed`, `sham_quantile_uncalibrated`, `target_below_mechanistic_variation_floor`, and `confirmation_underpowered`. A zero sample SD is not grounds for claiming arbitrarily high power: it arose because the matched comparison was exactly tied on all observed development roots. Scientific effect size and intervention feasibility must be redesigned before any confirmation.
+
+The eight roots are an engineering diagnostic distribution conditioned on the original synthetic source family, and 1,024 cases are repeated observations within only eight trained worlds. Their tie is a negative result for this intervention-and-null construction, rather than a proof of equality for all possible seed-trained recurrences.
