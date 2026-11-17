@@ -1,0 +1,178 @@
+{
+  "study_id": "BPD-PD-09",
+  "registered_date": "2026-11-17",
+  "status": "prospective_before_all_pd09_training",
+  "predecessor": {
+    "canonical_pd08_main_registered_pass": 23,
+    "canonical_pd08_raw_control_success": 0,
+    "canonical_pd08_stage1": "true count-supervised dictionary discovery",
+    "canonical_pd08_arms": 6,
+    "canonical_pd08_original_run": 44114011511
+  },
+  "hypothesis": "Annealed unlabeled smooth hyperplane-mass sparsity over an orthogonal read basis recovers compositional four-dimensional factors more reliably than fixed-scale smooth mass, without any count/support labels.",
+  "seeds": [
+    1291,
+    1297,
+    1301,
+    1303,
+    1307,
+    1319,
+    1321,
+    1327,
+    1361,
+    1367,
+    1373,
+    1381,
+    1399,
+    1409,
+    1423,
+    1427,
+    1429,
+    1433,
+    1439,
+    1447,
+    1451,
+    1453,
+    1459,
+    1471
+  ],
+  "smoke_seed": 2009,
+  "source": {
+    "generator": "unchanged PD06 rotation_for_seed and sample_batch",
+    "train_supports": "PD06 all singletons, four adjacent pairs, three triples",
+    "holdout_supports": "PD06 diagonal pairs 0,2 and 1,3, withheld triple 0,2,3 and transition",
+    "family_order": [
+      "k1_seen",
+      "k2_seen",
+      "k2_unseen",
+      "k3_seen",
+      "k3_unseen",
+      "transition_unseen"
+    ],
+    "per_seed_Q_generator_offset": 900000,
+    "train_generator_offset": 100000,
+    "heldout_generator_offset": 200000,
+    "heldout_family_stride": 10000,
+    "train_batch_size": 32,
+    "heldout_boards_per_family": 192,
+    "observed_x_only": true
+  },
+  "physical": {
+    "target": "shared BPDModel/TiedComponentLinear bias-free I4, four rank1 components",
+    "zero_ablation": true,
+    "residual_delta_mask": 0,
+    "sphere_rescale": false,
+    "evaluation_mask": "hard fixed 1[abs(x@normalized_V) >= 0.5]"
+  },
+  "arms": [
+    {
+      "key": "orthogonal_annealed",
+      "training": "orthogonal_QR_sparse_mass",
+      "sigma_schedule": [
+        0.6,
+        0.3,
+        0.15
+      ],
+      "direct_count_or_support_supervision": false
+    },
+    {
+      "key": "orthogonal_fixed",
+      "training": "orthogonal_QR_sparse_mass",
+      "sigma_schedule": [
+        0.6,
+        0.6,
+        0.6
+      ],
+      "direct_count_or_support_supervision": false
+    },
+    {
+      "key": "untied_sparse",
+      "training": "untied_BPD_factors_with_sparse_mass_and_orthogonal_regularization",
+      "sigma_schedule": [
+        0.6,
+        0.3,
+        0.15
+      ],
+      "direct_count_or_support_supervision": false
+    },
+    {
+      "key": "random_orthogonal",
+      "training": "no_updates_random_QR_negative",
+      "direct_count_or_support_supervision": false
+    },
+    {
+      "key": "count_supervised_positive",
+      "training": "PD06_count_supervised_topk",
+      "direct_count_or_support_supervision": true
+    }
+  ],
+  "optimization": {
+    "steps": 360,
+    "batch_size": 32,
+    "Adam_lr": 0.025,
+    "weight_decay": 0,
+    "smooth_mass": "L0_smooth = mean_j(1-exp(-0.5*(z_j/sigma)^2)), z=x@V_normalized",
+    "orthogonal_parameterization": "train raw matrix A initialized from PD06 random V; V=orthogonal_QR(A); U=V.T; source Q never read in optimization",
+    "sigma_segments": [
+      [
+        0,
+        119,
+        0.6
+      ],
+      [
+        120,
+        239,
+        0.3
+      ],
+      [
+        240,
+        359,
+        0.15
+      ]
+    ],
+    "untied_loss": "smoothed L0 + 0.3 physical weight reconstruction MSE + 0.5 normalized read Gram off-diagonal squared + 0.15 column norm deviation squared",
+    "ortho_full_reconstruction": "analytic exact I4 via tied V and V.T; no loss term needed",
+    "count_supervised_positive_training": "original PD06 count_supervised objective with count cross entropy and both physical factors trainable for 360 updates",
+    "all_unsupervised_arms_use_only_observed_x": true,
+    "no_gate_parameters_trained_after_stage1": true
+  },
+  "scoring": {
+    "mean_read_cos_min": 0.9,
+    "overall_MSE_max": 0.03,
+    "seen_family_MSE_max": 0.04,
+    "unseen_family_MSE_max": 0.06,
+    "seen_fourpass_support_min": 0.8,
+    "unseen_fourpass_support_min": 0.7,
+    "all_hard_masks_binary": true,
+    "trained_factor_gradient_positive": true,
+    "trained_factor_update_positive": true,
+    "primary_arm": "orthogonal_annealed",
+    "primary_control": "orthogonal_fixed",
+    "primary_successes_min": 18,
+    "primary_net_wins_min": 6,
+    "primary_exact_two_sided_McNemar_max": 0.05,
+    "margin_diagnostic_min_component_cos": 0.99333
+  },
+  "stats": {
+    "independent_unit": "seed plus independent rotation",
+    "seed_count": 24,
+    "seed_paired_McNemar": true,
+    "Wilson95": true,
+    "source_hashes": true,
+    "first_run_json_archived": true
+  },
+  "limits": {
+    "no_neural_mechanism_inference": true,
+    "count_supervision_only_positive_control": true,
+    "no_supervised_signal_in_primary_or_its_matched_control": true,
+    "original_pd01_to_pd08_untouched": true
+  },
+  "execution": {
+    "python": "3.12",
+    "torch": "2.5.1+cpu",
+    "cpu_threads": 1,
+    "timeout_minutes": 20,
+    "RSS_limit_GiB": 3,
+    "source_lock_after_smoke": true
+  }
+}
