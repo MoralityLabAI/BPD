@@ -1,0 +1,158 @@
+{
+  "study_id": "BPD-PD-08",
+  "registered_date": "2026-11-17",
+  "status": "registered_before_any_pd08_model_training",
+  "motivation": "PD07 unlabelled jointly trained read gates 1/24 and planted-frozen read gate 24/24; isolate factor discovery from second-stage gate selection",
+  "predecessor": {
+    "pd07_merge_sha": "5c3bdd6141c30c2568ce20326bd614c22b64dd0a",
+    "pd07_read_coupled_success": 1,
+    "pd07_raw_control_success": 0,
+    "pd07_planted_read_success": 24
+  },
+  "seeds": [
+    1109,
+    1117,
+    1123,
+    1129,
+    1151,
+    1153,
+    1163,
+    1171,
+    1181,
+    1187,
+    1193,
+    1201,
+    1213,
+    1217,
+    1223,
+    1229,
+    1231,
+    1237,
+    1249,
+    1259,
+    1277,
+    1279,
+    1283,
+    1289
+  ],
+  "smoke_seed": 2017,
+  "source": {
+    "generator": "unchanged PD06 rotated 4D sample_batch and rotation_for_seed",
+    "family_order": [
+      "k1_seen",
+      "k2_seen",
+      "k2_unseen",
+      "k3_seen",
+      "k3_unseen",
+      "transition_unseen"
+    ],
+    "stage1_rng_offset": 100000,
+    "stage2_rng_offset": 500000,
+    "heldout_rng_offset": 200000,
+    "heldout_family_stride": 10000,
+    "stage1_batch": 32,
+    "stage2_batch": 32,
+    "heldout_boards_per_family": 192,
+    "train_supports": "PD06 all 4 singletons, 4 cycle pairs, 3 triples",
+    "unseen_supports": "PD06 withheld diagonal pairs and triple, including transition"
+  },
+  "architecture": {
+    "physical": "W=I4, BPDModel/TiedComponentLinear four rank-one components",
+    "zero_ablation": true,
+    "residual_delta_mask": 0,
+    "sphere_rescale": false,
+    "stage1": "PD06 count-supervised top-k with MLP GateMLP; only count labels during first-stage training",
+    "stage2": "freeze learned V and U bitwise; train only gate parameters; source labels forbidden in both trainable second-stage gate arms",
+    "read_features": "z_j=x@V_j/norm(V_j), abs, per-column threshold 0.25+0.5*sigmoid(theta_j)",
+    "read_backward": "sigmoid(10*(abs(z_j)-threshold)) straight-through, exact 0/1 forward",
+    "raw_gate": "PD06 GateMLP on signed x, independent sigmoid per assignment head, binary threshold 0.5",
+    "planted_control": "V=Q,U=Q.T under rotation seed, frozen",
+    "oracle_support_control": "exact latent mask with frozen stage1 learned dictionary"
+  },
+  "arms": [
+    {
+      "key": "read_trained",
+      "kind": "read",
+      "stage2_updates": true,
+      "uses_support_labels": false,
+      "planted": false
+    },
+    {
+      "key": "raw_independent",
+      "kind": "raw",
+      "stage2_updates": true,
+      "uses_support_labels": false,
+      "planted": false
+    },
+    {
+      "key": "read_fixed_threshold",
+      "kind": "read_fixed",
+      "stage2_updates": false,
+      "uses_support_labels": false,
+      "planted": false
+    },
+    {
+      "key": "oracle_support_learned_dictionary",
+      "kind": "oracle",
+      "stage2_updates": false,
+      "uses_support_labels": true,
+      "planted": false
+    },
+    {
+      "key": "read_planted_frozen",
+      "kind": "read_fixed",
+      "stage2_updates": false,
+      "uses_support_labels": false,
+      "planted": true
+    }
+  ],
+  "training": {
+    "stage1_updates": 360,
+    "stage1_lr": 0.025,
+    "stage1_count_ce_weight": 1,
+    "stage1_recon_weight": 1,
+    "stage1_matrix_faith_weight": 0.3,
+    "stage1_gate_frac_weight": 0.05,
+    "stage2_updates": 240,
+    "stage2_lr": 0.025,
+    "stage2_recon_weight": 1,
+    "stage2_gate_frac_weight": 0.05,
+    "stage2_physical_faith_term_constant": 0.3,
+    "stage2_common_init": "reset torch.manual_seed(seed+700000) on each arm gate init",
+    "stage2_objective_uses_no_count_support_labels": true
+  },
+  "scoring": {
+    "axis_mean_abs_cos_min": 0.9,
+    "overall_MSE_max": 0.03,
+    "seen_family_MSE_max": 0.04,
+    "unseen_family_MSE_max": 0.06,
+    "seen_exact_fourpass_support_min": 0.8,
+    "unseen_exact_fourpass_support_min": 0.7,
+    "require_bitwise_frozen_VU": true,
+    "primary_arm": "read_trained",
+    "control_arm": "raw_independent",
+    "primary_read_successes_min": 18,
+    "primary_net_seed_wins_min": 6,
+    "primary_paired_two_sided_mcnemar_p_max": 0.05,
+    "diagnostic_min_cosine_margin": 0.99333,
+    "diagnostic_per_component_distance_margin": 0.11547
+  },
+  "statistical_unit": "seed and fixed Q rotation",
+  "report": {
+    "seed_level_Wilson95": true,
+    "paired_McNemar_exact": true,
+    "all_120_arm_receipts": true,
+    "stage1_common_factor_hash": true,
+    "stage1_axis_accuracy": true,
+    "seen_unseen_by_family": true,
+    "heldout_only_after_stage2": true,
+    "raw_first_run_preserved": true
+  },
+  "execution": {
+    "pytorch": "2.5.1+cpu",
+    "python": "3.12",
+    "cpu_threads": 1,
+    "timeout_minutes": 20,
+    "memory_limit_GiB": 3
+  }
+}
