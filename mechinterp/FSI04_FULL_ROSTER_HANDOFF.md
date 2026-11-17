@@ -35,6 +35,12 @@ The primary test remains donor joint transplant **minus clean** correct Sudoku c
 
 Even after fresh development scoring, the EvalMath preflight must label the 24-root result **development-only**, because its 95th-percentile/95%-confidence sham-tail criterion needs at least 59 independent calibration roots. The planned 256-root confirmation would require separate sealed sampling, fresh calibration and frozen decisions. No test-set generalization or mechanistic BPD victory can be claimed from a single root-matched pilot, and the old data already show an apparent donor-over-random advantage arising from less harmful donor corruption.
 
+## Exploratory resolution estimate
+
+The prior \`yagizdevre\` S4 root-wise *donor-minus-clean* correct-cell effect had standard deviation approximately **0.1659** across 40 already-published roots. Using EvalMath's normal-approximation planning formula with familywise alpha 0.05 across two comparisons, 80% power, and a target 0.15 effect exceeding a hypothetical 0.10 sham/scientific floor by 0.05 requires about **105 independent roots** if that historical variance persists. At only 24 roots, the corresponding approximate resolvable effect is **0.204**, above the registered target. At 256 roots the same calculation gives **0.132**. Those estimates are *sensitivity planning*, using previously selected mismatched-sham data; they have no coverage guarantee and cannot calibrate the new matched-sham null.
+
+The more important physical test is whether the new displacement-matched random sham's 95th-percentile variation can be bounded below the target. The prescribed tolerance bound still requires at least 59 independent **new calibration** roots. A large first-successor cosine or readout L2 response does not override either gate.
+
 ## Existing compute environment
 
 The current ChatGPT tool environment exposes CPU-only PyTorch and contains neither of the registered native 7M model checkpoints. It can generate and audit Sudoku roots, recompute historical FSI-03 probabilities, and source-check the launcher. True native continuation must execute on a machine with the required model weights or another explicitly configured model runtime.
