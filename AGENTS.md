@@ -19,6 +19,15 @@ does not thereby repair clean reasoning. Observational probes and exact
 linear-algebraic BPD witnesses belong to different evidence classes from
 native model-causal claims.
 
+AMM-03's 128-model confirmation population is **scientifically sealed**:
+its 64 independent development roots yielded zero memory-over-local gain
+and the source-pinned EvalMath planner misleadingly reported READY from
+zero sample variance. Do not invoke AMM-03 `--phase confirmation` even with
+its archived READY receipt. Read
+`mechinterp/bpd/experiments/amm03_geometry_memory/RESULTS.md` and
+`README.md` before proposing new causal-memory transfer runs. Preserve the
+source-locked training and development receipts.
+
 The ARG-03-N 168-case protected `test.jsonl` is **strictly sealed**. Preserve
 its public SHA locks. Do not open it, pass it as an exclusion file, generate a
 replacement with the same role, or run inference against it absent a distinct
