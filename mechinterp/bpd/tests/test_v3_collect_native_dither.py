@@ -4,7 +4,7 @@ import numpy as np
 import pytest
 import torch
 from mechinterp.bpd.v3.collect_native_dither import (
-    collect, dither_updated, rollout_single, substream_seed,
+    admit_cohort, collect, dither_updated, rollout_single, substream_seed,
 )
 
 
@@ -61,3 +61,20 @@ def test_duplicate_and_invalid_roster():
     with pytest.raises(ValueError,match='sigma'):
         dither_updated(torch.ones(1,3,4),torch.Generator(),-1)
     assert substream_seed(1,0,0)!=substream_seed(1,0,1)
+
+
+def test_full_cohort_requires_external_hash_and_exact_root_count():
+    sha = 'a' * 64
+    with pytest.raises(ValueError, match='requires 183'):
+        admit_cohort(182, max_boards=None, expected_roster_sha256=sha,
+                     observed_roster_sha256=sha)
+    with pytest.raises(ValueError, match='expected-roster-sha256'):
+        admit_cohort(183, max_boards=None, expected_roster_sha256=None,
+                     observed_roster_sha256=sha)
+    with pytest.raises(ValueError, match='hash mismatch'):
+        admit_cohort(183, max_boards=None, expected_roster_sha256='b' * 64,
+                     observed_roster_sha256=sha)
+    assert admit_cohort(183, max_boards=None, expected_roster_sha256=sha,
+                        observed_roster_sha256=sha).startswith('NATIVE_COHORT')
+    assert admit_cohort(2, max_boards=2, expected_roster_sha256=None,
+                        observed_roster_sha256=sha) == 'DEVELOPMENT_ONLY'
