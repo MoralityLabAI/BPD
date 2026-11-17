@@ -6,5 +6,8 @@
   "expected_seed_count": 24,
   "expected_arms_per_seed": 4,
   "locked_source": "mechinterp/bpd/theory/pd02/CONFIG.json + PROTOCOL.md + experiment.py",
-  "evidence_policy": "Publish original first run even if registered scientific criterion fails."
+  "evidence_policy": "Publish original first run even if registered scientific criterion fails.",
+  "execution_attempt": 2,
+  "previous_attempt_workflow_run": 44066966041,
+  "previous_attempt_failure": "GitHub checkout depth=1 made HEAD^ unavailable; failed at source verification before torch installation or cohort execution"
 }
