@@ -101,4 +101,3 @@ def main():
     else:print(s,end='')
     return 2 if a.strict and result['decision']!='READY_FOR_CONFIRMATION' else 0
 if __name__=='__main__':raise SystemExit(main())
-
