@@ -66,7 +66,7 @@ jobs:
           assert len(r['arms'])==144
           assert len({(x['seed'],x['arm']) for x in r['arms']})==144
           assert {x['seed'] for x in r['arms']}==set(c['seed_list'])
-          assert {x['arm'] for x in r['arms']}=={a['key'] for a in c['objective']['arms']}
+          assert {x['arm'] for x in r['arms']}=={a['key'] for a in c['arms']}
           assert len({x['source_rotation_sha256'] for x in r['arms']})==24
           assert all(set(x['heldout']['per_family'])==set(c['source']['eval_families'])
                      for x in r['arms'])
