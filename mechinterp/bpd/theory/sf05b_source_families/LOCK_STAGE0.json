@@ -1,0 +1,56 @@
+{
+  "experiment": "BPD-SF05B",
+  "stage": "STAGE0_GENERATOR_ONLY_BEFORE_ANY_NEW_MODEL_ROOT",
+  "date": "2026-11-18",
+  "files": {
+    "PROTOCOL_STAGE0.md": "06a0f831b0c0118aa378cb7b786e4926d2511da8",
+    "source_families.py": "525cfb28d40cc5f58c0e8141489a8e744d1778f4",
+    "tests/test_source_families.py": "b397ce0dc8de162e8b3d349e8f78f0f9d3d1b138"
+  },
+  "family_train_history_lengths": [
+    2,
+    3,
+    4
+  ],
+  "family_heldout_history_lengths": [
+    5,
+    6
+  ],
+  "heldout_templates": {
+    "5": [
+      0,
+      1,
+      0,
+      2,
+      1
+    ],
+    "6": [
+      0,
+      1,
+      2,
+      0,
+      1,
+      2
+    ]
+  },
+  "source_count": 3,
+  "role_count": 4,
+  "input_features": 11,
+  "reserved_calibration_root_ids": {
+    "first": 6101,
+    "last": 6159,
+    "count": 59
+  },
+  "reserved_confirmation_root_ids": {
+    "first": 7101,
+    "last": 7132,
+    "count": 32
+  },
+  "excluded_engineering_roots": [
+    901,
+    902
+  ],
+  "new_trained_roots": 0,
+  "scientific_status": "NO_NEW_MODEL_TRAINING_OR_HELDOUT_MODEL_SCORING",
+  "strict_boundary": "Future training architecture/policy/intervention/thresholds require an independent frozen Stage1 lock before data."
+}
