@@ -183,6 +183,40 @@ theorem recurrence_bound (e : Nat → Nat) (L eps : Nat)
       _ = eps * geom L (n + 1) := by
         simp [geom, Nat.mul_add, Nat.mul_comm, Nat.mul_left_comm, Nat.mul_assoc]
 
+
+/-! A dictionary-independent block-activity event: when the commuting
+reparameterization preserves the zero vector and has an inverse, a block
+projection vanishes exactly on the same activation states. -/
+
+theorem block_activity_zero_iff_of_commute
+    {S : Type} [Zero S]
+    (r rInv d : S → S)
+    (hleft : ∀ s, rInv (r s) = s)
+    (hrZero : r 0 = 0)
+    (hinvZero : rInv 0 = 0)
+    (hcomm : ∀ s, d (r s) = r (d s))
+    (s : S) :
+    d (r s) = 0 ↔ d s = 0 := by
+  rw [hcomm s]
+  constructor
+  · intro h
+    have h' := congrArg rInv h
+    simpa only [hleft, hinvZero] using h'
+  · intro h
+    rw [h, hrZero]
+
+theorem block_write_invariant
+    {X S Y : Type}
+    (encode : X → S) (decode : S → Y)
+    (r rInv d : S → S)
+    (hleft : ∀ s, rInv (r s) = s)
+    (hright : ∀ s, r (rInv s) = s)
+    (hcomm : ∀ s, d (r s) = r (d s))
+    (x : X) :
+    decode (rInv (d (r (encode x)))) = decode (d (encode x)) := by
+  have hc := (conjugate_mask_iff_commute r rInv d hleft hright).mpr hcomm
+  exact congrArg decode (hc (encode x))
+
 end BPD.OptimalBasis
 
 #print axioms BPD.OptimalBasis.rotated_unique_optimal
@@ -193,3 +227,6 @@ end BPD.OptimalBasis
 #print axioms BPD.OptimalBasis.shear_unshear
 #print axioms BPD.OptimalBasis.singleton_mask_noninvariant
 #print axioms BPD.OptimalBasis.recurrence_bound
+
+#print axioms BPD.OptimalBasis.block_activity_zero_iff_of_commute
+#print axioms BPD.OptimalBasis.block_write_invariant
