@@ -8,9 +8,11 @@ HERE=Path(__file__).resolve().parent
 LOCK=HERE/'results'/'LOCKED_COUNTS.json'
 FILES=('PROTOCOL.md','experiment.py','reference.py')
 
-def sha256(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+def blob_sha(path):
+    data=Path(path).read_bytes()
+    return hashlib.sha1(b'blob '+str(len(data)).encode()+b'\0'+data).hexdigest()
 
-def source_hashes():return {name:sha256(HERE/name) for name in FILES}
+def source_hashes():return {name:blob_sha(HERE/name) for name in FILES}
 
 def compact(run):
     return {'schema':run['schema'],'seeds':run['seeds'],'cases_per_seed':run['cases_per_seed'],
