@@ -52,7 +52,7 @@ class NonprivilegedPolicy(nn.Module):
         budget = torch.minimum(CORRECTION_FRACTION*candidate_delta.norm(
             dim=-1,keepdim=True), torch.full((n,1),CORRECTION_MAX_NORM,device=corr.device))
         corr_norm = corr.norm(dim=-1,keepdim=True)
-        corr *= torch.minimum(torch.ones_like(budget),budget/corr_norm.clamp_min(1e-12))
+        corr = corr * torch.minimum(torch.ones_like(budget),budget/corr_norm.clamp_min(1e-12))
         return corr
 
     def corrected_edit(self, state:torch.Tensor, candidate_delta:torch.Tensor,
