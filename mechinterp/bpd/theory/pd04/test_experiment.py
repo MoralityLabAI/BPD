@@ -83,6 +83,16 @@ def test_actual_shared_component_wrapper_and_count_gradient():
     assert all(p.grad is not None for p in factors)
     assert sum(float(p.grad.square().sum()) for p in factors)>0
     assert sum(float(p.grad.square().sum()) for p in gate.count.parameters())>0
+    # Assignment logits are structurally irrelevant while count selects both;
+    # force a one-component state to audit the assignment gradient separately.
+    with torch.no_grad():
+        gate.count.weight.zero_()
+        gate.count.bias.fill_(-8.0)
+    for p in gate.parameters():
+        p.grad=None
+    for p in factors:
+        p.grad=None
+    objective(bpd,gate,x,"adaptive").backward()
     assert sum(float(p.grad.square().sum()) for p in gate.fc.parameters())>0
 
 
