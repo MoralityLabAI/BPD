@@ -65,6 +65,25 @@ def relative_remix_blocks(top_pairs: tuple[tuple[int, int], ...]) -> tuple[tuple
     return ((0, 1),)
 
 
+def masked_weight(pair: tuple[int, int], mask: tuple[int, int]):
+    """Exact represented edit M^{-1} diag(mask) M with W=identity."""
+    a, b = READS[pair[0]], READS[pair[1]]
+    inverse = mat_inverse(a, b)
+    masked_rows = ((Q(mask[0]) * a[0], Q(mask[0]) * a[1]),
+                   (Q(mask[1]) * b[0], Q(mask[1]) * b[1]))
+    return tuple(tuple(sum((inverse[i][k] * masked_rows[k][j]
+                            for k in range(2)), Q(0))
+                       for j in range(2)) for i in range(2))
+
+
+def unstable_singleton_masks(optimal_bases: tuple[tuple[int, int], ...]):
+    """Compare represented edits across all listed optimal dictionaries."""
+    anchor = optimal_bases[0]
+    return tuple(mask for mask in ((1, 0), (0, 1))
+                 if any(masked_weight(pair, mask) != masked_weight(anchor, mask)
+                        for pair in optimal_bases))
+
+
 def threshold_certificate(atoms: Sequence[tuple[Vec, Q]], basis: tuple[int, int]):
     """Verify the finite maximum-weight basis filtration level by level."""
     masses = tuple(hyperplane_mass(read, atoms) for read in READS)
@@ -106,6 +125,12 @@ def audit():
         assert relative_remix_blocks(pairs) == exp["blocks"], name
         for b in scores:
             assert threshold_certificate(atoms, b) == (b in pairs), (name, b)
+        assert all(masked_weight(p, (1, 1)) == ((1, 0), (0, 1))
+                   for p in pairs), name
+        assert all(masked_weight(p, (0, 0)) == ((0, 0), (0, 0))
+                   for p in pairs), name
+        expected_unstable = () if name == "rotated_unique" else ((1, 0), (0, 1))
+        assert unstable_singleton_masks(pairs) == expected_unstable, name
         results[name] = {
             "weights": [str(x) for x in masses],
             "optimal_mass_total": str(top),
@@ -113,6 +138,7 @@ def audit():
             "optimal_pairs": [list(pair) for pair in pairs],
             "invariant_masks_blocks": [list(block) for block in exp["blocks"]],
             "checked_bases": len(scores),
+            "unstable_singleton_masks": [list(v) for v in unstable_singleton_masks(pairs)],
         }
     return results
 
