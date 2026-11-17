@@ -62,6 +62,9 @@ jobs:
         run: |
           python -m pytest -q mechinterp/bpd/theory/pd03/test_experiment.py
           python -m pytest -q mechinterp/bpd/theory/pd03/test_published_results.py
+      - name: Verify PD04 adaptive cardinality on excluded seed
+        run: |
+          python -m pytest -q mechinterp/bpd/theory/pd04/test_experiment.py
       - name: Verify source module syntax
         run: |
           python -m compileall -q mechinterp/bpd
