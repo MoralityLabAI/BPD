@@ -1,0 +1,12 @@
+{
+  "study_id": "BPD-PD-08",
+  "execution": "first_registered_full_cohort",
+  "registered_date": "2026-11-17",
+  "source_commit_sha": "97bd82ace7f61d704bba7d431037eed405b7116f",
+  "seeds": 24,
+  "arms_per_seed": 5,
+  "excluded_smoke_seed": 2017,
+  "preflight_run_id": 44114371372,
+  "preflight_result": "SUCCESS with excluded-seed factor freeze / source-label isolation tests",
+  "policy": "Preserve unmodified raw 120-arm first-run JSON and preregistered scientific PASS/FAIL."
+}
