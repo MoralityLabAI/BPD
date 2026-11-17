@@ -24,6 +24,8 @@ jobs:
         run: |
           python -m unittest discover -s mechinterp/bpd/theory -p 'test_finite_optima.py' -v
           python mechinterp/bpd/theory/finite_optima.py > /tmp/bpd-optimal-basis-finite.json
+          python -m unittest discover -s mechinterp/bpd/theory -p 'test_finite_matroid.py' -v
+          python mechinterp/bpd/theory/finite_matroid_audit.py > /tmp/bpd-exact-matroid-audit.json
       - name: Install pinned Lean 4.19.0
         run: |
           curl --fail --location --retry 3 https://github.com/leanprover/lean4/releases/download/v4.19.0/lean-4.19.0-linux.tar.zst -o /tmp/lean.tar.zst
@@ -58,5 +60,6 @@ jobs:
           path: |
             /tmp/bpd-optimal-basis-finite.json
             /tmp/bpd-optimal-basis-axioms.txt
+            /tmp/bpd-exact-matroid-audit.json
           retention-days: 30
           if-no-files-found: warn
