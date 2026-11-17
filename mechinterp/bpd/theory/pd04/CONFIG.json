@@ -1,0 +1,226 @@
+{
+  "study_id": "BPD-PD-04",
+  "registered_date": "2026-11-17",
+  "status": "frozen_before_PD04_training",
+  "predecessor": {
+    "pd03_merge_sha": "a003611db6e4786c57b7807203beca70c4521ca7",
+    "pd03_top1_seed_successes": 24,
+    "pd03_margin_seed_successes": 19,
+    "pd03_primary_p": 0.0625,
+    "pd03_mixed_top1_mse": 0.48818
+  },
+  "scope": "2D shared BPD toy, full dictionary training; no neural mechanism inference",
+  "seed_list": [
+    419,
+    421,
+    431,
+    433,
+    439,
+    443,
+    449,
+    457,
+    461,
+    463,
+    467,
+    479,
+    487,
+    491,
+    499,
+    503,
+    509,
+    521,
+    523,
+    541,
+    547,
+    557,
+    563,
+    569
+  ],
+  "heldout_families": [
+    "disjoint",
+    "overlap",
+    "nested"
+  ],
+  "source": {
+    "passes": 4,
+    "width": 2,
+    "amplitude_min": 0.75,
+    "amplitude_max": 1.25,
+    "independent_signs": true,
+    "disjoint_supports": [
+      [
+        0
+      ],
+      [
+        0
+      ],
+      [
+        1
+      ],
+      [
+        1
+      ]
+    ],
+    "overlap_supports": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        1
+      ]
+    ],
+    "nested_supports": [
+      [
+        0
+      ],
+      [
+        0
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        1
+      ]
+    ],
+    "train_batch_per_family": 8,
+    "train_batch_size": 24,
+    "calibration_per_family": 128,
+    "heldout_per_family": 128,
+    "train_seed_offset": 100000,
+    "calibration_seed_offset": 300000,
+    "heldout_seed_offset": 200000,
+    "shuffle_train_batch": true
+  },
+  "model": {
+    "physics": "W=I2, physical TiedComponentLinear through BPDModel",
+    "components": 2,
+    "passes": 4,
+    "ablation_mode": "zero",
+    "sphere_rescale": false,
+    "residual_delta_mask": 0,
+    "initializer": "BPDModel init_svd=false trainable; true only frozen positive arm",
+    "gate_logits": "linear(abs(x),2) shared across passes and samples",
+    "count_head": "independent linear(abs(x),1) no explicit phase/clock/label",
+    "stage1_factor_training": "V,U train every step for all except adaptive_frozen",
+    "top1_forward": "one_hot(argmax(logits))",
+    "adaptive_forward": "top1 + binary_count*(ones-top1), binary_count=1[sigmoid(count_logit)>=0.5]",
+    "adaptive_backward": "top1 softmax Jacobian when count=1; count sigmoid STE with (1-softmax) component sensitivity"
+  },
+  "arms": [
+    {
+      "key": "adaptive_disjoint_overlap",
+      "kind": "adaptive",
+      "factor_train": true,
+      "role": "primary"
+    },
+    {
+      "key": "calibrated_independent",
+      "kind": "calibrated",
+      "factor_train": true,
+      "role": "paired comparator"
+    },
+    {
+      "key": "independent_hard",
+      "kind": "hard",
+      "factor_train": true,
+      "role": "independent hard baseline"
+    },
+    {
+      "key": "top1_fixed",
+      "kind": "top1",
+      "factor_train": true,
+      "role": "capacity negative control"
+    },
+    {
+      "key": "all2_fixed",
+      "kind": "all2",
+      "factor_train": true,
+      "role": "sparsity negative control"
+    },
+    {
+      "key": "oracle_cardinality",
+      "kind": "oracle",
+      "factor_train": true,
+      "role": "oracle support-count upper bound"
+    },
+    {
+      "key": "adaptive_frozen",
+      "kind": "adaptive",
+      "factor_train": false,
+      "role": "frozen-factor positive control"
+    }
+  ],
+  "optimization": {
+    "steps": 240,
+    "optimizer": "Adam",
+    "lr": 0.04,
+    "weight_decay": 0,
+    "reconstruction_coeff": 1,
+    "matrix_faithfulness_coeff": 0.3,
+    "gate_activity_coeff": 0.05,
+    "calibrated_margin_coeff": 0.02,
+    "calibrated_margin_band": 0.1,
+    "independent_threshold_candidates": [
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6
+    ],
+    "independent_threshold_choice": "minimum total calibration loss binary_mse + .05*mean_gate_count, tie largest_threshold",
+    "adaptive_count_threshold": 0.5,
+    "top1_softmax_temperature": 1,
+    "no_phase_labels_for_primary": true,
+    "oracle_support_count_from_input_nonzero": true,
+    "shared_initialization_within_seed": true,
+    "count_head_present_in_all_arms": true,
+    "always_one_process": true,
+    "cpu_threads": 1
+  },
+  "success": {
+    "read_axis_cos_min": 0.9,
+    "overall_heldout_mse_max": 0.02,
+    "per_family_binary_mse_max": 0.02,
+    "per_family_exact_four_pass_support_fraction_min": 0.9,
+    "trainable_factor_initial_grad_positive": true,
+    "trainable_factor_update_positive": true,
+    "primary_adaptive_success_count_min": 18,
+    "primary_net_paired_seed_wins_min": 6,
+    "primary_mcnemar_two_sided_p_max": 0.05
+  },
+  "evidence": {
+    "per_arm_per_seed_per_family_rows": true,
+    "stratum_matched_calibration": true,
+    "heldout_for_reporting_only": true,
+    "exact_binary_mask_check": true,
+    "false_off_and_false_on_by_family": true,
+    "Wilson95_success_intervals": true,
+    "exact_McNemar_on_seed_pairs": true,
+    "original_PD03_unchanged": true,
+    "no_neural_mechanism_claim": true,
+    "first_full_run_preserved_on_fail": true
+  },
+  "execution": {
+    "device": "cpu",
+    "threads": 1,
+    "model_process_rss_abort_gib": 3,
+    "preregister_before_data": true,
+    "source_locked_once": true,
+    "smoke_seed": 1009
+  }
+}
