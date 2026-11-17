@@ -62,3 +62,34 @@ board root are repeated observations, not independent samples.
 
 Source-only CPU fake-module tests are authorized immediately after this commit.
 Native model evaluation is still PENDING.
+
+## Native PowerShell runbook
+
+From the BPD repository root, first run the roster-preparation command in
+`NATIVE_COLLECTION_PROTOCOL.md` and review its output manifest. Use its
+pinned roster SHA for the complete clean-activation export:
+
+```powershell
+$rosterSHA = (Get-Content runs/bpd_v3/wb_stall_inputs.manifest.json | ConvertFrom-Json).roster_npz_sha256
+python mechinterp/bpd/v3/collect_basis_inputs.py `
+  --checkpoint-file "C:/PATH/TO/step_21700" --checkpoint-key gaoxin492 `
+  --inputs-npz runs/bpd_v3/wb_stall_inputs.npz `
+  --expected-roster-sha256 $rosterSHA `
+  --out-dir runs/bpd_v3/gaoxin_basis_inputs `
+  --device cuda:0 --dtype bf16 --positions-per-call 2
+python mechinterp/bpd/v3/floor_and_basis.py `
+  --matrix-npz runs/bpd_v3/gaoxin_basis_inputs/layers_0_down_proj.npz `
+  --out runs/bpd_v3/gaoxin_basis0_baselines.json
+```
+
+For the pinned replication checkpoint run a second exporter with
+`--checkpoint-key yagizdevre --checkpoint-file "C:/PATH/TO/model.pt"`
+and a separate output directory. Inspect the `manifest.json` for the
+per-call-type exact-zero fractions, file hashes and input matrix shapes.
+A source-only fake-model test runs with:
+
+```bash
+python -m pytest -q mechinterp/bpd/tests/test_v3_basis_inputs.py
+```
+
+No checkpoint or test data are downloaded by either exporter.
