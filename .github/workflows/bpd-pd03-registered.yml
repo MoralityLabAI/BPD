@@ -1,0 +1,77 @@
+name: BPD-PD-03 registered first top1-vs-margin cohort
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/theory/pd03/EXECUTE_LOCK.json'
+permissions:
+  contents: read
+jobs:
+  first-source-locked-cohort:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify preregistered source SHA and unchanged experimental files
+        run: |
+          python - <<'PY'
+          import json,subprocess
+          from pathlib import Path
+          root=Path('mechinterp/bpd/theory/pd03')
+          lock=json.loads((root/'EXECUTE_LOCK.json').read_text())
+          cfg=json.loads((root/'CONFIG.json').read_text())
+          assert lock['study_id']==cfg['study_id']=='BPD-PD-03'
+          assert lock['execution']=='first_registered_full_cohort'
+          assert lock['locked_arms']==7 and lock['locked_seeds']==24
+          assert len(cfg['seed_list'])==24 and len(cfg['arms'])==7
+          original=lock['source_commit_sha']
+          subprocess.run(['git','merge-base','--is-ancestor',original,'HEAD'],check=True)
+          paths=[str(root/name) for name in ('CONFIG.json','PROTOCOL.md',
+                 'experiment.py','test_experiment.py')]
+          subprocess.run(['git','diff','--exit-code',original,'HEAD','--',*paths],check=True)
+          print('FROZEN PD03 source verified:',original)
+          PY
+      - name: Install pinned PyTorch CPU and pytest
+        run: |
+          python -m pip install --disable-pip-version-check pytest
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Run source-only excluded-seed engineering gates
+        run: python -m pytest -q mechinterp/bpd/theory/pd03/test_experiment.py
+      - name: Execute 24 registered seeds across seven source-locked arms
+        run: python -m mechinterp.bpd.theory.pd03.experiment --out /tmp/bpd-pd03-first-run.json
+      - name: Verify all per-seed evidence without changing scientific outcome
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('/tmp/bpd-pd03-first-run.json').read_text())
+          c=json.loads(Path('mechinterp/bpd/theory/pd03/CONFIG.json').read_text())
+          assert d['study_id']=='BPD-PD-03'
+          assert d['summary']['registered']
+          assert d['summary']['seeds']==24
+          assert len(d['arms'])==24*7==168
+          by={(r['seed'],r['arm']):r for r in d['arms']}
+          assert len(by)==168
+          assert set(r['seed'] for r in d['arms'])==set(c['seed_list'])
+          assert set(r['arm'] for r in d['arms'])==set(x['name'] for x in c['arms'])
+          assert all(r['heldout']['execution_exact_binary'] for r in d['arms'])
+          assert all(r['factor_update_norm']>0 for r in d['arms'] if not r['frozen'])
+          assert all(r['factor_update_norm']==0 for r in d['arms'] if r['frozen'])
+          assert all(r['heldout']['gate_fraction']==.5 for r in d['arms'] if r['mode']=='top1')
+          assert all(len(r['calibration_candidates'])==6 for r in d['arms'] if r['mode']=='margin')
+          print('PD03 registered scientific outcome:',d['summary']['primary_passed'])
+          print('PD03 scores:',d['summary']['success_counts'])
+          print('PD03 paired p:',d['summary']['mcnemar_two_sided_p'])
+          PY
+      - name: Archive unmodified first-run full raw scientific receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bpd-pd03-first-run-${{ github.run_id }}
+          path: /tmp/bpd-pd03-first-run.json
+          retention-days: 60
+          if-no-files-found: warn
