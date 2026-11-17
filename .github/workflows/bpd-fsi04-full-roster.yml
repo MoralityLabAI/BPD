@@ -1,0 +1,59 @@
+name: BPD FSI04 full unscored development roster
+on:
+  push:
+    paths:
+      - '.github/workflows/bpd-fsi04-full-roster.yml'
+  pull_request:
+    paths:
+      - '.github/workflows/bpd-fsi04-full-roster.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  generate-36-public-development-roots:
+    runs-on: ubuntu-latest
+    timeout-minutes: 110
+    env:
+      PYTHONUNBUFFERED: '1'
+      OMP_NUM_THREADS: '2'
+      MKL_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned CPU libraries
+        run: |
+          python -m pip install --disable-pip-version-check numpy==2.1.3
+          python -m pip install --disable-pip-version-check torch==2.7.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Build full 24 S4 plus 12 WB-Prop registered development roots
+        run: |
+          python -m mechinterp.dark_fiber_gyms.fsi04.roster --out-dir /tmp/fsi04_full --max-attempts 100000
+      - name: Check source hashes, strata and puzzle independence
+        run: |
+          python - <<'PY'
+          import json,hashlib
+          from pathlib import Path
+          from mechinterp.dark_fiber_gyms.loopscope04_trm import read_boards,audit_boards
+          base=Path('/tmp/fsi04_full')
+          m=json.loads((base/'development_manifest.json').read_text())
+          reg=Path('mechinterp/dark_fiber_gyms/fsi04/REGISTRATION.json')
+          csv=base/'development.csv'
+          rows=read_boards(csv)
+          assert m['counts']=={'S4_stalled':24,'WB-Prop':12}
+          assert len(rows)==len({r['id'] for r in rows})==36
+          assert m['registration_sha256']==hashlib.sha256(reg.read_bytes()).hexdigest()
+          assert m['csv_sha256']==hashlib.sha256(csv.read_bytes()).hexdigest()
+          assert m['historical_rep_case_ids_checked']==120
+          assert m['ARG03_protected_test']=='untouched'
+          exclusion=Path('mechinterp/loopscope02/results/benchmark_bundle.json')
+          assert audit_boards([],rows,[exclusion],check_full_automorphisms=True)['test']==36
+          print('FSI04 FULL ROSTER VALID',m['csv_sha256'],'attempts',m['generator_attempts'])
+          PY
+      - name: Archive unscored full development roster and hashes
+        uses: actions/upload-artifact@v4
+        with:
+          name: bpd-fsi04-full-36-development-roots
+          path: /tmp/fsi04_full/*
+          retention-days: 90
+          if-no-files-found: error
