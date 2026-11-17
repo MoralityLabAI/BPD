@@ -1,6 +1,7 @@
 """Source-level and independent generator tests for AMM-01."""
 import math
 import unittest
+from unittest.mock import patch
 from . import experiment as e
 from .bridge import buzz_message
 
@@ -73,8 +74,17 @@ class AMM01Tests(unittest.TestCase):
         self.assertEqual(adj, {"a":0.03, "b":0.04, "c":0.5})
 
     def test_confirmation_must_have_preflight(self):
-        with self.assertRaises(ValueError):
-            e.bundle("confirmation")
+        # Regression: absolutely no fresh-world generation during a missing gate.
+        with patch.object(e, "learn_memory", side_effect=AssertionError("read training")) as training:
+            with patch.object(e, "cohort", side_effect=AssertionError("scored cohort")) as scoring:
+                with self.assertRaises(ValueError):
+                    e.bundle("confirm_fresh")
+                with self.assertRaises(ValueError):
+                    e.bundle("confirm_fresh", {"decision": "REDEVELOP", "experiment_id": e.ID})
+                with self.assertRaises(ValueError):
+                    e.bundle("confirmation", {"decision": "READY_FOR_CONFIRMATION", "experiment_id": e.ID})
+                training.assert_not_called()
+                scoring.assert_not_called()
         with self.assertRaises(ValueError):
             e.analyze({"phase":"development"}, {"decision":"READY_FOR_CONFIRMATION"})
 
@@ -84,7 +94,7 @@ class AMM01Tests(unittest.TestCase):
             buzz_message(dev,"invalid","https://github.com/MoralityLabAI/BPD/pull/1")
         with self.assertRaises(ValueError):
             buzz_message(dev,"00000000-0000-4000-8000-000000000001","https://github.com/MoralityLabAI/BPD/pull/1")
-        receipt = {"experiment":e.ID,"phase":"confirmation","independent_units":512,
+        receipt = {"experiment":e.ID,"phase":"confirm_fresh","independent_units":512,
                    "analysis":{"evidence_class":"synthetic", "primary_gate_pass":True,
                                "contrasts":{"memory_vs_pooled":{"mean_gain":0.17}}}}
         event = buzz_message(receipt,"00000000-0000-4000-8000-000000000001", "https://github.com/MoralityLabAI/BPD/pull/1")
