@@ -98,6 +98,8 @@ jobs:
         run: |
           python -m pytest -q mechinterp/bpd/theory/pd10/test_experiment.py
           python -m pytest -q mechinterp/bpd/theory/pd10/test_published_results.py
+      - name: PD11 excluded-seed global/local Givens and label-leakage tests
+        run: python -m pytest -q mechinterp/bpd/theory/pd11/test_experiment.py
       - name: Verify source module syntax
         run: |
           python -m compileall -q mechinterp/bpd
