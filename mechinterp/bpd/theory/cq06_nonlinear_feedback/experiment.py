@@ -476,6 +476,8 @@ def main():
     ap.add_argument('--out',type=Path)
     ap.add_argument('--no-raw-pairs',action='store_true')
     args=ap.parse_args()
+    if args.phase=="confirmation":
+        raise SystemExit("Confirmation is gated: use reference --phase confirmation after the 59-root EvalMath preflight")
     run=cohort(args.phase,args.backend,args.seeds if args.seeds else None,include_pairs=not args.no_raw_pairs)
     report=stats(run)
     if args.out:
