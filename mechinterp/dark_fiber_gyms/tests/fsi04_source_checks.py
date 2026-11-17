@@ -117,4 +117,73 @@ class PilotTests(unittest.TestCase):
         self.assertLess(r["historical"]["yagizdevre"]["mean_random_minus_clean"],0)
         self.assertEqual(r["decision"],"DOSE_MATCHED_FRESH_PILOT_ONLY")
 
+class PowerIntegrationTests(unittest.TestCase):
+    """All inputs here are synthetic validation receipts, never native measurements."""
+    def fake_inputs(self, temp):
+        import hashlib
+        from mechinterp.dark_fiber_gyms.fsi04.pilot_power import REG as POWER_REG
+        reg=json.loads(POWER_REG.read_text())
+        manifest={
+            "schema":"BPD-FSI04/development-roster/v1",
+            "counts":{"S4_stalled":24,"WB-Prop":12},
+            "registration_sha256":hashlib.sha256(POWER_REG.read_bytes()).hexdigest(),
+            "csv_sha256":"b"*64,
+            "ARG03_protected_test":"untouched"}
+        (temp/"roster.json").write_text(json.dumps(manifest))
+        for tag in ("yagizdevre","gaoxin492"):
+            rows=[]
+            for i in range(36):
+                x={"clean":(65,0,0),"donor_joint":(68,3,0),
+                   "random_joint_dose_matched":(63,0,2),"self_control":(65,0,0)}
+                arms={k:{"correct_cells":v[0],"gained_cells_vs_clean":v[1],
+                         "lost_cells_vs_clean":v[2],"net_cells_vs_clean":v[1]-v[2]}
+                      for k,v in x.items()}
+                rows.append({
+                  "case_id":f"{i:064x}",
+                  "stratum":"S4_stalled" if i<24 else "WB-Prop",
+                  "arms":arms,
+                  "certificate":{
+                    "pre_patch_full_head_max_abs":0.,
+                    "dose_matched_sham":{
+                      "head_pre_readout_max_abs":0.,
+                      "head_pre_radius_max_abs":0.,
+                      "zH_dose_mismatch_max_abs":0.,
+                      "zL_dose_mismatch_max_abs":0.}}})
+            body={"schema":"BPD-FSI04/native-development-causal-v1",
+                  "checkpoint_tag":tag,
+                  "checkpoint_sha256":next(v["sha256"] for v in reg["models"] if v["tag"]==tag),
+                  "registration_sha256":manifest["registration_sha256"],
+                  "eval_csv_sha256":manifest["csv_sha256"],"rows":rows}
+            (temp/f"{tag}.json").write_text(json.dumps(body))
+        return (temp/"yagizdevre.json",temp/"gaoxin492.json",temp/"roster.json")
+
+    def test_pilot_power_fails_closed_for_24_sham_roots(self):
+        if not os.environ.get("EVALMATH_PREFLIGHT_FILE"):self.skipTest("pin EvalMath skill")
+        import tempfile
+        from mechinterp.dark_fiber_gyms.fsi04.pilot_power import evaluate
+        with tempfile.TemporaryDirectory() as d:
+            y,g,m=self.fake_inputs(Path(d))
+            result=evaluate(y,g,m)
+        self.assertEqual(result["root_count"],24)
+        self.assertEqual(result["decision"],"REDESIGN_OR_MORE_INDEPENDENT_SHAM_CALIBRATION")
+        self.assertIn("sham_quantile_uncalibrated",result["evalmath_power"]["reasons"])
+        self.assertEqual(result["checkpoint_summaries"]["yagizdevre"]["corrected_cells_sum"],72)
+
+    def test_pilot_power_rejects_dose_violation_or_unpaired_roots(self):
+        import tempfile
+        from mechinterp.dark_fiber_gyms.fsi04.pilot_power import evaluate
+        with tempfile.TemporaryDirectory() as d:
+            y,g,m=self.fake_inputs(Path(d))
+            bad=json.loads(y.read_text())
+            bad["rows"][0]["certificate"]["dose_matched_sham"]["zH_dose_mismatch_max_abs"]=.1
+            y.write_text(json.dumps(bad))
+            with self.assertRaisesRegex(ValueError,"unmatched sham"):
+                evaluate(y,g,m)
+            bad["rows"][0]["certificate"]["dose_matched_sham"]["zH_dose_mismatch_max_abs"]=0.
+            bad["rows"][0]["case_id"]="a"*64
+            y.write_text(json.dumps(bad))
+            with self.assertRaisesRegex(ValueError,"unpaired"):
+                evaluate(y,g,m)
+
+
 if __name__=="__main__":unittest.main()
