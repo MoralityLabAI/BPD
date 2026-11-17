@@ -13,7 +13,7 @@ import csv
 from hashlib import sha256
 import json
 from math import comb, erfc, sqrt
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 from typing import Sequence
 
 import numpy as np
@@ -457,11 +457,13 @@ def _sanitize_manifest_paths(obj):
     if isinstance(obj, dict):
         out = {}
         for k, v in obj.items():
-            clean_k = Path(k).name if ("\\" in str(k) or "/" in str(k)) and ":" in str(k) else k
-            if k in ("source_csv", "source_runner") and isinstance(v, str) and ("\\" in v or "/" in v):
-                out[clean_k] = Path(v).name
+            # Windows path syntax accepts both separators, independent of the host OS.
+            key_path = PureWindowsPath(k) if isinstance(k, str) else None
+            clean_k = key_path.name if key_path is not None and key_path.anchor else k
+            if k in ("source_csv", "source_runner") and isinstance(v, str):
+                out[clean_k] = PureWindowsPath(v).name
             elif k == "excluded_sha256" and isinstance(v, dict):
-                out[clean_k] = {Path(pk).name: pv for pk, pv in v.items()}
+                out[clean_k] = {PureWindowsPath(pk).name: pv for pk, pv in v.items()}
             else:
                 out[clean_k] = _sanitize_manifest_paths(v)
         return out
