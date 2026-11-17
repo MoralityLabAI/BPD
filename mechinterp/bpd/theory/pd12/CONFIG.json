@@ -1,0 +1,334 @@
+{
+  "study_id": "BPD-PD-12",
+  "registered_date": "2026-11-18",
+  "status": "frozen_before_any_PD12_model_data",
+  "predecessor": {
+    "pd11_merge_sha": "028fb05f7fdb9ef78eb55256dac939fd6921e014",
+    "pd11_global_4d_successes": 24,
+    "pd11_local_4d_successes": 1,
+    "pd11_pair_angle_candidates": 2628,
+    "pd11_source": "4D orthogonal Q, balanced sparse amplitudes, hard read threshold"
+  },
+  "scientific_question": "Does unlabelled global Givens pair search retain exact latent support identification as dimension rises from 8 to 16 and the support law becomes correlated or active margin decreases? What is its recovery per candidate-angle evaluation?",
+  "factorial": {
+    "dimensions": [
+      8,
+      16
+    ],
+    "support_distribution": [
+      "uniform",
+      "clustered"
+    ],
+    "margins": [
+      "strong",
+      "weak"
+    ],
+    "cells": [
+      {
+        "id": "d8_uniform_strong",
+        "dimension": 8,
+        "support_distribution": "uniform",
+        "margin": "strong",
+        "seed_list": [
+          1847,
+          1861,
+          1867,
+          1871,
+          1873,
+          1877,
+          1879,
+          1889
+        ]
+      },
+      {
+        "id": "d8_uniform_weak",
+        "dimension": 8,
+        "support_distribution": "uniform",
+        "margin": "weak",
+        "seed_list": [
+          1901,
+          1907,
+          1913,
+          1931,
+          1933,
+          1949,
+          1951,
+          1973
+        ]
+      },
+      {
+        "id": "d8_clustered_strong",
+        "dimension": 8,
+        "support_distribution": "clustered",
+        "margin": "strong",
+        "seed_list": [
+          1979,
+          1987,
+          1993,
+          1997,
+          1999,
+          2027,
+          2039,
+          2053
+        ]
+      },
+      {
+        "id": "d8_clustered_weak",
+        "dimension": 8,
+        "support_distribution": "clustered",
+        "margin": "weak",
+        "seed_list": [
+          2063,
+          2069,
+          2081,
+          2083,
+          2087,
+          2089,
+          2099,
+          2111
+        ]
+      },
+      {
+        "id": "d16_uniform_strong",
+        "dimension": 16,
+        "support_distribution": "uniform",
+        "margin": "strong",
+        "seed_list": [
+          2113,
+          2129,
+          2131,
+          2137,
+          2141,
+          2143,
+          2153,
+          2161
+        ]
+      },
+      {
+        "id": "d16_uniform_weak",
+        "dimension": 16,
+        "support_distribution": "uniform",
+        "margin": "weak",
+        "seed_list": [
+          2179,
+          2203,
+          2207,
+          2213,
+          2221,
+          2237,
+          2239,
+          2243
+        ]
+      },
+      {
+        "id": "d16_clustered_strong",
+        "dimension": 16,
+        "support_distribution": "clustered",
+        "margin": "strong",
+        "seed_list": [
+          2251,
+          2267,
+          2269,
+          2273,
+          2281,
+          2287,
+          2293,
+          2297
+        ]
+      },
+      {
+        "id": "d16_clustered_weak",
+        "dimension": 16,
+        "support_distribution": "clustered",
+        "margin": "weak",
+        "seed_list": [
+          2309,
+          2311,
+          2333,
+          2339,
+          2341,
+          2347,
+          2351,
+          2357
+        ]
+      }
+    ],
+    "units_per_cell": 8,
+    "independent_units_total": 64,
+    "statistical_unit": "one seed and independently sampled orthogonal Q in one factorial cell",
+    "one_model_seed_used_once": true
+  },
+  "source": {
+    "generator": "new dimension-parametric extension of PD06 rotation and signed sparse active amplitudes, physical W=I_dim",
+    "gaussian_qr_seed_offset": 900000,
+    "train_seed_offset": 100000,
+    "heldout_seed_offset": 200000,
+    "heldout_family_stride": 10000,
+    "training_boards": 256,
+    "passes": 4,
+    "train_cardinalities": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "train_cardinality_probabilities": [
+      0.25,
+      0.25,
+      0.25,
+      0.25
+    ],
+    "support_banks": "all combinations of size k among dim coordinates except preregistered withheld supports",
+    "correlated_sampling": "for non-singleton k, with probability 0.85 choose one cyclic contiguous k-window anchored at indices divisible by 4, otherwise uniform over the available training supports; singleton always uniform",
+    "uniform_sampling": "uniform over all training supports of selected k",
+    "cluster_probability": 0.85,
+    "heldout_k2": "unique sorted pairs (i,(i+dim/2)%dim), i=0..dim/2-1",
+    "heldout_k3": "unique sorted triples (i,(i+2)%dim,(i+4)%dim), using i=0..dim-1",
+    "heldout_k4": "unique sorted quartets (i,(i+2)%dim,(i+4)%dim,(i+6)%dim), using i=0..dim-1",
+    "heldout_families": [
+      "k1_seen",
+      "k2_seen",
+      "k3_seen",
+      "k4_seen",
+      "k2_unseen",
+      "k3_unseen",
+      "k4_unseen",
+      "transition_unseen"
+    ],
+    "transition_unseen": "pass supports k1 seen, k2 unseen, k3 unseen, k4 unseen in order",
+    "eval_boards_per_family": 96,
+    "amplitude_ranges": {
+      "strong": [
+        0.75,
+        1.25
+      ],
+      "weak": [
+        0.25,
+        1.25
+      ]
+    },
+    "independent_signs": true,
+    "ground_truth_read_basis": "Q columns",
+    "input_to_unsupervised_optimizer": "observed rotated x only; never support masks, dimension source Q or cardinality labels"
+  },
+  "objective": {
+    "sigma_by_margin": {
+      "strong": 0.15,
+      "weak": 0.05
+    },
+    "annealing": "fixed sigma throughout; no objective changes across arms within a factorial cell",
+    "gaussian_mass": "mean(exp(-0.5*((x@V_j)/sigma)^2))",
+    "initial_basis": "deterministic-sign QR of seeded random Gaussian matrix generated from torch.Generator(seed+610000); identical for all arms within cell",
+    "orthogonality": "maintain V orthogonal via float64 Givens rotations; decoder U=V.T",
+    "pair_order": "all i<j in lexicographic order",
+    "angle_tiebreak": "within 1e-12 of maximum, choose smallest absolute angle then most negative angle",
+    "sweeps": 3,
+    "global_range_deg": [
+      -90,
+      90
+    ],
+    "local_range_deg": [
+      -5,
+      5
+    ],
+    "candidate_grid_high": 37,
+    "candidate_grid_low": 13,
+    "candidate_score_evaluations_high": "sweeps * dim*(dim-1)/2 * 37",
+    "candidate_score_evaluations_low": "sweeps * dim*(dim-1)/2 * 13",
+    "sample_cost_unit": "candidate pair angle scored over all four passes for all 256 training boards",
+    "no_training_label_access": true
+  },
+  "arms": [
+    {
+      "key": "global37",
+      "kind": "search",
+      "angle_grid": 37,
+      "range_deg": [
+        -90,
+        90
+      ],
+      "uses_true_Q_for_training": false
+    },
+    {
+      "key": "local37",
+      "kind": "search",
+      "angle_grid": 37,
+      "range_deg": [
+        -5,
+        5
+      ],
+      "uses_true_Q_for_training": false
+    },
+    {
+      "key": "global13",
+      "kind": "search",
+      "angle_grid": 13,
+      "range_deg": [
+        -90,
+        90
+      ],
+      "uses_true_Q_for_training": false
+    },
+    {
+      "key": "planted_Q_oracle",
+      "kind": "oracle",
+      "angle_grid": 0,
+      "range_deg": null,
+      "uses_true_Q_for_training": true
+    }
+  ],
+  "physical": {
+    "model": "actual BPDModel/TiedComponentLinear, shared bias-free W=I_dim with dim rank-one components and four passes",
+    "zero_ablation": true,
+    "residual_delta_mask": 0,
+    "sphere_rescale": false,
+    "fixed_read_gate_threshold_by_margin": {
+      "strong": 0.375,
+      "weak": 0.125
+    },
+    "gate": "exact hard 1[abs(x@normalized_V_j)>=threshold] without gate fitting",
+    "full_matrix_faithfulness_diagnostic": true
+  },
+  "scoring": {
+    "mean_abs_read_cos_min": 0.9,
+    "each_component_cos_diagnostic_min": 0.99333,
+    "heldout_overall_mse_max": 0.035,
+    "per_family_mse_max": 0.05,
+    "seen_family_fourpass_support_min": 0.8,
+    "unseen_family_fourpass_support_min": 0.7,
+    "exact_binary_masks": true,
+    "trained_arm_nonzero_moves_required": true,
+    "per_cell_successes_reported": true,
+    "primary_arm": "global37",
+    "paired_control": "local37",
+    "primary_global_total_successes_min": 40,
+    "primary_global_d8_successes_min": 24,
+    "primary_global_d16_successes_min": 12,
+    "primary_net_paired_seed_wins_min": 16,
+    "primary_two_sided_exact_McNemar_p_max": 0.05
+  },
+  "reporting": {
+    "all_256_arm_rows": true,
+    "exact_per_seed_and_cell_results": true,
+    "pooled_Wilson95_and_dimension_stratified": true,
+    "exact_McNemar_seed_pair": true,
+    "per_family_mse_support_false_on_off": true,
+    "objective_initial_final_and_monotonic_sweep": true,
+    "candidate_count_full_numerator": true,
+    "training_walltime_seconds": true,
+    "score_count_per_second_reported": true,
+    "objective_comparisons_budget_matched_global37_local37": true,
+    "cost_sensitive_lower_budget_global13_separate_secondary": true,
+    "first_registered_run_retained_on_failure": true
+  },
+  "execution": {
+    "python": "3.12",
+    "torch": "2.5.1+cpu",
+    "cpu_threads": 1,
+    "single_process": true,
+    "source_lock_before_science": true,
+    "smoke_seed": 3001,
+    "workflow_timeout_minutes": 20,
+    "peak_RSS_GiB_limit": 3
+  }
+}

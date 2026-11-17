@@ -42,6 +42,7 @@ jobs:
           lean mechinterp/bpd/theory/pd06/RotatedSupportMass.lean | tee -a /tmp/bpd-optimal-basis-axioms.txt
           lean mechinterp/bpd/theory/pd07/ReadGateSeparation.lean | tee -a /tmp/bpd-optimal-basis-axioms.txt
           lean mechinterp/bpd/theory/pd09/PairMixCost.lean | tee -a /tmp/bpd-optimal-basis-axioms.txt
+          lean mechinterp/bpd/theory/pd12/PairSearchBudget.lean | tee -a /tmp/bpd-optimal-basis-axioms.txt
           python - <<'PY'
           from pathlib import Path
           import re
@@ -62,6 +63,7 @@ jobs:
           assert 'BPD.PD06.rotated_coordinate_hyperplane_masses' in s
           assert 'BPD.PD07.read_gate_exact_on_any_four_coordinate_support' in s
           assert 'BPD.PD09.canonical_01_has_sixteen_more_zero_mass_units' in s
+          assert 'BPD.PD12.matched_16D_global_local_candidate_budget' in s
           assert 'BPD.PD06.heldout_pairs_distinct_from_seen' in s
           print('Lean kernel proof declarations checked; foundational axioms only')
           PY
