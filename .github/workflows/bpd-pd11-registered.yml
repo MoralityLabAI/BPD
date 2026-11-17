@@ -1,0 +1,97 @@
+name: BPD-PD-11 first registered global versus local Givens read search
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/theory/pd11/EXECUTE_LOCK.json'
+permissions:
+  contents: read
+
+jobs:
+  first-source-locked-global-angle-cohort:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check exact preregistration and byte-identical source
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json, subprocess
+          root=Path('mechinterp/bpd/theory/pd11')
+          lock=json.loads((root/'EXECUTE_LOCK.json').read_text())
+          cfg=json.loads((root/'CONFIG.json').read_text())
+          assert cfg['study_id']==lock['study_id']=='BPD-PD-11'
+          assert lock['execution']=='first_registered_full_cohort'
+          assert len(cfg['seed_list'])==lock['seeds']==24
+          assert len(cfg['objective']['arms'])==lock['arms_per_seed']==6
+          assert cfg['scoring']['primary_arm']=='global_givens'
+          assert cfg['scoring']['primary_control']=='local_givens'
+          assert cfg['objective']['sweep_count']==6
+          assert cfg['objective']['angles_per_pair']==73
+          source=lock['source_commit_sha']
+          subprocess.run(['git','merge-base','--is-ancestor',source,'HEAD'],check=True)
+          paths=[str(root/p) for p in ('CONFIG.json','PROTOCOL.md',
+                 'experiment.py','test_experiment.py')]
+          paths+=['mechinterp/bpd/theory/pd06/experiment.py',
+                  'mechinterp/bpd/theory/pd09/experiment.py',
+                  'mechinterp/bpd/components.py',
+                  'mechinterp/bpd/config.py']
+          subprocess.run(['git','diff','--exit-code',source,'HEAD','--',*paths],
+                         check=True)
+          print('PD11 model and source SHA verified:',source)
+          PY
+      - name: Install pinned Torch 2.5.1 CPU, pytest and NumPy
+        run: |
+          python -m pip install --disable-pip-version-check pytest numpy
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Repeat excluded-seed 2029 source-only optimizer and mask tests
+        run: python -m pytest -q mechinterp/bpd/theory/pd11/test_experiment.py
+      - name: Execute all 24 independent source rotations across six arms
+        run: python -m mechinterp.bpd.theory.pd11.experiment --out /tmp/bpd-pd11-first-run.json
+      - name: Verify full 144-arm source-locked receipt and scientific result
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          r=json.loads(Path('/tmp/bpd-pd11-first-run.json').read_text())
+          c=json.loads(Path('mechinterp/bpd/theory/pd11/CONFIG.json').read_text())
+          assert r['study_id']=='BPD-PD-11'
+          assert r['summary']['registered']
+          assert r['summary']['seed_count']==24
+          assert len(r['arms'])==144
+          assert len({(x['seed'],x['arm']) for x in r['arms']})==144
+          assert {x['seed'] for x in r['arms']}==set(c['seed_list'])
+          assert {x['arm'] for x in r['arms']}=={a['key'] for a in c['objective']['arms']}
+          assert len({x['source_rotation_sha256'] for x in r['arms']})==24
+          assert all(set(x['heldout']['per_family'])==set(c['source']['eval_families'])
+                     for x in r['arms'])
+          assert all(all(y['mask_exact_binary'] for y in x['heldout']['per_family'].values())
+                     for x in r['arms'])
+          assert all(x['number_of_candidate_pair_scores']==2628 for x in r['arms']
+                     if x['arm'] in ('global_givens','local_givens',
+                                    'global_pairmix_privileged','local_pairmix_privileged'))
+          assert all(x['orthogonality_max_error']<1e-4 for x in r['arms']
+                     if x['trained_derivative_free'])
+          assert all(not x['used_cardinality_labels'] for x in r['arms']
+                     if x['arm']!='count_supervised_positive')
+          assert all(not x['privileged_true_Q_initializer'] for x in r['arms']
+                     if x['arm'] not in ('global_pairmix_privileged',
+                                        'local_pairmix_privileged'))
+          print('Preregistered PD11 scientific PASS/FAIL:',
+                r['summary']['registered_primary_passed'])
+          print('Per-arm independent seed successes:',r['summary']['success_by_arm'])
+          print('Exact paired two-sided McNemar:',r['summary']['McNemar_exact_two_sided_p'])
+          PY
+      - name: Preserve raw original 144-arm JSON regardless of scientific verdict
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bpd-pd11-original-first-run-${{ github.run_id }}
+          path: /tmp/bpd-pd11-first-run.json
+          retention-days: 60
+          if-no-files-found: warn
