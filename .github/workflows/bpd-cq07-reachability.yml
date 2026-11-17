@@ -1,0 +1,49 @@
+name: BPD-CQ-07 natural-reachability feasibility and native replay
+on:
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/theory/cq07_reachability/**'
+      - '.github/workflows/bpd-cq07-reachability.yml'
+  workflow_dispatch:
+jobs:
+  source-only-and-native:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install CPU dependencies
+        run: python -m pip install 'torch==2.5.1' 'numpy>=1.26'
+      - name: Excluded development-root and exact span engineering tests
+        run: python -m unittest discover -s mechinterp/bpd/theory/cq07_reachability/tests -v
+      - name: Source-locked independent 8-root geometry and causal comparison replay
+        run: |
+          python -m mechinterp.bpd.theory.cq07_reachability.reference --backend independent --check \
+            --out /tmp/cq07_development_independent.json
+      - name: Native actual BPDModel/TiedComponentLinear donor continuation replay
+        run: |
+          python -m mechinterp.bpd.theory.cq07_reachability.reference --backend native --check \
+            --out /tmp/cq07_development_native.json
+      - name: Audit scientific preflight blocks confirmation
+        run: |
+          python -m mechinterp.bpd.theory.cq06_nonlinear_feedback.evalmath_preflight \
+            --pilot mechinterp/bpd/theory/cq07_reachability/results/cq07_preflight_input.json \
+            --out /tmp/cq07_preflight.json --strict && exit 1 || test $? -eq 2
+          python - <<'PY'
+          import json
+          d=json.load(open('/tmp/cq07_preflight.json'))
+          assert d['decision']=='REDESIGN_OR_PILOT_ONLY'
+          assert d['mean_pilot_effect']==0.0
+          print('CQ-07 prospective confirmation correctly blocked')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cq07-engineering-independent-native-replay
+          if-no-files-found: ignore
+          path: |
+            /tmp/cq07_development_independent.json
+            /tmp/cq07_development_native.json
+            /tmp/cq07_preflight.json
