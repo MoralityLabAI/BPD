@@ -77,6 +77,9 @@ jobs:
       - name: Verify BPD v3 local-only dither collector against tiny CPU recurrence
         run: |
           python -m pytest -q mechinterp/bpd/tests/test_v3_collect_native_dither.py mechinterp/bpd/tests/test_v3_prepare_native_roster.py
+      - name: Verify BASIS-01 pass-pooled module capture on fake recursive model
+        run: |
+          python -m pytest -q mechinterp/bpd/tests/test_v3_basis_inputs.py
       - name: Verify source module syntax
         run: |
           python -m compileall -q mechinterp/bpd
