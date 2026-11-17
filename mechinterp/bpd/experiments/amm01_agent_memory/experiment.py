@@ -53,9 +53,9 @@ class World:
 
 
 def world(phase: str, index: int) -> World:
-    if phase not in ("train", "development", "confirmation"):
+    if phase not in ("train", "development", "confirmation", "confirm_fresh"):
         raise ValueError("unknown phase")
-    cap = {"train": TRAIN_ROOTS, "development": DEV_ROOTS, "confirmation": CONFIRM_ROOTS}[phase]
+    cap = {"train": TRAIN_ROOTS, "development": DEV_ROOTS, "confirmation": CONFIRM_ROOTS, "confirm_fresh": CONFIRM_ROOTS}[phase]
     if not 0 <= index < cap:
         raise ValueError("world index out of range")
     r = rng_for("world", phase, index)
@@ -162,8 +162,8 @@ def evaluate_root(w: World, memory: dict[str, Any]) -> dict[str, Any]:
 
 
 def cohort(phase: str, memory: dict[str, Any] | None = None) -> dict[str, Any]:
-    if phase not in ("development", "confirmation"):
-        raise ValueError("cohort must be development or confirmation")
+    if phase not in ("development", "confirm_fresh"):
+        raise ValueError("cohort must be development or fresh confirmation")
     memory = memory or learn_memory()
     n = DEV_ROOTS if phase == "development" else CONFIRM_ROOTS
     rows = [evaluate_root(world(phase, i), memory) for i in range(n)]
@@ -228,7 +228,7 @@ def bootstrap_interval(diffs: list[int], name: str) -> list[float]:
 
 
 def analyze(confirm: dict[str, Any], preflight: dict[str, Any]) -> dict[str, Any]:
-    if confirm["phase"] != "confirmation" or confirm["independent_units"] != CONFIRM_ROOTS:
+    if confirm["phase"] != "confirm_fresh" or confirm["independent_units"] != CONFIRM_ROOTS:
         raise ValueError("wrong confirmation cohort")
     if preflight.get("decision") != "READY_FOR_CONFIRMATION" or preflight.get("experiment_id") != ID:
         raise ValueError("EvalMath strict preflight has not authorized confirmation")
@@ -262,13 +262,22 @@ def analyze(confirm: dict[str, Any], preflight: dict[str, Any]) -> dict[str, Any
 
 
 def bundle(phase: str, preflight: dict[str, Any] | None = None) -> dict[str, Any]:
+    # Hard preflight admission gate. Do not touch the fresh generator when absent.
+    if phase not in ("development", "confirm_fresh"):
+        raise ValueError("historical confirmation is engineering-only; use confirm_fresh")
+    if phase == "confirm_fresh" and (
+        preflight is None
+        or preflight.get("decision") != "READY_FOR_CONFIRMATION"
+        or preflight.get("experiment_id") != ID
+        or preflight.get("planned_confirmation_worlds") != CONFIRM_ROOTS
+    ):
+        raise ValueError("fresh confirmation requires a matching strict EvalMath preflight")
     m = learn_memory()
     run = cohort(phase, m)
     if phase == "development":
         run["evalmath_preflight_input"] = preflight_spec(run)
     else:
-        if preflight is None:
-            raise ValueError("confirmation requires an external EvalMath strict preflight receipt")
+        assert preflight is not None
         run["evalmath_preflight_sha256"] = digest(preflight)
         run["analysis"] = analyze(run, preflight)
     return run
@@ -276,7 +285,7 @@ def bundle(phase: str, preflight: dict[str, Any] | None = None) -> dict[str, Any
 
 def main() -> None:
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument("--phase", choices=("development", "confirmation"), required=True)
+    p.add_argument("--phase", choices=("development", "confirm_fresh"), required=True)
     p.add_argument("--preflight", type=Path, help="EvalMath strict preflight JSON for confirmation")
     p.add_argument("--out", type=Path, help="write reproducible JSON; refuse overwrite")
     p.add_argument("--check", type=Path, help="recompute and verify an existing receipt")
