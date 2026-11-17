@@ -1,10 +1,14 @@
 """Source-only mathematical sanity checks. No trained BPD result is claimed."""
 
 from math import isclose, isinf, log2
+from pathlib import Path
+import sys
 
 import pytest
 
-from mechinterp.bpd.experiments.sf01.information import (
+# Source-only audit must not import the full BPD package (which requires torch).
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from information import (
     conditional_mutual_information,
     finite_channel_information,
     public_channel_ledger,
