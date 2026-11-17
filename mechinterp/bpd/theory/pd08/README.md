@@ -1,0 +1,11 @@
+# BPD-PD-08: frozen read/write dictionary followed by label-free gate fitting
+
+The [prospective protocol](PROTOCOL.md) and [machine-readable CONFIG](CONFIG.json) were committed before PD-08 training. The study is a direct follow-up to [PD-07's registered result](../pd07/RESULTS_20261117.md), where planted read gates passed 24/24 but jointly trained read gates passed only 1/24, with mean read cosine 0.805.
+
+PD-08 uses 24 *new* orthogonally rotated 4D model seeds with the exact same training source and six heldout support families as PD-06/07. Stage one trains a single physical BPDModel factor dictionary per seed, using PD-06's **count-supervised** top-k objective for 360 updates. Count labels enter only this first-stage dictionary-training procedure. Stage two **freezes both V and U**, creates five matched arms from that exact snapshot, and trains independent read-threshold or raw-input gates on identical new source batches, without count/support labels.
+
+The five arms are a trained read-coefficient threshold, a trained raw-input independent MLP, a fixed 0.5 read threshold, the full-support oracle executed through the learned factors, and a planted-frozen read positive control. [experiment.py](experiment.py) implements this with the original BPD physical component wrapper; [test_experiment.py](test_experiment.py) verifies the factor freeze and label isolation on excluded seed 2017.
+
+Primary success requires at least 18/24 seed recoveries with a single component alignment across all six heldout families, at least six net wins of the read gate over the raw gate, and exact McNemar p<=0.05. A separate strict output MSE and four-pass exact support gate applies per seed.
+
+The first scientific cohort is released only after source CI passes and an `EXECUTE_LOCK.json` pins the audited experiment source. The dedicated workflow writes the original 120-arm JSON receipt and preserves a scientific failure unchanged. These remain controlled synthetic and partly count-supervised experiments, without a claim of complete unsupervised mechanistic identification.
