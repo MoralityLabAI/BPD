@@ -1,0 +1,241 @@
+{
+  "study_id": "BPD-PD-05",
+  "registered_at": "2026-11-17",
+  "status": "prospective_protocol_locked_before_pd05_model_training",
+  "predecessor": {
+    "pd04_merge_sha": "0ab4f9aac0bcb5ed8dd4043214354e7949df57ce",
+    "pd04_adaptive_successes": 0,
+    "pd04_calibrated_successes": 6,
+    "pd04_oracle_count_successes": 22,
+    "pd04_p": 0.03125
+  },
+  "model": {
+    "physical_module": "2x2 bias-free I, 4 tied passes, actual BPDModel TiedComponentLinear",
+    "components": 2,
+    "pass_count": 4,
+    "zero_ablation": true,
+    "sphere_rescale": false,
+    "delta_mask": 0,
+    "shared_assignment_logits": "affine abs(x) 2-dimensional",
+    "shared_count_logit": "affine abs(x) 1-dimensional",
+    "training_factors": "both U and V train every step except supervised_frozen",
+    "random_initialization": "matched across all trainable arms within each seed via torch.manual_seed"
+  },
+  "source": {
+    "families": [
+      "disjoint",
+      "overlap",
+      "nested"
+    ],
+    "supports": {
+      "disjoint": [
+        [
+          0
+        ],
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "overlap": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "nested": [
+        [
+          0
+        ],
+        [
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    "amplitude_uniform": [
+      0.75,
+      1.25
+    ],
+    "independent_signs": true,
+    "balanced_train_per_family": 8,
+    "training_batch_total": 24,
+    "calibration_count_per_family": 128,
+    "heldout_count_per_family": 128,
+    "train_generator_offset": 100000,
+    "calibration_generator_offset": 300000,
+    "heldout_generator_offset": 200000,
+    "shuffle_train": true
+  },
+  "seeds": [
+    571,
+    577,
+    587,
+    593,
+    599,
+    601,
+    607,
+    613,
+    617,
+    619,
+    631,
+    641,
+    643,
+    647,
+    653,
+    659,
+    661,
+    673,
+    677,
+    683,
+    691,
+    701,
+    709,
+    719
+  ],
+  "arms": [
+    {
+      "key": "unsupervised_sigmoid",
+      "ste": "sigmoid_logit_jacobian",
+      "count_supervision": 0,
+      "train_factors": true,
+      "source": "mixed_families"
+    },
+    {
+      "key": "unsupervised_identity",
+      "ste": "identity_logit_jacobian",
+      "count_supervision": 0,
+      "train_factors": true,
+      "source": "mixed_families"
+    },
+    {
+      "key": "unsupervised_tempered2",
+      "ste": "temperature2_logit_jacobian",
+      "count_supervision": 0,
+      "train_factors": true,
+      "source": "mixed_families"
+    },
+    {
+      "key": "supervised_sigmoid",
+      "ste": "sigmoid_logit_jacobian",
+      "count_supervision": 1,
+      "train_factors": true,
+      "source": "mixed_families"
+    },
+    {
+      "key": "supervised_identity",
+      "ste": "identity_logit_jacobian",
+      "count_supervision": 1,
+      "train_factors": true,
+      "source": "mixed_families"
+    },
+    {
+      "key": "supervised_frozen",
+      "ste": "sigmoid_logit_jacobian",
+      "count_supervision": 1,
+      "train_factors": false,
+      "source": "mixed_families"
+    },
+    {
+      "key": "oracle_count",
+      "ste": "oracle_count",
+      "count_supervision": 0,
+      "train_factors": true,
+      "source": "mixed_families"
+    },
+    {
+      "key": "calibrated_independent",
+      "ste": "independent_sigmoid",
+      "count_supervision": 0,
+      "train_factors": true,
+      "source": "mixed_families"
+    }
+  ],
+  "training": {
+    "optimizer": "Adam",
+    "steps": 240,
+    "learning_rate": 0.04,
+    "weight_decay": 0,
+    "loss_reconstruction_mse_weight": 1,
+    "loss_matrix_faithfulness_weight": 0.3,
+    "loss_mean_binary_gate_usage_weight": 0.05,
+    "auxiliary_count_BCE_weight": 1,
+    "auxiliary_count_label": "one iff both input coordinates nonzero at current pass; training_only_for_supervised_arms",
+    "ste_count_sigmoid": "p(1-p)",
+    "ste_count_identity": "1",
+    "ste_count_tempered2": "sigmoid(l/2)*(1-sigmoid(l/2))/2",
+    "selection_assignment": "argmax of assignment logits, ties choose component0",
+    "forward_count": "1 + 1[count_logit >= 0]",
+    "separate_calibration_thresholds": [
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6
+    ],
+    "calibration_choice": "min binary MSE + 0.05 mean binary activity, tie highest threshold",
+    "registered_calibration_on": "calibrated_independent_only"
+  },
+  "success": {
+    "read_axis_cosine_min": 0.9,
+    "overall_binary_mse_max": 0.02,
+    "per_family_binary_mse_max": 0.02,
+    "per_family_full_trajectory_support_min": 0.9,
+    "nonzero_first_factor_gradient": true,
+    "nonzero_factor_update": true,
+    "binary_gates_required": true,
+    "primary_arm": "supervised_sigmoid",
+    "primary_control": "unsupervised_sigmoid",
+    "primary_min_success_24": 18,
+    "primary_net_seed_wins_min": 6,
+    "primary_exact_mcnemar_p_max": 0.05
+  },
+  "report": {
+    "all_192_arm_rows": true,
+    "seed_level_unit": true,
+    "Wilson95": true,
+    "exact_seed_paired_McNemar": true,
+    "per_family_false_off_on": true,
+    "per_family_count_accuracy": true,
+    "per_family_count_logit_margin": true,
+    "count_head_first_step_grad_norm": true,
+    "common_initialization_SHA256": true,
+    "preserve_PD04_result": true
+  },
+  "runtime": {
+    "platform": "github_actions_ubuntu_24.04",
+    "python": "3.12",
+    "pytorch": "2.5.1+cpu",
+    "cpu_threads": 1,
+    "single_process": true,
+    "timeout_min": 18,
+    "smoke_seed": 1009,
+    "source_lock_before_data": true
+  }
+}

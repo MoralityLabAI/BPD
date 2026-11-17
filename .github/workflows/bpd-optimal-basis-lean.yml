@@ -38,6 +38,7 @@ jobs:
           lean mechinterp/bpd/theory/FiniteFiltration.lean | tee -a /tmp/bpd-optimal-basis-axioms.txt
           lean mechinterp/bpd/theory/GreedyRank.lean | tee -a /tmp/bpd-optimal-basis-axioms.txt
           lean mechinterp/bpd/theory/pd04/PlantedCapacity.lean | tee -a /tmp/bpd-optimal-basis-axioms.txt
+          lean mechinterp/bpd/theory/pd05/CountSeparation.lean | tee -a /tmp/bpd-optimal-basis-axioms.txt
           python - <<'PY'
           from pathlib import Path
           import re
@@ -54,6 +55,7 @@ jobs:
           assert 'BPD.FiniteFiltration.equal_profiles_of_optimal' in s
           assert 'BPD.GreedyRank.greedy_prefix_rank' in s
           assert 'BPD.PD04.top1_cannot_reconstruct_overlap' in s
+          assert 'BPD.PD05.quantized_one_two_gap' in s
           print('Lean kernel proof declarations checked; foundational axioms only')
           PY
       - name: Upload rational receipts and proof/axiom output
