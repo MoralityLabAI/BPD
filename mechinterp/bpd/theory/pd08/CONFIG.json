@@ -1,0 +1,180 @@
+{
+  "study_id": "BPD-PD-08",
+  "registration_date": "2026-11-17",
+  "status": "frozen_before_PD08_model_training",
+  "predecessor": {
+    "pd06_merge": "7e6a8bd3c2d34dcfc1111f3973d8467994d5e656",
+    "pd07_merge": "5c3bdd6141c30c2568ce20326bd614c22b64dd0a",
+    "pd07_learned_read_success": 1,
+    "pd07_planted_frozen_success": 24,
+    "pd06_count_supervised_read_cosine_over_point9": 32
+  },
+  "question": "Can a read-conditioned gate generalize to withheld sparse support combinations after count-supervised dictionary pretraining aligns V, when both read- and raw-input gates are refitted under the same frozen dictionary and without further labels?",
+  "model": {
+    "width": 4,
+    "components": 4,
+    "passes": 4,
+    "physical": "BPDModel TiedComponentLinear bias-free I4",
+    "source": "unchanged PD06 sparse latent generator with seeded QR",
+    "rotation_seed_offset": 900000,
+    "clean_target": "identity",
+    "stage1_factor_init": "BPDModel init_svd=false",
+    "stage1_gate": "PD06 GateMLP raw x, assignment/count logits",
+    "stage1_training": "count-supervised top-k with both physical factors trainable",
+    "stage2_gate": "PD07 GateChoice with independent normalized factor-read thresholds or raw-input MLP",
+    "stage2_factors_frozen": true,
+    "stage2_original_factor_hash_checked": true,
+    "stage2_read_thresholds_initial": 0.5,
+    "stage2_gate_init_seed_offset": 500000,
+    "stage2_train_generator_offset": 400000,
+    "stage2_no_count_or_support_labels": true,
+    "residual_delta_mask": 0,
+    "zero_ablation": true,
+    "sphere_rescale": false
+  },
+  "seeds": [
+    1109,
+    1117,
+    1123,
+    1129,
+    1151,
+    1153,
+    1163,
+    1171,
+    1181,
+    1187,
+    1193,
+    1201,
+    1213,
+    1217,
+    1223,
+    1229,
+    1231,
+    1237,
+    1249,
+    1259,
+    1277,
+    1279,
+    1283,
+    1289
+  ],
+  "arms": [
+    {
+      "key": "read_refit",
+      "kind": "read",
+      "train_gate": true,
+      "privileged_inference": false,
+      "read_feature_assignment": "matched"
+    },
+    {
+      "key": "raw_refit",
+      "kind": "raw_independent",
+      "train_gate": true,
+      "privileged_inference": false
+    },
+    {
+      "key": "read_nofit",
+      "kind": "read",
+      "train_gate": false,
+      "privileged_inference": false,
+      "read_feature_assignment": "matched"
+    },
+    {
+      "key": "read_shuffled_refit",
+      "kind": "read",
+      "train_gate": true,
+      "privileged_inference": false,
+      "read_feature_assignment": "cyclic-shifted-to-wrong-output-component"
+    },
+    {
+      "key": "stage1_count_topk",
+      "kind": "stage1_count_topk",
+      "train_gate": false,
+      "privileged_inference": false,
+      "training_label_stage1_only": true
+    },
+    {
+      "key": "oracle_support",
+      "kind": "oracle",
+      "train_gate": false,
+      "privileged_inference": true
+    }
+  ],
+  "source": {
+    "train_supports": "PD06 frozen train supports k1/k2/k3; withheld diagonal pairs and triple never appear in train or stage2 refit",
+    "active_amplitudes": [
+      0.75,
+      1.25
+    ],
+    "stage1_generator_offset": 100000,
+    "stage2_generator_offset": 400000,
+    "heldout_generator_offset": 200000,
+    "heldout_family_stride": 10000,
+    "train_batch": 32,
+    "heldout_boards_per_family": 192,
+    "eval_families": [
+      "k1_seen",
+      "k2_seen",
+      "k2_unseen",
+      "k3_seen",
+      "k3_unseen",
+      "transition_unseen"
+    ]
+  },
+  "optimization": {
+    "stage1_steps": 360,
+    "stage1_learning_rate": 0.025,
+    "stage1_loss_mse": 1,
+    "stage1_loss_matrix_faith": 0.3,
+    "stage1_loss_binary_gate_fraction": 0.05,
+    "stage1_auxiliary_count_CE": 1,
+    "stage2_steps": 180,
+    "stage2_learning_rate": 0.015,
+    "stage2_loss_mse": 1,
+    "stage2_loss_binary_gate_fraction": 0.05,
+    "stage2_source_labels_used": false,
+    "stage2_read_probability": "sigmoid(10*(abs(x@V/||V_j||)-(.25+.5*sigmoid(theta_j))))",
+    "stage2_raw_probability": "sigmoid(raw_GateMLP.assignment(x))",
+    "all_forward_masks_binary": true,
+    "shared_physical_factors_frozen_stage2": true,
+    "optimizer": "Adam",
+    "weight_decay": 0,
+    "CPU_threads": 1
+  },
+  "success": {
+    "axis_cos_min": 0.9,
+    "overall_mse_max": 0.03,
+    "seen_family_mse_max": 0.04,
+    "unseen_family_mse_max": 0.06,
+    "seen_exact_fourpass_support_min": 0.8,
+    "unseen_exact_fourpass_support_min": 0.7,
+    "first_stage_factor_grad_positive": true,
+    "first_stage_factor_update_positive": true,
+    "stage2_VU_exactly_unchanged": true,
+    "primary_arm": "read_refit",
+    "control_arm": "raw_refit",
+    "primary_min_successes": 18,
+    "primary_net_seed_wins_min": 6,
+    "primary_two_sided_McNemar_p_max": 0.05
+  },
+  "evidence": {
+    "frozen_before_data": true,
+    "original_all_144_arm_metrics": true,
+    "per_family_support_MSE": false,
+    "report_per_family_support_MSE": true,
+    "report_read_min_cosine": true,
+    "report_shuffled_control": true,
+    "report_source_leakage_tests": true,
+    "report_seed_level_Wilson95": true,
+    "report_exact_McNemar": true,
+    "original_PD06_PD07_immutable": true
+  },
+  "runtime": {
+    "device": "CPU",
+    "threads": 1,
+    "RSS_GiB_limit": 3,
+    "science_timeout_min": 20,
+    "excluded_smoke_seed": 3001,
+    "source_lock_before_full": true
+  }
+}
