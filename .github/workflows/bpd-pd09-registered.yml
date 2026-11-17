@@ -1,0 +1,84 @@
+name: BPD-PD-09 first registered unsupervised 4D hyperplane-mass cohort
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/theory/pd09/EXECUTE_LOCK.json'
+permissions:
+  contents: read
+jobs:
+  first-registered-hyperplane-cohort:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Freeze and verify source SHA before any registered model weights
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json,subprocess
+          root=Path('mechinterp/bpd/theory/pd09')
+          lock=json.loads((root/'EXECUTE_LOCK.json').read_text())
+          cfg=json.loads((root/'CONFIG.json').read_text())
+          assert lock['study_id']==cfg['study_id']=='BPD-PD-09'
+          assert lock['execution']=='first_registered_full_cohort'
+          assert len(cfg['seeds'])==lock['seeds']==24
+          assert len(cfg['arms'])==lock['arms_per_seed']==5
+          assert cfg['scoring']['primary_arm']=='orthogonal_annealed'
+          assert cfg['scoring']['primary_control']=='orthogonal_fixed'
+          sha=lock['source_commit_sha']
+          subprocess.run(['git','merge-base','--is-ancestor',sha,'HEAD'],check=True)
+          paths=[str(root/x) for x in
+                 ('CONFIG.json','PROTOCOL.md','experiment.py','test_experiment.py')]
+          subprocess.run(['git','diff','--exit-code',sha,'HEAD','--',*paths],check=True)
+          print('PD09 frozen science source:',sha)
+          PY
+      - name: Install pinned CPU Torch and test dependencies
+        run: |
+          python -m pip install --disable-pip-version-check pytest numpy
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Verify engineering-only QR and sparse-read mask semantics
+        run: python -m pytest -q mechinterp/bpd/theory/pd09/test_experiment.py
+      - name: Execute 24 fresh seed rotations across five frozen arms
+        run: python -m mechinterp.bpd.theory.pd09.experiment --out /tmp/bpd-pd09-first-run.json
+      - name: Verify complete registered 120-arm binary physical output
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('/tmp/bpd-pd09-first-run.json').read_text())
+          cfg=json.loads(Path('mechinterp/bpd/theory/pd09/CONFIG.json').read_text())
+          assert d['study_id']=='BPD-PD-09'
+          assert d['summary']['registered'] and d['summary']['seed_count']==24
+          assert len(d['arms'])==120 and len({(r['seed'],r['arm']) for r in d['arms']})==120
+          assert {r['seed'] for r in d['arms']}==set(cfg['seeds'])
+          assert {r['arm'] for r in d['arms']}=={r['key'] for r in cfg['arms']}
+          assert len({r['rotation_sha256'] for r in d['arms']})==24
+          assert all(set(r['heldout']['per_family'])==
+                     set(cfg['source']['family_order']) for r in d['arms'])
+          assert all(all(x['mask_exact_binary'] for x in
+                    r['heldout']['per_family'].values()) for r in d['arms'])
+          assert all(r['trainable_update_norm']>0 for r in d['arms']
+                     if r['arm']!='random_orthogonal')
+          assert all(r['first_trainable_gradient_norm']>0 for r in d['arms']
+                     if r['arm']!='random_orthogonal')
+          assert all(r['trainable_update_norm']==0 for r in d['arms']
+                     if r['arm']=='random_orthogonal')
+          assert all(r['heldout']['physical_weight_delta_mse']<1e-7
+                     for r in d['arms'] if r['raw_matrix_QR_gauge'])
+          print('BPD-PD-09 preregistered criterion:',d['summary']['primary_passed'])
+          print('Seed successes:',d['summary']['success_by_arm'])
+          print('Exact paired p:',d['summary']['McNemar_exact_two_sided_p'])
+          PY
+      - name: Preserve first original full PD09 JSON even on scientific FAIL
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bpd-pd09-first-run-${{ github.run_id }}
+          path: /tmp/bpd-pd09-first-run.json
+          retention-days: 60
+          if-no-files-found: warn
