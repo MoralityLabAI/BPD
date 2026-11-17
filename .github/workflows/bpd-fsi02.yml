@@ -2,7 +2,7 @@ name: BPD FSI02 prospective finite-basis CPU worlds
 on:
   pull_request:
     paths:
-      - 'mechinterp/bpd/experiments/fsi02_*'
+      - 'mechinterp/bpd/experiments/*fsi02*'
       - '.github/workflows/bpd-fsi02.yml'
   workflow_dispatch:
 permissions:
