@@ -1,0 +1,35 @@
+{
+  "experiment": "BPD-SF05-A2",
+  "stage": "POST_STAGE_A_EXCLUDED_ROOTS_ONLY",
+  "dated": "2026-11-18",
+  "retrospective_context": "Post-Stage-A data exposed nonlinear public effect. This lock precedes only A2 engineering execution, not Stage A nor fresh science.",
+  "a1_lock_blob_sha": "0f2969d9b87df632f8fdab3ecb85554533a91687",
+  "files": {
+    "A2_PROTOCOL.md": "9b1136e2eeea4786daa94e11d4051c54bee35294",
+    "finite_correct.py": "a7dc0de7ca606615979fa6926e7c503baeccc81e",
+    "stage_a2.py": "1be28c7eac3dc7bd6d328f9a76e1ca21012edb58",
+    "tests/test_finite_correct.py": "01f56e2e0665d45677dc7cc3bfbd485064d41d01"
+  },
+  "excluded_seeds": [
+    901,
+    902
+  ],
+  "new_science_roots": 0,
+  "diagnostic_pairs": 512,
+  "matched_null_arms": 16,
+  "finite_repair": {
+    "max_iterations": 8,
+    "absolute_public_tolerance": 0.0001,
+    "per_step_relative_norm_cap": 0.25,
+    "per_step_absolute_norm_cap": 0.5,
+    "gradient_floor": 1e-9,
+    "backtracking": [
+      1,
+      0.5,
+      0.25,
+      0.125
+    ]
+  },
+  "source_family": "original SF04 two-write two-user scalar generator",
+  "evidence_scope": "privileged public level-set oracle on previously used development roots; engineering only"
+}
