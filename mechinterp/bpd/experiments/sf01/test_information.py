@@ -86,3 +86,13 @@ def test_invalid_weights_and_undefined_records_fail():
         conditional_mutual_information([{"s": 0, "y": 1, "w": -1}], secret="s", signal="y", weight="w")
     with pytest.raises(ValueError):
         finite_channel_information({0: {0: 0.4}}, {0: 1.0})
+
+
+def test_xor_synergy_hides_secret_from_each_single_factor():
+    # Two independently random bits K and C=S XOR K each reveal zero
+    # information about S individually, while their joint state reveals S.
+    rows = [{"s": s, "key": k, "cipher": s ^ k}
+            for s in (0, 1) for k in (0, 1)]
+    assert isclose(conditional_mutual_information(rows, secret="s", signal="key"), 0.0)
+    assert isclose(conditional_mutual_information(rows, secret="s", signal="cipher"), 0.0)
+    assert isclose(conditional_mutual_information(rows, secret="s", signal=("key", "cipher")), 1.0)
