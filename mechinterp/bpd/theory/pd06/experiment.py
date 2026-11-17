@@ -199,6 +199,18 @@ def soft_inclusion(assignment: torch.Tensor, rank: int, temperature: float):
     mid = .5 * (sorted_scores[..., rank-1:rank] + sorted_scores[..., rank:rank+1])
     return ((assignment-mid) / temperature).sigmoid()
 
+class ExactBinaryProxy(torch.autograd.Function):
+    """Return hard mask bit-for-bit; backpropagate through soft surrogate."""
+
+    @staticmethod
+    def forward(ctx, hard: torch.Tensor, surrogate: torch.Tensor):
+        return hard
+
+    @staticmethod
+    def backward(ctx, grad_output: torch.Tensor):
+        return None, grad_output
+
+
 def ste_mask(
     assignment: torch.Tensor, count_logits: torch.Tensor,
     support: torch.Tensor, arm: str,
@@ -225,7 +237,7 @@ def ste_mask(
     else:
         count_weights = count_logits.softmax(dim=-1)
     surrogate = (smoothed * count_weights.unsqueeze(-1)).sum(dim=-2)
-    return hard + surrogate - surrogate.detach()
+    return ExactBinaryProxy.apply(hard, surrogate)
 
 def masked_rollout(bpd, gate, x, support, arm):
     assignment, count_logits = gate(x)
