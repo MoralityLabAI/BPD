@@ -13,6 +13,8 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -22,8 +24,14 @@ jobs:
           import json, subprocess
           from pathlib import Path
           lock = json.loads(Path('mechinterp/bpd/theory/pd02/EXECUTE_LOCK.json').read_text())
-          source_commit = subprocess.check_output(['git','rev-parse','HEAD^'], text=True).strip()
-          assert source_commit == lock['source_commit_sha'], (source_commit, lock)
+          source_commit = lock['source_commit_sha']
+          subprocess.run(['git','merge-base','--is-ancestor',source_commit,'HEAD'],check=True)
+          frozen_paths = ['mechinterp/bpd/theory/pd02/CONFIG.json',
+            'mechinterp/bpd/theory/pd02/PROTOCOL.md',
+            'mechinterp/bpd/theory/pd02/experiment.py',
+            'mechinterp/bpd/theory/pd02/test_experiment.py']
+          subprocess.run(['git','diff','--exit-code',source_commit,'HEAD','--',
+            *frozen_paths], check=True)
           cfg = json.loads(Path('mechinterp/bpd/theory/pd02/CONFIG.json').read_text())
           assert cfg['study_id'] == lock['study_id'] == 'BPD-PD-02'
           assert len(cfg['seeds']) == 24 and len(cfg['arms']) == 4
