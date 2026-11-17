@@ -1,0 +1,28 @@
+{
+  "experiment": "BPD-SF05B_STAGE2_DONOR_SOURCE_ONLY",
+  "status": "HASH_LOCKED_BEFORE_DONOR_GENERATOR_TESTS",
+  "date": "2026-11-18",
+  "src": {
+    "PROTOCOL_SOURCE_ONLY.md": "99deb0c0853aa870e7ce359c1a7d1c7178c8debb",
+    "THEORY.md": "8d639eb6bd16b7832e9dc6147c2ef4ca078c0d4b",
+    "donor_cohorts.py": "6c08787a2a08daf3c601265decbba6d8cfc7f930",
+    "tests/test_donor_cohorts.py": "6bd27abe9d80807fc79ef2f16ad5a6c27ed82897"
+  },
+  "stage0_generator_sha": "525cfb28d40cc5f58c0e8141489a8e744d1778f4",
+  "allowed_source_family": "heldout",
+  "authorized_strata": [
+    "authorized_unconditional",
+    "authorized_high_contrast"
+  ],
+  "public_stratum": "public_U",
+  "query_role_rule": "old_last_source_or_new_last_source_uniform",
+  "donor_flip": "last valid write tag only",
+  "contrast_threshold": 0.3,
+  "contrast_candidate_multiplier": 4,
+  "exact_conditional_blind_rule": "enumerate 6 permutations x 2 donor switches x 2 role choices; condition on role and contrast acceptance",
+  "new_teacher_roots_evaluated": 0,
+  "reserved_calibration_roots": "6101..6159",
+  "reserved_confirmation_roots": "7101..7132",
+  "evidence_scope": "source-only donor/preflight; no trained model inference, source-blind model scoring, or security results",
+  "arg03_sealed": true
+}
