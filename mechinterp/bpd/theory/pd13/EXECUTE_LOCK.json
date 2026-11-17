@@ -1,0 +1,15 @@
+{
+  "study_id": "BPD-PD-13",
+  "execution": "first_registered_full_cohort",
+  "registered_date": "2026-11-18",
+  "source_commit_sha": "02edb2c441f156e4eec6102e7fcf5230acd6e638",
+  "cells": 2,
+  "units": 32,
+  "arms_per_seed": 5,
+  "excluded_engineering_seed": 4001,
+  "excluded_seed_source_CI_run": 44139636764,
+  "excluded_seed_CI_conclusion": "SUCCESS on identical experiment source before final README-only head",
+  "Lean_CI_run": 44139808371,
+  "Lean_CI_conclusion": "SUCCESS",
+  "provenance_policy": "Keep exact first completed 160-arm JSON with original scientific verdict; no updated registration, seed or recovery gate post-unseal."
+}
