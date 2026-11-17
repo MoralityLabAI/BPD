@@ -217,6 +217,27 @@ theorem block_write_invariant
   have hc := (conjugate_mask_iff_commute r rInv d hleft hright).mpr hcomm
   exact congrArg decode (hc (encode x))
 
+/-! This exact two-coordinate shear has only two invariant Boolean
+diagonal masks: keep everything or erase everything. -/
+
+def bitMask (b0 b1 : Bool) (p : Int × Int) : Int × Int :=
+  (if b0 then p.1 else 0, if b1 then p.2 else 0)
+
+theorem shear_bit_mask_iff_equal (b0 b1 : Bool) :
+    (∀ p : Int × Int,
+      bitMask b0 b1 (shear p) = shear (bitMask b0 b1 p)) ↔ b0 = b1 := by
+  constructor
+  · intro h
+    have hw := h (0, 1)
+    cases b0 <;> cases b1 <;> simp [bitMask, shear] at hw ⊢
+  · intro h p
+    subst b1
+    cases b0 <;> simp [bitMask, shear]
+
+theorem declared_candidate_count_and_uniqueness :
+    candidateIndices.length = 5 ∧ candidateIndices.Nodup := by
+  decide
+
 end BPD.OptimalBasis
 
 #print axioms BPD.OptimalBasis.rotated_unique_optimal
@@ -230,3 +251,6 @@ end BPD.OptimalBasis
 
 #print axioms BPD.OptimalBasis.block_activity_zero_iff_of_commute
 #print axioms BPD.OptimalBasis.block_write_invariant
+
+#print axioms BPD.OptimalBasis.shear_bit_mask_iff_equal
+#print axioms BPD.OptimalBasis.declared_candidate_count_and_uniqueness
