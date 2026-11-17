@@ -27,7 +27,11 @@ jobs:
       - name: Install source-only dependencies
         run: python -m pip install 'numpy>=1.26' 'pytest>=8.0'
       - name: Test identities and exact certificates
-        run: python -m pytest -q mechinterp/bpd/tests/test_v3_floor_and_basis.py
+        # The shared neural conftest imports torch. Isolate the source-only suite.
+        run: |
+          mkdir -p /tmp/bpd-v3-tests
+          cp mechinterp/bpd/tests/test_v3_floor_and_basis.py /tmp/bpd-v3-tests/test_v3_floor_and_basis.py
+          PYTHONPATH="$PWD" python -m pytest -q /tmp/bpd-v3-tests/test_v3_floor_and_basis.py
       - name: Produce reproducible synthetic receipt
         run: python -m mechinterp.bpd.v3.floor_and_basis --smoke --out /tmp/bpd_v3_synthetic_smoke.json
       - name: Validate declared synthetic evidence boundary
