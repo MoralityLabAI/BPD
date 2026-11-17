@@ -24,7 +24,7 @@ jobs:
       - name: All prospective worlds, exact mask math and receipt agreement
         run: |
           export EVALMATH_FSI_FILE="${{ github.workspace }}/.deps/evalmath/src/spiral_ln/evaluation_finite_sample.py"
-          PYTHONPATH=. python -m unittest mechinterp.bpd.experiments.test_fsi02_cpu -v
+          PYTHONPATH=. python -m unittest discover -s mechinterp/bpd/experiments -p 'test_fsi02_cpu.py' -v
       - name: Re-run registered BPD FSI02 from source
         run: |
           export EVALMATH_FSI_FILE="${{ github.workspace }}/.deps/evalmath/src/spiral_ln/evaluation_finite_sample.py"
