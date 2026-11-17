@@ -1,0 +1,56 @@
+name: BPD-CQ-02 trained factor delayed observer
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/theory/cq02_trained_observer/**'
+      - '.github/workflows/bpd-cq02-trained-observer.yml'
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/theory/cq02_trained_observer/**'
+      - '.github/workflows/bpd-cq02-trained-observer.yml'
+permissions:
+  contents: read
+jobs:
+  cpu-source-and-native-parity:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned CPU PyTorch
+        run: |
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Execute independent tests and native BPD wrapper parity
+        run: |
+          python -m unittest discover -s mechinterp/bpd/theory/cq02_trained_observer/tests -v
+          python -m mechinterp.bpd.theory.cq02_trained_observer.pilot --backend independent --out /tmp/cq02-independent.json
+          python -m mechinterp.bpd.theory.cq02_trained_observer.pilot --backend native --out /tmp/cq02-native.json
+      - name: Check registered instrument and BPD-native numerical agreement
+        run: |
+          python - <<'PY'
+          import json
+          a=json.load(open('/tmp/cq02-independent.json'))
+          b=json.load(open('/tmp/cq02-native.json'))
+          assert a['seeds']==b['seeds']==[503,509,521,523,541,547,557,563]
+          assert a['registered_pilot_pass']
+          assert b['registered_pilot_pass']
+          for x,y in zip(a['rows'],b['rows']):
+              assert x['seed']==y['seed'] and y['native_parity_max_abs']<2e-6
+              assert x['four_pass_route']==y['four_pass_route']
+              assert abs(x['binary_reconstruction_mse']-y['binary_reconstruction_mse'])<1e-4
+              assert x['component_observable_rank_after_one']==y['component_observable_rank_after_one']==2
+              assert y['largest_norm_matching_error']<1e-5
+          print('Native BPDModel parity and synthetic delayed-observer gates passed')
+          PY
+      - name: Archive new CPU receipts (immutable source data in PR remains separate)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bpd-cq02-train-parity-${{ github.run_id }}
+          path: |
+            /tmp/cq02-independent.json
+            /tmp/cq02-native.json
+          retention-days: 30
+          if-no-files-found: warn
