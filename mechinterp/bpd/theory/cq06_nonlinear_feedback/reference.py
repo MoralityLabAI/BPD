@@ -6,6 +6,8 @@ independent sham/development models, before any confirmation root is executed.
 """
 from __future__ import annotations
 import argparse
+import base64
+import gzip
 import hashlib
 import json
 import math
@@ -18,7 +20,7 @@ from . import evalmath_preflight as EM
 
 ROOT=Path(__file__).resolve().parent
 RESULTS=ROOT/'results'
-SOURCE_FILES=('PROTOCOL.md','REGISTRATION.json','AMENDMENTS.md','experiment.py','reference.py','evalmath_preflight.py')
+SOURCE_FILES=('PROTOCOL.md','REGISTRATION.json','AMENDMENTS.md','experiment.py','reference.py','evalmath_preflight.py','tests/test_experiment.py')
 
 
 def git_blob_sha(path):
@@ -84,7 +86,18 @@ def verify(run,frozen):
 
 def load(phase):
     path=RESULTS/f'cq06_{phase}.json'
-    return json.loads(path.read_text())
+    if path.is_file():
+        return json.loads(path.read_text(encoding='utf-8'))
+    packed=path.with_suffix(path.suffix+'.gz.b64')
+    return json.loads(gzip.decompress(base64.b64decode(packed.read_text(encoding='ascii'))).decode('utf-8'))
+
+
+def receipt_sha(phase):
+    path=RESULTS/f'cq06_{phase}.json'
+    if path.is_file():return sha256(path)
+    packed=path.with_suffix(path.suffix+'.gz.b64')
+    data=gzip.decompress(base64.b64decode(packed.read_text(encoding='ascii')))
+    return hashlib.sha256(data).hexdigest()
 
 
 def write_once(path,content):
@@ -114,7 +127,7 @@ def build_preflight():
           'pilot_from_development_only':True,'heldout_sealed':True,
           'units_independent':True,'pilot':pilot}
     result=EM.preflight(spec)
-    result['sham_source_sha256']=sha256(RESULTS/'cq06_sham.json')
+    result['sham_source_sha256']=receipt_sha('sham')
     result['registered_source_lock']=source_lock()
     return spec,result
 
@@ -126,7 +139,7 @@ def sham_gate():
     if r['decision']!='READY_FOR_CONFIRMATION':
         raise RuntimeError('Confirmation blocked by EvalMath: '+r['decision'])
     if r['registered_source_lock']!=source_lock():raise RuntimeError('Confirmation blocked: source changed after preflight')
-    if r['sham_source_sha256']!=sha256(RESULTS/'cq06_sham.json'):
+    if r['sham_source_sha256']!=receipt_sha('sham'):
         raise RuntimeError('Confirmation blocked: sham receipt changed')
     if r['pilot_worlds']<59 or r['planned_confirmation_worlds']!=26:
         raise RuntimeError('Confirmation blocked: insufficient independent calibration worlds')
@@ -193,8 +206,13 @@ def main():
     if args.phase=='preflight':
         if args.backend!='independent':raise ValueError('preflight uses independent development/sham receipt only')
         spec,result=build_preflight()
-        write_once(RESULTS/'cq06_preflight_input.json',spec)
-        write_once(RESULTS/'cq06_preflight_result.json',result)
+        if args.check:
+            assert spec==json.loads((RESULTS/'cq06_preflight_input.json').read_text()),'preflight input changed'
+            assert result==json.loads((RESULTS/'cq06_preflight_result.json').read_text()),'preflight decision changed'
+            print('CQ-06 independent 59-root preflight source-lock replay PASS')
+        else:
+            write_once(RESULTS/'cq06_preflight_input.json',spec)
+            write_once(RESULTS/'cq06_preflight_result.json',result)
         print(json.dumps(result,indent=2,sort_keys=True))
         return 0 if result['decision']=='READY_FOR_CONFIRMATION' else 2
     if args.phase=='confirmation':gate=sham_gate()
