@@ -1,0 +1,15 @@
+{
+  "study_id": "BPD-PD-12",
+  "execution": "first_registered_full_factorial",
+  "registered_date": "2026-11-18",
+  "source_commit_sha": "6e52fbbb29c1e34573db189c70b6882427a49947",
+  "cells": 8,
+  "units": 64,
+  "arms_per_unit": 4,
+  "excluded_smoke_seed": 3001,
+  "preflight_run": 44134820809,
+  "preflight_conclusion": "SUCCESS: 8D/16D source and physical BPD execution tests",
+  "lean_run": 44135226560,
+  "lean_conclusion": "SUCCESS: exact Givens budget arithmetic certificate",
+  "evidence_policy": "Archive original complete 256-arm first-run JSON and preregistered scientific PASS/FAIL without retrospective alterations."
+}
