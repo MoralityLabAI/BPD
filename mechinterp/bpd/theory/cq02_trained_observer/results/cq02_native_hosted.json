@@ -1,0 +1,327 @@
+{
+  "elapsed_seconds": 3.7454,
+  "limitations": "Frozen hand-designed T; synthetic factor training; not a learned recurrent Transformer or natural math-reasoning mechanism.",
+  "outcomes": {
+    "native": 512,
+    "projected_native": 512,
+    "random_fiber": 54,
+    "sham": 0,
+    "visible": 0
+  },
+  "python_version": "3.12.16",
+  "registered_pilot_pass": true,
+  "rows": [
+    {
+      "backend": "native",
+      "binary_reconstruction_mse": 6.821870152107223e-11,
+      "calibration_axis_abs_cos": 1.0,
+      "calibration_index": 1,
+      "causal_pairs": 64,
+      "component_observable_rank_after_one": 2,
+      "component_observable_rank_now": 1,
+      "delayed_component_singular_values": [
+        1.0242493152618408,
+        0.8632686734199524
+      ],
+      "delayed_median": 1.0,
+      "fiber_instant_max": 0.0,
+      "four_pass_route": 128,
+      "heldout_boards": 128,
+      "identity_transport_instant_max": 0.0,
+      "immediate_median": 2.685648496481008e-06,
+      "largest_norm_matching_error": 2.9802322387695312e-08,
+      "mixed_source_mse": 0.25063619017601013,
+      "native_dark_later_pairs": 64,
+      "native_parity_max_abs": 0.0,
+      "random_fiber_instant_max": 0.0,
+      "seed": 503,
+      "train_steps": 200,
+      "transfer": {
+        "native": 64,
+        "projected_native": 64,
+        "random_fiber": 5,
+        "sham": 0,
+        "visible": 0
+      },
+      "updated_factors": {
+        "U": 1.1702556610107422,
+        "V": 1.0873398780822754
+      }
+    },
+    {
+      "backend": "native",
+      "binary_reconstruction_mse": 6.8069083702937405e-09,
+      "calibration_axis_abs_cos": 1.0,
+      "calibration_index": 0,
+      "causal_pairs": 64,
+      "component_observable_rank_after_one": 2,
+      "component_observable_rank_now": 1,
+      "delayed_component_singular_values": [
+        1.1213737726211548,
+        1.1201757192611694
+      ],
+      "delayed_median": 1.0,
+      "fiber_instant_max": 0.0,
+      "four_pass_route": 128,
+      "heldout_boards": 128,
+      "identity_transport_instant_max": 0.0,
+      "immediate_median": 6.346798181766644e-05,
+      "largest_norm_matching_error": 2.9802322387695312e-08,
+      "mixed_source_mse": 0.25582826137542725,
+      "native_dark_later_pairs": 64,
+      "native_parity_max_abs": 0.0,
+      "random_fiber_instant_max": 0.0,
+      "seed": 509,
+      "train_steps": 200,
+      "transfer": {
+        "native": 64,
+        "projected_native": 64,
+        "random_fiber": 9,
+        "sham": 0,
+        "visible": 0
+      },
+      "updated_factors": {
+        "U": 2.0982415676116943,
+        "V": 1.0205419063568115
+      }
+    },
+    {
+      "backend": "native",
+      "binary_reconstruction_mse": 2.2327258193399757e-05,
+      "calibration_axis_abs_cos": 0.9999725222587585,
+      "calibration_index": 1,
+      "causal_pairs": 64,
+      "component_observable_rank_after_one": 2,
+      "component_observable_rank_now": 1,
+      "delayed_component_singular_values": [
+        1.1487023830413818,
+        0.6437819600105286
+      ],
+      "delayed_median": 0.9999241232872009,
+      "fiber_instant_max": 0.0,
+      "four_pass_route": 128,
+      "heldout_boards": 128,
+      "identity_transport_instant_max": 0.0,
+      "immediate_median": 0.012316427193582058,
+      "largest_norm_matching_error": 2.9802322387695312e-08,
+      "mixed_source_mse": 0.25973838567733765,
+      "native_dark_later_pairs": 64,
+      "native_parity_max_abs": 0.0,
+      "random_fiber_instant_max": 0.0,
+      "seed": 521,
+      "train_steps": 200,
+      "transfer": {
+        "native": 64,
+        "projected_native": 64,
+        "random_fiber": 5,
+        "sham": 0,
+        "visible": 0
+      },
+      "updated_factors": {
+        "U": 1.273531436920166,
+        "V": 2.682827949523926
+      }
+    },
+    {
+      "backend": "native",
+      "binary_reconstruction_mse": 5.428707483545736e-11,
+      "calibration_axis_abs_cos": 1.0,
+      "calibration_index": 1,
+      "causal_pairs": 64,
+      "component_observable_rank_after_one": 2,
+      "component_observable_rank_now": 1,
+      "delayed_component_singular_values": [
+        1.9567303657531738,
+        0.8222335577011108
+      ],
+      "delayed_median": 1.0,
+      "fiber_instant_max": 0.0,
+      "four_pass_route": 128,
+      "heldout_boards": 128,
+      "identity_transport_instant_max": 0.0,
+      "immediate_median": 2.2038350380171323e-06,
+      "largest_norm_matching_error": 5.960464477539063e-08,
+      "mixed_source_mse": 0.25212371349334717,
+      "native_dark_later_pairs": 64,
+      "native_parity_max_abs": 0.0,
+      "random_fiber_instant_max": 0.0,
+      "seed": 523,
+      "train_steps": 200,
+      "transfer": {
+        "native": 64,
+        "projected_native": 64,
+        "random_fiber": 8,
+        "sham": 0,
+        "visible": 0
+      },
+      "updated_factors": {
+        "U": 2.201388359069824,
+        "V": 1.205696940422058
+      }
+    },
+    {
+      "backend": "native",
+      "binary_reconstruction_mse": 2.0738843975465215e-09,
+      "calibration_axis_abs_cos": 1.0,
+      "calibration_index": 1,
+      "causal_pairs": 64,
+      "component_observable_rank_after_one": 2,
+      "component_observable_rank_now": 1,
+      "delayed_component_singular_values": [
+        1.5477222204208374,
+        1.0996592044830322
+      ],
+      "delayed_median": 1.0,
+      "fiber_instant_max": 0.0,
+      "four_pass_route": 128,
+      "heldout_boards": 128,
+      "identity_transport_instant_max": 0.0,
+      "immediate_median": 1.4139878658170346e-05,
+      "largest_norm_matching_error": 2.9802322387695312e-08,
+      "mixed_source_mse": 0.25412383675575256,
+      "native_dark_later_pairs": 64,
+      "native_parity_max_abs": 0.0,
+      "random_fiber_instant_max": 0.0,
+      "seed": 541,
+      "train_steps": 200,
+      "transfer": {
+        "native": 64,
+        "projected_native": 64,
+        "random_fiber": 4,
+        "sham": 0,
+        "visible": 0
+      },
+      "updated_factors": {
+        "U": 1.3589622974395752,
+        "V": 1.7175142765045166
+      }
+    },
+    {
+      "backend": "native",
+      "binary_reconstruction_mse": 3.443410279135861e-10,
+      "calibration_axis_abs_cos": 1.0,
+      "calibration_index": 1,
+      "causal_pairs": 64,
+      "component_observable_rank_after_one": 2,
+      "component_observable_rank_now": 1,
+      "delayed_component_singular_values": [
+        1.014747977256775,
+        0.9396117925643921
+      ],
+      "delayed_median": 1.0,
+      "fiber_instant_max": 0.0,
+      "four_pass_route": 128,
+      "heldout_boards": 128,
+      "identity_transport_instant_max": 0.0,
+      "immediate_median": 3.6547373838402564e-06,
+      "largest_norm_matching_error": 2.9802322387695312e-08,
+      "mixed_source_mse": 0.25381845235824585,
+      "native_dark_later_pairs": 64,
+      "native_parity_max_abs": 0.0,
+      "random_fiber_instant_max": 0.0,
+      "seed": 547,
+      "train_steps": 200,
+      "transfer": {
+        "native": 64,
+        "projected_native": 64,
+        "random_fiber": 12,
+        "sham": 0,
+        "visible": 0
+      },
+      "updated_factors": {
+        "U": 1.294693946838379,
+        "V": 2.131500482559204
+      }
+    },
+    {
+      "backend": "native",
+      "binary_reconstruction_mse": 1.209799205259543e-10,
+      "calibration_axis_abs_cos": 1.0,
+      "calibration_index": 1,
+      "causal_pairs": 64,
+      "component_observable_rank_after_one": 2,
+      "component_observable_rank_now": 1,
+      "delayed_component_singular_values": [
+        1.4825170040130615,
+        0.9129338264465332
+      ],
+      "delayed_median": 1.0,
+      "fiber_instant_max": 0.0,
+      "four_pass_route": 128,
+      "heldout_boards": 128,
+      "identity_transport_instant_max": 0.0,
+      "immediate_median": 5.005295520277286e-07,
+      "largest_norm_matching_error": 2.9802322387695312e-08,
+      "mixed_source_mse": 0.2548855245113373,
+      "native_dark_later_pairs": 64,
+      "native_parity_max_abs": 0.0,
+      "random_fiber_instant_max": 0.0,
+      "seed": 557,
+      "train_steps": 200,
+      "transfer": {
+        "native": 64,
+        "projected_native": 64,
+        "random_fiber": 6,
+        "sham": 0,
+        "visible": 0
+      },
+      "updated_factors": {
+        "U": 1.59120774269104,
+        "V": 1.0600314140319824
+      }
+    },
+    {
+      "backend": "native",
+      "binary_reconstruction_mse": 1.0777671199946326e-08,
+      "calibration_axis_abs_cos": 0.9999999403953552,
+      "calibration_index": 0,
+      "causal_pairs": 64,
+      "component_observable_rank_after_one": 2,
+      "component_observable_rank_now": 1,
+      "delayed_component_singular_values": [
+        1.4121676683425903,
+        1.1900626420974731
+      ],
+      "delayed_median": 1.0,
+      "fiber_instant_max": 0.0,
+      "four_pass_route": 128,
+      "heldout_boards": 128,
+      "identity_transport_instant_max": 0.0,
+      "immediate_median": 4.798691225005314e-05,
+      "largest_norm_matching_error": 2.9802322387695312e-08,
+      "mixed_source_mse": 0.25806403160095215,
+      "native_dark_later_pairs": 64,
+      "native_parity_max_abs": 0.0,
+      "random_fiber_instant_max": 0.0,
+      "seed": 563,
+      "train_steps": 200,
+      "transfer": {
+        "native": 64,
+        "projected_native": 64,
+        "random_fiber": 5,
+        "sham": 0,
+        "visible": 0
+      },
+      "updated_factors": {
+        "U": 2.5613620281219482,
+        "V": 1.4685758352279663
+      }
+    }
+  ],
+  "schema": "BPD-CQ-02/trained-factors-cpu/v1",
+  "seed_success_count": 8,
+  "seeds": [
+    503,
+    509,
+    521,
+    523,
+    541,
+    547,
+    557,
+    563
+  ],
+  "source": "native BPDModel/TiedComponentLinear with trained factors",
+  "torch_version": "2.5.1+cpu",
+  "total_pairs": 512,
+  "total_train_steps": 1600
+}
