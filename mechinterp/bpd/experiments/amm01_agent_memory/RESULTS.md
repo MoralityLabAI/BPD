@@ -1,67 +1,58 @@
-# AMM-01 prospective results (2026-11-18)
+# AMM-01R: audited synthetic agent-memory transfer (2026-11-18)
 
-**Evidence:** Prospective positive-control result for deterministic strategy-memory transfer in engineered rank-at-most-two tied linear recurrent systems. The conclusion is confined to this synthetic instrument.
+**Current status:** Corrected prospective synthetic positive control, [AMENDMENT_20261118.md](AMENDMENT_20261118.md). A source-exposure issue invalidated the original 512-root cohort for confirmatory inference; it remains in Git history and the original `results/CONFIRMATION_LOCK.json` as an **engineering-only** cohort.
 
-## Pre-registration and source provenance
+## Chronology and provenance
 
-- Protocol-first commit: `cd0ed97d147bcf54340233e9243abf1eaea6e02a`.
-- Frozen implementation and verifier commit preceding test: `2adc180d5a65299d7dec1530b408587f34b778f8`.
-- Python runner SHA-256: `f68468bcc6248ac42349aa8438362cb7cfa4eadecfc8e57a725ed83b31b4352b`.
-- Training memory SHA-256: `2b7f42d00af7ff3c683fd4c39d38b1770b05fb2f5976e77704c2f14f3e0a1b94`.
-- Complete development raw receipt canonical SHA-256: `ed47c75ee6e2e5a584957e2be623635df5056c8a263c7e7802cd4865b245c4a4`.
-- Complete confirmation raw receipt canonical SHA-256: `5317c7ff6b2f512bc41556478f9439d3df7349dc06d0b14c9fbe951c1845cf4c`.
-- The exact code reconstructs every scored binary case from phase-separated SHA-256 seeds. Committed `results/*_LOCK.json` bind each full raw receipt to the frozen source.
-- EvalMath pinned source for strict preflight: `MoralityLabAI/EvalMath@2fdd5fe3f499070b63c474a2455f0e2c00fc55a8`. CI independently reruns the pinned preflight.
+- Original experiment registration, before initial code: `cd0ed97d147bcf54340233e9243abf1eaea6e02a`.
+- Original source lock: `2adc180d5a65299d7dec1530b408587f34b778f8`. The original `test_confirmation_must_have_preflight` evaluated all "confirmation" worlds before rejecting an absent preflight. As a result, the previously publicized "prospective" numbers **94.138% / 73.678%, gain +20.460 points** were engineering measurements and should not be cited as independent confirmation.
+- Pre-data corrective amendment: `f6471f97b58acbc23c52d8015b19c0f5816b2638`. Replaces only the confirmation root population with independently seeded `confirm_fresh/0000..0511` and bans missing-preflight code from touching the cohort.
+- Amended source frozen before fresh scoring: `ae88737dfa302eb678ddd72f51f95bae6fbda323`. Exact experiment `sha256=cc79250ced0c1470b87c01ceb4d1c6e29720140486ae8167d3c189ccebeabe13`.
+- New development receipt and gate committed before fresh scoring: `2eedbab547ed0689c03ddb12cc5ae96194c4c226`.
+- Current full fresh-case canonical SHA-256: `fa29c744b7b92abfcc7f99b73ce410c540d8e727a767aab66bf305cfaf96c688`.
+- Training-only memory canonical SHA-256: `2b7f42d00af7ff3c683fd4c39d38b1770b05fb2f5976e77704c2f14f3e0a1b94`.
+- EvalMath preflight source: `MoralityLabAI/EvalMath@2fdd5fe3f499070b63c474a2455f0e2c00fc55a8`.
 
-## Frozen design
+## Protocol
 
-The independent unit is a world-specific shared physical 4×4 transition with one random latent sign and gain. There are two opaque families: one transmits a current-dark unit-dose perturbation to the readout at t=1, the other at t=2. A policy can query exactly one horizon per scored case, with additive Gaussian noise SD 0.55. Family identity is available; latent sign, gain, transition coefficients and noiseless answers are withheld from the policy. The family-keyed table learns its probe horizon solely from 64 training worlds.
+**Independent unit:** one 4D rank-at-most-two tied linear recurrent system, with independently drawn sign and gain. Two opaque labels (`wren`, `basalt`) determine whether a fixed unit-norm, current-dark causal probe is informative after one or two passes. The observable is the sign of a single noisy future readout. Identical dose `d=(0,1/√2,-1/√2,0)` and one query per case in every policy.
 
-Matched arms: training-derived pooled best horizon, swapped family-key routing, deterministic random horizon, and an independently noised same-horizon pooled sham. The equal-dose query is `d=(0,1/√2,-1/√2,0)`, so `q(d)=0` and `||d||₂=1` in every arm.
+Training consists of 64 independent roots. Memory learns the best horizon per family, while a pooled arm learns one training-optimal horizon overall. Swapped-memory routing and seeded random-horizon policies are registered controls. Development uses 64 separate worlds with 256 repeated cases per world, and the corrective confirmation uses **512 new worlds with 256 repeated cases each**. All 3 signed root-level comparisons, root-bootstrap CIs, 15-point mechanistic floor, and 95th-quantile/95%-confidence sham gate were fixed before any new `confirm_fresh` query.
 
-## Development and strict EvalMath preflight
+**EvalMath strict preflight:** `READY_FOR_CONFIRMATION`. Measured development sham tolerance floor 0.1015625 (10.156 points); declared scientific effect floor 0.15; target effect 0.25. The root-level normal planning approximation requested 46 confirmation roots; the frozen plan supplied 512.
 
-64 independent development roots × 256 repeated case observations = 16,384 scored cases per arm. Development memory hit rate 15,508/16,384 (94.65%); pooled 12,166/16,384 (74.26%). Root-mean effect +0.20398. The 64 matched sham-world resamples provide a 95th-quantile / 95%-confidence sample-maximum floor of 0.1015625; the preregistered scientific effect floor is +0.15. The exact EvalMath planner returned `READY_FOR_CONFIRMATION` with no stated blockers and an approximate 46 roots needed for 80% planning power under its normal approximation; 512 new roots were already registered.
+## Corrective first-run confirmation (source-locked)
 
-## Prospective confirmation results
-
-**512 independent worlds × 256 repeated one-probe cases = 131,072 scored cases per arm.**
-
-| Frozen arm | Correct / 131,072 | Accuracy |
+| Agent policy | Correct / 131,072 cases | Accuracy |
 |---|---:|---:|
-| Family-keyed strategy memory | 123,388 | 94.138% |
-| Training-derived family-agnostic pooled horizon | 96,571 | 73.678% |
-| Deterministic random horizon | 95,349 | 72.746% |
-| Swapped family-keyed memory | 67,621 | 51.591% |
-| Pooled horizon, new independent sham noise | 97,205 | 74.162% |
+| Family-keyed memory | **123,581** | **94.2848%** |
+| Training-derived pooled horizon | 96,903 | 73.9311% |
+| Random horizon | 95,616 | 72.9492% |
+| Swapped family-key memory | 67,762 | 51.6983% |
+| Pooled horizon with independent sham noise | 97,001 | 74.0059% |
 
-| Prespecified comparison (memory minus control) | Mean root effect | Root-cluster bootstrap 95% CI | Holm-adjusted one-sided exact root sign p |
+| Registered comparison | Root-mean gain | Root-bootstrap 95% CI | Holm-adjusted exact one-sided root sign p |
 |---|---:|---:|---:|
-| Pooled (primary) | **+0.2045975** | **[+0.187363, +0.222488]** | 8.6362e-78 |
-| Swapped | +0.4254684 | [+0.421165, +0.429710] | 2.2375e-154 |
-| Random | +0.2139206 | [+0.210930, +0.217087] | 2.2375e-154 |
+| Memory vs pooled (primary) | **+0.20353699** | **[+0.18589783, +0.22167206]** | **8.6362e-78** |
+| Memory vs swapped | +0.42586517 | [+0.42172241, +0.43033600] | 2.2375e-154 |
+| Memory vs randomized | +0.21335602 | [+0.21051025, +0.21633911] | 2.2375e-154 |
 
-The primary comparison has **256 positive independent roots, zero negative roots, and 256 ties**. The ties correspond to roots whose family-keyed probe equals the pooled probe, and are retained in the reported effect and sign test. All cases and all negative-control failures are retained. The primary bootstrap lower bound (+0.18736) exceeds max(scientific floor +0.15, matched-sham floor +0.10156). The frozen primary gate therefore **passes**.
+Primary root directions: **256 positive, 256 tied, zero negative**; all independent roots and repeated-case failures included. The primary confidence lower bound (18.5898 points) exceeds the registered 15-point effect floor and the development sham tolerance floor (10.15625 points). The Holm-adjusted sign test meets the registered familywise alpha=.05. **The corrective prospective synthetic transfer gate passes.**
 
-## Interpreting the result
+## Audit boundary
 
-This setup deliberately gives different probe horizons different information value. Training-only family memory recovers the correct horizon and transfers it to independent worlds with different signs and gains. The swapped-memory arm demonstrates that transporting the wrong family rule loses the advantage; the random arm places the gain against a one-probe baseline.
+This is an intentionally constructed strategy-memory *positive instrument*. Memory learns a family-specific probe horizon; the timing structure is designed into the transition. The project has yet to evaluate trained neural agents, learned BPD mechanism discovery, nonlinear TRM/transformer causal effects, genuine cross-agent message transfer, or an authenticated Buzz relay. This scientific inference belongs to the 512 **independent worlds** rather than the 131,072 repeated cases.
 
-The timing structure and family key are engineered, and the policies contain no trained neural models or natural-language reasoning. Mechanistic discovery, BPD factor identifiability, model-to-model agent-memory transfer and a deployed Buzz system remain untested. Significance is assessed over independent worlds; 256 measurements from one world are repeatedly measured cases rather than independent roots. The exact finite synthetic instrument provides a rehearsal of the provenance and evaluation pipeline.
+The Buzz bridge exports only an **unsigned NIP-29 kind-9** provenance message draft. No model weights, protected ARG-03-N split, private conversations or signing keys were accessed.
 
-## Audit and next experiment
+## Reproduce
 
-Reproduce with:
+From the BPD root with CPU PyTorch available for package imports:
 
-```bash
+```sh
 python -m unittest mechinterp.bpd.experiments.amm01_agent_memory.test_experiment -v
-python -m mechinterp.bpd.experiments.amm01_agent_memory.verify \
-  --lock mechinterp/bpd/experiments/amm01_agent_memory/results/DEVELOPMENT_LOCK.json
-python -m mechinterp.bpd.experiments.amm01_agent_memory.verify \
-  --lock mechinterp/bpd/experiments/amm01_agent_memory/results/CONFIRMATION_LOCK.json \
-  --preflight mechinterp/bpd/experiments/amm01_agent_memory/results/PREFLIGHT.json
+python -m mechinterp.bpd.experiments.amm01_agent_memory.verify --lock mechinterp/bpd/experiments/amm01_agent_memory/results/DEVELOPMENT_R_LOCK.json
+python -m mechinterp.bpd.experiments.amm01_agent_memory.verify --lock mechinterp/bpd/experiments/amm01_agent_memory/results/CONFIRM_FRESH_LOCK.json --preflight mechinterp/bpd/experiments/amm01_agent_memory/results/PREFLIGHT.json
 ```
 
-The next registered test should let independent Goose/Codex or local-model agents learn probing/repair policies from separate BPD-CQ-style trained worlds, transfer those memories to genuinely new recurrent model families, and evaluate independently defined donor-behavior outcomes against equal-dose shams. Agent policy quality and causal mechanism evidence will require separate gates.
-
-Buzz export currently creates a privacy-minimized **unsigned** NIP-29 kind-9 message draft with the GitHub provenance digest. No event was signed, sent to a relay, or shared with other agents in this run.
+The verifier reconstructs every repeated-case bit and checks the committed canonical digest. The legacy engineering-only cohort can be reproduced from its historical source commit `2adc180d`.
