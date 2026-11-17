@@ -1,0 +1,168 @@
+{
+  "study_id": "BPD-PD-03",
+  "date_registered": "2026-11-17",
+  "status": "registered_before_all_PD03_training",
+  "predecessor": {
+    "merge_sha": "2fca9795795b90d959f8bbed6050fff8f759dd20",
+    "study": "BPD-PD-02",
+    "hard_successes": 6,
+    "soft_successes": 10,
+    "seeds": 24,
+    "hard_false_offs": 498,
+    "hard_wrong_ons": 0
+  },
+  "architecture": {
+    "physical_weight": "I_2",
+    "model": "MoralityLabAI/BPD BPDModel TiedComponentLinear",
+    "components": 2,
+    "passes": 4,
+    "component_residual_mask": 0,
+    "ablation_mode": "zero",
+    "sphere_rescale": false,
+    "gate_network": "SharedPhaseGate affine(|x|) no explicit phase label",
+    "factor_training": "both V and U train throughout all 200 stage1 updates for non-frozen arms"
+  },
+  "seed_list": [
+    269,
+    271,
+    277,
+    281,
+    283,
+    293,
+    307,
+    311,
+    313,
+    317,
+    331,
+    337,
+    347,
+    349,
+    353,
+    359,
+    367,
+    373,
+    379,
+    383,
+    389,
+    397,
+    401,
+    409
+  ],
+  "arms": [
+    {
+      "name": "top1_disjoint",
+      "gate": "top1_ste",
+      "mixed": false,
+      "trainable": true
+    },
+    {
+      "name": "margin_disjoint",
+      "gate": "margin_ste_calibrated",
+      "mixed": false,
+      "trainable": true
+    },
+    {
+      "name": "hard_disjoint",
+      "gate": "hard_independent_ste",
+      "mixed": false,
+      "trainable": true
+    },
+    {
+      "name": "top1_mixed",
+      "gate": "top1_ste",
+      "mixed": true,
+      "trainable": true
+    },
+    {
+      "name": "margin_mixed",
+      "gate": "margin_ste_calibrated",
+      "mixed": true,
+      "trainable": true
+    },
+    {
+      "name": "top1_frozen",
+      "gate": "top1_ste",
+      "mixed": false,
+      "trainable": false
+    },
+    {
+      "name": "margin_frozen",
+      "gate": "margin_ste_calibrated",
+      "mixed": false,
+      "trainable": false
+    }
+  ],
+  "generation": {
+    "amplitude_min": 0.75,
+    "amplitude_max": 1.25,
+    "sign_distribution": "independent_equiprobable",
+    "phase0_passes": [
+      0,
+      1
+    ],
+    "phase1_passes": [
+      2,
+      3
+    ],
+    "training_seed_offset": 100000,
+    "calibration_seed_offset": 300000,
+    "heldout_seed_offset": 200000,
+    "train_batch": 16,
+    "calibration_boards": 128,
+    "heldout_boards": 128
+  },
+  "optimization": {
+    "stage1_steps": 200,
+    "Adam_lr": 0.04,
+    "Adam_weight_decay": 0,
+    "reconstruction_coeff": 1,
+    "faithfulness_coeff": 0.3,
+    "gate_count_coeff": 0.05,
+    "margin_coeff": 0.02,
+    "margin_prob_gap": 0.1,
+    "top1_backward": "softmax(logits) straight through one_hot(argmax), temperature=1",
+    "independent_backward": "sigmoid(logits) straight through threshold",
+    "margin_penalty": "mean relu(.10-abs(prob-.5)), gradient through gate outputs",
+    "fixed_hard_threshold": 0.5,
+    "calibration_thresholds": [
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55
+    ],
+    "margin_calibration_objective": "binary_recon_MSE+0.05*mean_binary_gate_count, tie_choose_higher_threshold",
+    "calibration_only": true,
+    "no_switch_stage2": true
+  },
+  "success": {
+    "heldout_binary_mse_le": 0.02,
+    "read_axis_cos_ge": 0.9,
+    "board_phase_route_fraction_ge": 0.95,
+    "first_step_factor_grad_positive": true,
+    "stage1_factor_update_positive": true,
+    "full_eval_bin_masks_required": true,
+    "primary_top1_min_successes": 18,
+    "primary_net_paired_wins_min": 6,
+    "mcnemar_two_sided_p_le": 0.05
+  },
+  "evidence": {
+    "all_seeds_exact": true,
+    "complete_raw_rows": true,
+    "wilson_interval_95": true,
+    "exact_mcnemar_seed_unit": true,
+    "negative_controls_separately_reported": true,
+    "original_pd02_unmodified": true,
+    "no_neural_identifiability_claim": true,
+    "source_lock_before_scientific_execution": true
+  },
+  "runtime": {
+    "device": "cpu",
+    "threads": 1,
+    "one_process": true,
+    "max_rss_gib": 3,
+    "max_minutes": 18
+  },
+  "smoke_seed": 1009
+}
