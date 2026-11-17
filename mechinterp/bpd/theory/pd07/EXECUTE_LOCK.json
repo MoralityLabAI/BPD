@@ -1,0 +1,12 @@
+{
+  "study_id": "BPD-PD-07",
+  "execution": "first_registered_full_cohort",
+  "registered_date": "2026-11-17",
+  "source_commit_sha": "dc87f8192744db7f1dd9aa62963947b79b07e8af",
+  "seeds": 24,
+  "arms_per_seed": 6,
+  "excluded_smoke_seed": 2003,
+  "preflight_run_id": 44109170036,
+  "preflight_result": "source engineering PASS including gate-read V gradients and latent label poisoning",
+  "evidence_policy": "Archive original complete 144-arm raw JSON and publish scientific PASS or FAIL unchanged"
+}
