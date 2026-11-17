@@ -13,3 +13,14 @@ Evaluation uses the real shared BPDModel/TiedComponentLinear identity target and
 [Excluded-seed tests](test_experiment.py) use seed 2029 to verify label isolation, deterministic angle grids, pair-score monotonicity, orthogonal factors, source splits and exact physical execution. A source-pinned one-time `EXECUTE_LOCK.json` releases the registered 24×6 cohort only after the tests pass. Full first-run evidence is archived even if the scientific hypothesis fails.
 
 This is a four-dimensional synthetic source-specific optimization test. The nonlocal angle grid does not establish efficient learning in arbitrary high dimensions or mechanism identification in a 7M recurrent transformer.
+
+
+## Registered first-run outcome
+
+[RESULTS_20261118.md](RESULTS_20261118.md) preserves the original preregistered **PASS**: unlabelled global full-angle Givens search recovered 24/24 six-family mechanisms, while an equal-candidate-budget local-angle search recovered 1/24. The 23 global-only paired successes yielded exact two-sided McNemar p=2.384185791015625e-7, above every preregistered improvement requirement.
+
+The [complete 144-arm first-run JSON artifact](https://github.com/MoralityLabAI/BPD/actions/runs/44130218981/artifacts/14350115809) contains 1,233,189 bytes (SHA256 4d2b7a75b2f917254c141a828253557f801552cf8f655c7ed0bd4323d91a5df3). [PER_SEED_20261118.csv](PER_SEED_20261118.csv) and [independent replay](test_published_results.py) preserve all 24 paired seed outcomes, factor-alignment cosines, objective gains, exact withheld-support scores and control success flags.
+
+The global arm achieved 100% exact component masks across every seen and unseen support family, with zero false-on and zero false-off activations. Privileged 44° source-aligned stress initialization also recovered 24/24 with global-angle search, while local-angle stress recovered 0/24. Those privileged controls are separate from the unlabelled primary comparison.
+
+The synthetic orthogonal 4D source and exhaustive angular candidate grid are substantial design assumptions; this result does not establish recovery of causal mechanisms in a trained recurrent transformer.
