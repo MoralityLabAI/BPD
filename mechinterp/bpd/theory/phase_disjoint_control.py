@@ -195,7 +195,7 @@ def run_arm(
 
     gate.load_state_dict(best_gate_state)
     factors_unchanged = all(
-        torch.equal(p.detach(), before) for p, before in zip(factor_params, factor_snapshot),
+        torch.equal(p.detach(), before) for p, before in zip(factor_params, factor_snapshot)
     )
     if not factors_unchanged:
         raise AssertionError("Stage 2 modified a frozen dictionary")
