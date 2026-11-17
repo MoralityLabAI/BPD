@@ -33,6 +33,17 @@ class TestFiniteOptima(unittest.TestCase):
             anchor = pairs[0]
             self.assertTrue(mod.monomial(mod.relative(anchor, anchor)), name)
 
+    def test_block_edits_invariant_singleton_edits_vary(self):
+        for name, atoms in mod.fixtures().items():
+            _, _, pairs, _ = mod.optimal_pairs(atoms)
+            for pair in pairs:
+                self.assertEqual(mod.masked_weight(pair, (1, 1)),
+                                 ((mod.Q(1), mod.Q(0)), (mod.Q(0), mod.Q(1))))
+                self.assertEqual(mod.masked_weight(pair, (0, 0)),
+                                 ((mod.Q(0), mod.Q(0)), (mod.Q(0), mod.Q(0))))
+            expected = () if name == "rotated_unique" else ((1, 0), (0, 1))
+            self.assertEqual(mod.unstable_singleton_masks(pairs), expected, name)
+
     def test_atomic_cancellation_not_free_remix(self):
         atoms = mod.fixtures()["atomic_cancellation"]
         masses, top, pairs, scores = mod.optimal_pairs(atoms)
