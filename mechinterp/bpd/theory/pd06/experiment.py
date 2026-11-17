@@ -90,7 +90,7 @@ def build(seed: int, *, frozen_planted: bool):
     init_sha = hashlib.sha256(json.dumps(
         init_data, sort_keys=True, separators=(",", ":")
     ).encode()).hexdigest()
-    q_sha = hashlib.sha256(q.numpy().tobytes()).hexdigest()
+    q_sha = hashlib.sha256(json.dumps(q.tolist(), separators=(",", ":")).encode()).hexdigest()
     return bpd, gate, q, init_sha, q_sha
 
 def _supports_for_source(tag: str):
@@ -209,8 +209,10 @@ def ste_mask(
     if arm == "dense_all":
         return torch.ones_like(assignment)
 
-    true_k = support.sum(dim=-1).long()
-    selected_k = true_k if spec["oracle_count"] else count_logits.argmax(dim=-1) + 1
+    selected_k = (
+        support.sum(dim=-1).long() if spec["oracle_count"]
+        else count_logits.argmax(dim=-1) + 1
+    )
     hard = exact_topk_mask(assignment, selected_k)
     temperature = CONFIG["training"]["temperature"]
     smoothed = torch.stack(
@@ -219,7 +221,7 @@ def ste_mask(
         dim=-2,
     )
     if spec["oracle_count"]:
-        count_weights = F.one_hot((true_k-1).long(), 3).float()
+        count_weights = F.one_hot((selected_k-1).long(), 3).float()
     else:
         count_weights = count_logits.softmax(dim=-1)
     surrogate = (smoothed * count_weights.unsqueeze(-1)).sum(dim=-2)
@@ -250,9 +252,9 @@ def objective(bpd, gate, x, support, arm):
     active = mask.mean()
     total = cfg["coeff_recon"]*mse + cfg["coeff_faithfulness"]*faith
     total = total + cfg["coeff_gate_activity"]*active
-    label_count = support.sum(dim=-1).long() - 1
     label_terms = {}
     if ARM_CONFIG[arm]["count_supervision"]:
+        label_count = support.sum(dim=-1).long() - 1
         ce = F.cross_entropy(count.reshape(-1, 3), label_count.reshape(-1))
         total = total + cfg["coeff_count_supervision"] * ce
         label_terms["count_CE"] = float(ce.detach())
