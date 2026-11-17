@@ -1,0 +1,154 @@
+{
+  "study_id": "BPD-PD-02",
+  "registered_date": "2026-11-17",
+  "status": "prospective_frozen_before_pd02_training",
+  "predecessor": {
+    "pr": 2,
+    "merge_sha": "ca46f5827947770dbb6218a0b58f85826c27bc68",
+    "primary_result": "BPD-PD-01 FAIL 1 of 2 trainable seeds"
+  },
+  "architecture": {
+    "physical_layer": "2x2 bias-free identity, actual BPDModel TiedComponentLinear",
+    "passes": 4,
+    "components": 2,
+    "sequence_tokens": 1,
+    "gate": "shared affine(input.abs()) sigmoid; no explicit phase information",
+    "ablation": "zero",
+    "sphere_rescale": false,
+    "delta_mask": 0,
+    "init_svd_for_trainable": false,
+    "init_svd_for_frozen": true
+  },
+  "source": {
+    "disjoint": "passes 0-1 use coordinate 0 only, passes 2-3 coordinate 1 only",
+    "mixed": "both independent coordinates active at every pass",
+    "amplitude_min": 0.75,
+    "amplitude_max": 1.25,
+    "signs": "independent_bernoulli_equal",
+    "train_generator_offset": 100000,
+    "calibration_generator_offset": 300000,
+    "heldout_generator_offset": 200000,
+    "calibration_count": 128,
+    "heldout_count": 128,
+    "batch": 16
+  },
+  "seeds": [
+    137,
+    139,
+    149,
+    151,
+    157,
+    163,
+    167,
+    173,
+    179,
+    181,
+    191,
+    193,
+    197,
+    199,
+    211,
+    223,
+    227,
+    229,
+    233,
+    239,
+    241,
+    251,
+    257,
+    263
+  ],
+  "arms": [
+    {
+      "key": "hard_disjoint",
+      "mask": "hard_ste",
+      "source": "disjoint",
+      "factor_training": true
+    },
+    {
+      "key": "soft_disjoint",
+      "mask": "soft_sigmoid",
+      "source": "disjoint",
+      "factor_training": true
+    },
+    {
+      "key": "hard_mixed",
+      "mask": "hard_ste",
+      "source": "mixed",
+      "factor_training": true
+    },
+    {
+      "key": "hard_frozen",
+      "mask": "hard_ste",
+      "source": "disjoint",
+      "factor_training": false
+    }
+  ],
+  "training": {
+    "stage1_steps": 200,
+    "optimizer": "Adam",
+    "learning_rate": 0.04,
+    "weight_decay": 0,
+    "loss": {
+      "reconstruction_mse": 1,
+      "faithfulness_mse": 0.3,
+      "gate_usage": 0.05
+    },
+    "hard_forward": "sigmoid_logit_threshold_at_p_ge_0.5_with_straight_through_gradient",
+    "hard_gate_penalty": "mean_actual_binary_gate_with_straight_through_gradient",
+    "soft_forward": "sigmoid_probabilities_with_soft_gate_penalty",
+    "initialization": "matched_within_seed_for_soft_and_hard_trainable",
+    "backprop": "train_both_V_and_U_and_gate_every_stage1_step"
+  },
+  "stage2": {
+    "applies_to": "hard_disjoint",
+    "factors_frozen": true,
+    "coefficients": [
+      0,
+      0.01,
+      0.05,
+      0.2
+    ],
+    "updates_per_nonzero_coefficient": 25,
+    "optimizer": "Adam",
+    "learning_rate": 0.01,
+    "calibration_mse_tolerance_absolute": 0.005,
+    "calibration_gate_count_tolerance_absolute": 0.005,
+    "selection": "minimum_calibration_switch_among_feasible_candidates_including_coefficient_0",
+    "primary_result_from": "stage1_pre_switch"
+  },
+  "metrics": {
+    "axis_cosine_min": 0.9,
+    "heldout_binary_mse_max": 0.02,
+    "phase_consistent_fraction_min": 0.95,
+    "exact_hard_mask_required": true,
+    "nonzero_factor_gradient_required": true,
+    "stage2_bitwise_frozen_required": true,
+    "reference_statistical_unit": "seed"
+  },
+  "primary": {
+    "hard_success_min": 18,
+    "total": 24,
+    "net_paired_success_wins_min": 6,
+    "mcnemar_two_sided_p_max": 0.05,
+    "comparison": "hard_disjoint_versus_soft_disjoint_at_common_hard_threshold_inference"
+  },
+  "report": {
+    "per_seed_full_rows": true,
+    "all_arms": true,
+    "calibration_selection_only": true,
+    "heldout_once_after_stage1_and_optional_stage2": true,
+    "seed_paired_effects": true,
+    "exact_mcnemar": true,
+    "Wilson_95pct": true,
+    "source_commit_sha": true,
+    "no_neural_mechanism_claim": true
+  },
+  "execution": {
+    "device": "cpu",
+    "single_process": true,
+    "torch_threads": 1,
+    "memory_ceiling_gib": 3,
+    "training_test_source_locked_before_registered_run": true
+  }
+}
