@@ -1,0 +1,41 @@
+name: BPD-AMM-02 cross-trained agent-memory engineering
+on:
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/amm02_cross_model_memory/**'
+      - '.github/workflows/bpd-amm02-agent-memory.yml'
+  workflow_dispatch:
+jobs:
+  excluded-roots-and-preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install CPU-only PyTorch
+        run: python -m pip install --index-url https://download.pytorch.org/whl/cpu 'torch==2.10.0+cpu' 'numpy>=1.26'
+      - name: Excluded-root engineering, gauge, native BPD parity and seal guard
+        run: python -m unittest mechinterp.bpd.experiments.amm02_cross_model_memory.test_experiment -v
+      - name: Reconstruct training memory and development-only receipt, if locked
+        shell: bash
+        run: |
+          if test -f mechinterp/bpd/experiments/amm02_cross_model_memory/results/DEVELOPMENT_LOCK.json; then
+            python -m mechinterp.bpd.experiments.amm02_cross_model_memory.experiment --phase training --out /tmp/amm02_training.json
+            python -m mechinterp.bpd.experiments.amm02_cross_model_memory.experiment --phase development --memory /tmp/amm02_training.json --out /tmp/amm02_dev.json
+            python -c 'import json; from mechinterp.bpd.experiments.amm02_cross_model_memory import experiment as e; x=json.load(open("/tmp/amm02_dev.json")); y=json.load(open("mechinterp/bpd/experiments/amm02_cross_model_memory/results/DEVELOPMENT_LOCK.json")); assert x["totals"]==y["development_totals"]; assert x["n_independent_roots"]==y["development_independent_roots"]==64; assert e.digest([{"root":r["root"],"candidate_bits":r["candidate_bits"]} for r in x["rows"]])==y["development_candidate_case_bits_sha256"]; assert e.digest([{"root":r["root"],"policy_bits":r["policy_bits"]} for r in x["rows"]])==y["development_policy_case_bits_sha256"]'
+          else
+            echo 'SOURCE-ONLY; training/development not yet scored'
+          fi
+      - name: Verify registered strict EvalMath development decision
+        shell: bash
+        run: |
+          if test -f mechinterp/bpd/experiments/amm02_cross_model_memory/results/PREFLIGHT.json; then
+            curl -fsSL https://raw.githubusercontent.com/MoralityLabAI/EvalMath/2fdd5fe3f499070b63c474a2455f0e2c00fc55a8/skills/evalmath-mechinterp-power/scripts/preflight.py -o /tmp/amm02_evalmath.py
+            python -c 'import json;d=json.load(open("/tmp/amm02_dev.json"));json.dump(d["preflight_input"],open("/tmp/amm02_pilot.json","w"))'
+            python /tmp/amm02_evalmath.py --pilot /tmp/amm02_pilot.json --out /tmp/amm02_pf.json
+            python -c 'import json; x=json.load(open("/tmp/amm02_pf.json")); y=json.load(open("mechinterp/bpd/experiments/amm02_cross_model_memory/results/PREFLIGHT.json")); assert x==y, "EvalMath preflight changed"'
+          else
+            echo 'SOURCE-ONLY; no development preflight'
+          fi
