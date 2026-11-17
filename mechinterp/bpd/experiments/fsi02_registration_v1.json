@@ -1,0 +1,82 @@
+{
+  "schema": "BPD-FSI02/prospective-finite-basis-v1",
+  "registration_date": "2026-11-17",
+  "target": "CPU toy expected-L0 basis recovery under identifiable and cancellation-degenerate 2D activation laws",
+  "evidence_scope": "new independent synthetic worlds; no pretrained weights; ARG-03 168-case protected test stays untouched",
+  "seed_count": 32,
+  "seeds": [
+    2026120101,
+    2026120102,
+    2026120103,
+    2026120104,
+    2026120105,
+    2026120106,
+    2026120107,
+    2026120108,
+    2026120109,
+    2026120110,
+    2026120111,
+    2026120112,
+    2026120113,
+    2026120114,
+    2026120115,
+    2026120116,
+    2026120117,
+    2026120118,
+    2026120119,
+    2026120120,
+    2026120121,
+    2026120122,
+    2026120123,
+    2026120124,
+    2026120125,
+    2026120126,
+    2026120127,
+    2026120128,
+    2026120129,
+    2026120130,
+    2026120131,
+    2026120132
+  ],
+  "strata": "16 rotated-unique-optimum worlds, 16 cancellation-tied-optimum worlds, fixed ahead of outcome generation",
+  "candidate_rows": [
+    "(1,0)",
+    "(0,1)",
+    "(1,1)",
+    "(1,-1)",
+    "(1,2)"
+  ],
+  "row_basis_definition": "all unordered linearly independent pairs from candidates; canonical lexicographic tie-break for equal sampled expected L0",
+  "generator": {
+    "rotated": "support (1,1),(1,-1), and zero with positive symmetric weights varying by seed; exact optimum directions (1,1),(1,-1)",
+    "cancellation": "support (1,0),(0,1),(1,1) with equal positive weights and zero with remaining weight, three optima before sampling; expected L0 ties",
+    "train_draws": 64,
+    "readout_draws": 256,
+    "sampling": "Each seed uses independent deterministic seeded PRNG; train and readout streams disjoint; freeze criterion before readout"
+  },
+  "primary_tests": [
+    {
+      "id": "P1",
+      "comparison": "train-selected basis vs fixed e1,e2 basis",
+      "metric": "world-level paired heldout average active-row count reduction",
+      "test": "independent-world sign flip and Holm 2-test family",
+      "minimum_effect": "0"
+    },
+    {
+      "id": "P2",
+      "comparison": "exact-optimality of selected basis",
+      "metric": "world-level indicator whether trained basis belongs to the true maximum-hyperplane-mass optimum set",
+      "test": "descriptive proportion with world-level binomial interval; no hypothesis of universal recovery"
+    }
+  ],
+  "mechanistic_audit": "For two distinct optimal bases, compare singleton diagonal mask and whole-block masks under exact rational conjugation R=M2 M1^-1; verify commutator zeros iff invariant; label proof-dependent finite witness.",
+  "controls": [
+    "random candidate basis matched to same dictionary and seeds",
+    "canonical fixed reference basis",
+    "exact test-law hyperplane weights",
+    "train-only selection and test-only scoring"
+  ],
+  "root_unit": "world seed (n=32); 256 within-seed activation samples are correlated",
+  "familywise_alpha": "0.05",
+  "no_unseal": "ARG03-N test.jsonl SHA-256 ddd580... stays untouched"
+}
