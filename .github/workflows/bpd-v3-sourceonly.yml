@@ -33,9 +33,18 @@ jobs:
         run: |
           mkdir -p /tmp/bpd-v3-tests
           cp mechinterp/bpd/tests/test_v3_floor_and_basis.py mechinterp/bpd/tests/test_v3_uncertainty.py /tmp/bpd-v3-tests/
-          PYTHONPATH="$PWD" python -m pytest -q /tmp/bpd-v3-tests
+          PYTHONPATH="$PWD" python - <<'PY'
+          import pathlib
+          import sys
+          import types
+          import pytest
+          stub = types.ModuleType("mechinterp.bpd")
+          stub.__path__ = [str(pathlib.Path("mechinterp/bpd").resolve())]
+          sys.modules["mechinterp.bpd"] = stub
+          raise SystemExit(pytest.main(["-q", "/tmp/bpd-v3-tests"]))
+          PY
       - name: Produce reproducible synthetic receipt
-        run: python -m mechinterp.bpd.v3.floor_and_basis --smoke --out /tmp/bpd_v3_synthetic_smoke.json
+        run: python mechinterp/bpd/v3/floor_and_basis.py --smoke --out /tmp/bpd_v3_synthetic_smoke.json
       - name: Validate declared synthetic evidence boundary
         run: |
           python - <<'PY'
