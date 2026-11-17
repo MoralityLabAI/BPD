@@ -1,0 +1,717 @@
+{
+  "file_blobs": {
+    "PROTOCOL.md": "cb3b06f0e6045bc8a9828ab3e62149e16f2c2ae4",
+    "experiment.py": "3080af719e958ae10fe6beecae09815e616fc84d",
+    "reference.py": "f6f645897ce1b0519dcec2c885be6dc4f0501298"
+  },
+  "counts": {
+    "schema": "bpd.cq04.adaptive_masks.pilot.v1",
+    "seeds": [
+      701,
+      709,
+      719,
+      727,
+      733,
+      739,
+      743,
+      751
+    ],
+    "success_counts": {
+      "adaptive": 2002,
+      "static_mix": 1370,
+      "full": 2048,
+      "random_slots": 812
+    },
+    "rows": [
+      {
+        "seed": 701,
+        "counts": {
+          "adaptive": 249,
+          "static_mix": 191,
+          "full": 256,
+          "random_slots": 151
+        },
+        "costs": {
+          "adaptive": 2.57421875,
+          "static_mix": 2.796875,
+          "full": 4,
+          "random_slots": 2.57421875
+        },
+        "by_source": {
+          "adaptive": [
+            {
+              "n": 106,
+              "correct": 102
+            },
+            {
+              "n": 75,
+              "correct": 75
+            },
+            {
+              "n": 75,
+              "correct": 72
+            }
+          ],
+          "static_mix": [
+            {
+              "n": 106,
+              "correct": 77
+            },
+            {
+              "n": 75,
+              "correct": 58
+            },
+            {
+              "n": 75,
+              "correct": 56
+            }
+          ],
+          "full": [
+            {
+              "n": 106,
+              "correct": 106
+            },
+            {
+              "n": 75,
+              "correct": 75
+            },
+            {
+              "n": 75,
+              "correct": 75
+            }
+          ],
+          "random_slots": [
+            {
+              "n": 106,
+              "correct": 60
+            },
+            {
+              "n": 75,
+              "correct": 26
+            },
+            {
+              "n": 75,
+              "correct": 65
+            }
+          ]
+        },
+        "donor": {
+          "clean": 109,
+          "eligible": 7,
+          "same_mask": 9,
+          "success": {
+            "native": 7,
+            "dark_native": 7,
+            "random_dark": 1,
+            "sham": 0,
+            "full_state": 7
+          }
+        },
+        "gauge_masked_accuracy_after_shear": 236
+      },
+      {
+        "seed": 709,
+        "counts": {
+          "adaptive": 254,
+          "static_mix": 168,
+          "full": 256,
+          "random_slots": 96
+        },
+        "costs": {
+          "adaptive": 2.328125,
+          "static_mix": 2.40625,
+          "full": 4,
+          "random_slots": 2.328125
+        },
+        "by_source": {
+          "adaptive": [
+            {
+              "n": 106,
+              "correct": 104
+            },
+            {
+              "n": 65,
+              "correct": 65
+            },
+            {
+              "n": 85,
+              "correct": 85
+            }
+          ],
+          "static_mix": [
+            {
+              "n": 106,
+              "correct": 64
+            },
+            {
+              "n": 65,
+              "correct": 46
+            },
+            {
+              "n": 85,
+              "correct": 58
+            }
+          ],
+          "full": [
+            {
+              "n": 106,
+              "correct": 106
+            },
+            {
+              "n": 65,
+              "correct": 65
+            },
+            {
+              "n": 85,
+              "correct": 85
+            }
+          ],
+          "random_slots": [
+            {
+              "n": 106,
+              "correct": 40
+            },
+            {
+              "n": 65,
+              "correct": 19
+            },
+            {
+              "n": 85,
+              "correct": 37
+            }
+          ]
+        },
+        "donor": {
+          "clean": 104,
+          "eligible": 1,
+          "same_mask": 3,
+          "success": {
+            "native": 1,
+            "dark_native": 1,
+            "random_dark": 0,
+            "sham": 0,
+            "full_state": 1
+          }
+        },
+        "gauge_masked_accuracy_after_shear": 226
+      },
+      {
+        "seed": 719,
+        "counts": {
+          "adaptive": 250,
+          "static_mix": 171,
+          "full": 256,
+          "random_slots": 151
+        },
+        "costs": {
+          "adaptive": 2.453125,
+          "static_mix": 2.453125,
+          "full": 4,
+          "random_slots": 2.453125
+        },
+        "by_source": {
+          "adaptive": [
+            {
+              "n": 91,
+              "correct": 88
+            },
+            {
+              "n": 86,
+              "correct": 86
+            },
+            {
+              "n": 79,
+              "correct": 76
+            }
+          ],
+          "static_mix": [
+            {
+              "n": 91,
+              "correct": 57
+            },
+            {
+              "n": 86,
+              "correct": 59
+            },
+            {
+              "n": 79,
+              "correct": 55
+            }
+          ],
+          "full": [
+            {
+              "n": 91,
+              "correct": 91
+            },
+            {
+              "n": 86,
+              "correct": 86
+            },
+            {
+              "n": 79,
+              "correct": 79
+            }
+          ],
+          "random_slots": [
+            {
+              "n": 91,
+              "correct": 54
+            },
+            {
+              "n": 86,
+              "correct": 33
+            },
+            {
+              "n": 79,
+              "correct": 64
+            }
+          ]
+        },
+        "donor": {
+          "clean": 106,
+          "eligible": 0,
+          "same_mask": 3,
+          "success": {
+            "native": 0,
+            "dark_native": 0,
+            "random_dark": 0,
+            "sham": 0,
+            "full_state": 0
+          }
+        },
+        "gauge_masked_accuracy_after_shear": 195
+      },
+      {
+        "seed": 727,
+        "counts": {
+          "adaptive": 252,
+          "static_mix": 169,
+          "full": 256,
+          "random_slots": 96
+        },
+        "costs": {
+          "adaptive": 2.0078125,
+          "static_mix": 2.27734375,
+          "full": 4,
+          "random_slots": 2.0078125
+        },
+        "by_source": {
+          "adaptive": [
+            {
+              "n": 85,
+              "correct": 82
+            },
+            {
+              "n": 82,
+              "correct": 82
+            },
+            {
+              "n": 89,
+              "correct": 88
+            }
+          ],
+          "static_mix": [
+            {
+              "n": 85,
+              "correct": 43
+            },
+            {
+              "n": 82,
+              "correct": 74
+            },
+            {
+              "n": 89,
+              "correct": 52
+            }
+          ],
+          "full": [
+            {
+              "n": 85,
+              "correct": 85
+            },
+            {
+              "n": 82,
+              "correct": 82
+            },
+            {
+              "n": 89,
+              "correct": 89
+            }
+          ],
+          "random_slots": [
+            {
+              "n": 85,
+              "correct": 36
+            },
+            {
+              "n": 82,
+              "correct": 27
+            },
+            {
+              "n": 89,
+              "correct": 33
+            }
+          ]
+        },
+        "donor": {
+          "clean": 105,
+          "eligible": 0,
+          "same_mask": 5,
+          "success": {
+            "native": 0,
+            "dark_native": 0,
+            "random_dark": 0,
+            "sham": 0,
+            "full_state": 0
+          }
+        },
+        "gauge_masked_accuracy_after_shear": 190
+      },
+      {
+        "seed": 733,
+        "counts": {
+          "adaptive": 246,
+          "static_mix": 164,
+          "full": 256,
+          "random_slots": 63
+        },
+        "costs": {
+          "adaptive": 1.7421875,
+          "static_mix": 1.8125,
+          "full": 4,
+          "random_slots": 1.7421875
+        },
+        "by_source": {
+          "adaptive": [
+            {
+              "n": 93,
+              "correct": 86
+            },
+            {
+              "n": 77,
+              "correct": 77
+            },
+            {
+              "n": 86,
+              "correct": 83
+            }
+          ],
+          "static_mix": [
+            {
+              "n": 93,
+              "correct": 48
+            },
+            {
+              "n": 77,
+              "correct": 77
+            },
+            {
+              "n": 86,
+              "correct": 39
+            }
+          ],
+          "full": [
+            {
+              "n": 93,
+              "correct": 93
+            },
+            {
+              "n": 77,
+              "correct": 77
+            },
+            {
+              "n": 86,
+              "correct": 86
+            }
+          ],
+          "random_slots": [
+            {
+              "n": 93,
+              "correct": 20
+            },
+            {
+              "n": 77,
+              "correct": 23
+            },
+            {
+              "n": 86,
+              "correct": 20
+            }
+          ]
+        },
+        "donor": {
+          "clean": 102,
+          "eligible": 10,
+          "same_mask": 14,
+          "success": {
+            "native": 10,
+            "dark_native": 10,
+            "random_dark": 2,
+            "sham": 0,
+            "full_state": 10
+          }
+        },
+        "gauge_masked_accuracy_after_shear": 133
+      },
+      {
+        "seed": 739,
+        "counts": {
+          "adaptive": 248,
+          "static_mix": 165,
+          "full": 256,
+          "random_slots": 101
+        },
+        "costs": {
+          "adaptive": 1.734375,
+          "static_mix": 1.8046875,
+          "full": 4,
+          "random_slots": 1.734375
+        },
+        "by_source": {
+          "adaptive": [
+            {
+              "n": 94,
+              "correct": 86
+            },
+            {
+              "n": 84,
+              "correct": 84
+            },
+            {
+              "n": 78,
+              "correct": 78
+            }
+          ],
+          "static_mix": [
+            {
+              "n": 94,
+              "correct": 41
+            },
+            {
+              "n": 84,
+              "correct": 84
+            },
+            {
+              "n": 78,
+              "correct": 40
+            }
+          ],
+          "full": [
+            {
+              "n": 94,
+              "correct": 94
+            },
+            {
+              "n": 84,
+              "correct": 84
+            },
+            {
+              "n": 78,
+              "correct": 78
+            }
+          ],
+          "random_slots": [
+            {
+              "n": 94,
+              "correct": 35
+            },
+            {
+              "n": 84,
+              "correct": 34
+            },
+            {
+              "n": 78,
+              "correct": 32
+            }
+          ]
+        },
+        "donor": {
+          "clean": 110,
+          "eligible": 11,
+          "same_mask": 16,
+          "success": {
+            "native": 11,
+            "dark_native": 11,
+            "random_dark": 2,
+            "sham": 0,
+            "full_state": 11
+          }
+        },
+        "gauge_masked_accuracy_after_shear": 116
+      },
+      {
+        "seed": 743,
+        "counts": {
+          "adaptive": 248,
+          "static_mix": 163,
+          "full": 256,
+          "random_slots": 81
+        },
+        "costs": {
+          "adaptive": 1.96484375,
+          "static_mix": 1.828125,
+          "full": 4,
+          "random_slots": 1.96484375
+        },
+        "by_source": {
+          "adaptive": [
+            {
+              "n": 105,
+              "correct": 97
+            },
+            {
+              "n": 75,
+              "correct": 75
+            },
+            {
+              "n": 76,
+              "correct": 76
+            }
+          ],
+          "static_mix": [
+            {
+              "n": 105,
+              "correct": 62
+            },
+            {
+              "n": 75,
+              "correct": 52
+            },
+            {
+              "n": 76,
+              "correct": 49
+            }
+          ],
+          "full": [
+            {
+              "n": 105,
+              "correct": 105
+            },
+            {
+              "n": 75,
+              "correct": 75
+            },
+            {
+              "n": 76,
+              "correct": 76
+            }
+          ],
+          "random_slots": [
+            {
+              "n": 105,
+              "correct": 30
+            },
+            {
+              "n": 75,
+              "correct": 26
+            },
+            {
+              "n": 76,
+              "correct": 25
+            }
+          ]
+        },
+        "donor": {
+          "clean": 116,
+          "eligible": 17,
+          "same_mask": 22,
+          "success": {
+            "native": 17,
+            "dark_native": 17,
+            "random_dark": 1,
+            "sham": 0,
+            "full_state": 17
+          }
+        },
+        "gauge_masked_accuracy_after_shear": 60
+      },
+      {
+        "seed": 751,
+        "counts": {
+          "adaptive": 255,
+          "static_mix": 179,
+          "full": 256,
+          "random_slots": 73
+        },
+        "costs": {
+          "adaptive": 1.875,
+          "static_mix": 2.0390625,
+          "full": 4,
+          "random_slots": 1.875
+        },
+        "by_source": {
+          "adaptive": [
+            {
+              "n": 108,
+              "correct": 107
+            },
+            {
+              "n": 84,
+              "correct": 84
+            },
+            {
+              "n": 64,
+              "correct": 64
+            }
+          ],
+          "static_mix": [
+            {
+              "n": 108,
+              "correct": 74
+            },
+            {
+              "n": 84,
+              "correct": 56
+            },
+            {
+              "n": 64,
+              "correct": 49
+            }
+          ],
+          "full": [
+            {
+              "n": 108,
+              "correct": 108
+            },
+            {
+              "n": 84,
+              "correct": 84
+            },
+            {
+              "n": 64,
+              "correct": 64
+            }
+          ],
+          "random_slots": [
+            {
+              "n": 108,
+              "correct": 28
+            },
+            {
+              "n": 84,
+              "correct": 28
+            },
+            {
+              "n": 64,
+              "correct": 17
+            }
+          ]
+        },
+        "donor": {
+          "clean": 116,
+          "eligible": 21,
+          "same_mask": 25,
+          "success": {
+            "native": 21,
+            "dark_native": 21,
+            "random_dark": 4,
+            "sham": 0,
+            "full_state": 21
+          }
+        },
+        "gauge_masked_accuracy_after_shear": 64
+      }
+    ]
+  },
+  "readme": "Prospective CPU pilot source-locked after GitHub protocol 808050f and source d1200e4; full per-run independent/native artifacts are generated by Actions."
+}
