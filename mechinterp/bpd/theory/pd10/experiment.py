@@ -120,6 +120,7 @@ def train_arm(seed: int, arm: str, *, steps=None, batch_size=None):
         return bpd,q,{
             **trained,
             "arm":arm,
+            "initial_parameter_sha256":trained["initial_parameters_sha256"],
             "source_rotation_sha256":trained["rotation_sha256"],
             "used_cardinality_labels":True,
             "starting_from_true_Q":False,
