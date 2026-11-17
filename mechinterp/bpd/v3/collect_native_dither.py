@@ -32,6 +32,26 @@ def substream_seed(seed: int, board: int, draw: int) -> int:
     return int.from_bytes(digest[:8], 'big') % (2**63 - 1)
 
 
+def admit_cohort(n_boards: int, *, max_boards: int | None,
+                 expected_roster_sha256: str | None, observed_roster_sha256: str) -> str:
+    """A full labeled cohort requires an externally pinned, matching roster digest.
+
+    The digest identifies the input bytes. Their origin must still be checked
+    against the versioned LOOPSCOPE-02 bundle and the roster sidecar.
+    """
+    if max_boards is not None:
+        if max_boards < 1:
+            raise ValueError('max-boards must be positive')
+        return 'DEVELOPMENT_ONLY'
+    if n_boards != 183:
+        raise ValueError(f'full WB-Stall cohort requires 183 roots, got {n_boards}')
+    if not expected_roster_sha256:
+        raise ValueError('full cohort requires --expected-roster-sha256 from reviewed roster manifest')
+    if expected_roster_sha256.lower() != observed_roster_sha256.lower():
+        raise ValueError('input roster hash mismatch')
+    return 'NATIVE_COHORT_ROSTER_HASH_CHECKED_ORIGIN_UNCONFIRMED'
+
+
 def dither_updated(state: torch.Tensor, generator: torch.Generator, sigma: float) -> torch.Tensor:
     """Bounded uniform additive dither in f32, cast back to native dtype."""
     if sigma < 0 or not math.isfinite(sigma):
@@ -166,8 +186,12 @@ def main() -> None:
         if args.max_boards < 1:
             ap.error('max-boards must be positive')
         inputs = inputs[:args.max_boards]
-    if len(inputs) != 183 and args.max_boards is None:
-        ap.error('native cohort must contain 183 WB-Stall roots, or supply --max-boards for development')
+    try:
+        status = admit_cohort(len(inputs), max_boards=args.max_boards,
+                              expected_roster_sha256=args.expected_roster_sha256,
+                              observed_roster_sha256=roster_sha)
+    except ValueError as exc:
+        ap.error(str(exc))
     dtype = torch.bfloat16 if args.dtype == 'bf16' else torch.float32
     model, sha = load_local_trm(args.checkpoint_file, args.checkpoint_key,
                                 dtype=dtype, device=args.device)
@@ -178,7 +202,7 @@ def main() -> None:
                         readout_passes=np.array(DEFAULT_READOUTS, dtype=np.int32))
     manifest = {
         'protocol': 'FLOOR-01_NATIVE_COLLECTION',
-        'status': 'DEVELOPMENT_ONLY' if args.max_boards is not None else 'NATIVE_COHORT_UNCONFIRMED',
+        'status': status,
         'checkpoint_key': args.checkpoint_key, 'checkpoint_sha256': sha,
         'input_npz_sha256': roster_sha, 'output_npz_sha256': file_sha256(args.out),
         'n_boards': len(inputs), 'k': args.k, 'sigma_relative_rms': args.sigma,
