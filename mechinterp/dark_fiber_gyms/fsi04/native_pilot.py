@@ -120,6 +120,8 @@ def main(argv=None):
     p.add_argument("--checkpoint-file",type=Path,required=True)
     p.add_argument("--tag",choices=("yagizdevre","gaoxin492"),required=True)
     p.add_argument("--eval-csv",type=Path,required=True)
+    p.add_argument("--roster-manifest",type=Path,required=True,
+                   help="source-hashed fresh FSI04 unscored development manifest")
     p.add_argument("--exclude-csv",type=Path,action="append",required=True)
     p.add_argument("--out",type=Path,required=True)
     p.add_argument("--device",default="cuda:0")
@@ -130,6 +132,13 @@ def main(argv=None):
         p.error("registration changed")
     if _bad_path(a.eval_csv) or any(_bad_path(z) for z in a.exclude_csv):
         p.error("ARG03/test.jsonl or other non-development path forbidden")
+    manifest=json.loads(a.roster_manifest.read_text())
+    if manifest.get("schema")!="BPD-FSI04/development-roster/v1" or (
+        manifest.get("registration_sha256")!=sha256_file(REG) or
+        manifest.get("csv_sha256")!=sha256_file(a.eval_csv)):
+        raise ValueError("development roster registration/CSV hash mismatch")
+    if manifest.get("ARG03_protected_test")!="untouched":
+        raise ValueError("missing test-seal attestation")
     if not a.checkpoint_file.is_file():p.error("local checkpoint missing; no model download")
     if a.limit<0:p.error("limit must be nonnegative")
     rows=read_boards(a.eval_csv,a.limit)
