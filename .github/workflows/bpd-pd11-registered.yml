@@ -28,7 +28,7 @@ jobs:
           assert cfg['study_id']==lock['study_id']=='BPD-PD-11'
           assert lock['execution']=='first_registered_full_cohort'
           assert len(cfg['seed_list'])==lock['seeds']==24
-          assert len(cfg['objective']['arms'])==lock['arms_per_seed']==6
+          assert len(cfg['arms'])==lock['arms_per_seed']==6
           assert cfg['scoring']['primary_arm']=='global_givens'
           assert cfg['scoring']['primary_control']=='local_givens'
           assert cfg['objective']['sweep_count']==6
