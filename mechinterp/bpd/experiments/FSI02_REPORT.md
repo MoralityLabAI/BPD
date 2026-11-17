@@ -31,7 +31,7 @@ Use the pinned EvalMath FSI-01 module at merge `5004cab9b366a412290a83945cda7698
 
 ```bash
 EVALMATH_FSI_FILE=../EvalMath/src/spiral_ln/evaluation_finite_sample.py \
-  PYTHONPATH=. python -m unittest mechinterp.bpd.experiments.test_fsi02_cpu -v
+  PYTHONPATH=. python -m unittest discover -s mechinterp/bpd/experiments -p 'test_fsi02_cpu.py' -v
 EVALMATH_FSI_FILE=../EvalMath/src/spiral_ln/evaluation_finite_sample.py \
   python mechinterp/bpd/experiments/fsi02_run.py \
   --registration mechinterp/bpd/experiments/fsi02_registration_v1.json \
