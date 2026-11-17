@@ -84,6 +84,10 @@ jobs:
         run: |
           python -m pytest -q mechinterp/bpd/theory/pd07/test_experiment.py
           python -m pytest -q mechinterp/bpd/theory/pd07/test_published_results.py
+      - name: PD08 staged-factor source and original 24-seed result replay
+        run: |
+          python -m pytest -q mechinterp/bpd/theory/pd08/test_experiment.py
+          python -m pytest -q mechinterp/bpd/theory/pd08/test_published_results.py
       - name: Verify source module syntax
         run: |
           python -m compileall -q mechinterp/bpd

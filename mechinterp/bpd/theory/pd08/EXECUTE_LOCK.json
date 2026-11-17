@@ -1,0 +1,13 @@
+{
+  "study_id": "BPD-PD-08",
+  "execution": "first_registered_full_cohort",
+  "registration_date": "2026-11-17",
+  "source_commit_sha": "b7b12cd31f5affd9cc91a0ca41f6f2d9fdc26149",
+  "seeds": 24,
+  "arms_per_seed": 6,
+  "excluded_smoke_seed": 3001,
+  "source_only_preflight_run_id": 44113620633,
+  "source_only_preflight_result": "success",
+  "protection": "CONFIG, PROTOCOL, experiment, test and frozen PD06/07 code imported by stage1/2 unchanged since source commit",
+  "evidence_policy": "Preserve the exact first complete cohort whether primary scientific criterion passes or fails"
+}
