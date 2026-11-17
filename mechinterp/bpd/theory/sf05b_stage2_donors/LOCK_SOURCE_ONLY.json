@@ -1,0 +1,43 @@
+{
+  "experiment": "BPD-SF05B_STAGE2_DONOR_SOURCE_ONLY",
+  "status": "HASH_LOCKED_BEFORE_DONOR_GENERATOR_TESTS",
+  "date": "2026-11-18",
+  "src": {
+    "PROTOCOL_SOURCE_ONLY.md": "99deb0c0853aa870e7ce359c1a7d1c7178c8debb",
+    "THEORY.md": "b96130444d48fe51bc793925cd4f73011b2abfc7",
+    "donor_cohorts.py": "6c08787a2a08daf3c601265decbba6d8cfc7f930",
+    "tests/test_donor_cohorts.py": "c0098fbf143dd40aa51805c8b15617edf9b0de7d"
+  },
+  "stage0_generator_sha": "525cfb28d40cc5f58c0e8141489a8e744d1778f4",
+  "allowed_source_family": "heldout",
+  "authorized_strata": [
+    "authorized_unconditional",
+    "authorized_high_contrast"
+  ],
+  "public_stratum": "public_U",
+  "query_role_rule": "old_last_source_or_new_last_source_uniform",
+  "donor_flip": "last valid write tag only",
+  "contrast_threshold": 0.3,
+  "contrast_candidate_multiplier": 4,
+  "exact_conditional_blind_rule": "enumerate 6 permutations x 2 donor switches x 2 role choices; condition on role and contrast acceptance",
+  "new_teacher_roots_evaluated": 0,
+  "reserved_calibration_roots": "6101..6159",
+  "reserved_confirmation_roots": "7101..7132",
+  "evidence_scope": "source-only donor/preflight; no trained model inference, source-blind model scoring, or security results",
+  "arg03_sealed": true,
+  "source_only_math_amendments": [
+    {
+      "amendment": 1,
+      "prior_lock_blob_sha": "d6efe40ca0cad30dd550800e72654b025d5fed5d",
+      "initial_ci": "https://github.com/MoralityLabAI/BPD/actions/runs/44146966540",
+      "observed": "11 source-only tests; 2 independent closed-form blind Bayes checks failed, prior donor formula omitted old source's earlier write and high-contrast old-source stratum",
+      "corrected_files": [
+        "THEORY.md",
+        "tests/test_donor_cohorts.py"
+      ],
+      "unchanged_generator_blob_sha": "6c08787a2a08daf3c601265decbba6d8cfc7f930",
+      "scientific_root_data_seen": false,
+      "outcome": "new source-only audit must rerun before any model pilot"
+    }
+  ]
+}

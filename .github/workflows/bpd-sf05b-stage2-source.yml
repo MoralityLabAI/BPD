@@ -1,0 +1,78 @@
+# Source-only Bayes oracle audit rerun after MATH_AMENDMENT_01.md
+name: BPD-SF05B Stage 2 source-aware donor and conditional oracle tests
+
+on:
+  push:
+    branches:
+      - "research/bpd-sf05b-stage2-*"
+    paths:
+      - ".github/workflows/bpd-sf05b-stage2-source.yml"
+  pull_request:
+    paths:
+      - "mechinterp/bpd/theory/sf05b_stage2_donors/**"
+      - ".github/workflows/bpd-sf05b-stage2-source.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-admission:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pinned CPU PyTorch
+        run: python -m pip install "torch==2.5.1"
+      - name: Verify source lock and unchanged Stage 0 donor family
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json,subprocess
+          from pathlib import Path
+          root=Path('mechinterp/bpd/theory/sf05b_stage2_donors')
+          lock=json.loads((root/'LOCK_SOURCE_ONLY.json').read_text())
+          assert lock['status']=='HASH_LOCKED_BEFORE_DONOR_GENERATOR_TESTS'
+          assert lock['new_teacher_roots_evaluated']==0
+          assert lock['contrast_threshold']==.30
+          assert lock['contrast_candidate_multiplier']==4
+          assert lock['arg03_sealed'] is True
+          for name,sha in lock['src'].items():
+              got=subprocess.check_output(['git','hash-object',str(root/name)],text=True).strip()
+              assert got==sha,(name,got,sha)
+          up=subprocess.check_output(['git','hash-object',
+            'mechinterp/bpd/theory/sf05b_source_families/source_families.py'],text=True).strip()
+          assert up==lock['stage0_generator_sha']
+          print('STAGE2 DONOR SOURCE LOCK VERIFIED; no new model roots')
+          PY
+      - name: Exact donor, public U and conditional Bayes enumeration tests
+        run: python -m unittest discover -s mechinterp/bpd/theory/sf05b_stage2_donors/tests -v
+      - name: Deterministic source strata admission
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from mechinterp.bpd.theory.sf05b_stage2_donors.donor_cohorts import make_cohort
+          for stratum,seed in [('authorized_unconditional',20551),
+                               ('authorized_high_contrast',20651),('public_U',20751)]:
+              c=make_cohort(seed,512,stratum)
+              assert c.accepted==512
+              rec=c.recipient
+              source_only={
+                  'stratum':stratum,'accepted':c.accepted,
+                  'attempted':c.attempted_candidates,
+                  'qualified':c.qualified_candidates,
+                  'source_label_change_fraction':c.label_change_fraction,
+                  'exact_oracle_target_abs_change_mean':
+                      float((rec.target-c.donor_target).abs().mean()),
+                  'recipient_sourceblind_mse':
+                      float((rec.target-c.blind_recipient).square().mean()),
+                  'donor_sourceblind_mse':
+                      float((c.donor_target-c.blind_donor).square().mean()),
+              }
+              print('STAGE2_SOURCE_ONLY='+json.dumps(source_only))
+          print('No teacher/policy/real LM scored')
+          PY
