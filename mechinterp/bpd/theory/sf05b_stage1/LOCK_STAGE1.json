@@ -6,7 +6,7 @@
   "source_blobs": {
     "PROTOCOL.md": "5a5a6546631a136a1db28dbc5ab429fb8b9e2ba2",
     "teacher.py": "277f3b98aa600827022e077329f0c9ca0689918f",
-    "policy.py": "6d0099b27224e11f9dd01c2b9a1940d676a0e1ee",
+    "policy.py": "d02f1bc491188f6e54ba4282708bd9adcbbc59ec",
     "evaluate.py": "f3ff9b462090f120b9354e198fd3f5daee9390db",
     "native_parity.py": "94214efbe94aa30a4af8e0d83d49fe1707d6a115",
     "tests/test_stage1.py": "92a072993d9b9c3002586939ad1c02f3886dfede"
@@ -97,5 +97,18 @@
   },
   "evidence_boundary": "Engineering on previously excluded roots only. No 59-root calibration or 32-root confirmation, no real language-model secrecy claim.",
   "protected_cases": "ARG-03-N 168 sealed cases unexamined",
-  "training_only_pre_registration_observation": "Excluded 901/902 training-family pilot before source freeze; no model-scored heldout sample was inspected."
+  "training_only_pre_registration_observation": "Excluded 901/902 training-family pilot before source freeze; no model-scored heldout sample was inspected.",
+  "pre_ood_engineering_amendments": [
+    {
+      "number": 1,
+      "original_lock_blob_sha": "1f85f5006ce32d3eba18158c3d03dcaf1809f526",
+      "original_policy_blob_sha": "6d0099b27224e11f9dd01c2b9a1940d676a0e1ee",
+      "fixed_policy_blob_sha": "d02f1bc491188f6e54ba4282708bd9adcbbc59ec",
+      "failure_run": "https://github.com/MoralityLabAI/BPD/actions/runs/44143648755",
+      "failure_stage": "unit test policy-training smoke; autograd version error from inplace clipping",
+      "data_boundary": "failed before native parity and before any OOD model evaluation",
+      "change": "corr *= clipping_scale -> corr = corr * clipping_scale",
+      "scientific_adjustment": false
+    }
+  ]
 }
