@@ -25,3 +25,41 @@ A `driven_logits` array requires an independently specified **paired driven roll
 ## Validation gates and execution
 
 Source-only fake-model CPU tests before weights: exact shape, readout timing, reproducible dither seeds, output perturbation, zero-dose equivalence and refusal of nonlocal/unpinned weights. Native admission: verify checkpoint and board hashes, full cohort size, finite logits, digit-class and call-role parity, and record GPU batch size/dtype. A float32-to-float32 repeat baseline and unchanged-model clean rerun are required before numerical branch effects may be attributed to dither.
+
+## Commands from the BPD repository root
+
+Prepare the exact public LOOPSCOPE-02 WB-Stall roster; the script asserts 183 unique roots and writes its SHA manifest:
+
+```bash
+python mechinterp/bpd/v3/prepare_native_roster.py \
+  --bundle-json mechinterp/loopscope02/results/benchmark_bundle.json \
+  --out runs/bpd_v3/wb_stall_inputs.npz
+```
+
+Source-level sample for the local RTX checkpoint, labeled DEVELOPMENT_ONLY and limited to two boards:
+
+```bash
+python mechinterp/bpd/v3/collect_native_dither.py \
+  --checkpoint-file /LOCAL/PINNED/step_21700 --checkpoint-key gaoxin492 \
+  --inputs-npz runs/bpd_v3/wb_stall_inputs.npz \
+  --out runs/bpd_v3/gaoxin_dither_dev2.npz \
+  --device cuda:0 --dtype bf16 --k 8 --max-boards 2
+python mechinterp/bpd/v3/floor_and_basis.py \
+  --target-npz runs/bpd_v3/gaoxin_dither_dev2.npz \
+  --out runs/bpd_v3/gaoxin_dither_dev2_floor.json
+```
+
+After inspecting that manifest and the zero-dose and clean-repeat controls, remove `--max-boards` for the full 183-root development cohort. Repeat with the independently pinned `yagizdevre` `model.pt` checkpoint. Retain each full tensor and sidecar SHA manifest. The `--inputs-npz` file must be copied locally into the user's compute environment; cloud CI does not fetch checkpoint binaries.
+
+To compute board-cluster uncertainty from an emitted NPZ:
+
+```python
+import numpy as np
+from mechinterp.bpd.v3.uncertainty import board_js, bootstrap_board_means
+
+with np.load("runs/bpd_v3/gaoxin_dither_dev2.npz", allow_pickle=False) as d:
+    result = bootstrap_board_means(board_js(d["target_logits"]))
+print(result)  # Development only: B=2 is unpowered
+```
+
+The Gaussian/rounding-size calculation supplies a perturbation-scale prior. A completed K=8 injected-dither experiment must be reported as a stochastic intervention on state, with its law and scale explicitly recorded. It cannot serve as a measurement of the actual physical distribution of `bfloat16` GPU roundoff.
