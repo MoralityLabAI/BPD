@@ -85,7 +85,7 @@ class TestCostAwareNativeAbstention(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,"normalized"):
             posterior_classes((1,-1),(Q(1,3),Q(1,3)))
         with self.assertRaisesRegex(ValueError,"dimensions"):
-            bayes_candidate_action((1,-1),(1,))
+            bayes_candidate_action((1,-1),(Q(1,2),Q(1,4),Q(1,4)))
         with self.assertRaisesRegex(ValueError,"ternary"):
             regret_certificate((1,-1),(2,-1),(Q(1,2),Q(1,2)),(Q(1,2),Q(1,2)))
 
