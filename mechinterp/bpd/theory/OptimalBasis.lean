@@ -42,10 +42,15 @@ def twoAtomMass (i : Fin 5) : Nat :=
   (if dot (read i) ⟨1, -1⟩ = 0 then 1 else 0)
 
 -- Exactly one unordered optimum: the rotated (1,1),(1,-1) basis.
+-- Explicit exhaustive candidate enumeration avoids a classical
+-- Decidable instance for quantified propositions over Fin 5.
+def candidateIndices : List (Fin 5) := [0, 1, 2, 3, 4]
+
 theorem rotated_unique_optimal :
-    ∀ (i j : Fin 5),
-      (fullRank i j ∧ twoAtomMass i + twoAtomMass j = 2) ↔
-      ((i = 2 ∧ j = 3) ∨ (i = 3 ∧ j = 2)) := by
+    candidateIndices.all (fun i =>
+      candidateIndices.all (fun j =>
+        decide ((fullRank i j ∧ twoAtomMass i + twoAtomMass j = 2) ↔
+                ((i = 2 ∧ j = 3) ∨ (i = 3 ∧ j = 2))))) = true := by
   decide
 
 theorem rotated_reference_has_zero_mass :
@@ -64,11 +69,12 @@ def threeAtomMass (i : Fin 5) : Nat :=
 
 -- Exactly three unordered optimum bases, thus six ordered choices.
 theorem three_atom_exact_optimal_set :
-    ∀ (i j : Fin 5),
-      (fullRank i j ∧ threeAtomMass i + threeAtomMass j = 2) ↔
-      ((i = 0 ∧ j = 1) ∨ (i = 1 ∧ j = 0) ∨
-       (i = 0 ∧ j = 3) ∨ (i = 3 ∧ j = 0) ∨
-       (i = 1 ∧ j = 3) ∨ (i = 3 ∧ j = 1)) := by
+    candidateIndices.all (fun i =>
+      candidateIndices.all (fun j =>
+        decide ((fullRank i j ∧ threeAtomMass i + threeAtomMass j = 2) ↔
+                ((i = 0 ∧ j = 1) ∨ (i = 1 ∧ j = 0) ∨
+                 (i = 0 ∧ j = 3) ∨ (i = 3 ∧ j = 0) ∨
+                 (i = 1 ∧ j = 3) ∨ (i = 3 ∧ j = 1))))) = true := by
   decide
 
 theorem atomic_cancellation_zero_mass_for_extra_reads :
