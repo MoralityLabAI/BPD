@@ -2,11 +2,15 @@
 from __future__ import annotations
 
 import unittest
-from fractions import Fraction as Q
+import importlib.util
+from pathlib import Path
 
-from mechinterp.bpd.theory.finite_matroid_audit import (
-    basis_certification, rank, run_audit,
-)
+SPEC = importlib.util.spec_from_file_location(
+    'bpd_finite_matroid', Path(__file__).with_name('finite_matroid_audit.py'))
+mod = importlib.util.module_from_spec(SPEC)
+assert SPEC.loader is not None
+SPEC.loader.exec_module(mod)
+basis_certification, rank, run_audit = mod.basis_certification, mod.rank, mod.run_audit
 
 
 class TestFiniteMatroid(unittest.TestCase):
@@ -31,7 +35,7 @@ class TestFiniteMatroid(unittest.TestCase):
         self.assertEqual(c["weight"], "2/3")
         self.assertEqual(c["optima"], 3)
 
-    def test_96_dimensional_family_cases(self):
+    def test_96_cases_across_dimensions(self):
         result = run_audit()
         self.assertEqual(
             result, {
