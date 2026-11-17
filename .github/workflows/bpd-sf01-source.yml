@@ -1,0 +1,33 @@
+name: BPD-SF01 source-only information audit
+
+on:
+  pull_request:
+    paths:
+      - "mechinterp/bpd/experiments/sf01/**"
+      - ".github/workflows/bpd-sf01-source.yml"
+  push:
+    branches:
+      - "research/bpd-sf01-*"
+    paths:
+      - "mechinterp/bpd/experiments/sf01/**"
+      - ".github/workflows/bpd-sf01-source.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-math-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install test runner
+        run: python -m pip install "pytest>=8,<10"
+      - name: Nine exact finite-information tests
+        run: python -m pytest -q mechinterp/bpd/experiments/sf01/test_information.py
+      - name: Syntax check
+        run: python -m compileall -q mechinterp/bpd/experiments/sf01
