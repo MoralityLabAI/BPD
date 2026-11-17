@@ -121,7 +121,6 @@ def train_factors(seed, teacher, steps=400, batch=256):
 
 
 def paired_source_swap(seed, n):
-    record, _, _, target, meta = sample(seed, n)
     first, second, query, target, meta = sample(seed, n)
     donor = second.clone()
     donor[:, :2] = 1.0 - donor[:, :2]  # same values, new source identity
