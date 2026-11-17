@@ -31,7 +31,7 @@ def lock_for(run: dict, source_commit: str) -> dict:
 
 def verify(lock: dict, preflight: dict | None) -> dict:
     phase = lock["phase"]
-    if phase not in ("development", "confirmation"):
+    if phase not in ("development", "confirm_fresh"):
         raise AssertionError("unrecognized phase")
     run = bundle(phase, preflight)
     if lock != lock_for(run, lock["source_commit"]):
