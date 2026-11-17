@@ -1,0 +1,36 @@
+name: BPD FSI04 Windows runner static verification
+on:
+  push:
+    paths:
+      - 'mechinterp/dark_fiber_gyms/fsi04/run_local.ps1'
+      - '.github/workflows/bpd-fsi04-local-launch-lint.yml'
+  pull_request:
+    paths:
+      - 'mechinterp/dark_fiber_gyms/fsi04/run_local.ps1'
+      - '.github/workflows/bpd-fsi04-local-launch-lint.yml'
+permissions:
+  contents: read
+jobs:
+  parse-and-handoff-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Parse PowerShell locally without accessing model checkpoints
+        shell: pwsh
+        run: |
+          $path = 'mechinterp/dark_fiber_gyms/fsi04/run_local.ps1'
+          $tokens = $null
+          $parseErrors = $null
+          $ast = [System.Management.Automation.Language.Parser]::ParseFile((Resolve-Path $path), [ref]$tokens, [ref]$parseErrors)
+          if ($parseErrors.Count -ne 0) {
+            $parseErrors | ForEach-Object { Write-Error $_.Message }
+            throw 'Invalid PowerShell source'
+          }
+          $scriptText = Get-Content -Raw -LiteralPath $path
+          foreach ($required in @('Get-FileHash', 'development_manifest.json',
+                                  'fsi04.native_pilot', 'fsi04.pilot_power',
+                                  'YagizCheckpoint', 'GaoxinCheckpoint')) {
+            if (-not $scriptText.Contains($required)) { throw "Missing registered launch control: $required" }
+          }
+          Write-Host 'FSI04 Windows launch script syntax and source contracts PASS'
