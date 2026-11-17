@@ -1,0 +1,1505 @@
+{
+  "local_config_note": "Sandbox used a minimal equivalent configuration on frozen seed/dictionary/generator fields; pinned GitHub registration is canonical.",
+  "mask": {
+    "cancellation_worlds_with_singleton_counterexample": 16,
+    "full_block_invariance_algebraic": true
+  },
+  "p1": {
+    "bonferroni_p": "2/20001",
+    "bootstrap_97p5_interval": [
+      0.27077484130859375,
+      0.5956802368164062
+    ],
+    "confirm": true,
+    "effect": "1773/4096",
+    "signflip_p": "1/20001",
+    "test": "monte_carlo_cluster_sign_flip"
+  },
+  "p2": {
+    "by_stratum": {
+      "cancellation": {
+        "exact_optimal_count": 16,
+        "iid_model_cp95_outward": [
+          "104083/131072",
+          "1"
+        ],
+        "n_worlds": 16
+      },
+      "rotated": {
+        "exact_optimal_count": 16,
+        "iid_model_cp95_outward": [
+          "104083/131072",
+          "1"
+        ],
+        "n_worlds": 16
+      }
+    },
+    "caveat": "Fixed 16+16 strata: interval per stratum assumes iid generator worlds within that stratum; no pooled binomial interval.",
+    "exact_optimal_worlds": 32,
+    "n_worlds": 32
+  },
+  "readout_per_world": 256,
+  "registration_git_blob": "e348f969d312cc1ffeb61ca30e40491936f862ee",
+  "runner_git_blob": "9a9fd1c5a3cdd611255597f06b4f52e38c908e3f",
+  "runtime_seconds": 0.4959,
+  "schema": "BPD-FSI02/prospective-cpu-result-v1",
+  "scope": "Synthetic finite-dictionary CPU experiment; no trained BPD network, ARG03 protected test untouched.",
+  "world_count": 32,
+  "worlds": [
+    {
+      "mask": {
+        "full_block_invariant": true,
+        "n_optima": 1,
+        "singleton_not_invariant": false,
+        "witness_bases": null
+      },
+      "population_optimum_l0": "9/10",
+      "population_selected_l0": "9/10",
+      "random_basis": [
+        2,
+        3
+      ],
+      "random_test_loss_sum": 223,
+      "reference_test_loss_sum": 446,
+      "seed": 2026120101,
+      "selected_basis": [
+        2,
+        3
+      ],
+      "selected_exact_optimal": true,
+      "selected_test_loss_sum": 223,
+      "selected_train_loss": 54,
+      "stratum": "rotated",
+      "true_optimal_bases": [
+        [
+          2,
+          3
+        ]
+      ],
+      "world_reduction_exact": "223/256"
+    },
+    {
+      "mask": {
+        "full_block_invariant": true,
+        "n_optima": 1,
+        "singleton_not_invariant": false,
+        "witness_bases": null
+      },
+      "population_optimum_l0": "22/25",
+      "population_selected_l0": "22/25",
+      "random_basis": [
+        0,
+        2
+      ],
+      "random_test_loss_sum": 313,
+      "reference_test_loss_sum": 442,
+      "seed": 2026120102,
+      "selected_basis": [
+        2,
+        3
+      ],
+      "selected_exact_optimal": true,
+      "selected_test_loss_sum": 221,
+      "selected_train_loss": 56,
+      "stratum": "rotated",
+      "true_optimal_bases": [
+        [
+          2,
+          3
+        ]
+      ],
+      "world_reduction_exact": "221/256"
+    },
+    {
+      "mask": {
+        "full_block_invariant": true,
+        "n_optima": 1,
+        "singleton_not_invariant": false,
+        "witness_bases": null
+      },
+      "population_optimum_l0": "17/20",
+      "population_selected_l0": "17/20",
+      "random_basis": [
+        3,
+        4
+      ],
+      "random_test_loss_sum": 313,
+      "reference_test_loss_sum": 424,
+      "seed": 2026120103,
+      "selected_basis": [
+        2,
+        3
+      ],
+      "selected_exact_optimal": true,
+      "selected_test_loss_sum": 212,
+      "selected_train_loss": 57,
+      "stratum": "rotated",
+      "true_optimal_bases": [
+        [
+          2,
+          3
+        ]
+      ],
+      "world_reduction_exact": "53/64"
+    },
+    {
+      "mask": {
+        "full_block_invariant": true,
+        "n_optima": 1,
+        "singleton_not_invariant": false,
+        "witness_bases": null
+      },
+      "population_optimum_l0": "21/25",
+      "population_selected_l0": "21/25",
+      "random_basis": [
+        2,
+        4
+      ],
+      "random_test_loss_sum": 338,
+      "reference_test_loss_sum": 440,
+      "seed": 2026120104,
+      "selected_basis": [
+        2,
+        3
+      ],
+      "selected_exact_optimal": true,
+      "selected_test_loss_sum": 220,
+      "selected_train_loss": 59,
+      "stratum": "rotated",
+      "true_optimal_bases": [
+        [
+          2,
+          3
+        ]
+      ],
+      "world_reduction_exact": "55/64"
+    },
+    {
+      "mask": {
+        "full_block_invariant": true,
+        "n_optima": 1,
+        "singleton_not_invariant": false,
+        "witness_bases": null
+      },
+      "population_optimum_l0": "43/50",
+      "population_selected_l0": "43/50",
+      "random_basis": [
+        0,
+        4
+      ],
+      "random_test_loss_sum": 446,
+      "reference_test_loss_sum": 446,
+      "seed": 2026120105,
+      "selected_basis": [
+        2,
+        3
+      ],
+      "selected_exact_optimal": true,
+      "selected_test_loss_sum": 223,
+      "selected_train_loss": 56,
+      "stratum": "rotated",
+      "true_optimal_bases": [
+        [
+          2,
+          3
+        ]
+      ],
+      "world_reduction_exact": "223/256"
+    },
+    {
+      "mask": {
+        "full_block_invariant": true,
+        "n_optima": 1,
+        "singleton_not_invariant": false,
+        "witness_bases": null
+      },
+      "population_optimum_l0": "21/25",
+      "population_selected_l0": "21/25",
+      "random_basis": [
+        0,
+        1
+      ],
+      "random_test_loss_sum": 414,
+      "reference_test_loss_sum": 414,
+      "seed": 2026120106,
+      "selected_basis": [
+        2,
+        3
+      ],
+      "selected_exact_optimal": true,
+      "selected_test_loss_sum": 207,
+      "selected_train_loss": 54,
+      "stratum": "rotated",
+      "true_optimal_bases": [
+        [
+          2,
+          3
+        ]
+      ],
+      "world_reduction_exact": "207/256"
+    },
+    {
+      "mask": {
+        "full_block_invariant": true,
+        "n_optima": 1,
+        "singleton_not_invariant": false,
+        "witness_bases": null
+      },
+      "population_optimum_l0": "9/10",
+      "population_selected_l0": "9/10",
+      "random_basis": [
+        0,
+        2
+      ],
+      "random_test_loss_sum": 365,
+      "reference_test_loss_sum": 442,
+      "seed": 2026120107,
+      "selected_basis": [
+        2,
+        3
+      ],
+      "selected_exact_optimal": true,
+      "selected_test_loss_sum": 221,
+      "selected_train_loss": 60,
+      "stratum": "rotated",
+      "true_optimal_bases": [
+        [
+          2,
+          3
+        ]
+      ],
+      "world_reduction_exact": "221/256"
+    },
+    {
+      "mask": {
+        "full_block_invariant": true,
+        "n_optima": 1,
+        "singleton_not_invariant": false,
+        "witness_bases": null
+      },
+      "population_optimum_l0": "21/25",
+      "population_selected_l0": "21/25",
+      "random_basis": [
+        1,
+        3
+      ],
+      "random_test_loss_sum": 339,
+      "reference_test_loss_sum": 438,
+      "seed": 2026120108,
+      "selected_basis": [
+        2,
+        3
+      ],
+      "selected_exact_optimal": true,
+      "selected_test_loss_sum": 219,
+      "selected_train_loss": 55,
+      "stratum": "rotated",
+      "true_optimal_bases": [
+        [
+          2,
+          3
+        ]
+      ],
+      "world_reduction_exact": "219/256"
+    },
+    {
+      "mask": {
+        "full_block_invariant": true,
+        "n_optima": 1,
+        "singleton_not_invariant": false,
+        "witness_bases": null
+      },
+      "population_optimum_l0": "21/25",
+      "population_selected_l0": "21/25",
+      "random_basis": [
+        1,
+        3
+      ],
+      "random_test_loss_sum": 347,
+      "reference_test_loss_sum": 440,
+      "seed": 2026120109,
+      "selected_basis": [
+        2,
+        3
+      ],
+      "selected_exact_optimal": true,
+      "selected_test_loss_sum": 220,
+      "selected_train_loss": 44,
+      "stratum": "rotated",
+      "true_optimal_bases": [
+        [
+          2,
+          3
+        ]
+      ],
+      "world_reduction_exact": "55/64"
+    },
+    {
+      "mask": {
+        "full_block_invariant": true,
+        "n_optima": 1,
+        "singleton_not_invariant": false,
+        "witness_bases": null
+      },
+      "population_optimum_l0": "87/100",
+      "population_selected_l0": "87/100",
+      "random_basis": [
+        1,
+        3
+      ],
+      "random_test_loss_sum": 346,
+      "reference_test_loss_sum": 448,
+      "seed": 2026120110,
+      "selected_basis": [
+        2,
+        3
+      ],
+      "selected_exact_optimal": true,
+      "selected_test_loss_sum": 224,
+      "selected_train_loss": 55,
+      "stratum": "rotated",
+      "true_optimal_bases": [
+        [
+          2,
+          3
+        ]
+      ],
+      "world_reduction_exact": "7/8"
+    },
+    {
+      "mask": {
+        "full_block_invariant": true,
+        "n_optima": 1,
+        "singleton_not_invariant": false,
+        "witness_bases": null
+      },
+      "population_optimum_l0": "43/50",
+      "population_selected_l0": "43/50",
+      "random_basis": [
+        2,
+        4
+      ],
+      "random_test_loss_sum": 276,
+      "reference_test_loss_sum": 412,
+      "seed": 2026120111,
+      "selected_basis": [
+        2,
+        3
+      ],
+      "selected_exact_optimal": true,
+      "selected_test_loss_sum": 206,
+      "selected_train_loss": 57,
+      "stratum": "rotated",
+      "true_optimal_bases": [
+        [
+          2,
+          3
+        ]
+      ],
+      "world_reduction_exact": "103/128"
+    },
+    {
+      "mask": {
+        "full_block_invariant": true,
+        "n_optima": 1,
+        "singleton_not_invariant": false,
+        "witness_bases": null
+      },
+      "population_optimum_l0": "43/50",
+      "population_selected_l0": "43/50",
+      "random_basis": [
+        1,
+        4
+      ],
+      "random_test_loss_sum": 444,
+      "reference_test_loss_sum": 444,
+      "seed": 2026120112,
+      "selected_basis": [
+        2,
+        3
+      ],
+      "selected_exact_optimal": true,
+      "selected_test_loss_sum": 222,
+      "selected_train_loss": 56,
+      "stratum": "rotated",
+      "true_optimal_bases": [
+        [
+          2,
+          3
+        ]
+      ],
+      "world_reduction_exact": "111/128"
+    },
+    {
+      "mask": {
+        "full_block_invariant": true,
+        "n_optima": 1,
+        "singleton_not_invariant": false,
+        "witness_bases": null
+      },
+      "population_optimum_l0": "21/25",
+      "population_selected_l0": "21/25",
+      "random_basis": [
+        1,
+        4
+      ],
+      "random_test_loss_sum": 426,
+      "reference_test_loss_sum": 426,
+      "seed": 2026120113,
+      "selected_basis": [
+        2,
+        3
+      ],
+      "selected_exact_optimal": true,
+      "selected_test_loss_sum": 213,
+      "selected_train_loss": 56,
+      "stratum": "rotated",
+      "true_optimal_bases": [
+        [
+          2,
+          3
+        ]
+      ],
+      "world_reduction_exact": "213/256"
+    },
+    {
+      "mask": {
+        "full_block_invariant": true,
+        "n_optima": 1,
+        "singleton_not_invariant": false,
+        "witness_bases": null
+      },
+      "population_optimum_l0": "89/100",
+      "population_selected_l0": "89/100",
+      "random_basis": [
+        0,
+        2
+      ],
+      "random_test_loss_sum": 334,
+      "reference_test_loss_sum": 436,
+      "seed": 2026120114,
+      "selected_basis": [
+        2,
+        3
+      ],
+      "selected_exact_optimal": true,
+      "selected_test_loss_sum": 218,
+      "selected_train_loss": 56,
+      "stratum": "rotated",
+      "true_optimal_bases": [
+        [
+          2,
+          3
+        ]
+      ],
+      "world_reduction_exact": "109/128"
+    },
+    {
+      "mask": {
+        "full_block_invariant": true,
+        "n_optima": 1,
+        "singleton_not_invariant": false,
+        "witness_bases": null
+      },
+      "population_optimum_l0": "17/20",
+      "population_selected_l0": "17/20",
+      "random_basis": [
+        3,
+        4
+      ],
+      "random_test_loss_sum": 373,
+      "reference_test_loss_sum": 458,
+      "seed": 2026120115,
+      "selected_basis": [
+        2,
+        3
+      ],
+      "selected_exact_optimal": true,
+      "selected_test_loss_sum": 229,
+      "selected_train_loss": 53,
+      "stratum": "rotated",
+      "true_optimal_bases": [
+        [
+          2,
+          3
+        ]
+      ],
+      "world_reduction_exact": "229/256"
+    },
+    {
+      "mask": {
+        "full_block_invariant": true,
+        "n_optima": 1,
+        "singleton_not_invariant": false,
+        "witness_bases": null
+      },
+      "population_optimum_l0": "43/50",
+      "population_selected_l0": "43/50",
+      "random_basis": [
+        0,
+        1
+      ],
+      "random_test_loss_sum": 450,
+      "reference_test_loss_sum": 450,
+      "seed": 2026120116,
+      "selected_basis": [
+        2,
+        3
+      ],
+      "selected_exact_optimal": true,
+      "selected_test_loss_sum": 225,
+      "selected_train_loss": 57,
+      "stratum": "rotated",
+      "true_optimal_bases": [
+        [
+          2,
+          3
+        ]
+      ],
+      "world_reduction_exact": "225/256"
+    },
+    {
+      "mask": {
+        "full_block_invariant": true,
+        "n_optima": 3,
+        "relative_change": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "1",
+            "0"
+          ]
+        ],
+        "singleton_not_invariant": true,
+        "witness_bases": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            3
+          ]
+        ]
+      },
+      "population_optimum_l0": "29/25",
+      "population_selected_l0": "29/25",
+      "random_basis": [
+        0,
+        2
+      ],
+      "random_test_loss_sum": 382,
+      "reference_test_loss_sum": 299,
+      "seed": 2026120117,
+      "selected_basis": [
+        0,
+        1
+      ],
+      "selected_exact_optimal": true,
+      "selected_test_loss_sum": 299,
+      "selected_train_loss": 66,
+      "stratum": "cancellation",
+      "true_optimal_bases": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          3
+        ]
+      ],
+      "world_reduction_exact": "0"
+    },
+    {
+      "mask": {
+        "full_block_invariant": true,
+        "n_optima": 3,
+        "relative_change": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "1",
+            "0"
+          ]
+        ],
+        "singleton_not_invariant": true,
+        "witness_bases": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            3
+          ]
+        ]
+      },
+      "population_optimum_l0": "28/25",
+      "population_selected_l0": "28/25",
+      "random_basis": [
+        1,
+        3
+      ],
+      "random_test_loss_sum": 317,
+      "reference_test_loss_sum": 290,
+      "seed": 2026120118,
+      "selected_basis": [
+        0,
+        1
+      ],
+      "selected_exact_optimal": true,
+      "selected_test_loss_sum": 290,
+      "selected_train_loss": 72,
+      "stratum": "cancellation",
+      "true_optimal_bases": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          3
+        ]
+      ],
+      "world_reduction_exact": "0"
+    },
+    {
+      "mask": {
+        "full_block_invariant": true,
+        "n_optima": 3,
+        "relative_change": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "1",
+            "0"
+          ]
+        ],
+        "singleton_not_invariant": true,
+        "witness_bases": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            3
+          ]
+        ]
+      },
+      "population_optimum_l0": "88/75",
+      "population_selected_l0": "88/75",
+      "random_basis": [
+        1,
+        2
+      ],
+      "random_test_loss_sum": 364,
+      "reference_test_loss_sum": 295,
+      "seed": 2026120119,
+      "selected_basis": [
+        0,
+        1
+      ],
+      "selected_exact_optimal": true,
+      "selected_test_loss_sum": 295,
+      "selected_train_loss": 78,
+      "stratum": "cancellation",
+      "true_optimal_bases": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          3
+        ]
+      ],
+      "world_reduction_exact": "0"
+    },
+    {
+      "mask": {
+        "full_block_invariant": true,
+        "n_optima": 3,
+        "relative_change": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "1",
+            "0"
+          ]
+        ],
+        "singleton_not_invariant": true,
+        "witness_bases": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            3
+          ]
+        ]
+      },
+      "population_optimum_l0": "28/25",
+      "population_selected_l0": "28/25",
+      "random_basis": [
+        1,
+        3
+      ],
+      "random_test_loss_sum": 276,
+      "reference_test_loss_sum": 297,
+      "seed": 2026120120,
+      "selected_basis": [
+        0,
+        1
+      ],
+      "selected_exact_optimal": true,
+      "selected_test_loss_sum": 297,
+      "selected_train_loss": 73,
+      "stratum": "cancellation",
+      "true_optimal_bases": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          3
+        ]
+      ],
+      "world_reduction_exact": "0"
+    },
+    {
+      "mask": {
+        "full_block_invariant": true,
+        "n_optima": 3,
+        "relative_change": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "1",
+            "0"
+          ]
+        ],
+        "singleton_not_invariant": true,
+        "witness_bases": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            3
+          ]
+        ]
+      },
+      "population_optimum_l0": "28/25",
+      "population_selected_l0": "28/25",
+      "random_basis": [
+        1,
+        4
+      ],
+      "random_test_loss_sum": 366,
+      "reference_test_loss_sum": 293,
+      "seed": 2026120121,
+      "selected_basis": [
+        0,
+        3
+      ],
+      "selected_exact_optimal": true,
+      "selected_test_loss_sum": 282,
+      "selected_train_loss": 66,
+      "stratum": "cancellation",
+      "true_optimal_bases": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          3
+        ]
+      ],
+      "world_reduction_exact": "11/256"
+    },
+    {
+      "mask": {
+        "full_block_invariant": true,
+        "n_optima": 3,
+        "relative_change": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "1",
+            "0"
+          ]
+        ],
+        "singleton_not_invariant": true,
+        "witness_bases": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            3
+          ]
+        ]
+      },
+      "population_optimum_l0": "28/25",
+      "population_selected_l0": "28/25",
+      "random_basis": [
+        1,
+        2
+      ],
+      "random_test_loss_sum": 362,
+      "reference_test_loss_sum": 282,
+      "seed": 2026120122,
+      "selected_basis": [
+        0,
+        1
+      ],
+      "selected_exact_optimal": true,
+      "selected_test_loss_sum": 282,
+      "selected_train_loss": 67,
+      "stratum": "cancellation",
+      "true_optimal_bases": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          3
+        ]
+      ],
+      "world_reduction_exact": "0"
+    },
+    {
+      "mask": {
+        "full_block_invariant": true,
+        "n_optima": 3,
+        "relative_change": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "1",
+            "0"
+          ]
+        ],
+        "singleton_not_invariant": true,
+        "witness_bases": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            3
+          ]
+        ]
+      },
+      "population_optimum_l0": "86/75",
+      "population_selected_l0": "86/75",
+      "random_basis": [
+        2,
+        4
+      ],
+      "random_test_loss_sum": 436,
+      "reference_test_loss_sum": 288,
+      "seed": 2026120123,
+      "selected_basis": [
+        0,
+        1
+      ],
+      "selected_exact_optimal": true,
+      "selected_test_loss_sum": 288,
+      "selected_train_loss": 69,
+      "stratum": "cancellation",
+      "true_optimal_bases": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          3
+        ]
+      ],
+      "world_reduction_exact": "0"
+    },
+    {
+      "mask": {
+        "full_block_invariant": true,
+        "n_optima": 3,
+        "relative_change": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "1",
+            "0"
+          ]
+        ],
+        "singleton_not_invariant": true,
+        "witness_bases": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            3
+          ]
+        ]
+      },
+      "population_optimum_l0": "86/75",      "population_selected_l0": "86/75",
+      "random_basis": [
+        3,
+        4
+      ],
+      "random_test_loss_sum": 370,
+      "reference_test_loss_sum": 299,
+      "seed": 2026120124,
+      "selected_basis": [
+        0,
+        1
+      ],
+      "selected_exact_optimal": true,
+      "selected_test_loss_sum": 299,
+      "selected_train_loss": 63,
+      "stratum": "cancellation",
+      "true_optimal_bases": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          3
+        ]
+      ],
+      "world_reduction_exact": "0"
+    },
+    {
+      "mask": {
+        "full_block_invariant": true,
+        "n_optima": 3,
+        "relative_change": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "1",
+            "0"
+          ]
+        ],
+        "singleton_not_invariant": true,
+        "witness_bases": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            3
+          ]
+        ]
+      },
+      "population_optimum_l0": "6/5",
+      "population_selected_l0": "6/5",
+      "random_basis": [
+        0,
+        4
+      ],
+      "random_test_loss_sum": 373,
+      "reference_test_loss_sum": 308,
+      "seed": 2026120125,
+      "selected_basis": [
+        0,
+        1
+      ],
+      "selected_exact_optimal": true,
+      "selected_test_loss_sum": 308,
+      "selected_train_loss": 74,
+      "stratum": "cancellation",
+      "true_optimal_bases": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          3
+        ]
+      ],
+      "world_reduction_exact": "0"
+    },
+    {
+      "mask": {
+        "full_block_invariant": true,
+        "n_optima": 3,
+        "relative_change": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "1",
+            "0"
+          ]
+        ],
+        "singleton_not_invariant": true,
+        "witness_bases": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            3
+          ]
+        ]
+      },
+      "population_optimum_l0": "86/75",
+      "population_selected_l0": "86/75",
+      "random_basis": [
+        0,
+        1
+      ],
+      "random_test_loss_sum": 303,
+      "reference_test_loss_sum": 303,
+      "seed": 2026120126,
+      "selected_basis": [
+        0,
+        3
+      ],
+      "selected_exact_optimal": true,
+      "selected_test_loss_sum": 283,
+      "selected_train_loss": 69,
+      "stratum": "cancellation",
+      "true_optimal_bases": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          3
+        ]
+      ],
+      "world_reduction_exact": "5/64"
+    },
+    {
+      "mask": {
+        "full_block_invariant": true,
+        "n_optima": 3,
+        "relative_change": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "1",
+            "0"
+          ]
+        ],
+        "singleton_not_invariant": true,
+        "witness_bases": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            3
+          ]
+        ]
+      },
+      "population_optimum_l0": "89/75",
+      "population_selected_l0": "89/75",
+      "random_basis": [
+        2,
+        4
+      ],
+      "random_test_loss_sum": 440,
+      "reference_test_loss_sum": 290,
+      "seed": 2026120127,
+      "selected_basis": [
+        0,
+        3
+      ],
+      "selected_exact_optimal": true,
+      "selected_test_loss_sum": 294,
+      "selected_train_loss": 67,
+      "stratum": "cancellation",
+      "true_optimal_bases": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          3
+        ]
+      ],
+      "world_reduction_exact": "-1/64"
+    },
+    {
+      "mask": {
+        "full_block_invariant": true,
+        "n_optima": 3,
+        "relative_change": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "1",
+            "0"
+          ]
+        ],
+        "singleton_not_invariant": true,
+        "witness_bases": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            3
+          ]
+        ]
+      },
+      "population_optimum_l0": "29/25",
+      "population_selected_l0": "29/25",
+      "random_basis": [
+        2,
+        4
+      ],
+      "random_test_loss_sum": 442,
+      "reference_test_loss_sum": 303,
+      "seed": 2026120128,
+      "selected_basis": [
+        1,
+        3
+      ],
+      "selected_exact_optimal": true,
+      "selected_test_loss_sum": 293,
+      "selected_train_loss": 71,
+      "stratum": "cancellation",
+      "true_optimal_bases": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          3
+        ]
+      ],
+      "world_reduction_exact": "5/128"
+    },
+    {
+      "mask": {
+        "full_block_invariant": true,
+        "n_optima": 3,
+        "relative_change": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "1",
+            "0"
+          ]
+        ],
+        "singleton_not_invariant": true,
+        "witness_bases": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            3
+          ]
+        ]
+      },
+      "population_optimum_l0": "17/15",
+      "population_selected_l0": "17/15",
+      "random_basis": [
+        1,
+        2
+      ],
+      "random_test_loss_sum": 355,
+      "reference_test_loss_sum": 287,
+      "seed": 2026120129,
+      "selected_basis": [
+        0,
+        3
+      ],
+      "selected_exact_optimal": true,
+      "selected_test_loss_sum": 290,
+      "selected_train_loss": 71,
+      "stratum": "cancellation",
+      "true_optimal_bases": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          3
+        ]
+      ],
+      "world_reduction_exact": "-3/256"
+    },
+    {
+      "mask": {
+        "full_block_invariant": true,
+        "n_optima": 3,
+        "relative_change": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "1",
+            "0"
+          ]
+        ],
+        "singleton_not_invariant": true,
+        "witness_bases": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            3
+          ]
+        ]
+      },
+      "population_optimum_l0": "6/5",
+      "population_selected_l0": "6/5",
+      "random_basis": [
+        2,
+        3
+      ],
+      "random_test_loss_sum": 391,
+      "reference_test_loss_sum": 317,
+      "seed": 2026120130,
+      "selected_basis": [
+        0,
+        3
+      ],
+      "selected_exact_optimal": true,
+      "selected_test_loss_sum": 304,
+      "selected_train_loss": 72,
+      "stratum": "cancellation",
+      "true_optimal_bases": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          3
+        ]
+      ],
+      "world_reduction_exact": "13/256"
+    },
+    {
+      "mask": {
+        "full_block_invariant": true,
+        "n_optima": 3,
+        "relative_change": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "1",
+            "0"
+          ]
+        ],
+        "singleton_not_invariant": true,
+        "witness_bases": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            3
+          ]
+        ]
+      },
+      "population_optimum_l0": "28/25",
+      "population_selected_l0": "28/25",
+      "random_basis": [
+        0,
+        1
+      ],
+      "random_test_loss_sum": 291,
+      "reference_test_loss_sum": 291,
+      "seed": 2026120131,
+      "selected_basis": [
+        1,
+        3
+      ],
+      "selected_exact_optimal": true,
+      "selected_test_loss_sum": 295,
+      "selected_train_loss": 69,
+      "stratum": "cancellation",
+      "true_optimal_bases": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          3
+        ]
+      ],
+      "world_reduction_exact": "-1/64"
+    },
+    {
+      "mask": {
+        "full_block_invariant": true,
+        "n_optima": 3,
+        "relative_change": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "1",
+            "0"
+          ]
+        ],
+        "singleton_not_invariant": true,
+        "witness_bases": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            3
+          ]
+        ]
+      },
+      "population_optimum_l0": "17/15",
+      "population_selected_l0": "17/15",
+      "random_basis": [
+        0,
+        3
+      ],
+      "random_test_loss_sum": 302,
+      "reference_test_loss_sum": 302,
+      "seed": 2026120132,
+      "selected_basis": [
+        0,
+        1
+      ],
+      "selected_exact_optimal": true,
+      "selected_test_loss_sum": 302,
+      "selected_train_loss": 69,
+      "stratum": "cancellation",
+      "true_optimal_bases": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          3
+        ]
+      ],
+      "world_reduction_exact": "0"
+    }
+  ]
+}

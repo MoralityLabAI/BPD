@@ -1,0 +1,38 @@
+name: BPD FSI02 prospective finite-basis CPU worlds
+on:
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/*fsi02*'
+      - '.github/workflows/bpd-fsi02.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  exact-world-replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: MoralityLabAI/EvalMath
+          ref: 5004cab9b366a412290a83945cda76987bb3cd6c
+          path: .deps/evalmath
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: All prospective worlds, exact mask math and receipt agreement
+        run: |
+          export EVALMATH_FSI_FILE="${{ github.workspace }}/.deps/evalmath/src/spiral_ln/evaluation_finite_sample.py"
+          PYTHONPATH=. python -m unittest discover -s mechinterp/bpd/experiments -p 'test_fsi02_cpu.py' -v
+      - name: Re-run registered BPD FSI02 from source
+        run: |
+          export EVALMATH_FSI_FILE="${{ github.workspace }}/.deps/evalmath/src/spiral_ln/evaluation_finite_sample.py"
+          python mechinterp/bpd/experiments/fsi02_run.py \
+            --registration mechinterp/bpd/experiments/fsi02_registration_v1.json \
+            --out /tmp/bpd_fsi02_replay.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bpd-fsi02-full-public-cpu-replay
+          path: /tmp/bpd_fsi02_replay.json
+          if-no-files-found: error
