@@ -75,38 +75,44 @@ class StageTwoDonorSourceChecks(unittest.TestCase):
     def test_exact_unconditional_blind_mean_closed_form(self):
         c=make_cohort(20661,160,"authorized_unconditional")
         b=c.recipient
-        predicted=[]
-        for i in range(160):
-            L=int(b.lengths[i])
-            template=HELDOUT_TEMPLATES[L]
-            last=template[-1]
-            other=[k for k in range(3) if k!=last]
-            loc=[max(j for j,t in enumerate(template) if t==k) for k in other]
-            value=.5*b.values[i,L-1]+.25*(b.values[i,loc[0]]+b.values[i,loc[1]])
-            predicted.append(value)
-        expected=torch.stack(predicted)
-        self.assertTrue(torch.allclose(expected,c.blind_recipient,atol=2e-6))
-        self.assertTrue(torch.allclose(expected,c.blind_donor,atol=2e-6))
-
-    def test_high_contrast_conditional_blind_mean_closed_form(self):
-        c=make_cohort(20819,160,"authorized_high_contrast")
-        b=c.recipient
-        predicted=[]
+        expected_rec,expected_don=[],[]
         for i in range(160):
             L=int(b.lengths[i])
             template=HELDOUT_TEMPLATES[L]
             old=template[-1]
-            other=[k for k in range(3) if k!=old]
-            loc=[max(j for j,t in enumerate(template) if t==k) for k in other]
-            last_value=b.values[i,L-1]
-            prev=b.values[i,loc]
-            allowed=(last_value-prev).abs()>=HIGH_CONTRAST_GAP
-            self.assertTrue(allowed.any())
-            expected=.5*last_value+.5*prev[allowed].mean()
-            predicted.append(expected)
-        expected=torch.stack(predicted)
-        self.assertTrue(torch.allclose(expected,c.blind_recipient,atol=2e-6))
-        self.assertTrue(torch.allclose(expected,c.blind_donor,atol=2e-6))
+            j_old=max(j for j,t in enumerate(template[:-1]) if t==old)
+            others=[k for k in range(3) if k!=old]
+            pos=[max(j for j,t in enumerate(template) if t==k) for k in others]
+            v_last=b.values[i,L-1]
+            expected_rec.append(.5*v_last+.25*(b.values[i,pos[0]]+b.values[i,pos[1]]))
+            expected_don.append(.5*v_last+.5*b.values[i,j_old])
+        self.assertTrue(torch.allclose(torch.stack(expected_rec),c.blind_recipient,atol=2e-6))
+        self.assertTrue(torch.allclose(torch.stack(expected_don),c.blind_donor,atol=2e-6))
+        self.assertTrue(((c.blind_recipient-c.blind_donor).abs()>1e-5).any())
+
+    def test_high_contrast_conditional_blind_mean_closed_form(self):
+        c=make_cohort(20819,160,"authorized_high_contrast")
+        b=c.recipient
+        expected_rec,expected_don=[],[]
+        for i in range(160):
+            L=int(b.lengths[i])
+            template=HELDOUT_TEMPLATES[L]
+            old=template[-1]
+            j_old=max(j for j,t in enumerate(template[:-1]) if t==old)
+            others=[k for k in range(3) if k!=old]
+            pos=[max(j for j,t in enumerate(template) if t==k) for k in others]
+            last=b.values[i,L-1]
+            prev_old=b.values[i,j_old]
+            other_a,other_b=b.values[i,pos[0]],b.values[i,pos[1]]
+            wo=float((last-prev_old).abs()>=HIGH_CONTRAST_GAP)
+            wa=float((last-other_a).abs()>=HIGH_CONTRAST_GAP)
+            wb=float((last-other_b).abs()>=HIGH_CONTRAST_GAP)
+            Z=2*wo+wa+wb
+            self.assertGreater(Z,0)
+            expected_rec.append((2*wo*last+wa*other_a+wb*other_b)/Z)
+            expected_don.append((2*wo*prev_old+(wa+wb)*last)/Z)
+        self.assertTrue(torch.allclose(torch.stack(expected_rec),c.blind_recipient,atol=2e-6))
+        self.assertTrue(torch.allclose(torch.stack(expected_don),c.blind_donor,atol=2e-6))
 
     def test_reproducible_and_distinct_seeds(self):
         a=make_cohort(90103,80,"authorized_high_contrast")
