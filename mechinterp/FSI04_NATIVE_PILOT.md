@@ -34,7 +34,7 @@ Historical continuous donor alignment, exact Sudoku solve changes and the select
 
 The [roster generator](dark_fiber_gyms/fsi04/roster.py) uses randomized MRV full Sudoku solutions, an exact unique-solution clue-deletion solver, and synchronous naked/hidden-single propagation to select **24 S4-stalled** roots and **12 WB-Prop** negative-control roots. It rejects all exact/digit-relabel/full-grid automorphism equivalents of the 256 prior LOOPSCOPE-02 source puzzles and compares SHA-256 puzzle identities with the 120 historical LOOPSCOPE-04 root IDs. The historical archive contains hashes rather than source puzzles, so full-automorphism exclusion against those 120 cannot be independently certified. Do not call the new roster universally contamination-free.
 
-CI produces a small six-board smoke roster, with the raw development.csv and hash-bearing manifest as artifacts. A full roster is created locally with the same script. **Never include ARG-03 test.jsonl in the exclusions or readout command.**
+CI produces a three-board smoke roster, with the raw development.csv and hash-bearing manifest as artifacts. A full roster is created locally with the same script. **Never include ARG-03 test.jsonl in the exclusions or readout command.**
 
 ## Source and native commands
 
@@ -43,7 +43,7 @@ From the BPD repository root:
 ```bash
 # First generate solver-checked unscored development puzzles.
 python -m mechinterp.dark_fiber_gyms.fsi04.roster \
-  --out-dir runs/fsi04/roster --max-attempts 8000
+  --out-dir runs/fsi04/roster --max-attempts 100000
 
 # In a source-only environment, run old-data preflight, a guaranteed red gate.
 export EVALMATH_PREFLIGHT_FILE=/path/to/EvalMath/skills/evalmath-mechinterp-power/scripts/preflight.py
