@@ -15,7 +15,7 @@ from mechinterp.bpd.components import BPDModel
 from mechinterp.bpd.theory.pd05.experiment import (
     CONFIG, ARMS, SEEDS, FAMILIES, AdaptiveCountSTE, ARM_BY_KEY,
     build, count_truth, draw_train_batch, draw_stratified, masked_forward,
-    objective, run_arm, summary, gate_mask, evaluate_all,
+    objective, run_arm, summary, evaluate_all,
 )
 from mechinterp.bpd.theory.pd04.experiment import draw_family
 
