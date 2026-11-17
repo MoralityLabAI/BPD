@@ -88,8 +88,12 @@ jobs:
         run: |
           python -m pytest -q mechinterp/bpd/theory/pd08/test_experiment.py
           python -m pytest -q mechinterp/bpd/theory/pd08/test_published_results.py
-      - name: PD09 unlabeled hyperplane mass and QR source-only engineering smoke
-        run: python -m pytest -q mechinterp/bpd/theory/pd09/test_experiment.py
+      - name: PD09 source smoke, 24-seed registered replay and posthoc landscape
+        run: |
+          python -m pytest -q mechinterp/bpd/theory/pd09/test_experiment.py
+          python -m pytest -q mechinterp/bpd/theory/pd09/test_published_results.py
+          python -m pytest -q mechinterp/bpd/theory/pd09/test_landscape.py
+          python -m mechinterp.bpd.theory.pd09.landscape_audit --out /tmp/bpd-pd09-landscape-posthoc.json
       - name: Verify source module syntax
         run: |
           python -m compileall -q mechinterp/bpd
