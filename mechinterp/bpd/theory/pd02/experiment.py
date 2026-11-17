@@ -334,7 +334,9 @@ def wilson_ci(success: int, total: int, z: float = 1.959963984540054):
     d = 1 + z * z / total
     mid = (p + z * z / (2 * total)) / d
     spread = z * math.sqrt(p * (1 - p) / total + z * z / (4 * total * total)) / d
-    return [max(0, mid - spread), min(1, mid + spread)]
+    lower = 0.0 if success == 0 else max(0.0, mid - spread)
+    upper = 1.0 if success == total else min(1.0, mid + spread)
+    return [lower, upper]
 
 
 def summarize(arms: list[dict], *, registered: bool) -> dict:
