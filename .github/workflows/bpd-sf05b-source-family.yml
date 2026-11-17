@@ -1,0 +1,66 @@
+name: BPD-SF05B source-family benchmark and exact Bayes oracles
+
+on:
+  pull_request:
+    paths:
+      - "mechinterp/bpd/theory/sf05b_source_families/**"
+      - ".github/workflows/bpd-sf05b-source-family.yml"
+  push:
+    branches:
+      - "research/bpd-sf05b-*"
+    paths:
+      - "mechinterp/bpd/theory/sf05b_source_families/**"
+      - ".github/workflows/bpd-sf05b-source-family.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  generator-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pinned CPU PyTorch
+        run: python -m pip install "torch==2.5.1"
+      - name: Validate source family hash and future-root exclusion
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json,subprocess
+          from pathlib import Path
+          p=Path('mechinterp/bpd/theory/sf05b_source_families')
+          lock=json.loads((p/'LOCK_STAGE0.json').read_text())
+          assert lock['stage']=='STAGE0_GENERATOR_ONLY_BEFORE_ANY_NEW_MODEL_ROOT'
+          assert lock['new_trained_roots']==0
+          assert lock['reserved_calibration_root_ids']['count']==59
+          assert lock['reserved_confirmation_root_ids']['count']==32
+          for file,sha in lock['files'].items():
+              got=subprocess.check_output(['git','hash-object',str(p/file)],text=True).strip()
+              assert got==sha,(file,got,sha)
+          print('SF05B structural source split HASH LOCK VERIFIED; no new teacher roots')
+          PY
+      - name: Exact last-write labels and exhaustive blind oracle tests
+        run: python -m unittest discover -s mechinterp/bpd/theory/sf05b_source_families/tests -v
+      - name: Deterministic source-family split admission
+        shell: bash
+        run: |
+          python - <<'PY'
+          import torch
+          from mechinterp.bpd.theory.sf05b_source_families.source_families import make_batch,change_last_source
+          a=make_batch(10103,1024,'train')
+          b=make_batch(20103,1024,'heldout')
+          assert a.lengths.max()<=4 and b.lengths.min()>=5
+          assert b.events.shape==(1024,6,11)
+          donor,y,tags=change_last_source(b,31203)
+          assert torch.equal(donor[:,:,3:],b.events[:,:,3:])
+          print('TRAIN source-family labels/lengths:', {str(k):int((a.lengths==k).sum()) for k in (2,3,4)})
+          print('HELDOUT source-family labels/lengths:', {str(k):int((b.lengths==k).sum()) for k in (5,6)})
+          print('HELDOUT source-blind conditional-mean MSE:',
+                float((b.target-b.source_blind_conditional_mean).square().mean()))
+          print('No model was trained. Generator only.')
+          PY
