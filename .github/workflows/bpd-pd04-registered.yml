@@ -1,0 +1,87 @@
+name: BPD-PD-04 adaptive cardinality first registered cohort
+
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/theory/pd04/EXECUTE_LOCK.json'
+
+permissions:
+  contents: read
+
+jobs:
+  first-registered-cohort:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify frozen source ancestry and original registration
+        run: |
+          python - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          root=Path('mechinterp/bpd/theory/pd04')
+          lock=json.loads((root/'EXECUTE_LOCK.json').read_text(encoding='utf-8'))
+          cfg=json.loads((root/'CONFIG.json').read_text(encoding='utf-8'))
+          assert lock['study_id']==cfg['study_id']=='BPD-PD-04'
+          assert lock['execution']=='first_registered_full_cohort'
+          assert lock['seeds']==24 and lock['arms_per_seed']==7
+          assert len(cfg['seed_list'])==24 and len(cfg['arms'])==7
+          assert len(cfg['heldout_families'])==3
+          base=lock['source_commit_sha']
+          subprocess.run(['git','merge-base','--is-ancestor',base,'HEAD'],check=True)
+          source_paths=[str(root/x) for x in
+            ('CONFIG.json','PROTOCOL.md','experiment.py','test_experiment.py')]
+          subprocess.run(['git','diff','--exit-code',base,'HEAD','--',
+                          *source_paths],check=True)
+          print('PD04 frozen source verified:',base)
+          PY
+      - name: Install pinned Torch and test dependencies on CPU
+        run: |
+          python -m pip install --disable-pip-version-check pytest
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Run excluded-seed engineering checks before any science data
+        run: python -m pytest -q mechinterp/bpd/theory/pd04/test_experiment.py
+      - name: Execute 24 seeds and all seven preregistered arms
+        run: python -m mechinterp.bpd.theory.pd04.experiment --out /tmp/bpd-pd04-first-run.json
+      - name: Verify all 168 source-locked evidence rows and exact mask guards
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('/tmp/bpd-pd04-first-run.json')
+          r=json.loads(p.read_text())
+          c=json.loads(Path('mechinterp/bpd/theory/pd04/CONFIG.json').read_text())
+          assert r['study_id']=='BPD-PD-04'
+          assert r['summary']['is_registered_run']
+          assert len(r['rows'])==24*7==168
+          assert {row['seed'] for row in r['rows']}==set(c['seed_list'])
+          assert {row['arm'] for row in r['rows']}=={a['key'] for a in c['arms']}
+          assert len({(row['seed'],row['arm']) for row in r['rows']})==168
+          assert all(set(row['heldout']['per_family'])==set(c['heldout_families'])
+                     for row in r['rows'])
+          assert all(all(v['mask_is_binary']
+                         for v in row['heldout']['per_family'].values())
+                     for row in r['rows'])
+          assert all(row['factor_update_norm']>0 for row in r['rows']
+                     if not row['frozen'])
+          assert all(row['factor_update_norm']==0 for row in r['rows']
+                     if row['frozen'])
+          assert all(len(row['calibration_candidates'])==7 for row in r['rows']
+                     if row['mode']=='calibrated')
+          print('Scientific preregistered gate:',r['summary']['registered_primary_passed'])
+          print('Seed-level successes:',r['summary']['success_count_by_arm'])
+          print('Exact paired McNemar p:',r['summary']['McNemar_exact_two_sided_p'])
+          PY
+      - name: Archive original full registered JSON even on scientific FAIL
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bpd-pd04-first-run-${{ github.run_id }}
+          path: /tmp/bpd-pd04-first-run.json
+          retention-days: 60
+          if-no-files-found: warn
