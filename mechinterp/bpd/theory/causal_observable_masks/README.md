@@ -7,10 +7,12 @@ It asks which BPD component masks are **observationally invariant for k addition
 From BPD repo root:
 
 ```bash
-python -m unittest discover -s mechinterp/bpd/theory/causal_observable_masks/tests -v
-python -m mechinterp.bpd.theory.causal_observable_masks.reference --out mechinterp/bpd/theory/causal_observable_masks/results/cq01_cpu_reference.json --check
+PYTHONPATH=mechinterp/bpd/theory python -m unittest discover -s mechinterp/bpd/theory/causal_observable_masks/tests -v
+PYTHONPATH=mechinterp/bpd/theory python -m causal_observable_masks.reference --out mechinterp/bpd/theory/causal_observable_masks/results/cq01_cpu_reference.json --check
 ```
 
 The first command uses no PyTorch, GPU, remote services, or model weights. `reference --check` replays all 384 deterministic rational worlds from the registered script, verifies source hashes and the fixed result. The numerical output is a mathematical instrument audit rather than empirical BPD parameter recovery.
 
 The companion retrospective [SCM21_RECEIPT_CROSSWALK.md](SCM21_RECEIPT_CROSSWALK.md) keeps the native-write norm mismatch visible. A proper trained BPD test requires independent candidate-subspace calibration and paired held-out outcome measurements.
+
+The standalone module path keeps this exact Fraction audit independent of BPD's optional Torch runtime and its package-level imports. This is a CI dependency correction only; registered mathematical source, protocol and receipt hashes remain unchanged.
