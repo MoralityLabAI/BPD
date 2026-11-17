@@ -1,0 +1,30 @@
+name: BPD-AMM-01 agent memory source/receipt replay
+on:
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/amm01_agent_memory/**'
+      - '.github/workflows/bpd-amm01-agent-memory.yml'
+  workflow_dispatch:
+jobs:
+  cpu-replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Tests (stdlib; no weights)
+        run: python -m unittest mechinterp.bpd.experiments.amm01_agent_memory.test_experiment -v
+      - name: Replay locked development receipt
+        run: |
+          if test -f mechinterp/bpd/experiments/amm01_agent_memory/results/DEVELOPMENT.json; then
+            python -m mechinterp.bpd.experiments.amm01_agent_memory.experiment --phase development --check mechinterp/bpd/experiments/amm01_agent_memory/results/DEVELOPMENT.json
+          fi
+      - name: Replay locked confirmation receipt
+        run: |
+          if test -f mechinterp/bpd/experiments/amm01_agent_memory/results/PREFLIGHT.json && test -f mechinterp/bpd/experiments/amm01_agent_memory/results/CONFIRMATION.json; then
+            python -m mechinterp.bpd.experiments.amm01_agent_memory.experiment --phase confirmation --preflight mechinterp/bpd/experiments/amm01_agent_memory/results/PREFLIGHT.json --check mechinterp/bpd/experiments/amm01_agent_memory/results/CONFIRMATION.json
+          else
+            echo 'SOURCE ONLY: no confirmation receipt committed'
+          fi
