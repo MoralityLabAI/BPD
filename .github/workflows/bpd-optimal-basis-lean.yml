@@ -40,6 +40,7 @@ jobs:
           lean mechinterp/bpd/theory/pd04/PlantedCapacity.lean | tee -a /tmp/bpd-optimal-basis-axioms.txt
           lean mechinterp/bpd/theory/pd05/CountSeparation.lean | tee -a /tmp/bpd-optimal-basis-axioms.txt
           lean mechinterp/bpd/theory/pd06/RotatedSupportMass.lean | tee -a /tmp/bpd-optimal-basis-axioms.txt
+          lean mechinterp/bpd/theory/pd07/ReadGateSeparation.lean | tee -a /tmp/bpd-optimal-basis-axioms.txt
           python - <<'PY'
           from pathlib import Path
           import re
@@ -58,6 +59,7 @@ jobs:
           assert 'BPD.PD04.top1_cannot_reconstruct_overlap' in s
           assert 'BPD.PD05.quantized_one_two_gap' in s
           assert 'BPD.PD06.rotated_coordinate_hyperplane_masses' in s
+          assert 'BPD.PD07.read_gate_exact_on_any_four_coordinate_support' in s
           assert 'BPD.PD06.heldout_pairs_distinct_from_seen' in s
           print('Lean kernel proof declarations checked; foundational axioms only')
           PY
