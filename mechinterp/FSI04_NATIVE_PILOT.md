@@ -66,6 +66,18 @@ python -m mechinterp.dark_fiber_gyms.fsi04.native_pilot \
   --out runs/fsi04/yagiz_development.json --device cuda:0
 ```
 
+After both native development receipts exist, run the **independent-root preflight** on all 24 S4 puzzles. It rejects mismatched board lists, altered registration hashes, incomplete arm records, missing controls, and physical-dose violations. It sends primary donor-minus-clean recovery and both checkpoint shams to the EvalMath skill:
+
+\`\`\`bash
+python -m mechinterp.dark_fiber_gyms.fsi04.pilot_power \
+  --yagiz runs/fsi04/yagiz_development.json \
+  --gaoxin runs/fsi04/gaoxin_development.json \
+  --roster-manifest runs/fsi04/roster/development_manifest.json \
+  --out runs/fsi04/new_native_power.json
+\`\`\`
+
+This 24-root pilot is intentionally **not eligible to pass the nonparametric 95th-percentile/95%-confidence sham-tail criterion**. It can show whether the corrected-cell signal merits commissioning at least 59 fresh sham-calibration roots with the new dose-matched control. A new sealed confirmation cohort and prospective decision rule would then be separate from the pilot, with familywise adjustment for the checkpoint comparisons.
+
 The native runner rejects missing weights, an altered roster manifest, SHA mismatch, an incorrectly labelled difficulty stratum, and geometric dose/readout parity violations. The runner itself imports no ARG-03 data. Retain checkpoint and board source hashes in each output and report all arms, including failed/silent controls. Generate further independent calibration and confirmation roots only after the developmental effect clears the *mechanistic* threshold and a valid matched-sham envelope is available.
 
 ## Evidence classification
