@@ -1,0 +1,246 @@
+{
+  "study_id": "BPD-PD-07",
+  "registered_at": "2026-11-17",
+  "status": "source_registration_before_any_pd07_training",
+  "predecessor": {
+    "pd06_merge_commit": "7e6a8bd3c2d34dcfc1111f3973d8467994d5e656",
+    "pd06_count_supervised_successes": 1,
+    "pd06_unsupervised_successes": 0,
+    "pd06_support_supervised_successes": 17,
+    "pd06_oracle_support_successes": 32,
+    "pd06_count_supervised_ood_pair_route_mean": 0.311849,
+    "pd06_count_supervised_ood_triple_route_mean": 0.562012
+  },
+  "question": "Will componentwise gating on the learned read coefficients x@V, rather than raw-observation MLP gating, recover reusable mechanisms on withheld support combinations without count or support labels?",
+  "seeds": [
+    947,
+    953,
+    967,
+    971,
+    977,
+    983,
+    991,
+    997,
+    1013,
+    1019,
+    1021,
+    1031,
+    1033,
+    1039,
+    1049,
+    1051,
+    1061,
+    1063,
+    1069,
+    1087,
+    1091,
+    1093,
+    1097,
+    1103
+  ],
+  "source": {
+    "parent": "PD06 frozen sample_batch and rotation_for_seed, unchanged source support law",
+    "physical_dimension": 4,
+    "components": 4,
+    "passes": 4,
+    "train_support_k1": [
+      [
+        0
+      ],
+      [
+        1
+      ],
+      [
+        2
+      ],
+      [
+        3
+      ]
+    ],
+    "train_support_k2": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        0,
+        3
+      ]
+    ],
+    "train_support_k3": [
+      [
+        0,
+        1,
+        2
+      ],
+      [
+        0,
+        1,
+        3
+      ],
+      [
+        1,
+        2,
+        3
+      ]
+    ],
+    "unseen_support_k2": [
+      [
+        0,
+        2
+      ],
+      [
+        1,
+        3
+      ]
+    ],
+    "unseen_support_k3": [
+      [
+        0,
+        2,
+        3
+      ]
+    ],
+    "evaluation_families": [
+      "k1_seen",
+      "k2_seen",
+      "k2_unseen",
+      "k3_seen",
+      "k3_unseen",
+      "transition_unseen"
+    ],
+    "rotation_Q_generator": "900000+seed Gaussian QR, diag-sign-normalized",
+    "train_generator": "100000+seed",
+    "heldout_generator": "200000+seed plus 10000*family index",
+    "independent_active_amplitude_range": [
+      0.75,
+      1.25
+    ],
+    "train_batch_size": 32,
+    "heldout_boards_per_family": 192
+  },
+  "model": {
+    "teacher": "one shared bias-free W=I4 physical BPDModel/TiedComponentLinear",
+    "factor_count": 4,
+    "zero_ablation": true,
+    "sphere_rescale": false,
+    "residual_delta_mask": 0,
+    "read_source": "normalized z=x@V divided by per-column L2 norm(V), clamp_min 1e-6",
+    "read_gate": "sigmoid(10*(abs(z_j) - (0.25+0.5*sigmoid(tau_j))))",
+    "tau_raw_initial": 0,
+    "read_gate_forward": "binary 1[p>=0.5] using exact ThresholdSTE",
+    "raw_gate": "PD06 GateMLP(Linear 4x32 GELU, assignment 4, count 3)",
+    "read_gate_detach_control": "detach V only when forming gate read features, while actual physical BPD factors remain trainable",
+    "gate_no_phase_id": true,
+    "gate_no_true_Q": true,
+    "all_trainable_arms_start_identical_factor_and_raw_mlp_initialization": true
+  },
+  "arms": [
+    {
+      "key": "read_coupled",
+      "kind": "read",
+      "factor_train": true,
+      "uses_count_label": false,
+      "uses_support_label": false,
+      "read_feature_gradient_to_V": true
+    },
+    {
+      "key": "raw_independent",
+      "kind": "raw_independent",
+      "factor_train": true,
+      "uses_count_label": false,
+      "uses_support_label": false
+    },
+    {
+      "key": "read_detached",
+      "kind": "read",
+      "factor_train": true,
+      "uses_count_label": false,
+      "uses_support_label": false,
+      "read_feature_gradient_to_V": false
+    },
+    {
+      "key": "raw_count_supervised",
+      "kind": "raw_count",
+      "factor_train": true,
+      "uses_count_label": true,
+      "uses_support_label": false
+    },
+    {
+      "key": "read_planted_frozen",
+      "kind": "read",
+      "factor_train": false,
+      "uses_count_label": false,
+      "uses_support_label": false,
+      "planted_Q_factors": true
+    },
+    {
+      "key": "oracle_support",
+      "kind": "oracle",
+      "factor_train": true,
+      "uses_count_label": false,
+      "uses_support_label": true
+    }
+  ],
+  "train": {
+    "optimizer": "Adam",
+    "steps": 240,
+    "lr": 0.025,
+    "weight_decay": 0,
+    "coef_output_mse": 1,
+    "coef_matrix_faith": 0.3,
+    "coef_gate_frac": 0.05,
+    "coef_raw_count_ce": 1,
+    "no_support_supervision_except_oracle": true,
+    "surrogate": "PD03 exact binary mask with probability STE for read/raw; PD06 soft-topk STE for privileged raw_count arm",
+    "curriculum": "none; same source law in every training step",
+    "train_actual_V_and_U_each_step": true
+  },
+  "success": {
+    "mean_abs_read_cosine_min": 0.9,
+    "overall_mse_max": 0.03,
+    "seen_family_mse_max": 0.04,
+    "unseen_family_mse_max": 0.06,
+    "seen_fourpass_exact_support_fraction_min": 0.8,
+    "unseen_fourpass_exact_support_fraction_min": 0.7,
+    "nonzero_initial_factor_grad": true,
+    "nonzero_factor_update": true,
+    "exact_binary_forward": true,
+    "primary_arm": "read_coupled",
+    "control_arm": "raw_independent",
+    "primary_min_successes": 18,
+    "primary_net_seed_wins_min": 6,
+    "primary_exact_mcnemar_p_max": 0.05
+  },
+  "reporting": {
+    "all_seed_arm_rows": true,
+    "seed_paired_exact_McNemar": true,
+    "Wilson95": true,
+    "per_family_false_on_false_off": true,
+    "per_family_support_and_mse": true,
+    "read_basis_alignment": true,
+    "heldout_bypass_forbidden": true,
+    "freeze_threshold_training_only": true,
+    "first_full_run_preserved_on_fail": true,
+    "no_neural_identification_claim": true
+  },
+  "runtime": {
+    "device": "CPU",
+    "torch": "2.5.1+cpu",
+    "threads": 1,
+    "python": "3.12",
+    "single_process": true,
+    "process_RSS_GiB_max": 3,
+    "science_workflow_timeout_min": 20,
+    "smoke_seed": 2003,
+    "source_lock_before_science": true
+  }
+}
