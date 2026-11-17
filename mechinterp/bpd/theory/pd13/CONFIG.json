@@ -1,0 +1,204 @@
+{
+  "study_id": "BPD-PD-13",
+  "registration_date": "2026-11-18",
+  "status": "prospective_frozen_before_any_pd13_training",
+  "predecessor": {
+    "pd12_merge_sha": "d37ee8f286025b43832a59507503d65624f77f3d",
+    "pd12_clustered16d_strong_global37": 0,
+    "pd12_clustered16d_weak_global37": 0,
+    "pd12_planted_oracle_16d": 32,
+    "pd12_first_run": 44135442855
+  },
+  "scientific_question": "On unchanged clustered 16D PD12 sources, does prioritizing difficult read pairs by low marginal smoothed zero mass improve full mechanism recovery over lexicographic order at matched 2048-board and equal candidate score budgets; what independent benefit comes from 8x training observations?",
+  "seed_cells": [
+    {
+      "id": "clustered16d_strong",
+      "dimension": 16,
+      "support_distribution": "clustered",
+      "margin": "strong",
+      "seeds": [
+        2371,
+        2377,
+        2381,
+        2383,
+        2389,
+        2393,
+        2399,
+        2411,
+        2417,
+        2423,
+        2437,
+        2441,
+        2447,
+        2459,
+        2467,
+        2473
+      ]
+    },
+    {
+      "id": "clustered16d_weak",
+      "dimension": 16,
+      "support_distribution": "clustered",
+      "margin": "weak",
+      "seeds": [
+        2477,
+        2503,
+        2521,
+        2531,
+        2539,
+        2543,
+        2549,
+        2551,
+        2557,
+        2579,
+        2591,
+        2593,
+        2609,
+        2617,
+        2621,
+        2633
+      ]
+    }
+  ],
+  "smoke_seed": 4001,
+  "source": {
+    "generator": "EXACT PD12 rotation_for_seed, support_banks and sample_batch imports; no modification of source law",
+    "training_rng_offset": 100000,
+    "heldout_rng_offset": 200000,
+    "heldout_family_stride": 10000,
+    "train_full_boards": 2048,
+    "train_small_boards": 256,
+    "passes": 4,
+    "heldout_boards_per_family": 96,
+    "dimension": 16,
+    "support_distribution": "clustered",
+    "cluster_probability": 0.85,
+    "train_cardinality_probabilities": [
+      0.25,
+      0.25,
+      0.25,
+      0.25
+    ],
+    "strong_amplitude_min": 0.75,
+    "weak_amplitude_min": 0.25,
+    "train_supports": "PD12 nonwithheld all k-subsets; 0.85 clustered contiguous cyclic windows of length k anchored at 0,4,8,12 for k>=2",
+    "heldout_supports": "PD12 antipodal pairs, stride-two triples and stride-two quartets never in training",
+    "heldout_families": [
+      "k1_seen",
+      "k2_seen",
+      "k3_seen",
+      "k4_seen",
+      "k2_unseen",
+      "k3_unseen",
+      "k4_unseen",
+      "transition_unseen"
+    ],
+    "sampled_training_pool": "one 2048-board data sample per seed. Arms with 256 use x[:256] of SAME full pool. Only observed x enters optimizer."
+  },
+  "model": {
+    "initial_basis": "EXACT PD12 initial_random_basis(seed,16) seeded Gaussian QR with seed+610000; same among all arms",
+    "orthonormal_factors": "V 16x16 orthogonal, U=V.T; physical W=I16",
+    "shared_bpd_wrapper": "PD12 physical_model(16,V) using true BPDModel TiedComponentLinear, 4 passes, zero residual delta",
+    "read_gate": "PD12 fixed threshold strong=0.375 or weak=0.125; no fitting or calibration",
+    "global_assignment": "PD12 deterministic SciPy Hungarian absolute cosine, same permutation every source family"
+  },
+  "arms": [
+    {
+      "key": "priority2048",
+      "kind": "search",
+      "pair_order": "low_mass_first",
+      "train_boards": 2048
+    },
+    {
+      "key": "lex2048",
+      "kind": "search",
+      "pair_order": "lexicographic",
+      "train_boards": 2048
+    },
+    {
+      "key": "priority256",
+      "kind": "search",
+      "pair_order": "low_mass_first",
+      "train_boards": 256
+    },
+    {
+      "key": "lex256",
+      "kind": "search",
+      "pair_order": "lexicographic",
+      "train_boards": 256
+    },
+    {
+      "key": "planted_Q_oracle",
+      "kind": "oracle",
+      "pair_order": null,
+      "train_boards": 0,
+      "privileged_Q": true
+    }
+  ],
+  "objective": {
+    "sigma_by_margin": {
+      "strong": 0.15,
+      "weak": 0.05
+    },
+    "gaussian_mass": "PD12 pairwise exp(-0.5*(rotated_projection/sigma)^2), maximize empirical mass",
+    "angle_range_degrees": [
+      -90,
+      90
+    ],
+    "candidate_grid": 37,
+    "sweeps": 3,
+    "pair_count": 120,
+    "pair_evaluations_per_arm": 13320,
+    "angle_tie_tolerance": 1e-12,
+    "pair_priority": "At start of each sweep compute marginal zero mass m_i=mean_over_observed_x exp(-0.5*(z_i/sigma)^2). Sort all unordered pairs (i,j) by ascending m_i+m_j, lexicographic (i,j) on ties. Visit each exactly once in that sweep; recompute priorities at start of next sweep.",
+    "pair_control": "Lexicographic i<j each sweep; all else including candidate grids, number of pair evaluations, initial V, training inputs and sigma identical",
+    "priority_proxy_cost": "one extra O(N*d) marginal Gaussian mass per sweep, counted and reported separately from candidate-angle evaluations and wall time",
+    "training_sample_cost_high": "13320*8192=109117440 candidate-by-vector comparisons",
+    "training_sample_cost_low": "13320*1024=13639680 candidate-by-vector comparisons",
+    "all_search_arms_see_only_observed_x": true,
+    "source_labels_and_Q_excluded_from_pair_priority_and_score": true
+  },
+  "scoring": {
+    "mean_read_cos_min": 0.9,
+    "overall_MSE_max": 0.035,
+    "per_family_MSE_max": 0.05,
+    "seen_full_fourpass_support_min": 0.8,
+    "unseen_full_fourpass_support_min": 0.7,
+    "exact_binary_masks": true,
+    "nonzero_search_updates": true,
+    "primary_arm": "priority2048",
+    "primary_control": "lex2048",
+    "primary_min_successes": 18,
+    "primary_net_paired_wins_min": 8,
+    "primary_exact_mcnemar_p_max": 0.05,
+    "condition_successes_must_be_reported_separately": true
+  },
+  "statistics": {
+    "independent_unit": "seed plus hidden 16D orthogonal rotation, assigned to one of the two margin cells",
+    "n_total": 32,
+    "n_per_margin": 16,
+    "paired_exact_mcnemar": true,
+    "Wilson95": true,
+    "volume_effect_secondary": "priority2048 vs priority256 and lex2048 vs lex256, paired; report raw counts and differences without a second registered significance gate",
+    "training_cost_ratio_high_low": 8
+  },
+  "evidence": {
+    "full_first_160_arm_json": true,
+    "per_seed_csv": true,
+    "per_cell_failures": true,
+    "zero_supervision_verified": true,
+    "exact_13320_candidate_count": true,
+    "paired_initialization_and_pool_hash": true,
+    "full_evaluator_PD12_exact": true,
+    "original_pd12_untouched": true
+  },
+  "execution": {
+    "python": "3.12",
+    "torch": "2.5.1+cpu",
+    "scipy": "1.14.1",
+    "cpu_threads": 1,
+    "process_RSS_GiB_max": 3,
+    "workflow_timeout_minutes": 20,
+    "one_time_source_lock": true
+  }
+}
