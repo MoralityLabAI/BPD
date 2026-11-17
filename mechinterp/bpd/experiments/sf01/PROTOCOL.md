@@ -86,6 +86,16 @@ F_a(h)=(0,h_1,(a+(1-a)\lambda)h_2).
 
 It has two potential rank-one writes and is run *twice* without changing parameters. From `h_0=(s,0,0)` the initial and first-pass outputs are both zero; the second-pass readout is `(a+(1-a)\lambda)s`. With `a=1` it discloses to the authorized role. With `a=0,\lambda=0` it suppresses the public readout. Positive `lambda` is an intentionally leaky control. This is algebraic routing built into the model, not learned mechanism recovery. See `information.py` and `test_information.py`.
 
+## Synergistic secret subspaces: a two-coordinate obstruction
+
+For independent uniformly random bits `S,K`, let `C=S XOR K`. Then
+
+\[
+I(S;K)=I(S;C)=0,\quad I(S;(K,C))=H(S)=1\ \mathrm{bit}.
+\]
+
+An individually unsuccessful probe or singleton BPD ablation does not show the *joint block* lacks the secret. Conversely, a high-decoding factor is not automatically a mediator. SF01 must measure group/coalition interventions (including pairs of BPD factors), compare their effects to constituent singleton edits, and test gauge changes that remix coordinates within a fixed physical block. This is an exact source-only information-theory control; no trained model is claimed to implement an XOR encoding.
+
 ## Phased prospective campaign
 
 1. Verify exact finite-support conditional information, action/talk chain rule, missing-support KL, source routing, and tied two-pass hidden-to-visible access. Treat these as source-only sanity tests.
