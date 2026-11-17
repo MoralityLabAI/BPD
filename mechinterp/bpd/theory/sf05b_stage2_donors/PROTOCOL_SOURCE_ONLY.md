@@ -16,7 +16,7 @@ This authorized-role stratification is based solely on the **synthetic source la
 
 Define two explicit test strata:
 
-- \`authorized_unconditional\`: keep all n generated cases, including those whose exact target is unchanged. Report the exact target-change fraction and any later model-based admission separately.
+- \`authorized_unconditional\`: keep all n generated cases, including small-magnitude exact target changes. With continuous independent values and the heldout template's repeated source IDs, the chosen role causes a label change almost surely; report its absolute magnitude distribution and any later model-based admission separately.
 - \`authorized_high_contrast\`: draw **4n candidate cases** from one deterministic source seed; after the above role and donor-tag choice, retain the first n examples whose **exact source-oracle target difference is at least 0.30**, without looking at model outputs. Report every candidate denominator, accepted example and rejected count; raise an explicit admission failure if fewer than n qualify. This is a **different generator population** and must be labeled accordingly.
 
 A fixed threshold of 0.30 is a data-generation criterion, not an empirical effect gate. The high-contrast stratum can increase causal test efficiency while conditioning on the source's true label; unconditional results must remain visible.
