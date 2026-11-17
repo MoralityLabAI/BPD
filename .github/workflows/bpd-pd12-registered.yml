@@ -1,0 +1,100 @@
+name: BPD-PD-12 first registered 8D/16D scaling factorial
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/theory/pd12/EXECUTE_LOCK.json'
+permissions:
+  contents: read
+
+jobs:
+  first-frozen-factorial:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify registration, eight cells and immutable source
+        run: |
+          python - <<'PY'
+          import json,subprocess
+          from pathlib import Path
+          root=Path('mechinterp/bpd/theory/pd12')
+          lock=json.loads((root/'EXECUTE_LOCK.json').read_text())
+          cfg=json.loads((root/'CONFIG.json').read_text())
+          assert lock['study_id']==cfg['study_id']=='BPD-PD-12'
+          assert lock['execution']=='first_registered_full_factorial'
+          assert len(cfg['factorial']['cells'])==lock['cells']==8
+          assert sum(len(c['seed_list']) for c in cfg['factorial']['cells'])==lock['units']==64
+          assert len(cfg['arms'])==lock['arms_per_unit']==4
+          assert cfg['scoring']['primary_arm']=='global37'
+          assert cfg['scoring']['paired_control']=='local37'
+          assert len({s for c in cfg['factorial']['cells'] for s in c['seed_list']})==64
+          sha=lock['source_commit_sha']
+          subprocess.run(['git','merge-base','--is-ancestor',sha,'HEAD'],check=True)
+          paths=[str(root/x) for x in (
+            'CONFIG.json','PROTOCOL.md','experiment.py','test_experiment.py'
+          )]
+          paths+=['mechinterp/bpd/components.py',
+                  'mechinterp/bpd/config.py',
+                  'mechinterp/bpd/theory/pd02/experiment.py']
+          subprocess.run(['git','diff','--exit-code',sha,'HEAD','--',*paths],check=True)
+          print('PD12 original frozen research source:',sha)
+          PY
+      - name: Install pinned CPU Torch, SciPy and pytest
+        run: |
+          python -m pip install --disable-pip-version-check pytest 'numpy>=1.26' scipy==1.14.1
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Repeat excluded-seed 8D/16D source, physical mask and cost checks
+        run: python -m pytest -q mechinterp/bpd/theory/pd12/test_experiment.py
+      - name: Run all 64 units times four source-locked arms
+        run: python -m mechinterp.bpd.theory.pd12.experiment --out /tmp/bpd-pd12-first-run.json
+      - name: Verify 256 row evidence, matched budget and stratified statistics
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('/tmp/bpd-pd12-first-run.json').read_text())
+          cfg=json.loads(Path('mechinterp/bpd/theory/pd12/CONFIG.json').read_text())
+          s=r['summary']
+          assert r['study_id']==s['study_id']=='BPD-PD-12'
+          assert s['registered'] and s['units']==64 and s['arm_count']==256
+          assert len(r['arms'])==256
+          assert len({(x['seed'],x['arm']) for x in r['arms']})==256
+          assert len({x['seed'] for x in r['arms']})==64
+          assert {x['arm'] for x in r['arms']}=={a['key'] for a in cfg['arms']}
+          assert set(s['success_by_cell'])=={c['id'] for c in cfg['factorial']['cells']}
+          assert all(set(x['heldout']['per_family'])==
+                     set(cfg['source']['heldout_families']) for x in r['arms'])
+          assert all(all(y['binary_mask'] for y in x['heldout']['per_family'].values())
+                     for x in r['arms'])
+          assert all(not x['uses_true_q_for_optimization'] for x in r['arms']
+                     if x['arm']!='planted_Q_oracle')
+          for x in r['arms']:
+              if x['arm']=='planted_Q_oracle':
+                  assert x['training']['candidate_angle_scores']==0
+                  continue
+              d=x['dimension']
+              n_pairs=d*(d-1)//2
+              budget=cfg['objective']['sweeps']*n_pairs*next(
+                  a['angle_grid'] for a in cfg['arms'] if a['key']==x['arm'])
+              assert x['training']['candidate_angle_scores']==budget
+              assert x['training']['training_observed_vectors']==1024
+              assert x['training']['candidate_scalar_projection_evaluations']==1024*budget
+              assert x['training']['orthogonality_max_error']<1e-4
+          print('PD12 original scientific PASS or FAIL:',s['primary_passed'])
+          print('PD12 success by dimension:',s['success_by_dimension'])
+          print('PD12 success by cell:',s['success_by_cell'])
+          print('PD12 exact paired McNemar:',s['exact_McNemar_two_sided_p'])
+          PY
+      - name: Archive complete immutable 256-arm first-run JSON
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bpd-pd12-first-run-${{ github.run_id }}
+          path: /tmp/bpd-pd12-first-run.json
+          if-no-files-found: warn
+          retention-days: 60
