@@ -74,6 +74,9 @@ jobs:
         run: |
           python -m pytest -q mechinterp/bpd/theory/pd06/test_experiment.py
           python -m pytest -q mechinterp/bpd/theory/pd06/test_published_results.py
+      - name: Verify BPD v3 local-only dither collector against tiny CPU recurrence
+        run: |
+          python -m pytest -q mechinterp/bpd/tests/test_v3_collect_native_dither.py
       - name: Verify source module syntax
         run: |
           python -m compileall -q mechinterp/bpd
