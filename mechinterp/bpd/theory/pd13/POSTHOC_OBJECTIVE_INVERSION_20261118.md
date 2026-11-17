@@ -16,6 +16,8 @@ Let A,B be independent active magnitudes on the registered interval, with indepe
 - h = E exp(-A²/(4 sigma²))
 - c = E[exp(-(A+B)²/(4 sigma²)) + exp(-(A-B)²/(4 sigma²))].
 
+This remix is defined in the planted latent-coordinate frame using the known Q only for a post-hoc diagnostic. Its physical read basis is Q times a fixed four-pair Givens matrix. It is an existence witness for the objective landscape, not a label-free algorithm that recovers those directions from x.
+
 Rotating the pair (A,B) by 45 degrees gives the exact expected *two-read score-sum* difference
 
     D = (p10+p01) (2h-1-g) + p11 (c-2g).
