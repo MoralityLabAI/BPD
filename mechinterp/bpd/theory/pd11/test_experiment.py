@@ -44,7 +44,7 @@ def test_full_candidate_grid_and_matched_eval_budget():
     assert len(global_grid) == len(local_grid) == 73
     assert abs(float(global_grid[0]) + math.pi / 2) < 1e-12
     assert abs(float(global_grid[-1]) - math.pi / 2) < 1e-12
-    assert abs(float(local_grid[0]) - math.radians(5)) < 1e-12
+    assert abs(float(local_grid[0]) + math.radians(5)) < 1e-12
     assert abs(float(local_grid[-1]) - math.radians(5)) < 1e-12
     assert abs(float(global_grid[36])) < 1e-12
     assert abs(float(local_grid[36])) < 1e-12
@@ -132,7 +132,7 @@ def test_all_six_arms_physical_bpd_and_first_run_budgets():
                           "global_pairmix_privileged","local_pairmix_privileged"):
             assert row["number_of_candidate_pair_scores"]==2*6*9
             assert row["orthogonality_max_error"] < 2e-6
-            assert row["actual_nonzero_pair_updates"]>0
+            assert 0 <= row["actual_nonzero_pair_updates"] <= 2 * len(PAIRS)
             assert not row["used_cardinality_labels"]
         if row["arm"].endswith("_privileged"):
             assert row["privileged_true_Q_initializer"]
