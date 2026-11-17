@@ -23,3 +23,7 @@ The naive `floor_and_basis.py --matrix-npz` performs an unnecessary dense solve 
 - Run source-only CPU tests in CI without pretrained weights, capture synthetic timing and peak-memory diagnostics as engineering data only. No real TRM neuron-support conclusion until the local checkpoint capture has run.
 
 Do not modify `REGISTRATION.md`, any existing v2 receipt, or the sealed ARG-03-N test cohort. Preserve the existing `floor_and_basis.py` public function contract and synthetic results while replacing implementation internals.
+
+## Implementation amendment (pre-test, 2026-11-17)
+
+Keep the historical `floor_and_basis.py` evaluator intact as an independent CPU oracle. Introduce the scalable implementation and CLI in separate `basis_stream.py` and `score_exported_basis.py` files; test exact scalar agreement against the historical function on six synthetic seeds. This preserves the previously published synthetic receipt and directs full native 23,058-vector module captures to the streaming implementation. Report the numerical-null write direction count and the non-null active fraction: in a 512×1536 down projection the full right-SVD contains 1,024 structural null-write directions, making raw active counts misleading without the non-null denominator. These null counts are basis geometry, not neural evidence of sparse semantics.
