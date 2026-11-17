@@ -22,7 +22,7 @@ jobs:
           python-version: '3.12'
       - name: Install CPU PyTorch and pytest
         run: |
-          python -m pip install --disable-pip-version-check pytest 'numpy>=1.26' numpy
+          python -m pip install --disable-pip-version-check pytest 'numpy>=1.26' numpy scipy==1.14.1
           python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
       - name: Test archived failure predicates and new contrast/multiplicity/math semantics
         run: |
