@@ -39,6 +39,18 @@ def _validate_record(r):
             raise ValueError("signed causal gain accounting failed")
     if arms["clean"]["correct_cells"]!=arms["self_control"]["correct_cells"]:
         raise ValueError("self-control changed task outcome")
+    n_missing={v.get("missing_cells_total") for v in arms.values()}
+    if len(n_missing)!=1 or not all(type(n) is int and 1<=n<=81 for n in n_missing):
+        raise ValueError("missing-cell causal denominator mismatch")
+    for x in arms.values():
+        n=x["missing_cells_total"]
+        c=x.get("missing_cells_correct")
+        if type(c) is not int or not 0<=c<=n:
+            raise ValueError("invalid missing-cell accuracy")
+        if x.get("missing_net_vs_clean")!=x.get("missing_gained_vs_clean",0)-x.get("missing_lost_vs_clean",0):
+            raise ValueError("missing-cell causal gain accounting failed")
+    if arms["clean"]["missing_cells_correct"]!=arms["self_control"]["missing_cells_correct"]:
+        raise ValueError("self-control changed missing-cell task outcome")
     cert=r.get("certificate",{})
     sham=cert.get("dose_matched_sham",{})
     for k in ("head_pre_readout_max_abs","head_pre_radius_max_abs",
@@ -112,7 +124,13 @@ def evaluate(primary_path:Path,replica_path:Path,roster_manifest:Path):
     stats={}
     for tag in ("yagizdevre","gaoxin492"):
         x=[r["checkpoint_effects"][tag] for r in rows]
+        missing_vals=[
+          (tables[tag][r["unit_id"]]["arms"]["donor_joint"]["missing_cells_correct"]-
+           tables[tag][r["unit_id"]]["arms"]["clean"]["missing_cells_correct"]) /
+          tables[tag][r["unit_id"]]["arms"]["clean"]["missing_cells_total"]
+          for r in rows]
         stats[tag]={"roots":len(x),
+          "mean_missing_cell_donor_vs_clean_fraction":sum(missing_vals)/len(missing_vals),
           "mean_donor_vs_clean_fraction":sum(z["donor_vs_clean"] for z in x)/(81*len(x)),
           "mean_sham_vs_clean_fraction":sum(z["sham_vs_clean"] for z in x)/(81*len(x)),
           "mean_donor_vs_sham_fraction":sum(z["donor_vs_sham"] for z in x)/(81*len(x)),
