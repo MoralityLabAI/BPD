@@ -1,0 +1,73 @@
+name: BPD-AMM-03 geometry-conditioned memory and EvalMath audit
+on:
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/amm03_geometry_memory/**'
+      - '.github/workflows/bpd-amm03-geometry-memory.yml'
+  workflow_dispatch:
+jobs:
+  model-memory-cpu:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install CPU-only PyTorch and numpy
+        run: python -m pip install --index-url https://download.pytorch.org/whl/cpu 'torch==2.10.0+cpu' 'numpy>=1.26'
+      - name: Run excluded-root engineering, gauge, seal guard and native BPD parity
+        run: python -m unittest mechinterp.bpd.experiments.amm03_geometry_memory.test_experiment -v
+      - name: Replay training and development source-locked outcomes, when available
+        shell: bash
+        run: |
+          if test -f mechinterp/bpd/experiments/amm03_geometry_memory/results/DEVELOPMENT_LOCK.json; then
+            python -m mechinterp.bpd.experiments.amm03_geometry_memory.experiment --phase training --out /tmp/amm03_train.json
+            python -m mechinterp.bpd.experiments.amm03_geometry_memory.experiment --phase development --memory /tmp/amm03_train.json --out /tmp/amm03_dev.json
+            python - <<'PY'
+          import json
+          from mechinterp.bpd.experiments.amm03_geometry_memory import experiment as e,models as m
+          root='mechinterp/bpd/experiments/amm03_geometry_memory/results/'
+          tr=json.load(open('/tmp/amm03_train.json'))
+          dv=json.load(open('/tmp/amm03_dev.json'))
+          a=json.load(open(root+'TRAINING_LOCK.json'))
+          b=json.load(open(root+'DEVELOPMENT_LOCK.json'))
+          assert tr['sha256']==a['training_memory_sha256'], 'training memory changed'
+          assert tr['pooled_action']==a['pooled_action'], 'pooled action changed'
+          assert dv['training_memory_sha256']==a['training_memory_sha256']
+          assert dv['totals']==b['totals'] and dv['n_independent_roots']==b['independent_roots']
+          def rootcase(rows):
+              return m.digest([{'root':r['root'],
+                  'heldout_case_bits':r['heldout']['candidate_bits'],
+                  'policy_bits':r['policy_bits'], 'choices':r['policy_actions']} for r in rows])
+          assert rootcase(dv['rows'])==b['root_case_bits_sha256'], 'all candidate or chosen bits drifted'
+          assert e.source_sha256()==a['source_sha256']==b['source_sha256']
+          print('AMM03 full per-root, per-case binary and policy replay PASS')
+          PY
+          else
+            echo 'SOURCE ONLY: no training or development lock committed yet'
+          fi
+      - name: Replay pinned strict EvalMath preflight and verify seal
+        shell: bash
+        run: |
+          if test -f mechinterp/bpd/experiments/amm03_geometry_memory/results/PREFLIGHT.json; then
+            curl -fsSL https://raw.githubusercontent.com/MoralityLabAI/EvalMath/2fdd5fe3f499070b63c474a2455f0e2c00fc55a8/skills/evalmath-mechinterp-power/scripts/preflight.py -o /tmp/amm03_evalmath.py
+            python - <<'PY'
+          import json
+          d=json.load(open('/tmp/amm03_dev.json'))
+          json.dump(d['preflight_input'],open('/tmp/amm03_pilot.json','w'))
+          PY
+            python /tmp/amm03_evalmath.py --pilot /tmp/amm03_pilot.json --out /tmp/amm03_pf.json
+            python - <<'PY'
+          import json
+          p=json.load(open('/tmp/amm03_pf.json'))
+          locked=json.load(open('mechinterp/bpd/experiments/amm03_geometry_memory/results/PREFLIGHT.json'))
+          assert p==locked, 'EvalMath preflight drifted'
+          if p['decision']=='REDESIGN_OR_PILOT_ONLY':
+              print('DEVELOPMENT ONLY: registered confirmation remains sealed')
+          else:
+              print('Preflight READY; separately lock confirmation source before scoring')
+          PY
+          else
+            echo 'SOURCE ONLY: no registered development preflight'
+          fi

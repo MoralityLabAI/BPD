@@ -1,0 +1,34 @@
+{
+  "schema": "bpd.amm03.geometry_memory.v1/development_lock/v1",
+  "experiment": "BPD-AMM-03",
+  "phase": "development",
+  "independent_roots": 64,
+  "heldout_cases_per_root": 128,
+  "n_cases": 8192,
+  "source_sha256": {
+    "models.py": "69b5a0c9688efa048ff9e5fb7308fbc2c8bfe15d0b274a9cf61b00b28af8f967",
+    "experiment.py": "4310c6612986f432f702957e7c6d5387f39e38d32c21bd65b05a833179804500"
+  },
+  "training_memory_sha256": "e22ce9bd2dfbbbcf90ba0502a847477835f275b2099f8d79816c35534a7d0e56",
+  "totals": {
+    "full_donor": 8032,
+    "geometry_rule": 7042,
+    "local_only": 7774,
+    "memory_calibrated": 7774,
+    "memory_only": 7404,
+    "pooled": 5905,
+    "random_component": 6462,
+    "random_dark": 2198,
+    "random_dark_b": 2299,
+    "sham": 69
+  },
+  "root_case_bits_sha256": "6b6cae4bec764283d7a98b7a8eae1fbfd2dc1e60f8aa7e812f6c97ad037fbc55",
+  "complete_canonical_receipt_sha256": "906a6c83947d9160046db972aa5fcd387d3f7288855c36898c7da6bfd30f53ca",
+  "preflight_input_sha256": "6801d09a9bcc29262af113c82480edc345ce02cb40bac4fc5aa90344d2b793ac",
+  "calibration_tie_roots": 30,
+  "memory_local_action_disagreement_roots": 10,
+  "memory_local_nonzero_root_effects": 0,
+  "posthoc_oracle_test_hits_descriptive": 7784,
+  "gate_decision": "READY_FOR_CONFIRMATION",
+  "decision_note": "EvalMath returned READY on zero observed effect with sigma=0; veto confirmation for scientific resolution and structural ceiling review."
+}
