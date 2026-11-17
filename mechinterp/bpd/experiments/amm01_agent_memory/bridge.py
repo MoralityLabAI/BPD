@@ -21,7 +21,7 @@ def buzz_message(receipt: dict, channel: str, github_url: str) -> dict:
         raise ValueError("require a public GitHub BPD repository artifact URL")
     if receipt.get("experiment") != ID:
         raise ValueError("unexpected experiment")
-    if receipt.get("phase") != "confirmation" or "analysis" not in receipt:
+    if receipt.get("phase") != "confirm_fresh" or "analysis" not in receipt:
         raise ValueError("only completed confirmation receipts may be exported")
     a = receipt["analysis"]
     payload = {"schema": "BPD-AMM-01/buzz-summary/v1", "experiment": ID,
