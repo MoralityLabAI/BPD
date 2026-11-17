@@ -30,8 +30,8 @@ from mechinterp.bpd.theory.pd09.experiment import (
 ROOT = Path(__file__).resolve().parent
 CONFIG = json.loads((ROOT / "CONFIG.json").read_text(encoding="utf-8"))
 SEEDS = tuple(CONFIG["seed_list"])
-ARMS = tuple(a["key"] for a in CONFIG["objective"]["arms"])
-ARM_SPEC = {a["key"]: a for a in CONFIG["objective"]["arms"]}
+ARMS = tuple(a["key"] for a in CONFIG["arms"])
+ARM_SPEC = {a["key"]: a for a in CONFIG["arms"]}
 FAMILIES = tuple(CONFIG["source"]["eval_families"])
 PAIRS = tuple(tuple(pair) for pair in CONFIG["objective"]["ordered_pairs"])
 WIDTH = 4
