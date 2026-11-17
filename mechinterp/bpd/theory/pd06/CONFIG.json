@@ -1,0 +1,275 @@
+{
+  "study_id": "BPD-PD-06",
+  "registration_date": "2026-11-17",
+  "status": "preregistered_before_all_PD06_weights_or_data",
+  "predecessor": {
+    "pd05_merge_sha": "873fd1990fdc9853cc7fd0e4b6630a7dc77df31c",
+    "pd05_count_supervision_successes": 21,
+    "pd05_unsupervised_successes": 0,
+    "pd05_source": "2D exactly zero observed coordinates"
+  },
+  "experiment_hypothesis": "Does supervised cardinality or labelled support enable recovery of a hidden rotated 4D sparse basis and transfer to unseen support combinations?",
+  "seeds": [
+    727,
+    733,
+    739,
+    743,
+    751,
+    757,
+    761,
+    769,
+    773,
+    787,
+    797,
+    809,
+    811,
+    821,
+    823,
+    827,
+    829,
+    839,
+    853,
+    857,
+    859,
+    863,
+    877,
+    881,
+    883,
+    887,
+    907,
+    911,
+    919,
+    929,
+    937,
+    941
+  ],
+  "physical": {
+    "width": 4,
+    "components": 4,
+    "passes": 4,
+    "teacher": "one shared bias-free nn.Linear with W=I4",
+    "wrapper": "BPDModel TiedComponentLinear",
+    "ablation": "zero",
+    "sphere_rescale": false,
+    "residual_delta_mask": 0,
+    "rotation": "per-seed orthogonal 4x4 from torch.linalg.qr Gaussian with deterministic diagonal sign, generator seed=900000+seed",
+    "latent_to_observed": "x=a @ rotation.T",
+    "component_ground_truth": "V columns=rotation columns; U rows=rotation.T rows",
+    "initialization": "BPDModel(init_svd=false), except planted-frozen control initialized to rotation, all matched trainable arms share random weights"
+  },
+  "source": {
+    "train_support_k1": [
+      [
+        0
+      ],
+      [
+        1
+      ],
+      [
+        2
+      ],
+      [
+        3
+      ]
+    ],
+    "train_support_k2": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        0,
+        3
+      ]
+    ],
+    "train_support_k3": [
+      [
+        0,
+        1,
+        2
+      ],
+      [
+        0,
+        1,
+        3
+      ],
+      [
+        1,
+        2,
+        3
+      ]
+    ],
+    "holdout_support_k2": [
+      [
+        0,
+        2
+      ],
+      [
+        1,
+        3
+      ]
+    ],
+    "holdout_support_k3": [
+      [
+        0,
+        2,
+        3
+      ]
+    ],
+    "active_amplitude_uniform": [
+      0.75,
+      1.25
+    ],
+    "signed_amplitudes": true,
+    "train_each_k_probability": 0.3333333333333333,
+    "train_batch": 32,
+    "calibration_boards_per_family": 192,
+    "heldout_boards_per_family": 192,
+    "passes": 4,
+    "training_generator_seed_offset": 100000,
+    "calibration_generator_seed_offset": 300000,
+    "heldout_generator_seed_offset": 200000,
+    "eval_families": [
+      "k1_seen",
+      "k2_seen",
+      "k2_unseen",
+      "k3_seen",
+      "k3_unseen",
+      "transition_unseen"
+    ],
+    "transition_unseen_support_counts": [
+      1,
+      2,
+      3,
+      2
+    ],
+    "transition_unseen_uses_heldout_supports_for_k2k3": true
+  },
+  "gate": {
+    "model": "shared per-pass MLP on signed observed x: Linear(4,32), GELU, assignment Linear(32,4), count Linear(32,3)",
+    "count_class": "k-1 (classes for k1,k2,k3)",
+    "selection": "exact top-k of assignment logits, count argmax +1, lower-coordinate tie break",
+    "training_gradient": "hard top-k forward and differentiable soft rank/count surrogate; temperature=0.5, softmax count",
+    "labels": "count_BCE_CE in count supervised arm, support_BCE_with_logits and count_CE in support supervised arm, no label gradients for unsupervised"
+  },
+  "arms": [
+    {
+      "key": "unsupervised_topk",
+      "count_supervision": 0,
+      "support_supervision": 0,
+      "oracle_count": false,
+      "oracle_support": false,
+      "frozen": false
+    },
+    {
+      "key": "count_supervised",
+      "count_supervision": 1,
+      "support_supervision": 0,
+      "oracle_count": false,
+      "oracle_support": false,
+      "frozen": false
+    },
+    {
+      "key": "support_supervised",
+      "count_supervision": 1,
+      "support_supervision": 1,
+      "oracle_count": false,
+      "oracle_support": false,
+      "frozen": false
+    },
+    {
+      "key": "oracle_count",
+      "count_supervision": 0,
+      "support_supervision": 0,
+      "oracle_count": true,
+      "oracle_support": false,
+      "frozen": false
+    },
+    {
+      "key": "oracle_support",
+      "count_supervision": 0,
+      "support_supervision": 0,
+      "oracle_count": false,
+      "oracle_support": true,
+      "frozen": false
+    },
+    {
+      "key": "count_supervised_planted_frozen",
+      "count_supervision": 1,
+      "support_supervision": 0,
+      "oracle_count": false,
+      "oracle_support": false,
+      "frozen": true
+    },
+    {
+      "key": "dense_all",
+      "count_supervision": 0,
+      "support_supervision": 0,
+      "oracle_count": false,
+      "oracle_support": false,
+      "frozen": false
+    }
+  ],
+  "training": {
+    "steps": 360,
+    "optimizer": "Adam",
+    "learning_rate": 0.025,
+    "weight_decay": 0,
+    "batch_size": 32,
+    "coeff_recon": 1,
+    "coeff_faithfulness": 0.3,
+    "coeff_gate_activity": 0.05,
+    "coeff_count_supervision": 1,
+    "coeff_support_supervision": 1,
+    "temperature": 0.5,
+    "one_thread": true
+  },
+  "scoring": {
+    "axis_cosine_min": 0.9,
+    "full_recon_MSE_max": 0.03,
+    "each_seen_family_MSE_max": 0.04,
+    "each_unseen_family_MSE_max": 0.06,
+    "exact_support_seen_min": 0.8,
+    "exact_support_unseen_min": 0.7,
+    "nonzero_first_factor_gradient": true,
+    "nonzero_factor_update": true,
+    "required_exact_binary_masks": true,
+    "required_all_6_families": true,
+    "primary_arm": "count_supervised",
+    "primary_control": "unsupervised_topk",
+    "primary_min_successes": 24,
+    "primary_net_paired_wins_min": 8,
+    "primary_mcnemar_two_sided_p_max": 0.05,
+    "primary_ood_requirement": "unseen pair, unseen triple and transition support exactness all >=0.70"
+  },
+  "negative_controls": {
+    "dense_all_support_expected_fail": true,
+    "oracle_support_explicit_training_and_inference_labels": true,
+    "supervised_labels_only_training": true
+  },
+  "statistics": {
+    "independent_unit": "model seed+rotation pair",
+    "n_seeds": 32,
+    "CI": "Wilson95",
+    "paired_exact": "two-sided McNemar",
+    "all_arm_seed_results": true,
+    "no_pseudoreplication": true
+  },
+  "execution": {
+    "device": "CPU",
+    "threads": 1,
+    "RSS_limit_GiB": 3,
+    "smoke_seed": 1009,
+    "pinned_torch": "2.5.1+cpu",
+    "source_lock_required": true,
+    "publish_first_data_even_if_fail": true
+  }
+}
