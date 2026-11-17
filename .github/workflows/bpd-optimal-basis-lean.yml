@@ -33,6 +33,7 @@ jobs:
         run: |
           lean --version
           lean mechinterp/bpd/theory/OptimalBasis.lean | tee /tmp/bpd-optimal-basis-axioms.txt
+          lean mechinterp/bpd/theory/FiniteFiltration.lean | tee -a /tmp/bpd-optimal-basis-axioms.txt
           python - <<'PY'
           from pathlib import Path
           import re
@@ -45,6 +46,8 @@ jobs:
           assert 'sorryAx' not in s and 'ofReduceBool' not in s, 'unproved Lean declaration'
           assert 'BPD.OptimalBasis.recurrence_bound' in s
           assert 'BPD.OptimalBasis.rotated_unique_optimal' in s
+          assert 'BPD.FiniteFiltration.optimal_iff_saturates' in s
+          assert 'BPD.FiniteFiltration.equal_profiles_of_optimal' in s
           print('Lean kernel proof declarations checked; foundational axioms only')
           PY
       - name: Upload rational receipts and proof/axiom output
