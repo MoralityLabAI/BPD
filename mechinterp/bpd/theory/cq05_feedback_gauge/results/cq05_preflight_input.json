@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "experiment_id": "BPD-CQ-05-DEV-PREFLIGHT",
+  "independent_unit": "one independently fitted physical recurrence, BPD factors and feedback controller",
+  "alpha": "0.05",
+  "scientific_min_effect": "0.15",
+  "target_effect": "0.30",
+  "measurement_resolution": "1/32",
+  "sham_quantile": "0.95",
+  "sham_confidence": "0.95",
+  "planned_comparisons": 2,
+  "confirm_units_planned": 8,
+  "pilot_from_development_only": true,
+  "units_independent": true,
+  "heldout_sealed": false,
+  "pilot": [
+    {
+      "unit_id": "dev997",
+      "paired_effect": "17/32",
+      "sham_effects": [
+        "4/32"
+      ]
+    },
+    {
+      "unit_id": "dev1009",
+      "paired_effect": "2/32",
+      "sham_effects": [
+        "1/32"
+      ]
+    },
+    {
+      "unit_id": "dev1013",
+      "paired_effect": "14/32",
+      "sham_effects": [
+        "3/32"
+      ]
+    },
+    {
+      "unit_id": "dev1021",
+      "paired_effect": "20/32",
+      "sham_effects": [
+        "3/32"
+      ]
+    }
+  ]
+}
