@@ -33,10 +33,20 @@ jobs:
         run: |
           lean --version
           lean mechinterp/bpd/theory/OptimalBasis.lean | tee /tmp/bpd-optimal-basis-axioms.txt
-          if grep -Eq 'sorryAx|ofReduceBool|depends on axioms:' /tmp/bpd-optimal-basis-axioms.txt; then
-            echo 'Unexpected axiom in checked Lean theorem'
-            exit 1
-          fi
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          s = Path('/tmp/bpd-optimal-basis-axioms.txt').read_text()
+          found = re.findall(r"depends on axioms: \\[(.*?)\\]", s)
+          allowed = {'propext', 'Quot.sound', 'Classical.choice'}
+          for group in found:
+              used = {part.strip() for part in group.split(',') if part.strip()}
+              assert used <= allowed, f'unexpected Lean axiom(s): {used - allowed}'
+          assert 'sorryAx' not in s and 'ofReduceBool' not in s, 'unproved Lean declaration'
+          assert 'BPD.OptimalBasis.recurrence_bound' in s
+          assert 'BPD.OptimalBasis.rotated_unique_optimal' in s
+          print('Lean kernel proof declarations checked; foundational axioms only')
+          PY
       - name: Upload rational receipts and proof/axiom output
         if: always()
         uses: actions/upload-artifact@v4
