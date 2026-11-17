@@ -1,0 +1,44 @@
+name: BPD-SF03 tangent-matched dark-fiber source checks
+
+on:
+  push:
+    branches:
+      - "research/bpd-sf03-*"
+    paths:
+      - "mechinterp/bpd/theory/sf03_tangent_null/**"
+      - ".github/workflows/bpd-sf03-engineering.yml"
+  pull_request:
+    paths:
+      - "mechinterp/bpd/theory/sf03_tangent_null/**"
+      - ".github/workflows/bpd-sf03-engineering.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  cpu-engineering:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install CPU torch
+        run: python -m pip install "torch==2.5.1"
+      - name: Four exact tangent-geometry unit tests
+        run: python -m unittest discover -s mechinterp/bpd/theory/sf03_tangent_null/tests -v
+      - name: Excluded-seed sanity
+        shell: bash
+        run: |
+          python -m mechinterp.bpd.theory.sf03_tangent_null.experiment --phase excluded --out /tmp/sf03_excluded.json
+          python - <<'PY'
+          import json
+          r = json.load(open('/tmp/sf03_excluded.json'))
+          assert [x['seed'] for x in r['rows']] == [901, 902]
+          for x in r['rows']:
+              assert x['max_norm_error'] < 1e-4
+              assert x['max_signed_jacobian_error'] < 1e-4
+          print("Excluded-seed engineering PASS; no fresh science roots run")
+          PY
