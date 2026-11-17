@@ -1,0 +1,9 @@
+# CQ-04 EvalMath strict preflight
+
+The canonical [EvalMath mechinterp-power](https://github.com/MoralityLabAI/EvalMath/tree/main/skills/evalmath-mechinterp-power) script was run with \`--strict\` on four excluded engineering roots \`997,1009,1013,1021\`. This was an audit of the model-seed pilot design, **not** a pretense that an eight-root test can certify a nonparametric tail.
+
+Developer paired adaptive-vs-static effects on 256 cases/root: \`0.3359375, 0.3359375, 0.2851562, 0.34375\`. Matched same-policy random-mixture sampling shams obtained by independently resampling the calibrated static policy twice per development root: \`-0.0117188,-0.0039062,0.0351562,0.0078125\`. These estimate finite-controller *baseline randomization noise* only. They are not a physical matched null for donor causal transfer.
+
+Declared alpha .05, mechanistic minimum .15, planning target .30, paired comparisons 2, measurement resolution 1/256, 95th-percentile/95%-confidence sham threshold, nominal 8 model-seed pilot roots. The strict preflight returned **exit code 2** with \`REDESIGN_OR_PILOT_ONLY\`. The reported reasons are \`heldout_unsealed\`, \`sham_quantile_uncalibrated\`, \`too_few_pilot_worlds\`. Four sham worlds cannot calibrate a 95%/95% order-statistic threshold. The minimum sample-maximum rule needs 59 independent sham worlds; planned confirmation would also need a separately sealed root cohort.
+
+The normal-model estimate for 80% power was 2 roots and the nominal resolvable effect .17937. These are conditional power heuristics. The source audit uses the independent model-world as a unit and treats 256 within-world examples as repeated observations. The 8-seed locked result is a **prospective synthetic pilot** in this evidence taxonomy. Source selection and labels are described in \`PROTOCOL.md\`, and the count lock and all losing arms remain preserved.
