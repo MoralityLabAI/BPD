@@ -2,7 +2,7 @@
 from __future__ import annotations
 import unittest,random
 from fractions import Fraction as Q
-from mechinterp.bpd.theory.causal_observable_masks.quotient import (
+from causal_observable_masks.quotient import (
  matrix,eye,mul,transpose,inverse,rank,zero,all_masks,mask_matrix,commutator_change,
  invariant_masks,invariant_to_horizon,response_matrices,observable_gramian,
  first_detected,delayed_shear,nonlattice_four,closed_under_intersection,capacity_witness)
