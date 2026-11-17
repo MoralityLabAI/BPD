@@ -1,0 +1,8859 @@
+{
+  "base_linear_observable_horizon": "0_to_state_dimension_minus_one",
+  "capacity": {
+    "mixed": {
+      "observability_rank": 2,
+      "successful_top1_masks": []
+    },
+    "phase_disjoint": {
+      "observability_rank": 2,
+      "successful_top1_masks": [
+        [
+          1,
+          0
+        ]
+      ]
+    }
+  },
+  "cohorts": {
+    "delayed": {
+      "invariant_counts_by_horizon_pattern": {
+        "4,2": 128
+      },
+      "n": 128,
+      "non_boolean_at_horizon1": 0,
+      "observability_rank_at_last_horizon": {
+        "2": 128
+      },
+      "saturation_passed": 128
+    },
+    "nonlattice": {
+      "invariant_counts_by_horizon_pattern": {
+        "16,6,6,6": 128
+      },
+      "n": 128,
+      "non_boolean_at_horizon1": 128,
+      "observability_rank_at_last_horizon": {
+        "2": 128
+      },
+      "saturation_passed": 128
+    },
+    "random": {
+      "invariant_counts_by_horizon_pattern": {
+        "16,16,16,16": 10,
+        "16,16,2,2": 1,
+        "16,16,4,4": 1,
+        "16,16,8,4": 1,
+        "16,2,2,2": 3,
+        "16,4,2,2": 2,
+        "16,4,4,4": 5,
+        "16,8,2,2": 3,
+        "16,8,4,2": 3,
+        "16,8,4,4": 3,
+        "16,8,8,2": 1,
+        "16,8,8,4": 1,
+        "16,8,8,8": 5,
+        "2,2,2,2": 7,
+        "4,2,2,2": 6,
+        "4,4,2,2": 3,
+        "4,4,4,4": 25,
+        "8,2,2,2": 11,
+        "8,4,2,2": 9,
+        "8,4,4,2": 2,
+        "8,4,4,4": 9,
+        "8,8,4,2": 1,
+        "8,8,4,4": 2,
+        "8,8,8,8": 14
+      },
+      "n": 128,
+      "non_boolean_at_horizon1": 0,
+      "observability_rank_at_last_horizon": {
+        "1": 29,
+        "2": 32,
+        "3": 35,
+        "4": 32
+      },
+      "saturation_passed": 128
+    }
+  },
+  "engineering_run": false,
+  "evidence": "source_only_mathematical_fixtures",
+  "n_worlds": 384,
+  "neural_models_evaluated": 0,
+  "no_sealed_arg03_test": true,
+  "prospective_extended_seed": 2026111801,
+  "schema": "BPD-CQ-01/exact-rational-reference/v1",
+  "source_sha256": {
+    "PROTOCOL.md": "3ca3d657ec3f2bcee0cd617a52dfbcd37ab336100fabec2e8e01d9a2673ac8fe",
+    "quotient.py": "14274577a4c3c075b022f6c06be1ff2a53665f3d2a10a296611f644c9aad4bcb",
+    "reference.py": "006ad174fbef1560f1cbeaafa64cad35967df6296182914cb486023d3d8ea5f6"
+  },
+  "worlds": [
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 0,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 5
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 1,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 1
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 2,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 1
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 3,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 3
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 4,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 7
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 5,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 2
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 6,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 3
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 7,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 5
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 8,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -1
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 9,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 1
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 10,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -3
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 11,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 5
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 12,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -5
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 13,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -1
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 14,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -1
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 15,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -7
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 16,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 1
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 17,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -3
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 18,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 5
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 19,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -7
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 20,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 2
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 21,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 7
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 22,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 3
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 23,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -1
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 24,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 2
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 25,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -1
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 26,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 3
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 27,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -3
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 28,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 7
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 29,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 5
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 30,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -2
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 31,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 2
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 32,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -7
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 33,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -7
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 34,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 1
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 35,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 1
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 36,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 3
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 37,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -5
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 38,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -3
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 39,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -5
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 40,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -1
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 41,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 1
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 42,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 3
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 43,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -3
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 44,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -3
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 45,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -2
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 46,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -7
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 47,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 5
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 48,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -3
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 49,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 7
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 50,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 1
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 51,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -1
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 52,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -7
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 53,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -5
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 54,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 3
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 55,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 2
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 56,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 1
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 57,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 2
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 58,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -2
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 59,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 7
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 60,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 7
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 61,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -2
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 62,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 7
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 63,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 3
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 64,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 1
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 65,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -7
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 66,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 3
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 67,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 1
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 68,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 2
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 69,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -2
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 70,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -1
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 71,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 5
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 72,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 7
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 73,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 1
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 74,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -5
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 75,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 3
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 76,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -2
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 77,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -2
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 78,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 2
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 79,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 5
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 80,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -7
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 81,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 7
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 82,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 3
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 83,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -5
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 84,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 2
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 85,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 5
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 86,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 2
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 87,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -5
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 88,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 5
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 89,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -2
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 90,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 7
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 91,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -7
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 92,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 1
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 93,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -2
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 94,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 1
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 95,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 7
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 96,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -5
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 97,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 5
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 98,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 5
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 99,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 7
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 100,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 5
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 101,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 7
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 102,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 1
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 103,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 2
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 104,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 5
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 105,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -7
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 106,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -3
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 107,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -2
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 108,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 7
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 109,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 1
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 110,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 5
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 111,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 5
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 112,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 2
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 113,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -3
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 114,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -7
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 115,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -5
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 116,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 5
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 117,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 2
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 118,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -1
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 119,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -7
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 120,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 1
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 121,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -3
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 122,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 5
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 123,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 2
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 124,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -3
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 125,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -1
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 126,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 1
+    },
+    {
+      "cohort": "delayed",
+      "delayed_detection": {
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 2,
+      "horizon1_mask_boolean": true,
+      "index": 127,
+      "invariant_counts": [
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -2
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 128,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 7
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 129,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -7
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 130,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -5
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 131,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 7
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 132,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -5
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 133,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -5
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 134,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -3
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 135,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -7
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 136,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 3
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 137,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -7
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 138,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 5
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 139,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 1
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 140,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -2
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 141,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 3
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 142,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 5
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 143,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 2
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 144,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -1
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 145,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 3
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 146,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 5
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 147,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 2
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 148,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 7
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 149,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -1
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 150,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -7
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 151,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 1
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 152,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 1
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 153,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 1
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 154,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 1
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 155,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 1
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 156,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -3
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 157,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -1
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 158,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 2
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 159,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -5
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 160,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -3
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 161,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 2
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 162,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -5
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 163,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -5
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 164,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -3
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 165,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -2
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 166,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 7
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 167,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -7
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 168,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 3
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 169,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -1
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 170,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 7
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 171,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -5
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 172,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -1
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 173,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 5
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 174,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 5
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 175,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 2
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 176,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 7
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 177,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 5
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 178,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -3
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 179,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -1
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 180,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -7
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 181,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 2
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 182,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -7
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 183,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -1
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 184,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 7
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 185,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -3
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 186,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -1
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 187,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -5
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 188,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -2
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 189,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -1
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 190,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -3
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 191,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 5
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 192,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 3
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 193,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 2
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 194,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 1
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 195,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -3
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 196,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -5
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 197,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -3
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 198,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -3
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 199,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 1
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 200,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 5
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 201,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 1
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 202,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 7
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 203,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -5
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 204,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 2
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 205,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 5
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 206,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -7
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 207,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -2
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 208,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -5
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 209,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 5
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 210,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 7
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 211,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -2
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 212,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 7
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 213,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -5
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 214,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -7
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 215,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 1
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 216,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 2
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 217,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -7
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 218,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -7
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 219,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -7
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 220,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -1
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 221,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -3
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 222,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -3
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 223,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -7
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 224,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 3
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 225,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 1
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 226,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -5
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 227,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -2
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 228,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 5
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 229,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -3
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 230,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 3
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 231,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -3
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 232,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -1
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 233,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -7
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 234,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 2
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 235,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 5
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 236,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 7
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 237,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 3
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 238,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 3
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 239,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -1
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 240,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 1
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 241,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 2
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 242,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -1
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 243,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -7
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 244,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 7
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 245,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 7
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 246,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 3
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 247,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -5
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 248,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 1
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 249,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -5
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 250,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 7
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 251,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 3
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 252,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": 2
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 253,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -2
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 254,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -2
+    },
+    {
+      "cohort": "nonlattice",
+      "delayed_detection": {
+        "1": 10,
+        "never": 6
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": false,
+      "index": 255,
+      "invariant_counts": [
+        16,
+        6,
+        6,
+        6
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": -7
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 12,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 256,
+      "invariant_counts": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "2": 14,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 257,
+      "invariant_counts": [
+        16,
+        16,
+        2,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        3
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "2": 8,
+        "3": 4,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 258,
+      "invariant_counts": [
+        16,
+        16,
+        8,
+        4
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "1": 4,
+        "2": 2,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 259,
+      "invariant_counts": [
+        8,
+        4,
+        2,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "1": 4,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 260,
+      "invariant_counts": [
+        8,
+        4,
+        4,
+        4
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        3
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 14,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 261,
+      "invariant_counts": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "1": 8,
+        "3": 6,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 262,
+      "invariant_counts": [
+        16,
+        8,
+        8,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "1": 4,
+        "2": 2,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 263,
+      "invariant_counts": [
+        8,
+        4,
+        2,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        3
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "1": 4,
+        "3": 2,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 264,
+      "invariant_counts": [
+        8,
+        4,
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "1": 4,
+        "2": 2,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 265,
+      "invariant_counts": [
+        8,
+        4,
+        2,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "never": 8
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 266,
+      "invariant_counts": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "observable_rank": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "never": 16
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 267,
+      "invariant_counts": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "observable_rank": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 12,
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 268,
+      "invariant_counts": [
+        4,
+        2,
+        2,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        3
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "1": 4,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 269,
+      "invariant_counts": [
+        8,
+        4,
+        4,
+        4
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "1": 6,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 270,
+      "invariant_counts": [
+        8,
+        2,
+        2,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 12,
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 271,
+      "invariant_counts": [
+        4,
+        2,
+        2,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        3
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 12,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 272,
+      "invariant_counts": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "1": 12,
+        "2": 2,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 273,
+      "invariant_counts": [
+        16,
+        4,
+        2,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        3
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "1": 14,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 274,
+      "invariant_counts": [
+        16,
+        2,
+        2,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 12,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 275,
+      "invariant_counts": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 12,
+        "2": 2,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 276,
+      "invariant_counts": [
+        4,
+        4,
+        2,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 12,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 277,
+      "invariant_counts": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "observable_rank": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "2": 4,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 278,
+      "invariant_counts": [
+        8,
+        8,
+        4,
+        4
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        3
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "never": 8
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 279,
+      "invariant_counts": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "observable_rank": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "1": 6,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 280,
+      "invariant_counts": [
+        8,
+        2,
+        2,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "never": 16
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 281,
+      "invariant_counts": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "observable_rank": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "1": 12,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 282,
+      "invariant_counts": [
+        16,
+        4,
+        4,
+        4
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        3
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "1": 8,
+        "2": 6,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 283,
+      "invariant_counts": [
+        16,
+        8,
+        2,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "2": 4,
+        "3": 2,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 284,
+      "invariant_counts": [
+        8,
+        8,
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "never": 16
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 285,
+      "invariant_counts": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "observable_rank": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 14,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 286,
+      "invariant_counts": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        3
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "never": 16
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 287,
+      "invariant_counts": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "observable_rank": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 12,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 288,
+      "invariant_counts": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "1": 6,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 289,
+      "invariant_counts": [
+        8,
+        2,
+        2,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "1": 8,
+        "2": 4,
+        "3": 2,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 290,
+      "invariant_counts": [
+        16,
+        8,
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "1": 12,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 291,
+      "invariant_counts": [
+        16,
+        4,
+        4,
+        4
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 12,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 292,
+      "invariant_counts": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "1": 8,
+        "3": 4,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 293,
+      "invariant_counts": [
+        16,
+        8,
+        8,
+        4
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 14,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 294,
+      "invariant_counts": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "observable_rank": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "1": 4,
+        "3": 2,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 295,
+      "invariant_counts": [
+        8,
+        4,
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "never": 8
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 296,
+      "invariant_counts": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "observable_rank": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "1": 6,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 297,
+      "invariant_counts": [
+        8,
+        2,
+        2,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "1": 14,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 298,
+      "invariant_counts": [
+        16,
+        2,
+        2,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        3
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "never": 8
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 299,
+      "invariant_counts": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "observable_rank": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "1": 8,
+        "2": 4,
+        "3": 2,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 300,
+      "invariant_counts": [
+        16,
+        8,
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "never": 16
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 301,
+      "invariant_counts": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 14,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 302,
+      "invariant_counts": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 12,
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 303,
+      "invariant_counts": [
+        4,
+        2,
+        2,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "1": 8,
+        "never": 8
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 304,
+      "invariant_counts": [
+        16,
+        8,
+        8,
+        8
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 14,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 305,
+      "invariant_counts": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "observable_rank": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 14,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 306,
+      "invariant_counts": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 12,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 307,
+      "invariant_counts": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        3
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "1": 4,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 308,
+      "invariant_counts": [
+        8,
+        4,
+        4,
+        4
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 12,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 309,
+      "invariant_counts": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        3
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "1": 12,
+        "2": 2,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 310,
+      "invariant_counts": [
+        16,
+        4,
+        2,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        3
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "never": 16
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 311,
+      "invariant_counts": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "observable_rank": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "1": 12,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 312,
+      "invariant_counts": [
+        16,
+        4,
+        4,
+        4
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "1": 6,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 313,
+      "invariant_counts": [
+        8,
+        2,
+        2,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "never": 8
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 314,
+      "invariant_counts": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        3
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "1": 8,
+        "2": 6,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 315,
+      "invariant_counts": [
+        16,
+        8,
+        2,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "1": 4,
+        "2": 2,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 316,
+      "invariant_counts": [
+        8,
+        4,
+        2,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 12,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 317,
+      "invariant_counts": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 12,
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 318,
+      "invariant_counts": [
+        4,
+        2,
+        2,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 12,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 319,
+      "invariant_counts": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "observable_rank": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 12,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 320,
+      "invariant_counts": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        3
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 12,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 321,
+      "invariant_counts": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "observable_rank": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "never": 8
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 322,
+      "invariant_counts": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "1": 6,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 323,
+      "invariant_counts": [
+        8,
+        2,
+        2,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "1": 4,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 324,
+      "invariant_counts": [
+        8,
+        4,
+        4,
+        4
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        3
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "never": 8
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 325,
+      "invariant_counts": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "observable_rank": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "never": 8
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 326,
+      "invariant_counts": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "observable_rank": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "1": 8,
+        "2": 6,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 327,
+      "invariant_counts": [
+        16,
+        8,
+        2,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "1": 4,
+        "2": 2,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 328,
+      "invariant_counts": [
+        8,
+        4,
+        2,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "1": 14,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 329,
+      "invariant_counts": [
+        16,
+        2,
+        2,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "1": 8,
+        "never": 8
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 330,
+      "invariant_counts": [
+        16,
+        8,
+        8,
+        8
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        3
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "1": 12,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 331,
+      "invariant_counts": [
+        16,
+        4,
+        4,
+        4
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        3
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "1": 4,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 332,
+      "invariant_counts": [
+        8,
+        4,
+        4,
+        4
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        3
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "never": 16
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 333,
+      "invariant_counts": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 12,
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 334,
+      "invariant_counts": [
+        4,
+        2,
+        2,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "never": 8
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 335,
+      "invariant_counts": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "observable_rank": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 12,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 336,
+      "invariant_counts": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "observable_rank": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 12,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 337,
+      "invariant_counts": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        3
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "1": 8,
+        "never": 8
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 338,
+      "invariant_counts": [
+        16,
+        8,
+        8,
+        8
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "never": 16
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 339,
+      "invariant_counts": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "observable_rank": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 14,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 340,
+      "invariant_counts": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "never": 8
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 341,
+      "invariant_counts": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "never": 8
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 342,
+      "invariant_counts": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "observable_rank": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "1": 6,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 343,
+      "invariant_counts": [
+        8,
+        2,
+        2,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        3
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "never": 8
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 344,
+      "invariant_counts": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "observable_rank": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 12,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 345,
+      "invariant_counts": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        3
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 12,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 346,
+      "invariant_counts": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "never": 16
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 347,
+      "invariant_counts": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "observable_rank": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 12,
+        "2": 2,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 348,
+      "invariant_counts": [
+        4,
+        4,
+        2,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        3
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "2": 12,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 349,
+      "invariant_counts": [
+        16,
+        16,
+        4,
+        4
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        3
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "1": 4,
+        "2": 2,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 350,
+      "invariant_counts": [
+        8,
+        4,
+        2,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "never": 8
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 351,
+      "invariant_counts": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "observable_rank": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 12,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 352,
+      "invariant_counts": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "observable_rank": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 12,
+        "1": 2,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 353,
+      "invariant_counts": [
+        4,
+        2,
+        2,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        3
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "1": 6,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 354,
+      "invariant_counts": [
+        8,
+        2,
+        2,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        3
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "1": 4,
+        "2": 2,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 355,
+      "invariant_counts": [
+        8,
+        4,
+        2,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        3
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 12,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 356,
+      "invariant_counts": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "1": 8,
+        "2": 4,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 357,
+      "invariant_counts": [
+        16,
+        8,
+        4,
+        4
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        3
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 12,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 358,
+      "invariant_counts": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 12,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 359,
+      "invariant_counts": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "observable_rank": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "1": 4,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 360,
+      "invariant_counts": [
+        8,
+        4,
+        4,
+        4
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 12,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 361,
+      "invariant_counts": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "1": 6,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 362,
+      "invariant_counts": [
+        8,
+        2,
+        2,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        3
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "1": 8,
+        "never": 8
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 363,
+      "invariant_counts": [
+        16,
+        8,
+        8,
+        8
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "never": 16
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 364,
+      "invariant_counts": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "observable_rank": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "1": 8,
+        "2": 4,
+        "3": 2,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 365,
+      "invariant_counts": [
+        16,
+        8,
+        4,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "1": 8,
+        "2": 4,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 366,
+      "invariant_counts": [
+        16,
+        8,
+        4,
+        4
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 12,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 367,
+      "invariant_counts": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        3
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "2": 4,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 368,
+      "invariant_counts": [
+        8,
+        8,
+        4,
+        4
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        3
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "1": 4,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 369,
+      "invariant_counts": [
+        8,
+        4,
+        4,
+        4
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        3
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 12,
+        "2": 2,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 370,
+      "invariant_counts": [
+        4,
+        4,
+        2,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "1": 8,
+        "never": 8
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 371,
+      "invariant_counts": [
+        16,
+        8,
+        8,
+        8
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "1": 12,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 372,
+      "invariant_counts": [
+        16,
+        4,
+        4,
+        4
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "1": 6,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 373,
+      "invariant_counts": [
+        8,
+        2,
+        2,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "1": 4,
+        "2": 2,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 374,
+      "invariant_counts": [
+        8,
+        4,
+        2,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 12,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 375,
+      "invariant_counts": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "observable_rank": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "1": 4,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 376,
+      "invariant_counts": [
+        8,
+        4,
+        4,
+        4
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        3
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "1": 8,
+        "2": 4,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 377,
+      "invariant_counts": [
+        16,
+        8,
+        4,
+        4
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        3
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "1": 4,
+        "2": 2,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 378,
+      "invariant_counts": [
+        8,
+        4,
+        2,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        3,
+        3
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "1": 4,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 379,
+      "invariant_counts": [
+        8,
+        4,
+        4,
+        4
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 12,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 380,
+      "invariant_counts": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 12,
+        "never": 4
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 381,
+      "invariant_counts": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "observable_rank": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "1": 6,
+        "never": 2
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 382,
+      "invariant_counts": [
+        8,
+        2,
+        2,
+        2
+      ],
+      "observable_rank": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    },
+    {
+      "cohort": "random",
+      "delayed_detection": {
+        "0": 8,
+        "never": 8
+      },
+      "dimension": 4,
+      "horizon1_mask_boolean": true,
+      "index": 383,
+      "invariant_counts": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "observable_rank": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "saturation_at_dimension_minus_one": true,
+      "twist": null
+    }
+  ]
+}
