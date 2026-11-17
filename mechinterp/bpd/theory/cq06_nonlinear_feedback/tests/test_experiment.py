@@ -57,6 +57,7 @@ class CQ06Engineering(unittest.TestCase):
         self.assertEqual(d['n_pairs'],32)
         self.assertTrue(d['first_target_retained'] and d['per_root_target_flipped'])
         self.assertLess(d['max_equal_dose_error'],1e-5)
+        self.assertEqual(set(d['out_of_tanh_range_by_arm']),set(d['counts']['feedback']))
         self.assertLess(d['max_immediate_readout_dark_effect'],1e-5)
         for arm in ('dark_bpd','manifold_dark_1','manifold_dark_2','random_dark_1','random_dark_2','sham'):
             self.assertEqual(len(d['pair_outcomes'][arm]['feedback']),32)
@@ -84,5 +85,6 @@ class CQ06Engineering(unittest.TestCase):
         self.assertLess(E.native_parity(self.seed,self.teacher,self.factor,native),1e-5)
         d=E.donor_assay(self.seed,self.teacher,self.factor,self.gate,'native',native,n=32)
         self.assertLess(d['max_equal_dose_error'],1e-5)
+        self.assertEqual(set(d['out_of_tanh_range_by_arm']),set(d['counts']['feedback']))
 
 if __name__=='__main__':unittest.main()
