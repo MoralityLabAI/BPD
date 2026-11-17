@@ -8,11 +8,12 @@ From the BPD repository root:
 
 ```bash
 python -m pip install numpy pytest
-python -m pytest -q mechinterp/bpd/tests/test_v3_floor_and_basis.py
-python -m mechinterp.bpd.v3.floor_and_basis --smoke --out runs/bpd_v3/synthetic_smoke.json
+python mechinterp/bpd/v3/floor_and_basis.py --smoke --out runs/bpd_v3/synthetic_smoke.json
+# In the standard BPD neural environment (which also has torch):
+python -m pytest -q mechinterp/bpd/tests/test_v3_floor_and_basis.py mechinterp/bpd/tests/test_v3_uncertainty.py
 ```
 
-The deterministic smoke exercises 63-step bistability with K=8 bounded dithers, readouts at 20/41/62, an independently sampled second ensemble, six exact matrix bases, 3% and other off-contribution budgets, and a phase-disjoint hyperplane-mass witness. Its data are **synthetic**, including the estimated JS floor. The 8 unit tests cover the KL identity, a single-reference counterexample, a PSD output seminorm and the full-on and partial-off certificates.
+The source-only GitHub Actions workflow runs the eleven tests in an isolated loader because BPD's existing package initializer imports torch. The deterministic smoke exercises 63-step bistability with K=8 bounded dithers, readouts at 20/41/62, an independently sampled second ensemble, six exact matrix bases, 3% and other off-contribution budgets, and a phase-disjoint hyperplane-mass witness. Its data are **synthetic**, including the estimated JS floor. The 11 unit tests cover the KL identity, a single-reference counterexample, a PSD output seminorm and the full-on and partial-off certificates.
 
 ## Load externally recorded TRM readouts
 
@@ -23,7 +24,7 @@ Create a local NPZ whose `target_logits` are shaped `[N_boards,K_dithers,N_reado
 - `independent_logits`: `[B,K,R,P,V]`, a separately dithered surrogate ensemble. Reported `ensemble_mean_kl` evaluates KL between the two empirical mean distributions.
 
 ```bash
-python -m mechinterp.bpd.v3.floor_and_basis \
+python mechinterp/bpd/v3/floor_and_basis.py \
   --target-npz /local/gaoxin492_dither_logits.npz \
   --out runs/bpd_v3/gaoxin492_floor.json
 ```
@@ -37,7 +38,7 @@ The saved B4 v2 archive has factors `(V,U)` but lacks the causal-importance netw
 Create another local NPZ with `W` shaped `[d_out,d_in]` and independent clean/dither-pooled module inputs `inputs` shaped `[N,d_in]` for one selected matrix. Run:
 
 ```bash
-python -m mechinterp.bpd.v3.floor_and_basis \
+python mechinterp/bpd/v3/floor_and_basis.py \
   --matrix-npz /local/down_proj_0_inputs.npz \
   --out runs/bpd_v3/down_proj_0_basis.json
 ```
