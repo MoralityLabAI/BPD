@@ -100,3 +100,18 @@ No checkpoint or test data are downloaded by either exporter.
 The source-only scorer from [BASIS01_SCALE_REGISTRATION.md](BASIS01_SCALE_REGISTRATION.md) retains the original `floor_and_basis.py` as an independent numerical oracle. For full `[512,1536]` down projections and 23,058 vectors per module, use `score_exported_basis.py`; it processes vectors in bounded chunks and scores a full SVD once per matrix. The full right-SVD basis has 1,024 numerical null-write directions for a full-row-rank `down_proj` matrix. Report near-null write count and mean active non-null writes alongside raw active-component count. Those directions are a property of the weight matrix and do not imply semantic feature sparsity.
 
 The sampled vectors share 183 board roots. The scorer reports per-phase mean active counts, but those 23,058 vector observations are repeated measurements within boards.
+
+## One-command RTX launch
+
+The orchestrator handles the SHA-pinned roster, four physical module exports, and six basis comparisons per matrix. From a PowerShell prompt in the BPD checkout:
+
+```powershell
+pwsh -NoProfile -File mechinterp/bpd/v3/run_basis01.ps1 `
+  -CheckpointKey gaoxin492 `
+  -CheckpointFile "C:/PATH/TO/step_21700" `
+  -MaxBoards 2
+```
+
+The two-board smoke is **development-only**. For the complete registered 183-board cohort, omit `-MaxBoards 2`. Repeat with `-CheckpointKey yagizdevre` and its SHA-pinned `model.pt`. The script reads only the public LOOPSCOPE-02 benchmark bundle and explicitly supplied local checkpoint. Its output remains in `runs/bpd_v3`.
+
+The core scorer has a fixed `--chunk-size 256` default and can use `--family input` or `--family output` when independently auditing one factorization family. Full registered comparisons keep the random control and both families. The output's `mean_logit_kl` is a module-output softmax diagnostic; it is **not** the actual Sudoku digit-head KL after the recurrent model. Its `near_null_write_directions` field uses a documented numerical threshold, which is separate from exact-zero activation support.
