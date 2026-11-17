@@ -104,7 +104,7 @@ class TestPublishedPD13(unittest.TestCase):
             ("priority2048_mse",.0013350706328765227),
             ("lex2048_mse",.0013983099285042044),
         ):
-            self.assertAlmostEqual(avg(key),value,places=5,key)
+            self.assertAlmostEqual(avg(key),value,places=5,msg=key)
         strong=[r for r in rows if r["cell"]=="clustered16d_strong"]
         self.assertTrue(all(float(r["priority2048_unseen_k4"])==0 for r in strong))
         self.assertTrue(all(float(r["lex2048_unseen_k4"])==0 for r in strong))
