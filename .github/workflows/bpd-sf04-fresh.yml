@@ -1,0 +1,55 @@
+name: BPD-SF04 frozen eight-root source binding campaign
+
+on:
+  push:
+    branches:
+      - "research/bpd-sf04-*"
+    paths:
+      - ".github/workflows/bpd-sf04-fresh.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  eight-fresh-roots:
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pinned PyTorch
+        run: python -m pip install "torch==2.5.1"
+      - name: Verify full source lock and fresh seed roster
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          root=Path('mechinterp/bpd/theory/sf04_source_binding')
+          lock=json.loads((root/'LOCK.json').read_text())
+          assert lock['status']=='FROZEN_BEFORE_FIRST_EIGHT_FRESH_ROOTS'
+          assert lock['fresh_roots']==[1301,1303,1307,1319,1321,1327,1361,1367]
+          assert lock['excluded_design_roots']==[901,902]
+          for path, expected in lock['files'].items():
+              actual=subprocess.check_output(['git','hash-object',str(root/path)],text=True).strip()
+              assert actual==expected, f'{path}: {actual} != {expected}'
+          print('SF04 FROZEN SOURCE LOCK PASS, eight independent roots admitted')
+          PY
+      - name: Run eight fresh heldout source-label counterfactual roots
+        run: |
+          python -m mechinterp.bpd.theory.sf04_source_binding.experiment \
+            --phase fresh --out /tmp/sf04_fresh_hosted.json
+      - name: Apply frozen separate science and engineering gates
+        run: |
+          python -m mechinterp.bpd.theory.sf04_source_binding.verdict \
+            /tmp/sf04_fresh_hosted.json --out /tmp/sf04_frozen_verdict.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sf04-source-locked-eight-root-data
+          path: |
+            /tmp/sf04_fresh_hosted.json
+            /tmp/sf04_frozen_verdict.json

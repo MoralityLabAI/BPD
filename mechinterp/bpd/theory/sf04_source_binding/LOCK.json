@@ -1,0 +1,69 @@
+{
+  "experiment": "BPD-SF04",
+  "status": "FROZEN_BEFORE_FIRST_EIGHT_FRESH_ROOTS",
+  "date": "2026-11-18",
+  "files": {
+    "PROTOCOL.md": "439d6725fa24e51fab27a20621c20ed118ae11d4",
+    "experiment.py": "147dbe89bc82c0841e42bf9757917d20d32437af",
+    "native_parity.py": "67ed8eaf76a2189496395d514c6543ce007446f6",
+    "tests/test_experiment.py": "b14841dcb18de80f40b7ef60da0177eb7674611a",
+    "verdict.py": "b8fdf1a5aefb1928c0a75bca3e3f299f6a70376c"
+  },
+  "excluded_design_roots": [
+    901,
+    902
+  ],
+  "fresh_roots": [
+    1301,
+    1303,
+    1307,
+    1319,
+    1321,
+    1327,
+    1361,
+    1367
+  ],
+  "teacher_updates": 1200,
+  "teacher_batch": 256,
+  "teacher_lr": 0.012,
+  "factor_updates": 400,
+  "factor_batch": 256,
+  "factor_lr": 0.03,
+  "hidden_dim": 20,
+  "hidden_width": 40,
+  "input_dim": 9,
+  "components": 20,
+  "dev_selected_components": 14,
+  "development_pairs": 240,
+  "test_pairs": 512,
+  "random_dark_shams": 64,
+  "signed_tangent_shams": 64,
+  "eligibility": {
+    "recipient_and_donor_abs_label_error_max": 0.08,
+    "current_readout_difference_max": 0.04,
+    "future_clean_difference_strict_min": 0.2,
+    "authorized_roles_only": true
+  },
+  "frozen_acceptance": {
+    "all_engineering_roots": 8,
+    "min_provenance_roots": 6,
+    "min_partial_roots": 6,
+    "teacher_mae_max": 0.08,
+    "teacher_vs_blind_mae_ratio_max": 0.6,
+    "physical_mse_max": 0.0001,
+    "native_parity_max": 0.00001,
+    "min_eligible": 100,
+    "full_factor_recovery_min": 0.9,
+    "full_dark_recovery_min": 0.9,
+    "partial_recovery_min": 0.6,
+    "partial_above_signed_sham_mean_min": 0.2,
+    "public_partial_disturbance_max": 0.08
+  },
+  "scope": "Synthetic same-source-family exploratory; no 95/95 claim, no real LLM secret leakage",
+  "notes": [
+    "Never replace failed roots or adjust frozen source after fresh results.",
+    "ARG-03-N 168 heldout cases remain sealed.",
+    "Source-tag-only second-record swap, identical payload values.",
+    "Full-rank factors have GL(20) gauge freedom."
+  ]
+}

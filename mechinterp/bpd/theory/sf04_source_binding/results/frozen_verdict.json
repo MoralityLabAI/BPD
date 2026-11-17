@@ -1,0 +1,94 @@
+{
+  "evidence_class": "synthetic eight-root exploratory",
+  "root_count": 8,
+  "engineering_gate_passed": true,
+  "provenance_learning_gate_passed": true,
+  "partial_routing_gate_passed": false,
+  "root_pass_counts": {
+    "engineering": 8,
+    "provenance": 8,
+    "partial_routing": 3
+  },
+  "roots": [
+    {
+      "seed": 1301,
+      "authorized_eligible": 252,
+      "engineering_pass": true,
+      "provenance_pass": true,
+      "partial_routing_pass": false,
+      "partial_recovery": 0.773809552192688,
+      "signed_sham_mean": 0.0215153777244268,
+      "public_partial_abs_change": 0.16212350130081177
+    },
+    {
+      "seed": 1303,
+      "authorized_eligible": 227,
+      "engineering_pass": true,
+      "provenance_pass": true,
+      "partial_routing_pass": true,
+      "partial_recovery": 0.8766520023345947,
+      "signed_sham_mean": 0.05424008835689165,
+      "public_partial_abs_change": 0.0553760901093483
+    },
+    {
+      "seed": 1307,
+      "authorized_eligible": 249,
+      "engineering_pass": true,
+      "provenance_pass": true,
+      "partial_routing_pass": true,
+      "partial_recovery": 0.9598393440246582,
+      "signed_sham_mean": 0.12449799256864935,
+      "public_partial_abs_change": 0.06153595820069313
+    },
+    {
+      "seed": 1319,
+      "authorized_eligible": 265,
+      "engineering_pass": true,
+      "provenance_pass": true,
+      "partial_routing_pass": true,
+      "partial_recovery": 0.8377358317375183,
+      "signed_sham_mean": 0.1547759457025677,
+      "public_partial_abs_change": 0.06963485479354858
+    },
+    {
+      "seed": 1321,
+      "authorized_eligible": 247,
+      "engineering_pass": true,
+      "provenance_pass": true,
+      "partial_routing_pass": false,
+      "partial_recovery": 0.9716598987579346,
+      "signed_sham_mean": 0.0917257085093297,
+      "public_partial_abs_change": 0.08284968137741089
+    },
+    {
+      "seed": 1327,
+      "authorized_eligible": 269,
+      "engineering_pass": true,
+      "provenance_pass": true,
+      "partial_routing_pass": false,
+      "partial_recovery": 0.7806691527366638,
+      "signed_sham_mean": 0.052973977959482,
+      "public_partial_abs_change": 0.15854893624782562
+    },
+    {
+      "seed": 1361,
+      "authorized_eligible": 252,
+      "engineering_pass": true,
+      "provenance_pass": true,
+      "partial_routing_pass": false,
+      "partial_recovery": 0.6269841194152832,
+      "signed_sham_mean": 0.11886160972062498,
+      "public_partial_abs_change": 0.08933169394731522
+    },
+    {
+      "seed": 1367,
+      "authorized_eligible": 232,
+      "engineering_pass": true,
+      "provenance_pass": true,
+      "partial_routing_pass": false,
+      "partial_recovery": 0.12068965286016464,
+      "signed_sham_mean": 0.09819504315964878,
+      "public_partial_abs_change": 0.07954420149326324
+    }
+  ]
+}
