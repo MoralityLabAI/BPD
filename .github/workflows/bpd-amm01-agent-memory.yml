@@ -1,0 +1,40 @@
+name: BPD-AMM-01 agent memory source/receipt replay
+on:
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/amm01_agent_memory/**'
+      - '.github/workflows/bpd-amm01-agent-memory.yml'
+  workflow_dispatch:
+jobs:
+  cpu-replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install BPD package import dependencies (CPU only)
+        run: python -m pip install --index-url https://download.pytorch.org/whl/cpu "torch==2.5.1+cpu" "numpy>=1.26"
+      - name: Tests (no weights)
+        run: python -m unittest mechinterp.bpd.experiments.amm01_agent_memory.test_experiment -v
+      - name: Reconstruct all development cases and compare locked digest
+        run: |
+          python -m mechinterp.bpd.experiments.amm01_agent_memory.verify \
+            --lock mechinterp/bpd/experiments/amm01_agent_memory/results/DEVELOPMENT_R_LOCK.json
+      - name: EvalMath pinned strict preflight exact replay
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/MoralityLabAI/EvalMath/2fdd5fe3f499070b63c474a2455f0e2c00fc55a8/skills/evalmath-mechinterp-power/scripts/preflight.py -o /tmp/evalmath_preflight.py
+          python -m mechinterp.bpd.experiments.amm01_agent_memory.experiment --phase development --out /tmp/amm01_dev.json
+          python -c 'import json; d=json.load(open("/tmp/amm01_dev.json")); json.dump(d["evalmath_preflight_input"],open("/tmp/amm01_pilot.json","w"))'
+          python /tmp/evalmath_preflight.py --pilot /tmp/amm01_pilot.json --strict --out /tmp/amm01_preflight.json
+          python -c 'import json; a=json.load(open("/tmp/amm01_preflight.json")); b=json.load(open("mechinterp/bpd/experiments/amm01_agent_memory/results/PREFLIGHT.json")); assert a==b, "EvalMath preflight diverged"'
+      - name: Reconstruct prospective confirmation after preflight gate
+        run: |
+          if test -f mechinterp/bpd/experiments/amm01_agent_memory/results/CONFIRM_FRESH_LOCK.json; then
+            python -m mechinterp.bpd.experiments.amm01_agent_memory.verify \
+              --lock mechinterp/bpd/experiments/amm01_agent_memory/results/CONFIRM_FRESH_LOCK.json \
+              --preflight mechinterp/bpd/experiments/amm01_agent_memory/results/PREFLIGHT.json
+          else
+            echo 'SOURCE ONLY: confirmation not yet scored'
+          fi

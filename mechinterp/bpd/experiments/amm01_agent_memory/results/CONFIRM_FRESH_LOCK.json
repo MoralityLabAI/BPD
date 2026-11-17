@@ -1,0 +1,70 @@
+{
+  "all_arm_hits": {
+    "memory": 123581,
+    "pooled": 96903,
+    "random": 95616,
+    "sham": 97001,
+    "swapped": 67762
+  },
+  "analysis": {
+    "boundary": "Engineered rank<=2 synthetic tied linear systems and fixed policy agents; no LLM or trained neural BPD mechanism.",
+    "contrasts": {
+      "memory_vs_pooled": {
+        "holm_adjusted_p": 8.636168555094445e-78,
+        "mean_gain": 0.2035369873046875,
+        "negative_roots": 0,
+        "one_sided_exact_sign_p": 8.636168555094445e-78,
+        "positive_roots": 256,
+        "root_cluster_bootstrap_95_ci": [
+          0.1858978271484375,
+          0.22167205810546875
+        ],
+        "tied_roots": 256
+      },
+      "memory_vs_random": {
+        "holm_adjusted_p": 2.237502219360062e-154,
+        "mean_gain": 0.21335601806640625,
+        "negative_roots": 0,
+        "one_sided_exact_sign_p": 7.458340731200207e-155,
+        "positive_roots": 512,
+        "root_cluster_bootstrap_95_ci": [
+          0.21051025390625,
+          0.216339111328125
+        ],
+        "tied_roots": 0
+      },
+      "memory_vs_swapped": {
+        "holm_adjusted_p": 2.237502219360062e-154,
+        "mean_gain": 0.42586517333984375,
+        "negative_roots": 0,
+        "one_sided_exact_sign_p": 7.458340731200207e-155,
+        "positive_roots": 512,
+        "root_cluster_bootstrap_95_ci": [
+          0.421722412109375,
+          0.43033599853515625
+        ],
+        "tied_roots": 0
+      }
+    },
+    "evidence_class": "prospective synthetic strategy-memory transfer",
+    "independent_confirmation_worlds": 512,
+    "matched_sham_95q_95confidence_floor": 0.1015625,
+    "mechanistic_variation_floor": 0.15,
+    "physical_dose_l2": 1,
+    "planned_actual_comparisons": 3,
+    "primary_gate_pass": true,
+    "repeated_cases_per_world": 256,
+    "schema": "BPD-AMM-01/analysis/v1",
+    "scientific_min_effect": 0.15
+  },
+  "evalmath_preflight_sha256": "1d504d071972789f5e8a12ef74fb96e21ef9251c09ecb46b000b2d44cae17299",
+  "experiment": "BPD-AMM-01",
+  "full_raw_canonical_sha256": "fa29c744b7b92abfcc7f99b73ce410c540d8e727a767aab66bf305cfaf96c688",
+  "independent_units": 512,
+  "phase": "confirm_fresh",
+  "schema": "BPD-AMM-01/locked-full-cohort-digest/v1",
+  "scored_cases": 131072,
+  "source_code_sha256": "cc79250ced0c1470b87c01ceb4d1c6e29720140486ae8167d3c189ccebeabe13",
+  "source_commit": "ae88737dfa302eb678ddd72f51f95bae6fbda323",
+  "training_memory_sha256": "2b7f42d00af7ff3c683fd4c39d38b1770b05fb2f5976e77704c2f14f3e0a1b94"
+}
