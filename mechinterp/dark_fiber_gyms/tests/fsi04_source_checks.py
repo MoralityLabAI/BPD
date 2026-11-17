@@ -97,6 +97,9 @@ class PilotTests(unittest.TestCase):
         for arm in ("donor_joint","random_joint_dose_matched"):
             self.assertEqual(a[arm]["net_cells_vs_clean"],
                              a[arm]["gained_cells_vs_clean"]-a[arm]["lost_cells_vs_clean"])
+            self.assertEqual(a[arm]["missing_cells_total"],81)
+            self.assertEqual(a[arm]["missing_net_vs_clean"],
+                             a[arm]["missing_gained_vs_clean"]-a[arm]["missing_lost_vs_clean"])
         self.assertLess(out["certificate"]["pre_patch_full_head_max_abs"],1e-3)
         self.assertLess(out["certificate"]["dose_matched_sham"]["zH_dose_mismatch_max_abs"],2e-3)
 
@@ -135,8 +138,13 @@ class PowerIntegrationTests(unittest.TestCase):
             for i in range(36):
                 x={"clean":(65,0,0),"donor_joint":(68,3,0),
                    "random_joint_dose_matched":(63,0,2),"self_control":(65,0,0)}
+                miss={"clean":34,"donor_joint":37,"random_joint_dose_matched":32,"self_control":34}
                 arms={k:{"correct_cells":v[0],"gained_cells_vs_clean":v[1],
-                         "lost_cells_vs_clean":v[2],"net_cells_vs_clean":v[1]-v[2]}
+                         "lost_cells_vs_clean":v[2],"net_cells_vs_clean":v[1]-v[2],
+                         "missing_cells_total":50,"missing_cells_correct":miss[k],
+                         "missing_gained_vs_clean":v[1],
+                         "missing_lost_vs_clean":v[2],
+                         "missing_net_vs_clean":v[1]-v[2]}
                       for k,v in x.items()}
                 rows.append({
                   "case_id":f"{i:064x}",
