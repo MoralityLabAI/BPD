@@ -1,0 +1,52 @@
+{
+  "experiment": "BPD-SF02",
+  "registration_date": "2026-11-17",
+  "status": "SOURCE_LOCKED_BEFORE_FRESH_EIGHT_ROOT_DATA",
+  "source_only": true,
+  "parent_merged_pr": "https://github.com/MoralityLabAI/BPD/pull/28",
+  "protocol_blob_sha": "57c30eb93b440432af678b30fe5e31bbdfadf073",
+  "experiment_blob_sha": "5ddaef3f19ee8850cea258f5ffb05d46bc56fe56",
+  "native_parity_blob_sha": "528dfce3266cccad748da99e0bb3750846db1b5b",
+  "engineering_tests_blob_sha": "03c8d47a07413fd321695ef0e0787226c8671df2",
+  "excluded_tuning_pilots": [
+    901,
+    902
+  ],
+  "fresh_roots": [
+    1013,
+    1019,
+    1021,
+    1031,
+    1033,
+    1039,
+    1049,
+    1051
+  ],
+  "teacher_steps": 850,
+  "factor_steps": 400,
+  "training_batch": 256,
+  "calibration_pairs": 240,
+  "test_pairs_per_root": 384,
+  "components": 12,
+  "greedy_selected": 6,
+  "random_dark_null_arms": 255,
+  "readout_tolerance": 1e-7,
+  "clean_eligibility_error": 0.08,
+  "donor_step_readout_difference_max": 0.04,
+  "auth_target_displacement_min": 0.2,
+  "recovery_error_max": 0.1,
+  "exploratory_science_gate": {
+    "min_passing_roots": 6,
+    "min_eligible_auth_pairs": 100,
+    "min_recovery": 0.6,
+    "min_excess_vs_best_random_dark": 0.2,
+    "min_full_dark_recovery": 0.9
+  },
+  "limitations": [
+    "same synthetic source family",
+    "8 independent roots insufficient for 95/95 calibration",
+    "full rank factorization is noncanonical",
+    "random matched-state-sham exchangeability unestablished",
+    "no actual natural-language secrecy or sealed test"
+  ]
+}
