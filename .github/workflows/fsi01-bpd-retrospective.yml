@@ -1,0 +1,34 @@
+name: FSI-01 BPD retrospective inference
+on:
+  pull_request:
+    paths:
+      - 'mechinterp/fsi01_bpd_audit.py'
+      - 'mechinterp/test_fsi01_bpd_audit.py'
+      - 'mechinterp/FSI01_RETROSPECTIVE_AUDIT.md'
+      - '.github/workflows/fsi01-bpd-retrospective.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-only-existing-receipts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: MoralityLabAI/EvalMath
+          ref: 5004cab9b366a412290a83945cda76987bb3cd6c
+          path: .deps/evalmath
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify source-only FSI crosswalk and public raw outcomes
+        run: PYTHONPATH=.deps/evalmath/src:. python -m unittest mechinterp.test_fsi01_bpd_audit -v
+      - name: Emit auditable public report
+        run: PYTHONPATH=.deps/evalmath/src:. python -m mechinterp.fsi01_bpd_audit --output /tmp/bpd-fsi01-retrospective.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bpd-fsi01-public-retrospective
+          path: /tmp/bpd-fsi01-retrospective.json
+          if-no-files-found: error
