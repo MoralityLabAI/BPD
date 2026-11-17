@@ -17,13 +17,15 @@ python -c 'import json; x=json.load(open("/tmp/amm03_development.json")); json.d
 python /path/to/pinned/EvalMath/skills/evalmath-mechinterp-power/scripts/preflight.py --pilot /tmp/amm03_preflight_input.json --out /tmp/amm03_preflight.json
 ```
 
-The strict EvalMath variant is `--strict`; exit code 2 and `REDESIGN_OR_PILOT_ONLY` mean the registered confirmation cohort **stays sealed**. Do not score the 128 confirmation roots unless the prospective gate passes:
+## Scientific confirmation hold after the completed development run
 
-```bash
-python -m mechinterp.bpd.experiments.amm03_geometry_memory.experiment --phase confirmation --memory /tmp/amm03_training.json --preflight /tmp/amm03_preflight.json --out /tmp/amm03_confirmation.json
-```
+**The 128 AMM-03 confirmation roots are sealed. Do not run `--phase confirmation`, including with the historical `READY_FOR_CONFIRMATION` receipt.** The source-pinned planner reported READY because all 64 development root effects were exactly zero and its naive normal-power calculation treated that zero variation as certainty. The registered target of +20 percentage points is unsupported by the development result; a test-answer oracle had just 0.12 percentage points of additional room beyond local calibration. [RESULTS.md](RESULTS.md) contains the audit and the retained historical preflight receipt.
 
-The code checks source hashes and confirms eligibility *before* touching any confirmation root. Each `--out` uses exclusive file creation. Engineering tests only train excluded roots. CI independently replays case bits and the pinned EvalMath preflight. Raw receipts contain complete binary case outcomes, deterministic training and root diagnostics, and exact source hashes.
+The frozen experiment source was left unchanged for source-hash replay. **Its original CLI checks the older planner output and is not an override of this scientific hold.** A new experiment with fresh roots and a separately registered higher-resolution causal contrast is needed before any confirmation work. EvalMath's follow-up correction is tracked in [EvalMath PR #51](https://github.com/MoralityLabAI/EvalMath/pull/51).
+
+The strict EvalMath variant is `--strict`; its archived AMM-03 output is retained to document the planning anomaly. Future planning should use the fixed planner, and any non-READY verdict blocks confirmation before root access.
+
+The code checks source hashes and its original preflight eligibility fields *before* touching any confirmation root. Each `--out` uses exclusive file creation. Engineering tests only train excluded roots. CI independently replays case bits and the pinned EvalMath preflight. Raw receipts contain complete binary case outcomes, deterministic training and root diagnostics, and exact source hashes.
 
 ## Evidence limits
 
