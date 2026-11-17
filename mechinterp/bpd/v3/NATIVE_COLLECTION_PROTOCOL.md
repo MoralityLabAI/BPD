@@ -49,7 +49,18 @@ python mechinterp/bpd/v3/floor_and_basis.py \
   --out runs/bpd_v3/gaoxin_dither_dev2_floor.json
 ```
 
-After inspecting that manifest and the zero-dose and clean-repeat controls, remove `--max-boards` for the full 183-root development cohort. Repeat with the independently pinned `yagizdevre` `model.pt` checkpoint. Retain each full tensor and sidecar SHA manifest. The `--inputs-npz` file must be copied locally into the user's compute environment; cloud CI does not fetch checkpoint binaries.
+After inspecting that manifest and the zero-dose and clean-repeat controls, remove `--max-boards` for the full 183-root development cohort. A full cohort now requires an externally pinned roster hash; pass `--expected-roster-sha256` with the `roster_npz_sha256` from the reviewed `wb_stall_inputs.manifest.json`. This proves that the roster bytes stayed fixed between review and collection. Retain the benchmark-bundle hash in the manifest to document the source.
+
+For PowerShell on the RTX workstation:
+
+```powershell
+$rosterSHA = (Get-Content runs/bpd_v3/wb_stall_inputs.manifest.json | ConvertFrom-Json).roster_npz_sha256
+python mechinterp/bpd/v3/collect_native_dither.py `
+  --checkpoint-file "C:/PATH/TO/step_21700" --checkpoint-key gaoxin492 `
+  --inputs-npz runs/bpd_v3/wb_stall_inputs.npz `
+  --expected-roster-sha256 $rosterSHA `
+  --out runs/bpd_v3/gaoxin_dither_183_k8.npz --device cuda:0 --dtype bf16 --k 8
+``` Repeat with the independently pinned `yagizdevre` `model.pt` checkpoint. Retain each full tensor and sidecar SHA manifest. The `--inputs-npz` file must be copied locally into the user's compute environment; cloud CI does not fetch checkpoint binaries.
 
 To compute board-cluster uncertainty from an emitted NPZ:
 
