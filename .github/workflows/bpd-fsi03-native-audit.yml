@@ -3,7 +3,7 @@ on:
   pull_request:
     paths:
       - 'mechinterp/dark_fiber_gyms/fsi03_native_audit.py'
-      - 'mechinterp/dark_fiber_gyms/tests/fsi03_test.py'
+      - 'mechinterp/dark_fiber_gyms/tests/fsi03_source_checks.py'
       - 'mechinterp/FSI03_NATIVE_VARIATION_AUDIT.md'
       - '.github/workflows/bpd-fsi03-native-audit.yml'
   workflow_dispatch:
@@ -26,7 +26,7 @@ jobs:
       - name: Standalone exact tests with no torch dependency
         run: |
           export EVALMATH_FSI_FILE="${{ github.workspace }}/.deps/evalmath/src/spiral_ln/evaluation_finite_sample.py"
-          python -m unittest discover -s mechinterp/dark_fiber_gyms/tests -p 'fsi03_test.py' -v
+          python -m unittest discover -s mechinterp/dark_fiber_gyms/tests -p 'fsi03_source_checks.py' -v
       - name: Audit all 16 comparisons on both native checkpoints and 120 public boards
         run: |
           export EVALMATH_FSI_FILE="${{ github.workspace }}/.deps/evalmath/src/spiral_ln/evaluation_finite_sample.py"
