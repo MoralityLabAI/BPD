@@ -88,6 +88,8 @@ jobs:
         run: |
           python -m pytest -q mechinterp/bpd/theory/pd08/test_experiment.py
           python -m pytest -q mechinterp/bpd/theory/pd08/test_published_results.py
+      - name: PD09 unlabeled hyperplane mass and QR source-only engineering smoke
+        run: python -m pytest -q mechinterp/bpd/theory/pd09/test_experiment.py
       - name: Verify source module syntax
         run: |
           python -m compileall -q mechinterp/bpd
