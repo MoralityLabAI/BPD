@@ -1,0 +1,67 @@
+name: BPD idealized-L0 optimum and invariant-mask Lean certificates
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/theory/**'
+      - '.github/workflows/bpd-optimal-basis-lean.yml'
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/theory/**'
+      - '.github/workflows/bpd-optimal-basis-lean.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  exact-basis-and-mask-proofs:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run exact-rational four-case optimizer audit
+        run: |
+          python -m unittest discover -s mechinterp/bpd/theory -p 'test_finite_optima.py' -v
+          python mechinterp/bpd/theory/finite_optima.py > /tmp/bpd-optimal-basis-finite.json
+          python -m unittest discover -s mechinterp/bpd/theory -p 'test_finite_matroid.py' -v
+          python mechinterp/bpd/theory/finite_matroid_audit.py > /tmp/bpd-exact-matroid-audit.json
+      - name: Install pinned Lean 4.19.0
+        run: |
+          curl --fail --location --retry 3 https://github.com/leanprover/lean4/releases/download/v4.19.0/lean-4.19.0-linux.tar.zst -o /tmp/lean.tar.zst
+          tar --zstd -xf /tmp/lean.tar.zst -C /tmp
+          echo '/tmp/lean-4.19.0-linux/bin' >> "$GITHUB_PATH"
+      - name: Kernel-check the exact examples and intervention commutation
+        run: |
+          lean --version
+          lean mechinterp/bpd/theory/OptimalBasis.lean | tee /tmp/bpd-optimal-basis-axioms.txt
+          lean mechinterp/bpd/theory/FiniteFiltration.lean | tee -a /tmp/bpd-optimal-basis-axioms.txt
+          lean mechinterp/bpd/theory/GreedyRank.lean | tee -a /tmp/bpd-optimal-basis-axioms.txt
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          s = Path('/tmp/bpd-optimal-basis-axioms.txt').read_text()
+          found = re.findall(r"depends on axioms: \\[(.*?)\\]", s)
+          allowed = {'propext', 'Quot.sound', 'Classical.choice'}
+          for group in found:
+              used = {part.strip() for part in group.split(',') if part.strip()}
+              assert used <= allowed, f'unexpected Lean axiom(s): {used - allowed}'
+          assert 'sorryAx' not in s and 'ofReduceBool' not in s, 'unproved Lean declaration'
+          assert 'BPD.OptimalBasis.recurrence_bound' in s
+          assert 'BPD.OptimalBasis.rotated_unique_optimal' in s
+          assert 'BPD.FiniteFiltration.optimal_iff_saturates' in s
+          assert 'BPD.FiniteFiltration.equal_profiles_of_optimal' in s
+          assert 'BPD.GreedyRank.greedy_prefix_rank' in s
+          print('Lean kernel proof declarations checked; foundational axioms only')
+          PY
+      - name: Upload rational receipts and proof/axiom output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bpd-optimal-basis-${{ github.run_id }}
+          path: |
+            /tmp/bpd-optimal-basis-finite.json
+            /tmp/bpd-optimal-basis-axioms.txt
+            /tmp/bpd-exact-matroid-audit.json
+          retention-days: 30
+          if-no-files-found: warn

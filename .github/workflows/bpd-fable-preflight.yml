@@ -27,6 +27,33 @@ jobs:
       - name: Test archived failure predicates and new contrast/multiplicity/math semantics
         run: |
           python -m pytest -q mechinterp/bpd/tests/test_bpd_fable_preflight.py
+      - name: Test phase-disjoint shared BPD dictionary control
+        run: |
+          python -m pytest -q mechinterp/bpd/theory/test_phase_disjoint_control.py
+      - name: Execute preregistered BPD-PD-01 CPU controls
+        run: |
+          python -m mechinterp.bpd.theory.phase_disjoint_control --steps 100 --stage2-steps 25 --out /tmp/bpd-pd01-results.json
+          python - <<'PY'
+          import json
+          receipt=json.load(open('/tmp/bpd-pd01-results.json'))
+          assert len(receipt['arms']) == 6
+          assert all(a['stage2_dictionary_bitwise_frozen'] for a in receipt['arms'])
+          print('BPD-PD-01 registered directional criterion:',receipt['registered_primary_criterion_passed'])
+          for a in receipt['arms']:
+              r=a['heldout_selected']
+              print('seed',a['seed'],'mixed',a['mixed'],'dictionary_trainable',
+                    a['dictionary_trainable_in_stage1'],'MSE',round(r['reconstruction_mse'],5),
+                    'axis_match',round(r['read_axis_match'],4),
+                    'gate_pattern',a['phase_routing_meets_binary_pattern'])
+          PY
+      - name: Archive BPD-PD-01 signed receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bpd-pd01-phase-disjoint-${{ github.run_id }}
+          path: /tmp/bpd-pd01-results.json
+          retention-days: 30
+          if-no-files-found: warn
       - name: Verify source module syntax
         run: |
           python -m compileall -q mechinterp/bpd

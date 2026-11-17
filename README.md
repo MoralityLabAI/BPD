@@ -14,6 +14,7 @@ Extends Goodfire's single-pass [adVersarial Parameter Decomposition (VPD)](https
 - **Documentation & audit trail:**
   - Package guide: [`mechinterp/bpd/README.md`](mechinterp/bpd/README.md)
   - Formal equations & positioning: [`mechinterp/bpd/docs/design_and_positioning.md`](mechinterp/bpd/docs/design_and_positioning.md)
+  - Idealized expected-L0 identifiability and mask algebra: [`mechinterp/bpd/theory/OPTIMAL_BASIS_AND_MASKS.md`](mechinterp/bpd/theory/OPTIMAL_BASIS_AND_MASKS.md), with Lean finite optimizer/mask certificates, exact-rational tests, and a separate empirical-evidence boundary.
   - Initial pre-registration (`49c7207`): [`mechinterp/bpd/docs/registration.md`](mechinterp/bpd/docs/registration.md)
   - Fable pre-run amendments (`2026-11-15`): [`mechinterp/bpd/docs/amendments_2026-11-15_fable.md`](mechinterp/bpd/docs/amendments_2026-11-15_fable.md)
   - Positive-control run history & archived pre-amendment receipts: [`mechinterp/bpd/docs/positive_control_history.md`](mechinterp/bpd/docs/positive_control_history.md), [`mechinterp/bpd/results/historical_pre_amendment_49c7207/`](mechinterp/bpd/results/historical_pre_amendment_49c7207/)
