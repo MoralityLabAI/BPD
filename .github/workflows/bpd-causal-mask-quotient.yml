@@ -1,0 +1,22 @@
+name: BPD-CQ-01 exact causal observable masks
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/theory/causal_observable_masks/**'
+      - '.github/workflows/bpd-causal-mask-quotient.yml'
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/theory/causal_observable_masks/**'
+      - '.github/workflows/bpd-causal-mask-quotient.yml'
+jobs:
+  exact-fraction:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Exact rational tests, including seeded metamorphic instances
+        run: python -m unittest discover -s mechinterp/bpd/theory/causal_observable_masks/tests -v
+      - name: Reproduce sealed source-only reference
+        run: python -m mechinterp.bpd.theory.causal_observable_masks.reference --out mechinterp/bpd/theory/causal_observable_masks/results/cq01_cpu_reference.json --check
