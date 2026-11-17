@@ -57,6 +57,7 @@ jobs:
       - name: BPD-PD-02 excluded-seed hard-mask engineering smoke
         run: |
           python -m pytest -q mechinterp/bpd/theory/pd02/test_experiment.py
+          python -m pytest -q mechinterp/bpd/theory/pd02/test_published_results.py
       - name: Verify source module syntax
         run: |
           python -m compileall -q mechinterp/bpd
