@@ -1,0 +1,37 @@
+{
+  "experiment": "BPD-SF05",
+  "stage": "A_EXCLUDED_ROOTS_ONLY",
+  "source_frozen": "2026-11-18",
+  "parent_merged_pr": "https://github.com/MoralityLabAI/BPD/pull/41",
+  "issue": "https://github.com/MoralityLabAI/BPD/issues/42",
+  "files": {
+    "PROTOCOL.md": "5ce844e393707380b942ce9cea52ae0a8bb20aa9",
+    "THEORY.md": "a636492e3109a3d9d1df955f5afe8b81d4b5f59b",
+    "geometry.py": "8057c8ca61d17ff5f176c57adb98ba7b3a7e4a70",
+    "stage_a.py": "073d6b1acba4b60a2654c33caf5e2047479ccabb",
+    "tests/test_geometry.py": "f4d208b7ea1e9c3876951431d3794e4dd17e7c37",
+    "tests/test_sf04_adapter.py": "10c701a5fa7dc6dd25049588e43c350e897dba00"
+  },
+  "imported_sf04_experiment_blob_sha": "147dbe89bc82c0841e42bf9757917d20d32437af",
+  "allowable_seeds": [
+    901,
+    902
+  ],
+  "scientific_roots_evaluated": 0,
+  "sham_arms": 16,
+  "diagnostic_pairs_per_seed": 512,
+  "studied_output_ranks": [
+    8,
+    12,
+    16,
+    20
+  ],
+  "current_readout_coordinate": 0,
+  "public_gradient_tol": 1e-8,
+  "stage_a_claims": "Engineering and development diagnostics only. Cannot infer a new BPD secret module, privacy leak, source-family replication, or confirmed 95/95 bound.",
+  "protected_exclusions": [
+    "SF04 eight previously scored roots",
+    "SF03 root cohorts",
+    "ARG-03-N sealed 168-case test"
+  ]
+}
