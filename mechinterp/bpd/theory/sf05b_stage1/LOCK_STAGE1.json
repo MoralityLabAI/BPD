@@ -1,0 +1,114 @@
+{
+  "experiment": "BPD-SF05B_STAGE1",
+  "stage": "EXCLUDED_ROOT_ENGINEERING_SOURCE_FROZEN_BEFORE_FIRST_OOD_MODEL_EVALUATION",
+  "date": "2026-11-18",
+  "parent_issue": "https://github.com/MoralityLabAI/BPD/issues/48",
+  "source_blobs": {
+    "PROTOCOL.md": "5a5a6546631a136a1db28dbc5ab429fb8b9e2ba2",
+    "teacher.py": "277f3b98aa600827022e077329f0c9ca0689918f",
+    "policy.py": "d02f1bc491188f6e54ba4282708bd9adcbbc59ec",
+    "evaluate.py": "f3ff9b462090f120b9354e198fd3f5daee9390db",
+    "native_parity.py": "94214efbe94aa30a4af8e0d83d49fe1707d6a115",
+    "tests/test_stage1.py": "92a072993d9b9c3002586939ad1c02f3886dfede"
+  },
+  "stage0_generator_git_blob_sha": "525cfb28d40cc5f58c0e8141489a8e744d1778f4",
+  "privileged_training_only_oracle_git_blob_sha": "a7dc0de7ca606615979fa6926e7c503baeccc81e",
+  "excluded_roots": [
+    901,
+    902
+  ],
+  "reserved_calibration_roots": {
+    "first": 6101,
+    "last": 6159,
+    "count": 59,
+    "executed": 0
+  },
+  "reserved_confirmation_roots": {
+    "first": 7101,
+    "last": 7132,
+    "count": 32,
+    "executed": 0
+  },
+  "teacher": {
+    "hidden": 32,
+    "inner": 64,
+    "input": 11,
+    "updates": 2600,
+    "batch": 128,
+    "optimizer": "Adam",
+    "lr": 0.012
+  },
+  "factor": {
+    "components": 32,
+    "updates": 450,
+    "batch": 128,
+    "optimizer": "Adam",
+    "lr": 0.035,
+    "active_components": 32
+  },
+  "policy": {
+    "input": 76,
+    "hidden": [
+      96,
+      96
+    ],
+    "output": 32,
+    "updates": 240,
+    "batch": 128,
+    "lr": 0.003,
+    "correction_fraction_cap": 0.25,
+    "correction_absolute_cap": 0.5
+  },
+  "oracle_label": {
+    "max_iterations": 8,
+    "public_residual_tolerance": 0.0001,
+    "line_search": [
+      1,
+      0.5,
+      0.25,
+      0.125
+    ],
+    "inference_access": false
+  },
+  "ood_assay": {
+    "test_rows_per_root": 512,
+    "shams_per_kind": 16,
+    "source_family": "heldout",
+    "train_history_lengths": [
+      2,
+      3,
+      4
+    ],
+    "test_history_lengths": [
+      5,
+      6
+    ],
+    "source_labels": 3,
+    "eligible": {
+      "clean_label_error_max": 0.1,
+      "prequery_readout_difference_max": 0.05,
+      "donor_future_difference_min": 0.2
+    }
+  },
+  "descriptive_teacher_admission": {
+    "heldout_mae_max": 0.12,
+    "heldout_public_mae_max": 0.05,
+    "mae_vs_heldout_blind_ratio_max": 0.8
+  },
+  "evidence_boundary": "Engineering on previously excluded roots only. No 59-root calibration or 32-root confirmation, no real language-model secrecy claim.",
+  "protected_cases": "ARG-03-N 168 sealed cases unexamined",
+  "training_only_pre_registration_observation": "Excluded 901/902 training-family pilot before source freeze; no model-scored heldout sample was inspected.",
+  "pre_ood_engineering_amendments": [
+    {
+      "number": 1,
+      "original_lock_blob_sha": "1f85f5006ce32d3eba18158c3d03dcaf1809f526",
+      "original_policy_blob_sha": "6d0099b27224e11f9dd01c2b9a1940d676a0e1ee",
+      "fixed_policy_blob_sha": "d02f1bc491188f6e54ba4282708bd9adcbbc59ec",
+      "failure_run": "https://github.com/MoralityLabAI/BPD/actions/runs/44143648755",
+      "failure_stage": "unit test policy-training smoke; autograd version error from inplace clipping",
+      "data_boundary": "failed before native parity and before any OOD model evaluation",
+      "change": "corr *= clipping_scale -> corr = corr * clipping_scale",
+      "scientific_adjustment": false
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+# SF05B pre-OOD autograd fix rerun; see ENGINEERING_AMENDMENT_01.md
+name: BPD-SF05B Stage 1 excluded-root teacher and oracle-free correction
+
+on:
+  push:
+    branches:
+      - "research/bpd-sf05b-stage1-*"
+    paths:
+      - ".github/workflows/bpd-sf05b-stage1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-and-ood-engineering:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pinned CPU PyTorch
+        run: python -m pip install "torch==2.5.1"
+      - name: Verify source, privileged label oracle and reserved scientific-roster lock
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          root=Path('mechinterp/bpd/theory/sf05b_stage1')
+          lock=json.loads((root/'LOCK_STAGE1.json').read_text())
+          assert lock['stage']=='EXCLUDED_ROOT_ENGINEERING_SOURCE_FROZEN_BEFORE_FIRST_OOD_MODEL_EVALUATION'
+          assert lock['excluded_roots']==[901,902]
+          assert lock['reserved_calibration_roots']['executed']==0
+          assert lock['reserved_confirmation_roots']['executed']==0
+          for path, expected in lock['source_blobs'].items():
+              got=subprocess.check_output(['git','hash-object',str(root/path)],text=True).strip()
+              assert got==expected, f'{path}: {got} != {expected}'
+          for rel,key in [
+              ('mechinterp/bpd/theory/sf05b_source_families/source_families.py','stage0_generator_git_blob_sha'),
+              ('mechinterp/bpd/theory/sf05_public_safe/finite_correct.py','privileged_training_only_oracle_git_blob_sha')
+          ]:
+              got=subprocess.check_output(['git','hash-object',rel],text=True).strip()
+              assert got==lock[key], (rel,got,lock[key])
+          print('STAGE1 LOCK VERIFIED: excluded 901/902 only, zero fresh confirmation roots')
+          PY
+      - name: Engineering tests, including forbidden-input poison and reserved-root ban
+        run: python -m unittest discover -s mechinterp/bpd/theory/sf05b_stage1/tests -v
+      - name: Native BPDModel seven-call masked physical parity
+        run: python -m mechinterp.bpd.theory.sf05b_stage1.native_parity
+      - name: Run excluded-root train vs structurally disjoint heldout diagnostic
+        shell: bash
+        run: |
+          python -m mechinterp.bpd.theory.sf05b_stage1.evaluate \
+            --roots 901 902 --teacher-updates 2600 --factor-updates 450 \
+            --policy-updates 240 --samples 512 --shams 16 \
+            --out /tmp/sf05b_stage1_excluded_hosted.json \
+            > /tmp/sf05b_stage1_stdout.json
+      - name: Report all teacher competence, factor and correction outcomes
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, math
+          r=json.load(open('/tmp/sf05b_stage1_excluded_hosted.json'))
+          assert r['roots']==[901,902] and len(r['rows'])==2
+          for row in r['rows']:
+              assert row['evidence_class']=='excluded-root engineering only'
+              for family in ('train_family','heldout_family'):
+                  f=row[family]
+                  assert f['total_pairs']==512
+                  assert f['authorized_eligible']>=0
+                  for arm in f['arms'].values():
+                      assert arm['prequery_readout_max_error']<=1e-6
+                      assert math.isfinite(arm['public_abs_mean'])
+                  admission=(
+                      row['heldout_competence']['mae']<=0.12
+                      and row['heldout_competence']['public_mae']<=0.05
+                      and row['heldout_competence']['mae']<=
+                          .80*row['heldout_competence']['blind_mae']
+                  )
+                  print(json.dumps({
+                      'seed':row['seed'],'family':f['family'],
+                      'teacher_mae':row['heldout_competence' if family=='heldout_family' else 'train_competence']['mae'],
+                      'teacher_ood_admission':admission,
+                      'authorized_eligible':f['authorized_eligible'],
+                      'bpd_factor_mse':f['physical_reconstruction_mse'],
+                      'raw_full_auth':f['arms']['bpd_full_raw']['authorized_donor_recovery'],
+                      'corrected_full_auth':f['arms']['bpd_full_learned']['authorized_donor_recovery'],
+                      'public_raw':f['arms']['bpd_full_raw']['public_abs_mean'],
+                      'public_corrected':f['arms']['bpd_full_learned']['public_abs_mean'],
+                      'privileged_public':f['arms']['bpd_full_privileged_oracle']['public_abs_mean'],
+                  }))
+          print('SF05B STAGE1: engineering receipt complete; no fresh root claims')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bpd-sf05b-stage1-excluded-root-receipts
+          path: |
+            /tmp/sf05b_stage1_excluded_hosted.json
+            /tmp/sf05b_stage1_stdout.json

@@ -1,0 +1,115 @@
+{
+  "experiment": "BPD-SF05B",
+  "phase": "Stage1 excluded-root training and OOD engineering",
+  "evidence_class": "development only",
+  "hosted_run": "https://github.com/MoralityLabAI/BPD/actions/runs/44144164744",
+  "raw_zip_artifact": "https://github.com/MoralityLabAI/BPD/actions/runs/44144164744/artifacts/14356166513",
+  "full_raw_json_sha256": "fb21f7f956826df71acd06a1377934fd0e58b8e681dcca64dab30734f7afd194",
+  "torch_version": "2.5.1+cu124",
+  "excluded_roots": [
+    901,
+    902
+  ],
+  "reserved_roots_executed": {
+    "calibration": 0,
+    "confirmation": 0
+  },
+  "backend": "native BPD full-mask 7-call max error 1.1920928955078125e-6, source-swap max error 7.748603820800781e-7",
+  "corrected_policy_inference_uses_oracle": false,
+  "n_train_oracle_labels_per_root": 30720,
+  "stage1_ood_descriptive_thresholds": {
+    "mae_max": 0.12,
+    "public_mae_max": 0.05,
+    "mae_vs_blind_ratio_max": 0.8
+  },
+  "roots": [
+    {
+      "seed": 901,
+      "teacher": {
+        "train_mae": 0.057050637900829315,
+        "train_mse": 0.005721095949411392,
+        "heldout_mae": 0.07448390126228333,
+        "heldout_mse": 0.010557391680777073,
+        "heldout_blind_mae": 0.22008298337459564,
+        "heldout_public_mae": 0.038105711340904236,
+        "heldout_prequery_visible_abs": 0.14106875658035278
+      },
+      "train": {
+        "generated": 512,
+        "eligible": 35,
+        "source_target_changes": 240,
+        "physical_mse": 2.3024067985488728e-8,
+        "raw_full_auth": 1,
+        "learned_full_auth": 1,
+        "privileged_auth": 1,
+        "raw_full_public_abs": 0.03261493891477585,
+        "learned_full_public_abs": 0.0255196001380682,
+        "oracle_full_public_abs": 0.000013284290616866201,
+        "random_sham_corrected_auth_mean": 0.057142857694998384,
+        "signed_grad_sham_corrected_auth_mean": 0.1910714330151677
+      },
+      "heldout": {
+        "generated": 512,
+        "eligible": 18,
+        "source_target_changes": 278,
+        "physical_mse": 2.3024067985488728e-8,
+        "rank24_singular_gap": 0.0291920006275177,
+        "raw_full_auth": 1,
+        "learned_full_auth": 1,
+        "privileged_auth": 1,
+        "raw_full_public_abs": 0.04139373451471329,
+        "learned_full_public_abs": 0.0341264083981514,
+        "oracle_full_public_abs": 0.000013882112398277968,
+        "raw_rank24_auth": 1,
+        "learned_rank24_auth": 1,
+        "learned_rank24_public_abs": 0.03430257365107536,
+        "random_sham_corrected_auth_mean": 0.09722222434356809,
+        "signed_grad_sham_corrected_auth_mean": 0.23263889597728848
+      }
+    },
+    {
+      "seed": 902,
+      "teacher": {
+        "train_mae": 0.07030662894248962,
+        "train_mse": 0.009701172821223736,
+        "heldout_mae": 0.09602833539247513,
+        "heldout_mse": 0.019184982404112816,
+        "heldout_blind_mae": 0.22727404534816742,
+        "heldout_public_mae": 0.0482516773045063,
+        "heldout_prequery_visible_abs": 0.21253342926502228
+      },
+      "train": {
+        "generated": 512,
+        "eligible": 18,
+        "source_target_changes": 249,
+        "physical_mse": 0.000003934756023227237,
+        "raw_full_auth": 1,
+        "learned_full_auth": 1,
+        "privileged_auth": 1,
+        "raw_full_public_abs": 0.047217633575201035,
+        "learned_full_public_abs": 0.040072035044431686,
+        "oracle_full_public_abs": 0.000012611024430952966,
+        "random_sham_corrected_auth_mean": 0.08680555620230734,
+        "signed_grad_sham_corrected_auth_mean": 0.11805555690079927
+      },
+      "heldout": {
+        "generated": 512,
+        "eligible": 13,
+        "source_target_changes": 240,
+        "physical_mse": 0.000003934756023227237,
+        "rank24_singular_gap": 0.014486074447631836,
+        "raw_full_auth": 1,
+        "learned_full_auth": 1,
+        "privileged_auth": 1,
+        "raw_full_public_abs": 0.06884994357824326,
+        "learned_full_public_abs": 0.063641756772995,
+        "oracle_full_public_abs": 0.000010394338460173458,
+        "raw_rank24_auth": 1,
+        "learned_rank24_auth": 1,
+        "learned_rank24_public_abs": 0.06406813859939575,
+        "random_sham_corrected_auth_mean": 0.1298076962120831,
+        "signed_grad_sham_corrected_auth_mean": 0.07211538730189204
+      }
+    }
+  ]
+}
