@@ -1,0 +1,29 @@
+name: BPD-CQ-03 learned recurrence with native causal component parity
+on:
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/theory/cq03_learned_recurrence/**'
+      - '.github/workflows/bpd-cq03-trained-recurrence.yml'
+  workflow_dispatch:
+jobs:
+  cpu-checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install 'torch==2.5.1' 'numpy>=1.26'
+      - name: Engineer unit tests and native wrapper parity
+        run: python -m unittest discover -s mechinterp/bpd/theory/cq03_learned_recurrence/tests -v
+      - name: Source-locked independent trained-recurrence replay
+        run: python -m mechinterp.bpd.theory.cq03_learned_recurrence.reference --backend independent --out mechinterp/bpd/theory/cq03_learned_recurrence/results/cq03_independent.json --check
+      - name: Native BPDModel/TiedComponentLinear full-mask execution
+        run: |
+          python -m mechinterp.bpd.theory.cq03_learned_recurrence.reference --backend native \
+            --out /tmp/cq03_native_hosted.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cq03-native-cpu-receipt
+          path: /tmp/cq03_native_hosted.json
