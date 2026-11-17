@@ -24,7 +24,7 @@ jobs:
           if test -f mechinterp/bpd/experiments/amm02_cross_model_memory/results/DEVELOPMENT_LOCK.json; then
             python -m mechinterp.bpd.experiments.amm02_cross_model_memory.experiment --phase training --out /tmp/amm02_training.json
             python -m mechinterp.bpd.experiments.amm02_cross_model_memory.experiment --phase development --memory /tmp/amm02_training.json --out /tmp/amm02_dev.json
-            python -c 'import json; x=json.load(open("/tmp/amm02_dev.json")); y=json.load(open("mechinterp/bpd/experiments/amm02_cross_model_memory/results/DEVELOPMENT_LOCK.json")); assert x["totals"]==y["totals"]; assert x["n_independent_roots"]==y["n_independent_roots"]==64'
+            python -c 'import json; from mechinterp.bpd.experiments.amm02_cross_model_memory import experiment as e; x=json.load(open("/tmp/amm02_dev.json")); y=json.load(open("mechinterp/bpd/experiments/amm02_cross_model_memory/results/DEVELOPMENT_LOCK.json")); assert x["totals"]==y["development_totals"]; assert x["n_independent_roots"]==y["development_independent_roots"]==64; assert e.digest([{"root":r["root"],"candidate_bits":r["candidate_bits"]} for r in x["rows"]])==y["development_candidate_case_bits_sha256"]; assert e.digest([{"root":r["root"],"policy_bits":r["policy_bits"]} for r in x["rows"]])==y["development_policy_case_bits_sha256"]'
           else
             echo 'SOURCE-ONLY; training/development not yet scored'
           fi
