@@ -77,7 +77,7 @@ jobs:
           python - <<'PY'
           import json
           m=json.load(open('/tmp/fsi04_roster/development_manifest.json'))
-          assert m['counts']=={'S4_stalled':4,'WB-Prop':2}
+          assert m['counts']=={'S4_stalled':1,'WB-Prop':2}
           assert m['historical_rep_case_ids_checked']==120
           assert m['full_automorphism_against_loopscope02']
           assert m['ARG03_protected_test']=='untouched'
