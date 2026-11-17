@@ -207,6 +207,8 @@ def main():
         frozen=load(args.phase)
         assert frozen['run']['backend']=='independent'
         verify(run,frozen)
+        if args.out:
+            write_once(args.out,result)
         print(f'CQ-06 {args.phase} {args.backend}: source-locked raw paired replay PASS')
     else:
         if args.backend!='independent':raise ValueError('Only independent backend may write initial frozen receipt')
