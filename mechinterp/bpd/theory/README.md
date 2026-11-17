@@ -24,3 +24,9 @@ The dedicated workflow uses Lean 4.19.0 and captures axiom output. The finite Le
 - [phase_disjoint_control.py](phase_disjoint_control.py) uses the actual shared V,U component wrapper and trains both factors throughout stage 1. A frozen-factor gate-only refit runs under calibration-set tolerances, with held-out evaluation only after selection.
 
 Original B1–B4 gates and receipts, VPD parity controls, and phase-disjoint dictionary-training protocol remain unchanged.
+
+### BPD-PD-02 follow-up (2026-11-17)
+
+The independently registered [24-seed hard-gate cohort](pd02/PROTOCOL.md) is complete: its [source-locked FAIL report](pd02/RESULTS_20261117.md) and [24 paired-seed CSV](pd02/PER_SEED_20261117.csv) are committed, with an [immutable full JSON CI artifact](https://github.com/MoralityLabAI/BPD/actions/runs/44067120071/artifacts/14321006811). The hard-gated dictionary achieved 24/24 axis recoveries but only 6/24 complete phase-routing recoveries, against 10/24 for matched soft gating (exact paired McNemar p=0.34375).
+
+A [posthoc omission audit](pd02/POSTHOC_OMISSION_20261117.md) counts 498 required-gate false-offs in 12,288 required invocations and zero observed wrong-component activations. Its four-pass product prediction matches the measured correct-board fraction across seeds. The original preregistration and failed primary gate remain unchanged.
