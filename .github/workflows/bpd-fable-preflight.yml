@@ -69,6 +69,7 @@ jobs:
       - name: PD05 count supervision and STE excluded-seed source checks
         run: |
           python -m pytest -q mechinterp/bpd/theory/pd05/test_experiment.py
+          python -m pytest -q mechinterp/bpd/theory/pd05/test_published_results.py
       - name: Verify source module syntax
         run: |
           python -m compileall -q mechinterp/bpd
