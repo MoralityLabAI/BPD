@@ -1,10 +1,13 @@
 """FSI-02 controlled finite-basis source and prospective world-replay checks."""
-import json,os,unittest
+import json,os,unittest,importlib.util
 from fractions import Fraction as Q
 from pathlib import Path
-from mechinterp.bpd.experiments.fsi02_run import (
-    DIRECTIONS,BASES,law,true_l0,exact_minimizers,score_world,run)
 ROOT=Path(__file__).resolve().parents[3]
+spec=importlib.util.spec_from_file_location('bpd_fsi02_standalone',Path(__file__).with_name('fsi02_run.py'))
+bpd=importlib.util.module_from_spec(spec)
+spec.loader.exec_module(bpd)
+DIRECTIONS,BASES,law,true_l0,exact_minimizers,score_world,run=(
+    bpd.DIRECTIONS,bpd.BASES,bpd.law,bpd.true_l0,bpd.exact_minimizers,bpd.score_world,bpd.run)
 REG=ROOT/'mechinterp/bpd/experiments/fsi02_registration_v1.json'
 ARCHIVE=ROOT/'mechinterp/bpd/experiments/fsi02_cpu_world_receipt.json'
 
