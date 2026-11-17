@@ -1,0 +1,67 @@
+name: BPD-CQ-06 nonlinear feedback / preregistered staged source locks
+on:
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/theory/cq06_nonlinear_feedback/**'
+      - '.github/workflows/bpd-cq06-nonlinear-feedback.yml'
+  workflow_dispatch:
+jobs:
+  native-engineering:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install 'torch==2.5.1' 'numpy>=1.26'
+      - name: Development-only engineering including true native BPDModel parity
+        run: python -m unittest discover -s mechinterp/bpd/theory/cq06_nonlinear_feedback/tests -v
+      - name: Prospective source registration is present
+        run: |
+          test -s mechinterp/bpd/theory/cq06_nonlinear_feedback/PROTOCOL.md
+          test -s mechinterp/bpd/theory/cq06_nonlinear_feedback/REGISTRATION.json
+          python -m compileall -q mechinterp/bpd/theory/cq06_nonlinear_feedback
+  replay-registered:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install 'torch==2.5.1' 'numpy>=1.26'
+      - name: Reproduce the 59-root source-locked independent and native sham cohort if registered
+        run: |
+          if test -f mechinterp/bpd/theory/cq06_nonlinear_feedback/results/cq06_sham.json.gz.b64; then
+            python -m mechinterp.bpd.theory.cq06_nonlinear_feedback.reference --phase sham --backend independent --check --out /tmp/cq06_independent_sham.json
+            python -m mechinterp.bpd.theory.cq06_nonlinear_feedback.reference --phase sham --backend native --check --out /tmp/cq06_native_sham.json
+          else
+            echo 'Sham cohort sealed at engineering stage; no prospective results requested'
+          fi
+      - name: Check registered preflight and replay confirmation only if it was unsealed by READY
+        run: |
+          if test -f mechinterp/bpd/theory/cq06_nonlinear_feedback/results/cq06_preflight_result.json; then
+            rc=0
+            python -m mechinterp.bpd.theory.cq06_nonlinear_feedback.reference --phase preflight --check || rc=$?
+            if [ "$rc" != 0 ] && [ "$rc" != 2 ]; then exit "$rc"; fi
+            if test -f mechinterp/bpd/theory/cq06_nonlinear_feedback/results/cq06_confirmation.json.gz.b64; then
+              test "$rc" = 0 || (echo 'Confirmation exists but preflight is not READY' && exit 1)
+              python -m mechinterp.bpd.theory.cq06_nonlinear_feedback.reference --phase confirmation --backend independent --check --out /tmp/cq06_independent_confirmation.json
+              python -m mechinterp.bpd.theory.cq06_nonlinear_feedback.reference --phase confirmation --backend native --check --out /tmp/cq06_native_confirmation.json
+            fi
+          else
+            test ! -f mechinterp/bpd/theory/cq06_nonlinear_feedback/results/cq06_confirmation.json.gz.b64
+            echo 'No locked preflight yet; confirmation remains blocked'
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cq06-hosted-independent-native-replay
+          if-no-files-found: ignore
+          retention-days: 30
+          path: |
+            /tmp/cq06_independent_sham.json
+            /tmp/cq06_native_sham.json
+            /tmp/cq06_independent_confirmation.json
+            /tmp/cq06_native_confirmation.json
