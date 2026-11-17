@@ -1,0 +1,100 @@
+name: BPD-SF03 32-root sealed-threshold confirmation
+
+on:
+  push:
+    branches:
+      - "research/bpd-sf03-*"
+    paths:
+      - ".github/workflows/bpd-sf03-confirmation.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  confirmation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pinned CPU torch
+        run: python -m pip install "torch==2.5.1"
+      - name: Verify unmodified source and preconfirmed 59-root threshold
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          root=Path("mechinterp/bpd/theory/sf03_tangent_null")
+          spec=json.loads((root/"LOCK.json").read_text())
+          locked=json.loads((root/"CALIBRATION_LOCK.json").read_text())
+          for key,path in [
+            ("protocol_blob_sha",root/"PROTOCOL.md"),
+            ("experiment_blob_sha",root/"experiment.py"),
+            ("tests_blob_sha",root/"tests/test_tangent_sham.py"),
+            ("reused_sf02_teacher_blob_sha",Path("mechinterp/bpd/theory/sf02_secret_circuit/experiment.py")),
+          ]:
+            actual=subprocess.check_output(["git","hash-object",str(path)],text=True).strip()
+            assert actual == spec[key], (path, actual, spec[key])
+          raw=root/"results/calibration_59_hosted.json"
+          assert subprocess.check_output(["git","hash-object",str(raw)],text=True).strip()==locked["calibration_raw_git_blob_sha"]
+          r=json.loads(raw.read_text())
+          assert r["roots"]==list(range(4101,4160))
+          assert locked["confirmation_roots"]==list(range(5101,5133))
+          assert locked["one_sided_upper_tolerance_T"]==max(row["pseudo_sham_gap"] for row in r["rows"])
+          assert locked["minimum_confirmation_gap"]==locked["one_sided_upper_tolerance_T"]+0.05
+          print(f"SF03 FROZEN T={locked['one_sided_upper_tolerance_T']:.17g}; confirmation 32 unseen roots admitted")
+          PY
+      - name: Run 32 prospective independent confirmation roots
+        run: |
+          python -m mechinterp.bpd.theory.sf03_tangent_null.experiment \
+            --phase confirmation --out /tmp/sf03_confirmation_32.json
+      - name: Evaluate immutable strong effect and equivalence gates
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, random, statistics
+          from pathlib import Path
+          root=Path("mechinterp/bpd/theory/sf03_tangent_null")
+          lock=json.loads((root/"CALIBRATION_LOCK.json").read_text())
+          r=json.load(open("/tmp/sf03_confirmation_32.json"))
+          assert r["roots"]==list(range(5101,5133)) and len(r["rows"])==32
+          threshold=lock["minimum_confirmation_gap"]
+          good=0;equivroot=0;engineering=0;gaps=[]
+          for row in r["rows"]:
+              ok=(row["max_norm_error"]<1e-4 and row["max_abs_jacobian_error"]<1e-4
+                 and row["max_signed_jacobian_error"]<1e-4 and row["factor_weight_mse"]<=1e-4)
+              g=row["bpd_minus_signed_sham"]
+              engineering+=ok
+              good+=bool(ok and g>=threshold)
+              equivroot+=bool(ok and abs(g)<=.05)
+              gaps.append(g)
+              print(json.dumps({"seed":row["seed"],"eligible":row["eligible"],
+                 "bpd_recovery":row["bpd_recovery"],"signed_sham":row["tangent_signed_sham_mean"],
+                 "bpd_gap":g,"factor_mse":row["factor_weight_mse"],"engineering":ok}))
+          rng=random.Random(61205)
+          means=sorted(statistics.mean(rng.choices(gaps,k=32)) for _ in range(10000))
+          lo,hi=means[249],means[9749]
+          report={
+            "threshold":threshold,
+            "incremental_gate_passed":good>=24,
+            "strong_roots":good,
+            "root_engineering_passes":engineering,
+            "root_equivalence_count":equivroot,
+            "mean_gap":statistics.mean(gaps),
+            "bootstrap_95_mean_gap":[lo,hi],
+            "equivalence_gate_passed":equivroot>=28 and lo>=-.05 and hi<=.05,
+            "evidence_scope":"same-family independent trained root confirmation"}
+          print("SF03_CONFIRMATION_VERDICT="+json.dumps(report))
+          Path("/tmp/sf03_verdict.json").write_text(json.dumps(report,indent=2)+"\n")
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bpd-sf03-confirmation-32-root-raw
+          path: |
+            /tmp/sf03_confirmation_32.json
+            /tmp/sf03_verdict.json

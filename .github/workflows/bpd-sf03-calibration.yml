@@ -1,0 +1,70 @@
+name: BPD-SF03 59-root tangent null calibration
+
+on:
+  push:
+    branches:
+      - "research/bpd-sf03-*"
+    paths:
+      - ".github/workflows/bpd-sf03-calibration.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  root-calibration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pinned PyTorch
+        run: python -m pip install "torch==2.5.1"
+      - name: Verify source hashes and split lock
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json, subprocess
+          root = Path("mechinterp/bpd/theory/sf03_tangent_null")
+          lock = json.loads((root / "LOCK.json").read_text())
+          for name, path in [
+              ("protocol_blob_sha", root/"PROTOCOL.md"),
+              ("experiment_blob_sha", root/"experiment.py"),
+              ("tests_blob_sha", root/"tests/test_tangent_sham.py"),
+              ("reused_sf02_teacher_blob_sha", Path("mechinterp/bpd/theory/sf02_secret_circuit/experiment.py")),
+          ]:
+              actual = subprocess.check_output(["git", "hash-object", str(path)], text=True).strip()
+              assert actual == lock[name], (name, actual, lock[name])
+          assert lock["calibration_roots"] == list(range(4101,4160))
+          assert lock["confirmation_roots"] == list(range(5101,5133))
+          print("SF03 SOURCE SHA AND ROOT SPLIT VERIFIED")
+          PY
+      - name: Execute fresh 59-root tangent null calibration
+        run: |
+          python -m mechinterp.bpd.theory.sf03_tangent_null.experiment \
+            --phase calibration --out /tmp/sf03_calibration.json
+      - name: Report one-sided tolerance from actual root null gaps
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          r = json.load(open("/tmp/sf03_calibration.json"))
+          assert r["roots"] == list(range(4101,4160)) and len(r["rows"]) == 59
+          t = max(x["pseudo_sham_gap"] for x in r["rows"])
+          for row in r["rows"]:
+              assert row["max_norm_error"] < 1e-4
+              assert row["max_signed_jacobian_error"] < 1e-4
+              assert row["max_abs_jacobian_error"] < 1e-4
+              print(json.dumps({"seed":row["seed"],"null_gap":row["pseudo_sham_gap"],
+                "bpd_gap":row["bpd_minus_signed_sham"],"fit_mse":row["factor_weight_mse"]}))
+          print(f"SF03_CALIBRATION_T={t:.17g}")
+          print(f"ONE_SIDED_COVERAGE_95TH={1-0.95**59:.12f}")
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bpd-sf03-calibration-59-root-raw
+          path: /tmp/sf03_calibration.json
