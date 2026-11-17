@@ -1,0 +1,74 @@
+{
+  "alpha": "0.05",
+  "confirm_units_planned": 26,
+  "experiment_id": "BPD-CQ-07-excluded-root-reachability-feasibility",
+  "heldout_sealed": false,
+  "independent_unit": "one trained rotated nonlinear parity recurrence, fitted BPD factors and controller",
+  "measurement_resolution": "1/128",
+  "pilot": [
+    {
+      "paired_effect": "0/128",
+      "sham_effects": [
+        "0/128"
+      ],
+      "unit_id": "root-997"
+    },
+    {
+      "paired_effect": "0/128",
+      "sham_effects": [
+        "0/128"
+      ],
+      "unit_id": "root-1009"
+    },
+    {
+      "paired_effect": "0/128",
+      "sham_effects": [
+        "0/128"
+      ],
+      "unit_id": "root-1013"
+    },
+    {
+      "paired_effect": "0/128",
+      "sham_effects": [
+        "0/128"
+      ],
+      "unit_id": "root-1021"
+    },
+    {
+      "paired_effect": "0/128",
+      "sham_effects": [
+        "0/128"
+      ],
+      "unit_id": "root-1033"
+    },
+    {
+      "paired_effect": "0/128",
+      "sham_effects": [
+        "0/128"
+      ],
+      "unit_id": "root-1039"
+    },
+    {
+      "paired_effect": "0/128",
+      "sham_effects": [
+        "0/128"
+      ],
+      "unit_id": "root-1049"
+    },
+    {
+      "paired_effect": "0/128",
+      "sham_effects": [
+        "0/128"
+      ],
+      "unit_id": "root-1051"
+    }
+  ],
+  "pilot_from_development_only": true,
+  "planned_comparisons": 2,
+  "schema_version": 1,
+  "scientific_min_effect": "0.15",
+  "sham_confidence": "0.95",
+  "sham_quantile": "0.95",
+  "target_effect": "0",
+  "units_independent": true
+}
