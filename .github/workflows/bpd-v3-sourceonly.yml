@@ -4,11 +4,13 @@ on:
     paths:
       - 'mechinterp/bpd/v3/**'
       - 'mechinterp/bpd/tests/test_v3_floor_and_basis.py'
+      - 'mechinterp/bpd/tests/test_v3_uncertainty.py'
       - '.github/workflows/bpd-v3-sourceonly.yml'
   pull_request:
     paths:
       - 'mechinterp/bpd/v3/**'
       - 'mechinterp/bpd/tests/test_v3_floor_and_basis.py'
+      - 'mechinterp/bpd/tests/test_v3_uncertainty.py'
       - '.github/workflows/bpd-v3-sourceonly.yml'
   workflow_dispatch:
 
@@ -30,8 +32,8 @@ jobs:
         # The shared neural conftest imports torch. Isolate the source-only suite.
         run: |
           mkdir -p /tmp/bpd-v3-tests
-          cp mechinterp/bpd/tests/test_v3_floor_and_basis.py /tmp/bpd-v3-tests/test_v3_floor_and_basis.py
-          PYTHONPATH="$PWD" python -m pytest -q /tmp/bpd-v3-tests/test_v3_floor_and_basis.py
+          cp mechinterp/bpd/tests/test_v3_floor_and_basis.py mechinterp/bpd/tests/test_v3_uncertainty.py /tmp/bpd-v3-tests/
+          PYTHONPATH="$PWD" python -m pytest -q /tmp/bpd-v3-tests
       - name: Produce reproducible synthetic receipt
         run: python -m mechinterp.bpd.v3.floor_and_basis --smoke --out /tmp/bpd_v3_synthetic_smoke.json
       - name: Validate declared synthetic evidence boundary
