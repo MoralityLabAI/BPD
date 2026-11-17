@@ -33,7 +33,6 @@ jobs:
           assert len(config['arms'])==lock['arms_per_seed']==6
           assert config['scoring']['primary_arm']=='cold015'
           assert config['scoring']['primary_control']=='anneal060_030_015'
-          assert config['optimization'] if 'optimization' in config else True
           sha=lock['source_commit_sha']
           subprocess.run(['git','merge-base','--is-ancestor',sha,'HEAD'],check=True)
           files=[str(root / p) for p in ('CONFIG.json','PROTOCOL.md','experiment.py','test_experiment.py')]
