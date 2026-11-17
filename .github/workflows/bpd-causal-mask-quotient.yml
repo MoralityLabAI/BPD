@@ -17,6 +17,6 @@ jobs:
         with:
           python-version: '3.12'
       - name: Exact rational tests, including seeded metamorphic instances
-        run: python -m unittest discover -s mechinterp/bpd/theory/causal_observable_masks/tests -v
+        run: PYTHONPATH=mechinterp/bpd/theory python -m unittest discover -s mechinterp/bpd/theory/causal_observable_masks/tests -v
       - name: Reproduce sealed source-only reference
-        run: python -m mechinterp.bpd.theory.causal_observable_masks.reference --out mechinterp/bpd/theory/causal_observable_masks/results/cq01_cpu_reference.json --check
+        run: PYTHONPATH=mechinterp/bpd/theory python -m causal_observable_masks.reference --out mechinterp/bpd/theory/causal_observable_masks/results/cq01_cpu_reference.json --check
