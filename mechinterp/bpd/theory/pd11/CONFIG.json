@@ -1,0 +1,210 @@
+{
+  "study_id": "BPD-PD-11",
+  "registration_date": "2026-11-18",
+  "status": "frozen_before_PD11_optimization",
+  "predecessor": {
+    "pd10_merge_sha": "8a9c74ca8cd9997bd50a85f8789dff4ad25c90ad",
+    "pd10_cold015_successes": 2,
+    "pd10_anneal_successes": 0,
+    "pd10_privileged_42deg_successes": 0,
+    "pd10_first_run": 44124926867,
+    "pd09_posthoc": "45-degree pair remains local maximum of smoothed near-zero mass at sigma 0.15; source coordinate pair has higher global objective"
+  },
+  "seed_list": [
+    1637,
+    1657,
+    1663,
+    1667,
+    1669,
+    1693,
+    1697,
+    1699,
+    1709,
+    1721,
+    1723,
+    1733,
+    1741,
+    1747,
+    1753,
+    1759,
+    1777,
+    1783,
+    1787,
+    1789,
+    1801,
+    1811,
+    1823,
+    1831
+  ],
+  "smoke_seed": 2029,
+  "source": {
+    "generator": "PD06 rotation_for_seed and sample_batch unchanged",
+    "observed_training_inputs_only": true,
+    "train_supports": "PD06 four singletons, four adjacent pairs, three triples",
+    "unseen_supports": "PD06 withheld diagonal pairs (0,2),(1,3), triple (0,2,3), transition",
+    "train_boards": 1024,
+    "train_seed_offset": 100000,
+    "heldout_seed_offset": 200000,
+    "heldout_family_stride": 10000,
+    "heldout_boards_per_family": 192,
+    "eval_families": [
+      "k1_seen",
+      "k2_seen",
+      "k2_unseen",
+      "k3_seen",
+      "k3_unseen",
+      "transition_unseen"
+    ],
+    "rotation_seed_offset": 900000
+  },
+  "objective": {
+    "name": "unlabelled Gaussian near-zero mass over two orthogonal read columns",
+    "sigma": 0.15,
+    "pair_score": "mean(exp(-0.5*((u*cosθ+v*sinθ)/sigma)^2)+exp(-0.5*((-u*sinθ+v*cosθ)/sigma)^2))",
+    "maximize": true,
+    "rotation_update": "V_i'=cosθ V_i+sinθ V_j, V_j'=-sinθ V_i+cosθ V_j",
+    "qr_initialization": "PD09 qr_orthogonal of same BPD random V per seed",
+    "ordered_pairs": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        3
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        1,
+        3
+      ],
+      [
+        2,
+        3
+      ]
+    ],
+    "sweep_count": 6,
+    "angles_per_pair": 73,
+    "random_init_sources": "PD06 BPDModel V factors; identical among global/local arms",
+    "tie_break": "score maximum; within tolerance 1e-12 prefer smallest absolute angle then smaller angle",
+    "target_sigma_015_from_start": true,
+    "no_supervised_label_use_in_primary_and_control": true,
+    "trained_objective_receipt": "initial and final full-sample near-zero mass, total angular updates, exact pair-score evaluations"
+  },
+  "arms": [
+    {
+      "key": "global_givens",
+      "kind": "global",
+      "initialization": "matched_random_qr",
+      "theta_min_deg": -90,
+      "theta_max_deg": 90,
+      "uses_true_rotation_in_initialization": false,
+      "uses_count_labels": false
+    },
+    {
+      "key": "local_givens",
+      "kind": "local",
+      "initialization": "matched_random_qr",
+      "theta_min_deg": -5,
+      "theta_max_deg": 5,
+      "uses_true_rotation_in_initialization": false,
+      "uses_count_labels": false
+    },
+    {
+      "key": "global_pairmix_privileged",
+      "kind": "global",
+      "initialization": "true_Q_pairmix_44deg_01",
+      "theta_min_deg": -90,
+      "theta_max_deg": 90,
+      "uses_true_rotation_in_initialization": true,
+      "uses_count_labels": false
+    },
+    {
+      "key": "local_pairmix_privileged",
+      "kind": "local",
+      "initialization": "true_Q_pairmix_44deg_01",
+      "theta_min_deg": -5,
+      "theta_max_deg": 5,
+      "uses_true_rotation_in_initialization": true,
+      "uses_count_labels": false
+    },
+    {
+      "key": "random_orthogonal",
+      "kind": "negative",
+      "initialization": "matched_random_qr",
+      "uses_true_rotation_in_initialization": false,
+      "uses_count_labels": false
+    },
+    {
+      "key": "count_supervised_positive",
+      "kind": "supervised",
+      "initialization": "PD06_original",
+      "uses_true_rotation_in_initialization": false,
+      "uses_count_labels": true
+    }
+  ],
+  "training": {
+    "max_angular_sweeps": 6,
+    "source_train_boards": 1024,
+    "angles_per_pair": 73,
+    "global_grid": "73 angles linspace(-90,90) inclusive",
+    "local_grid": "73 angles linspace(-5,5) inclusive",
+    "count_supervised_steps": 360,
+    "count_supervised_lr": 0.025,
+    "count_supervised_batch": 32,
+    "pytorch_threads": 1,
+    "exact_ortho_U": "V.T",
+    "real_physical_bpd_eval": true,
+    "zero_ablation": true,
+    "delta_mask_zero": true,
+    "sphere_rescale": false,
+    "physical_gating": "hard fixed abs(x@normalized_V)>=0.5, no gate refit"
+  },
+  "scoring": {
+    "mean_read_cos_min": 0.9,
+    "overall_binary_MSE_max": 0.03,
+    "seen_family_MSE_max": 0.04,
+    "unseen_family_MSE_max": 0.06,
+    "seen_fourpass_exact_support_min": 0.8,
+    "unseen_fourpass_exact_support_min": 0.7,
+    "all_masks_binary": true,
+    "trained_givens_requires_nonzero_rotation_update": true,
+    "supervised_positive_requires_nonzero_gradient": true,
+    "primary_arm": "global_givens",
+    "primary_control": "local_givens",
+    "primary_successes_min": 18,
+    "primary_net_paired_seed_wins_min": 6,
+    "primary_two_sided_McNemar_p_max": 0.05
+  },
+  "evidence": {
+    "first_full_run_immutable": true,
+    "seed_paired_exact_McNemar": true,
+    "Wilson95": true,
+    "per_family_success_and_mse": true,
+    "all_144_rows": true,
+    "globally_aligned_read_axes": true,
+    "original_pd09_pd10_receipts_unchanged": true
+  },
+  "limits": {
+    "privileged_pairmix_Q_initialization_separate": true,
+    "positive_count_labels_separate": true,
+    "unlabelled_arms_only_observed_x": true,
+    "no_recurrent_transformer_identification_claim": true
+  },
+  "execution": {
+    "python": "3.12",
+    "torch": "2.5.1+cpu",
+    "single_process": true,
+    "threads": 1,
+    "memory_limit_GiB": 3,
+    "timeout_min": 20,
+    "source_lock_after_excluded_smoke": true
+  }
+}
