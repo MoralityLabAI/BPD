@@ -4,9 +4,9 @@
   "date": "2026-11-18",
   "src": {
     "PROTOCOL_SOURCE_ONLY.md": "99deb0c0853aa870e7ce359c1a7d1c7178c8debb",
-    "THEORY.md": "8d639eb6bd16b7832e9dc6147c2ef4ca078c0d4b",
+    "THEORY.md": "b96130444d48fe51bc793925cd4f73011b2abfc7",
     "donor_cohorts.py": "6c08787a2a08daf3c601265decbba6d8cfc7f930",
-    "tests/test_donor_cohorts.py": "6bd27abe9d80807fc79ef2f16ad5a6c27ed82897"
+    "tests/test_donor_cohorts.py": "c0098fbf143dd40aa51805c8b15617edf9b0de7d"
   },
   "stage0_generator_sha": "525cfb28d40cc5f58c0e8141489a8e744d1778f4",
   "allowed_source_family": "heldout",
@@ -24,5 +24,20 @@
   "reserved_calibration_roots": "6101..6159",
   "reserved_confirmation_roots": "7101..7132",
   "evidence_scope": "source-only donor/preflight; no trained model inference, source-blind model scoring, or security results",
-  "arg03_sealed": true
+  "arg03_sealed": true,
+  "source_only_math_amendments": [
+    {
+      "amendment": 1,
+      "prior_lock_blob_sha": "d6efe40ca0cad30dd550800e72654b025d5fed5d",
+      "initial_ci": "https://github.com/MoralityLabAI/BPD/actions/runs/44146966540",
+      "observed": "11 source-only tests; 2 independent closed-form blind Bayes checks failed, prior donor formula omitted old source's earlier write and high-contrast old-source stratum",
+      "corrected_files": [
+        "THEORY.md",
+        "tests/test_donor_cohorts.py"
+      ],
+      "unchanged_generator_blob_sha": "6c08787a2a08daf3c601265decbba6d8cfc7f930",
+      "scientific_root_data_seen": false,
+      "outcome": "new source-only audit must rerun before any model pilot"
+    }
+  ]
 }
