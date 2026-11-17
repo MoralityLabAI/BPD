@@ -52,3 +52,8 @@ $P = "$HOME/.venvs/bluebeam/Scripts/python.exe"
 ```
 
 Provenance hashes linking back to `MoralityLabAI/LoopedTransformers` and `MoralityLabAI/VPD` are recorded in [`PROVENANCE.json`](PROVENANCE.json).
+
+
+## Statistical resolution before BPD GPU sweeps
+
+Use the [EvalMath mechanistic-power agent skill](https://github.com/MoralityLabAI/EvalMath/tree/main/skills/evalmath-mechinterp-power) before planning a causal intervention, probe or small held-out evaluation. Its independent-root, matched-sham and effect-floor preflight keeps shallow 64-outcome sweeps from being mistaken for measured mechanisms. The [FSI-03 native TRM audit](mechinterp/FSI03_NATIVE_VARIATION_AUDIT.md) shows why delayed-logit change must be checked against a matched random direction on actual task outcomes. Retain the ARG-03-N sealed test restrictions.

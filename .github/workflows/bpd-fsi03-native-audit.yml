@@ -1,0 +1,48 @@
+name: BPD-FSI03 native TRM variation vs equal-dose random control
+on:
+  pull_request:
+    paths:
+      - 'mechinterp/dark_fiber_gyms/fsi03_native_audit.py'
+      - 'mechinterp/dark_fiber_gyms/tests/fsi03_source_checks.py'
+      - 'mechinterp/FSI03_NATIVE_VARIATION_AUDIT.md'
+      - '.github/workflows/bpd-fsi03-native-audit.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  published-native-receipt:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: MoralityLabAI/EvalMath
+          ref: 5004cab9b366a412290a83945cda76987bb3cd6c
+          path: .deps/evalmath
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Standalone exact tests with no torch dependency
+        run: |
+          export EVALMATH_FSI_FILE="${{ github.workspace }}/.deps/evalmath/src/spiral_ln/evaluation_finite_sample.py"
+          python -m unittest discover -s mechinterp/dark_fiber_gyms/tests -p 'fsi03_source_checks.py' -v
+      - name: Audit all 16 comparisons on both native checkpoints and 120 public boards
+        run: |
+          export EVALMATH_FSI_FILE="${{ github.workspace }}/.deps/evalmath/src/spiral_ln/evaluation_finite_sample.py"
+          python mechinterp/dark_fiber_gyms/fsi03_native_audit.py --out /tmp/bpd_fsi03_public.json
+          python - <<'PY'
+          import json
+          r=json.load(open('/tmp/bpd_fsi03_public.json'))
+          assert r['independent_units_declared']==120
+          assert r['family']['size']==16
+          assert r['family']['nominal_p_below_005']==0
+          assert r['family']['holm_p_below_005']==0
+          assert r['family']['largest_positive_effect_pp']<10
+          assert 'not read' in r['heldout_seal']
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bpd-fsi03-source-locked-native-audit
+          path: /tmp/bpd_fsi03_public.json
+          if-no-files-found: error
