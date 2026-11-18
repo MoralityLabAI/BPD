@@ -85,6 +85,30 @@ jobs:
           else
             echo 'AMM09 no development: preflight blocked'
           fi
+      - name: Independently audit the registered primary and four-contrast Holm family
+        shell: bash
+        run: |
+          if test -f /tmp/amm09_development.json; then
+            python -m mechinterp.bpd.experiments.amm09_two_slot_memory.audit_development \
+              --development /tmp/amm09_development.json \
+              --training-lock mechinterp/bpd/experiments/amm09_two_slot_memory/results/TRAINING_LOCK.json \
+              --development-lock mechinterp/bpd/experiments/amm09_two_slot_memory/results/DEVELOPMENT_LOCK.json \
+              --preflight /tmp/amm09_preflight.json \
+              --out /tmp/amm09_corrected_analysis.json
+            if test -f mechinterp/bpd/experiments/amm09_two_slot_memory/results/ANALYSIS_CORRECTED.json; then
+              python -m mechinterp.bpd.experiments.amm09_two_slot_memory.audit_development \
+                --development /tmp/amm09_development.json \
+                --training-lock mechinterp/bpd/experiments/amm09_two_slot_memory/results/TRAINING_LOCK.json \
+                --development-lock mechinterp/bpd/experiments/amm09_two_slot_memory/results/DEVELOPMENT_LOCK.json \
+                --preflight /tmp/amm09_preflight.json \
+                --check-lock mechinterp/bpd/experiments/amm09_two_slot_memory/results/ANALYSIS_CORRECTED.json
+              echo 'AMM09 registered four-contrast source-preserving audit PASS'
+            else
+              echo 'AMM09 first independent post-development correction receipt'
+            fi
+          else
+            echo 'AMM09 no development: independent audit blocked'
+          fi
       - name: Archive independent source and complete training/development case receipts
         if: always()
         uses: actions/upload-artifact@v4
@@ -97,3 +121,4 @@ jobs:
             /tmp/amm09_development.json
             /tmp/amm09_pilot.json
             /tmp/amm09_preflight.json
+            /tmp/amm09_corrected_analysis.json
