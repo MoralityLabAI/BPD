@@ -6,6 +6,10 @@ Upstream VPD targets feedforward weight sites where each matrix executes once pe
 
 **Pre-run review amendment:** [Fable protocol corrections](docs/amendments_2026-11-15_fable.md). The earlier positive control history remains unchanged. The default level pool is now max; item-contrast donor swaps are the proposed specificity metric. The current mirror in MoralityLabAI/VPD is a prior snapshot.
 
+## Projector transfer under a limited target budget
+
+The [18 November 2026 transfer addendum](../../papers/shared_weights_dark_fibers/BPD_TRANSFER_ADDENDUM_20261118.md) applies NC-12 to BPD's source-assisted reuse claims. Across eight synthetic model pairs, the fixed transfer procedure failed all 16 registered gates. At eight target gradient inputs, direct target estimation improved shared-task NLL by 0.072721 nats under the common retained-write calibration. The addendum states the target access budget and limits the inference to this engineering study.
+
 ## Where VPD Breaks on Loops, and What BPD Changes
 
 | VPD assumes | What a loop does to it | BPD change |
@@ -80,3 +84,4 @@ mechinterp/bpd/
 - Bushnaq et al. (Goodfire, 2026), *Interpreting Language Model Parameters* — https://www.goodfire.ai/research/interpreting-lm-parameters
 - Wang & Reid (2026), *Looped Transformers under the Jacobian Lens: Does the Global Workspace Survive Recurrence?*, `arXiv:2609.01924` — https://arxiv.org/abs/2609.01924
 - Internal foundations: `mechinterp/loopscope01` (`LoopedChase`, `TCA`), `mechinterp/loopscope02` (`PureSudokuTRM`, $F_1 / F_6 = 1{,}808.4$), `mechinterp/loopscope03` ($V_t / C_t / R_t$ ledger & sphere calibration), and `papers/shared_weights_dark_fibers/PAPER.md` (`v014`).
+

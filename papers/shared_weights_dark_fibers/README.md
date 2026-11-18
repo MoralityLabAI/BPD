@@ -22,6 +22,7 @@ It synthesizes seven studies across five experimental arcs while leaving all pri
 - [`PAPER.md`](PAPER.md) — Self-contained GitHub-readable Markdown edition (`v014`, unchanged) with embedded PNG figures and full reference list
 - [`CAUSAL_QUOTIENT_ARG03.md`](CAUSAL_QUOTIENT_ARG03.md) — Theoretical design note (Propositions 1–4: observable quotients, delayed Gramians, and observer-relative trace caches)
 - [`DARK_FIBERS_CAMPAIGN_ADDENDUM.md`](DARK_FIBERS_CAMPAIGN_ADDENDUM.md) — Empirical campaign addendum reporting `LOOPSCOPE-04` (3A–3C) and `ARG-03-N` (`development.jsonl` $N=96$) with embedded `fig6`–`fig7`
+- [`BPD_TRANSFER_ADDENDUM_20261118.md`](BPD_TRANSFER_ADDENDUM_20261118.md): NC-12 source-assisted projector transfer, with all 16 original comparisons, target information accounting and the link to BPD basis theory. Evidence covers eight synthetic model pairs. The [retrospective resolution audit](NC12_ADDENDUM_RESOLUTION_AUDIT_20261118.json) preserves its `REDESIGN_OR_PILOT_ONLY` result.
 - [`ARG03_FROZEN_TEST_PROTOCOL.md`](ARG03_FROZEN_TEST_PROTOCOL.md) — Frozen preregistered decision rules and calibration lock for sealed `ARG-03-N` `test.jsonl` ($N=168$)
 - [`campaign_20261115/`](campaign_20261115/) — Provenance-locked statistical summary ([`campaign_summary.json`](campaign_20261115/campaign_summary.json)) and frozen development calibration ([`arg03_dev_calibration.json`](campaign_20261115/arg03_dev_calibration.json))
 - [`build_figures.py`](build_figures.py) — Deterministic CPU script regenerating `figures/fig1..fig5.{pdf,png}` from [`../../mechinterp/loopscope02/results/`](../../mechinterp/loopscope02/results/) and [`../../mechinterp/loopscope03/results/`](../../mechinterp/loopscope03/results/)
@@ -67,3 +68,4 @@ bibtex main
 pdflatex -interaction=nonstopmode -halt-on-error main.tex
 pdflatex -interaction=nonstopmode -halt-on-error main.tex
 ```
+
