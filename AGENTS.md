@@ -19,6 +19,19 @@ does not thereby repair clean reasoning. Observational probes and exact
 linear-algebraic BPD witnesses belong to different evidence classes from
 native model-causal claims.
 
+AMM-07's 128 independent confirmation model roots are **SEALED**.
+Its 64-model development study learned the hidden feedback quality on
+59 roots but produced only +0.305pp causal gain above a matched-fit
+quality-blind policy. The Holm-adjusted root sign p was 1.0, below
+the registered +8pp science floor; the corrected EvalMath planner
+returned `REDESIGN_OR_PILOT_ONLY`. An audit-only casewise
+oracle headroom of 7.875pp also missed a prespecified veto.
+Do not invoke AMM-07 `--phase confirmation` or construct its
+release manifest, including from archived pilot receipts. Read
+`mechinterp/bpd/experiments/amm07_replicated_feedback/RESULTS.md`
+and `AMENDMENT_TRAINING_NUMERIC.md` for fidelity and training
+reproducibility audits.
+
 AMM-06's 128 independent confirmation model roots are **SEALED**.
 The preregistered 64-root development study measured a +0.81pp
 selective-trust advantage over always updating noisy local feedback,
