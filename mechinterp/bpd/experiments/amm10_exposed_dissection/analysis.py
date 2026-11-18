@@ -87,7 +87,7 @@ def score_identity(X,coeff):
  full=x@b;reduced=common[:,None]+variable
  keep=(0,2,3,4,15,16,17)
  spread=float(np.max(abs(x[:,:,keep]-x[:,0:1,keep])))
- return {"n_training_cases":8192,"max_candidate_invariant_spread":spread,
+ return {"n_training_cases":int(len(x)),"max_candidate_invariant_spread":spread,
   "max_preclip_score_error":float(np.max(abs(full-reduced))),
   "preclip_action_mismatch_count":int(np.count_nonzero(np.argmax(full,axis=1)!=np.argmax(reduced,axis=1))),
   "postclip_action_mismatch_count":int(np.count_nonzero(np.argmax(np.clip(full,0,1),axis=1)!=np.argmax(np.clip(reduced,0,1),axis=1))),
