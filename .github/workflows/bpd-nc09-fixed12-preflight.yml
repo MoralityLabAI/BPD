@@ -1,0 +1,63 @@
+name: BPD-NC-09 Fixed12 prospective source and exact rank-budget preflight
+
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/experiments/nc09_fixed12/**'
+      - '.github/workflows/bpd-nc09-fixed12-preflight.yml'
+      - '.github/workflows/bpd-nc09-fixed12-registered.yml'
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/nc09_fixed12/**'
+      - '.github/workflows/bpd-nc09-fixed12-preflight.yml'
+      - '.github/workflows/bpd-nc09-fixed12-registered.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  excluded-root-source-and-sham:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Assert NC09 fixed-budget PROTOCOL predated implementation
+        run: |
+          set -euo pipefail
+          git cat-file -e e14d54cd08bf99306b31e491ade4e94d72f823f0^{commit}
+          git merge-base --is-ancestor e14d54cd08bf99306b31e491ade4e94d72f823f0 HEAD
+          git show e14d54cd08bf99306b31e491ade4e94d72f823f0:mechinterp/bpd/experiments/nc09_fixed12/PROTOCOL.md > /tmp/nc09-fixed12-registered-protocol.md
+          cmp mechinterp/bpd/experiments/nc09_fixed12/PROTOCOL.md /tmp/nc09-fixed12-registered-protocol.md
+      - name: Install pinned source-only CPU numerical runtime
+        run: |
+          python -m pip install --disable-pip-version-check pytest 'numpy>=1.26' scipy==1.14.1
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Test only excluded root 899, exact DP, physical gain and root bootstrap
+        run: |
+          python -m compileall -q mechinterp/bpd/experiments/nc09_fixed12
+          python -m pytest -q mechinterp/bpd/experiments/nc09_fixed12/test_experiment.py mechinterp/bpd/experiments/nc09_fixed12/test_aggregate.py
+      - name: Independently verify first source-locked 16-root positive publication
+        run: python -m pytest -q mechinterp/bpd/experiments/nc09_fixed12/test_published_results.py
+
+  lean-fixed12-budget:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Install pinned Lean 4.19 proof kernel
+        run: |
+          curl --fail --location --retry 3 https://github.com/leanprover/lean4/releases/download/v4.19.0/lean-4.19.0-linux.tar.zst -o /tmp/lean.tar.zst
+          tar --zstd -xf /tmp/lean.tar.zst -C /tmp
+          echo '/tmp/lean-4.19.0-linux/bin' >> "$GITHUB_PATH"
+      - name: Verify original source-independent 12/16 rank-budget arithmetic
+        run: |
+          set -euo pipefail
+          lean mechinterp/bpd/experiments/nc09_fixed12/Fixed12Budget.lean | tee /tmp/nc09-lean.txt
+          grep -q 'BPD.NC09Fixed12.flat_three_budget' /tmp/nc09-lean.txt
+          grep -q 'BPD.NC09Fixed12.finite_pass_rank_tuple_count' /tmp/nc09-lean.txt
+          if grep -E 'sorryAx|ofReduceBool' /tmp/nc09-lean.txt; then exit 1; fi
