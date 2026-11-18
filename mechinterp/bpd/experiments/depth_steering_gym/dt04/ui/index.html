@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="color-scheme" content="dark"/>
+<title>TRM Depth Lab · BPD-DT04 Campaign Viewer</title>
+<style>
+:root{--bg:#091019;--panel:#121d2d;--line:#28384a;--line2:#1c2939;--ink:#eef5fb;--muted:#95aabe;--soft:#6c849d;--mint:#6ee3c2;--yellow:#f1c27a;--blue:#78aaff;--purple:#bc9bfa;--danger:#ef969d;--radius:14px}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;font-size:14px}
+button,select,input{font:inherit}button{cursor:pointer}a{color:var(--mint);text-decoration:none}
+.shell{display:grid;grid-template-columns:240px minmax(0,1fr);min-height:100vh}
+aside{position:sticky;top:0;height:100vh;border-right:1px solid var(--line);background:#0d1622;padding:24px 16px;display:flex;flex-direction:column;gap:20px}
+.brand{display:flex;gap:10px;align-items:center;padding:0 8px}.brand-icon{width:34px;height:34px;border:1px solid var(--mint);display:grid;place-items:center;border-radius:10px;color:var(--mint);font-weight:900;font-size:18px}
+.brand strong{font-size:13px;letter-spacing:.09em}.brand small{display:block;margin-top:3px;color:var(--muted);font-size:10px;letter-spacing:.15em}
+.eyebrow{font-size:10px;letter-spacing:.16em;color:var(--soft);font-weight:750;text-transform:uppercase}
+.nav{display:grid;gap:6px}.nav button{background:transparent;border:1px solid transparent;color:var(--muted);padding:11px 13px;border-radius:10px;text-align:left;display:flex;gap:10px;align-items:center;width:100%}
+.nav button:hover,.nav button.active{background:#18293a;border-color:#2a3e52;color:var(--ink)}
+.aside-foot{margin-top:auto;padding:14px;background:#142334;border:1px solid #294052;border-radius:12px;font-size:12px;color:var(--muted);line-height:1.55}
+main{padding:32px clamp(18px,4vw,58px) 60px;max-width:1560px;width:100%}
+.topline,.split,.row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.row{justify-content:flex-start}
+h1{font-size:clamp(26px,2.8vw,42px);letter-spacing:-.04em;margin:8px 0}.lead{color:var(--muted);max-width:780px;line-height:1.65;margin:0}
+h2{font-size:19px;margin:0}h3{font-size:15px;margin:0 0 6px}
+.grid-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin:22px 0}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.metric,.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius)}
+.metric{padding:18px 20px}.metric .label{font-size:11px;color:#abc0d0;font-weight:650}.metric .value{font-size:27px;font-weight:720;margin:9px 0 4px;font-variant-numeric:tabular-nums}.metric .detail{font-size:11px;color:var(--muted)}
+.panel{padding:22px}.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:28px 0 14px}
+.pill{display:inline-flex;align-items:center;padding:5px 10px;border-radius:999px;font-size:10px;font-weight:750;letter-spacing:.05em;background:#173344;border:1px solid #345668;color:var(--mint)}
+.pill.warn{color:var(--yellow);background:#3b3127;border-color:#64513e}.pill.danger{color:var(--danger);background:#35232f;border-color:#69444f}
+.barline{border-bottom:1px solid var(--line2);display:grid;grid-template-columns:210px 1fr 66px;align-items:center;gap:10px;padding:9px 0;font-size:12px}
+.track{height:9px;background:#243546;border-radius:99px;overflow:hidden}.fill{height:100%;border-radius:99px}
+table{border-collapse:collapse;width:100%;font-size:12px}th{text-align:left;color:var(--soft);font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:11px 8px}
+td{border-top:1px solid var(--line2);padding:11px 8px;color:#d5e3ef;font-variant-numeric:tabular-nums}
+.callout{padding:15px 17px;background:#192838;border-left:3px solid var(--mint);border-radius:0 10px 10px 0;color:#c9daea;font-size:12px;line-height:1.65}
+.view{display:none}.view.active{display:block}
+select{background:#0d1622;color:var(--ink);border:1px solid #345066;border-radius:8px;padding:8px 10px}
+.footer{border-top:1px solid var(--line);margin-top:40px;padding-top:16px;font-size:11px;color:var(--soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+@media(max-width:1000px){.grid-4,.grid-2{grid-template-columns:1fr}.shell{grid-template-columns:1fr}aside{height:auto;position:static}}
+</style>
+</head>
+<body>
+<div class="shell">
+<aside>
+  <div class="brand"><div class="brand-icon">Δ</div><div><strong>LOOPED LAB · DT04</strong><small>PROSPECTIVE 59-ROOT GYM</small></div></div>
+  <nav class="nav" aria-label="DT04 sections">
+    <button class="active" data-view="overview">▤ Competence &amp; Transfer</button>
+    <button data-view="causal">◎ Causal Steering &amp; Shams</button>
+    <button data-view="endpoints">⚖ Registered Endpoints</button>
+    <button data-view="hardware">◇ RTX 5080 &amp; 7M Bridge</button>
+  </nav>
+  <div class="aside-foot"><strong>Read-only viewer</strong><br/>Historical DT02-A archive SHA verified. ARG-03-N (168 cases) and confirmation roots remain strictly sealed.</div>
+</aside>
+<main>
+  <div class="topline"><span class="eyebrow">MECHANISTIC INTERPRETABILITY / BPD-DT04</span><span class="pill" id="status-pill">LOADING…</span></div>
+  <h1>TRM Depth Lab · DT04 Campaign</h1>
+  <p class="lead">59-root calibrated development study comparing canonical-disjoint 4×4 Sudoku, demo-conditioned synthetic ARC program splits, closed-loop Storyworld endings, fitted physical BPD (V, U) components, and 8 privileged signed-Jacobian shams per root across supervised depths (2, 4, 6) and unseen depths (8, 12).</p>
+  <div class="grid-4">
+    <div class="metric"><div class="label">CALIBRATED ROOTS</div><div class="value" id="m-roots">–</div><div class="detail" id="m-roots-sub">59-root 95/95 sham cohort</div></div>
+    <div class="metric"><div class="label">SUDOKU4 DEPTH-8 EXACT</div><div class="value" id="m-sud">–</div><div class="detail">DT02-A baseline: 0.0%</div></div>
+    <div class="metric"><div class="label">STORY 12-STEP ENDING</div><div class="value" id="m-story">–</div><div class="detail">DT02-A baseline: 0.0%</div></div>
+    <div class="metric"><div class="label">VERIFIED SHAM CERTS</div><div class="value" id="m-shams" style="color:var(--mint)">–</div><div class="detail">Full signed-Jacobian + L2 dose</div></div>
+  </div>
+
+  <section id="view-overview" class="view active">
+    <div class="section-head"><h2>Competence &amp; Unseen Depth Transport (DT02-A vs DT04)</h2><div class="row"><label for="ov-depth" class="eyebrow">Depth</label><select id="ov-depth"><option value="6">ACT 6 (fit boundary)</option><option value="8" selected>ACT 8 (unseen)</option><option value="12">ACT 12 (unseen)</option></select></div></div>
+    <div class="grid-2">
+      <div class="panel"><h3>Mean exact competence across 59 independent roots</h3><div id="comp-bars" style="margin-top:14px"></div></div>
+      <div class="panel"><h3>ARC specification &amp; color-support dissection</h3><div id="arc-callout" class="callout" style="margin-top:10px">Waiting for DT04 summary…</div><div id="geom-summary" style="margin-top:16px"></div></div>
+    </div>
+  </section>
+
+  <section id="view-causal" class="view">
+    <div class="section-head"><h2>Complete-State Protected Steering vs Privileged Signed-Jacobian Shams</h2><div class="row"><label for="cs-metric" class="eyebrow">Outcome</label><select id="cs-metric"><option value="gold_whole_board_exact">Gold whole-board exact</option><option value="gold_blank_accuracy">Gold blank-cell accuracy</option><option value="whole_case_donor_recovery">Whole-case donor recovery</option><option value="net_blank_cell_gain">Net blank-cell gain vs no-edit</option></select></div></div>
+    <div class="panel"><div id="steer-svg"></div><div id="steer-table-wrap" style="margin-top:18px;overflow:auto"></div></div>
+  </section>
+
+  <section id="view-endpoints" class="view">
+    <div class="section-head"><h2>Registered 6-Endpoint Family &amp; Pinned EvalMath Preflight</h2><span class="pill warn" id="evalmath-pill">EvalMath</span></div>
+    <div class="panel" style="overflow:auto"><table><thead><tr><th>Endpoint</th><th>Admitted</th><th>Mean Effect</th><th>95% Marginal CI</th><th>Familywise Bonferroni CI</th><th>Floor</th><th>Decision</th></tr></thead><tbody id="ep-tbody"></tbody></table></div>
+    <div class="panel" style="margin-top:18px"><h3>EvalMath 95/95 Sham-Tolerance Summary</h3><div id="evalmath-box" class="callout" style="margin-top:10px"></div></div>
+  </section>
+
+  <section id="view-hardware" class="view">
+    <div class="section-head"><h2>Empirical RTX 5080 Memory Envelope &amp; Offline 7M TRM Bridge</h2><span class="pill">HF_HUB_OFFLINE=1 · SHA-Verified</span></div>
+    <div class="grid-2">
+      <div class="panel" style="overflow:auto"><h3>Measured VRAM &amp; RSS vs UI Lower Bounds</h3><table><thead><tr><th>Config</th><th>Dtype</th><th>Batch</th><th>UI State LB</th><th>Max Alloc VRAM</th><th>Host RSS</th><th>d=8 ms</th></tr></thead><tbody id="hw-tbody"></tbody></table></div>
+      <div class="panel" style="overflow:auto"><h3>7M Pretrained Sudoku Horizon (16 Fresh Screened Boards)</h3><table><thead><tr><th>Checkpoint</th><th>Stratum</th><th>Step 4</th><th>Step 8</th><th>Step 16</th><th>Step 32</th><th>Oscillation</th></tr></thead><tbody id="trm7m-tbody"></tbody></table></div>
+    </div>
+  </section>
+
+  <div class="footer"><span id="foot-lock">Checking locks…</span><span>BPD-DT04 Readonly Dashboard · Loopback Only</span></div>
+</main>
+</div>
+<script>
+"use strict";
+const byId = id => document.getElementById(id);
+const pct = (v, d=1) => Number.isFinite(Number(v)) ? (Number(v)*100).toFixed(d)+"%" : "–";
+const fnum = (v, d=4) => Number.isFinite(Number(v)) ? Number(v).toFixed(d) : "–";
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+let bundle = null;
+
+document.querySelectorAll(".nav button").forEach(btn => btn.addEventListener("click", () => {
+  document.querySelectorAll(".view").forEach(v => v.classList.toggle("active", v.id === "view-" + btn.dataset.view));
+  document.querySelectorAll(".nav button").forEach(b => b.classList.toggle("active", b === btn));
+}));
+
+function renderOverview() {
+  const s = bundle.dt04_summary;
+  const prog = bundle.dt04_progress;
+  byId("m-roots").textContent = prog.completed_roots_on_disk + " / " + prog.expected_roots;
+  if (!s) {
+    byId("status-pill").textContent = "RUNNING (" + prog.completed_roots_on_disk + "/" + prog.expected_roots + ")";
+    byId("comp-bars").innerHTML = '<div class="callout">Overnight execution in progress (' + prog.completed_roots_on_disk + ' of 59 roots written). Refresh after aggregation completes.</div>';
+    return;
+  }
+  byId("status-pill").textContent = s.verdict;
+  const c = s.competence_and_depth_transport;
+  const d = byId("ov-depth").value;
+  byId("m-sud").textContent = pct(c.sudoku4_exact_d8);
+  byId("m-story").textContent = pct(c.storyworld_terminal_success_d12);
+  byId("m-shams").textContent = bundle.dt04_audit ? String(bundle.dt04_audit.total_verified_sham_certificates) : "–";
+
+  const rows = [
+    ["Sudoku 4×4 whole-board exact", c["sudoku4_exact_d" + d], "var(--mint)"],
+    ["Sudoku 4×4 blank-cell accuracy", c["sudoku4_blank_acc_d" + d], "var(--mint)"],
+    ["ARC 2-rule in-dist exact", c["arc_legacy2rule_indist_exact_d" + d], "var(--blue)"],
+    ["ARC 2-rule heldout exact (no color 3)", c["arc_legacy2rule_heldout_exact_d" + d], "var(--danger)"],
+    ["ARC 192→64 LUT in-dist exact", c["arc_lut192_indist_exact_d" + d], "var(--blue)"],
+    ["ARC 192→64 LUT heldout cell acc", c["arc_lut192_heldout_cell_d" + d], "var(--yellow)"],
+    ["ARC 192→64 LUT heldout exact", c["arc_lut192_heldout_exact_d" + d], "var(--yellow)"],
+    ["Storyworld 12-step terminal success", c["storyworld_terminal_success_d" + d], "var(--purple)"]
+  ];
+  byId("comp-bars").innerHTML = rows.map(r => {
+    const w = Math.max(0, Math.min(100, Number(r[1] || 0) * 100));
+    return '<div class="barline"><span>' + esc(r[0]) + '</span><div class="track"><div class="fill" style="background:' + r[2] + ';width:' + w + '%"></div></div><strong>' + pct(r[1]) + '</strong></div>';
+  }).join("");
+
+  const g = s.geometry_and_bpd_factors;
+  byId("arc-callout").innerHTML = "<strong>DT03 Color-Support &amp; Program-Diversity Audit:</strong> Strict 2-rule <code>worlds.arc_analogue</code> reaches <strong>" + pct(c["arc_legacy2rule_indist_exact_d" + d]) + "</strong> on unseen grids of its training rules when given 3 demos, while heldout <code>fill_zero</code> emits color 3 (0% training target support). Balancing all 4 colors across 192 training lookup programs lifts zero-shot heldout cell accuracy to <strong>" + pct(c["arc_lut192_heldout_cell_d" + d]) + "</strong> (exact grids " + pct(c["arc_lut192_heldout_exact_d" + d]) + ").";
+  byId("geom-summary").innerHTML = "<table><thead><tr><th>Diagnostic</th><th>ACT 6</th><th>ACT 8</th><th>ACT 12</th></tr></thead><tbody>" +
+    "<tr><td>Gramian subspace overlap</td><td>" + pct(g.overlap_d6) + "</td><td>" + pct(g.overlap_d8) + "</td><td>" + pct(g.overlap_d12) + "</td></tr>" +
+    "<tr><td>Mean principal angle (deg)</td><td>" + fnum(g.mean_angle_deg_d6, 1) + "°</td><td>" + fnum(g.mean_angle_deg_d8, 1) + "°</td><td>" + fnum(g.mean_angle_deg_d12, 1) + "°</td></tr>" +
+    "<tr><td>Sparse top-12 BPD exact boards</td><td>" + pct(g.bpd_sparse_top12_exact_d6) + "</td><td>" + pct(g.bpd_sparse_top12_exact_d8) + "</td><td>" + pct(g.bpd_sparse_top12_exact_d12) + "</td></tr>" +
+    "<tr><td>Sparse top-12 BPD KL (nats)</td><td>" + fnum(g.bpd_sparse_top12_kl_d6, 4) + "</td><td>" + fnum(g.bpd_sparse_top12_kl_d8, 4) + "</td><td>" + fnum(g.bpd_sparse_top12_kl_d12, 4) + "</td></tr>" +
+    "</tbody></table><p style='font-size:12px;color:var(--muted);margin-top:10px'>Mean 1-step subspace closure defect: <strong>" + fnum(g.mean_one_step_subspace_closure_defect, 4) + "</strong> · Protected-kernel 1-step escape: <strong>" + fnum(g.mean_one_step_protected_kernel_escape, 4) + "</strong></p>";
+}
+
+function renderCausal() {
+  const s = bundle.dt04_summary;
+  if (!s) return;
+  const st = s.steering_arms_by_depth;
+  const m = byId("cs-metric").value;
+  const depths = ["6", "8", "12"];
+  const arms = [
+    ["no_edit", "No edit (corrupted)", "#8fa8bd"],
+    ["full_dark_donor", "Full dark transplant", "#6ee3c2"],
+    ["task_gramian_r8", "Task Gramian r=8", "#78aaff"],
+    ["bpd_vu_r8_dose", "Physical BPD (V,U) r=8", "#bc9bfa"],
+    ["weight_svd_left_r8_dose", "Left o_proj SVD r=8", "#f1c27a"],
+    ["signed_jac_sham_mean8", "Signed-Jacobian Sham (mean 8)", "#ef969d"]
+  ];
+  const vals = depths.map(d => arms.map(a => st[d][a[0]][m]));
+  const flat = vals.flat();
+  const lo = Math.min(0, ...flat), hi = Math.max(0.2, Math.max(...flat) * 1.08);
+  const X = i => 80 + i * 230, Y = v => 195 - ((v - lo) / (hi - lo || 1)) * 160;
+  const lines = arms.map((a, j) => '<polyline fill="none" stroke="' + a[2] + '" stroke-width="3" points="' + depths.map((d, i) => X(i) + "," + Y(vals[i][j])).join(" ") + '"/>' + depths.map((d, i) => '<circle cx="' + X(i) + '" cy="' + Y(vals[i][j]) + '" r="4.5" fill="' + a[2] + '"/>').join("")).join("");
+  byId("steer-svg").innerHTML = '<svg viewBox="0 0 640 230" style="width:100%;max-height:240px">' + lines + depths.map((d, i) => '<text x="' + X(i) + '" y="220" fill="#95aabe" font-size="11" text-anchor="middle">ACT ' + d + '</text>').join("") + '</svg>';
+  byId("steer-table-wrap").innerHTML = "<table><thead><tr><th>Arm</th><th>ACT 6</th><th>ACT 8 (unseen)</th><th>ACT 12 (unseen)</th></tr></thead><tbody>" +
+    arms.map((a, j) => "<tr><td><strong style='color:" + a[2] + "'>" + esc(a[1]) + "</strong></td><td>" + pct(vals[0][j]) + "</td><td>" + pct(vals[1][j]) + "</td><td>" + pct(vals[2][j]) + "</td></tr>").join("") + "</tbody></table>";
+}
+
+function renderEndpoints() {
+  const s = bundle.dt04_summary;
+  if (!s) return;
+  const eps = s.registered_endpoints;
+  byId("ep-tbody").innerHTML = Object.entries(eps).map(([k, v]) => {
+    const b = v.bootstrap;
+    const mci = b ? "[" + fnum(b.ci95_marginal[0], 4) + ", " + fnum(b.ci95_marginal[1], 4) + "]" : "Withheld";
+    const fci = b ? "[" + fnum(b.ci_familywise_bonferroni[0], 4) + ", " + fnum(b.ci_familywise_bonferroni[1], 4) + "]" : "Withheld";
+    return "<tr><td><code>" + esc(k) + "</code></td><td>" + v.admitted_roots + "/" + v.required_roots + "</td><td>" + fnum(v.descriptive_mean, 4) + "</td><td>" + mci + "</td><td>" + fci + "</td><td>&gt; +" + fnum(v.min_lower_bound_required, 2) + "</td><td><strong>" + esc(v.decision) + "</strong></td></tr>";
+  }).join("");
+  const em = s.evalmath_post_development;
+  if (em) {
+    byId("evalmath-pill").textContent = em.decision;
+    byId("evalmath-box").innerHTML = "<strong>Decision:</strong> <code>" + esc(em.decision) + "</code> · Pilot worlds: <strong>" + em.pilot_worlds + "</strong> · Mean effect: <strong>" + fnum(em.mean_pilot_effect, 4) + "</strong> · 95/95 Upper Sham Quantile (rank " + (em.order_statistic_rank || "–") + "): <strong>" + fnum(em.upper_sham_quantile, 4) + "</strong> · Mechanistic variation floor: <strong>" + fnum(em.mechanistic_variation_floor, 4) + "</strong> · Reasons: <code>" + esc((em.reasons || []).join(", ") || "none") + "</code>";
+  }
+}
+
+function renderHardware() {
+  const hw = bundle.dt04_hardware_7m;
+  if (!hw) return;
+  byId("hw-tbody").innerHTML = hw.compute_envelope.measurements.map(r =>
+    "<tr><td><strong>" + esc(r.config) + "</strong></td><td>" + esc(r.dtype) + "</td><td>" + r.batch + "</td><td>" + fnum(r.ui_lower_bound_state_mib, 2) + " MiB</td><td>" + fnum(r.measured_cuda_max_allocated_mib, 1) + " MiB</td><td>" + fnum(r.measured_host_rss_mib, 0) + " MiB</td><td>" + fnum(r.depth8_infer_ms, 1) + "</td></tr>"
+  ).join("");
+  const rows7 = [];
+  for (const [tag, obj] of Object.entries(hw.checkpoints_7m)) {
+    for (const [label, h] of [["All 16", obj.horizon_all_16], ["S4_stalled (8)", obj.horizon_s4_stalled_8], ["WB-Prop (8)", obj.horizon_wb_prop_8]]) {
+      const ex = h.exact_by_step;
+      rows7.push("<tr><td><strong>" + esc(tag) + "</strong></td><td>" + esc(label) + "</td><td>" + pct(ex["4"]) + "</td><td>" + pct(ex["8"]) + "</td><td>" + pct(ex["16"]) + "</td><td>" + pct(ex["32"]) + "</td><td>" + pct(h.period2_oscillation) + "</td></tr>");
+    }
+  }
+  byId("trm7m-tbody").innerHTML = rows7.join("");
+}
+
+byId("ov-depth").onchange = renderOverview;
+byId("cs-metric").onchange = renderCausal;
+
+fetch("/api/dt04", {cache: "no-store"}).then(r => r.json()).then(data => {
+  bundle = data;
+  byId("foot-lock").textContent = "Historical DT02 SHA verified · DT04 summary SHA: " + ((data.dt04_progress.summary_sha256 || "pending").slice(0, 16));
+  renderOverview();
+  renderCausal();
+  renderEndpoints();
+  renderHardware();
+});
+</script>
+</body>
+</html>
