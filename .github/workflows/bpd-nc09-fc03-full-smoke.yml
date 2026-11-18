@@ -1,0 +1,101 @@
+name: BPD NC09-FC03 full excluded 13999 Grassmann optimization pilot
+
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/experiments/nc09_fixed12/grassmann_fc03/FULL_SMOKE_LOCK.json'
+
+permissions:
+  contents: read
+
+jobs:
+  excluded-original-13999-full-budget:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify excluded-only source, fresh roots locked and protocol unchanged
+        run: |
+          python - <<'PY'
+          import json,subprocess
+          from pathlib import Path
+          root=Path('mechinterp/bpd/experiments/nc09_fixed12/grassmann_fc03')
+          lock=json.loads((root/'FULL_SMOKE_LOCK.json').read_text())
+          assert lock['study']=='BPD-NC09-FC03'
+          assert lock['phase']=='FULL_SOURCE_EXCLUDED_13999'
+          assert lock['smoke_root']==13999
+          assert lock['new_development_roots_executed']==0
+          assert lock['training_updates']==384
+          assert lock['discovery_samples']==1024
+          assert lock['sham_baseline_proposals']==4096
+          assert lock['solver_charts']==32 and lock['solver_steps']==64
+          sha=lock['source_commit_sha']
+          subprocess.run(['git','merge-base','--is-ancestor',sha,'HEAD'],check=True)
+          subprocess.run(['git','merge-base','--is-ancestor',
+              '51812dd5a1fdbe27acb7d28d4beaa219d69a92c9','HEAD'],check=True)
+          protected=[str(root/p) for p in (
+            'PROTOCOL.md','THEORY.md','solver.py','experiment.py',
+            'aggregate.py','test_solver.py','test_aggregate.py','GrassmannBudget.lean'
+          )]+[
+            'mechinterp/bpd/experiments/nc09_fixed12/PROTOCOL.md',
+            'mechinterp/bpd/experiments/nc09_fixed12/experiment.py',
+            'mechinterp/bpd/experiments/nc09_fixed12/tangent_sham_calibration/tangent_shams.py',
+            'mechinterp/bpd/components.py','mechinterp/bpd/config.py'
+          ]
+          subprocess.run(['git','diff','--exit-code',sha,'HEAD','--',*protected],check=True)
+          print('FC03 frozen excluded source:',sha)
+          PY
+      - name: Pin original Python 3.12 PyTorch 2.5.1 numerical environment
+        run: |
+          python -m pip install --disable-pip-version-check pytest 'numpy>=1.26' scipy==1.14.1
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Excluded source-only unit tests and rank/tangent geometry
+        run: |
+          python -m pytest -q \
+            mechinterp/bpd/experiments/nc09_fixed12/grassmann_fc03/test_solver.py \
+            mechinterp/bpd/experiments/nc09_fixed12/grassmann_fc03/test_aggregate.py
+      - name: Execute one full 384-step excluded model, 32 charts and original FC02 sampler
+        run: |
+          mkdir -p /tmp/nc09-fc03-excluded
+          python -m mechinterp.bpd.experiments.nc09_fixed12.grassmann_fc03.experiment \
+            --root 13999 --steps 384 --discovery 1024 --selector 512 \
+            --heldout 1024 --sham-proposals 4096 --shams 8 \
+            --solver-starts 32 --solver-steps 64 \
+            --out /tmp/nc09-fc03-excluded/EXCLUDED_13999_FULL.json
+      - name: Independent original excluded projector and task-receipt replay
+        run: |
+          python - <<'PY'
+          import json
+          from mechinterp.bpd.experiments.nc09_fixed12.grassmann_fc03.aggregate import independent_source_audit
+          p='/tmp/nc09-fc03-excluded/EXCLUDED_13999_FULL.json'
+          data=json.load(open(p))
+          assert data['root']==13999 and data['study']=='BPD-NC09-FC03'
+          assert data['phase']=='CONSTRAINED_GRASSMANN_ENGINEERING_DEVELOPMENT'
+          assert data['training']['steps']==384
+          assert data['full_mask_closure']['passed']
+          assert data['splits']=={
+             'train':2048,'derivative_discovery':1024,
+             'model_validation':512,'labeled_calibration':1024
+          }
+          g=independent_source_audit(data)
+          print('Original excluded 13999 full source sham match:',g['source_eligible'])
+          print('Constrained Grassmann accepted:',data['sham_admission']['selected'])
+          print('Matched chart starts:',data['sham_admission']['charts_actually_attempted'])
+          print('Original FC02 sampler qualified:',data['fc02_original_rejection_admission']['qualified'])
+          print('Original FC02 sampler accepted:',data['fc02_original_rejection_admission']['selected'])
+          print('Full excluded model eligible:',data['eligible'])
+          assert g['source_eligible'] and data['eligible']
+          PY
+      - name: Archive original engineering excluded-root proof and numerical receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bpd-nc09-fc03-excluded-13999-original-${{ github.run_id }}
+          path: /tmp/nc09-fc03-excluded/
+          retention-days: 90
+          if-no-files-found: warn
