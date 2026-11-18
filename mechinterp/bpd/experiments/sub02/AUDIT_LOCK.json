@@ -8,5 +8,7 @@
   "original_json_sha256": "3f736bcc90d331a00ae8927857d3ee2454029a653e729538cbe1538bbd2e2c12",
   "allow_retrain": false,
   "original_engineering_verdict": "ENGINEERING_SIGNAL_ONLY",
-  "protected_confirmation": "not_read_or_generated"
+  "protected_confirmation": "not_read_or_generated",
+  "audit_attempt": 2,
+  "audit_change": "remove accidental backslash before GITHUB_TOKEN expression; no data or source changes"
 }
