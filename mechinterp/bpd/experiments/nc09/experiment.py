@@ -103,7 +103,7 @@ def procrustes(source: Tensor, target: Tensor) -> tuple[Tensor, dict]:
     cross = torch.einsum("nti,ntj->tij", source.double(), target.double())
     u, singular, vh = torch.linalg.svd(cross, full_matrices=False)
     r = u @ vh
-    aligned = source.double() @ r
+    aligned = torch.einsum("nti,tij->ntj",source.double(),r)
     errs = (aligned-target.double()).norm(dim=(0,2)) / target.double().norm(dim=(0,2)).clamp_min(1e-12)
     orth = torch.eye(WIDTH, dtype=torch.float64)
     return r, {
