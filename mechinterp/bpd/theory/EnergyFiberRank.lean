@@ -35,28 +35,28 @@ def energyDarkDimension (L : RankLedger) : Nat :=
 
 /-- Adding one scalar energy constraint loses at most one dark dimension. -/
 theorem energy_fiber_loses_at_most_one_dimension (L : RankLedger) :
-    L.presentDarkDimension ≤ L.energyDarkDimension + 1 := by
-  rcases L with ⟨dim, presentRank, jointRank, futureRestrictedRank,
-    hPresent, hJoint, hRow, hFuture⟩
-  simp only [presentDarkDimension, energyDarkDimension]
+    (presentDarkDimension L) ≤ (energyDarkDimension L) + 1 := by
+  have hr := L.oneScalarRow
+  have hj := L.jointBound
+  unfold presentDarkDimension energyDarkDimension
   omega
 
 /-- Equivalent lower bound for the present-and-energy-dark joint kernel. -/
 theorem energy_dark_dimension_lower_bound (L : RankLedger) :
-    L.presentDarkDimension - 1 ≤ L.energyDarkDimension := by
+    (presentDarkDimension L) - 1 ≤ (energyDarkDimension L) := by
   have h := energy_fiber_loses_at_most_one_dimension L
   omega
 
 /-- The delayed observable rank cannot exceed the physical fiber dimension.
 This uses the explicit futureRestrictedRank bound recorded in the ledger. -/
 theorem future_rank_le_energy_dark_dimension (L : RankLedger) :
-    L.futureRestrictedRank ≤ L.energyDarkDimension := by
-  exact L.futureBound
+    L.futureRestrictedRank ≤ (energyDarkDimension L) := by
+  simpa only [energyDarkDimension] using L.futureBound
 
 /-- A strictly positive delayed rank implies the joint kernel has capacity. -/
 theorem delayed_rank_positive_implies_nonempty_fiber
     (L : RankLedger) (h : 0 < L.futureRestrictedRank) :
-    0 < L.energyDarkDimension := by
+    0 < (energyDarkDimension L) := by
   have hrank := future_rank_le_energy_dark_dimension L
   omega
 
