@@ -1,0 +1,59 @@
+name: BPD-CQ-08 natural-state nuisance mediation engineering + native parity
+on:
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/theory/cq08_nuisance_mediation/**'
+      - '.github/workflows/bpd-cq08-nuisance-mediation.yml'
+  workflow_dispatch:
+    inputs:
+      phase:
+        description: 'development or independent 59-world sham (confirmation sealed)'
+        required: true
+        type: choice
+        default: development
+        options: [development, sham]
+jobs:
+  cpu-engineering:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install CPU Torch
+        run: python -m pip install 'torch==2.5.1' 'numpy>=1.26'
+      - name: Excluded-root unit tests and native BPDModel parity
+        run: python -m unittest discover -s mechinterp/bpd/theory/cq08_nuisance_mediation/tests -v
+      - name: Source-locked independent eight-root development replay
+        run: python -m mechinterp.bpd.theory.cq08_nuisance_mediation.reference --backend independent --check
+      - name: Source-locked native BPDModel/TiedComponentLinear development parity
+        run: python -m mechinterp.bpd.theory.cq08_nuisance_mediation.reference --backend native --check
+      - name: EvalMath strict preflight blocks without sham calibration
+        run: |
+          python -c "import json;from mechinterp.bpd.theory.cq08_nuisance_mediation.reference import load_frozen;open('/tmp/cq08_dev.json','w').write(json.dumps(load_frozen()))"
+          set +e
+          python -m mechinterp.bpd.theory.cq08_nuisance_mediation.power --development /tmp/cq08_dev.json --strict
+          rc=$?
+          if test "$rc" -ne 2; then echo "ERROR: expected blocked strict preflight exit 2, got $rc"; exit 1; fi
+      - name: Confirmation remains locked
+        run: |
+          if test -e mechinterp/bpd/theory/cq08_nuisance_mediation/CONFIRM_UNLOCK.json; then
+            echo 'ERROR: confirmation release not authorized by CQ08 engineering PR'; exit 1
+          fi
+  sham-calibration:
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.phase == 'sham' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install 'torch==2.5.1' 'numpy>=1.26'
+      - name: Independent 59-world sham only (confirmation remains sealed)
+        run: python -m mechinterp.bpd.theory.cq08_nuisance_mediation.reference --phase sham --backend independent --out /tmp/cq08_sham_independent.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cq08-59-root-independent-sham
+          path: /tmp/cq08_sham_independent.json
