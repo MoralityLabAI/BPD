@@ -1,0 +1,47 @@
+name: BPD-SUB-08 source checks only
+
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/experiments/sub08/**'
+      - '.github/workflows/bpd-sub08-source.yml'
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/sub08/**'
+      - '.github/workflows/bpd-sub08-source.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  arithmetic-and-audit-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install frozen numerical dependencies
+        run: |
+          python -m pip install numpy==2.3.5
+          python -m pip install torch==2.5.1+cpu --index-url https://download.pytorch.org/whl/cpu
+      - name: Verify finite oracle and source access boundaries without training
+        run: |
+          python -m unittest mechinterp.bpd.experiments.sub08.test_oracle mechinterp.bpd.experiments.sub08.test_source mechinterp.bpd.experiments.sub08.test_audit -v
+      - name: Reproduce inherited negative causal preflight
+        shell: bash
+        run: |
+          set +e
+          python mechinterp/bpd/experiments/sub08/evalmath_preflight_pinned.py --pilot mechinterp/bpd/experiments/sub08/INHERITED_SUB07_PILOT.json --strict --out /tmp/sub08-inherited-preflight.json
+          code=$?
+          set -e
+          test "$code" -eq 2
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          actual=json.loads(Path('/tmp/sub08-inherited-preflight.json').read_text())
+          expected=json.loads(Path('mechinterp/bpd/experiments/sub08/INHERITED_SUB07_PREFLIGHT.json').read_text())
+          assert actual==expected
+          assert actual['decision']=='REDESIGN_OR_PILOT_ONLY'
+          PY
