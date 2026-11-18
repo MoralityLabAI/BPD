@@ -1,0 +1,38 @@
+{
+  "study": "BPD-NC-11",
+  "status": "SOURCE_LOCK_BEFORE_FIRST_NC11_MODEL_TRAINING",
+  "protocol_first_commit": "60b65642c03cb3064912aa3929582479aa21dd20",
+  "source_snapshot_commit": "ddb8bc10a0cea312f450996ae7e2d7a7b4ef8d62",
+  "engineering_roots": [
+    1100,
+    1101,
+    1102,
+    1103,
+    1104,
+    1105,
+    1106,
+    1107
+  ],
+  "source_smoke_only": 1099,
+  "model_initializations_per_root": 2,
+  "source_blob_sha1": {
+    "mechinterp/bpd/experiments/nc11/PROTOCOL.md": "79aa52a656fe13931d2f8845a1ece97a1fe3fa83",
+    "mechinterp/bpd/experiments/nc11/experiment.py": "243cd0fd54b026f5fb3d6b1683c05afb5e80d575",
+    "mechinterp/bpd/experiments/nc11/aggregate.py": "132a88ee33c30686dea2b97f896650c5b1772021",
+    "mechinterp/bpd/experiments/nc11/test_experiment.py": "818be46791201829affcf4ef40338e758355ae58"
+  },
+  "budgets": {
+    "training_steps": 384,
+    "train_A": 2048,
+    "train_B": 2048,
+    "discovery_A": 1024,
+    "target_calibration": 128,
+    "calibration_pool": 512,
+    "dose_inputs": 1024,
+    "evaluation_inputs": 1024,
+    "sham_proposals": 2048
+  },
+  "independent_root_unit": "trained model pair",
+  "confirm_status": "SEALED",
+  "note": "Full development only after source checksum + excluded smoke tests; all scientific negative outcomes preserved."
+}
