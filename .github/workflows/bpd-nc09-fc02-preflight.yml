@@ -1,0 +1,47 @@
+name: BPD NC09-FC02 prospective tangent/dose sham source preflight
+
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/experiments/nc09_fixed12/tangent_sham_calibration/**'
+      - '.github/workflows/bpd-nc09-fc02-preflight.yml'
+      - '.github/workflows/bpd-nc09-fc02-registered.yml'
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/nc09_fixed12/tangent_sham_calibration/**'
+      - '.github/workflows/bpd-nc09-fc02-preflight.yml'
+      - '.github/workflows/bpd-nc09-fc02-registered.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  source-only-excluded-12999:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify FC02 preregistration preceded executable source
+        run: |
+          set -euo pipefail
+          git cat-file -e 91982c00ed3fe7362fdba5a7323d13906826c70c^{commit}
+          git merge-base --is-ancestor 91982c00ed3fe7362fdba5a7323d13906826c70c HEAD
+          git show 91982c00ed3fe7362fdba5a7323d13906826c70c:mechinterp/bpd/experiments/nc09_fixed12/tangent_sham_calibration/PROTOCOL.md > /tmp/fc02-original-protocol.md
+          cmp /tmp/fc02-original-protocol.md mechinterp/bpd/experiments/nc09_fixed12/tangent_sham_calibration/PROTOCOL.md
+      - name: Install pinned CPU numerical libraries
+        run: |
+          python -m pip install --disable-pip-version-check pytest 'numpy>=1.26' scipy==1.14.1
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Test exact pseudo-target centering, source-only tangent matching and excluded 12999 BPD
+        run: |
+          python -m compileall -q mechinterp/bpd/experiments/nc09_fixed12/tangent_sham_calibration
+          python -m pytest -q \
+            mechinterp/bpd/experiments/nc09_fixed12/tangent_sham_calibration/test_experiment.py \
+            mechinterp/bpd/experiments/nc09_fixed12/tangent_sham_calibration/test_aggregate.py
+      - name: Verify first 59-root publication and frozen source SHA without retraining
+        run: python -m pytest -q mechinterp/bpd/experiments/nc09_fixed12/tangent_sham_calibration/test_published_results.py

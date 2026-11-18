@@ -1,0 +1,173 @@
+name: BPD NC09-FC02 first original 59-root tangent-matched mean-null calibration
+
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/experiments/nc09_fixed12/tangent_sham_calibration/EXECUTE_LOCK.json'
+
+permissions:
+  contents: read
+
+jobs:
+  first-original-59-root-fc02:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify fresh 59-root source SHA and prospective protocol before training
+        run: |
+          python - <<'PY'
+          import json,subprocess
+          from pathlib import Path
+          root=Path('mechinterp/bpd/experiments/nc09_fixed12/tangent_sham_calibration')
+          lock=json.loads((root/'EXECUTE_LOCK.json').read_text())
+          assert lock['study']=='BPD-NC09-FC02'
+          assert lock['phase']=='FIRST_ORIGINAL_59_ROOT_AGGREGATE_TANGENT_CALIBRATION'
+          assert lock['calibration_roots']==list(range(13000,13059))
+          assert lock['excluded_smoke_root']==12999
+          assert lock['confirmation_models_trained']==0
+          assert lock['model_train_steps']==384
+          assert lock['source_discovery_samples']==1024
+          assert lock['model_only_source_diagnostics']==512
+          assert lock['independent_labeled_calibration_samples']==1024
+          assert lock['sham_proposals']==4096 and lock['required_matched_shams']==8
+          assert lock['aggregate_outer_draws']==256 and lock['aggregate_inner_draws']==4096
+          assert lock['target_future_model_root_mean_n']==32
+          sha=lock['source_commit_sha']
+          subprocess.run(['git','merge-base','--is-ancestor',sha,'HEAD'],check=True)
+          subprocess.run(['git','merge-base','--is-ancestor',
+             '91982c00ed3fe7362fdba5a7323d13906826c70c','HEAD'],check=True)
+          protected=[str(root/p) for p in (
+             'PROTOCOL.md','THEORY.md','tangent_shams.py','experiment.py',
+             'aggregate.py','test_experiment.py','test_aggregate.py'
+          )]+[
+             'mechinterp/bpd/experiments/nc09_fixed12/PROTOCOL.md',
+             'mechinterp/bpd/experiments/nc09_fixed12/experiment.py',
+             'mechinterp/bpd/experiments/nc08/experiment.py',
+             'mechinterp/bpd/experiments/nc04/experiment.py',
+             'mechinterp/bpd/experiments/nc05/experiment.py',
+             'mechinterp/bpd/experiments/nc02/experiment.py',
+             'mechinterp/bpd/components.py','mechinterp/bpd/config.py',
+          ]
+          subprocess.run(['git','diff','--exit-code',sha,'HEAD','--',*protected],check=True)
+          print('FC02 original source and 59 independent new roots admitted:',sha)
+          PY
+      - name: Install numerical runtime pinned to original NC09
+        run: |
+          python -m pip install --disable-pip-version-check pytest 'numpy>=1.26' scipy==1.14.1
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Re-run original excluded-12999 and synthetic 32-root mean-null controls
+        run: |
+          python -m pytest -q \
+            mechinterp/bpd/experiments/nc09_fixed12/tangent_sham_calibration/test_experiment.py \
+            mechinterp/bpd/experiments/nc09_fixed12/tangent_sham_calibration/test_aggregate.py
+      - name: Train 59 fresh independent nonlinear recurrences and select frozen tangent-matched shams
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/nc09-fc02-original
+          for root in $(seq 13000 13058); do
+            python -m mechinterp.bpd.experiments.nc09_fixed12.tangent_sham_calibration.experiment \
+              --root "$root" --steps 384 --discovery 1024 --selector 512 \
+              --heldout 1024 --sham-proposals 4096 --shams 8 \
+              --out "/tmp/nc09-fc02-original/nc09_fc02_root_$root.json"
+          done
+      - name: Execute frozen rootwise pseudo-target and aggregate mean-null bootstrap
+        run: |
+          python -m mechinterp.bpd.experiments.nc09_fixed12.tangent_sham_calibration.aggregate \
+            --root-dir /tmp/nc09-fc02-original \
+            --out /tmp/nc09-fc02-original/FC02_FIRST_59_ROOT_AGGREGATE_RESULT.json
+      - name: Independently audit raw root shams and first calibration/power decision
+        run: |
+          python - <<'PY'
+          import hashlib,json,math,numpy as np
+          from pathlib import Path
+          root=Path('/tmp/nc09-fc02-original')
+          summary=json.loads((root/'FC02_FIRST_59_ROOT_AGGREGATE_RESULT.json').read_text())
+          assert summary['study']=='BPD-NC09-FC02'
+          assert summary['phase']=='AGGREGATE_TANGENT_SHAM_CALIBRATION'
+          assert summary['evidence_class']=='CALIBRATION_DEVELOPMENT_ONLY'
+          assert summary['independent_model_roots']==59
+          assert len(summary['per_root'])==59
+          assert summary['scientific_confirmation_roots_evaluated']==0
+          assert summary['calibration_scientific_confirmation_ready'] is False
+          assert summary['original_FC01_verdict_unchanged']=='CALIBRATION_REDESIGN_OR_PILOT_ONLY'
+          expected={
+              'CALIBRATION_INCOMPLETE',
+              'AGGREGATE_TANGENT_NULL_PILOT_ONLY',
+              'AGGREGATE_TANGENT_NULL_DEVELOPMENT_POSITIVE',
+          }
+          assert summary['registered_development_verdict'] in expected
+          assert {r['root'] for r in summary['per_root']}==set(range(13000,13059))
+          eligible_count=0
+          max_null=0.
+          for seed in range(13000,13059):
+            p=root/('nc09_fc02_root_%d.json'%seed)
+            d=json.loads(p.read_text())
+            assert d['root']==seed and d['study']=='BPD-NC09-FC02'
+            assert d['phase']=='AGGREGATE_TANGENT_SHAM_CALIBRATION'
+            assert d['protocol_sha256']==summary['protocol_sha256']
+            assert d['training']['steps']==384
+            assert d['splits']=={
+              'train':2048,'derivative_discovery':1024,
+              'model_validation':512,'labeled_calibration':1024
+            }
+            assert d['full_mask_closure']['passed']
+            assert d['parent_integrity']['nc09_original_experiment_sha256']=='8d1b88eea8518a83669f03f9126136ca3d56ac5bac5fe041e2e03fb12922d380'
+            sha=hashlib.sha256(p.read_bytes()).hexdigest()
+            if d['eligible']:
+              eligible_count+=1
+              assert sum(d['source_rank12_optimum']['ranks'])==12
+              sham=d['sham_admission']
+              assert sham['proposals']==4096 and sham['selected']==8
+              assert sham['uses_external_labels'] is False
+              assert len(d['sham_nlls'])==8
+              assert all(x<=.15+1e-12 for x in sham['selected_dose_relative_errors'])
+              assert all(x<=sham['signed_score_abs_tolerance']+1e-12
+                         for x in sham['selected_score_mean_abs_errors'])
+              assert all(x<=sham['rms_score_abs_tolerance']+1e-12
+                         for x in sham['selected_score_rms_abs_errors'])
+              z=d['effects']['Z_pseudo_null_by_sham']
+              assert len(z)==8 and abs(sum(z))<1e-10
+              m=float(np.median(d['sham_nlls']))
+              t=max(abs(v-m) for v in d['sham_nlls'])
+              assert abs(t-d['effects']['T_null_worst_abs'])<1e-10
+              max_null=max(max_null,t)
+            print('FC02 original root',seed,'SHA256',sha,
+                  'eligible',d['eligible'],
+                  'source_matches',(d['sham_admission'] or {}).get('qualified'))
+          assert summary['eligible_roots']==eligible_count
+          if eligible_count==59:
+            assert abs(summary['rootwise_sham_max_95_95_diagnostic']-max_null)<1e-10
+            a=summary['aggregate_32_root_pseudo_null']
+            assert a['outer_resamples']==256 and a['inner_simulations_per_outer']==4096
+            assert len(a['outer_95pct_tail_estimates'])==256
+            assert a['future_model_roots_per_simulated_mean']==32
+            assert a['mathematical_exact_coverage_claim'] is False
+            assert summary['approximate_power'] is not None
+            assert set(summary['gates'])=={
+               'all_59_source_eligible_and_three_way_matched',
+               'DP12_benefit_over_flat3_and_source_dose_match',
+               'absolute_and_rank4_task_fidelity_and_local_shams',
+               'aggregate_null_exceeded_with_incremental_margin',
+               'future_32_root_normal_power_planning'
+            }
+          print('Original FC02 CALIBRATION verdict:',summary['registered_development_verdict'])
+          print('Original rootwise 95/95 diagnostic:',summary['rootwise_sham_max_95_95_diagnostic'])
+          print('Original aggregate root-mean pseudo-null:',(
+            summary['aggregate_32_root_pseudo_null'] or {}
+          ).get('upper95_across_outer_95pct_estimates'))
+          print('Original NC09 FC01 hold remains active')
+          PY
+      - name: Archive original 59 independent root receipts and calibrated pseudo-null
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bpd-nc09-fc02-original-59-roots-${{ github.run_id }}
+          path: /tmp/nc09-fc02-original/
+          retention-days: 90
+          if-no-files-found: warn
