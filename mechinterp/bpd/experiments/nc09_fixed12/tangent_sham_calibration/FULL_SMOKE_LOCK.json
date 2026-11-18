@@ -1,0 +1,16 @@
+{
+  "study": "BPD-NC09-FC02",
+  "phase": "EXCLUDED_12999_FULL_SOURCE_ONLY_ENGINEERING",
+  "registration_date": "2026-11-18",
+  "original_protocol_first_commit": "91982c00ed3fe7362fdba5a7323d13906826c70c",
+  "source_commit_sha": "30b7d9d02c1007994e4ef222ae3dd752a76d46ca",
+  "smoke_root": 12999,
+  "calibration_roots_trained": 0,
+  "confirmation_roots_trained": 0,
+  "train_steps": 384,
+  "discovery_samples": 1024,
+  "model_only_validation_samples": 512,
+  "sham_proposals": 4096,
+  "required_shams": 8,
+  "role": "Only one excluded development seed tests source geometry. This pilot is never counted among the 59 independent calibration roots and cannot change frozen criteria."
+}
