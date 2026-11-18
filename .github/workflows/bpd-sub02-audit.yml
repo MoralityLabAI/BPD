@@ -1,0 +1,60 @@
+name: BPD-SUB-02 independent original artifact audit
+
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/experiments/sub02/AUDIT_LOCK.json'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  original-receipt-only:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify original artifact and unchanged model source
+        run: |
+          set -euxo pipefail
+          python - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          b=Path('mechinterp/bpd/experiments/sub02')
+          j=json.loads((b/'AUDIT_LOCK.json').read_text())
+          assert j['study']=='BPD-SUB-02'
+          assert j['phase']=='original_readonly_audit'
+          assert j['original_run']==44269044080
+          assert j['original_artifact']==14411157818
+          assert j['original_zip_sha256']=='a486c2f66d848586ee93f05b41d9c3ed2dc08ff51c11b3fc4db7867b2c39f52c'
+          assert j['original_json_sha256']=='3f736bcc90d331a00ae8927857d3ee2454029a653e729538cbe1538bbd2e2c12'
+          assert j['allow_retrain'] is False
+          for name in ('PROTOCOL.md','THEORY.md','experiment.py','test_experiment.py'):
+              subprocess.run(['git','diff','--exit-code',j['frozen_source_commit'],'HEAD','--',str(b/name)],check=True)
+          print('SUB02_ORIGINAL_SOURCE_UNCHANGED')
+          PY
+      - name: Install only audit dependencies
+        run: python -m pip install --disable-pip-version-check numpy==2.5.5
+      - uses: actions/download-artifact@v4
+        with:
+          name: bpd-sub02-first-original-eight-root-development
+          run-id: 44269044080
+          github-token: \${{ secrets.GITHUB_TOKEN }}
+          path: /tmp/sub02-original
+      - name: Independent audit, root effects and frozen bootstrap
+        run: |
+          set -o pipefail
+          python mechinterp/bpd/experiments/sub02/audit_original.py \
+            --receipt /tmp/sub02-original/sub02_original_eight.json \
+            --report /tmp/sub02-independent-audit.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bpd-sub02-original-eight-independent-audit
+          path: /tmp/sub02-independent-audit.json
