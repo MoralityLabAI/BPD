@@ -38,7 +38,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           run-id: 44295607653
-          github-token: \${{ github.token }}
+          github-token: ${{ github.token }}
           name: amm09r1-development-source-locked
           path: /tmp/amm10_original_dev
       - name: Verify SHA256 of both original published JSON files
