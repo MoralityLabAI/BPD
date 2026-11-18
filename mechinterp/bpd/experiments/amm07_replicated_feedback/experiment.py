@@ -66,7 +66,8 @@ def train():
         for c in (0,1):totals[c]+=scored['candidate_hits'][f'component_{c}']
         rows.append({'root':m.root_key('training',i),'family':m.family_for(i),
                      'fitting':metrics,'assay':scored})
-    weights=ridge(torch.cat(xs),torch.cat(ys),LAMBDA_MEMORY)
+    # Quantized, hardware-portable policy weights; see AMENDMENT_TRAINING_NUMERIC.md.
+    weights=[round(float(x),4) for x in ridge(torch.cat(xs),torch.cat(ys),LAMBDA_MEMORY)]
     out={'schema':SCHEMA+'/training_memory','experiment':NAME,'phase':'training',
          'independent_training_roots':m.PHASE_N['training'],
          'training_pairs_per_root':m.TRAIN_PAIRS,
@@ -74,7 +75,9 @@ def train():
          'pooled_action':0 if totals[0]>=totals[1] else 1,
          'coefficients':weights,'memory_ridge_lambda':LAMBDA_MEMORY,
          'source_sha256':source_sha256(),'rows':rows}
-    out['sha256']=m.digest(out)
+    out['train_rows_sha256']=m.digest([{'root':r['root'],
+        'candidate_bits':r['assay']['candidate_bits']} for r in rows])
+    out['sha256']=m.digest({k:v for k,v in out.items() if k!='rows'})
     return out
 
 
@@ -83,14 +86,21 @@ def validate_memory(memory:dict):
         raise ValueError('AMM-07 frozen training policy required')
     if memory.get('source_sha256')!=source_sha256():
         raise ValueError('model and memory source mismatch')
-    if memory.get('sha256')!=m.digest({k:v for k,v in memory.items() if k!='sha256'}):
-        raise ValueError('training memory digest failed')
+    if memory.get('sha256')!=m.digest({k:v for k,v in memory.items()
+                                     if k not in ('sha256','rows')}):
+        raise ValueError('training policy digest failed')
     if memory.get('independent_training_roots')!=64 or len(memory.get('rows',[]))!=64:
         raise ValueError('training source-root count invalid')
     if {row['root'] for row in memory['rows']}!={m.root_key('training',i) for i in range(64)}:
         raise ValueError('training root membership invalid')
     if len(memory.get('coefficients',[]))!=F or not all(math.isfinite(x) for x in memory['coefficients']):
         raise ValueError('invalid memory weights')
+    if any(round(x,4)!=x for x in memory['coefficients']):
+        raise ValueError('global memory coefficients must be quantized')
+    check=m.digest([{'root':r['root'],
+        'candidate_bits':r['assay']['candidate_bits']} for r in memory['rows']])
+    if check!=memory.get('train_rows_sha256'):
+        raise ValueError('training outcome bit digest changed')
     return True
 
 
@@ -291,8 +301,7 @@ def compact(run:dict)->dict:
         return {'schema':SCHEMA+'/training_lock','source_sha256':run['source_sha256'],
                 'memory_sha256':run['sha256'],'pooled_action':run['pooled_action'],
                 'independent_roots':64,'train_candidate_hits':run['component_training_hits'],
-                'train_rows_sha256':m.digest([{'root':r['root'],
-                    'candidate_bits':r['assay']['candidate_bits']} for r in run['rows']])}
+                'train_rows_sha256':run['train_rows_sha256']}
     out={'schema':SCHEMA+'/cohort_lock','phase':run['phase'],
          'source_sha256':run['source_sha256'],
          'memory_sha256':run['training_memory_sha256'],
@@ -306,7 +315,9 @@ def compact(run:dict)->dict:
                'candidate_bits':r['heldout']['candidate_bits'],
                'policy_actions':r['policy_actions'],'policy_bits':r['policy_bits'],
                'repeat_bits':r['repeatability']['blind_bits']} for r in run['rows']]),
-         'full_receipt_sha256':m.digest(run)}
+         'full_receipt_sha256':None}
+    # Raw floating-point JSON is separately hashed at archive time; the
+    # compact replay lock uses only test-case bits and source identifiers.
     if run['phase']=='development':
         out['headroom_rate']=run['posthoc_oracle_headroom_rate']
         out['correct_quality_roots']=run['correct_quality_roots']
