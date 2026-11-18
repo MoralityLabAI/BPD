@@ -1,0 +1,20 @@
+{
+  "study": "BPD-NC09-FC05",
+  "phase": "FIRST_EXCLUDED_FULL_SMOKE",
+  "protocol_commit_sha": "8eb34f3533591513b46f14b902721d7f78bc0d43",
+  "source_commit_sha": "9e8a51c4c3633327ecd14c75a2fc48c963dc03b3",
+  "source_manifest_sha256": "c0951817b3be4b201af5a1d1a68c41e51f93c0f914107e8c0c3985e61c69a573",
+  "excluded_smoke_root": 15999,
+  "model_roots": [],
+  "scientific_confirmation_models_evaluated": 0,
+  "budgets": {
+    "steps": 384,
+    "discovery_n": 1024,
+    "selector_n": 512,
+    "heldout_n": 1024,
+    "shams": 8,
+    "solver_starts": 32,
+    "solver_steps": 64
+  },
+  "evidence_policy": "Preserve first full smoke and frozen-sampler byte comparison; no calibration release until every smoke gate passes."
+}

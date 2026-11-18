@@ -1,5 +1,13 @@
 # BPD-NC-09 Fixed12: causal passwise allocation at equal physical rank budget
 
+## Current calibration status, November 18, 2026
+
+The [FC05 independent full-tangent calibration](full_tangent_calibration_fc05/RESULTS_20261118.md) completed all 59 fresh roots with eight matched shams per model. Its registered result is **FULL_TANGENT_CALIBRATION_PILOT_ONLY**. Mean sham-minus-DP12 task NLL was 0.008083953 nats, with marginal root-bootstrap 95% interval [0.005644242, 0.010486967]. The 0.020 scientific margin remains unmet. The independently calibrated rootwise 95/95 floor is 0.058183573 nats, and strict EvalMath returned **REDESIGN_OR_PILOT_ONLY**.
+
+All scientific confirmation populations remain sealed. FC05 evaluated zero confirmation models. The original registration and first-development account below retain their historical results; subsequent FC01–FC05 calibration and engineering studies have their own prospective records.
+
+## Original registration
+
 **Prospectively registered November 18, 2026.** [PROTOCOL.md](PROTOCOL.md) was committed first at e14d54cd08bf99306b31e491ade4e94d72f823f0, before implementation or training.
 
 NC-08's first development result passed its source/sham controls and compressed physical retained write rank by 32.8%, but failed its frozen extra task-cost bound versus flat rank four. Its source-locked **secondary descriptive** budget-12 comparison favored passwise source-derived rank allocation over flat rank three by 0.013068 nats mean true-label NLL on the exposed eight roots. NC-09 tests this same-rank allocation question on **16 fresh independently trained model roots, 900–915**, with excluded engineering seed 899.
