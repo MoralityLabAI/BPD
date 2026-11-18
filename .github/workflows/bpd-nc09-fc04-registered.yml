@@ -1,0 +1,146 @@
+name: BPD NC09-FC04 first original sixteen-root full-tangent source feasibility
+
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/experiments/nc09_fixed12/full_tangent_fc04/EXECUTE_LOCK.json'
+
+permissions:
+  contents: read
+
+jobs:
+  first-sixteen-root-FC04:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify first prospective root IDs, source lock and unchanged parent algorithms
+        run: |
+          python - <<'PY'
+          import json,subprocess
+          from pathlib import Path
+          root=Path('mechinterp/bpd/experiments/nc09_fixed12/full_tangent_fc04')
+          l=json.loads((root/'EXECUTE_LOCK.json').read_text())
+          assert l['study']=='BPD-NC09-FC04'
+          assert l['phase']=='FIRST_ORIGINAL_16_ROOT_FULL_TANGENT_ENGINEERING'
+          assert l['new_model_roots']==list(range(15000,15016))
+          assert l['excluded_smoke_root']==14999
+          assert l['trained_model_updates']==384
+          assert l['discovery_source_examples']==1024
+          assert l['model_only_diagnostic_examples']==512
+          assert l['independent_task_eval_examples']==1024
+          assert l['full_tangent_charts']==32 and l['corrections_per_chart']==64
+          assert l['frozen_FC03_charts']==32 and l['frozen_FC03_updates']==64
+          assert l['frozen_FC02_proposals']==4096
+          assert l['required_matched_shams']==8
+          assert l['scientific_confirmation_models_evaluated']==0
+          sha=l['source_commit_sha']
+          subprocess.run(['git','merge-base','--is-ancestor',sha,'HEAD'],check=True)
+          subprocess.run(['git','merge-base','--is-ancestor',
+             'e51938e4cf96ac4d34ffeaca3afdb52b84969db9','HEAD'],check=True)
+          protected=[str(root/f) for f in (
+             'PROTOCOL.md','THEORY.md','solver.py','experiment.py','aggregate.py',
+             'test_solver.py','test_aggregate.py','TangentBudget.lean'
+          )]+[
+             'mechinterp/bpd/experiments/nc09_fixed12/experiment.py',
+             'mechinterp/bpd/experiments/nc09_fixed12/grassmann_fc03/solver.py',
+             'mechinterp/bpd/experiments/nc09_fixed12/tangent_sham_calibration/tangent_shams.py',
+             'mechinterp/bpd/components.py','mechinterp/bpd/config.py'
+          ]
+          subprocess.run(['git','diff','--exit-code',sha,'HEAD','--',*protected],check=True)
+          print('FC04 first original source-locked 16-root SHA',sha)
+          PY
+      - name: Install same CPU PyTorch environment as original NC09
+        run: |
+          python -m pip install --disable-pip-version-check pytest 'numpy>=1.26' scipy==1.14.1
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Verify excluded smoke mathematics and registered engineering gate
+        run: |
+          python -m pytest -q \
+            mechinterp/bpd/experiments/nc09_fixed12/full_tangent_fc04/test_solver.py \
+            mechinterp/bpd/experiments/nc09_fixed12/full_tangent_fc04/test_aggregate.py
+      - name: Train sixteen new independent dense nonlinear recurrences and evaluate all sham algorithms
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/nc09-fc04-first
+          for root in $(seq 15000 15015); do
+            python -m mechinterp.bpd.experiments.nc09_fixed12.full_tangent_fc04.experiment \
+              --root "$root" --steps 384 --discovery 1024 --selector 512 \
+              --heldout 1024 --sham-proposals 4096 --shams 8 \
+              --solver-starts 32 --solver-steps 64 \
+              --out "/tmp/nc09-fc04-first/nc09_fc04_root_$root.json"
+          done
+      - name: Aggregate strict sixteen-root first scientific-development feasibility
+        run: |
+          python -m mechinterp.bpd.experiments.nc09_fixed12.full_tangent_fc04.aggregate \
+            --root-dir /tmp/nc09-fc04-first \
+            --out /tmp/nc09-fc04-first/FC04_ORIGINAL_16_ROOT_SUMMARY.json
+      - name: Independent projector archive, model and task receipt verification
+        run: |
+          python - <<'PY'
+          import json,hashlib
+          from pathlib import Path
+          from mechinterp.bpd.experiments.nc09_fixed12.full_tangent_fc04.aggregate import (
+            independently_audit_full_tangent_projectors
+          )
+          root=Path('/tmp/nc09-fc04-first')
+          summary=json.loads((root/'FC04_ORIGINAL_16_ROOT_SUMMARY.json').read_text())
+          assert summary['study']=='BPD-NC09-FC04'
+          assert summary['phase']=='FULL_TANGENT_JACOBIAN_ENGINEERING_DEVELOPMENT'
+          assert summary['evidence_class']=='ENGINEERING_ONLY'
+          assert summary['model_roots']==16 and len(summary['per_root'])==16
+          assert {r['root'] for r in summary['per_root']}==set(range(15000,15016))
+          assert summary['protected_59_root_recalibration_evaluated']==0
+          assert summary['protected_32_root_confirmation_evaluated']==0
+          assert summary['original_FC01_hold']=='CALIBRATION_REDESIGN_OR_PILOT_ONLY'
+          assert summary['original_FC02_hold']=='CALIBRATION_INCOMPLETE'
+          assert summary['original_FC03_verdict']=='ENGINEERING_NULL_OR_INELIGIBLE'
+          assert summary['first_source_locked_development_verdict'] in (
+            'FULL_TANGENT_ENGINEERING_POSITIVE','ENGINEERING_NULL_OR_INELIGIBLE'
+          )
+          assert len(summary['gates'])==4
+          for seed in range(15000,15016):
+            p=root/('nc09_fc04_root_%d.json'%seed)
+            d=json.loads(p.read_text())
+            assert d['study']=='BPD-NC09-FC04' and d['root']==seed
+            assert d['phase']=='FULL_TANGENT_JACOBIAN_ENGINEERING_DEVELOPMENT'
+            assert d['training']['steps']==384
+            assert d['splits']=={
+              'train':2048,'derivative_discovery':1024,
+              'model_validation':512,'labeled_calibration':1024
+            }
+            assert d['protocol_sha256']==summary['protocol_sha256']
+            assert d['full_mask_closure']['passed']
+            assert sum(d['source_rank12_optimum']['ranks'])==12
+            assert d['fc02_original_rejection_admission']['proposals']==4096
+            assert d['fc03_original_eightdim_admission']['charts_configured']==32
+            assert d['fc03_original_eightdim_admission']['max_adam_steps_per_chart']==64
+            assert d['sham_admission']['charts_configured']==32
+            assert d['sham_admission']['max_corrections_per_chart']==64
+            audit=independently_audit_full_tangent_projectors(d)
+            assert audit['matched']==len(d['sham_nlls'])
+            assert len(d['fc03_original_eightdim_sham_nlls'])==d['fc03_original_eightdim_admission']['selected']
+            assert len(d['fc02_original_rejection_sham_nlls'])==d['fc02_original_rejection_admission']['selected']
+            if d['eligible']:
+              assert audit['complete']
+              assert len(audit['geometry'])==8
+            print('FC04 original root',seed,'SHA256',hashlib.sha256(p.read_bytes()).hexdigest(),
+                  'full_tangent',audit['matched'],
+                  'old_FC03',d['fc03_original_eightdim_admission']['selected'],
+                  'old_FC02',d['fc02_original_rejection_admission']['selected'])
+          print('FC04 first original verdict',summary['first_source_locked_development_verdict'])
+          print('FC04 original registered gates',summary['gates'])
+          PY
+      - name: Preserve complete original sixteen-root physical and source evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bpd-nc09-fc04-original-16-root-${{ github.run_id }}
+          path: /tmp/nc09-fc04-first/
+          retention-days: 90
+          if-no-files-found: warn

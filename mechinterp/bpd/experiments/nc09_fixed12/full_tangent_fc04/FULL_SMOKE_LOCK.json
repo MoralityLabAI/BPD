@@ -1,0 +1,25 @@
+{
+  "study": "BPD-NC09-FC04",
+  "phase": "EXCLUDED_14999_FULL_SOURCE_ENGINEERING",
+  "protocol_first_sha": "e51938e4cf96ac4d34ffeaca3afdb52b84969db9",
+  "source_commit_sha": "07b1593e9fc26cdfaf537d265957850c1fc348f8",
+  "excluded_smoke_root": 14999,
+  "development_roots_trained": 0,
+  "confirmation_roots_trained": 0,
+  "model_training_updates": 384,
+  "source_discovery_examples": 1024,
+  "model_only_diagnostic_examples": 512,
+  "labeled_smoke_examples": 1024,
+  "tangent_charts": 32,
+  "corrections_per_chart": 64,
+  "FC03_chart_starts": 32,
+  "FC03_chart_updates": 64,
+  "FC02_rejection_candidates": 4096,
+  "required_distinct_shams": 8,
+  "original_calibration_holds": {
+    "FC01": "CALIBRATION_REDESIGN_OR_PILOT_ONLY",
+    "FC02": "CALIBRATION_INCOMPLETE",
+    "FC03": "ENGINEERING_NULL_OR_INELIGIBLE"
+  },
+  "original_outcome_policy": "This one excluded model is smoke-only; archive failure or success, no tuning original source, and no training 15000..15015 before a clean full-budget first smoke."
+}
