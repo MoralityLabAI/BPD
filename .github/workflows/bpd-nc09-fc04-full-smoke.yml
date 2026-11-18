@@ -1,0 +1,104 @@
+name: BPD NC09-FC04 first full excluded-14999 Jacobian pilot
+
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/experiments/nc09_fixed12/full_tangent_fc04/FULL_SMOKE_LOCK.json'
+
+permissions:
+  contents: read
+
+jobs:
+  excluded-14999-full-tangent:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Admit only excluded training source under original first-protocol commit
+        run: |
+          python - <<'PY'
+          import json,subprocess
+          from pathlib import Path
+          r=Path('mechinterp/bpd/experiments/nc09_fixed12/full_tangent_fc04')
+          l=json.loads((r/'FULL_SMOKE_LOCK.json').read_text())
+          assert l['study']=='BPD-NC09-FC04' and l['phase']=='EXCLUDED_14999_FULL_SOURCE_ENGINEERING'
+          assert l['excluded_smoke_root']==14999 and l['development_roots_trained']==0
+          assert l['model_training_updates']==384
+          assert l['source_discovery_examples']==1024 and l['labeled_smoke_examples']==1024
+          assert l['tangent_charts']==32 and l['corrections_per_chart']==64
+          assert l['FC02_rejection_candidates']==4096
+          assert l['FC03_chart_starts']==32 and l['FC03_chart_updates']==64
+          source=l['source_commit_sha']
+          subprocess.run(['git','merge-base','--is-ancestor',source,'HEAD'],check=True)
+          subprocess.run(['git','merge-base','--is-ancestor',
+            'e51938e4cf96ac4d34ffeaca3afdb52b84969db9','HEAD'],check=True)
+          frozen=[str(r/p) for p in (
+             'PROTOCOL.md','THEORY.md','solver.py','experiment.py','aggregate.py',
+             'test_solver.py','test_aggregate.py','TangentBudget.lean'
+          )]+[
+             'mechinterp/bpd/experiments/nc09_fixed12/experiment.py',
+             'mechinterp/bpd/experiments/nc09_fixed12/PROTOCOL.md',
+             'mechinterp/bpd/experiments/nc09_fixed12/grassmann_fc03/solver.py',
+             'mechinterp/bpd/experiments/nc09_fixed12/tangent_sham_calibration/tangent_shams.py',
+             'mechinterp/bpd/components.py','mechinterp/bpd/config.py'
+          ]
+          subprocess.run(['git','diff','--exit-code',source,'HEAD','--',*frozen],check=True)
+          print('FC04 registered excluded source SHA:',source)
+          PY
+      - name: Install original 20D CPU numerical runtime
+        run: |
+          python -m pip install --disable-pip-version-check pytest 'numpy>=1.26' scipy==1.14.1
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Recheck excluded 14999 and complete source-only Jacobian geometry
+        run: |
+          python -m pytest -q \
+            mechinterp/bpd/experiments/nc09_fixed12/full_tangent_fc04/test_solver.py \
+            mechinterp/bpd/experiments/nc09_fixed12/full_tangent_fc04/test_aggregate.py
+      - name: Original full 384-step 14999 and three independent sham algorithms
+        run: |
+          mkdir -p /tmp/nc09-fc04-excluded
+          python -m mechinterp.bpd.experiments.nc09_fixed12.full_tangent_fc04.experiment \
+            --root 14999 --steps 384 --discovery 1024 --selector 512 \
+            --heldout 1024 --sham-proposals 4096 --shams 8 \
+            --solver-starts 32 --solver-steps 64 \
+            --out /tmp/nc09-fc04-excluded/EXCLUDED_14999_FULL.json
+      - name: Independent excluded full-source and physical projector receipt verification
+        run: |
+          python - <<'PY'
+          import json
+          from mechinterp.bpd.experiments.nc09_fixed12.full_tangent_fc04.aggregate import independently_audit_full_tangent_projectors
+          p='/tmp/nc09-fc04-excluded/EXCLUDED_14999_FULL.json'
+          d=json.load(open(p))
+          assert d['study']=='BPD-NC09-FC04' and d['root']==14999
+          assert d['phase']=='FULL_TANGENT_JACOBIAN_ENGINEERING_DEVELOPMENT'
+          assert d['training']['steps']==384
+          assert d['splits']=={
+            'train':2048,'derivative_discovery':1024,
+            'model_validation':512,'labeled_calibration':1024
+          }
+          assert d['full_mask_closure']['passed']
+          assert d['parent_integrity']['nc09_original_experiment_sha256']=='8d1b88eea8518a83669f03f9126136ca3d56ac5bac5fe041e2e03fb12922d380'
+          a=independently_audit_full_tangent_projectors(d)
+          assert d['sham_admission']['charts_configured']==32
+          assert d['sham_admission']['max_corrections_per_chart']==64
+          assert d['fc03_original_eightdim_admission']['charts_configured']==32
+          assert d['fc02_original_rejection_admission']['proposals']==4096
+          print('Excluded original source: new full-tangent shams',a['matched'])
+          print('Original frozen FC03 solver matches:',d['fc03_original_eightdim_admission']['selected'])
+          print('Original FC02 random matches:',d['fc02_original_rejection_admission']['selected'])
+          print('Original excluded training/physical eligibility:',d['eligible'])
+          assert a['complete'] and d['eligible']
+          PY
+      - name: Preserve complete first excluded model source and physical task receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bpd-nc09-fc04-excluded-14999-${{ github.run_id }}
+          path: /tmp/nc09-fc04-excluded/
+          retention-days: 90
+          if-no-files-found: warn
