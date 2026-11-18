@@ -9,7 +9,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 import json
 import numpy as np
-from . import analysis as a
+import analysis as a
 
 
 class AMM10Tests(unittest.TestCase):
