@@ -20,3 +20,14 @@ The new mathematical question is whether a **norm-conditioned rank-three** subsp
 The fixed engineering gate requires eight trained/admitted roots and matched shams, norm-rank-three absolute fidelity mean/upper-bootstrap <=.05 nats, improvement >=.01 nats over each same-rank control with positive 2000-draw root-bootstrap lower endpoint, and matched-sham advantage >=.02 with positive lower endpoint. Every failure remains in the published development receipt, and no scientific confirmation is claimed from eight synthetic roots.
 
 The [experiment](experiment.py), [aggregator](aggregate.py), and [excluded seed 599 tests](test_experiment.py) provide the runnable local/hosted CPU gym. A source lock is required before releasing the original eight-root development. Future >=59 sham-calibration and >=32 confirmation model roots remain ungenerated and sealed, as do unrelated ARG-03-N and AMM-03 protected datasets.
+
+
+## Original eight-root development: norm-conditioning incremental null
+
+[Original source-locked GitHub Actions run #44255130086](https://github.com/MoralityLabAI/BPD/actions/runs/44255130086) completed all eight new trained dense 20D recurrent roots, their native four-pass physical interventions, matched local sham controls and first evidence archive. The frozen developmental verdict is **ENGINEERING_NULL_OR_INELIGIBLE**. All eight source/physical eligibility controls passed.
+
+Norm-rank3 kept-minus-clean mean true-label NLL was +0.02116 nats, upper 95% root bootstrap +0.03371, so **absolute fidelity passed**. Its median matched-sham advantage was +0.07453 nats, lower 95% +0.05571, also passed. Norm weighting provided **+0.000357 nats** versus unweighted rank3 and **+0.000336** versus exact-ESS shuffle, both far below the registered +0.01 improvement threshold with intervals spanning zero. The frozen developmental hypothesis therefore failed.
+
+The original unweighted rank-four reference gave clean-to-kept NLL +0.00538 nats. Normalized activation-energy weights had an approximately **91% effective sample fraction at each recurrent step**, far weaker conditioning than PD-15's ~48% sparse-source effective fraction. Native orthogonal gauge physical-operator errors stayed below 1.30e-7.
+
+[Detailed source-locked results](RESULTS_20261118.md), [original eight-root table](PER_ROOT_20261118.csv), [independent original SHA and outcome audit](test_published_results.py), and [unmodified full original artifact #14405931779](https://github.com/MoralityLabAI/BPD/actions/runs/44255130086/artifacts/14405931779) preserve this negative incremental result. The independent 59-root sham-calibration and 32-root confirmation phases remain sealed.
