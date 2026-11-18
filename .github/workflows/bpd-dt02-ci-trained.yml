@@ -1,0 +1,89 @@
+name: BPD-DT02-A native mini Attention-TRM CPU training and unseen-depth steering
+
+on:
+  push:
+    branches:
+      - "research/bpd-dt02-ci-*"
+    paths:
+      - ".github/workflows/bpd-dt02-ci-trained.yml"
+  pull_request:
+    paths:
+      - "mechinterp/bpd/experiments/depth_steering_gym/**"
+      - ".github/workflows/bpd-dt02-ci-trained.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  native-mini-trm-cpu:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Pin actual CPU native TRM dependencies
+        run: python -m pip install "torch==2.5.1" "numpy>=1.26,<3"
+      - name: Verify source and exact prior-world/physical TRM blobs
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import subprocess,json
+          root=Path("mechinterp/bpd/experiments/depth_steering_gym")
+          lock=json.loads((root/"LOCK_CI.json").read_text())
+          assert lock["status"]=="FROZEN_EXCLUDED_ROOT_NATIVE_CPU_PILOT_BEFORE_HOSTED_TRAINING"
+          assert lock["roots"]==[901,902] and lock["train_depths"]==[2,4,6] and lock["unseen_depths"]==[8,12]
+          assert lock["official_arc1_evaluated"] is False
+          for name,expected in lock["files"].items():
+              actual=subprocess.check_output(["git","hash-object",str(root/name)],text=True).strip()
+              assert actual==expected,(name,actual,expected)
+          for name,expected in lock["upstream_source"].items():
+              actual=subprocess.check_output(["git","hash-object",name],text=True).strip()
+              assert actual==expected,(name,actual,expected)
+          print("DT02-A SOURCE LOCK VERIFIED; excluded roots and no official ARC-1 claims")
+          PY
+      - name: Test actual native Attention-TRM training and full output protection
+        run: python -m unittest mechinterp.bpd.experiments.depth_steering_gym.test_ci_pilot -v
+      - name: Train six compact real TRM models and evaluate unseen depths 8 and 12
+        shell: bash
+        run: |
+          python -m mechinterp.bpd.experiments.depth_steering_gym.ci_pilot \
+            --seeds 901 902 --updates 64 --samples 64 \
+            --out /tmp/bpd_dt02a_native_training.json
+      - name: Preserve all task failures and protected readout engineering receipts
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json,math
+          r=json.load(open("/tmp/bpd_dt02a_native_training.json"))
+          assert r["experiment"]=="BPD-DT02-A" and r["supervised_depths"]==[2,4,6]
+          assert r["heldout_depths"]==[8,12]
+          assert r["official_arc1_evaluated"] is False
+          assert [q["seed"] for q in r["roots"]]==[901,902]
+          for row in r["roots"]:
+              assert set(row["family"])=={"sudoku4","arc_style","storyworld"}
+              for fam,item in row["family"].items():
+                  assert math.isfinite(item["final_loss"])
+                  for dep in ("8","12"):
+                      entry=item["eval"][dep]
+                      assert entry["n"]==64
+                      assert 0 <= entry["exact_task_accuracy"] <= 1
+                  print("DT02_NATIVE="+json.dumps({"root":row["seed"],"family":fam,
+                      "parameters":item["parameter_count"],
+                      "depth8_exact":item["eval"]["8"]["exact_task_accuracy"],
+                      "depth12_exact":item["eval"]["12"]["exact_task_accuracy"],
+                      "loss":item["final_loss"]}))
+              steering=row["family"]["sudoku4"]["protected_steering"]
+              assert steering["protected_all_vocab_max_error"] <= 1e-6
+              assert set(steering["depths"])=={"4","8","12"}
+          print("DT02-A native CPU pilot complete; no official ARC1 or 7M checkpoint result")
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bpd-dt02a-native-minitrm-six-models-excluded-receipt
+          path: /tmp/bpd_dt02a_native_training.json
+          if-no-files-found: warn
