@@ -26,8 +26,8 @@ STEPS_FACTORS = 140
 LR = 0.035
 TOL = 0.18
 EPS = 1e-9
-ARMS = ('memory_calibrated', 'local_only', 'memory_only', 'geometry_rule', 'pooled', 'random_component', 'random_dark', 'random_dark_b', 'sham', 'full_donor')
-COMPARISONS = {'memory_vs_local': 'local_only', 'memory_vs_geometry': 'geometry_rule', 'memory_vs_pooled': 'pooled'}
+ARMS = ('selective_trust', 'always_update', 'memory_only', 'local_ridge', 'pooled', 'random_component', 'random_dark', 'random_dark_b', 'sham', 'full_donor')
+COMPARISONS = {'trust_vs_always_update': 'always_update', 'trust_vs_memory_only': 'memory_only', 'trust_vs_local_ridge': 'local_ridge'}
 
 
 def canonical(x: Any) -> str:
