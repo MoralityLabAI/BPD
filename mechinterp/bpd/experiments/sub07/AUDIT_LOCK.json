@@ -1,0 +1,16 @@
+{
+  "study": "BPD-SUB-07",
+  "action": "read_only_original_receipt_audit",
+  "original_run_id": 44307622000,
+  "original_artifact_id": 14428937156,
+  "original_artifact_zip_sha256": "063fdbad7c9e592ac10f68ce944ac2e7f6affe31691e3bc8b997727574d42598",
+  "original_sha256": "cc0d465aa5c75825180e5674f986f86ed8af8987ca12ec9c787d36e8e0ebb930",
+  "frozen_source_commit": "9b44567211e2894981ae2eaf875e3ca36b7689ef",
+  "first_registration_commit": "35aea0f112c096d2bf563e50b4485ad3cd2ee26d",
+  "original_failure": "Independent audit compared Python tuples to JSON arrays in exact oracle certificate; experiment completed and original receipt was saved",
+  "auditor_fix_commit": "3d28e30e652c542b06ab57a981edfbe73a2e7de1",
+  "retraining_allowed": false,
+  "confirmation_generated": false,
+  "calibration_generated": false,
+  "protected_cohorts": "sealed"
+}
