@@ -312,7 +312,7 @@ def clocked_student(model:Looper,x:Tensor,bundle:Tensor):
         "true_nll":float(F.binary_cross_entropy_with_logits(out,truth)),
         "correct_count":int(((out>=0)==truth.bool()).sum()),
         "accuracy":float(((out>=0)==truth.bool()).float().mean()),
-        "max_full_rank_parity":None,
+        "max_full_rank_parity":float((out-clean).abs().max()),
     }
 
 
@@ -383,20 +383,16 @@ def evaluate_root(seed:int,*,steps:int=STEPS):
     arms.update({"angular_"+str(i):v["projectors"]
                  for i,v in enumerate(shams)})
     with torch.no_grad():
-        calibration={
-            k: [
-                float((physical_delta(seed,3,t,len(check),p[t],
-                                      .25*float(model.rollout(discovery)[1][0]
-                                      .double().square().sum(-1).mean().sqrt()))
-                       .norm(dim=-1)-
-                       .25*float(model.rollout(discovery)[1][0]
-                       .double().square().sum(-1).mean().sqrt())
-                       ).abs().max())
-                for t in range(3)]
-            for k,p in (("aligned",bundle),("stationary",arms["stationary"]))
-        }
         _,disc_states=model.rollout(discovery)
         alpha=.25*float(disc_states[0].double().square().sum(-1).mean().sqrt())
+        calibration={
+            key:[
+                float((physical_delta(seed,3,t,len(check),ps[t],alpha)
+                       .norm(dim=-1)-alpha).abs().max())
+                for t in range(3)
+            ] for key,ps in (("aligned",bundle),
+                             ("stationary",arms["stationary"]))
+        }
         scores={name:causal_response(model,heldout,ps,alpha,seed,4)
                 for name,ps in arms.items()}
         students={name:clocked_student(model,heldout,ps)
@@ -435,7 +431,8 @@ def evaluate_root(seed:int,*,steps:int=STEPS):
         and gauge["transported_next_state_error"]<=5e-5
         and gauge["transported_logit_error"]<=5e-5
         and max(gauge["wrong_untransported_logit_rms_by_pass"])>1e-5)
-    fullparity=full_student["mean_clean_bernoulli_kl"]<=1e-7
+    fullparity=(full_student["max_full_rank_parity"]<=5e-6
+                and full_student["mean_clean_bernoulli_kl"]<=1e-7)
     eligible=bool(min(contexts.values())>=.80 and
         angular_geom and source_geom and all_dose and input_checks
         and gauge_ok and fullparity and len(scores)==17)
@@ -466,6 +463,7 @@ def evaluate_root(seed:int,*,steps:int=STEPS):
         "calibration_max_dose_errors":calibration,
         "scores":scores,"students":students,
         "full_rank_student_kl":full_student["mean_clean_bernoulli_kl"],
+        "full_rank_logit_max_error":full_student["max_full_rank_parity"],
         "gauge":gauge,
         "geometry_ok":source_geom and angular_geom,
         "dose_ok":all_dose and input_checks,
