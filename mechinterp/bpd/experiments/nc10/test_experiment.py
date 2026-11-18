@@ -122,7 +122,7 @@ def test_score_is_full_closed_loop_and_context_separated():
 
 def test_root_eligibility_and_confirmation_seal():
     with pytest.raises(ValueError):
-        nc.train_task(1000,"A",steps=1)
+        nc.train_task(1100,"A",steps=1)
     with pytest.raises(ValueError):
         nc.run(1100,steps=1,discovery_size=4,alignment_size=4,evaluation_size=4)
 
@@ -134,7 +134,7 @@ def test_familywise_bootstrap_and_missing_roots():
     assert x["familywise_ci"][0]<=x["mean_nats"]<=x["familywise_ci"][1]
     assert len(COMPARISON_NAMES)==4
     with pytest.raises(ValueError):
-        aggregate([{"root":900}]*8)
+        aggregate([{"root":1000}]*8)
 
 
 def test_smoke_is_usable_even_when_source_alignment_count_is_below_full_gate():
