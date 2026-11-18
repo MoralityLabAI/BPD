@@ -1,0 +1,54 @@
+{
+  "all_case_bits_sha256": "35dd3d5e78c2f206f51ad1220063b10166903f16abb05dbb46759021ef5ca58a",
+  "correct_quality_roots": 59,
+  "fidelity_strata": {
+    "flagged_fit": {
+      "aware_success": 0,
+      "blind_success": 0,
+      "roots": 0
+    },
+    "high_fidelity": {
+      "aware_success": 30367,
+      "blind_success": 30167,
+      "roots": 64
+    }
+  },
+  "full_receipt_sha256": null,
+  "headroom_rate": 0.0787506103515625,
+  "high_fidelity_roots": 64,
+  "independent_roots": 64,
+  "memory_sha256": "1ead62295b7201378e53318d6e6501ce850cf0ffb4ae8b45c33a59217e4118bb",
+  "phase": "development",
+  "preflight_input_sha256": "fb842b3f51ee859e7f7aaf62781c7d00750e45ced9042f5c145f445eaf15483c",
+  "quality_strata": {
+    "high_noise": {
+      "correct": 27,
+      "roots": 32
+    },
+    "low_noise": {
+      "correct": 32,
+      "roots": 32
+    }
+  },
+  "schema": "bpd.amm07.replicated_feedback.v1/cohort_lock",
+  "source_sha256": {
+    "case.py": "a2fd168b3e609a759d5721a10b9906e820b254cc9026135683fd8ab14fd47817",
+    "experiment.py": "735f9c8a698176bf88e43c564005577e4a110de99f77f22f35b33fca4c0658a9",
+    "models.py": "b28915f0c00bf39299c5ddfe26c444b510150588700b3566d5c58d2adf983608",
+    "noise.py": "34117a86e03ea19f5c279662c97e5a68a12fefdb79f12711ff6e9ee468794f43"
+  },
+  "test_cases": 65536,
+  "totals": {
+    "blind_all": 30618,
+    "full_donor": 65536,
+    "local_ridge": 28533,
+    "memory_only": 30051,
+    "pooled": 26505,
+    "quality_aware": 30367,
+    "quality_blind": 30167,
+    "random_component": 20442,
+    "random_dark": 13153,
+    "random_dark_b": 13163,
+    "sham": 0
+  }
+}

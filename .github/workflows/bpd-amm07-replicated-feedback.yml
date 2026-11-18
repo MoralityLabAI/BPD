@@ -1,0 +1,53 @@
+name: BPD-AMM-07 independent reliability and causal memory
+on:
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/amm07_replicated_feedback/**'
+      - '.github/workflows/bpd-amm07-replicated-feedback.yml'
+  workflow_dispatch:
+jobs:
+  cpu:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install CPU PyTorch and numpy
+        run: python -m pip install --index-url https://download.pytorch.org/whl/cpu 'torch==2.10.0+cpu' 'numpy>=1.26'
+      - name: Engineering-only tests and native BPD parity
+        run: python -m unittest mechinterp.bpd.experiments.amm07_replicated_feedback.test_experiment -v
+      - name: Source-locked 64-model training memory
+        run: |
+          python -m mechinterp.bpd.experiments.amm07_replicated_feedback.experiment --phase training --out /tmp/amm07_train.json
+          python -c 'import json,pathlib; from mechinterp.bpd.experiments.amm07_replicated_feedback import experiment as e; z=e.compact(json.load(open("/tmp/amm07_train.json"))); print("AMM07_TRAINING_LOCK="+json.dumps(z,sort_keys=True)); p=pathlib.Path("mechinterp/bpd/experiments/amm07_replicated_feedback/results/TRAINING_LOCK.json"); assert not p.exists() or z==json.loads(p.read_text()), "training drift"'
+      - name: Development after committed training lock
+        run: |
+          if test -f mechinterp/bpd/experiments/amm07_replicated_feedback/results/TRAINING_LOCK.json; then
+            python -m mechinterp.bpd.experiments.amm07_replicated_feedback.experiment --phase development --memory /tmp/amm07_train.json --out /tmp/amm07_dev.json
+            python -c 'import json,pathlib; from mechinterp.bpd.experiments.amm07_replicated_feedback import experiment as e; z=e.compact(json.load(open("/tmp/amm07_dev.json"))); print("AMM07_DEVELOPMENT_LOCK="+json.dumps(z,sort_keys=True)); p=pathlib.Path("mechinterp/bpd/experiments/amm07_replicated_feedback/results/DEVELOPMENT_LOCK.json"); assert not p.exists() or z==json.loads(p.read_text()),"development drift"'
+          else
+            echo "Training-only CI: development blocked until policy SHA locked"
+          fi
+      - name: Corrected EvalMath independent-root preflight
+        run: |
+          if test -f /tmp/amm07_dev.json; then
+            curl -fsSL https://raw.githubusercontent.com/MoralityLabAI/EvalMath/6d9c28dbe8e4c42b3fba76ae7adb84aed9f0921a/skills/evalmath-mechinterp-power/scripts/preflight.py -o /tmp/amm07_evalmath.py
+            python -c 'import json; d=json.load(open("/tmp/amm07_dev.json")); json.dump(d["preflight_input"],open("/tmp/amm07_pilot.json","w"))'
+            python /tmp/amm07_evalmath.py --pilot /tmp/amm07_pilot.json --out /tmp/amm07_pf.json
+            python -c 'import json,pathlib; z=json.load(open("/tmp/amm07_pf.json"));print("AMM07_PREFLIGHT="+json.dumps(z,sort_keys=True));p=pathlib.Path("mechinterp/bpd/experiments/amm07_replicated_feedback/results/PREFLIGHT.json");assert not p.exists() or z==json.loads(p.read_text()),"preflight drift"'
+          else
+            echo "No development: preflight not scored"
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: amm07-source-locked-full-receipts
+          retention-days: 30
+          if-no-files-found: ignore
+          path: |
+            /tmp/amm07_train.json
+            /tmp/amm07_dev.json
+            /tmp/amm07_pilot.json
+            /tmp/amm07_pf.json
