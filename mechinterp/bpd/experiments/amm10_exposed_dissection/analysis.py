@@ -103,6 +103,22 @@ def ridge(x,y,cols):
  if not np.isfinite(coef).all():raise ValueError("unstable root-held-out ridge")
  return coef
 
+def identical_feature_ties(x,cols,scores):
+ """Implement exact mathematical tie for feature-identical candidate masks.
+
+ Only rows identical in ALL selected input columns are modified; do not use
+ near-tie epsilons or posthoc task labels. See AMENDMENT_NUMERIC_TIES.md.
+ """
+ selected=x[:,:,list(cols)]
+ corrected=np.asarray(scores,dtype=np.float64).copy()
+ if selected.ndim!=3 or selected.shape[:2]!=corrected.shape:
+  raise ValueError("fixed six-action feature/score dimensions required")
+ for later in range(1,6):
+  for earlier in range(later):
+   same=np.all(selected[:,later,:]==selected[:,earlier,:],axis=1)
+   corrected[same,later]=corrected[same,earlier]
+ return corrected
+
 def heuristic(x,name):
  if name=="max_cosine":sc=x[:,:,14]
  elif name=="max_cardinality":sc=x[:,:,1]
@@ -139,7 +155,7 @@ def crossfit(X,Y):
    "family_pooled_masks":{FAMILIES[j]:per_family[j] for j in (0,1)}})
   for r in hold:
    x=X[r];y=Y[r];ix=np.arange(128)
-   selected={k:np.argmax(np.clip(x[:,:,list(VARIANTS[k])]@w,0,1),axis=1) for k,w in models.items()}
+   selected={k:np.argmax(np.clip(identical_feature_ties(x,VARIANTS[k],x[:,:,list(VARIANTS[k])]@w),0,1),axis=1) for k,w in models.items()}
    selected.update({k:heuristic(x,k) for k in HEURISTICS})
    selected["pooled_fold"]=np.full(128,pool,dtype=np.int32)
    selected["family_pooled_fold"]=np.full(128,per_family[r%2],dtype=np.int32)
