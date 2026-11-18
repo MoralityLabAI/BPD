@@ -45,7 +45,7 @@ jobs:
         with:
           name: bpd-sub02-first-original-eight-root-development
           run-id: 44269044080
-          github-token: \${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           path: /tmp/sub02-original
       - name: Independent audit, root effects and frozen bootstrap
         run: |
