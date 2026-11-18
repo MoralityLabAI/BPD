@@ -173,10 +173,10 @@ def admit(phase:str,memory:dict|None,preflight:dict|None=None,release:dict|None=
             release.get('memory_sha256')!=memory['sha256'],
             release.get('preflight_sha256')!=m.digest(pf),
             release.get('independent_confirmation_roots')!=128,
-            release.get('registered_population')!='AMM06/confirmation/0..127',
+            release.get('registered_population')!='AMM07/confirmation/0..127',
             release.get('development_oracle_headroom_rate',0)<.08,
-            release.get('development_gate_accepted_roots',0)<8,
-            release.get('development_quality_acceptance_gap',0)<.10,
+            release.get('development_correct_quality_roots',0)<52,
+            release.get('development_high_fidelity_roots',0)<56,
             not isinstance(release.get('approval_commit'),str),
         )):
             raise ValueError('independent explicit confirmation release manifest required')
@@ -189,8 +189,8 @@ def preflight_input(run:dict):
     for r in run['rows']:
         hits=r['policy_hits']
         rows.append({'unit_id':r['root'],
-                     'paired_effect':f"{hits['selective_trust']-hits['always_update']}/{m.PAIRS}",
-                     'sham_effects':[f"{hits['always_update']-r['repeatability']['always_update_hits']}/{m.PAIRS}"]})
+                     'paired_effect':f"{hits['quality_aware']-hits['quality_blind']}/{m.PAIRS}",
+                     'sham_effects':[f"{hits['quality_blind']-r['repeatability']['blind_hits']}/{m.PAIRS}"]})
     return {'schema_version':1,'experiment_id':NAME,
             'independent_unit':'one separately trained physical recurrent model plus BPD factor pair',
             'alpha':'0.05','scientific_min_effect':'0.08',
@@ -224,7 +224,7 @@ def bootstrap(diffs:list[int],label:str)->list[float]:
 
 def analyze(run:dict,pf:dict)->dict:
     if run['phase']!='confirmation':raise ValueError('confirmation phase only')
-    diffs={k:[r['policy_hits']['selective_trust']-r['policy_hits'][v] for r in run['rows']]
+    diffs={k:[r['policy_hits']['quality_aware']-r['policy_hits'][v] for r in run['rows']]
            for k,v in COMPARISONS.items()}
     p={k:root_sign_p(v) for k,v in diffs.items()}
     adj=holm(p)
@@ -236,7 +236,7 @@ def analyze(run:dict,pf:dict)->dict:
     floor=max(SCIENCE_FLOOR,pf['mechanistic_variation_floor'])
     err=max(r['heldout']['diagnostics']['max_equal_dose_error'] for r in run['rows'])
     vis=max(r['heldout']['diagnostics']['max_immediate_readout_displacement'] for r in run['rows'])
-    primary=out['trust_vs_always_update']
+    primary=out['aware_vs_blind']
     return {'schema':SCHEMA+'/analysis','comparisons':out,
             'registered_floor':floor,'max_equal_dose_error':err,
             'max_visible_drift':vis,
