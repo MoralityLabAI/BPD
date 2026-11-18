@@ -45,6 +45,8 @@ jobs:
           python -m pytest -q \
             mechinterp/bpd/experiments/nc09_fixed12/grassmann_fc03/test_solver.py \
             mechinterp/bpd/experiments/nc09_fixed12/grassmann_fc03/test_aggregate.py
+      - name: Original 16-root first-run source SHA and independent publication audit
+        run: python -m pytest -q mechinterp/bpd/experiments/nc09_fixed12/grassmann_fc03/test_published_results.py
 
 
   kernel-check-frozen-source-budget:
