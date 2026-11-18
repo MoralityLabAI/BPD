@@ -1,0 +1,98 @@
+name: BPD-AMM-05 case-conditioned memory and independent-root audit
+on:
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/amm05_case_routing/**'
+      - '.github/workflows/bpd-amm05-case-routing.yml'
+  workflow_dispatch:
+
+jobs:
+  cpu-memory-pilot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install CPU PyTorch and numpy
+        run: python -m pip install --index-url https://download.pytorch.org/whl/cpu 'torch==2.10.0+cpu' 'numpy>=1.26'
+      - name: Engineering-only native BPD parity, gauge, equal-dose and seal tests
+        run: python -m unittest mechinterp.bpd.experiments.amm05_case_routing.test_experiment -v
+      - name: Train on exactly 64 independent training roots, print frozen policy digest
+        shell: bash
+        run: |
+          python -m mechinterp.bpd.experiments.amm05_case_routing.experiment \
+            --phase training --out /tmp/amm05_training.json
+          python - <<'PY'
+          import json
+          from mechinterp.bpd.experiments.amm05_case_routing import experiment as e
+          training=json.load(open('/tmp/amm05_training.json'))
+          locked=e.compact(training)
+          print('AMM05_TRAINING_LOCK='+json.dumps(locked,sort_keys=True))
+          import pathlib
+          manifest=pathlib.Path('mechinterp/bpd/experiments/amm05_case_routing/results/TRAINING_LOCK.json')
+          if manifest.exists():
+              assert locked==json.loads(manifest.read_text()),'training source/labels or digest changed'
+              print('AMM05 locked training replay PASS')
+          else:
+              print('AMM05 source frozen; training evidence only. Development remains blocked until a training lock is committed.')
+          PY
+      - name: Execute disjoint development only after training lock is committed
+        shell: bash
+        run: |
+          if test -f mechinterp/bpd/experiments/amm05_case_routing/results/TRAINING_LOCK.json; then
+            python -m mechinterp.bpd.experiments.amm05_case_routing.experiment \
+              --phase development --memory /tmp/amm05_training.json \
+              --out /tmp/amm05_development.json
+            python - <<'PY'
+          import json,pathlib
+          from mechinterp.bpd.experiments.amm05_case_routing import experiment as e
+          dev=json.load(open('/tmp/amm05_development.json'))
+          locked=e.compact(dev)
+          print('AMM05_DEVELOPMENT_LOCK='+json.dumps(locked,sort_keys=True))
+          manifest=pathlib.Path('mechinterp/bpd/experiments/amm05_case_routing/results/DEVELOPMENT_LOCK.json')
+          if manifest.exists():
+              assert locked==json.loads(manifest.read_text()), 'development case-bit/source replay changed'
+              print('AMM05 full scored-case/route replay PASS')
+          else:
+              print('AMM05 development scored; first evidence remains available only in this run')
+          PY
+          else
+            echo 'AMM05 development not executed: first freeze 64-training-root memory'
+          fi
+      - name: Evaluate corrected independent-root EvalMath gate if development exists
+        shell: bash
+        run: |
+          if test -f /tmp/amm05_development.json; then
+            curl -fsSL https://raw.githubusercontent.com/MoralityLabAI/EvalMath/6d9c28dbe8e4c42b3fba76ae7adb84aed9f0921a/skills/evalmath-mechinterp-power/scripts/preflight.py -o /tmp/amm05_evalmath.py
+            python - <<'PY'
+          import json
+          dev=json.load(open('/tmp/amm05_development.json'))
+          json.dump(dev['preflight_input'],open('/tmp/amm05_pilot.json','w'))
+          PY
+            python /tmp/amm05_evalmath.py --pilot /tmp/amm05_pilot.json --out /tmp/amm05_preflight.json
+            python - <<'PY'
+          import json,pathlib
+          pf=json.load(open('/tmp/amm05_preflight.json'))
+          manifest=pathlib.Path('mechinterp/bpd/experiments/amm05_case_routing/results/PREFLIGHT.json')
+          if manifest.exists():
+              assert pf==json.loads(manifest.read_text()),'pinned EvalMath result diverged'
+          print('AMM05_EVALMATH_PREFLIGHT='+json.dumps(pf,sort_keys=True))
+          print('AMM05 confirmation remains sealed pending separately approved release manifest')
+          PY
+          else
+            echo 'AMM05 EvalMath awaits independent development roots'
+          fi
+      - name: Archive full raw training/development receipts and planner
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: amm05-source-locked-cpu-receipts
+          if-no-files-found: ignore
+          retention-days: 30
+          path: |
+            /tmp/amm05_training.json
+            /tmp/amm05_development.json
+            /tmp/amm05_pilot.json
+            /tmp/amm05_preflight.json
