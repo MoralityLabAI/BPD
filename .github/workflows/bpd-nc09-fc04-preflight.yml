@@ -44,6 +44,8 @@ jobs:
           python -m pytest -q \
             mechinterp/bpd/experiments/nc09_fixed12/full_tangent_fc04/test_solver.py \
             mechinterp/bpd/experiments/nc09_fixed12/full_tangent_fc04/test_aggregate.py
+      - name: Independently audit frozen first 16-root publication and original scientific source SHA
+        run: python -m pytest -q mechinterp/bpd/experiments/nc09_fixed12/full_tangent_fc04/test_published_results.py
 
   lean-rank-source-certificate:
     runs-on: ubuntu-24.04
