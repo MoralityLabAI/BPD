@@ -1,0 +1,2870 @@
+{
+  "audit_valid": true,
+  "candidate_results": [
+    {
+      "cost": 19132800,
+      "passed": true,
+      "passing_seeds": [
+        1890,
+        1891,
+        1892
+      ],
+      "updates": 2400,
+      "width": 48
+    },
+    {
+      "cost": 28699200,
+      "passed": true,
+      "passing_seeds": [
+        1890,
+        1891,
+        1892
+      ],
+      "updates": 3600,
+      "width": 48
+    },
+    {
+      "cost": 32880000,
+      "passed": true,
+      "passing_seeds": [
+        1890,
+        1891,
+        1892
+      ],
+      "updates": 2400,
+      "width": 64
+    },
+    {
+      "cost": 49320000,
+      "passed": true,
+      "passing_seeds": [
+        1890,
+        1891,
+        1892
+      ],
+      "updates": 3600,
+      "width": 64
+    }
+  ],
+  "causal_effect_floor": null,
+  "causal_power": null,
+  "causal_units_measured": 0,
+  "errors": [],
+  "manifest_sha256": "86c27e7c036cafe9314ebed365e4b124b0f623d0ebd6dca9b4952fad81bdd59b",
+  "matched_sham_floor": null,
+  "n_expected_records": 12,
+  "n_records": 12,
+  "n_roots": 6,
+  "n_seed_ids": 3,
+  "oracle_certificate": {
+    "class_counts": [
+      781,
+      1146,
+      1024,
+      1145
+    ],
+    "heldout_correct_ceilings": {
+      "counts": 449,
+      "last": 304,
+      "prefix2": 347,
+      "prefix4": 531
+    },
+    "heldout_n": 1024,
+    "partition_hashes": {
+      "heldout": "34e8e8974ac7fb156e247d99eb2b14283dc29569d55b562b0aa5477e433b0b92",
+      "reserved_dose": "be6accc45558be6dc089608d0b280d1bd68ed84ec401b82fb5e922de59d35d34",
+      "train": "83476f17cb79f4edfd549f3aa7b95322e4023d9a7ea60be1f3d753e98b1b60ea",
+      "validation": "16cb2f2d43d95e793969c97dcadb4188ef848a220ebd7812c6f47c04e5473e77"
+    },
+    "population_correct_ceilings": {
+      "counts": 1603,
+      "last": 1188,
+      "prefix2": 1232,
+      "prefix4": 1556
+    },
+    "population_n": 4096
+  },
+  "physical_dose": null,
+  "role": "design",
+  "root_results": [
+    {
+      "checkpoint_replay_max": 0.0,
+      "checkpoint_sha256": "911e315375e5312ee1b521e6a13ee8cc8c79ce1dfd0b1c29c028ce1f6469005f",
+      "completed_updates": 2400,
+      "copied_aggregate_metrics_used": false,
+      "gates": {
+        "checkpoint_replay": true,
+        "exact_updates": true,
+        "finite_weights_and_logits": true,
+        "full_width_parity": true,
+        "receipt_integrity": true,
+        "validation_accuracy": true,
+        "validation_class_recall": true
+      },
+      "initial_state_sha256": "2b80b34e6aa15d62535d3a89b232fe79795ff8a7beb729527ef88d34082b9318",
+      "metrics": {
+        "train": {
+          "accuracy": 1.0,
+          "class_correct": [
+            384,
+            548,
+            525,
+            591
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            384,
+            548,
+            525,
+            591
+          ],
+          "confusion": [
+            [
+              384,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              548,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              525,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              591
+            ]
+          ],
+          "correct": 2048,
+          "ids_sha256": "83476f17cb79f4edfd549f3aa7b95322e4023d9a7ea60be1f3d753e98b1b60ea",
+          "n": 2048,
+          "nll": 0.0005562355595293733,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 486,
+              "n": 486,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 515,
+              "n": 515,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 526,
+              "n": 526,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 521,
+              "n": 521,
+              "token": 3
+            }
+          ]
+        },
+        "validation": {
+          "accuracy": 1.0,
+          "class_correct": [
+            106,
+            158,
+            123,
+            125
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            106,
+            158,
+            123,
+            125
+          ],
+          "confusion": [
+            [
+              106,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              158,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              123,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              125
+            ]
+          ],
+          "correct": 512,
+          "ids_sha256": "16cb2f2d43d95e793969c97dcadb4188ef848a220ebd7812c6f47c04e5473e77",
+          "n": 512,
+          "nll": 0.0008139065611109268,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 131,
+              "n": 131,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 129,
+              "n": 129,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 124,
+              "n": 124,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 128,
+              "n": 128,
+              "token": 3
+            }
+          ]
+        }
+      },
+      "passed": true,
+      "path": "roots/seed1890_w48_u2400.json",
+      "prefix": {},
+      "replay_errors": {
+        "train.logits": 0.0,
+        "validation.logits": 0.0
+      },
+      "seed": 1890,
+      "status": "complete",
+      "updates": 2400,
+      "width": 48
+    },
+    {
+      "checkpoint_replay_max": 0.0,
+      "checkpoint_sha256": "5d4172f184f7e030ae19ae9c4c0e7c76dc5e72f1e1f43a49cbf84f5f796c7cfd",
+      "completed_updates": 3600,
+      "copied_aggregate_metrics_used": false,
+      "gates": {
+        "checkpoint_replay": true,
+        "exact_updates": true,
+        "finite_weights_and_logits": true,
+        "full_width_parity": true,
+        "receipt_integrity": true,
+        "validation_accuracy": true,
+        "validation_class_recall": true
+      },
+      "initial_state_sha256": "2b80b34e6aa15d62535d3a89b232fe79795ff8a7beb729527ef88d34082b9318",
+      "metrics": {
+        "train": {
+          "accuracy": 1.0,
+          "class_correct": [
+            384,
+            548,
+            525,
+            591
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            384,
+            548,
+            525,
+            591
+          ],
+          "confusion": [
+            [
+              384,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              548,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              525,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              591
+            ]
+          ],
+          "correct": 2048,
+          "ids_sha256": "83476f17cb79f4edfd549f3aa7b95322e4023d9a7ea60be1f3d753e98b1b60ea",
+          "n": 2048,
+          "nll": 0.0001877799682215721,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 486,
+              "n": 486,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 515,
+              "n": 515,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 526,
+              "n": 526,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 521,
+              "n": 521,
+              "token": 3
+            }
+          ]
+        },
+        "validation": {
+          "accuracy": 1.0,
+          "class_correct": [
+            106,
+            158,
+            123,
+            125
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            106,
+            158,
+            123,
+            125
+          ],
+          "confusion": [
+            [
+              106,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              158,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              123,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              125
+            ]
+          ],
+          "correct": 512,
+          "ids_sha256": "16cb2f2d43d95e793969c97dcadb4188ef848a220ebd7812c6f47c04e5473e77",
+          "n": 512,
+          "nll": 0.00026626983140367753,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 131,
+              "n": 131,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 129,
+              "n": 129,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 124,
+              "n": 124,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 128,
+              "n": 128,
+              "token": 3
+            }
+          ]
+        }
+      },
+      "passed": true,
+      "path": "roots/seed1890_w48_u3600.json",
+      "prefix": {},
+      "replay_errors": {
+        "train.logits": 0.0,
+        "validation.logits": 0.0
+      },
+      "seed": 1890,
+      "status": "complete",
+      "updates": 3600,
+      "width": 48
+    },
+    {
+      "checkpoint_replay_max": 0.0,
+      "checkpoint_sha256": "654144a480bb9440f794011730b69743ec275e20774800c2dc84a3e0cf8ea6c8",
+      "completed_updates": 2400,
+      "copied_aggregate_metrics_used": false,
+      "gates": {
+        "checkpoint_replay": true,
+        "exact_updates": true,
+        "finite_weights_and_logits": true,
+        "full_width_parity": true,
+        "receipt_integrity": true,
+        "validation_accuracy": true,
+        "validation_class_recall": true
+      },
+      "initial_state_sha256": "d73cb53b49a9c9cf14007368fdde8f649bde9831875a1e1d73a5f36907600e4e",
+      "metrics": {
+        "train": {
+          "accuracy": 1.0,
+          "class_correct": [
+            384,
+            548,
+            525,
+            591
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            384,
+            548,
+            525,
+            591
+          ],
+          "confusion": [
+            [
+              384,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              548,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              525,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              591
+            ]
+          ],
+          "correct": 2048,
+          "ids_sha256": "83476f17cb79f4edfd549f3aa7b95322e4023d9a7ea60be1f3d753e98b1b60ea",
+          "n": 2048,
+          "nll": 0.0004598424127144451,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 486,
+              "n": 486,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 515,
+              "n": 515,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 526,
+              "n": 526,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 521,
+              "n": 521,
+              "token": 3
+            }
+          ]
+        },
+        "validation": {
+          "accuracy": 1.0,
+          "class_correct": [
+            106,
+            158,
+            123,
+            125
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            106,
+            158,
+            123,
+            125
+          ],
+          "confusion": [
+            [
+              106,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              158,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              123,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              125
+            ]
+          ],
+          "correct": 512,
+          "ids_sha256": "16cb2f2d43d95e793969c97dcadb4188ef848a220ebd7812c6f47c04e5473e77",
+          "n": 512,
+          "nll": 0.0007169129689093205,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 131,
+              "n": 131,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 129,
+              "n": 129,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 124,
+              "n": 124,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 128,
+              "n": 128,
+              "token": 3
+            }
+          ]
+        }
+      },
+      "passed": true,
+      "path": "roots/seed1891_w48_u2400.json",
+      "prefix": {},
+      "replay_errors": {
+        "train.logits": 0.0,
+        "validation.logits": 0.0
+      },
+      "seed": 1891,
+      "status": "complete",
+      "updates": 2400,
+      "width": 48
+    },
+    {
+      "checkpoint_replay_max": 0.0,
+      "checkpoint_sha256": "069de5e8a27a14db8c03b46bacbdebd85f402796819fb9effb5a4a34133be220",
+      "completed_updates": 3600,
+      "copied_aggregate_metrics_used": false,
+      "gates": {
+        "checkpoint_replay": true,
+        "exact_updates": true,
+        "finite_weights_and_logits": true,
+        "full_width_parity": true,
+        "receipt_integrity": true,
+        "validation_accuracy": true,
+        "validation_class_recall": true
+      },
+      "initial_state_sha256": "d73cb53b49a9c9cf14007368fdde8f649bde9831875a1e1d73a5f36907600e4e",
+      "metrics": {
+        "train": {
+          "accuracy": 1.0,
+          "class_correct": [
+            384,
+            548,
+            525,
+            591
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            384,
+            548,
+            525,
+            591
+          ],
+          "confusion": [
+            [
+              384,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              548,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              525,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              591
+            ]
+          ],
+          "correct": 2048,
+          "ids_sha256": "83476f17cb79f4edfd549f3aa7b95322e4023d9a7ea60be1f3d753e98b1b60ea",
+          "n": 2048,
+          "nll": 0.00016972262694715058,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 486,
+              "n": 486,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 515,
+              "n": 515,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 526,
+              "n": 526,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 521,
+              "n": 521,
+              "token": 3
+            }
+          ]
+        },
+        "validation": {
+          "accuracy": 1.0,
+          "class_correct": [
+            106,
+            158,
+            123,
+            125
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            106,
+            158,
+            123,
+            125
+          ],
+          "confusion": [
+            [
+              106,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              158,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              123,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              125
+            ]
+          ],
+          "correct": 512,
+          "ids_sha256": "16cb2f2d43d95e793969c97dcadb4188ef848a220ebd7812c6f47c04e5473e77",
+          "n": 512,
+          "nll": 0.00025753957369303675,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 131,
+              "n": 131,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 129,
+              "n": 129,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 124,
+              "n": 124,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 128,
+              "n": 128,
+              "token": 3
+            }
+          ]
+        }
+      },
+      "passed": true,
+      "path": "roots/seed1891_w48_u3600.json",
+      "prefix": {},
+      "replay_errors": {
+        "train.logits": 0.0,
+        "validation.logits": 0.0
+      },
+      "seed": 1891,
+      "status": "complete",
+      "updates": 3600,
+      "width": 48
+    },
+    {
+      "checkpoint_replay_max": 0.0,
+      "checkpoint_sha256": "ebe9b7a4a463b3dc89725cfd0ee1762bed1b483618d364c177f98d80dafc74da",
+      "completed_updates": 2400,
+      "copied_aggregate_metrics_used": false,
+      "gates": {
+        "checkpoint_replay": true,
+        "exact_updates": true,
+        "finite_weights_and_logits": true,
+        "full_width_parity": true,
+        "receipt_integrity": true,
+        "validation_accuracy": true,
+        "validation_class_recall": true
+      },
+      "initial_state_sha256": "df03c03899c334b14a52add46b5baf364eb6ed2c23907e6ac20f0f314949259f",
+      "metrics": {
+        "train": {
+          "accuracy": 1.0,
+          "class_correct": [
+            384,
+            548,
+            525,
+            591
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            384,
+            548,
+            525,
+            591
+          ],
+          "confusion": [
+            [
+              384,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              548,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              525,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              591
+            ]
+          ],
+          "correct": 2048,
+          "ids_sha256": "83476f17cb79f4edfd549f3aa7b95322e4023d9a7ea60be1f3d753e98b1b60ea",
+          "n": 2048,
+          "nll": 0.0005692674969990661,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 486,
+              "n": 486,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 515,
+              "n": 515,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 526,
+              "n": 526,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 521,
+              "n": 521,
+              "token": 3
+            }
+          ]
+        },
+        "validation": {
+          "accuracy": 1.0,
+          "class_correct": [
+            106,
+            158,
+            123,
+            125
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            106,
+            158,
+            123,
+            125
+          ],
+          "confusion": [
+            [
+              106,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              158,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              123,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              125
+            ]
+          ],
+          "correct": 512,
+          "ids_sha256": "16cb2f2d43d95e793969c97dcadb4188ef848a220ebd7812c6f47c04e5473e77",
+          "n": 512,
+          "nll": 0.0008824443889666967,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 131,
+              "n": 131,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 129,
+              "n": 129,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 124,
+              "n": 124,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 128,
+              "n": 128,
+              "token": 3
+            }
+          ]
+        }
+      },
+      "passed": true,
+      "path": "roots/seed1892_w48_u2400.json",
+      "prefix": {},
+      "replay_errors": {
+        "train.logits": 0.0,
+        "validation.logits": 0.0
+      },
+      "seed": 1892,
+      "status": "complete",
+      "updates": 2400,
+      "width": 48
+    },
+    {
+      "checkpoint_replay_max": 0.0,
+      "checkpoint_sha256": "1697e98b075765cf26a02e1355e4f86a8f406a3a588bbb67aa5c5608f7e2651e",
+      "completed_updates": 3600,
+      "copied_aggregate_metrics_used": false,
+      "gates": {
+        "checkpoint_replay": true,
+        "exact_updates": true,
+        "finite_weights_and_logits": true,
+        "full_width_parity": true,
+        "receipt_integrity": true,
+        "validation_accuracy": true,
+        "validation_class_recall": true
+      },
+      "initial_state_sha256": "df03c03899c334b14a52add46b5baf364eb6ed2c23907e6ac20f0f314949259f",
+      "metrics": {
+        "train": {
+          "accuracy": 1.0,
+          "class_correct": [
+            384,
+            548,
+            525,
+            591
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            384,
+            548,
+            525,
+            591
+          ],
+          "confusion": [
+            [
+              384,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              548,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              525,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              591
+            ]
+          ],
+          "correct": 2048,
+          "ids_sha256": "83476f17cb79f4edfd549f3aa7b95322e4023d9a7ea60be1f3d753e98b1b60ea",
+          "n": 2048,
+          "nll": 0.00019914091930812886,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 486,
+              "n": 486,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 515,
+              "n": 515,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 526,
+              "n": 526,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 521,
+              "n": 521,
+              "token": 3
+            }
+          ]
+        },
+        "validation": {
+          "accuracy": 1.0,
+          "class_correct": [
+            106,
+            158,
+            123,
+            125
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            106,
+            158,
+            123,
+            125
+          ],
+          "confusion": [
+            [
+              106,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              158,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              123,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              125
+            ]
+          ],
+          "correct": 512,
+          "ids_sha256": "16cb2f2d43d95e793969c97dcadb4188ef848a220ebd7812c6f47c04e5473e77",
+          "n": 512,
+          "nll": 0.000308732397934673,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 131,
+              "n": 131,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 129,
+              "n": 129,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 124,
+              "n": 124,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 128,
+              "n": 128,
+              "token": 3
+            }
+          ]
+        }
+      },
+      "passed": true,
+      "path": "roots/seed1892_w48_u3600.json",
+      "prefix": {},
+      "replay_errors": {
+        "train.logits": 0.0,
+        "validation.logits": 0.0
+      },
+      "seed": 1892,
+      "status": "complete",
+      "updates": 3600,
+      "width": 48
+    },
+    {
+      "checkpoint_replay_max": 0.0,
+      "checkpoint_sha256": "dc2dde3d76b8f402fd3353c0b6f78f50176c23c6889e649e46f420148f63dfe7",
+      "completed_updates": 2400,
+      "copied_aggregate_metrics_used": false,
+      "gates": {
+        "checkpoint_replay": true,
+        "exact_updates": true,
+        "finite_weights_and_logits": true,
+        "full_width_parity": true,
+        "receipt_integrity": true,
+        "validation_accuracy": true,
+        "validation_class_recall": true
+      },
+      "initial_state_sha256": "8e2c61fdced363fc7827ad03eab336f3d2973e5655b0bb136b05b7dba65da814",
+      "metrics": {
+        "train": {
+          "accuracy": 1.0,
+          "class_correct": [
+            384,
+            548,
+            525,
+            591
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            384,
+            548,
+            525,
+            591
+          ],
+          "confusion": [
+            [
+              384,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              548,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              525,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              591
+            ]
+          ],
+          "correct": 2048,
+          "ids_sha256": "83476f17cb79f4edfd549f3aa7b95322e4023d9a7ea60be1f3d753e98b1b60ea",
+          "n": 2048,
+          "nll": 0.0004235976535072283,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 486,
+              "n": 486,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 515,
+              "n": 515,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 526,
+              "n": 526,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 521,
+              "n": 521,
+              "token": 3
+            }
+          ]
+        },
+        "validation": {
+          "accuracy": 0.998046875,
+          "class_correct": [
+            105,
+            158,
+            123,
+            125
+          ],
+          "class_recall": [
+            0.9905660377358491,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            106,
+            158,
+            123,
+            125
+          ],
+          "confusion": [
+            [
+              105,
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              158,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              123,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              125
+            ]
+          ],
+          "correct": 511,
+          "ids_sha256": "16cb2f2d43d95e793969c97dcadb4188ef848a220ebd7812c6f47c04e5473e77",
+          "n": 512,
+          "nll": 0.003746834941034406,
+          "per_last_token": [
+            {
+              "accuracy": 0.9923664122137404,
+              "class_recall": [
+                0.9666666666666667,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 130,
+              "n": 131,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 129,
+              "n": 129,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 124,
+              "n": 124,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 128,
+              "n": 128,
+              "token": 3
+            }
+          ]
+        }
+      },
+      "passed": true,
+      "path": "roots/seed1890_w64_u2400.json",
+      "prefix": {},
+      "replay_errors": {
+        "train.logits": 0.0,
+        "validation.logits": 0.0
+      },
+      "seed": 1890,
+      "status": "complete",
+      "updates": 2400,
+      "width": 64
+    },
+    {
+      "checkpoint_replay_max": 0.0,
+      "checkpoint_sha256": "880666d17cb808498ece71a6db5311c768063f0ae3d4464c15fbef28687aea74",
+      "completed_updates": 3600,
+      "copied_aggregate_metrics_used": false,
+      "gates": {
+        "checkpoint_replay": true,
+        "exact_updates": true,
+        "finite_weights_and_logits": true,
+        "full_width_parity": true,
+        "receipt_integrity": true,
+        "validation_accuracy": true,
+        "validation_class_recall": true
+      },
+      "initial_state_sha256": "8e2c61fdced363fc7827ad03eab336f3d2973e5655b0bb136b05b7dba65da814",
+      "metrics": {
+        "train": {
+          "accuracy": 1.0,
+          "class_correct": [
+            384,
+            548,
+            525,
+            591
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            384,
+            548,
+            525,
+            591
+          ],
+          "confusion": [
+            [
+              384,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              548,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              525,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              591
+            ]
+          ],
+          "correct": 2048,
+          "ids_sha256": "83476f17cb79f4edfd549f3aa7b95322e4023d9a7ea60be1f3d753e98b1b60ea",
+          "n": 2048,
+          "nll": 0.00014995506864359665,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 486,
+              "n": 486,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 515,
+              "n": 515,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 526,
+              "n": 526,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 521,
+              "n": 521,
+              "token": 3
+            }
+          ]
+        },
+        "validation": {
+          "accuracy": 0.998046875,
+          "class_correct": [
+            105,
+            158,
+            123,
+            125
+          ],
+          "class_recall": [
+            0.9905660377358491,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            106,
+            158,
+            123,
+            125
+          ],
+          "confusion": [
+            [
+              105,
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              158,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              123,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              125
+            ]
+          ],
+          "correct": 511,
+          "ids_sha256": "16cb2f2d43d95e793969c97dcadb4188ef848a220ebd7812c6f47c04e5473e77",
+          "n": 512,
+          "nll": 0.0022873218767896475,
+          "per_last_token": [
+            {
+              "accuracy": 0.9923664122137404,
+              "class_recall": [
+                0.9666666666666667,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 130,
+              "n": 131,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 129,
+              "n": 129,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 124,
+              "n": 124,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 128,
+              "n": 128,
+              "token": 3
+            }
+          ]
+        }
+      },
+      "passed": true,
+      "path": "roots/seed1890_w64_u3600.json",
+      "prefix": {},
+      "replay_errors": {
+        "train.logits": 0.0,
+        "validation.logits": 0.0
+      },
+      "seed": 1890,
+      "status": "complete",
+      "updates": 3600,
+      "width": 64
+    },
+    {
+      "checkpoint_replay_max": 0.0,
+      "checkpoint_sha256": "790d38aea12febefe28c389f9b5ae328c4a0b8f8b5f628aaefdb0376fa0cabf2",
+      "completed_updates": 2400,
+      "copied_aggregate_metrics_used": false,
+      "gates": {
+        "checkpoint_replay": true,
+        "exact_updates": true,
+        "finite_weights_and_logits": true,
+        "full_width_parity": true,
+        "receipt_integrity": true,
+        "validation_accuracy": true,
+        "validation_class_recall": true
+      },
+      "initial_state_sha256": "5b3a813e23faba52b5ca6d51d7155b814ef1343668cb808ffb0537738728a369",
+      "metrics": {
+        "train": {
+          "accuracy": 1.0,
+          "class_correct": [
+            384,
+            548,
+            525,
+            591
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            384,
+            548,
+            525,
+            591
+          ],
+          "confusion": [
+            [
+              384,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              548,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              525,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              591
+            ]
+          ],
+          "correct": 2048,
+          "ids_sha256": "83476f17cb79f4edfd549f3aa7b95322e4023d9a7ea60be1f3d753e98b1b60ea",
+          "n": 2048,
+          "nll": 0.0003982492792800304,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 486,
+              "n": 486,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 515,
+              "n": 515,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 526,
+              "n": 526,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 521,
+              "n": 521,
+              "token": 3
+            }
+          ]
+        },
+        "validation": {
+          "accuracy": 1.0,
+          "class_correct": [
+            106,
+            158,
+            123,
+            125
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            106,
+            158,
+            123,
+            125
+          ],
+          "confusion": [
+            [
+              106,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              158,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              123,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              125
+            ]
+          ],
+          "correct": 512,
+          "ids_sha256": "16cb2f2d43d95e793969c97dcadb4188ef848a220ebd7812c6f47c04e5473e77",
+          "n": 512,
+          "nll": 0.0005811346541333843,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 131,
+              "n": 131,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 129,
+              "n": 129,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 124,
+              "n": 124,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 128,
+              "n": 128,
+              "token": 3
+            }
+          ]
+        }
+      },
+      "passed": true,
+      "path": "roots/seed1891_w64_u2400.json",
+      "prefix": {},
+      "replay_errors": {
+        "train.logits": 0.0,
+        "validation.logits": 0.0
+      },
+      "seed": 1891,
+      "status": "complete",
+      "updates": 2400,
+      "width": 64
+    },
+    {
+      "checkpoint_replay_max": 0.0,
+      "checkpoint_sha256": "67f2e71ed6921769e6624c68220eac79e0a11f3b2bac4609784d04a3a1efbe86",
+      "completed_updates": 3600,
+      "copied_aggregate_metrics_used": false,
+      "gates": {
+        "checkpoint_replay": true,
+        "exact_updates": true,
+        "finite_weights_and_logits": true,
+        "full_width_parity": true,
+        "receipt_integrity": true,
+        "validation_accuracy": true,
+        "validation_class_recall": true
+      },
+      "initial_state_sha256": "5b3a813e23faba52b5ca6d51d7155b814ef1343668cb808ffb0537738728a369",
+      "metrics": {
+        "train": {
+          "accuracy": 1.0,
+          "class_correct": [
+            384,
+            548,
+            525,
+            591
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            384,
+            548,
+            525,
+            591
+          ],
+          "confusion": [
+            [
+              384,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              548,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              525,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              591
+            ]
+          ],
+          "correct": 2048,
+          "ids_sha256": "83476f17cb79f4edfd549f3aa7b95322e4023d9a7ea60be1f3d753e98b1b60ea",
+          "n": 2048,
+          "nll": 0.00014013699952523725,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 486,
+              "n": 486,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 515,
+              "n": 515,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 526,
+              "n": 526,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 521,
+              "n": 521,
+              "token": 3
+            }
+          ]
+        },
+        "validation": {
+          "accuracy": 1.0,
+          "class_correct": [
+            106,
+            158,
+            123,
+            125
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            106,
+            158,
+            123,
+            125
+          ],
+          "confusion": [
+            [
+              106,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              158,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              123,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              125
+            ]
+          ],
+          "correct": 512,
+          "ids_sha256": "16cb2f2d43d95e793969c97dcadb4188ef848a220ebd7812c6f47c04e5473e77",
+          "n": 512,
+          "nll": 0.00020606667809999524,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 131,
+              "n": 131,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 129,
+              "n": 129,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 124,
+              "n": 124,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 128,
+              "n": 128,
+              "token": 3
+            }
+          ]
+        }
+      },
+      "passed": true,
+      "path": "roots/seed1891_w64_u3600.json",
+      "prefix": {},
+      "replay_errors": {
+        "train.logits": 0.0,
+        "validation.logits": 0.0
+      },
+      "seed": 1891,
+      "status": "complete",
+      "updates": 3600,
+      "width": 64
+    },
+    {
+      "checkpoint_replay_max": 0.0,
+      "checkpoint_sha256": "311e25213ff9c35d8069476df34750e44333e2b61e4af519f2bd27ac851b4ef0",
+      "completed_updates": 2400,
+      "copied_aggregate_metrics_used": false,
+      "gates": {
+        "checkpoint_replay": true,
+        "exact_updates": true,
+        "finite_weights_and_logits": true,
+        "full_width_parity": true,
+        "receipt_integrity": true,
+        "validation_accuracy": true,
+        "validation_class_recall": true
+      },
+      "initial_state_sha256": "966a7fa4a3ae94058e8b6cb8b3b51da3a04e5ac04d7eeaf9d23312f232303984",
+      "metrics": {
+        "train": {
+          "accuracy": 1.0,
+          "class_correct": [
+            384,
+            548,
+            525,
+            591
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            384,
+            548,
+            525,
+            591
+          ],
+          "confusion": [
+            [
+              384,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              548,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              525,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              591
+            ]
+          ],
+          "correct": 2048,
+          "ids_sha256": "83476f17cb79f4edfd549f3aa7b95322e4023d9a7ea60be1f3d753e98b1b60ea",
+          "n": 2048,
+          "nll": 0.0003649941310924738,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 486,
+              "n": 486,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 515,
+              "n": 515,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 526,
+              "n": 526,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 521,
+              "n": 521,
+              "token": 3
+            }
+          ]
+        },
+        "validation": {
+          "accuracy": 1.0,
+          "class_correct": [
+            106,
+            158,
+            123,
+            125
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            106,
+            158,
+            123,
+            125
+          ],
+          "confusion": [
+            [
+              106,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              158,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              123,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              125
+            ]
+          ],
+          "correct": 512,
+          "ids_sha256": "16cb2f2d43d95e793969c97dcadb4188ef848a220ebd7812c6f47c04e5473e77",
+          "n": 512,
+          "nll": 0.0005410799862341467,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 131,
+              "n": 131,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 129,
+              "n": 129,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 124,
+              "n": 124,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 128,
+              "n": 128,
+              "token": 3
+            }
+          ]
+        }
+      },
+      "passed": true,
+      "path": "roots/seed1892_w64_u2400.json",
+      "prefix": {},
+      "replay_errors": {
+        "train.logits": 0.0,
+        "validation.logits": 0.0
+      },
+      "seed": 1892,
+      "status": "complete",
+      "updates": 2400,
+      "width": 64
+    },
+    {
+      "checkpoint_replay_max": 0.0,
+      "checkpoint_sha256": "59f3e2df8637cf011926dfb38960b16bb78292177e993ef7c8314db2d4941618",
+      "completed_updates": 3600,
+      "copied_aggregate_metrics_used": false,
+      "gates": {
+        "checkpoint_replay": true,
+        "exact_updates": true,
+        "finite_weights_and_logits": true,
+        "full_width_parity": true,
+        "receipt_integrity": true,
+        "validation_accuracy": true,
+        "validation_class_recall": true
+      },
+      "initial_state_sha256": "966a7fa4a3ae94058e8b6cb8b3b51da3a04e5ac04d7eeaf9d23312f232303984",
+      "metrics": {
+        "train": {
+          "accuracy": 1.0,
+          "class_correct": [
+            384,
+            548,
+            525,
+            591
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            384,
+            548,
+            525,
+            591
+          ],
+          "confusion": [
+            [
+              384,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              548,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              525,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              591
+            ]
+          ],
+          "correct": 2048,
+          "ids_sha256": "83476f17cb79f4edfd549f3aa7b95322e4023d9a7ea60be1f3d753e98b1b60ea",
+          "n": 2048,
+          "nll": 0.00013086104237969455,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 486,
+              "n": 486,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 515,
+              "n": 515,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 526,
+              "n": 526,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 521,
+              "n": 521,
+              "token": 3
+            }
+          ]
+        },
+        "validation": {
+          "accuracy": 1.0,
+          "class_correct": [
+            106,
+            158,
+            123,
+            125
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            106,
+            158,
+            123,
+            125
+          ],
+          "confusion": [
+            [
+              106,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              158,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              123,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              125
+            ]
+          ],
+          "correct": 512,
+          "ids_sha256": "16cb2f2d43d95e793969c97dcadb4188ef848a220ebd7812c6f47c04e5473e77",
+          "n": 512,
+          "nll": 0.00019615703273206513,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 131,
+              "n": 131,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 129,
+              "n": 129,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 124,
+              "n": 124,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 128,
+              "n": 128,
+              "token": 3
+            }
+          ]
+        }
+      },
+      "passed": true,
+      "path": "roots/seed1892_w64_u3600.json",
+      "prefix": {},
+      "replay_errors": {
+        "train.logits": 0.0,
+        "validation.logits": 0.0
+      },
+      "seed": 1892,
+      "status": "complete",
+      "updates": 3600,
+      "width": 64
+    }
+  ],
+  "schema": 1,
+  "scientific_status": "CAUSAL_STUDY_NOT_RUN",
+  "selected_config": {
+    "updates": 2400,
+    "width": 48
+  },
+  "verdict": "DESIGN_PASS"
+}
