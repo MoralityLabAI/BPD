@@ -25,9 +25,10 @@ def setup_model(seed=400, steps=8):
 
 
 def test_trainable_dense_shared_weights_have_no_planted_structural_mask():
-    model, _, report = setup_model(400, 8)
+    model, bpd, report = setup_model(400, 8)
     assert not hasattr(model, "structural_mask")
-    assert model.mix.weight.shape == (WIDTH, WIDTH)
+    # BPD replaces nn.Linear with TiedComponentLinear after training.
+    assert bpd.wrappers["mix"].W_target.shape == (WIDTH, WIDTH)
     assert report["n_trainable_parameters"] > WIDTH * WIDTH
     assert report["mix_weight_density_abs_ge_1e-4"] >= .90
 
