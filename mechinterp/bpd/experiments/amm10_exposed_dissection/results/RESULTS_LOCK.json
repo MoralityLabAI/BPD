@@ -1,14 +1,14 @@
 {
-  "schema": "bpd.amm10.exposed_dissection.v1/hosted_result_lock",
+  "schema": "bpd.amm10.exposed_dissection.v1/numeric_tie_corrected_result_lock",
   "analysis_plan_commit": "9a8a322e30b02f0fe05008d059ce3fb735f06416",
   "source_experiment": "BPD-AMM-09R1",
   "source_model_root_count": 64,
   "source_training_sha256": "015f8c78181514a0702e56ad707444699e48b377d9bf29da8ec60a42a0d48d30",
   "source_development_sha256": "682473974fa15db6005dab588d66d73c2a58bba1d5c8f1f4a91a93899ea88e5a",
   "source_training_policy_sha256": "b34b9a322ff5aeaa517eb5edd4bf0aced9ccf70f0bf97383d8e6cca79de2f0e9",
-  "original_hosted_action_run": 44305663753,
-  "original_hosted_artifact_id": 14428236123,
-  "original_hosted_complete_json_sha256": "88d7e2f6bd4c04097196c723af9667686b3e3cbcc55c37dbd99392eb7c59c648",
+  "original_hosted_action_run": 44306562013,
+  "original_hosted_artifact_id": 14427663036,
+  "original_hosted_complete_json_sha256": "bb12ee7b352e5fe3f5d23bd361c8ebc7f3c5979c89933ec037b7deb185558903",
   "root_heldout_training_cases": 8192,
   "frozen_rank_identity": {
     "preclip_mismatch": 0,
@@ -23,7 +23,7 @@
     "no_delayed_probes": 3136,
     "no_geometry": 2183,
     "linear_probe": 3129,
-    "cardinality_only": 1896,
+    "cardinality_only": 1822,
     "alignment_only": 3155,
     "max_cosine": 3155,
     "max_cardinality": 1822,
@@ -63,5 +63,7 @@
   },
   "development_memory_roots_using_multiple_masks": 64,
   "confirmation_roots_accessed": 0,
-  "scientific_status": "exploratory_exposed_root_only_no_new_evalmath_readiness"
+  "scientific_status": "exploratory_exposed_root_only_no_new_evalmath_readiness",
+  "posthoc_numeric_tie_amendment_commit": "941ad933ec95e74f46d5824081b5007314f7b41e",
+  "correction_scope": "exact-identical-feature tie of cardinality_only fold 3; all other 18 arm totals unchanged"
 }
