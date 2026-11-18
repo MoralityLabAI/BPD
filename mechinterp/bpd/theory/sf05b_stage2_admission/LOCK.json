@@ -1,0 +1,59 @@
+{
+  "experiment": "BPD-SF05B_STAGE2_A_EXCLUDED_SOURCE_AWARE_MODEL_ADMISSION",
+  "status": "PROSPECTIVE_SOURCE_HASHES_FROZEN_BEFORE_EXCLUDED_ROOT_MODEL_SCORING",
+  "protocol_date": "2026-11-18",
+  "files": {
+    "PROTOCOL.md": "0f251c7474ef0e03bc9fc5d6e5b97fae6592268e",
+    "evaluate.py": "2c038a32a643291305f9e0658c8f056dd016711f",
+    "tests/test_admission.py": "008d6546ceaa9d35e0da0a2da5a78e5bb8368363"
+  },
+  "upstream_source_blobs": {
+    "mechinterp/bpd/theory/sf05b_source_families/source_families.py": "525cfb28d40cc5f58c0e8141489a8e744d1778f4",
+    "mechinterp/bpd/theory/sf05b_stage2_donors/donor_cohorts.py": "6c08787a2a08daf3c601265decbba6d8cfc7f930",
+    "mechinterp/bpd/theory/sf05b_stage1/teacher.py": "277f3b98aa600827022e077329f0c9ca0689918f",
+    "mechinterp/bpd/theory/sf05b_stage1/policy.py": "d02f1bc491188f6e54ba4282708bd9adcbbc59ec",
+    "mechinterp/bpd/theory/sf05b_stage1/evaluate.py": "f3ff9b462090f120b9354e198fd3f5daee9390db",
+    "mechinterp/bpd/theory/sf05b_stage1/native_parity.py": "94214efbe94aa30a4af8e0d83d49fe1707d6a115",
+    "mechinterp/bpd/theory/sf05_public_safe/finite_correct.py": "a7dc0de7ca606615979fa6926e7c503baeccc81e",
+    "mechinterp/bpd/theory/sf05_public_safe/geometry.py": "8057c8ca61d17ff5f176c57adb98ba7b3a7e4a70"
+  },
+  "seeds": [
+    901,
+    902
+  ],
+  "excluded_design_roots_only": true,
+  "new_calibration_roots_executed": 0,
+  "reserved_calibration_root_range": "6101..6159",
+  "new_confirmation_roots_executed": 0,
+  "reserved_confirmation_root_range": "7101..7132",
+  "teacher_updates": 2600,
+  "factor_updates": 450,
+  "policy_updates": 240,
+  "teacher_training_family": "train",
+  "test_family": "heldout",
+  "cohort_samples_per_root": {
+    "authorized_unconditional": 512,
+    "authorized_high_contrast": 512,
+    "public_U": 512
+  },
+  "high_contrast_candidate_count": 2048,
+  "high_contrast_minimum_exact_target_gap": 0.3,
+  "model_filter": {
+    "clean_recipient_and_donor_abs_target_error_max": 0.1,
+    "current_readout_difference_max": 0.05,
+    "clean_future_donor_recipient_gap_min": 0.2
+  },
+  "donor_recovery_abs_tolerance": 0.1,
+  "gauge_invariant_output_svd_rank": 24,
+  "public_reference_mean_abs_tolerance": 0.02,
+  "signed_and_random_corrected_shams_per_kind": 16,
+  "policy_inference_allowed_fields": [
+    "state",
+    "candidate_delta",
+    "public_query",
+    "current_readout"
+  ],
+  "evidence_class": "excluded-root descriptive model admission and finite public output audit only",
+  "protected_sealed": "ARG-03-N 168 cases never accessed",
+  "amendments": []
+}
