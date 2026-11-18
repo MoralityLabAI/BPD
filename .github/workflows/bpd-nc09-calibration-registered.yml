@@ -1,0 +1,157 @@
+name: BPD NC09-FC01 first registered 59-model-root sham calibration
+
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/experiments/nc09_fixed12/calibration/EXECUTE_LOCK.json'
+
+permissions:
+  contents: read
+
+jobs:
+  original-59-root-sham-calibration:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify 59 new independent roots and all immutable source inputs
+        run: |
+          python - <<'PY'
+          import json,subprocess,hashlib
+          from pathlib import Path
+          root=Path('mechinterp/bpd/experiments/nc09_fixed12/calibration')
+          lock=json.loads((root/'EXECUTE_LOCK.json').read_text())
+          assert lock['study']=='BPD-NC09-FC01'
+          assert lock['execution']=='first_original_59_root_sham_calibration'
+          assert lock['calibration_roots']==list(range(12000,12059))
+          assert lock['excluded_smoke_root']==11999
+          assert lock['fresh_calibration_model_roots']==59
+          assert lock['confirmation_models_trained']==0
+          assert lock['train_steps']==384
+          assert lock['splits']=={
+            'train':2048,'derivative_discovery':1024,
+            'model_validation':512,'labeled_calibration':1024
+          }
+          assert lock['per_root_sham_proposals']==4096
+          assert lock['shams_per_root']==8
+          assert lock['target_sham_quantile']=='19/20'
+          assert lock['target_sham_confidence']=='19/20'
+          sha=lock['source_commit_sha']
+          subprocess.run(['git','merge-base','--is-ancestor',sha,'HEAD'],check=True)
+          subprocess.run(['git','merge-base','--is-ancestor','c7d9a99414b3e674ae5525507ac0e2fc1b86619f','HEAD'],check=True)
+          protected=[str(root/f) for f in (
+            'PROTOCOL.md','experiment.py','aggregate.py','evalmath_preflight.py',
+            'test_experiment.py','test_aggregate.py','CalibrationCoverage.lean'
+          )]+[
+            'mechinterp/bpd/experiments/nc09_fixed12/PROTOCOL.md',
+            'mechinterp/bpd/experiments/nc09_fixed12/experiment.py',
+            'mechinterp/bpd/experiments/nc08/experiment.py',
+            'mechinterp/bpd/experiments/nc04/experiment.py',
+            'mechinterp/bpd/experiments/nc05/experiment.py',
+            'mechinterp/bpd/experiments/nc02/experiment.py',
+            'mechinterp/bpd/components.py','mechinterp/bpd/config.py'
+          ]
+          subprocess.run(['git','diff','--exit-code',sha,'HEAD','--',*protected],check=True)
+          script=(root/'evalmath_preflight.py').read_bytes()
+          blob=hashlib.sha1(b'blob '+str(len(script)).encode()+b'\x00'+script).hexdigest()
+          assert blob=='0ff062f76f5534d9f18425f986ae3e750397f50c'
+          print('Original 59-root source and exact EvalMath blob verified:',sha)
+          PY
+      - name: Install same pinned CPU Torch and SciPy as NC09 Fixed12
+        run: |
+          python -m pip install --disable-pip-version-check pytest 'numpy>=1.26' scipy==1.14.1
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Admit excluded engineering root 11999 and original statistical source controls
+        run: |
+          python -m pytest -q mechinterp/bpd/experiments/nc09_fixed12/calibration/test_experiment.py mechinterp/bpd/experiments/nc09_fixed12/calibration/test_aggregate.py
+      - name: Execute 59 untouched independent trained model-root physical sham calibrations
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/nc09-fc01-original
+          for root in $(seq 12000 12058); do
+            python -m mechinterp.bpd.experiments.nc09_fixed12.calibration.experiment \
+              --root "$root" --steps 384 --discovery 1024 --selector 512 \
+              --heldout 1024 --sham-proposals 4096 --shams 8 \
+              --out "/tmp/nc09-fc01-original/nc09_cal_root_$root.json"
+          done
+      - name: Aggregate exact first-run 59-root null and pinned EvalMath power verdict
+        run: |
+          python -m mechinterp.bpd.experiments.nc09_fixed12.calibration.aggregate \
+            --root-dir /tmp/nc09-fc01-original \
+            --out-dir /tmp/nc09-fc01-original
+      - name: Independently validate 59 original roots, sham tolerance and hold
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib,json,math,numpy as np
+          root=Path('/tmp/nc09-fc01-original')
+          summary=json.loads((root/'CAL01_ORIGINAL_59_ROOT_SUMMARY.json').read_text())
+          assert summary['study']=='BPD-NC09-FC01'
+          assert summary['phase']=='INDEPENDENT_SHAM_CALIBRATION'
+          assert summary['evidence_class']=='CALIBRATION_ONLY'
+          assert summary['root_count']==59 and len(summary['per_root'])==59
+          assert {r['root'] for r in summary['per_root']}==set(range(12000,12059))
+          assert summary['independent_confirmation_roots_evaluated']==0
+          assert summary['other_protected_roots_evaluated']==0
+          assert summary['original_95_95_root_tolerance_coverage']>=.95
+          assert summary['calibration_verdict'] in (
+             'CALIBRATION_READY_FOR_SEPARATE_CONFIRMATION_PROTOCOL',
+             'CALIBRATION_REDESIGN_OR_PILOT_ONLY',
+             'CALIBRATION_INCOMPLETE','EVALMATH_NOT_RUN'
+          )
+          nulls=[]
+          for seed in range(12000,12059):
+            path=root/('nc09_cal_root_%d.json'%seed)
+            d=json.loads(path.read_text())
+            assert d['study']=='BPD-NC09-FC01'
+            assert d['root']==seed and d['phase']=='INDEPENDENT_SHAM_CALIBRATION'
+            assert d['training']['steps']==384
+            assert d['splits']=={
+               'train':2048,'derivative_discovery':1024,
+               'model_validation':512,'labeled_calibration':1024
+            }
+            assert d['protocol_sha256']==summary['protocol_sha256']
+            assert d['parent_integrity']['nc09_original_experiment_sha256']=='8d1b88eea8518a83669f03f9126136ca3d56ac5bac5fe041e2e03fb12922d380'
+            if d['eligible']:
+              assert d['source_rank12_optimum']['total_rank']==12
+              assert sum(d['source_rank12_optimum']['ranks'])==12
+              assert d['source_gain_eligible']
+              assert d['sham_admission']['selected']==8
+              assert d['sham_admission']['proposals']==4096
+              assert len(d['sham_nlls'])==8
+              m=float(np.median(d['sham_nlls']))
+              t=max(abs(v-m) for v in d['sham_nlls'])
+              assert abs(t-d['effects']['T_null_worst_abs'])<1e-10
+              nulls.append(t)
+            print('NC09 calibration root',seed,'sha256',
+                  hashlib.sha256(path.read_bytes()).hexdigest(),
+                  'admitted',d['eligible'])
+          if summary['full_59_root_admission']:
+            assert len(nulls)==59
+            assert abs(max(nulls)-summary['95_95_sham_floor'])<1e-10
+            assert summary['order_statistic_rank']==59
+            pilot=json.loads((root/'EVALMATH_ORIGINAL_59_ROOT_PILOT.json').read_text())
+            assert len(pilot['pilot'])==59 and pilot['confirm_units_planned']==32
+            if summary['calibration_verdict']!='EVALMATH_NOT_RUN':
+              power=json.loads((root/'EVALMATH_PINNED_FIRST_PREFLIGHT.json').read_text())
+              assert power['pilot_worlds']==59
+              assert power['order_statistic_rank']==59
+              assert abs(power['upper_sham_quantile']-max(nulls))<1e-10
+              assert power['decision']==summary['evalmath_decision']
+          print('Original FC01 calibration verdict',summary['calibration_verdict'])
+          print('Original FC01 calibrated 95/95 sham floor',summary['95_95_sham_floor'])
+          print('Original FC01 EvalMath',summary['evalmath_decision'],summary['evalmath_reasons'])
+          PY
+      - name: Archive original 59-model-root receipts and exact EvalMath input/decision
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bpd-nc09-fc01-original-59-root-${{ github.run_id }}
+          path: /tmp/nc09-fc01-original/
+          retention-days: 90
+          if-no-files-found: warn
