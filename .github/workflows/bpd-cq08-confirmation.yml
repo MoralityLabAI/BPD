@@ -1,0 +1,48 @@
+name: BPD-CQ-08 released 32-root native confirmation audit
+on:
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/theory/cq08_nuisance_mediation/CONFIRM_UNLOCK.json'
+      - 'mechinterp/bpd/theory/cq08_nuisance_mediation/confirmation_release.py'
+      - 'mechinterp/bpd/theory/cq08_nuisance_mediation/confirmation_native_audit.py'
+      - 'mechinterp/bpd/theory/cq08_nuisance_mediation/results/cq08_confirmation_independent.json.gz.b64'
+      - 'mechinterp/bpd/theory/cq08_nuisance_mediation/results/CONFIRMATION_LOCK.json'
+      - '.github/workflows/bpd-cq08-confirmation.yml'
+  workflow_dispatch:
+jobs:
+  native-confirmation-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Pinned independent CPU model environment
+        run: |
+          python -m pip install 'numpy>=1.26'
+          python -m pip install --index-url https://download.pytorch.org/whl/cpu 'torch==2.10.0+cpu'
+      - name: Source-locked release, sham and predata inference check
+        run: |
+          python -m mechinterp.bpd.theory.cq08_nuisance_mediation.confirmation_release --preflight
+          python -m unittest discover -s mechinterp/bpd/theory/cq08_nuisance_mediation/tests -p test_confirmation_release.py -v
+      - name: Native and independent second-visit parity across 32 registered roots
+        run: python -m mechinterp.bpd.theory.cq08_nuisance_mediation.confirmation_native_audit --out /tmp/cq08_native_confirmation_audit.json
+      - name: Enforce native execution parity on all confirmation roots
+        run: |
+          python - <<'PY'
+          import json
+          p=json.load(open('/tmp/cq08_native_confirmation_audit.json'))
+          assert p['roots']==32
+          assert p['backend_native_parity']=='PASS'
+          print('Native BPD parity PASS, exact original frozen retraining count status:',p['frozen_cpu_exact_count_parity'])
+          if p['frozen_cpu_exact_count_parity']!='PASS':
+              print('CROSS-HOST DRIFT PRESENT: inspect original pair IDs before strong reproducibility claims')
+          PY
+      - name: Preserve full cross-host and native-audit outputs
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cq08-32-root-native-confirmation-parity
+          if-no-files-found: warn
+          path: /tmp/cq08_native_confirmation_audit.json

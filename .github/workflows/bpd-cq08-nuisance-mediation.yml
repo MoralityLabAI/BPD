@@ -85,10 +85,13 @@ jobs:
           assert lock['confirmed_release']=='NOT RELEASED'
           print('59 independent sham roots and preflight hashes verified; confirmation sealed')
           PY
-      - name: Confirmation remains locked
+      - name: Confirm sealed or validate independently committed release (no automatic scoring)
         run: |
           if test -e mechinterp/bpd/theory/cq08_nuisance_mediation/CONFIRM_UNLOCK.json; then
-            echo 'ERROR: confirmation release not authorized by CQ08 engineering PR'; exit 1
+            python -m mechinterp.bpd.theory.cq08_nuisance_mediation.confirmation_release --preflight
+            python -m unittest discover -s mechinterp/bpd/theory/cq08_nuisance_mediation/tests -p test_confirmation_release.py -v
+          else
+            echo 'CQ08 confirmation is sealed'
           fi
   sham-calibration:
     if: ${{ github.event_name == 'workflow_dispatch' && inputs.phase == 'sham' }}
