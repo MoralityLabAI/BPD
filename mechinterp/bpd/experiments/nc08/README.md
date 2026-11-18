@@ -1,0 +1,15 @@
+# BPD-NC-08: allocate physical BPD rank differently at each recurrent pass
+
+**Prospectively registered November 18, 2026.** [PROTOCOL.md](PROTOCOL.md) was committed FIRST at `27e09f396392f9ba0c8a169b84aea3712ed4c6cc`, before implementation or any training of the eight new engineering roots 800–807.
+
+NC-07's actual four-pass trained-model experiment selected ranks 3,4,3,4,6,3,6,3 under a shared rank at every pass. Its original engineering compression gate failed: mean rank 4.0, and only 7/8 models had the required eight physically dose-matched local shams. The next controlled question is whether a smaller *sum of pass-specific retained ranks* can support terminal task behavior, especially when some passes need more of the shared physical write than others.
+
+NC-08 freezes **four source-only total-rank budgets: 8, 10, 12, 14**. For each budget it enumerates passwise ranks from {2,3,4,5,6} and chooses the tuple minimizing the source-only squared omitted first-order model-score change. A separate independent 512-input stream then validates the actual four-pass closed-loop model's clean-to-retained predictive KL and physical write fraction. The smallest passing budget is selected, without external true-label access.
+
+The [experiment](experiment.py) evaluates the selected projector through real BPDModel/TiedComponentLinear override-read interventions on every nonlinear recurrent pass. Its final labels are taken only from a further independent 1,024-example source; fixed 3-3-3-3 (total 12), fixed 4-4-4-4 (total 16), and predeclared DP budget-12 comparisons are scored on the same heldout stream. Each root receives eight independently seeded local pass-specific-rank projector shams from a frozen 2,048-proposal search, admitted on a clean-discovery physical retained-write RMS tolerance of 15%. Gauge-equivalent factor bases must reproduce the same physical retained operator and closed-loop logits.
+
+The prospective eight-root **engineering-development** gate requires all roots fully admitted, mean retained total rank <=12.5 with at least five roots using B<=12, upper bootstrap true-task kept-minus-clean NLL <=.05 nats, selected-vs-fixed-rank4 heldout NLL cost upper <=.02 nats, and a positive source-dose-matched sham advantage >=.02 nats. The bootstrap resamples only whole independently trained model roots (2,000 replicates; fixed RNG 808008).
+
+[THEORY.md](THEORY.md) sets out the multiple-choice knapsack, the omitted score-derivative surrogate, its nonlinear limitations, and the distinct final task criterion. [PasswiseBudget.lean](PasswiseBudget.lean) kernel-certifies the fixed rank-count arithmetic. [Source-only excluded-799 tests](test_experiment.py) and [synthetic registered-decision tests](test_aggregate.py) establish initial engineering admission before releasing development root 800.
+
+The entire first eight-root run will retain either ENGINEERING_POSITIVE or ENGINEERING_NULL_OR_INELIGIBLE without revising the protocol. Future 59-root sham-calibration, EvalMath power review and 32-root scientific confirmation remain independently sealed and ungenerated.
