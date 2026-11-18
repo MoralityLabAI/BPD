@@ -1,0 +1,47 @@
+name: BPD-NC-09 source-only cross-task preflight
+on:
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/nc09/**'
+      - '.github/workflows/bpd-nc09-source.yml'
+  workflow_dispatch:
+
+jobs:
+  excluded-source-and-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned CPU dependencies
+        run: python -m pip install 'torch==2.5.1' 'numpy>=1.26' 'pytest>=8'
+      - name: Compile, check native BPD parity, oracle blindness, sham and seal
+        run: |
+          python -m compileall -q mechinterp/bpd/experiments/nc09
+          python -m pytest -q mechinterp/bpd/experiments/nc09/test_experiment.py
+      - name: Excluded seed 899 engineering-only model and causal smoke
+        run: |
+          python -m mechinterp.bpd.experiments.nc09.experiment \
+            --seed 899 --steps 640 --discovery-size 256 \
+            --evaluation-size 256 --proposals 256 \
+            --out /tmp/nc09_excluded_source_smoke.json
+          python - <<'PY'
+          import json
+          d=json.load(open('/tmp/nc09_excluded_source_smoke.json'))
+          assert d['seed']==899 and d['phase']=='EXCLUDED_SOURCE_TEST'
+          assert d['protocol_commit']=='22e00fc22cdd5e3403d936294232bcfc051aa2e2'
+          assert d['negative_controls']['zero_head']['max_gradient']==0.0
+          for name,branch in d['bases'].items():
+              print(name,'parity',branch['closure'])
+          print('source root task',d['task_passed'],'eligible',d['eligible'])
+          print('source sham candidates',d['sham_matching'].get('qualifying'))
+          print('source primary',d['primary'])
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nc09-excluded-source-smoke
+          path: /tmp/nc09_excluded_source_smoke.json
+          if-no-files-found: warn
