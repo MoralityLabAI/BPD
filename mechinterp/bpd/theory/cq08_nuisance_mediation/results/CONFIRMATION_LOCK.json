@@ -1,0 +1,153 @@
+{
+  "analysis_commit": "ff53a639c507e20fb9f9644ce11ec4115b97e3e1",
+  "claims": "Registered equal-component-count block-off ablation contrast within a synthetic block-separated nuisance carrier; not equal-physical-dose mediation.",
+  "engineering_gate_pass": true,
+  "gzip_base64_bytes": 137529,
+  "gzip_base64_sha256": "1443e43a8161158f42c3de616d226f8de8f18ae6926e8ad39a4a5f91f907f30c",
+  "n_donor_cases": 4096,
+  "n_roots": 32,
+  "native_hosted_verification": "PENDING; original source unchanged",
+  "original_registration_commit": "6960a1fc45d76a1e04866344a25a0e41c5c24489",
+  "original_source_experiment_blob": "b3d03da3d0679c8aa7bfed5c06d278e04c0aa1f1",
+  "parts": [
+    {
+      "path": "/mnt/data/cq08_confirmation_parts/part01.json",
+      "seeds": [
+        11001,
+        11003,
+        11005,
+        11007
+      ],
+      "sha256": "d68785d0846b0d24dddb6a3bd7c8e46ed033138921fd4211becb5cc30db378e3",
+      "size_bytes": 102638
+    },
+    {
+      "path": "/mnt/data/cq08_confirmation_parts/part02.json",
+      "seeds": [
+        11009,
+        11011,
+        11013,
+        11015
+      ],
+      "sha256": "6b1f5616e0ddee5de678262c142b4142edc2e94ef456be602f26fd211b7daffe",
+      "size_bytes": 102494
+    },
+    {
+      "path": "/mnt/data/cq08_confirmation_parts/part03.json",
+      "seeds": [
+        11017,
+        11019,
+        11021,
+        11023
+      ],
+      "sha256": "49f189a6e527637a4999c3327cea277a447b9e90444c2ca443ec73e671491bc8",
+      "size_bytes": 102526
+    },
+    {
+      "path": "/mnt/data/cq08_confirmation_parts/part04.json",
+      "seeds": [
+        11025,
+        11027,
+        11029,
+        11031
+      ],
+      "sha256": "72672cc255d8e282c77605d284c18a1d63c375d9fc9af767d1148913428a1db0",
+      "size_bytes": 102521
+    },
+    {
+      "path": "/mnt/data/cq08_confirmation_parts/part05.json",
+      "seeds": [
+        11033,
+        11035,
+        11037,
+        11039
+      ],
+      "sha256": "456fbca2c4979316ae73a190d7fa4c2e12f54b8918d1ac9d748872a573eeb091",
+      "size_bytes": 102467
+    },
+    {
+      "path": "/mnt/data/cq08_confirmation_parts/part06.json",
+      "seeds": [
+        11041,
+        11043,
+        11045,
+        11047
+      ],
+      "sha256": "ccdbf145bdb59781578c9a54589243e6e17a440c707b173513f251b962e59146",
+      "size_bytes": 102522
+    },
+    {
+      "path": "/mnt/data/cq08_confirmation_parts/part07.json",
+      "seeds": [
+        11049,
+        11051,
+        11053,
+        11055
+      ],
+      "sha256": "ea8d64b6314224093898bb6ce8d2777b61a9093563cdb76b3915fa6bfebc4d65",
+      "size_bytes": 102534
+    },
+    {
+      "path": "/mnt/data/cq08_confirmation_parts/part08.json",
+      "seeds": [
+        11057,
+        11059,
+        11061,
+        11063
+      ],
+      "sha256": "674876e1f190d56d699b0c71bdb1529a5f173f8e86636e38b2c36bb8a2834667",
+      "size_bytes": 102510
+    }
+  ],
+  "physical_ablation_doses_matched": false,
+  "predata_sham_floor": 0.1328125,
+  "previously_sealed": true,
+  "primary_damages": {
+    "random_1": 916,
+    "random_2": 879,
+    "selected": 2139
+  },
+  "primary_effect": 0.298583984375,
+  "primary_gate_pass": true,
+  "primary_holm_p": 1.2780074030160904e-06,
+  "primary_roots_above_floor": 29,
+  "raw_json_bytes": 819758,
+  "raw_json_sha256": "a900971860d899af7063c713ee4bcc156a492644a31588b125ab5333bc80b95e",
+  "registered_effect_floor": 0.15,
+  "release_commit": "0be2c8bbe10335f9597c31b12d688bca522f9117",
+  "roster": [
+    11001,
+    11003,
+    11005,
+    11007,
+    11009,
+    11011,
+    11013,
+    11015,
+    11017,
+    11019,
+    11021,
+    11023,
+    11025,
+    11027,
+    11029,
+    11031,
+    11033,
+    11035,
+    11037,
+    11039,
+    11041,
+    11043,
+    11045,
+    11047,
+    11049,
+    11051,
+    11053,
+    11055,
+    11057,
+    11059,
+    11061,
+    11063
+  ],
+  "schema": "bpd.cq08.confirmation.lock.v1"
+}
