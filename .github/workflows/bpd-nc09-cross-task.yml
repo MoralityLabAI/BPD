@@ -24,7 +24,9 @@ jobs:
           from pathlib import Path
           p=Path('mechinterp/bpd/experiments/nc09/EXECUTE_LOCK.json')
           lock=json.loads(p.read_text())
-          assert lock['status']=='SOURCE_LOCK_BEFORE_FIRST_MODEL_TRAINING'
+          assert lock['status']=='SOURCE_LOCK_AMENDED_BEFORE_FIRST_DEVELOPMENT_ROOT'
+          assert len(lock['amendments'])==1
+          assert lock['amendments'][0]['first_development_root_evaluated_before_fix'] is False
           assert lock['protocol_first_commit']=='e85724a42b97d9fa41f82cf76d537e71832250a7'
           for path,sha in lock['source_blob_sha1'].items():
               observed=subprocess.check_output(['git','hash-object',path],text=True).strip()
