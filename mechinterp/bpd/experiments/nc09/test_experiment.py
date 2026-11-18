@@ -36,7 +36,7 @@ def test_procrustes_exact_orthogonal_alignment_and_projector_transport():
         q,r=torch.linalg.qr(torch.randn(WIDTH,WIDTH,generator=g,dtype=torch.float64))
         true.append(q * torch.where(torch.diag(r)>=0,1.,-1.).unsqueeze(0))
     q=torch.stack(true)
-    b=a@q
+    b=torch.einsum("nti,tij->ntj",a,q)
     recovered,diag=nc.procrustes(a,b)
     assert diag["max_orthogonality_error"]<1e-10
     assert max(diag["relative_alignment_residual_by_pass"])<1e-10
