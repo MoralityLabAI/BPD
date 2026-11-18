@@ -1,0 +1,32 @@
+{
+  "study": "BPD-NC-06",
+  "execution": "first_eight_development_roots",
+  "registration_date": "2026-11-18",
+  "protocol_first_commit_sha": "782c545d92e2b92ece3e3bc82390d3dbea1aa97a",
+  "source_commit_sha": "cf03270c4e6ba8767e58ff9c0abccac69922bda0",
+  "roots": [
+    600,
+    601,
+    602,
+    603,
+    604,
+    605,
+    606,
+    607
+  ],
+  "excluded_engineering_seed": 599,
+  "training_steps": 384,
+  "samples_per_model": {
+    "train": 2048,
+    "discovery": 1024,
+    "heldout": 1024
+  },
+  "rank_arms": [
+    "norm_r3",
+    "uniform_r3",
+    "shuffle_r3",
+    "uniform_r4_reference"
+  ],
+  "source_preflight_success_run": 44254914905,
+  "decision": "Development engineering only. Retain raw 8-root original results and all failed controls. No 59-root sham calibration or 32-root confirmation unlocked."
+}
