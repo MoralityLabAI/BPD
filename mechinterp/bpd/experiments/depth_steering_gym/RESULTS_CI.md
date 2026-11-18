@@ -17,6 +17,8 @@ All six models received 64 AdamW updates on independent training-generated examp
 
 **Storyworld terminal success is 0/16 for each root at 12-step closed-loop evaluation**, despite 95.3% / 92.2% independent-state expert-action classification. The trained policy therefore fails the actual hidden-ending task. Action classification is a **shallow proxy**, with distribution shift from independently sampled public snapshots to recurrent closed-loop execution. Any BPD component evaluated on those model actions lacks a validated behavioral improvement endpoint.
 
+The synthetic ARC-style test model was supplied only the **test input grid**, with the demonstration pairs absent from its input encoding. This leaves the transformation program ambiguous, particularly across unseen program families; its zero exact score is therefore also an **input specification failure**, and cannot be attributed solely to insufficient model capacity. See [DT03 issue #104](https://github.com/MoralityLabAI/BPD/issues/104) for a demo-conditioned repair.
+
 Sudoku4 and synthetic ARC-style exact tasks also fail. Token accuracy, legal Sudoku boards, per-root checkpoint hashes and full logits are in the raw JSON. These negative scores must remain visible; no official ARC-AGI-1 result, 9×9 7M TRM performance or new learned BPD discovery follows from this experiment.
 
 ## Native recurrent steering and protected full head
