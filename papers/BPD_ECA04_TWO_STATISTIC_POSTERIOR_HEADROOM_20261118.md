@@ -61,6 +61,12 @@ Thus **the Bayesian geometry, rank-two probe advantage and physical subspace sta
 
 The negative result extends the BPD-ECA-03 finding to a channel family where the exact posterior is genuinely rank two. The model's internal decoding error remains substantial in squared log-odds coordinates, yet much of it is *behaviorally inert* for these five public priors, binary audit reports and the fixed 2:1 error cost. Accuracy and proper probability scoring can therefore tell different stories about the same recurrent representation.
 
+## Independent trained-model replay
+
+The separate [Control-Harness independent CI](https://github.com/MoralityLabAI/Control-Harness/actions/runs/44266899308) returned **PASS**, verifying seven source SHA-256 digests, seven output digests and all 3,008 independent roots. The GRU was retrained from its registered 2,048 training roots and 256 validation roots; maximum checkpoint parameter delta was **7.15×10⁻⁷**. Its original public-evidence inference was reproducible with maximum probability deviation **1.79×10⁻⁷**, unchanged private task-loss totals, and near-exact rank-one/rank-two physical projector overlaps **0.999999990** and **0.999999998**, respectively. [Machine-readable audit artifact](https://github.com/MoralityLabAI/Control-Harness/actions/runs/44266899308/artifacts/14410532396).
+
+A separate root-entropy-derived arithmetic audit regenerated 192 public issuer histories, **6,144 independently seeded private case labels/reports**, and all policy-cost totals directly from exact channel parameters and archived model posterior probabilities. The first-readout result and blocked behavioral-headroom verdict remained unchanged.
+
 ## Evaluation boundary and next mechanism experiment
 
 A neural probe that decodes two posterior coordinates is an **observational** result. The fixed rank-two geometry is a mathematical result about the host-defined likelihood. The fact that the recurrent model gets most action decisions correct does not identify the physical internal subspace that causes them.
