@@ -1,3 +1,5 @@
+**BPD-DT01 recurrent-depth training/steering gym (Nov 18, 2026):** [Sudoku, ARC-1-compatible loading and hidden-ending storyworlds](mechinterp/bpd/experiments/depth_steering_gym/README.md) with protected readout and signed-Jacobian-matched controls across supervised depths 2/4/6 and unseen depths 8/12. **Stage 0 source-only; native model results pending.** Paired longer-horizon [LDT adversarial world gym](https://github.com/MoralityLabAI/HybridTRMLDT/tree/research/ldt-red01-adversarial-control-depth-20261118/research_gym/benchmarks/ldt_adversarial_depth_gym).
+
 # `MoralityLabAI/BPD` — Behavioral Parameter Decomposition & Causal Dark Fibers for Looped Transformers
 
 Parameter-space (**Behavioral Parameter Decomposition, BPD**) and state-space (**Causal Observable Quotients, `LOOPSCOPE-01..04` & `ARG-03-N`**) mechanistic interpretability for weight-tied, recurrent-depth transformers, companion to [`MoralityLabAI/VPD`](https://github.com/MoralityLabAI/VPD).
