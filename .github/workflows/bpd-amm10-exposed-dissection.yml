@@ -53,17 +53,27 @@ jobs:
             --training /tmp/amm10_original_train/training.json \
             --development /tmp/amm10_original_dev/development.json \
             --out /tmp/amm10_exposed_result.json
-          if test -f mechinterp/bpd/experiments/amm10_exposed_dissection/results/ANALYSIS.json; then
-            python mechinterp/bpd/experiments/amm10_exposed_dissection/analysis.py \
-              --training /tmp/amm10_original_train/training.json \
-              --development /tmp/amm10_original_dev/development.json \
-              --check-lock mechinterp/bpd/experiments/amm10_exposed_dissection/results/ANALYSIS.json \
-              --out /tmp/amm10_check_result.json
-            cmp -s /tmp/amm10_exposed_result.json /tmp/amm10_check_result.json
-            echo 'AMM10 FULL ORIGINAL CASE/ABLATION SOURCE LOCK REPLAY PASS'
-          else
-            echo 'AMM10 first exploratory outcome receipt: commit before final replay'
-          fi
+          python - <<'PY'
+          import hashlib,json,pathlib
+          report=pathlib.Path('/tmp/amm10_exposed_result.json')
+          lock=json.loads(pathlib.Path(
+              'mechinterp/bpd/experiments/amm10_exposed_dissection/results/RESULTS_LOCK.json').read_text())
+          data=json.loads(report.read_text())
+          assert hashlib.sha256(report.read_bytes()).hexdigest()==lock['original_hosted_complete_json_sha256'], 'original hosted exploratory data drift'
+          assert data['raw_training_sha256']==lock['source_training_sha256']
+          assert data['raw_development_sha256']==lock['source_development_sha256']
+          assert data['frozen_training_policy_sha256']==lock['source_training_policy_sha256']
+          assert data['confirmation_roots_opened']==lock['confirmation_roots_accessed']==0
+          assert data['exact_rank_identity']['preclip_action_mismatch_count']==lock['frozen_rank_identity']['preclip_mismatch']==0
+          assert data['exact_rank_identity']['postclip_action_mismatch_count']==lock['frozen_rank_identity']['postclip_mismatch']==0
+          for arm,expected in lock['root_heldout_training_hits'].items():
+              assert data['training_cv']['arms'][arm]['hits']==expected, f'{arm} root-heldout hits changed'
+          for arm,expected in lock['original_exposed_development_hits'].items():
+              assert data['development']['arms'][arm]['hits']==expected, f'{arm} original development hits changed'
+          assert data['development']['train_selected_family_pooled_masks']==lock['development_family_training_selected_fixed_masks']
+          assert data['development']['memory_only_multi_mask_roots']==lock['development_memory_roots_using_multiple_masks']
+          print('AMM10 COMPLETE ORIGINAL CASE/ABLATION SOURCE LOCK REPLAY PASS')
+          PY
       - name: Archive complete exploratory root scores and invariance proof audit
         if: always()
         uses: actions/upload-artifact@v4
