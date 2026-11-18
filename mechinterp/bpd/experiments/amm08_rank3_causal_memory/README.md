@@ -8,6 +8,33 @@ The global memory trains on 64 independent model roots with 128 donor cases/root
 
 The independent unit is **one trained physical model and BPD factorization**, with disjoint root-specific training, calibration, evaluation and repeatability streams. Repeated donor cases and seven interventions inside a root remain repeated observations. There are 64 training and 64 development roots, 512 heldout and 512 repeatability cases per development model, and **128 sealed confirmation roots**. The registered primary floor is +8 percentage points, with an independent-world 95/95 sham tolerance bound from 64 roots. Confirmatory source release additionally requires a nontrivial per-case oracle headroom and 56/64 source-validation fidelity roots.
 
+## Completed prospective development and scientific hold
+
+The source-locked [RESULTS.md](RESULTS.md) and compact `results/`
+receipts cover **64 independently trained 6D rank-three model roots** and
+32,768 heldout causal interventions per policy. Memory plus noisy local
+calibration improved on a strong equal-budget local ridge by
+**+3.24 percentage points**, with 34 positive, 13 negative and 17
+tied roots (Holm-adjusted exact root sign p=.00463). The independent
+root-bootstrap interval [+0.66,+5.62]pp lies below the preregistered
+**+8pp scientific minimum**, and the 95/95 repeatability tolerance
+floor is +6.05pp. Corrected EvalMath returned
+`REDESIGN_OR_PILOT_ONLY`.
+
+The task retains substantial audit-only casewise oracle headroom
+(19.39pp above local ridge), while memory-only chose the full
+three-component mask on 99.50% of cases and yielded exactly the
+same number of correct outcomes as the fixed pooled action.
+Local feedback reduced memory-only accuracy by 64 cases. Eight
+imperfectly fitted BPD models remain in the primary denominator;
+56/64 pass the prespecified fidelity gate.
+
+**All 128 AMM08 confirmation model roots remain SEALED.**
+Do not call `--phase confirmation`, construct a release manifest
+from this negative preflight, or reuse the protected AMM03–07 or
+ARG-03-N populations. The original experimental source is frozen
+for exact semantic case-bit and independent-root replay.
+
 ## CPU workflow
 
 Use Python 3.12 and CPU PyTorch 2.10 from the BPD repository root:
