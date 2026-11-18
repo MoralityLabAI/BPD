@@ -17,6 +17,7 @@ Extends Goodfire's single-pass [adVersarial Parameter Decomposition (VPD)](https
   - Package guide: [`mechinterp/bpd/README.md`](mechinterp/bpd/README.md)
   - Formal equations & positioning: [`mechinterp/bpd/docs/design_and_positioning.md`](mechinterp/bpd/docs/design_and_positioning.md)
   - Idealized expected-L0 identifiability and mask algebra: [`mechinterp/bpd/theory/OPTIMAL_BASIS_AND_MASKS.md`](mechinterp/bpd/theory/OPTIMAL_BASIS_AND_MASKS.md), with Lean finite optimizer/mask certificates, exact-rational tests, and a separate empirical-evidence boundary.
+  - Projector transfer addendum (2026-11-18): [NC-12 and the target gradient budget](papers/shared_weights_dark_fibers/BPD_TRANSFER_ADDENDUM_20261118.md). Eight synthetic model pairs; all 16 registered transfer gates failed. Includes exact information accounting and implications for looped-transformer studies.
   - Initial pre-registration (`49c7207`): [`mechinterp/bpd/docs/registration.md`](mechinterp/bpd/docs/registration.md)
   - Fable pre-run amendments (`2026-11-15`): [`mechinterp/bpd/docs/amendments_2026-11-15_fable.md`](mechinterp/bpd/docs/amendments_2026-11-15_fable.md)
   - Positive-control run history & archived pre-amendment receipts: [`mechinterp/bpd/docs/positive_control_history.md`](mechinterp/bpd/docs/positive_control_history.md), [`mechinterp/bpd/results/historical_pre_amendment_49c7207/`](mechinterp/bpd/results/historical_pre_amendment_49c7207/)
@@ -59,3 +60,4 @@ Provenance hashes linking back to `MoralityLabAI/LoopedTransformers` and `Morali
 ## Statistical resolution before BPD GPU sweeps
 
 Use the [EvalMath mechanistic-power agent skill](https://github.com/MoralityLabAI/EvalMath/tree/main/skills/evalmath-mechinterp-power) before planning a causal intervention, probe or small held-out evaluation. Its independent-root, matched-sham and effect-floor preflight keeps shallow 64-outcome sweeps from being mistaken for measured mechanisms. The [FSI-03 native TRM audit](mechinterp/FSI03_NATIVE_VARIATION_AUDIT.md) shows why delayed-logit change must be checked against a matched random direction on actual task outcomes. Retain the ARG-03-N sealed test restrictions.
+
