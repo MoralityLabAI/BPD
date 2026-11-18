@@ -19,6 +19,17 @@ does not thereby repair clean reasoning. Observational probes and exact
 linear-algebraic BPD witnesses belong to different evidence classes from
 native model-causal claims.
 
+AMM09R1's 128 confirmation roots are **SEALED**. Its separately registered
+64-root development study under the accepted CPU recipe measured a
++13.6230pp memory-only advantage over the training-selected pooled mask,
+with root-bootstrap 95% [+9.8328,+17.5140]pp and Holm-adjusted root sign
+p=1.49194e-6. All development gates passed and 58/64 roots met source
+fidelity. Adding noisy local feedback reduced performance by 3.5461pp
+relative to memory alone. Read
+`mechinterp/bpd/experiments/amm09r_two_slot_memory/RESULTS.md` and its
+locked `results/ANALYSIS.json`. The source rejects confirmation generation;
+READY grants no release authorization. Preserve every historical cohort seal.
+
 AMM-09's 128 new independently trained confirmation model roots
 are **SEALED** even though corrected EvalMath returned
 `READY_FOR_CONFIRMATION` for its positive +14.78pp development

@@ -1,0 +1,466 @@
+{
+  "alpha": "0.05",
+  "confirm_units_planned": 128,
+  "experiment_id": "BPD-AMM-09R1",
+  "heldout_sealed": true,
+  "independent_unit": "one 6D rank-three three-pass trained physical and BPD model root",
+  "measurement_resolution": "1/512",
+  "pilot": [
+    {
+      "paired_effect": "47/512",
+      "sham_effects": [
+        "0/512"
+      ],
+      "unit_id": "development/0000"
+    },
+    {
+      "paired_effect": "83/512",
+      "sham_effects": [
+        "-9/512"
+      ],
+      "unit_id": "development/0001"
+    },
+    {
+      "paired_effect": "281/512",
+      "sham_effects": [
+        "4/512"
+      ],
+      "unit_id": "development/0002"
+    },
+    {
+      "paired_effect": "67/512",
+      "sham_effects": [
+        "-13/512"
+      ],
+      "unit_id": "development/0003"
+    },
+    {
+      "paired_effect": "32/512",
+      "sham_effects": [
+        "-20/512"
+      ],
+      "unit_id": "development/0004"
+    },
+    {
+      "paired_effect": "6/512",
+      "sham_effects": [
+        "8/512"
+      ],
+      "unit_id": "development/0005"
+    },
+    {
+      "paired_effect": "66/512",
+      "sham_effects": [
+        "-6/512"
+      ],
+      "unit_id": "development/0006"
+    },
+    {
+      "paired_effect": "-69/512",
+      "sham_effects": [
+        "-8/512"
+      ],
+      "unit_id": "development/0007"
+    },
+    {
+      "paired_effect": "-21/512",
+      "sham_effects": [
+        "-20/512"
+      ],
+      "unit_id": "development/0008"
+    },
+    {
+      "paired_effect": "129/512",
+      "sham_effects": [
+        "-2/512"
+      ],
+      "unit_id": "development/0009"
+    },
+    {
+      "paired_effect": "17/512",
+      "sham_effects": [
+        "-7/512"
+      ],
+      "unit_id": "development/0010"
+    },
+    {
+      "paired_effect": "62/512",
+      "sham_effects": [
+        "4/512"
+      ],
+      "unit_id": "development/0011"
+    },
+    {
+      "paired_effect": "-5/512",
+      "sham_effects": [
+        "6/512"
+      ],
+      "unit_id": "development/0012"
+    },
+    {
+      "paired_effect": "124/512",
+      "sham_effects": [
+        "14/512"
+      ],
+      "unit_id": "development/0013"
+    },
+    {
+      "paired_effect": "14/512",
+      "sham_effects": [
+        "-17/512"
+      ],
+      "unit_id": "development/0014"
+    },
+    {
+      "paired_effect": "45/512",
+      "sham_effects": [
+        "-13/512"
+      ],
+      "unit_id": "development/0015"
+    },
+    {
+      "paired_effect": "31/512",
+      "sham_effects": [
+        "-5/512"
+      ],
+      "unit_id": "development/0016"
+    },
+    {
+      "paired_effect": "129/512",
+      "sham_effects": [
+        "-2/512"
+      ],
+      "unit_id": "development/0017"
+    },
+    {
+      "paired_effect": "60/512",
+      "sham_effects": [
+        "-10/512"
+      ],
+      "unit_id": "development/0018"
+    },
+    {
+      "paired_effect": "-71/512",
+      "sham_effects": [
+        "20/512"
+      ],
+      "unit_id": "development/0019"
+    },
+    {
+      "paired_effect": "35/512",
+      "sham_effects": [
+        "6/512"
+      ],
+      "unit_id": "development/0020"
+    },
+    {
+      "paired_effect": "133/512",
+      "sham_effects": [
+        "5/512"
+      ],
+      "unit_id": "development/0021"
+    },
+    {
+      "paired_effect": "25/512",
+      "sham_effects": [
+        "-9/512"
+      ],
+      "unit_id": "development/0022"
+    },
+    {
+      "paired_effect": "94/512",
+      "sham_effects": [
+        "-1/512"
+      ],
+      "unit_id": "development/0023"
+    },
+    {
+      "paired_effect": "-33/512",
+      "sham_effects": [
+        "-2/512"
+      ],
+      "unit_id": "development/0024"
+    },
+    {
+      "paired_effect": "33/512",
+      "sham_effects": [
+        "-2/512"
+      ],
+      "unit_id": "development/0025"
+    },
+    {
+      "paired_effect": "82/512",
+      "sham_effects": [
+        "5/512"
+      ],
+      "unit_id": "development/0026"
+    },
+    {
+      "paired_effect": "-1/512",
+      "sham_effects": [
+        "-4/512"
+      ],
+      "unit_id": "development/0027"
+    },
+    {
+      "paired_effect": "117/512",
+      "sham_effects": [
+        "-3/512"
+      ],
+      "unit_id": "development/0028"
+    },
+    {
+      "paired_effect": "-2/512",
+      "sham_effects": [
+        "14/512"
+      ],
+      "unit_id": "development/0029"
+    },
+    {
+      "paired_effect": "120/512",
+      "sham_effects": [
+        "-8/512"
+      ],
+      "unit_id": "development/0030"
+    },
+    {
+      "paired_effect": "-47/512",
+      "sham_effects": [
+        "-3/512"
+      ],
+      "unit_id": "development/0031"
+    },
+    {
+      "paired_effect": "141/512",
+      "sham_effects": [
+        "-13/512"
+      ],
+      "unit_id": "development/0032"
+    },
+    {
+      "paired_effect": "5/512",
+      "sham_effects": [
+        "-17/512"
+      ],
+      "unit_id": "development/0033"
+    },
+    {
+      "paired_effect": "0/512",
+      "sham_effects": [
+        "-5/512"
+      ],
+      "unit_id": "development/0034"
+    },
+    {
+      "paired_effect": "25/512",
+      "sham_effects": [
+        "-8/512"
+      ],
+      "unit_id": "development/0035"
+    },
+    {
+      "paired_effect": "285/512",
+      "sham_effects": [
+        "0/512"
+      ],
+      "unit_id": "development/0036"
+    },
+    {
+      "paired_effect": "164/512",
+      "sham_effects": [
+        "-18/512"
+      ],
+      "unit_id": "development/0037"
+    },
+    {
+      "paired_effect": "122/512",
+      "sham_effects": [
+        "4/512"
+      ],
+      "unit_id": "development/0038"
+    },
+    {
+      "paired_effect": "145/512",
+      "sham_effects": [
+        "-4/512"
+      ],
+      "unit_id": "development/0039"
+    },
+    {
+      "paired_effect": "-22/512",
+      "sham_effects": [
+        "-16/512"
+      ],
+      "unit_id": "development/0040"
+    },
+    {
+      "paired_effect": "115/512",
+      "sham_effects": [
+        "-2/512"
+      ],
+      "unit_id": "development/0041"
+    },
+    {
+      "paired_effect": "1/512",
+      "sham_effects": [
+        "7/512"
+      ],
+      "unit_id": "development/0042"
+    },
+    {
+      "paired_effect": "1/512",
+      "sham_effects": [
+        "5/512"
+      ],
+      "unit_id": "development/0043"
+    },
+    {
+      "paired_effect": "-119/512",
+      "sham_effects": [
+        "23/512"
+      ],
+      "unit_id": "development/0044"
+    },
+    {
+      "paired_effect": "152/512",
+      "sham_effects": [
+        "-11/512"
+      ],
+      "unit_id": "development/0045"
+    },
+    {
+      "paired_effect": "143/512",
+      "sham_effects": [
+        "-11/512"
+      ],
+      "unit_id": "development/0046"
+    },
+    {
+      "paired_effect": "126/512",
+      "sham_effects": [
+        "6/512"
+      ],
+      "unit_id": "development/0047"
+    },
+    {
+      "paired_effect": "119/512",
+      "sham_effects": [
+        "9/512"
+      ],
+      "unit_id": "development/0048"
+    },
+    {
+      "paired_effect": "114/512",
+      "sham_effects": [
+        "-8/512"
+      ],
+      "unit_id": "development/0049"
+    },
+    {
+      "paired_effect": "89/512",
+      "sham_effects": [
+        "3/512"
+      ],
+      "unit_id": "development/0050"
+    },
+    {
+      "paired_effect": "251/512",
+      "sham_effects": [
+        "-28/512"
+      ],
+      "unit_id": "development/0051"
+    },
+    {
+      "paired_effect": "51/512",
+      "sham_effects": [
+        "-16/512"
+      ],
+      "unit_id": "development/0052"
+    },
+    {
+      "paired_effect": "127/512",
+      "sham_effects": [
+        "-13/512"
+      ],
+      "unit_id": "development/0053"
+    },
+    {
+      "paired_effect": "231/512",
+      "sham_effects": [
+        "-2/512"
+      ],
+      "unit_id": "development/0054"
+    },
+    {
+      "paired_effect": "59/512",
+      "sham_effects": [
+        "6/512"
+      ],
+      "unit_id": "development/0055"
+    },
+    {
+      "paired_effect": "25/512",
+      "sham_effects": [
+        "0/512"
+      ],
+      "unit_id": "development/0056"
+    },
+    {
+      "paired_effect": "239/512",
+      "sham_effects": [
+        "-14/512"
+      ],
+      "unit_id": "development/0057"
+    },
+    {
+      "paired_effect": "-40/512",
+      "sham_effects": [
+        "12/512"
+      ],
+      "unit_id": "development/0058"
+    },
+    {
+      "paired_effect": "126/512",
+      "sham_effects": [
+        "-17/512"
+      ],
+      "unit_id": "development/0059"
+    },
+    {
+      "paired_effect": "-45/512",
+      "sham_effects": [
+        "-18/512"
+      ],
+      "unit_id": "development/0060"
+    },
+    {
+      "paired_effect": "55/512",
+      "sham_effects": [
+        "-17/512"
+      ],
+      "unit_id": "development/0061"
+    },
+    {
+      "paired_effect": "101/512",
+      "sham_effects": [
+        "-21/512"
+      ],
+      "unit_id": "development/0062"
+    },
+    {
+      "paired_effect": "95/512",
+      "sham_effects": [
+        "-7/512"
+      ],
+      "unit_id": "development/0063"
+    }
+  ],
+  "pilot_from_development_only": true,
+  "planned_comparisons": 4,
+  "schema_version": 1,
+  "scientific_min_effect": "0.08",
+  "sham_confidence": "0.95",
+  "sham_quantile": "0.95",
+  "target_effect": "0.16",
+  "units_independent": true
+}
