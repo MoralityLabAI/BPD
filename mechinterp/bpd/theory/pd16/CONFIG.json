@@ -1,0 +1,176 @@
+{
+  "study_id": "BPD-PD-16",
+  "registration_date": "2026-11-18",
+  "status": "prospective_frozen_before_any_pd16_scientific_training",
+  "predecessor": {
+    "pd15_PR_merged": 69,
+    "pd15_merge_sha": "6dd68675bce6c7d1369452f6dbedc484ffb00199",
+    "pd15_original_run": 44233123380,
+    "pd15_original_scientific_PASS": true,
+    "pd15_primary_weighted_wide_successes": 32,
+    "pd15_uniform_wide_successes": 0,
+    "pd15_mean_effective_sample_fraction": 0.4846821638353369
+  },
+  "scientific_question": "Does the original PD15 norm-to-observation alignment cause full clustered-16D component recovery, when a permutation placebo retains the exact same norm-derived weight multiset, marginal weight distribution and effective sample size while destroying its correlation with that observation's latent support count?",
+  "seed_cell": {
+    "id": "clustered16d_strong",
+    "dimension": 16,
+    "support_distribution": "clustered",
+    "margin": "strong",
+    "seeds": [
+      3301,
+      3307,
+      3313,
+      3319,
+      3323,
+      3329,
+      3331,
+      3343,
+      3347,
+      3359,
+      3361,
+      3371,
+      3373,
+      3389,
+      3391,
+      3407,
+      3413,
+      3433,
+      3449,
+      3457,
+      3461,
+      3463,
+      3467,
+      3469,
+      3491,
+      3499,
+      3511,
+      3517,
+      3527,
+      3529,
+      3533,
+      3539
+    ]
+  },
+  "engineering_seed": 4001,
+  "source": {
+    "generator": "EXACT PD12 source generator and PD15 source_for_seed and physical BPD evaluator, unchanged; source seeds new",
+    "training_rng_offset": 100000,
+    "train_boards": 2048,
+    "passes": 4,
+    "heldout_boards_per_family": 96,
+    "heldout_rng_offset": 200000,
+    "heldout_family_stride": 10000,
+    "heldout_families": [
+      "k1_seen",
+      "k2_seen",
+      "k3_seen",
+      "k4_seen",
+      "k2_unseen",
+      "k3_unseen",
+      "k4_unseen",
+      "transition_unseen"
+    ],
+    "dimension": 16,
+    "cluster_probability": 0.85,
+    "amplitude_range": [
+      0.75,
+      1.25
+    ],
+    "training_pool": "One 2048-board four-pass source pool and original PD12 QR initial basis shared by all learned arms of each registered seed",
+    "independent_unit": "seed and seeded hidden 16D rotation Q"
+  },
+  "arms": [
+    {
+      "key": "norm_aligned",
+      "kind": "search",
+      "weight_mode": "aligned"
+    },
+    {
+      "key": "norm_shuffled",
+      "kind": "search",
+      "weight_mode": "shuffled"
+    },
+    {
+      "key": "uniform_control",
+      "kind": "search",
+      "weight_mode": "uniform"
+    },
+    {
+      "key": "planted_Q_oracle",
+      "kind": "oracle",
+      "weight_mode": null
+    }
+  ],
+  "objective": {
+    "lambda": 1,
+    "sigma": 0.15,
+    "gaussian_mass": "exact PD15 exp(-.5*(xV/sigma)^2), fixed original source sigma",
+    "weight_formula": "exp(-sum(x_j^2)) on observed physical vectors only",
+    "shuffled_weights": "torch.randperm(N, generator=manual_seed(910000+source_seed)) over all 8192 pass vectors, applied to the exact aligned weight vector",
+    "shuffled_control_ESS": "exact same weights in a different order, thus exact same sum(w), sum(w²), ESS, histogram and floating-point near-equality",
+    "shuffled_control_independence": "single predeclared RNG permutation, no selection based on latent support/cardinality/Q/heldout outcomes",
+    "uniform_control": "ones weights and original PD15 unweighted optimizer",
+    "pair_order": "original PD12 lexicographic i<j all 120 pairs per sweep",
+    "sweeps": 9,
+    "angles_per_pair": 37,
+    "angle_range_degrees": [
+      -90,
+      90
+    ],
+    "tie_tolerance": 1e-12,
+    "candidate_angle_scores": 39960,
+    "observed_vectors": 8192,
+    "candidate_by_vector_scores": 327352320,
+    "weight_build_extra_cost_separate": true,
+    "source_Q_and_latent_labels_forbidden_from_fit": true,
+    "RNG_independence": "The permutation depends only on seed and N, never source sample labels or future outcomes"
+  },
+  "scoring": {
+    "mean_read_cos_min": 0.9,
+    "overall_MSE_max": 0.035,
+    "per_family_MSE_max": 0.05,
+    "seen_full_fourpass_support_min": 0.8,
+    "unseen_full_fourpass_support_min": 0.7,
+    "exact_binary_masks": true,
+    "nonzero_search_updates": true,
+    "primary_arm": "norm_aligned",
+    "primary_control": "norm_shuffled",
+    "primary_min_successes": 18,
+    "primary_net_paired_wins_min": 10,
+    "primary_exact_mcnemar_p_max": 0.05,
+    "diagnostic_gate": "at least 30/32 source pools have Pearson corr(aligned_w,k)<=-0.70, abs(corr(shuffled_w,k))<=0.05 and equal aligned/shuffled ESS within 1e-10",
+    "diagnostic_min_passing_seeds": 30,
+    "aligned_weight_k_corr_max": -0.7,
+    "shuffled_weight_k_abs_corr_max": 0.05,
+    "ESS_abs_diff_max": 1e-10,
+    "scientific_pass_requires_mechanism_and_diagnostic": true,
+    "secondary": "uniform_control vs each weighted arm, per-seed full mask, MSE, read cosines, final training objective, and runtime descriptive without additional registered significance claim"
+  },
+  "statistics": {
+    "independent_units": 32,
+    "per_seed_arms": 4,
+    "total_arms": 128,
+    "exact_two_sided_McNemar": true,
+    "Wilson95": true,
+    "source_trajectories_not_independent_tests": true
+  },
+  "execution": {
+    "python": "3.12",
+    "torch": "2.5.1+cpu",
+    "scipy": "1.14.1",
+    "cpu_threads": 1,
+    "max_RSS_GiB": 3,
+    "CI_timeout_minutes": 75,
+    "first_run_archive_days": 90
+  },
+  "evidence": {
+    "one_time_source_lock": true,
+    "original_first_128_arm_JSON": true,
+    "original_per_seed_table": true,
+    "exact_weight_multiset_and_ESS_parity": true,
+    "forbidden_label_use_tests": true,
+    "strict_physical_BPD_mask_evaluation": true,
+    "older_PD01_to_PD15_unchanged": true
+  }
+}
