@@ -94,36 +94,58 @@ def validate_memory(memory:dict):
     return True
 
 
+def model_fidelity(d:dict)->bool:
+    """Independent source-validation diagnostics; all roots remain in ITT."""
+    return bool(d['teacher_behavioral_mse']<=1e-4
+        and d['factor_behavioral_mse']<=.10
+        and d['weight_reconstruction_relative']<=.50
+        and d['singular_gap']>.01)
+
+
 def score_one(phase:str,index:int,memory:dict)->dict:
-    """Policy sees only SVD geometry/probe features and noisy calibration."""
+    """Policy sees only duplicate reports and causal-response features."""
     _,f,metrics=m.fit(phase,index)
     root=m.root_key(phase,index)
     calibration=case.assay(phase,index,f,'local_calibration',N_LOCAL)
-    feedback=gate.reported_calibration(phase,index,calibration)
-    decision=gate.local_decision(calibration['features'],feedback,memory['coefficients'])
+    feedback=noise.reported_calibration(phase,index,calibration)
+    decision=noise.local_decision(calibration['features'],feedback,memory['coefficients'])
     held=case.assay(phase,index,f,'heldout_test',m.PAIRS)
-    actions=gate.choose_actions(held['features'],decision,root,memory['pooled_action'])
+    actions=noise.choose_actions(held['features'],decision,root,memory['pooled_action'])
     bits={}
     for arm,choice in actions.items():
-        bits[arm]=''.join(held['candidate_bits'][f'component_{c}'][i] for i,c in enumerate(choice))
+        bits[arm]=''.join(held['candidate_bits'][f'component_{c}'][i]
+                         for i,c in enumerate(choice))
     for arm in ('random_dark','random_dark_b','sham','full_donor'):
         bits[arm]=held['candidate_bits'][arm]
     repeat=case.assay(phase,index,f,'repeatability',m.PAIRS)
-    repeat_actions=gate.choose_actions(repeat['features'],decision,root,memory['pooled_action'])
+    repeat_actions=noise.choose_actions(repeat['features'],decision,root,memory['pooled_action'])
     repeat_bits=''.join(repeat['candidate_bits'][f'component_{c}'][i]
-                        for i,c in enumerate(repeat_actions['always_update']))
-    flips={k:sum(x!=y for x,y in zip(calibration['candidate_bits'][k],feedback['reported_bits'][k]))
-           for k in ('component_0','component_1')}
+                        for i,c in enumerate(repeat_actions['quality_blind']))
+    flips={}
+    for c in (0,1):
+        key=f'component_{c}'
+        clean=calibration['candidate_bits'][key]
+        flips[key]=[sum(a!=b for a,b in zip(clean,reported))
+                    for reported in feedback['reported_replicates'][key]]
+    actual_low=noise.hidden_quality(index)=='low_noise'
+    q=decision['quality']
     return {'root':root,'family':m.family_for(index),
-            'hidden_judge_quality_audit_only':gate.hidden_quality(index),
-            'fitting':metrics,'calibration_clean_audit_only':calibration,
-            'agent_visible_noisy_feedback':feedback,'judge_flip_counts_audit_only':flips,
-            'gate_decision':decision,'heldout':held,'policy_actions':actions,
-            'policy_bits':bits,'policy_hits':{k:v.count('1') for k,v in bits.items()},
+            'hidden_judge_quality_audit_only':noise.hidden_quality(index),
+            'quality_classifier_correct_audit_only':bool(q['classify_low']==actual_low),
+            'factor_fidelity_flag_audit_only':model_fidelity(metrics),
+            'fitting':metrics,
+            'calibration_clean_audit_only':calibration,
+            'agent_visible_duplicate_reports':feedback,
+            'calibration_report_flips_audit_only':flips,
+            'reliability_posterior':q,
+            'local_decision':decision,
+            'heldout':held,
+            'policy_actions':actions,'policy_bits':bits,
+            'policy_hits':{name:value.count('1') for name,value in bits.items()},
             'repeatability':{'assay':repeat,
-                             'always_update_actions':repeat_actions['always_update'],
-                             'always_update_bits':repeat_bits,
-                             'always_update_hits':repeat_bits.count('1')}}
+                             'blind_actions':repeat_actions['quality_blind'],
+                             'blind_bits':repeat_bits,
+                             'blind_hits':repeat_bits.count('1')}}
 
 
 def admit(phase:str,memory:dict|None,preflight:dict|None=None,release:dict|None=None):
