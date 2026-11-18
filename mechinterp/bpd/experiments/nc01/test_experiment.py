@@ -97,3 +97,18 @@ def test_native_attribution_and_closed_loop_intervention_execute():
     assert set(effect) == {"teacher_label_accuracy_clean", "ablate", "retain"}
     assert len(effect["ablate"]["kl_by_pass_nats"]) == PASSES
     assert effect["ablate"]["closed_loop_write_delta_rms"] > 0
+
+
+def test_sparse_three_node_chain_is_a_valid_connected_community():
+    # A and C are independent; B = A OR C, yielding edges A-B and B-C
+    # without the A-C edge. Real discovery graphs need not be cliques.
+    hits = torch.zeros(256, 3)
+    hits[:48, 0] = 1
+    hits[48:96, 2] = 1
+    hits[96:112, 0] = 1
+    hits[96:112, 2] = 1
+    hits[:, 1] = (hits[:, 0] + hits[:, 2] > 0).float()
+    groups = communities_from_selection(hits)
+    assert len(groups) == 1
+    assert groups[0]["nodes"] == [0, 1, 2]
+    assert groups[0]["internal_phi_mass"] > 0.0
