@@ -19,6 +19,18 @@ does not thereby repair clean reasoning. Observational probes and exact
 linear-algebraic BPD witnesses belong to different evidence classes from
 native model-causal claims.
 
+AMM-06's 128 independent confirmation model roots are **SEALED**.
+The preregistered 64-root development study measured a +0.81pp
+selective-trust advantage over always updating noisy local feedback,
+well below the corrected EvalMath 12.5pp independent-root variation
+floor, with only 7 accepted roots and insufficient judge-quality
+discrimination. The strict planner returned
+`REDESIGN_OR_PILOT_ONLY`. Do not run AMM-06 `--phase confirmation`,
+construct its release manifest, reuse any protected root population,
+or relabel this pilot as a confirmed mechanism. Review
+`mechinterp/bpd/experiments/amm06_selective_trust/RESULTS.md`
+and the locked `results/PREFLIGHT.json` before new work.
+
 AMM-05's 128-model confirmation roots are **sealed**. Its 64 independent
 development models yielded a positive +5.87pp memory-over-local ridge
 direction, but the independent-root repeatability variation floor was
