@@ -42,6 +42,7 @@ jobs:
           path: /tmp/sub01-original
       - name: Independently audit receipt created before CLI exception
         run: |
+          set -o pipefail
           python mechinterp/bpd/experiments/sub01/audit_original.py \
             --receipt /tmp/sub01-original/sub01_original_eight.json \
             --report /tmp/sub01-audit.json | tee /tmp/sub01-audit-log.json
