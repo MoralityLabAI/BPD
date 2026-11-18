@@ -274,7 +274,17 @@ def choose_matched_shams(nodes: list[int], acts: torch.Tensor, v: torch.Tensor,
                          u: torch.Tensor, seed: int, count: int = SHAMS) -> dict:
     """Same per-pass counts; choose RMS-matched unique shams on discovery only."""
     counts = [sum(i // WIDTH == t for i in nodes) for t in range(PASSES)]
-    target_dose = direct_write_rms(acts, v, u, nodes)
+    # Exact clean-context write RMS via per-pass second-moment Gram matrices.
+    # Avoid recomputing a full [B,T,C] matrix product for each random null.
+    z = acts @ v
+    gram = (
+        torch.einsum("bti,btj->tij", z, z) / len(z)
+        * (u @ u.T).unsqueeze(0) / (PASSES * u.shape[1])
+    )
+    def from_gram(group: list[int]) -> float:
+        m = node_mask(group)
+        return float(torch.einsum("ti,tij,tj->", m, gram, m).clamp_min(0).sqrt())
+    target_dose = from_gram(nodes)
     g = np.random.default_rng(seed)
     target = tuple(nodes)
     candidates: list[tuple[float, list[int], float]] = []
@@ -289,7 +299,7 @@ def choose_matched_shams(nodes: list[int], acts: torch.Tensor, v: torch.Tensor,
         if key in seen:
             continue
         seen.add(key)
-        dose = direct_write_rms(acts, v, u, sample)
+        dose = from_gram(sample)
         rel = abs(dose - target_dose) / max(target_dose, 1e-10)
         if rel <= DOSE_TOLERANCE:
             candidates.append((rel, sample, dose))
