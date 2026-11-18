@@ -13,3 +13,14 @@ The prospective eight-root **engineering-development** gate requires all roots f
 [THEORY.md](THEORY.md) sets out the multiple-choice knapsack, the omitted score-derivative surrogate, its nonlinear limitations, and the distinct final task criterion. [PasswiseBudget.lean](PasswiseBudget.lean) kernel-certifies the fixed rank-count arithmetic. [Source-only excluded-799 tests](test_experiment.py) and [synthetic registered-decision tests](test_aggregate.py) establish initial engineering admission before releasing development root 800.
 
 The entire first eight-root run will retain either ENGINEERING_POSITIVE or ENGINEERING_NULL_OR_INELIGIBLE without revising the protocol. Future 59-root sham-calibration, EvalMath power review and 32-root scientific confirmation remain independently sealed and ungenerated.
+
+
+## Frozen first-run developmental outcome
+
+[Original source-locked Actions run #44265232267](https://github.com/MoralityLabAI/BPD/actions/runs/44265232267) completed every engineering/source/physical evidence gate and archived all eight independently trained model roots. **Original development verdict: ENGINEERING_NULL_OR_INELIGIBLE**, from one failed prospective task-cost bound versus flat rank four.
+
+All **8/8** model roots were fully admitted, including eight physical same-tuple RMS-matched shams each from the 2048-proposal source-only pool. The selector chose total physical write rank budgets **8,8,10,10,12,12,12,14** (mean **10.75**), saving **32.8%** of the 16-slot flat-rank-four reference. Absolute task NLL cost upper root-bootstrap was **+0.036017** (cap +0.05) and the same-rank sham margin lower bootstrap was **+0.051208** (required >0), both PASS.
+
+The registered **selected-minus-flat-rank-four task NLL 95% upper bound was +0.024799**, above the fixed **+0.020** cap, so the original overall development result is a FAIL. The model-only selector's source agreement was insufficiently protective on one root: root 800 selected budget 10 and incurred **+0.051944** true-label NLL relative to flat rank four. The unweighted source-DP **budget-12** projector outperformed the equal-total-dimension flat rank-three comparator by **0.013068 nats mean** across the same eight roots, a prespecified **descriptive** contrast without a new significance claim.
+
+[Original full results](RESULTS_20261118.md), [frozen eight-root CSV](PER_ROOT_20261118.csv), [independent receipt auditor](test_published_results.py), and [original immutable nine-file artifact #14409767606](https://github.com/MoralityLabAI/BPD/actions/runs/44265232267/artifacts/14409767606) retain the first-run outcome. Original ZIP SHA256 is 533b150c6021093c1bf6d91d1152cce690eb3b09d357d641ec9de350aa9ca061. No new 59-root independent sham-calibration or 32-root confirmation sets were opened.
