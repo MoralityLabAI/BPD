@@ -1,0 +1,57 @@
+{
+  "study": "BPD-NC-12",
+  "status": "SOURCE_LOCK_AMENDED_BEFORE_FIRST_NC12_DEVELOPMENT_ROOT",
+  "protocol_first_commit": "6a4b5ebc16fae730f17b0e5dac5564eaf419c071",
+  "source_snapshot_commit": "9733485d29966de113801e913a3a71ae5267ece7",
+  "roots": [
+    1200,
+    1201,
+    1202,
+    1203,
+    1204,
+    1205,
+    1206,
+    1207
+  ],
+  "excluded_smoke_root": 1199,
+  "models_per_root": 2,
+  "source_blob_sha1": {
+    "mechinterp/bpd/experiments/nc12/PROTOCOL.md": "60e0fcd30069158d9a75bdf6fb782cc9d9d4631d",
+    "mechinterp/bpd/experiments/nc12/experiment.py": "6341ea32e1af3fa7b4725ced536c5a07ef0814ee",
+    "mechinterp/bpd/experiments/nc12/aggregate.py": "675f241bfb55289657fce02ccdd09fa6cb82b1eb",
+    "mechinterp/bpd/experiments/nc12/test_experiment.py": "92fc970e8b9ab3d3c5c02e2e202a23b95d31d037"
+  },
+  "budgets": {
+    "training_steps_each_model": 384,
+    "training_inputs_each_model": 2048,
+    "source_discovery": 1024,
+    "calibration_pool": 512,
+    "paired_unlabeled_activation_cases": 128,
+    "nested_gradient_case_budgets": [
+      4,
+      8,
+      16,
+      32
+    ],
+    "total_unique_primary_B_gradient_rows": 32,
+    "dose_only": 1024,
+    "external_heldout": 1024,
+    "source_only_sham_proposals_per_budget": 2048,
+    "source_matched_shams_required": 8
+  },
+  "comparisons": 16,
+  "decision": "lowest q <=8 meeting four Bonferroni 99.6875% CI gates, 8/8 paired roots",
+  "confirmation": "SEALED",
+  "note": "Engineering-only; first source-only root 1199 allowed after source checks. Keep original positive/negative outcome regardless of gate.",
+  "predevelopment_amendments": [
+    {
+      "date": "2026-11-18",
+      "first_failed_ci_run": "https://github.com/MoralityLabAI/BPD/actions/runs/44283519514",
+      "tests": "15 passed; 1 source smoke failed NameError basis_transport",
+      "first_development_job": "skipped; zero 1200..1207 model pairs evaluated",
+      "change": "add missing from nc03.experiment import basis_transport to numerical factor-gauge check",
+      "scope": "source-only import fix, protocol and statistical thresholds untouched",
+      "corrected_commit": "734f44647144ff375aa83a597eb765cc4bc9b69c"
+    }
+  ]
+}
