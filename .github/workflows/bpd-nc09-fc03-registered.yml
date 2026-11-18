@@ -1,0 +1,140 @@
+name: BPD NC09-FC03 original 16-root constrained Grassmann engineering
+
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/experiments/nc09_fixed12/grassmann_fc03/EXECUTE_LOCK.json'
+
+permissions:
+  contents: read
+
+jobs:
+  original-sixteen-root-fc03:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check registered source, original excluded smoke and sixteen new roots
+        run: |
+          python - <<'PY'
+          import json,subprocess
+          from pathlib import Path
+          root=Path('mechinterp/bpd/experiments/nc09_fixed12/grassmann_fc03')
+          lock=json.loads((root/'EXECUTE_LOCK.json').read_text())
+          assert lock['study']=='BPD-NC09-FC03'
+          assert lock['phase']=='FIRST_ORIGINAL_16_ROOT_ENGINEERING_DEVELOPMENT'
+          assert lock['roots']==list(range(14000,14016))
+          assert lock['excluded_smoke_root']==13999
+          assert lock['train_updates']==384
+          assert lock['source_examples']==1024 and lock['labeled_heldout_examples']==1024
+          assert lock['solver_charts']==32 and lock['solver_steps']==64
+          assert lock['FC02_rejection_candidates']==4096
+          assert lock['minimum_angle']==.25
+          assert lock['minimum_DP12_chordal']==.20
+          assert lock['minimum_pairwise_chordal']==.18
+          assert lock['independent_confirmation_roots_executed']==0
+          sha=lock['source_commit_sha']
+          subprocess.run(['git','merge-base','--is-ancestor',sha,'HEAD'],check=True)
+          subprocess.run(['git','merge-base','--is-ancestor',
+              '51812dd5a1fdbe27acb7d28d4beaa219d69a92c9','HEAD'],check=True)
+          paths=[str(root/f) for f in (
+             'PROTOCOL.md','THEORY.md','solver.py','experiment.py','aggregate.py',
+             'test_solver.py','test_aggregate.py','GrassmannBudget.lean'
+          )]+[
+             'mechinterp/bpd/experiments/nc09_fixed12/PROTOCOL.md',
+             'mechinterp/bpd/experiments/nc09_fixed12/experiment.py',
+             'mechinterp/bpd/experiments/nc09_fixed12/tangent_sham_calibration/tangent_shams.py',
+             'mechinterp/bpd/components.py','mechinterp/bpd/config.py'
+          ]
+          subprocess.run(['git','diff','--exit-code',sha,'HEAD','--',*paths],check=True)
+          print('FC03 first registered 16-root source-lock SHA',sha)
+          PY
+      - name: Install original CPU PyTorch numerical runtime
+        run: |
+          python -m pip install --disable-pip-version-check pytest 'numpy>=1.26' scipy==1.14.1
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Validate excluded 13999 and independently audited source-sham mathematics
+        run: |
+          python -m pytest -q \
+            mechinterp/bpd/experiments/nc09_fixed12/grassmann_fc03/test_solver.py \
+            mechinterp/bpd/experiments/nc09_fixed12/grassmann_fc03/test_aggregate.py
+      - name: Train sixteen fresh dense nonlinear recurrent roots and score both frozen sham methods
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/nc09-fc03-original
+          for root in $(seq 14000 14015); do
+            python -m mechinterp.bpd.experiments.nc09_fixed12.grassmann_fc03.experiment \
+              --root "$root" --steps 384 --discovery 1024 --selector 512 \
+              --heldout 1024 --sham-proposals 4096 --shams 8 \
+              --solver-starts 32 --solver-steps 64 \
+              --out "/tmp/nc09-fc03-original/nc09_fc03_root_$root.json"
+          done
+      - name: Aggregate original 16-root feasibility and descriptive future-task outcomes
+        run: |
+          python -m mechinterp.bpd.experiments.nc09_fixed12.grassmann_fc03.aggregate \
+            --root-dir /tmp/nc09-fc03-original \
+            --out /tmp/nc09-fc03-original/FC03_ORIGINAL_16_ROOT_SUMMARY.json
+      - name: Independent original projector-byte, source tolerance and physical task audit
+        run: |
+          python - <<'PY'
+          import json,hashlib
+          from pathlib import Path
+          from mechinterp.bpd.experiments.nc09_fixed12.grassmann_fc03.aggregate import independent_source_audit
+          root=Path('/tmp/nc09-fc03-original')
+          r=json.loads((root/'FC03_ORIGINAL_16_ROOT_SUMMARY.json').read_text())
+          assert r['study']=='BPD-NC09-FC03'
+          assert r['phase']=='CONSTRAINED_GRASSMANN_ENGINEERING_DEVELOPMENT'
+          assert r['evidence_class']=='ENGINEERING_ONLY'
+          assert r['source_roots']==16 and len(r['per_root'])==16
+          assert r['scientific_confirmation_roots_evaluated']==0
+          assert r['new_independent_59_root_recalibration_evaluated']==0
+          assert r['original_FC01_hold']=='CALIBRATION_REDESIGN_OR_PILOT_ONLY'
+          assert r['original_FC02_hold']=='CALIBRATION_INCOMPLETE'
+          assert r['first_original_development_verdict'] in (
+            'CONSTRAINED_GRASSMANN_ENGINEERING_POSITIVE',
+            'ENGINEERING_NULL_OR_INELIGIBLE'
+          )
+          assert len(r['gates'])==4
+          assert {x['root'] for x in r['per_root']}==set(range(14000,14016))
+          for seed in range(14000,14016):
+            p=root/('nc09_fc03_root_%d.json'%seed)
+            d=json.loads(p.read_text())
+            assert d['study']=='BPD-NC09-FC03'
+            assert d['root']==seed and d['training']['steps']==384
+            assert d['splits']=={
+              'train':2048,'derivative_discovery':1024,
+              'model_validation':512,'labeled_calibration':1024
+            }
+            assert d['full_mask_closure']['passed']
+            assert d['protocol_sha256']==r['protocol_sha256']
+            assert d['parent_integrity']['nc09_original_experiment_sha256']=='8d1b88eea8518a83669f03f9126136ca3d56ac5bac5fe041e2e03fb12922d380'
+            source=independent_source_audit(d)
+            assert d['fc02_original_rejection_admission']['proposals']==4096
+            assert d['sham_admission']['charts_configured']==32
+            assert d['sham_admission']['max_adam_steps_per_chart']==64
+            assert d['sham_admission']['selected']<=8
+            assert len(d['sham_nlls'])==d['sham_admission']['selected']
+            assert len(d['fc02_original_rejection_sham_nlls'])==d['fc02_original_rejection_admission']['selected']
+            if d['eligible']:
+              assert source['source_eligible']
+              assert len(source['geometry'])==8
+              assert all(v['distance_to_dp12']>=.20 for v in source['geometry'])
+            print('FC03 first root',seed,'SHA256',hashlib.sha256(p.read_bytes()).hexdigest(),
+                  'solver shams',d['sham_admission']['selected'],
+                  'original rejection shams',d['fc02_original_rejection_admission']['selected'])
+          print('FC03 first original engineering verdict',r['first_original_development_verdict'])
+          print('Original gates',r['gates'])
+          PY
+      - name: Archive first original independent 16-root source and future-task evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bpd-nc09-fc03-original-16-root-${{ github.run_id }}
+          path: /tmp/nc09-fc03-original/
+          retention-days: 90
+          if-no-files-found: warn

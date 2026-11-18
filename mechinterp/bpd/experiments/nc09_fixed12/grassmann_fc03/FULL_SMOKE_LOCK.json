@@ -1,0 +1,20 @@
+{
+  "study": "BPD-NC09-FC03",
+  "phase": "FULL_SOURCE_EXCLUDED_13999",
+  "prospective_first_protocol": "51812dd5a1fdbe27acb7d28d4beaa219d69a92c9",
+  "source_commit_sha": "bfb70b435e7c0ed9cc24e36e891f9a2eb3b5e191",
+  "smoke_root": 13999,
+  "new_development_roots_executed": 0,
+  "scientific_confirmation_roots_executed": 0,
+  "training_updates": 384,
+  "discovery_samples": 1024,
+  "model_only_validation_samples": 512,
+  "independent_labeled_smoke_samples": 1024,
+  "sham_baseline_proposals": 4096,
+  "solver_charts": 32,
+  "solver_steps": 64,
+  "required_shams": 8,
+  "original_FC01_hold": "CALIBRATION_REDESIGN_OR_PILOT_ONLY",
+  "original_FC02_hold": "CALIBRATION_INCOMPLETE",
+  "evidence_policy": "Preserve first excluded source result, including failure. No modification to registered solver or confirmation source."
+}

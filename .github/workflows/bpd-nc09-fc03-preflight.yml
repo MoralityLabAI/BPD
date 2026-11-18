@@ -1,0 +1,68 @@
+name: BPD NC09-FC03 constrained Grassmann first-source engineering preflight
+
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/experiments/nc09_fixed12/grassmann_fc03/**'
+      - '.github/workflows/bpd-nc09-fc03-preflight.yml'
+      - '.github/workflows/bpd-nc09-fc03-full-smoke.yml'
+      - '.github/workflows/bpd-nc09-fc03-registered.yml'
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/nc09_fixed12/grassmann_fc03/**'
+      - '.github/workflows/bpd-nc09-fc03-preflight.yml'
+      - '.github/workflows/bpd-nc09-fc03-full-smoke.yml'
+      - '.github/workflows/bpd-nc09-fc03-registered.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  excluded-13999-and-exact-math:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify first protocol predates all Grassmann source and fresh model data
+        run: |
+          set -euo pipefail
+          git merge-base --is-ancestor 51812dd5a1fdbe27acb7d28d4beaa219d69a92c9 HEAD
+          git show 51812dd5a1fdbe27acb7d28d4beaa219d69a92c9:mechinterp/bpd/experiments/nc09_fixed12/grassmann_fc03/PROTOCOL.md > /tmp/fc03-first-protocol.md
+          cmp /tmp/fc03-first-protocol.md mechinterp/bpd/experiments/nc09_fixed12/grassmann_fc03/PROTOCOL.md
+          git cat-file -e 43c1f29^{commit}
+      - name: Install pinned original CPU PyTorch and SciPy environment
+        run: |
+          python -m pip install --disable-pip-version-check pytest 'numpy>=1.26' scipy==1.14.1
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Source only Grassmann geometry, finite rank, physical norms and excluded 13999
+        run: |
+          python -m compileall -q mechinterp/bpd/experiments/nc09_fixed12/grassmann_fc03
+          python -m pytest -q \
+            mechinterp/bpd/experiments/nc09_fixed12/grassmann_fc03/test_solver.py \
+            mechinterp/bpd/experiments/nc09_fixed12/grassmann_fc03/test_aggregate.py
+      - name: Original 16-root first-run source SHA and independent publication audit
+        run: python -m pytest -q mechinterp/bpd/experiments/nc09_fixed12/grassmann_fc03/test_published_results.py
+
+
+  kernel-check-frozen-source-budget:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Install Lean 4.19.0 kernel
+        run: |
+          curl --fail --location --retry 3 https://github.com/leanprover/lean4/releases/download/v4.19.0/lean-4.19.0-linux.tar.zst -o /tmp/lean.tar.zst
+          tar --zstd -xf /tmp/lean.tar.zst -C /tmp
+          echo '/tmp/lean-4.19.0-linux/bin' >> "$GITHUB_PATH"
+      - name: Prove 12-slot and eight-parameter Grassmann budget in Lean
+        run: |
+          set -euo pipefail
+          lean mechinterp/bpd/experiments/nc09_fixed12/grassmann_fc03/GrassmannBudget.lean | tee /tmp/fc03-lean.txt
+          grep -q 'BPD.NC09FC03.registered_source_budget' /tmp/fc03-lean.txt
+          grep -q 'BPD.NC09FC03.source_chart_optimizer_budget' /tmp/fc03-lean.txt
+          if grep -E 'sorryAx|ofReduceBool' /tmp/fc03-lean.txt; then exit 1; fi
