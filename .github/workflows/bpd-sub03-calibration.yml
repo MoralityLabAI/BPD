@@ -1,0 +1,138 @@
+name: BPD-SUB-03 original 64-root strong-null calibration and strict EvalMath gate
+
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/experiments/sub03/EXECUTE_LOCK.json'
+
+permissions:
+  contents: read
+
+jobs:
+  original-calibration:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify prospective source lock and immutable original model core
+        run: |
+          set -euxo pipefail
+          python - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          root=Path('mechinterp/bpd/experiments/sub03')
+          lock=json.loads((root/'EXECUTE_LOCK.json').read_text())
+          assert lock['study']=='BPD-SUB-03'
+          assert lock['execution']=='first_original_64_root_calibration'
+          assert lock['roots']==list(range(1400,1464))
+          assert lock['excluded_smoke']==1399
+          assert lock['model_training_steps']==256
+          assert lock['train']==2048
+          assert lock['discovery']==512 and lock['null_calibration']==512
+          assert lock['pilot']==1024
+          assert lock['rank']==8 and lock['shams']==8
+          assert lock['required_independent_sham_roots']==59
+          assert lock['future_confirmation_roots_generated'] is False
+          assert lock['evalmath_commit']=='6d9c28dbe8e4c42b3fba76ae7adb84aed9f0921a'
+          for sha in ('6342376f0f5c2d34e3868bbbc332d2ca4756dd8f',
+                       lock['source_commit_sha']):
+              subprocess.run(['git','merge-base','--is-ancestor',sha,'HEAD'],check=True)
+          # All calibration source/analysis source frozen before execution lock.
+          for name in ('PROTOCOL.md','experiment.py','test_experiment.py',
+                       'audit_original.py'):
+              subprocess.run(['git','diff','--exit-code',lock['source_commit_sha'],
+                   'HEAD','--',str(root/name)],check=True)
+          original=subprocess.check_output(['git','show',
+              '6342376f0f5c2d34e3868bbbc332d2ca4756dd8f:'+str(root/'PROTOCOL.md')])
+          assert original==(root/'PROTOCOL.md').read_bytes()
+          subprocess.run(['git','diff','--exit-code',
+               '3b73b45c40303ab7d4187dbc133d7b48ae7c9b8b',
+               'HEAD','--',
+               'mechinterp/bpd/experiments/sub01/experiment.py',
+               'mechinterp/bpd/experiments/sub02/experiment.py'],check=True)
+          print('SUB03_ORIGINAL_CALIBRATION_SOURCE_LOCK_PASS')
+          PY
+      - name: Install pinned source-only CPU packages
+        run: |
+          python -m pip install --disable-pip-version-check 'numpy==2.2.6' 'pytest==8.3.5'
+          python -m pip install --disable-pip-version-check 'torch==2.5.1' --index-url https://download.pytorch.org/whl/cpu
+      - name: Re-run registered source math before first data exposure
+        run: |
+          python -m compileall -q mechinterp/bpd/experiments/sub03
+          python -m pytest -q mechinterp/bpd/experiments/sub03/test_experiment.py
+      - name: Train 64 independent roots, record all shams and per-root pilot
+        run: |
+          mkdir -p /tmp/sub03
+          python -m mechinterp.bpd.experiments.sub03.experiment \
+            --phase calibration --ack-calibration \
+            --out /tmp/sub03/original_64_roots.json \
+            --pilot-out /tmp/sub03/evalmath_pilot.json
+      - name: Independently audit the first complete calibration receipt
+        run: |
+          set -euo pipefail
+          python mechinterp/bpd/experiments/sub03/audit_original.py \
+            --receipt /tmp/sub03/original_64_roots.json \
+            --report /tmp/sub03/INDEPENDENT_AUDIT.json
+      - name: Run pinned EvalMath preflight and preserve strict disposition
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path('/tmp/sub03')
+          summary=json.loads((root/'original_64_roots.json').read_text())['summary']
+          assert summary['attempted_roots']==64
+          status={'study':'BPD-SUB-03','phase':'CALIBRATION_ONLY',
+             'eligible_roots':summary['eligible_roots'],
+             'independent_95_95_tail_available':summary['at_least_59_eligible'],
+             'confirmation_roots_generated':False,
+             'scientific_status':'PENDING_STRICT_EVALMATH'
+             if summary['at_least_59_eligible'] else 'CALIBRATION_INSUFFICIENT'}
+          (root/'GATE.json').write_text(json.dumps(status,indent=2,sort_keys=True)+'\n')
+          PY
+          if test -f /tmp/sub03/evalmath_pilot.json; then
+            curl -fLsS \
+              'https://raw.githubusercontent.com/MoralityLabAI/EvalMath/6d9c28dbe8e4c42b3fba76ae7adb84aed9f0921a/skills/evalmath-mechinterp-power/scripts/preflight.py' \
+              -o /tmp/sub03/evalmath_preflight_pinned.py
+            set +e
+            python /tmp/sub03/evalmath_preflight_pinned.py \
+              --pilot /tmp/sub03/evalmath_pilot.json \
+              --out /tmp/sub03/EVALMATH_PREFLIGHT.json --strict
+            status=$?
+            set -e
+            if test "$status" -ne 0 && test "$status" -ne 2; then
+              echo "Unexpected strict EvalMath execution error: $status"
+              exit "$status"
+            fi
+            python - "$status" <<'PY'
+          import json, sys
+          from pathlib import Path
+          root=Path('/tmp/sub03')
+          s=int(sys.argv[1])
+          gate=json.loads((root/'GATE.json').read_text())
+          pre=json.loads((root/'EVALMATH_PREFLIGHT.json').read_text())
+          assert pre['experiment_id']=='BPD-SUB-03'
+          assert pre['pilot_worlds']>=59
+          assert s==(0 if pre['decision']=='READY_FOR_CONFIRMATION' else 2)
+          gate['evalmath_strict_exit_code']=s
+          gate['evalmath_decision']=pre['decision']
+          gate['mechanistic_variation_floor_bounded']=pre['mechanistic_variation_floor']
+          gate['mechanistic_variation_floor_logit_rms']=(
+              pre['mechanistic_variation_floor']/
+              (1-pre['mechanistic_variation_floor']))
+          gate['scientific_status']='PREFLIGHT_'+pre['decision']
+          (root/'GATE.json').write_text(json.dumps(gate,indent=2,sort_keys=True)+'\n')
+          print(json.dumps(gate,sort_keys=True))
+          PY
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bpd-sub03-original-64-root-calibration-and-preflight
+          path: /tmp/sub03/
+          retention-days: 90
