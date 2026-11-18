@@ -418,10 +418,6 @@ def evaluate_root(seed:int, *, steps:int=STEPS):
     dose_ok=all(
         row["transition"]["max_physical_dose_error"]<=5e-6
         and row["transition"]["max_null_projection_norm"]<=5e-6
-        for row in (*results.values(),)
-    ) if False else all(
-        row["transition"]["max_physical_dose_error"]<=5e-6
-        and row["transition"]["max_null_projection_norm"]<=5e-6
         for row in list(results.values())+sham_results
     ) and all(z<=5e-6 for z in check_doses.values())
     gauge_ok=(
