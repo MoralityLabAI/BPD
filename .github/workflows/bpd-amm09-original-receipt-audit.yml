@@ -21,7 +21,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           run-id: 44281548742
-          github-token: \${{ github.token }}
+          github-token: ${{ github.token }}
           name: amm09-two-slot-cpu-source-locked-receipts
           path: /tmp/amm09_first_run
       - name: Check exact original uploaded raw development evidence hash
