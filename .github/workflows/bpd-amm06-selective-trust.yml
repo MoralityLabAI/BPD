@@ -1,0 +1,98 @@
+name: BPD-AMM-06 selective trust gate and EvalMath root audit
+
+on:
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/amm06_selective_trust/**'
+      - '.github/workflows/bpd-amm06-selective-trust.yml'
+  workflow_dispatch:
+
+jobs:
+  cpu-source-and-registered-replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install CPU-only PyTorch and numpy
+        run: python -m pip install --index-url https://download.pytorch.org/whl/cpu 'torch==2.10.0+cpu' 'numpy>=1.26'
+      - name: Run excluded engineering-root native parity and hard seal tests
+        run: python -m unittest mechinterp.bpd.experiments.amm06_selective_trust.test_experiment -v
+      - name: Fit sixty-four new training model roots, reconstruct frozen memory
+        shell: bash
+        run: |
+          python -m mechinterp.bpd.experiments.amm06_selective_trust.experiment --phase training --out /tmp/amm06_training.json
+          python - <<'PY'
+          import json, pathlib
+          from mechinterp.bpd.experiments.amm06_selective_trust import experiment as e
+          train=json.load(open('/tmp/amm06_training.json'))
+          lock=e.compact(train)
+          print('AMM06_TRAINING_LOCK='+json.dumps(lock,sort_keys=True))
+          expected=pathlib.Path('mechinterp/bpd/experiments/amm06_selective_trust/results/TRAINING_LOCK.json')
+          if expected.exists():
+              assert lock==json.loads(expected.read_text()),'locked source/training changed'
+              print('AMM06 frozen training memory PASS')
+          else:
+              print('AMM06 source-only training; no independent development until a training lock is committed')
+          PY
+      - name: Evaluate independent development only after training source lock
+        shell: bash
+        run: |
+          if test -f mechinterp/bpd/experiments/amm06_selective_trust/results/TRAINING_LOCK.json; then
+            python -m mechinterp.bpd.experiments.amm06_selective_trust.experiment \
+              --phase development --memory /tmp/amm06_training.json \
+              --out /tmp/amm06_development.json
+            python - <<'PY'
+          import json,pathlib
+          from mechinterp.bpd.experiments.amm06_selective_trust import experiment as e
+          dev=json.load(open('/tmp/amm06_development.json'))
+          lock=e.compact(dev)
+          print('AMM06_DEVELOPMENT_LOCK='+json.dumps(lock,sort_keys=True))
+          expected=pathlib.Path('mechinterp/bpd/experiments/amm06_selective_trust/results/DEVELOPMENT_LOCK.json')
+          if expected.exists():
+              assert lock==json.loads(expected.read_text()), 'full-case confirmation/provenance drift'
+              print('AMM06 development all-case hash replay PASS')
+          else:
+              print('AMM06 first independent development receipt; use this source-locked CI artifact')
+          PY
+          else
+            echo 'AMM06 development blocked until 64-root training lock is committed'
+          fi
+      - name: Check corrected EvalMath 95/95 independent-root gate
+        shell: bash
+        run: |
+          if test -f /tmp/amm06_development.json; then
+            curl -fsSL https://raw.githubusercontent.com/MoralityLabAI/EvalMath/6d9c28dbe8e4c42b3fba76ae7adb84aed9f0921a/skills/evalmath-mechinterp-power/scripts/preflight.py -o /tmp/amm06_evalmath.py
+            python - <<'PY'
+          import json
+          dev=json.load(open('/tmp/amm06_development.json'))
+          json.dump(dev['preflight_input'],open('/tmp/amm06_pilot.json','w'))
+          PY
+            python /tmp/amm06_evalmath.py --pilot /tmp/amm06_pilot.json --out /tmp/amm06_preflight.json
+            python - <<'PY'
+          import json,pathlib
+          pf=json.load(open('/tmp/amm06_preflight.json'))
+          print('AMM06_PREFLIGHT='+json.dumps(pf,sort_keys=True))
+          expected=pathlib.Path('mechinterp/bpd/experiments/amm06_selective_trust/results/PREFLIGHT.json')
+          if expected.exists():
+              assert pf==json.loads(expected.read_text()),'pinned independent-root preflight changed'
+              print('AMM06 pinned EvalMath preflight replay PASS')
+          print('Confirmation remains sealed; never run release from CI')
+          PY
+          else
+            echo 'AMM06 preflight waits for independent development roots'
+          fi
+      - name: Archive complete training, development and preflight evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: amm06-registered-cpu-receipts
+          if-no-files-found: ignore
+          retention-days: 30
+          path: |
+            /tmp/amm06_training.json
+            /tmp/amm06_development.json
+            /tmp/amm06_pilot.json
+            /tmp/amm06_preflight.json
