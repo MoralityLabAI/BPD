@@ -1,0 +1,174 @@
+{
+  "approved_source_commit_sha": "51b71eb16267fb04ef7162efd99e1e8bf184741d",
+  "calibration_roots": [
+    16000,
+    16001,
+    16002,
+    16003,
+    16004,
+    16005,
+    16006,
+    16007,
+    16008,
+    16009,
+    16010,
+    16011,
+    16012,
+    16013,
+    16014,
+    16015,
+    16016,
+    16017,
+    16018,
+    16019,
+    16020,
+    16021,
+    16022,
+    16023,
+    16024,
+    16025,
+    16026,
+    16027,
+    16028,
+    16029,
+    16030,
+    16031,
+    16032,
+    16033,
+    16034,
+    16035,
+    16036,
+    16037,
+    16038,
+    16039,
+    16040,
+    16041,
+    16042,
+    16043,
+    16044,
+    16045,
+    16046,
+    16047,
+    16048,
+    16049,
+    16050,
+    16051,
+    16052,
+    16053,
+    16054,
+    16055,
+    16056,
+    16057,
+    16058
+  ],
+  "copied_original_outputs": {
+    "FC05_EVALMATH_INPUT.json": {
+      "sha256": "78622a8fa6af70d3d8dfc0d583882fdf800f2e8ce31c4cb5d066bf6db2b52725",
+      "size_bytes": 6871
+    },
+    "FC05_EVALMATH_PREFLIGHT.json": {
+      "sha256": "abe6f78bac2a58290773719f2f4302d8c0f03c6e5c050bce647cc1429932bfff",
+      "size_bytes": 1233
+    },
+    "FC05_EVALMATH_RECEIPT.json": {
+      "sha256": "03c5691240f69dd047baff46c703968a8d65877421cc6c3163faf77929f6b7fd",
+      "size_bytes": 218
+    },
+    "FC05_ORIGINAL_SHA256.csv": {
+      "sha256": "ca430b7c8fc137271a9208f97372ecd37fd66c7c6d73d558939cea1abc619c34",
+      "size_bytes": 21160
+    },
+    "FC05_PER_ROOT.csv": {
+      "sha256": "d5607f24b71f7b5c0ee2d055508116a5cb65d2ae86718ba0db7a18cb8b199326",
+      "size_bytes": 13189
+    },
+    "ORIGINAL_ENVIRONMENT.json": {
+      "sha256": "c1a5220cf8e692e6cbcf679ccd9f0aab1a2b31999b4a44a6f909bb2bc0292fae",
+      "size_bytes": 725
+    },
+    "ORIGINAL_RUN_COMPLETION.json": {
+      "sha256": "624ecf53f447440af86791360c69375ab11255008a284e59688b912381df2290",
+      "size_bytes": 817
+    }
+  },
+  "eligible_roots": 59,
+  "evidence_class": "CALIBRATION_DEVELOPMENT_ONLY",
+  "hosted_original_smoke_replay": {
+    "sha256": "d1cee041f73dce395252381de0dae27dc0f834ff83c5a07d09cb714f70b34205",
+    "size_bytes": 2849
+  },
+  "initial_source_commit_sha": "9e8a51c4c3633327ecd14c75a2fc48c963dc03b3",
+  "original_archive_members": 187,
+  "original_archives": [
+    {
+      "artifact_id": 14434720197,
+      "artifact_url": "https://github.com/MoralityLabAI/BPD/actions/runs/44319021117/artifacts/14434720197",
+      "file": "bpd-nc09-fc05-original-59-root-44319021117.zip",
+      "run_id": 44319021117,
+      "run_url": "https://github.com/MoralityLabAI/BPD/actions/runs/44319021117",
+      "sha256": "44b7ec94472b11444d7c71fc9668740d925c76367b27f51c0921556d93769986",
+      "size_bytes": 89927755,
+      "workflow_conclusion": "success"
+    },
+    {
+      "artifact_id": 14433326335,
+      "artifact_url": "https://github.com/MoralityLabAI/BPD/actions/runs/44317319540/artifacts/14433326335",
+      "file": "bpd-nc09-fc05-excluded-15999-44317319540.zip",
+      "run_id": 44317319540,
+      "run_url": "https://github.com/MoralityLabAI/BPD/actions/runs/44317319540",
+      "sha256": "23e95ea757082dfef9bb417bb9dc04381aa7ef026c8526ece99b160cfacf5bb7",
+      "size_bytes": 1508382,
+      "workflow_conclusion": "failure"
+    },
+    {
+      "artifact_id": 14432474818,
+      "artifact_url": "https://github.com/MoralityLabAI/BPD/actions/runs/44318700523/artifacts/14432474818",
+      "file": "bpd-nc09-fc05-smoke-replay-44318700523.zip",
+      "run_id": 44318700523,
+      "run_url": "https://github.com/MoralityLabAI/BPD/actions/runs/44318700523",
+      "sha256": "5df2bd8a4f1df9877f096336dbef11e73fe8a58bf5f5a414f3ca9b28ff9380d8",
+      "size_bytes": 1373,
+      "workflow_conclusion": "success"
+    }
+  ],
+  "original_execution_commit_sha": "895433c4bc15c0985af6fc4936504bf055f76cdc",
+  "original_summary": {
+    "file": "FC05_ORIGINAL_59_ROOT_SUMMARY.json",
+    "sha256": "7878745cc6f1f95457b59f27961aae8bb9dcd9c5053956d39fd0357ee56fc77c",
+    "size_bytes": 1873932
+  },
+  "post_run_audits": {
+    "FC05_SOURCE_AUDIT.json": {
+      "sha256": "b009624828a0140ba2d925c24b0a461bca4494a1923d34c5f49b88ce5eed267d",
+      "size_bytes": 38210
+    },
+    "FC05_STATISTICAL_AUDIT.json": {
+      "sha256": "972fbb00250af29c9ff40caf4373691f76aeb8873cf3b7d14b79a6e3ff6d09d2",
+      "size_bytes": 41768
+    },
+    "FC05_TASK_RECEIPT_AUDIT.json": {
+      "sha256": "1b0f77bf8860c9b7dbc348ff5d3b27929509f9c38785422d0ccaf4237986ce49",
+      "size_bytes": 87166
+    }
+  },
+  "post_run_scope": "All checks read original evidence. No new training, source optimization, task rollout, root replacement or threshold change occurred.",
+  "post_run_source_auditor": {
+    "changes": "Added CLI paths and output safeguards, with a failing exit status when checks fail. Audit arithmetic is unchanged.",
+    "original_script_sha256": "3d6b1a1260fbac8820eae08c6f2737bfb906f6c2dfa12c39ad5942a5227db2ef",
+    "published_script_sha256": "78271afb03c0b870f56e96b93d1d6146c74cfe5f0d94930a894e1e4732b49054"
+  },
+  "protocol_commit_sha": "8eb34f3533591513b46f14b902721d7f78bc0d43",
+  "publication_date": "2026-11-18",
+  "registered_verdict": "FULL_TANGENT_CALIBRATION_PILOT_ONLY",
+  "replay_repair_commit_sha": "cf877e2b3bfd9ca41ce296ec55df311ad6dc7394",
+  "root_source_task_manifest_entries": 177,
+  "scientific_confirmation_models_evaluated": 0,
+  "selected_shams": 472,
+  "source_manifest_files": 55,
+  "source_manifest_sha256": "8e8500cd4c3d82ba9bce3e86d1405be13da544e7dc9435dee4742f2a58861628",
+  "study": "BPD-NC09-FC05",
+  "summary_extract": {
+    "sha256": "ebe3fb1e4ebeb7c58b601b9c47e83e1a967b0db105e0b39b069e533eecb7f567",
+    "size_bytes": 11200
+  }
+}

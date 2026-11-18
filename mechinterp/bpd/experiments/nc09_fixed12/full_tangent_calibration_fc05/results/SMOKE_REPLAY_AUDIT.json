@@ -1,0 +1,64 @@
+{
+  "audit_source_manifest_sha256": "8e8500cd4c3d82ba9bce3e86d1405be13da544e7dc9435dee4742f2a58861628",
+  "exact_original_parameter_states_reproduced": 33,
+  "frozen_sampler_agreement": {
+    "compared_counters": {
+      "charts_actually_started": 8,
+      "full_tangent_parameter_count": 202,
+      "jacobian_rank_census": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 25
+      },
+      "root_seed": 15055999,
+      "selected": 8,
+      "total_jacobian_corrections": 25
+    },
+    "exact_selected_projector_bytes_equal": true,
+    "new_model_trainings_in_comparison": 0,
+    "passed": true,
+    "projector_sha256_sequence": [
+      "3fe564fb243297db1f326ef34eda2467e6e6d22e66172ed5c35e8e1ff6373073",
+      "8b6a82d2b666b2df9f39b5ee23121da3401892f407628dc4c02c28193a975d8f",
+      "dbda6707203c824fc820dbd788522f565de5dbb3139281b549e21b7fd0939954",
+      "d8d3e957d25f68bb210ebcc4d09713ef049c0f7cbe927779be41ad69c7c6bc11",
+      "de231cadbd6ec53c828fe6ac34fef896ebc6a8780d6e9523ef379422d88833a5",
+      "f1d98f2a4f9607d2070850e2de9f09a780c2d48ad4823a7f2ae30b7ee7493977",
+      "ed571e269c9517e7fae80046ea1ba6155949364ab529045d0f4304cb0ebfa1e6",
+      "6362b8d2a4178620544cf00c919873f4b1a8ae894b2efea5bec96ef19cc5f95e"
+    ],
+    "sampler": "frozen_FC04_89fb5446d2734ba3c34b765354ebfd1ea9e3eba4"
+  },
+  "instrumented_projector_sha256_sequence": [
+    "3fe564fb243297db1f326ef34eda2467e6e6d22e66172ed5c35e8e1ff6373073",
+    "8b6a82d2b666b2df9f39b5ee23121da3401892f407628dc4c02c28193a975d8f",
+    "dbda6707203c824fc820dbd788522f565de5dbb3139281b549e21b7fd0939954",
+    "d8d3e957d25f68bb210ebcc4d09713ef049c0f7cbe927779be41ad69c7c6bc11",
+    "de231cadbd6ec53c828fe6ac34fef896ebc6a8780d6e9523ef379422d88833a5",
+    "f1d98f2a4f9607d2070850e2de9f09a780c2d48ad4823a7f2ae30b7ee7493977",
+    "ed571e269c9517e7fae80046ea1ba6155949364ab529045d0f4304cb0ebfa1e6",
+    "6362b8d2a4178620544cf00c919873f4b1a8ae894b2efea5bec96ef19cc5f95e"
+  ],
+  "layout_source": "Frozen nc08.passwise_source_candidates slices torch.linalg.eigh eigenvectors",
+  "new_models_trained": 0,
+  "new_task_evaluations": 0,
+  "original_artifact_id": 14433326335,
+  "original_jacobian_corrections": 25,
+  "original_root_json_sha256": "e7c00303308e44606cc05b64ad31057dbbea5339d6b48ccff37f47ff31a825bc",
+  "original_run_id": 44317319540,
+  "original_source_archive_sha256": "db2b7c5c27dd0b741af8007b8bd391c1c6afddd22d615bf0cc03017617b125bc",
+  "original_task_archive_sha256": "7784186ccae9272eca5ea58836e4f2534c4e8176b39ec37b939a6aff2b5281e8",
+  "original_workflow_conclusion": "failure",
+  "passed": true,
+  "phase": "ORIGINAL_SMOKE_REPLAY_AUDIT",
+  "replay_basis_stride_elements": [
+    1,
+    20
+  ],
+  "scientific_confirmation_models_evaluated": 0,
+  "source_audit_passed": true,
+  "study": "BPD-NC09-FC05",
+  "task_audit_passed": true,
+  "technical_admission_errors": []
+}
