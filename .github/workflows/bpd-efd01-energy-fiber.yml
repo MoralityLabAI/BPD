@@ -1,0 +1,29 @@
+name: BPD-EFD-01 energy-fiber math source-only
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/experiments/efd01/**'
+      - '.github/workflows/bpd-efd01-energy-fiber.yml'
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/efd01/**'
+      - '.github/workflows/bpd-efd01-energy-fiber.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-only-cpu:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install numpy==1.26.4
+      - name: Verify source-only numerical tests (no pretrained assets or sealed data)
+        run: |
+          python -m compileall -q mechinterp/bpd/experiments/efd01
+          python -m unittest discover -s mechinterp/bpd/experiments/efd01 -p 'test_energy_fibers.py' -v
