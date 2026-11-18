@@ -1,0 +1,27 @@
+{
+  "schema": "BPD-AMM-04/training-lock/v1",
+  "source_freeze_commit": "a1af66f00207d899307eb704d262f047e154454d",
+  "independent_training_roots": 64,
+  "clean_training_pairs_per_root": 96,
+  "memory_sha256": "f9983333551bd7a16d62ac0e2b5c855dd4d6b9e932d96534d38b20a30e0a1b14",
+  "full_training_canonical_sha256": "0022a16ea6a99e33539425091d5aef8a69d3e3559b59e9a3b83906cfc26bcc14",
+  "source_sha256": {
+    "models.py": "dc186b5b1fef4aa8b4562f5e927b69a13c5a346e95d4ba51e8cff37412bdc40f",
+    "experiment.py": "e55ca56d70d04b7d4ada5cec4d56a6a9c9da9b74914fee299964a5c9b9ca7bab"
+  },
+  "pooled_action": 0,
+  "component_training_hits": {
+    "0": 4864,
+    "1": 4501
+  },
+  "ridge_coefficients": [
+    -0.3694984700519328,
+    0.1640684270799012,
+    2.5388031414343972,
+    -1.7240292323712836,
+    0.3966926555802652,
+    -0.008388980279500295,
+    0.07529149593937957
+  ],
+  "status": "frozen before scoring AMM04 development model roots"
+}

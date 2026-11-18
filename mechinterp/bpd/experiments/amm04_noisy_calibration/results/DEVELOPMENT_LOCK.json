@@ -1,0 +1,43 @@
+{
+  "schema": "BPD-AMM-04/development-lock/v1",
+  "source_freeze_commit": "a1af66f00207d899307eb704d262f047e154454d",
+  "training_lock_commit": "f5f7c5ceaeb823573b39c7a67e4bcfa03cde233d",
+  "independent_roots": 64,
+  "test_cases_per_root": 128,
+  "repeatability_cases_per_root": 128,
+  "calibration_pairs_per_root": 4,
+  "local_judge_feedback_bits_per_root": 8,
+  "test_cases_total": 8192,
+  "source_sha256": {
+    "models.py": "dc186b5b1fef4aa8b4562f5e927b69a13c5a346e95d4ba51e8cff37412bdc40f",
+    "experiment.py": "e55ca56d70d04b7d4ada5cec4d56a6a9c9da9b74914fee299964a5c9b9ca7bab"
+  },
+  "training_memory_sha256": "f9983333551bd7a16d62ac0e2b5c855dd4d6b9e932d96534d38b20a30e0a1b14",
+  "totals": {
+    "full_donor": 8111,
+    "geometry_rule": 7102,
+    "local_only": 7161,
+    "memory_calibrated": 7457,
+    "memory_only": 7472,
+    "pooled": 6673,
+    "random_component": 6458,
+    "random_dark": 2242,
+    "random_dark_b": 2206,
+    "sham": 41
+  },
+  "root_case_bits_sha256": "abae857059c929558b78132feb184079c7a7ebac0abc48e2a281cc6753745c29",
+  "complete_canonical_receipt_sha256": "79d6d5097d89fbe8cddda18f6a805444b02a2219c92b891bea1295a15c52381e",
+  "preflight_input_sha256": "ed2bdca1029262c9f88623d89e6470881202312ab829a52de9c83160f94d798b",
+  "posthoc_oracle_headroom_hits": 730,
+  "posthoc_oracle_headroom_rate": 0.089111328125,
+  "feedback_flip_count": 184,
+  "feedback_labeled_observations": 512,
+  "calibration_tied_noisy_roots": 11,
+  "memory_local_action_disagreements": 7,
+  "primary_gain_roots": 3,
+  "primary_loss_roots": 0,
+  "primary_tied_roots": 61,
+  "max_active_equal_dose_abs_error": 2.384185791015625e-7,
+  "max_current_visible_effect": 0,
+  "evidence_class": "registered synthetic trained-model development-only"
+}

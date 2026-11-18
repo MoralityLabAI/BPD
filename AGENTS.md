@@ -19,6 +19,15 @@ does not thereby repair clean reasoning. Observational probes and exact
 linear-algebraic BPD witnesses belong to different evidence classes from
 native model-causal claims.
 
+AMM-04's 128-model confirmation cohort is **sealed** after a strict
+corrected EvalMath preflight returned `REDESIGN_OR_PILOT_ONLY`.
+Its development memory-over-local gain was +3.61 percentage points across
+64 independent trained model roots, below the frozen +8pp scientific minimum.
+Do not run AMM-04 `--phase confirmation`, pass a fabricated READY receipt,
+or repurpose its 128 confirmation roots. Use
+`mechinterp/bpd/experiments/amm04_noisy_calibration/RESULTS.md` and
+`results/PREFLIGHT.json` to understand the scientific decision.
+
 AMM-03's 128-model confirmation population is **scientifically sealed**:
 its 64 independent development roots yielded zero memory-over-local gain
 and the source-pinned EvalMath planner misleadingly reported READY from

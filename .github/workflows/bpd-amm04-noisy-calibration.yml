@@ -1,0 +1,76 @@
+name: BPD-AMM-04 noisy local calibration and geometry memory
+on:
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/amm04_noisy_calibration/**'
+      - '.github/workflows/bpd-amm04-noisy-calibration.yml'
+  workflow_dispatch:
+jobs:
+  cpu-source-and-replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install CPU PyTorch and numpy
+        run: python -m pip install --index-url https://download.pytorch.org/whl/cpu 'torch==2.10.0+cpu' 'numpy>=1.26'
+      - name: Excluded engineering roots, native BPD parity, gauge and seal guards
+        run: python -m unittest mechinterp.bpd.experiments.amm04_noisy_calibration.test_experiment -v
+      - name: Reconstruct training and development and audit every scored bit
+        shell: bash
+        run: |
+          if test -f mechinterp/bpd/experiments/amm04_noisy_calibration/results/DEVELOPMENT_LOCK.json; then
+            python -m mechinterp.bpd.experiments.amm04_noisy_calibration.experiment --phase training --out /tmp/amm04_training.json
+            python -m mechinterp.bpd.experiments.amm04_noisy_calibration.experiment --phase development --memory /tmp/amm04_training.json --out /tmp/amm04_development.json
+            python - <<'PY'
+          import json
+          from mechinterp.bpd.experiments.amm04_noisy_calibration import experiment as e, models as m
+          prefix='mechinterp/bpd/experiments/amm04_noisy_calibration/results/'
+          train=json.load(open('/tmp/amm04_training.json'))
+          dev=json.load(open('/tmp/amm04_development.json'))
+          a=json.load(open(prefix+'TRAINING_LOCK.json'))
+          b=json.load(open(prefix+'DEVELOPMENT_LOCK.json'))
+          assert train['sha256']==a['memory_sha256'], 'training memory changed'
+          assert train['pooled_action']==a['pooled_action']
+          assert e.source_sha256()==a['source_sha256']==b['source_sha256']
+          assert dev['training_memory_sha256']==train['sha256']
+          assert dev['n_independent_roots']==b['independent_roots']==64
+          assert dev['totals']==b['totals']
+          assert dev['posthoc_oracle_headroom_hits']==b['posthoc_oracle_headroom_hits']
+          def bits(rows):
+              return m.digest([{'root':r['root'],
+                  'clean_calibration_bits':r['calibration_audit_clean']['candidate_bits'],
+                  'reported_calibration_bits':r['calibration_feedback_visible']['reported_bits'],
+                  'heldout_candidate_bits':r['heldout']['candidate_bits'],
+                  'policy_bits':r['policy_bits'],
+                  'repeatability_bits':r['repeatability']['local_only_bits'],
+                  'choices':r['policy_actions']} for r in rows])
+          assert bits(dev['rows'])==b['root_case_bits_sha256']
+          print('AMM04 full source and per-root case-bit replay PASS')
+          PY
+          else
+            echo 'SOURCE ONLY: development scores remain ungenerated'
+          fi
+      - name: Pin merged EvalMath root-variation preflight and verify decision
+        shell: bash
+        run: |
+          if test -f mechinterp/bpd/experiments/amm04_noisy_calibration/results/PREFLIGHT.json; then
+            curl -fsSL https://raw.githubusercontent.com/MoralityLabAI/EvalMath/6d9c28dbe8e4c42b3fba76ae7adb84aed9f0921a/skills/evalmath-mechinterp-power/scripts/preflight.py -o /tmp/amm04_evalmath.py
+            python - <<'PY'
+          import json
+          dev=json.load(open('/tmp/amm04_development.json'))
+          json.dump(dev['preflight_input'],open('/tmp/amm04_pilot.json','w'))
+          PY
+            python /tmp/amm04_evalmath.py --pilot /tmp/amm04_pilot.json --out /tmp/amm04_pf.json
+            python - <<'PY'
+          import json
+          pf=json.load(open('/tmp/amm04_pf.json'))
+          locked=json.load(open('mechinterp/bpd/experiments/amm04_noisy_calibration/results/PREFLIGHT.json'))
+          assert pf==locked,'EvalMath decision changed'
+          print('AMM04 pinned EvalMath:',pf['decision'])
+          PY
+          else
+            echo 'SOURCE ONLY: no development preflight'
+          fi
