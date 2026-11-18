@@ -1,0 +1,70 @@
+name: BPD-DT02-A archive source-locked native TRM raw receipt
+
+on:
+  push:
+    branches:
+      - "research/bpd-dt02-ci-trained-native-20261118"
+    paths:
+      - ".github/workflows/bpd-dt02-archive.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  archive-native-receipt:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Download first registered native mini TRM training receipt
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/bpd_dt02_receipt"
+          gh run download 44277919962 \
+            --repo MoralityLabAI/BPD \
+            --name bpd-dt02a-native-minitrm-six-models-excluded-receipt \
+            --dir "$RUNNER_TEMP/bpd_dt02_receipt"
+      - name: Validate raw digest, exact registered roots and task provenance
+        shell: bash
+        run: |
+          python - <<'PY'
+          import hashlib,json,os
+          from pathlib import Path
+          root=Path('mechinterp/bpd/experiments/depth_steering_gym')
+          f=Path(os.environ['RUNNER_TEMP'])/'bpd_dt02_receipt'/'bpd_dt02a_native_training.json'
+          raw=f.read_bytes()
+          sha=hashlib.sha256(raw).hexdigest()
+          assert sha=='9d4f9463c0853c6cc2491711ebf3cb6c37021a61861f3947962dff67fa76b30b',sha
+          x=json.loads(raw)
+          assert x['experiment']=='BPD-DT02-A'
+          assert x['supervised_depths']==[2,4,6] and x['heldout_depths']==[8,12]
+          assert [r['seed'] for r in x['roots']]==[901,902]
+          assert not x['official_arc1_evaluated']
+          assert not x['full_task_jacobian_null_evaluated']
+          for root_row in x['roots']:
+              assert set(root_row['family'])=={'sudoku4','arc_style','storyworld'}
+              for row in root_row['family'].values():
+                  assert row['eval']['12']['n']==64
+          dest=root/'results'/'dt02a_native_excluded.json'
+          dest.parent.mkdir(parents=True,exist_ok=True)
+          dest.write_bytes(raw)
+          print('BPD-DT02-A ORIGINAL TRAINING RECEIPT HASH VERIFIED',sha,len(raw))
+          PY
+      - name: Commit exact first-run JSON without rewriting existing science
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add mechinterp/bpd/experiments/depth_steering_gym/results/dt02a_native_excluded.json
+          if git diff --cached --quiet; then
+            echo "Original receipt already archived"
+          else
+            git commit -m "results(BPD-DT02): archive byte-verified first native six-model CPU receipt"
+            git push origin HEAD:research/bpd-dt02-ci-trained-native-20261118
+          fi
