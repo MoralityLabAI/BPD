@@ -80,7 +80,7 @@ def heldout_source(seed:int, law:str, family:str, *,
         CONFIG["source_rng"]["heldout_family_stride"]*idx
     )
     q=rotation_for_seed(seed,D)
-    x,latent,mask=sample_batch(generator,n,q,cell=CELL,family=family)
+    x,mask,latent=sample_batch(generator,n,q,cell=CELL,family=family)
     if law=="radial_camouflage":
         streams=CONFIG["source_laws"]["radial_camouflage"]["deterministic_streams"]
         x,latent,radius=_camouflage(
