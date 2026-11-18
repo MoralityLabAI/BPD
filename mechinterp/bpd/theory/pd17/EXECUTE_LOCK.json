@@ -1,0 +1,17 @@
+{
+  "study_id": "BPD-PD-17",
+  "execution": "first_registered_full_cohort",
+  "registration_date": "2026-11-18",
+  "config_original_commit_sha": "2bdea40b83f60f17d9af2f396c69a6d62a0952c2",
+  "protocol_original_commit_sha": "a190856c6447102c7a9a3d6aee08a4d4cb2db28f",
+  "source_commit_sha": "481079c9c295213892e2ee4b164c345b6619e479",
+  "units": 32,
+  "paired_source_laws": 2,
+  "arms_per_law": 4,
+  "excluded_engineering_seed": 4001,
+  "source_preflight_CI_run": 44240634021,
+  "source_preflight_CI_conclusion": "success",
+  "Lean_CI_run": 44240518056,
+  "Lean_CI_conclusion": "success",
+  "provenance": "Pin original 256-arm first-run scientific PASS/FAIL and per-root observations without modifying scientific CONFIG, PROTOCOL, source, optimizer or scorer after unsealing."
+}
