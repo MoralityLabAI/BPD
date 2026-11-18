@@ -1,0 +1,31 @@
+{
+  "all_case_bits_sha256": "63963c059df3b29f9368320df06707d2d85bc7954efbb511aefcd745ba5f765b",
+  "full_receipt_sha256": "b67a2e8836e441e5d05db8136c276fdc9fd344e598a06e0189408b3b93ab439d",
+  "gate_accepted_roots": 7,
+  "gate_quality_acceptance_gap": 0.09375,
+  "headroom_rate": 0.0802001953125,
+  "independent_roots": 64,
+  "memory_sha256": "fe39c6bb94885b6e968ac95dc6589892480b862e2060dd69c4162dff25b73c9c",
+  "phase": "development",
+  "preflight_input_sha256": "51033dde7815252809e38a7d36f03b683a338deaa5ef916fc22e6cd90b269709",
+  "schema": "bpd.amm06.selective_trust.v1/cohort_lock",
+  "source_sha256": {
+    "case.py": "0fe333bba17289c7d9a288e70a77327878c2417f1890d8dac568aeaa5a2c802c",
+    "experiment.py": "6b883ccabaffb82c080dcc6dccd5929838cafdbf5211e1233f35530386882907",
+    "gate.py": "641a9e24ed707a1ec169bd3fb9fe0f37c17c3b41f71ff5ae05fa74b6210124e8",
+    "models.py": "78b2b91532625c524eb9da0b22485e70dd43f98d9d47c7adb15ab675efc43126"
+  },
+  "test_cases": 16384,
+  "totals": {
+    "always_update": 6790,
+    "full_donor": 16160,
+    "local_ridge": 5793,
+    "memory_only": 6995,
+    "pooled": 5682,
+    "random_component": 4799,
+    "random_dark": 3244,
+    "random_dark_b": 3240,
+    "selective_trust": 6922,
+    "sham": 12
+  }
+}
