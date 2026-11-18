@@ -19,6 +19,16 @@ does not thereby repair clean reasoning. Observational probes and exact
 linear-algebraic BPD witnesses belong to different evidence classes from
 native model-causal claims.
 
+AMM-05's 128-model confirmation roots are **sealed**. Its 64 independent
+development models yielded a positive +5.87pp memory-over-local ridge
+direction, but the independent-root repeatability variation floor was
++14.06pp, leading the corrected EvalMath planner to
+`REDESIGN_OR_PILOT_ONLY`. Do not run AMM-05 `--phase confirmation`,
+construct a release manifest from the archived negative preflight,
+or reinterpret repeated donor pairs as independent model roots. Refer
+to `mechinterp/bpd/experiments/amm05_case_routing/RESULTS.md` and
+the source-locked `results/PREFLIGHT.json` before new proposals.
+
 AMM-04's 128-model confirmation cohort is **sealed** after a strict
 corrected EvalMath preflight returned `REDESIGN_OR_PILOT_ONLY`.
 Its development memory-over-local gain was +3.61 percentage points across
