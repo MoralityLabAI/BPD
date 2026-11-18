@@ -35,7 +35,7 @@ class AMM11Tests(unittest.TestCase):
 
     def test_external_three_pass_labels_by_family(self):
         x=torch.tensor([[.1,.2,.3]])
-        self.assertEqual(tuple(float(y[0]) for y in m.labels(x,"wren")),(.1,.2,.3))
+        self.assertTrue(torch.allclose(torch.stack(m.labels(x,"wren"),dim=1),x))
         self.assertAlmostEqual(float(m.labels(x,"basalt")[0][0]),.3,places=6)
 
     def test_nuisance_and_future_input_deltas(self):
@@ -105,7 +105,7 @@ class AMM11Tests(unittest.TestCase):
         self.assertEqual(signature["versions"]["torch"],"2.10.0+cpu")
         self.assertTrue(signature["deterministic"])
         self.assertIn(signature["cpu_capability"],("NO AVX","DEFAULT"))
-        self.assertEqual(e.source_sha256()["RUNTIME.json"],m.digest(json.loads((m.ROOT/"RUNTIME.json").read_text())) if False else e.source_sha256()["RUNTIME.json"])
+        self.assertEqual(len(e.source_sha256()["RUNTIME.json"]),64)
 
     def test_repeated_donor_streams_disjoint(self):
         a=m.donor_pairs("engineering",0,m.PAIRS,"heldout")
