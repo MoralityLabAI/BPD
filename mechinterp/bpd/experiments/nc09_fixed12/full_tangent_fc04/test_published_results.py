@@ -129,7 +129,6 @@ def audit_original_first_run(path:Path):
         rng=np.random.default_rng(15041504)
         ix=rng.integers(0,16,size=(4096,16))
         means=values[ix].mean(axis=1)
-        assert abs(float(means.mean())-float(means.mean()))<1e-12
         assert abs(stats["mean"]-float(values.mean()))<1e-12
         assert abs(stats["lower95"]-float(np.percentile(means,2.5)))<1e-12
         assert abs(stats["upper95"]-float(np.percentile(means,97.5)))<1e-12
