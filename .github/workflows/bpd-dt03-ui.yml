@@ -1,0 +1,48 @@
+name: BPD-DT03 local research UI integrity and interaction contracts
+on:
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/depth_steering_gym/ui/**'
+      - 'mechinterp/bpd/experiments/depth_steering_gym/ui_server.py'
+      - 'mechinterp/bpd/experiments/depth_steering_gym/test_ui.py'
+      - 'mechinterp/bpd/experiments/depth_steering_gym/UI_README.md'
+      - '.github/workflows/bpd-dt03-ui.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  ui-source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.11','3.13']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Pin CPU Torch supported on Python version
+        shell: bash
+        run: |
+          if [ '${{ matrix.python-version }}' = '3.13' ]; then
+            python -m pip install torch==2.10.0 --index-url https://download.pytorch.org/whl/cpu
+          else
+            python -m pip install torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          fi
+      - name: Validate browser JavaScript syntax
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          src=Path('mechinterp/bpd/experiments/depth_steering_gym/ui/index.html').read_text()
+          script=src.split('<script>',1)[1].split('</script>',1)[0]
+          Path('/tmp/dt03-browser.js').write_text(script)
+          PY
+          node --check /tmp/dt03-browser.js
+      - name: Run read-only UI and fixture contracts
+        env:
+          OMP_NUM_THREADS: '1'
+          MKL_NUM_THREADS: '1'
+        run: python -m unittest mechinterp.bpd.experiments.depth_steering_gym.test_ui -v
