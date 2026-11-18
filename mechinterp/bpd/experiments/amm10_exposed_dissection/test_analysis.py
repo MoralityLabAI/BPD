@@ -88,6 +88,6 @@ class AMM10Tests(unittest.TestCase):
         self.assertEqual(r1["negative_roots"],24)
         self.assertEqual(r1["tied_roots"],9)
         self.assertEqual(r1["delta_hits"],31*4-24*3)
-        self.assertEqual(r1["descriptive_cluster_bootstrap_95"][0]<=r1["mean_root_difference"],True)
+        self.assertEqual(r1["descriptive_cluster_bootstrap_95"][0]<=r1["delta_rate"],True)
 
 if __name__=="__main__":unittest.main()
