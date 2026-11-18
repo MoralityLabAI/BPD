@@ -31,6 +31,14 @@ registered AMM11 must compare learned transfer to the analytical
 cosine rule on entirely new model roots. Every historical protected
 confirmation cohort remains sealed.
 
+The [numeric-tie amendment](AMENDMENT_NUMERIC_TIES.md) records a
+cross-run one-ULP floating-point selection issue in the exploratory
+cardinality-only ridge. Exact feature-identical ties now follow the
+predeclared lowest-mask-index rule. The original 1,896-hit output is
+preserved, while the corrected cardinality-only result is 1,822/8,192
+and the other 18 arm totals are unchanged. Both original artifacts
+and result locks remain available for independent inspection.
+
 ## Questions
 
 The original 18-feature linear strategy-memory policy receives six equal-dose
@@ -56,10 +64,10 @@ new policy predictions, or fresh model training are outside scope.
 ## Reproduce from immutable archived GitHub Actions artifacts
 
 Python 3.12 with NumPy 2.2.6. Download the original artifacts:
-- [Training run 44294944939](https://github.com/MoralityLabAI/BPD/actions/runs/44294944939), \`amm09r1-training-ubuntu-22.04\` → \`training.json\`.
-- [Development run 44295607653](https://github.com/MoralityLabAI/BPD/actions/runs/44295607653), \`amm09r1-development-source-locked\` → \`development.json\`.
+- [Training run 44294944939](https://github.com/MoralityLabAI/BPD/actions/runs/44294944939), `amm09r1-training-ubuntu-22.04` → `training.json`.
+- [Development run 44295607653](https://github.com/MoralityLabAI/BPD/actions/runs/44295607653), `amm09r1-development-source-locked` → `development.json`.
 
-\`\`\`bash
+```bash
 PYTHONPATH=mechinterp/bpd/experiments/amm10_exposed_dissection \
  python -m unittest test_analysis -v
 
@@ -67,7 +75,7 @@ python mechinterp/bpd/experiments/amm10_exposed_dissection/analysis.py \
  --training /path/to/training.json \
  --development /path/to/development.json \
  --out /tmp/amm10_exposed_results.json
-\`\`\`
+```
 
 The analyzer verifies original raw SHA-256, exact root/phase/family/order
 memberships, six permitted actions, training feature hashes, heldout
@@ -76,7 +84,7 @@ discloses all refits and analytic rules; root-bootstrap intervals are
 **descriptive** because all model-root populations are selection-exposed.
 The dedicated [workflow](../../../../.github/workflows/bpd-amm10-exposed-dissection.yml)
 downloads the original registered archives and reconstructs the locked
-\`results/ANALYSIS.json\` without running a single trained model.
+`results/ANALYSIS.json` without running a single trained model.
 
 Scientific boundary: 64 training model roots (128 donor cases/root)
 and 64 already-scored development roots (512 donor cases/root).
