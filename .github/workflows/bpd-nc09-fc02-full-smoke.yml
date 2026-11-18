@@ -1,0 +1,90 @@
+name: BPD NC09-FC02 excluded-root full 3-way sham engineering pilot
+
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/experiments/nc09_fixed12/tangent_sham_calibration/FULL_SMOKE_LOCK.json'
+
+permissions:
+  contents: read
+
+jobs:
+  excluded-12999-source-full-budget:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Admit only excluded engineering root 12999
+        run: |
+          python - <<'PY'
+          import json,subprocess
+          l=json.load(open('mechinterp/bpd/experiments/nc09_fixed12/tangent_sham_calibration/FULL_SMOKE_LOCK.json'))
+          assert l['study']=='BPD-NC09-FC02'
+          assert l['phase']=='EXCLUDED_12999_FULL_SOURCE_ONLY_ENGINEERING'
+          assert l['smoke_root']==12999
+          assert l['calibration_roots_trained']==0
+          assert l['train_steps']==384 and l['discovery_samples']==1024
+          assert l['sham_proposals']==4096 and l['required_shams']==8
+          sha=l['source_commit_sha']
+          subprocess.run(['git','merge-base','--is-ancestor',sha,'HEAD'],check=True)
+          subprocess.run(['git','diff','--exit-code',sha,'HEAD','--',
+            'mechinterp/bpd/experiments/nc09_fixed12/tangent_sham_calibration/experiment.py',
+            'mechinterp/bpd/experiments/nc09_fixed12/tangent_sham_calibration/tangent_shams.py',
+            'mechinterp/bpd/experiments/nc09_fixed12/tangent_sham_calibration/aggregate.py',
+            'mechinterp/bpd/experiments/nc09_fixed12/tangent_sham_calibration/PROTOCOL.md'],check=True)
+          print('Excluded-only FC02 full source smoke admitted',sha)
+          PY
+      - name: Install pinned numerical CPU runtime
+        run: |
+          python -m pip install --disable-pip-version-check pytest 'numpy>=1.26' scipy==1.14.1
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Source-only FC02 unit tests, no calibration roots
+        run: |
+          python -m pytest -q \
+            mechinterp/bpd/experiments/nc09_fixed12/tangent_sham_calibration/test_experiment.py \
+            mechinterp/bpd/experiments/nc09_fixed12/tangent_sham_calibration/test_aggregate.py
+      - name: Train excluded 12999 full 384 steps, 1024 score cases and 4096 sham candidates
+        run: |
+          mkdir -p /tmp/fc02-excluded
+          python -m mechinterp.bpd.experiments.nc09_fixed12.tangent_sham_calibration.experiment \
+            --root 12999 --steps 384 --discovery 1024 --selector 512 \
+            --heldout 1024 --sham-proposals 4096 --shams 8 \
+            --out /tmp/fc02-excluded/excluded_12999_full.json
+      - name: Independently verify eight simultaneous physical and tangent source matches
+        run: |
+          python - <<'PY'
+          import json,math
+          p='/tmp/fc02-excluded/excluded_12999_full.json'
+          r=json.load(open(p))
+          assert r['root']==12999
+          assert r['study']=='BPD-NC09-FC02'
+          assert r['full_mask_closure']['passed']
+          d=r['sham_admission']
+          assert d['proposals']==4096 and d['source_observation_count']==1024
+          assert d['selected']==8 and d['qualified']>=8
+          assert len(r['sham_nlls'])==8 and r['effects'] is not None
+          assert d['uses_external_labels'] is False
+          assert all(x<=.15+1e-12 for x in d['selected_dose_relative_errors'])
+          assert all(x<=d['signed_score_abs_tolerance']+1e-12
+                     for x in d['selected_score_mean_abs_errors'])
+          assert all(x<=d['rms_score_abs_tolerance']+1e-12
+                     for x in d['selected_score_rms_abs_errors'])
+          assert abs(sum(r['effects']['Z_pseudo_null_by_sham']))<1e-10
+          print('FC02 full excluded first physical sham count:',d['qualified'])
+          print('FC02 source score targets:',d['target_signed_score_mean'],d['target_first_order_score_rms'])
+          print('FC02 full engineering admission:',r['eligible'])
+          assert r['eligible']
+          PY
+      - name: Preserve excluded engineering first pilot receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bpd-nc09-fc02-excluded-12999-full-smoke-${{ github.run_id }}
+          path: /tmp/fc02-excluded/
+          retention-days: 90
+          if-no-files-found: warn
