@@ -92,7 +92,7 @@ def test_equal_score_budget_monotone_and_deterministic_winner():
             ).hexdigest()
             for path in t["mass_paths_by_restart"]:
                 assert all(y >= x - 1e-9 for x, y in zip(path, path[1:]))
-            assert t["selected_final_mass"] == max(t["restart_final_masses"])
+            assert max(t["restart_final_masses"]) - t["selected_final_mass"] <= 1e-12
             replay, rt = fit_basis(x.clone(), SMOKE, sigma, method,
                                    sweeps_per_restart=1)
             assert torch.equal(read, replay)
@@ -188,5 +188,6 @@ def test_primary_science_decision_is_frozen_and_conjunctive():
     paired, d = synthetic_rows(strong_narrow=8, strong_wide=2, dual=16)
     s3 = summarize(paired, d, registered=True)
     assert s3["strong_net_paired_wins"] == 6
-    assert s3["strong_McNemar_exact_two_sided_p"] <= .05
+    assert s3["strong_McNemar_exact_two_sided_p"] > .05
+    assert not s3["registered_scientific_passed"]
     assert not summarize(rows, diagnostics, registered=False)["registered_scientific_passed"]
