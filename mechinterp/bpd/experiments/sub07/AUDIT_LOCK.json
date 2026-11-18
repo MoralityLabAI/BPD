@@ -12,5 +12,7 @@
   "retraining_allowed": false,
   "confirmation_generated": false,
   "calibration_generated": false,
-  "protected_cohorts": "sealed"
+  "protected_cohorts": "sealed",
+  "audit_attempt": 2,
+  "audit_change": "Install torch==2.5.1 for inherited BPD __init__ dependency; read only original artifact"
 }
