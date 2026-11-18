@@ -1,0 +1,112 @@
+name: BPD NC13 context and delivered displacement
+
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/experiments/nc13/**'
+      - '.github/workflows/bpd-nc13-context-displacement.yml'
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - 'mechinterp/bpd/experiments/nc13/**'
+      - '.github/workflows/bpd-nc13-context-displacement.yml'
+
+permissions:
+  contents: read
+
+env:
+  OMP_NUM_THREADS: '1'
+  MKL_NUM_THREADS: '1'
+
+jobs:
+  source-and-excluded-smoke:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install frozen CPU runtime
+        run: |
+          python -m pip install --disable-pip-version-check 'numpy==2.3.5' 'pytest==9.2.0'
+          python -m pip install --disable-pip-version-check 'torch==2.5.1' --index-url https://download.pytorch.org/whl/cpu
+      - name: Verify complete source lock and runtime
+        run: python -m mechinterp.bpd.experiments.nc13.verify_source
+      - name: Test dose search and registered inference semantics
+        run: python -m pytest mechinterp/bpd/experiments/nc13 -q
+      - name: Run excluded source smoke only
+        run: |
+          mkdir -p "$RUNNER_TEMP/nc13-smoke"
+          cp mechinterp/bpd/experiments/nc13/EXECUTE_LOCK.json "$RUNNER_TEMP/nc13-smoke/EXECUTE_LOCK.json"
+          python -m mechinterp.bpd.experiments.nc13.experiment --root 2601299 --outdir "$RUNNER_TEMP/nc13-smoke"
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          p=Path(os.environ['RUNNER_TEMP'])/'nc13-smoke/root_2601299.json'
+          r=json.loads(p.read_text())
+          assert r['root']==2601299 and r['phase']=='EXCLUDED_SMOKE' and r['complete']
+          print('Excluded smoke complete; global admissions:',r['global_failures'])
+          PY
+      - name: Independently audit the excluded original receipt
+        run: python -m mechinterp.bpd.experiments.nc13.audit --receipts "$RUNNER_TEMP/nc13-smoke" --out "$RUNNER_TEMP/nc13-smoke/NC13_SMOKE_AUDIT.json"
+      - name: Archive source smoke
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nc13-excluded-source-smoke-${{ github.run_id }}
+          path: ${{ runner.temp }}/nc13-smoke/
+          if-no-files-found: warn
+          retention-days: 90
+
+  first-sixteen-pair-development:
+    needs: source-and-excluded-smoke
+    if: >-
+      github.event_name == 'pull_request' && github.event.action == 'opened' &&
+      github.head_ref == 'research/nc13-context-delivered-displacement-20261118' &&
+      github.base_ref == 'main' && github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install frozen CPU runtime
+        run: |
+          python -m pip install --disable-pip-version-check 'numpy==2.3.5' 'pytest==9.2.0'
+          python -m pip install --disable-pip-version-check 'torch==2.5.1' --index-url https://download.pytorch.org/whl/cpu
+      - name: Verify source before any development initialization
+        run: python -m mechinterp.bpd.experiments.nc13.verify_source
+      - name: Execute the registered roots once
+        run: |
+          python - <<'PY'
+          import os,shutil,subprocess,sys
+          from pathlib import Path
+          out=Path(os.environ['RUNNER_TEMP'])/'nc13-original'
+          out.mkdir(parents=True,exist_ok=True)
+          shutil.copyfile('mechinterp/bpd/experiments/nc13/EXECUTE_LOCK.json',out/'EXECUTE_LOCK.json')
+          failures=[]
+          for root in range(2601300,2601316):
+              result=subprocess.run([sys.executable,'-m','mechinterp.bpd.experiments.nc13.experiment',
+                                     '--root',str(root),'--outdir',str(out)],check=False)
+              if result.returncode:
+                  failures.append(root)
+          if failures:
+              print('Original attempted roots with execution failures:',failures)
+              sys.exit(1)
+          PY
+      - name: Aggregate all original paired roots
+        if: always()
+        run: python -m mechinterp.bpd.experiments.nc13.aggregate --receipts "$RUNNER_TEMP/nc13-original" --out "$RUNNER_TEMP/nc13-original/NC13_ORIGINAL_SUMMARY.json"
+      - name: Independently audit original observations and inference
+        if: always()
+        run: python -m mechinterp.bpd.experiments.nc13.audit --receipts "$RUNNER_TEMP/nc13-original" --summary "$RUNNER_TEMP/nc13-original/NC13_ORIGINAL_SUMMARY.json" --out "$RUNNER_TEMP/nc13-original/NC13_ORIGINAL_AUDIT.json"
+      - name: Archive original or partial first run
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nc13-original-sixteen-pair-context-displacement
+          path: ${{ runner.temp }}/nc13-original/
+          if-no-files-found: error
+          retention-days: 90

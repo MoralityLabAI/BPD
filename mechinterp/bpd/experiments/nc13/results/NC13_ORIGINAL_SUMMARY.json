@@ -1,0 +1,1331 @@
+{
+  "comparison_family": 6,
+  "diagnostic_flags": {
+    "context_gain_D": false,
+    "context_gain_E": false,
+    "shared_gap_reduction_D": false
+  },
+  "endpoints": {
+    "context_gain_D": {
+      "attempted_mean_nats": -0.015093445777893066,
+      "direction": "lower_exceeds",
+      "inference": null,
+      "n_admitted_pairs": 8,
+      "n_available_effects": 8,
+      "passed": false,
+      "root_effects": [
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "shared_D:ineligible",
+            "shared_D:NO_REGISTERED_BRACKET",
+            "shared_D:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601300
+        },
+        {
+          "admitted": true,
+          "effect_nats": -0.08288648724555969,
+          "reasons": [],
+          "root": 2601301
+        },
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "shared_D:ineligible",
+            "shared_D:NO_REGISTERED_BRACKET",
+            "shared_D:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601302
+        },
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "shared_D:ineligible",
+            "shared_D:NO_REGISTERED_BRACKET",
+            "shared_D:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601303
+        },
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "shared_D:ineligible",
+            "shared_D:NO_REGISTERED_BRACKET",
+            "shared_D:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601304
+        },
+        {
+          "admitted": true,
+          "effect_nats": 0.04628068208694458,
+          "reasons": [],
+          "root": 2601305
+        },
+        {
+          "admitted": true,
+          "effect_nats": -0.01309928297996521,
+          "reasons": [],
+          "root": 2601306
+        },
+        {
+          "admitted": true,
+          "effect_nats": -0.020133957266807556,
+          "reasons": [],
+          "root": 2601307
+        },
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "shared_D:ineligible",
+            "shared_D:NO_REGISTERED_BRACKET",
+            "shared_D:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601308
+        },
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "shared_D:ineligible",
+            "shared_D:NO_REGISTERED_BRACKET",
+            "shared_D:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601309
+        },
+        {
+          "admitted": true,
+          "effect_nats": -0.007709488272666931,
+          "reasons": [],
+          "root": 2601310
+        },
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "shared_D:ineligible",
+            "shared_D:NO_REGISTERED_BRACKET",
+            "shared_D:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601311
+        },
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "shared_D:ineligible",
+            "shared_D:NO_REGISTERED_BRACKET",
+            "shared_D:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601312
+        },
+        {
+          "admitted": true,
+          "effect_nats": -0.052541181445121765,
+          "reasons": [],
+          "root": 2601313
+        },
+        {
+          "admitted": true,
+          "effect_nats": 0.0005308240652084351,
+          "reasons": [],
+          "root": 2601314
+        },
+        {
+          "admitted": true,
+          "effect_nats": 0.008811324834823608,
+          "reasons": [],
+          "root": 2601315
+        }
+      ],
+      "status": "INELIGIBLE",
+      "threshold_nats": 0.01
+    },
+    "context_gain_E": {
+      "attempted_mean_nats": -0.026442796923220158,
+      "direction": "lower_exceeds",
+      "inference": {
+        "mean_nats": -0.026442796923220158,
+        "n_independent_model_pairs": 16,
+        "nominal_cell_coverage": 0.9916666666666667,
+        "nominal_interval": [
+          -0.05702702566049993,
+          0.00034635581541813754
+        ],
+        "resamples": 16384,
+        "seed": 26130013
+      },
+      "n_admitted_pairs": 16,
+      "n_available_effects": 16,
+      "passed": false,
+      "root_effects": [
+        {
+          "admitted": true,
+          "effect_nats": 0.011383473873138428,
+          "reasons": [],
+          "root": 2601300
+        },
+        {
+          "admitted": true,
+          "effect_nats": -0.08825331926345825,
+          "reasons": [],
+          "root": 2601301
+        },
+        {
+          "admitted": true,
+          "effect_nats": -0.05452492833137512,
+          "reasons": [],
+          "root": 2601302
+        },
+        {
+          "admitted": true,
+          "effect_nats": -0.03336027264595032,
+          "reasons": [],
+          "root": 2601303
+        },
+        {
+          "admitted": true,
+          "effect_nats": 0.025839179754257202,
+          "reasons": [],
+          "root": 2601304
+        },
+        {
+          "admitted": true,
+          "effect_nats": 0.03771980106830597,
+          "reasons": [],
+          "root": 2601305
+        },
+        {
+          "admitted": true,
+          "effect_nats": 0.014623820781707764,
+          "reasons": [],
+          "root": 2601306
+        },
+        {
+          "admitted": true,
+          "effect_nats": -0.02864089608192444,
+          "reasons": [],
+          "root": 2601307
+        },
+        {
+          "admitted": true,
+          "effect_nats": -0.13117454946041107,
+          "reasons": [],
+          "root": 2601308
+        },
+        {
+          "admitted": true,
+          "effect_nats": -0.06103888154029846,
+          "reasons": [],
+          "root": 2601309
+        },
+        {
+          "admitted": true,
+          "effect_nats": 0.01078997552394867,
+          "reasons": [],
+          "root": 2601310
+        },
+        {
+          "admitted": true,
+          "effect_nats": -0.029135197401046753,
+          "reasons": [],
+          "root": 2601311
+        },
+        {
+          "admitted": true,
+          "effect_nats": -0.05912059545516968,
+          "reasons": [],
+          "root": 2601312
+        },
+        {
+          "admitted": true,
+          "effect_nats": -0.03762373328208923,
+          "reasons": [],
+          "root": 2601313
+        },
+        {
+          "admitted": true,
+          "effect_nats": -0.009523525834083557,
+          "reasons": [],
+          "root": 2601314
+        },
+        {
+          "admitted": true,
+          "effect_nats": 0.00895489752292633,
+          "reasons": [],
+          "root": 2601315
+        }
+      ],
+      "status": "ADMITTED",
+      "threshold_nats": 0.01
+    },
+    "median_sham_minus_shared_D": {
+      "attempted_mean_nats": null,
+      "direction": "lower_exceeds",
+      "inference": null,
+      "n_admitted_pairs": 0,
+      "n_available_effects": 0,
+      "passed": false,
+      "root_effects": [
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "shared_D:ineligible",
+            "shared_D:NO_REGISTERED_BRACKET",
+            "shared_D:unscored",
+            "sham_D_1:ineligible",
+            "sham_D_1:NO_REGISTERED_BRACKET",
+            "sham_D_1:unscored",
+            "sham_D_3:ineligible",
+            "sham_D_3:NO_REGISTERED_BRACKET",
+            "sham_D_3:unscored",
+            "sham_D_4:ineligible",
+            "sham_D_4:NO_REGISTERED_BRACKET",
+            "sham_D_4:unscored",
+            "sham_D_5:ineligible",
+            "sham_D_5:NO_REGISTERED_BRACKET",
+            "sham_D_5:unscored",
+            "sham_D_6:ineligible",
+            "sham_D_6:NO_REGISTERED_BRACKET",
+            "sham_D_6:unscored",
+            "sham_D_7:ineligible",
+            "sham_D_7:NO_REGISTERED_BRACKET",
+            "sham_D_7:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601300
+        },
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "sham_D_1:ineligible",
+            "sham_D_1:NO_REGISTERED_BRACKET",
+            "sham_D_1:unscored",
+            "sham_D_2:ineligible",
+            "sham_D_2:NO_REGISTERED_BRACKET",
+            "sham_D_2:unscored",
+            "sham_D_3:ineligible",
+            "sham_D_3:NO_REGISTERED_BRACKET",
+            "sham_D_3:unscored",
+            "sham_D_4:ineligible",
+            "sham_D_4:NO_REGISTERED_BRACKET",
+            "sham_D_4:unscored",
+            "sham_D_5:ineligible",
+            "sham_D_5:NO_REGISTERED_BRACKET",
+            "sham_D_5:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601301
+        },
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "shared_D:ineligible",
+            "shared_D:NO_REGISTERED_BRACKET",
+            "shared_D:unscored",
+            "sham_D_0:ineligible",
+            "sham_D_0:NO_REGISTERED_BRACKET",
+            "sham_D_0:unscored",
+            "sham_D_1:ineligible",
+            "sham_D_1:NO_REGISTERED_BRACKET",
+            "sham_D_1:unscored",
+            "sham_D_2:ineligible",
+            "sham_D_2:NO_REGISTERED_BRACKET",
+            "sham_D_2:unscored",
+            "sham_D_3:ineligible",
+            "sham_D_3:NO_REGISTERED_BRACKET",
+            "sham_D_3:unscored",
+            "sham_D_4:ineligible",
+            "sham_D_4:NO_REGISTERED_BRACKET",
+            "sham_D_4:unscored",
+            "sham_D_5:ineligible",
+            "sham_D_5:NO_REGISTERED_BRACKET",
+            "sham_D_5:unscored",
+            "sham_D_6:ineligible",
+            "sham_D_6:NO_REGISTERED_BRACKET",
+            "sham_D_6:unscored",
+            "sham_D_7:ineligible",
+            "sham_D_7:NO_REGISTERED_BRACKET",
+            "sham_D_7:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601302
+        },
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "shared_D:ineligible",
+            "shared_D:NO_REGISTERED_BRACKET",
+            "shared_D:unscored",
+            "sham_D_0:ineligible",
+            "sham_D_0:NO_REGISTERED_BRACKET",
+            "sham_D_0:unscored",
+            "sham_D_2:ineligible",
+            "sham_D_2:NO_REGISTERED_BRACKET",
+            "sham_D_2:unscored",
+            "sham_D_3:ineligible",
+            "sham_D_3:NO_REGISTERED_BRACKET",
+            "sham_D_3:unscored",
+            "sham_D_4:ineligible",
+            "sham_D_4:NO_REGISTERED_BRACKET",
+            "sham_D_4:unscored",
+            "sham_D_5:ineligible",
+            "sham_D_5:NO_REGISTERED_BRACKET",
+            "sham_D_5:unscored",
+            "sham_D_6:ineligible",
+            "sham_D_6:NO_REGISTERED_BRACKET",
+            "sham_D_6:unscored",
+            "sham_D_7:ineligible",
+            "sham_D_7:NO_REGISTERED_BRACKET",
+            "sham_D_7:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601303
+        },
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "shared_D:ineligible",
+            "shared_D:NO_REGISTERED_BRACKET",
+            "shared_D:unscored",
+            "sham_D_0:ineligible",
+            "sham_D_0:NO_REGISTERED_BRACKET",
+            "sham_D_0:unscored",
+            "sham_D_1:ineligible",
+            "sham_D_1:NO_REGISTERED_BRACKET",
+            "sham_D_1:unscored",
+            "sham_D_2:ineligible",
+            "sham_D_2:NO_REGISTERED_BRACKET",
+            "sham_D_2:unscored",
+            "sham_D_3:ineligible",
+            "sham_D_3:NO_REGISTERED_BRACKET",
+            "sham_D_3:unscored",
+            "sham_D_4:ineligible",
+            "sham_D_4:NO_REGISTERED_BRACKET",
+            "sham_D_4:unscored",
+            "sham_D_5:ineligible",
+            "sham_D_5:NO_REGISTERED_BRACKET",
+            "sham_D_5:unscored",
+            "sham_D_6:ineligible",
+            "sham_D_6:NO_REGISTERED_BRACKET",
+            "sham_D_6:unscored",
+            "sham_D_7:ineligible",
+            "sham_D_7:NO_REGISTERED_BRACKET",
+            "sham_D_7:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601304
+        },
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "sham_D_0:ineligible",
+            "sham_D_0:NO_REGISTERED_BRACKET",
+            "sham_D_0:unscored",
+            "sham_D_1:ineligible",
+            "sham_D_1:NO_REGISTERED_BRACKET",
+            "sham_D_1:unscored",
+            "sham_D_3:ineligible",
+            "sham_D_3:NO_REGISTERED_BRACKET",
+            "sham_D_3:unscored",
+            "sham_D_4:ineligible",
+            "sham_D_4:NO_REGISTERED_BRACKET",
+            "sham_D_4:unscored",
+            "sham_D_5:ineligible",
+            "sham_D_5:NO_REGISTERED_BRACKET",
+            "sham_D_5:unscored",
+            "sham_D_6:ineligible",
+            "sham_D_6:NO_REGISTERED_BRACKET",
+            "sham_D_6:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601305
+        },
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "sham_D_3:ineligible",
+            "sham_D_3:NO_REGISTERED_BRACKET",
+            "sham_D_3:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601306
+        },
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "sham_D_0:ineligible",
+            "sham_D_0:NO_REGISTERED_BRACKET",
+            "sham_D_0:unscored",
+            "sham_D_2:ineligible",
+            "sham_D_2:NO_REGISTERED_BRACKET",
+            "sham_D_2:unscored",
+            "sham_D_4:ineligible",
+            "sham_D_4:NO_REGISTERED_BRACKET",
+            "sham_D_4:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601307
+        },
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "shared_D:ineligible",
+            "shared_D:NO_REGISTERED_BRACKET",
+            "shared_D:unscored",
+            "sham_D_0:ineligible",
+            "sham_D_0:NO_REGISTERED_BRACKET",
+            "sham_D_0:unscored",
+            "sham_D_1:ineligible",
+            "sham_D_1:NO_REGISTERED_BRACKET",
+            "sham_D_1:unscored",
+            "sham_D_2:ineligible",
+            "sham_D_2:NO_REGISTERED_BRACKET",
+            "sham_D_2:unscored",
+            "sham_D_3:ineligible",
+            "sham_D_3:NO_REGISTERED_BRACKET",
+            "sham_D_3:unscored",
+            "sham_D_4:ineligible",
+            "sham_D_4:NO_REGISTERED_BRACKET",
+            "sham_D_4:unscored",
+            "sham_D_5:ineligible",
+            "sham_D_5:NO_REGISTERED_BRACKET",
+            "sham_D_5:unscored",
+            "sham_D_6:ineligible",
+            "sham_D_6:NO_REGISTERED_BRACKET",
+            "sham_D_6:unscored",
+            "sham_D_7:ineligible",
+            "sham_D_7:NO_REGISTERED_BRACKET",
+            "sham_D_7:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601308
+        },
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "shared_D:ineligible",
+            "shared_D:NO_REGISTERED_BRACKET",
+            "shared_D:unscored",
+            "sham_D_0:ineligible",
+            "sham_D_0:NO_REGISTERED_BRACKET",
+            "sham_D_0:unscored",
+            "sham_D_1:ineligible",
+            "sham_D_1:NO_REGISTERED_BRACKET",
+            "sham_D_1:unscored",
+            "sham_D_2:ineligible",
+            "sham_D_2:NO_REGISTERED_BRACKET",
+            "sham_D_2:unscored",
+            "sham_D_3:ineligible",
+            "sham_D_3:NO_REGISTERED_BRACKET",
+            "sham_D_3:unscored",
+            "sham_D_4:ineligible",
+            "sham_D_4:NO_REGISTERED_BRACKET",
+            "sham_D_4:unscored",
+            "sham_D_5:ineligible",
+            "sham_D_5:NO_REGISTERED_BRACKET",
+            "sham_D_5:unscored",
+            "sham_D_6:ineligible",
+            "sham_D_6:NO_REGISTERED_BRACKET",
+            "sham_D_6:unscored",
+            "sham_D_7:ineligible",
+            "sham_D_7:NO_REGISTERED_BRACKET",
+            "sham_D_7:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601309
+        },
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "sham_D_2:ineligible",
+            "sham_D_2:NO_REGISTERED_BRACKET",
+            "sham_D_2:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601310
+        },
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "shared_D:ineligible",
+            "shared_D:NO_REGISTERED_BRACKET",
+            "shared_D:unscored",
+            "sham_D_0:ineligible",
+            "sham_D_0:NO_REGISTERED_BRACKET",
+            "sham_D_0:unscored",
+            "sham_D_1:ineligible",
+            "sham_D_1:NO_REGISTERED_BRACKET",
+            "sham_D_1:unscored",
+            "sham_D_2:ineligible",
+            "sham_D_2:NO_REGISTERED_BRACKET",
+            "sham_D_2:unscored",
+            "sham_D_3:ineligible",
+            "sham_D_3:NO_REGISTERED_BRACKET",
+            "sham_D_3:unscored",
+            "sham_D_5:ineligible",
+            "sham_D_5:NO_REGISTERED_BRACKET",
+            "sham_D_5:unscored",
+            "sham_D_6:ineligible",
+            "sham_D_6:NO_REGISTERED_BRACKET",
+            "sham_D_6:unscored",
+            "sham_D_7:ineligible",
+            "sham_D_7:NO_REGISTERED_BRACKET",
+            "sham_D_7:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601311
+        },
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "shared_D:ineligible",
+            "shared_D:NO_REGISTERED_BRACKET",
+            "shared_D:unscored",
+            "sham_D_0:ineligible",
+            "sham_D_0:NO_REGISTERED_BRACKET",
+            "sham_D_0:unscored",
+            "sham_D_1:ineligible",
+            "sham_D_1:NO_REGISTERED_BRACKET",
+            "sham_D_1:unscored",
+            "sham_D_2:ineligible",
+            "sham_D_2:NO_REGISTERED_BRACKET",
+            "sham_D_2:unscored",
+            "sham_D_3:ineligible",
+            "sham_D_3:NO_REGISTERED_BRACKET",
+            "sham_D_3:unscored",
+            "sham_D_4:ineligible",
+            "sham_D_4:NO_REGISTERED_BRACKET",
+            "sham_D_4:unscored",
+            "sham_D_5:ineligible",
+            "sham_D_5:NO_REGISTERED_BRACKET",
+            "sham_D_5:unscored",
+            "sham_D_6:ineligible",
+            "sham_D_6:NO_REGISTERED_BRACKET",
+            "sham_D_6:unscored",
+            "sham_D_7:ineligible",
+            "sham_D_7:NO_REGISTERED_BRACKET",
+            "sham_D_7:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601312
+        },
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "sham_D_0:ineligible",
+            "sham_D_0:NO_REGISTERED_BRACKET",
+            "sham_D_0:unscored",
+            "sham_D_1:ineligible",
+            "sham_D_1:NO_REGISTERED_BRACKET",
+            "sham_D_1:unscored",
+            "sham_D_3:ineligible",
+            "sham_D_3:NO_REGISTERED_BRACKET",
+            "sham_D_3:unscored",
+            "sham_D_4:ineligible",
+            "sham_D_4:NO_REGISTERED_BRACKET",
+            "sham_D_4:unscored",
+            "sham_D_6:ineligible",
+            "sham_D_6:NO_REGISTERED_BRACKET",
+            "sham_D_6:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601313
+        },
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "sham_D_2:ineligible",
+            "sham_D_2:NO_REGISTERED_BRACKET",
+            "sham_D_2:unscored",
+            "sham_D_5:ineligible",
+            "sham_D_5:NO_REGISTERED_BRACKET",
+            "sham_D_5:unscored",
+            "sham_D_7:ineligible",
+            "sham_D_7:NO_REGISTERED_BRACKET",
+            "sham_D_7:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601314
+        },
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "sham_D_0:ineligible",
+            "sham_D_0:NO_REGISTERED_BRACKET",
+            "sham_D_0:unscored",
+            "sham_D_3:ineligible",
+            "sham_D_3:NO_REGISTERED_BRACKET",
+            "sham_D_3:unscored",
+            "sham_D_4:ineligible",
+            "sham_D_4:NO_REGISTERED_BRACKET",
+            "sham_D_4:unscored",
+            "sham_D_5:ineligible",
+            "sham_D_5:NO_REGISTERED_BRACKET",
+            "sham_D_5:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601315
+        }
+      ],
+      "status": "INELIGIBLE",
+      "threshold_nats": 0.02
+    },
+    "shared_D_minus_clean": {
+      "attempted_mean_nats": 0.1098739830777049,
+      "direction": "upper_at_most",
+      "inference": null,
+      "n_admitted_pairs": 8,
+      "n_available_effects": 8,
+      "passed": false,
+      "root_effects": [
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "shared_D:ineligible",
+            "shared_D:NO_REGISTERED_BRACKET",
+            "shared_D:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601300
+        },
+        {
+          "admitted": true,
+          "effect_nats": 0.4411921501159668,
+          "reasons": [],
+          "root": 2601301
+        },
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "shared_D:ineligible",
+            "shared_D:NO_REGISTERED_BRACKET",
+            "shared_D:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601302
+        },
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "shared_D:ineligible",
+            "shared_D:NO_REGISTERED_BRACKET",
+            "shared_D:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601303
+        },
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "shared_D:ineligible",
+            "shared_D:NO_REGISTERED_BRACKET",
+            "shared_D:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601304
+        },
+        {
+          "admitted": true,
+          "effect_nats": 0.0452912375330925,
+          "reasons": [],
+          "root": 2601305
+        },
+        {
+          "admitted": true,
+          "effect_nats": 0.044849321246147156,
+          "reasons": [],
+          "root": 2601306
+        },
+        {
+          "admitted": true,
+          "effect_nats": 0.0415051132440567,
+          "reasons": [],
+          "root": 2601307
+        },
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "shared_D:ineligible",
+            "shared_D:NO_REGISTERED_BRACKET",
+            "shared_D:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601308
+        },
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "shared_D:ineligible",
+            "shared_D:NO_REGISTERED_BRACKET",
+            "shared_D:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601309
+        },
+        {
+          "admitted": true,
+          "effect_nats": 0.16117963939905167,
+          "reasons": [],
+          "root": 2601310
+        },
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "shared_D:ineligible",
+            "shared_D:NO_REGISTERED_BRACKET",
+            "shared_D:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601311
+        },
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "shared_D:ineligible",
+            "shared_D:NO_REGISTERED_BRACKET",
+            "shared_D:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601312
+        },
+        {
+          "admitted": true,
+          "effect_nats": 0.1100756973028183,
+          "reasons": [],
+          "root": 2601313
+        },
+        {
+          "admitted": true,
+          "effect_nats": 0.06994227319955826,
+          "reasons": [],
+          "root": 2601314
+        },
+        {
+          "admitted": true,
+          "effect_nats": -0.035043567419052124,
+          "reasons": [],
+          "root": 2601315
+        }
+      ],
+      "status": "INELIGIBLE",
+      "threshold_nats": 0.05
+    },
+    "shared_gap_reduction_D": {
+      "attempted_mean_nats": 0.015540778104748045,
+      "direction": "lower_exceeds",
+      "inference": null,
+      "n_admitted_pairs": 7,
+      "n_available_effects": 7,
+      "passed": false,
+      "root_effects": [
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "shared_D:ineligible",
+            "shared_D:NO_REGISTERED_BRACKET",
+            "shared_D:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601300
+        },
+        {
+          "admitted": true,
+          "effect_nats": 0.0006718374788761139,
+          "reasons": [],
+          "root": 2601301
+        },
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "shared_D:ineligible",
+            "shared_D:NO_REGISTERED_BRACKET",
+            "shared_D:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601302
+        },
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "shared_D:ineligible",
+            "shared_D:NO_REGISTERED_BRACKET",
+            "shared_D:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601303
+        },
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "shared_D:ineligible",
+            "shared_D:NO_REGISTERED_BRACKET",
+            "shared_D:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601304
+        },
+        {
+          "admitted": true,
+          "effect_nats": 0.03999253362417221,
+          "reasons": [],
+          "root": 2601305
+        },
+        {
+          "admitted": true,
+          "effect_nats": 0.01006406545639038,
+          "reasons": [],
+          "root": 2601306
+        },
+        {
+          "admitted": true,
+          "effect_nats": 0.010566875338554382,
+          "reasons": [],
+          "root": 2601307
+        },
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "shared_D:ineligible",
+            "shared_D:NO_REGISTERED_BRACKET",
+            "shared_D:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601308
+        },
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "shared_D:ineligible",
+            "shared_D:NO_REGISTERED_BRACKET",
+            "shared_D:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601309
+        },
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "target_D:ineligible",
+            "target_D:NO_REGISTERED_BRACKET",
+            "target_D:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601310
+        },
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "shared_D:ineligible",
+            "shared_D:NO_REGISTERED_BRACKET",
+            "shared_D:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601311
+        },
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "shared_D:ineligible",
+            "shared_D:NO_REGISTERED_BRACKET",
+            "shared_D:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601312
+        },
+        {
+          "admitted": true,
+          "effect_nats": -0.002567470073699951,
+          "reasons": [],
+          "root": 2601313
+        },
+        {
+          "admitted": true,
+          "effect_nats": 0.028241708874702454,
+          "reasons": [],
+          "root": 2601314
+        },
+        {
+          "admitted": true,
+          "effect_nats": 0.021815896034240723,
+          "reasons": [],
+          "root": 2601315
+        }
+      ],
+      "status": "INELIGIBLE",
+      "threshold_nats": 0.01
+    },
+    "target_minus_shared_D": {
+      "attempted_mean_nats": -0.07634769486529487,
+      "direction": "lower_exceeds",
+      "inference": null,
+      "n_admitted_pairs": 7,
+      "n_available_effects": 7,
+      "passed": false,
+      "root_effects": [
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "shared_D:ineligible",
+            "shared_D:NO_REGISTERED_BRACKET",
+            "shared_D:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601300
+        },
+        {
+          "admitted": true,
+          "effect_nats": -0.4436604157090187,
+          "reasons": [],
+          "root": 2601301
+        },
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "shared_D:ineligible",
+            "shared_D:NO_REGISTERED_BRACKET",
+            "shared_D:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601302
+        },
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "shared_D:ineligible",
+            "shared_D:NO_REGISTERED_BRACKET",
+            "shared_D:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601303
+        },
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "shared_D:ineligible",
+            "shared_D:NO_REGISTERED_BRACKET",
+            "shared_D:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601304
+        },
+        {
+          "admitted": true,
+          "effect_nats": -0.006764903664588928,
+          "reasons": [],
+          "root": 2601305
+        },
+        {
+          "admitted": true,
+          "effect_nats": 0.004760086536407471,
+          "reasons": [],
+          "root": 2601306
+        },
+        {
+          "admitted": true,
+          "effect_nats": -0.0040329694747924805,
+          "reasons": [],
+          "root": 2601307
+        },
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "shared_D:ineligible",
+            "shared_D:NO_REGISTERED_BRACKET",
+            "shared_D:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601308
+        },
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "shared_D:ineligible",
+            "shared_D:NO_REGISTERED_BRACKET",
+            "shared_D:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601309
+        },
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "target_D:ineligible",
+            "target_D:NO_REGISTERED_BRACKET",
+            "target_D:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601310
+        },
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "shared_D:ineligible",
+            "shared_D:NO_REGISTERED_BRACKET",
+            "shared_D:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601311
+        },
+        {
+          "admitted": false,
+          "effect_nats": null,
+          "reasons": [
+            "shared_D:ineligible",
+            "shared_D:NO_REGISTERED_BRACKET",
+            "shared_D:unscored",
+            "unavailable_arm_score"
+          ],
+          "root": 2601312
+        },
+        {
+          "admitted": true,
+          "effect_nats": -0.10173571109771729,
+          "reasons": [],
+          "root": 2601313
+        },
+        {
+          "admitted": true,
+          "effect_nats": -0.051612429320812225,
+          "reasons": [],
+          "root": 2601314
+        },
+        {
+          "admitted": true,
+          "effect_nats": 0.0686124786734581,
+          "reasons": [],
+          "root": 2601315
+        }
+      ],
+      "status": "INELIGIBLE",
+      "threshold_nats": 0.01
+    }
+  },
+  "failure_sidecars": {},
+  "mean_shared_nll_by_arm": {
+    "A_clean": {
+      "mean_shared_nll": 0.08381254132837057,
+      "n_scored_roots": 16
+    },
+    "A_owned_mixed": {
+      "mean_shared_nll": 0.09313285048119724,
+      "n_scored_roots": 16
+    },
+    "A_owned_shared": {
+      "mean_shared_nll": 0.09585006604902446,
+      "n_scored_roots": 16
+    },
+    "B_clean": {
+      "mean_shared_nll": 0.10028811427764595,
+      "n_scored_roots": 16
+    },
+    "mixed": {
+      "mean_shared_nll": 0.22823284706100821,
+      "n_scored_roots": 16
+    },
+    "permuted_D": {
+      "mean_shared_nll": 0.24024973809719086,
+      "n_scored_roots": 5
+    },
+    "permuted_E": {
+      "mean_shared_nll": 0.3222909737378359,
+      "n_scored_roots": 16
+    },
+    "sham_D_0": {
+      "mean_shared_nll": 0.3273382902145386,
+      "n_scored_roots": 5
+    },
+    "sham_D_1": {
+      "mean_shared_nll": 0.1731629619995753,
+      "n_scored_roots": 6
+    },
+    "sham_D_2": {
+      "mean_shared_nll": 0.1913323074579239,
+      "n_scored_roots": 5
+    },
+    "sham_D_3": {
+      "mean_shared_nll": 0.1906794955333074,
+      "n_scored_roots": 3
+    },
+    "sham_D_4": {
+      "mean_shared_nll": 0.25628020614385605,
+      "n_scored_roots": 4
+    },
+    "sham_D_5": {
+      "mean_shared_nll": 0.32719289511442184,
+      "n_scored_roots": 4
+    },
+    "sham_D_6": {
+      "mean_shared_nll": 0.2326858937740326,
+      "n_scored_roots": 6
+    },
+    "sham_D_7": {
+      "mean_shared_nll": 0.23104765266180038,
+      "n_scored_roots": 7
+    },
+    "sham_E_0": {
+      "mean_shared_nll": 0.3367576617747545,
+      "n_scored_roots": 16
+    },
+    "sham_E_1": {
+      "mean_shared_nll": 0.27503934502601624,
+      "n_scored_roots": 16
+    },
+    "sham_E_2": {
+      "mean_shared_nll": 0.2717828433960676,
+      "n_scored_roots": 16
+    },
+    "sham_E_3": {
+      "mean_shared_nll": 0.29716905765235424,
+      "n_scored_roots": 16
+    },
+    "sham_E_4": {
+      "mean_shared_nll": 0.2946872878819704,
+      "n_scored_roots": 16
+    },
+    "sham_E_5": {
+      "mean_shared_nll": 0.30883716186508536,
+      "n_scored_roots": 16
+    },
+    "sham_E_6": {
+      "mean_shared_nll": 0.33312937524169683,
+      "n_scored_roots": 16
+    },
+    "sham_E_7": {
+      "mean_shared_nll": 0.27717954805120826,
+      "n_scored_roots": 16
+    },
+    "shared_D": {
+      "mean_shared_nll": 0.19631676468998194,
+      "n_scored_roots": 8
+    },
+    "shared_E": {
+      "mean_shared_nll": 0.2546756439842284,
+      "n_scored_roots": 16
+    },
+    "target_D": {
+      "mean_shared_nll": 0.16072465628385543,
+      "n_scored_roots": 15
+    },
+    "target_E": {
+      "mean_shared_nll": 0.14412248157896101,
+      "n_scored_roots": 16
+    }
+  },
+  "missing_roots": [],
+  "observed_roots": [
+    2601300,
+    2601301,
+    2601302,
+    2601303,
+    2601304,
+    2601305,
+    2601306,
+    2601307,
+    2601308,
+    2601309,
+    2601310,
+    2601311,
+    2601312,
+    2601313,
+    2601314,
+    2601315
+  ],
+  "protocol_commit": "069b355e8f37ec780dc6c46b82176b6f32f8e39b",
+  "receipt_sha256": {
+    "root_2601300.json": "b0e0eab6d365e84713208556e21d547351aebaf9fef05e1872c2a98f6984714b",
+    "root_2601301.json": "6ac3869d682bf7748674202175915b7fd8e7f1d2363ab25f103c55f84a758d4d",
+    "root_2601302.json": "8f8833ee837c08a4037146b88659843ecc237e933a895f0af5baa396944251b0",
+    "root_2601303.json": "7731cf6292f4146f9d50c67ca1ef28b26c532aab83d86617f8a1b807b09d60d0",
+    "root_2601304.json": "be3a15dd2ebfe2cef41c011ddc52e575f387427111ace53ddba6bd0ce8904e78",
+    "root_2601305.json": "2dd031a92f3ffa4f6e55c9571c89f192b1d2538e2b8ae69aa15b53b94e0a0eaf",
+    "root_2601306.json": "ec4d8222a972b47d382d24ac6f4114aa333c0275abd31378adf8218a082b0c6e",
+    "root_2601307.json": "1d5ef39b5b10c88848703530d478e5c7d495200d80a9731c2b3cfdc543b0e6ae",
+    "root_2601308.json": "3c21057e607232755fa574080817b6a5852a35b0a1e559a199a25084790b008c",
+    "root_2601309.json": "9ec4b1a403611971dd357c8644aca92b7cf1ac35dc3a5f5787487e809de413ae",
+    "root_2601310.json": "7e10daba004606352060b892b58d4ac7a1b2e30118a9721b08c62de590a7f33f",
+    "root_2601311.json": "6df7faaf53e6750df8386cf3c0b0146ffb0a6d1c6d7d8cfa3124ee82f2337455",
+    "root_2601312.json": "b1276067e67369846938d18ec26a6a3aa7efd23499dc727de402f79a17d75425",
+    "root_2601313.json": "b64f6b7e84af65e5ea3864042966977be8408eab8e7b64bc54376749e098c675",
+    "root_2601314.json": "4f70c9d2b84b3a970ede9c694680b0ea89e4e83f0caab473b60a03957c3f351e",
+    "root_2601315.json": "240f56748b939cfe7e12952a7b56d7ba3e6f658bbf99c44749621b3df0720102"
+  },
+  "registered_roots": [
+    2601300,
+    2601301,
+    2601302,
+    2601303,
+    2601304,
+    2601305,
+    2601306,
+    2601307,
+    2601308,
+    2601309,
+    2601310,
+    2601311,
+    2601312,
+    2601313,
+    2601314,
+    2601315
+  ],
+  "schema": "BPD/NC13-original-aggregate/v1",
+  "scientific_status": "ENGINEERING_ONLY",
+  "scope": "New development pairs. Nominal percentile-bootstrap intervals; no calibrated sham-tail bound or confirmation release.",
+  "source_lock_sha256": "addb681cf982956fa385074e233d90ad8da43787c65a584e43131f358162e293",
+  "study": "BPD-NC-13",
+  "verdict": "ENGINEERING_NO_RECOVERY_OR_INELIGIBLE"
+}
