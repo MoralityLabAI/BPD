@@ -19,6 +19,29 @@ does not thereby repair clean reasoning. Observational probes and exact
 linear-algebraic BPD witnesses belong to different evidence classes from
 native model-causal claims.
 
+AMM-09's 128 new independently trained confirmation model roots
+are **SEALED** even though corrected EvalMath returned
+`READY_FOR_CONFIRMATION` for its positive +14.78pp development
+effect on constrained two-component BPD actions. The original
+`experiment.py.analysis` mislabeled its primary numerator;
+the source-preserving `audit_development.py` and
+`results/ANALYSIS_CORRECTED.json` independently certify 55
+positive, 8 negative and 1 tied root, adjusted p=1.95e-9 and
+root-bootstrap 95% [+11.15,+18.66]pp. The original candidate
+case bits are archived and SHA-verified.
+
+A cross-host CPU replay changed **27/49,152 TRAIN candidate bits**
+and the fitted global policy SHA under identical source hashes.
+This is a documented numeric portability failure, not an exact
+source replay success. Read
+`mechinterp/bpd/experiments/amm09_two_slot_memory/RESULTS.md`,
+`AMENDMENT_POST_DEV_ANALYSIS.md` and
+`NUMERIC_REPLAY_LIMITATION.md` before new mechanistic claims.
+The protocol requires a *separately committed explicit
+human-approved release manifest*, which has not been provided.
+Do not run AMM09 `--phase confirmation`, fabricate release
+approval, or reuse its 128 prospective roots for development.
+
 AMM-08's 128 independent confirmation model roots are **SEALED**.
 The preregistered 64-root development study on 6D, rank-three
 three-pass trained recurrences found +3.24pp memory-over-local ridge
