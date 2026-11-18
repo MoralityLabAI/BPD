@@ -1,0 +1,72 @@
+{
+  "all_candidate_action_case_bits_sha256": "75aca6bceff2d7f4171bb2f8ad5e8fd57b16485890788c2c2d2bb9c7b4bd08e0",
+  "analysis": {
+    "comparisons": {
+      "memory_vs_local_count": {
+        "exact_one_sided_root_sign_p": 0.08207470089155322,
+        "holm_adjusted_p": 0.16414940178310644,
+        "mean_root_effect": 0.0528564453125,
+        "negative_roots": 16,
+        "positive_roots": 26,
+        "root_bootstrap_95_ci": [
+          0.01220703125,
+          0.097564697265625
+        ],
+        "tied_roots": 22
+      },
+      "memory_vs_local_ridge": {
+        "exact_one_sided_root_sign_p": 0.0015438382307593201,
+        "holm_adjusted_p": 0.00463151469227796,
+        "mean_root_effect": 0.03240966796875,
+        "negative_roots": 13,
+        "positive_roots": 34,
+        "root_bootstrap_95_ci": [
+          0.006591796875,
+          0.05621337890625
+        ],
+        "tied_roots": 17
+      },
+      "memory_vs_memory_only": {
+        "exact_one_sided_root_sign_p": 0.9375,
+        "holm_adjusted_p": 0.9375,
+        "mean_root_effect": -0.001953125,
+        "negative_roots": 5,
+        "positive_roots": 2,
+        "root_bootstrap_95_ci": [
+          -0.005218505859375,
+          0.000274658203125
+        ],
+        "tied_roots": 57
+      }
+    },
+    "schema": "bpd.amm08.rank3_causal_memory.v1/analysis",
+    "status": "development_only"
+  },
+  "high_fidelity_roots": 56,
+  "independent_roots": 64,
+  "max_equal_dose_error": 4.76837158203125e-7,
+  "max_immediate_readout_displacement": 0,
+  "oracle_headroom_rate_audit_only": 0.193939208984375,
+  "phase": "development",
+  "preflight_input_sha256": "d9c937ce906c27dc526c9451082940282850920de028b7596785a11d31455ac9",
+  "schema": "bpd.amm08.rank3_causal_memory.v1/cohort_lock",
+  "source_sha256": {
+    "case.py": "1046ea7d47704ae06ff9f81e74fadcdebc7f26b867611c8ca77abf92750497ad",
+    "experiment.py": "50ea04b05af5a03f45ab24bbb1a89374fa2c283fe1ba14b500b1c0c15e7364e0",
+    "models.py": "e9f17c5a6cc76b2c26a2bb752513916c82deff67ee30b3dca2ea8ceffbfd5b97"
+  },
+  "total_test_cases": 32768,
+  "totals": {
+    "full_donor": 31636,
+    "local_count": 12329,
+    "local_ridge": 12999,
+    "memory_only": 14125,
+    "memory_plus_local": 14061,
+    "pooled": 14125,
+    "random_dark": 1605,
+    "random_dark_b": 1563,
+    "random_mask": 6007,
+    "sham": 4
+  },
+  "training_policy_sha256": "1ce31aeabe1fc64be3bdff1944026fec7bf12ec3a995e8fa9f881e5a58089e67"
+}

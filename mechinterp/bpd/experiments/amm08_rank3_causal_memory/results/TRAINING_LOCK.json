@@ -1,0 +1,41 @@
+{
+  "global_coefficients": [
+    0.0051,
+    0.3263,
+    0.0016,
+    0.0028,
+    -0.1413,
+    -0.0074,
+    -0.0008,
+    0.1348,
+    -0.0396,
+    -0.1074,
+    0.0003,
+    -0.022,
+    0.0093,
+    0.0019,
+    0.3237,
+    0.2228,
+    -0.1854,
+    -0.0323
+  ],
+  "independent_roots": 64,
+  "pooled_action": 6,
+  "schema": "bpd.amm08.rank3_causal_memory.v1/training_lock",
+  "source_sha256": {
+    "case.py": "1046ea7d47704ae06ff9f81e74fadcdebc7f26b867611c8ca77abf92750497ad",
+    "experiment.py": "50ea04b05af5a03f45ab24bbb1a89374fa2c283fe1ba14b500b1c0c15e7364e0",
+    "models.py": "e9f17c5a6cc76b2c26a2bb752513916c82deff67ee30b3dca2ea8ceffbfd5b97"
+  },
+  "train_candidate_hits": {
+    "mask_0": 793,
+    "mask_1": 692,
+    "mask_2": 453,
+    "mask_3": 2152,
+    "mask_4": 1794,
+    "mask_5": 1360,
+    "mask_6": 4065
+  },
+  "training_case_bits_sha256": "3473118b20f74e9b4d44b3d7e45033a357f8142e06affa2c119013a398996975",
+  "training_policy_sha256": "1ce31aeabe1fc64be3bdff1944026fec7bf12ec3a995e8fa9f881e5a58089e67"
+}
