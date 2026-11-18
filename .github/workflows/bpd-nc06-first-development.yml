@@ -1,0 +1,102 @@
+name: BPD-NC-06 original eight-root trained-recurrence development
+
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/experiments/nc06/EXECUTE_LOCK.json'
+
+permissions:
+  contents: read
+
+jobs:
+  first-nc06-development:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check original protocol precedence and protected implementation
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import subprocess,json
+          root=Path('mechinterp/bpd/experiments/nc06')
+          lock=json.loads((root/'EXECUTE_LOCK.json').read_text())
+          assert lock['study']=='BPD-NC-06'
+          assert lock['execution']=='first_eight_development_roots'
+          assert lock['roots']==list(range(600,608))
+          sha=lock['source_commit_sha']
+          subprocess.run(['git','merge-base','--is-ancestor',sha,'HEAD'],check=True)
+          subprocess.run(['git','merge-base','--is-ancestor','782c545d92e2b92ece3e3bc82390d3dbea1aa97a','HEAD'],check=True)
+          protected=[str(root/p) for p in (
+            'PROTOCOL.md','experiment.py','aggregate.py',
+            'test_experiment.py','test_aggregate.py'
+          )]+[
+            'mechinterp/bpd/experiments/nc04/experiment.py',
+            'mechinterp/bpd/experiments/nc05/experiment.py',
+            'mechinterp/bpd/experiments/nc02/experiment.py',
+            'mechinterp/bpd/experiments/nc03/experiment.py',
+            'mechinterp/bpd/components.py','mechinterp/bpd/config.py'
+          ]
+          subprocess.run(['git','diff','--exit-code',sha,'HEAD','--',*protected],check=True)
+          print('NC06 original source lock verified',sha)
+          PY
+      - name: Install pinned CPU tensor and test runtime
+        run: |
+          python -m pip install --disable-pip-version-check pytest 'numpy>=1.26' scipy==1.14.1
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Source-only smoke 599, weight permutation and synthetic gate
+        run: |
+          python -m pytest -q mechinterp/bpd/experiments/nc06/test_experiment.py mechinterp/bpd/experiments/nc06/test_aggregate.py
+      - name: Execute original eight 384-update trained recurrent development roots
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/nc06-development
+          for seed in 600 601 602 603 604 605 606 607; do
+            python -m mechinterp.bpd.experiments.nc06.experiment \
+              --seed "$seed" --steps 384 --discovery 1024 --eval 1024 \
+              --proposals 1024 --shams 8 \
+              --out "/tmp/nc06-development/nc06_root_$seed.json"
+          done
+      - name: Aggregate fixed eight model roots with root-cluster bootstrap
+        run: |
+          python -m mechinterp.bpd.experiments.nc06.aggregate \
+            --root-dir /tmp/nc06-development \
+            --out /tmp/nc06-development/NC06_DEVELOPMENT_SUMMARY.json
+      - name: Audit distinct roots, native BPD outcomes and original decision
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json,hashlib
+          root=Path('/tmp/nc06-development')
+          summary=json.loads((root/'NC06_DEVELOPMENT_SUMMARY.json').read_text())
+          assert summary['study']=='BPD-NC-06'
+          assert summary['phase']=='ENGINEERING'
+          assert summary['evidence_class']=='DEVELOPMENT_ONLY'
+          assert summary['model_roots']==8 and len(summary['per_root'])==8
+          assert not summary['confirmation_roots_evaluated']
+          assert not summary['sham_calibration_roots_evaluated']
+          assert summary['registered_verdict'] in ('ENGINEERING_POSITIVE','ENGINEERING_NULL_OR_INELIGIBLE')
+          assert len(set(x['root'] for x in summary['per_root']))==8
+          for seed in range(600,608):
+            path=root/('nc06_root_%s.json'%seed)
+            r=json.loads(path.read_text())
+            assert r['root']==seed and r['phase']=='ENGINEERING'
+            assert r['protocol_sha256']==summary['protocol_sha256']
+            assert r['discovery_examples']==1024 and r['evaluation_examples']==1024
+            assert len(r['methods'])==4
+            print(seed,hashlib.sha256(path.read_bytes()).hexdigest(),r['eligible'])
+          print('Original development decision:',summary['registered_verdict'])
+          PY
+      - name: Preserve complete original eight-root engineering receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bpd-nc06-original-development-${{ github.run_id }}
+          path: /tmp/nc06-development/
+          retention-days: 90
+          if-no-files-found: warn
