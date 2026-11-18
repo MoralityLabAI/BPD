@@ -77,7 +77,9 @@ def compare_frozen_sampler(record: dict, source_file: Path) -> dict:
             torch.from_numpy(arrays["U"].copy()),
             torch.from_numpy(arrays["z"].copy()),
             torch.from_numpy(arrays["g"].copy()),
-            [torch.from_numpy(arrays[f"E_{t}"].copy()) for t in range(4)],
+            # Frozen passwise_source_candidates slices column-major eigh
+            # eigenvectors. NPZ stores logical values; restore the live stride.
+            [torch.from_numpy(np.asfortranarray(arrays[f"E_{t}"])) for t in range(4)],
             SMOKE,
         )
         instrumented = arrays["sham_projectors"].copy()
@@ -157,6 +159,8 @@ def execute(phase: str, out_dir: Path, run_url: str) -> int:
             }
         record["original_run_url"] = run_url
         write_json(path, record)
+        # The aggregate audits the persisted JSON schema, including rank lists.
+        record = json.loads(path.read_text())
         print(json.dumps({
             "root": seed, "eligible": record.get("eligible", False),
             "runtime_failure": record.get("runtime_failure", False),
