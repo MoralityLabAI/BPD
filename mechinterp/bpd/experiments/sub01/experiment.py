@@ -285,7 +285,6 @@ def gauge_score(model: Looper, x: torch.Tensor, seed: int, alpha: float):
     }
 
 
-@torch.no_grad()
 def evaluate_root(seed: int, *, steps: int = STEPS) -> dict:
     if seed not in ROOTS and seed != SMOKE:
         raise ValueError("Unregistered root")
