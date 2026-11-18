@@ -49,8 +49,10 @@ jobs:
           run-id: 44307622000
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path: /tmp/sub07-original
-      - name: Install source-only original receipt audit dependency
-        run: python -m pip install --disable-pip-version-check 'numpy==2.2.6'
+      - name: Install pinned Python dependencies used by BPD package import
+        run: |
+          python -m pip install --disable-pip-version-check 'numpy==2.2.6'
+          python -m pip install --disable-pip-version-check 'torch==2.5.1' --index-url https://download.pytorch.org/whl/cpu
       - name: Audit immutable original JSON and reconstruct all registered gates
         run: |
           set -euo pipefail
