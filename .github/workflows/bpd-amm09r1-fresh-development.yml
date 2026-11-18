@@ -1,0 +1,286 @@
+name: BPD-AMM-09R1 prospective development
+
+on:
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/amm09r_two_slot_memory/**'
+      - '.github/workflows/bpd-amm09r1-fresh-development.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: bpd-amm09r1-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  actions: read
+
+env:
+  ATEN_CPU_CAPABILITY: default
+  MKL_CBWR: COMPATIBLE
+  MKL_NUM_THREADS: '1'
+  OMP_NUM_THREADS: '1'
+  OPENBLAS_NUM_THREADS: '1'
+  MKL_DYNAMIC: 'FALSE'
+  OMP_DYNAMIC: 'FALSE'
+  PYTHONHASHSEED: '0'
+
+jobs:
+  stage:
+    runs-on: ubuntu-24.04
+    outputs:
+      phase: ${{ steps.stage.outputs.phase }}
+      training_run: ${{ steps.stage.outputs.training_run }}
+      development_run: ${{ steps.stage.outputs.development_run }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - id: stage
+        name: Read committed phase locks
+        run: |
+          python - <<'PY'
+          import json, os, pathlib
+          root = pathlib.Path('mechinterp/bpd/experiments/amm09r_two_slot_memory/results')
+          phase = 'archive' if (root / 'DEVELOPMENT_LOCK.json').exists() else ('development' if (root / 'TRAINING_LOCK.json').exists() else 'training')
+          result = {'phase': phase, 'training_run': '', 'development_run': ''}
+          if phase != 'training':
+              training = json.loads((root / 'TRAINING_RECEIPTS.json').read_text())
+              result['training_run'] = str(training['run_id'])
+              if phase == 'development':
+                  allowed = training['development_execution']
+                  assert allowed['workflow'] == os.environ['GITHUB_WORKFLOW']
+                  assert allowed['event'] == os.environ['GITHUB_EVENT_NAME'] == 'pull_request'
+                  assert type(allowed['run_number']) is int and allowed['run_number'] == int(os.environ['GITHUB_RUN_NUMBER'])
+                  assert allowed['run_attempt'] == int(os.environ['GITHUB_RUN_ATTEMPT']) == 1, 'development reruns are sealed; audit the preserved artifact'
+          if phase == 'archive':
+              result['development_run'] = str(json.loads((root / 'DEVELOPMENT_RECEIPTS.json').read_text())['run_id'])
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
+              for key, value in result.items():
+                  output.write(f'{key}={value}\n')
+          print(result)
+          PY
+
+  training:
+    needs: stage
+    if: needs.stage.outputs.phase == 'training'
+    strategy:
+      fail-fast: false
+      matrix:
+        worker: [ubuntu-22.04, ubuntu-24.04]
+    runs-on: ${{ matrix.worker }}
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.12'
+      - name: Install accepted CPU versions
+        run: |
+          python -m pip install --index-url https://download.pytorch.org/whl/cpu 'torch==2.10.0+cpu'
+          python -m pip install 'numpy==2.2.6'
+      - name: Test synthetic accounting and protected-root rejection
+        run: python -m unittest discover -s mechinterp/bpd/experiments/amm09r_two_slot_memory -p 'test_*.py' -v
+      - name: Fit the 64 fresh training roots
+        run: |
+          python mechinterp/bpd/experiments/amm09r_two_slot_memory/run.py \
+            --phase training --out /tmp/amm09r1-training/training.json
+          python - <<'PY'
+          import json, pathlib, platform, socket, subprocess
+          import torch
+          torch.set_num_threads(1)
+          torch.set_num_interop_threads(1)
+          torch.use_deterministic_algorithms(True)
+          from mechinterp.bpd.experiments.amm09r_two_slot_memory import experiment as e
+          root = pathlib.Path('/tmp/amm09r1-training')
+          run = json.loads((root / 'training.json').read_text())
+          (root / 'training-lock.json').write_text(json.dumps(e.compact(run), sort_keys=True, indent=2) + '\n')
+          cpu = next(line.split(':', 1)[1].strip() for line in pathlib.Path('/proc/cpuinfo').read_text().splitlines() if line.startswith('model name'))
+          host = {'cpu_model': cpu, 'hostname': socket.gethostname(), 'platform': platform.platform(), 'checkout_commit': subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(), 'runtime_signature': run['runtime_signature']}
+          (root / 'host.json').write_text(json.dumps(host, sort_keys=True, indent=2) + '\n')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: amm09r1-training-${{ matrix.worker }}
+          retention-days: 30
+          if-no-files-found: error
+          path: /tmp/amm09r1-training/
+
+  training_replay_gate:
+    needs: [stage, training]
+    if: ${{ always() && needs.stage.result == 'success' && needs.stage.outputs.phase != 'archive' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.12'
+      - name: Read current training receipts
+        if: needs.stage.outputs.phase == 'training'
+        uses: actions/download-artifact@v4
+        with:
+          pattern: amm09r1-training-*
+          path: /tmp/amm09r1-training-workers
+      - name: Read committed training receipts
+        if: needs.stage.outputs.phase == 'development'
+        uses: actions/download-artifact@v4
+        with:
+          run-id: ${{ needs.stage.outputs.training_run }}
+          github-token: ${{ github.token }}
+          pattern: amm09r1-training-*
+          path: /tmp/amm09r1-training-workers
+      - name: Require whole-training equality across both workers
+        run: |
+          python - <<'PY'
+          import hashlib, json, pathlib
+          root = pathlib.Path('mechinterp/bpd/experiments/amm09r_two_slot_memory')
+          directory = pathlib.Path('/tmp/amm09r1-training-workers')
+          memories = sorted(directory.glob('amm09r1-training-*/training.json'))
+          locks = sorted(directory.glob('amm09r1-training-*/training-lock.json'))
+          assert len(memories) == len(locks) == 2
+          assert memories[0].read_bytes() == memories[1].read_bytes(), 'fresh training numerical portability failed'
+          assert locks[0].read_bytes() == locks[1].read_bytes(), 'fresh policy locks differ'
+          memory = json.loads(memories[0].read_text())
+          lock = json.loads(locks[0].read_text())
+          for name, expected in memory['source_sha256'].items():
+              assert hashlib.sha256((root / name).read_bytes()).hexdigest() == expected, name
+          assert lock['source_sha256'] == memory['source_sha256']
+          assert lock['training_policy_sha256'] == memory['sha256']
+          manifest_path = root / 'results/TRAINING_RECEIPTS.json'
+          if manifest_path.exists():
+              manifest = json.loads(manifest_path.read_text())
+              for relative, expected in manifest['receipt_files'].items():
+                  assert hashlib.sha256((directory / relative).read_bytes()).hexdigest() == expected['sha256'], relative
+              assert lock == json.loads((root / 'results/TRAINING_LOCK.json').read_text())
+          summary = {'schema': 'bpd.amm09r1.training_replay.v1', 'whole_training_byte_exact': True, 'worker_count': 2, 'independent_training_roots': 64, 'training_policy_sha256': memory['sha256'], 'raw_training_sha256': hashlib.sha256(memories[0].read_bytes()).hexdigest(), 'confirmation_authorized': False}
+          pathlib.Path('/tmp/amm09r1-training-replay.json').write_text(json.dumps(summary, sort_keys=True, indent=2) + '\n')
+          print(summary)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: amm09r1-training-replay-verdict
+          retention-days: 30
+          if-no-files-found: error
+          path: /tmp/amm09r1-training-replay.json
+
+  development:
+    needs: [stage, training_replay_gate]
+    if: ${{ always() && needs.stage.outputs.phase == 'development' && needs.training_replay_gate.result == 'success' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.12'
+      - name: Install accepted CPU versions
+        run: |
+          python -m pip install --index-url https://download.pytorch.org/whl/cpu 'torch==2.10.0+cpu'
+          python -m pip install 'numpy==2.2.6'
+      - uses: actions/download-artifact@v4
+        with:
+          run-id: ${{ needs.stage.outputs.training_run }}
+          github-token: ${{ github.token }}
+          name: amm09r1-training-ubuntu-24.04
+          path: /tmp/amm09r1-memory
+      - name: Score 64 fresh development roots once
+        run: |
+          python mechinterp/bpd/experiments/amm09r_two_slot_memory/run.py \
+            --phase development --memory /tmp/amm09r1-memory/training.json \
+            --out /tmp/amm09r1-development/development.json
+          python - <<'PY'
+          import json, pathlib, platform, socket, subprocess
+          from mechinterp.bpd.experiments.amm09r_two_slot_memory import experiment as e
+          root = pathlib.Path('/tmp/amm09r1-development')
+          run = json.loads((root / 'development.json').read_text())
+          (root / 'development-lock.json').write_text(json.dumps(e.compact(run), sort_keys=True, indent=2) + '\n')
+          cpu = next(line.split(':', 1)[1].strip() for line in pathlib.Path('/proc/cpuinfo').read_text().splitlines() if line.startswith('model name'))
+          (root / 'host.json').write_text(json.dumps({'cpu_model':cpu,'hostname':socket.gethostname(),'platform':platform.platform(),'checkout_commit':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),'runtime_signature':run['runtime_signature']},sort_keys=True,indent=2)+'\n')
+          PY
+      - uses: actions/checkout@v4
+        with:
+          repository: MoralityLabAI/EvalMath
+          ref: 6d9c28dbe8e4c42b3fba76ae7adb84aed9f0921a
+          path: evalmath_planner
+      - name: Independently audit paired outcomes and rerun pinned EvalMath
+        run: |
+          python mechinterp/bpd/experiments/amm09r_two_slot_memory/audit.py \
+            --training /tmp/amm09r1-memory/training.json \
+            --development /tmp/amm09r1-development/development.json \
+            --planner evalmath_planner/skills/evalmath-mechinterp-power/scripts/preflight.py \
+            --out /tmp/amm09r1-development/analysis.json \
+            --pilot-out /tmp/amm09r1-development/pilot.json \
+            --preflight-out /tmp/amm09r1-development/preflight.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: amm09r1-development-source-locked
+          retention-days: 30
+          if-no-files-found: error
+          path: /tmp/amm09r1-development/
+
+  archived-development-audit:
+    needs: stage
+    if: needs.stage.outputs.phase == 'archive'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.12'
+      - uses: actions/download-artifact@v4
+        with:
+          run-id: ${{ needs.stage.outputs.training_run }}
+          github-token: ${{ github.token }}
+          name: amm09r1-training-ubuntu-24.04
+          path: /tmp/amm09r1-memory
+      - uses: actions/download-artifact@v4
+        with:
+          run-id: ${{ needs.stage.outputs.development_run }}
+          github-token: ${{ github.token }}
+          name: amm09r1-development-source-locked
+          path: /tmp/amm09r1-recorded
+      - name: Verify immutable raw development bytes
+        run: |
+          python - <<'PY'
+          import hashlib, json, pathlib
+          root = pathlib.Path('mechinterp/bpd/experiments/amm09r_two_slot_memory/results')
+          manifest = json.loads((root / 'DEVELOPMENT_RECEIPTS.json').read_text())
+          for relative, expected in manifest['receipt_files'].items():
+              assert hashlib.sha256((pathlib.Path('/tmp/amm09r1-recorded') / relative).read_bytes()).hexdigest() == expected['sha256'], relative
+          assert json.loads(pathlib.Path('/tmp/amm09r1-recorded/development-lock.json').read_text()) == json.loads((root / 'DEVELOPMENT_LOCK.json').read_text())
+          PY
+      - uses: actions/checkout@v4
+        with:
+          repository: MoralityLabAI/EvalMath
+          ref: 6d9c28dbe8e4c42b3fba76ae7adb84aed9f0921a
+          path: evalmath_planner
+      - name: Rebuild the scientific audit without generating roots
+        run: |
+          python mechinterp/bpd/experiments/amm09r_two_slot_memory/audit.py \
+            --training /tmp/amm09r1-memory/training.json \
+            --development /tmp/amm09r1-recorded/development.json \
+            --planner evalmath_planner/skills/evalmath-mechinterp-power/scripts/preflight.py \
+            --out /tmp/amm09r1-audit/analysis.json \
+            --pilot-out /tmp/amm09r1-audit/pilot.json \
+            --preflight-out /tmp/amm09r1-audit/preflight.json \
+            --check-lock mechinterp/bpd/experiments/amm09r_two_slot_memory/results/ANALYSIS.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: amm09r1-independent-archive-audit
+          retention-days: 30
+          if-no-files-found: error
+          path: /tmp/amm09r1-audit/
