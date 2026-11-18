@@ -39,4 +39,4 @@ jobs:
       - name: Run source math, exact shuffled ESS, and excluded 599 recurrent smoke
         run: |
           python -m compileall -q mechinterp/bpd/experiments/nc06
-          python -m pytest -q mechinterp/bpd/experiments/nc06/test_experiment.py
+          python -m pytest -q mechinterp/bpd/experiments/nc06/test_experiment.py mechinterp/bpd/experiments/nc06/test_aggregate.py
