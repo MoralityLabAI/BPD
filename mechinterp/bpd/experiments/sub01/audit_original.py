@@ -10,6 +10,7 @@ import hashlib
 import json
 import math
 import statistics
+import subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
@@ -32,7 +33,8 @@ def audit(receipt: dict) -> dict:
         assert len({r[key] for r in roots}) == 1
         assert roots[0][key] == summary[key]
     assert hashlib.sha256((ROOT / "PROTOCOL.md").read_bytes()).hexdigest() == summary["protocol_sha256"]
-    assert hashlib.sha256((ROOT / "experiment.py").read_bytes()).hexdigest() == summary["source_sha256"]
+    original = subprocess.check_output(["git", "show", "38dc50de5b7faf2e8dde54862c9666de65832de4:mechinterp/bpd/experiments/sub01/experiment.py"])
+    assert hashlib.sha256(original).hexdigest() == summary["source_sha256"]
     detail = []
     valid_effects = []
     for row in roots:
