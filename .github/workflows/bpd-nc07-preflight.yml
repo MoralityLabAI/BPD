@@ -41,3 +41,5 @@ jobs:
         run: |
           python -m compileall -q mechinterp/bpd/experiments/nc07
           python -m pytest -q mechinterp/bpd/experiments/nc07/test_experiment.py mechinterp/bpd/experiments/nc07/test_aggregate.py
+      - name: Independently audit original eight-root published outcomes and source hashes
+        run: python -m pytest -q mechinterp/bpd/experiments/nc07/test_published_results.py
