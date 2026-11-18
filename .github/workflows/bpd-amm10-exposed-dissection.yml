@@ -1,0 +1,86 @@
+name: BPD-AMM-10 exposed-root causal-memory dissection
+
+on:
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/amm10_exposed_dissection/**'
+      - '.github/workflows/bpd-amm10-exposed-dissection.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  source-only-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Pin NumPy-only numerical audit environment
+        run: python -m pip install 'numpy==2.2.6'
+      - name: No-root-generation fixture tests
+        shell: bash
+        run: |
+          PYTHONPATH=mechinterp/bpd/experiments/amm10_exposed_dissection \
+            python -m unittest test_analysis -v
+      - name: Download the exact original AMM09R1 training receipt
+        uses: actions/download-artifact@v4
+        with:
+          run-id: 44294944939
+          github-token: ${{ github.token }}
+          name: amm09r1-training-ubuntu-22.04
+          path: /tmp/amm10_original_train
+      - name: Download the single source-locked original AMM09R1 development receipt
+        uses: actions/download-artifact@v4
+        with:
+          run-id: 44295607653
+          github-token: ${{ github.token }}
+          name: amm09r1-development-source-locked
+          path: /tmp/amm10_original_dev
+      - name: Verify SHA256 of both original published JSON files
+        shell: bash
+        run: |
+          echo '015f8c78181514a0702e56ad707444699e48b377d9bf29da8ec60a42a0d48d30  /tmp/amm10_original_train/training.json' | sha256sum -c -
+          echo '682473974fa15db6005dab588d66d73c2a58bba1d5c8f1f4a91a93899ea88e5a  /tmp/amm10_original_dev/development.json' | sha256sum -c -
+      - name: Run eightfold training-root crossfit and original-action development diagnostics
+        shell: bash
+        run: |
+          python mechinterp/bpd/experiments/amm10_exposed_dissection/analysis.py \
+            --training /tmp/amm10_original_train/training.json \
+            --development /tmp/amm10_original_dev/development.json \
+            --out /tmp/amm10_exposed_result.json
+          python - <<'PY'
+          import hashlib,json,pathlib
+          report=pathlib.Path('/tmp/amm10_exposed_result.json')
+          lock=json.loads(pathlib.Path(
+              'mechinterp/bpd/experiments/amm10_exposed_dissection/results/RESULTS_LOCK.json').read_text())
+          data=json.loads(report.read_text())
+          assert hashlib.sha256(report.read_bytes()).hexdigest()==lock['original_hosted_complete_json_sha256'], 'original hosted exploratory data drift'
+          assert data['raw_training_sha256']==lock['source_training_sha256']
+          assert data['raw_development_sha256']==lock['source_development_sha256']
+          assert data['frozen_training_policy_sha256']==lock['source_training_policy_sha256']
+          assert data['confirmation_roots_opened']==lock['confirmation_roots_accessed']==0
+          assert data['exact_rank_identity']['preclip_action_mismatch_count']==lock['frozen_rank_identity']['preclip_mismatch']==0
+          assert data['exact_rank_identity']['postclip_action_mismatch_count']==lock['frozen_rank_identity']['postclip_mismatch']==0
+          for arm,expected in lock['root_heldout_training_hits'].items():
+              assert data['training_cv']['arms'][arm]['hits']==expected, f'{arm} root-heldout hits changed'
+          for arm,expected in lock['original_exposed_development_hits'].items():
+              assert data['development']['arms'][arm]['hits']==expected, f'{arm} original development hits changed'
+          assert data['development']['train_selected_family_pooled_masks']==lock['development_family_training_selected_fixed_masks']
+          assert data['development']['memory_only_multi_mask_roots']==lock['development_memory_roots_using_multiple_masks']
+          print('AMM10 COMPLETE ORIGINAL CASE/ABLATION SOURCE LOCK REPLAY PASS')
+          PY
+      - name: Archive complete exploratory root scores and invariance proof audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: amm10-exposed-root-causal-dissection
+          retention-days: 30
+          if-no-files-found: warn
+          path: |
+            /tmp/amm10_exposed_result.json
+            /tmp/amm10_check_result.json

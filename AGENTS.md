@@ -19,6 +19,23 @@ does not thereby repair clean reasoning. Observational probes and exact
 linear-algebraic BPD witnesses belong to different evidence classes from
 native model-causal claims.
 
+AMM10 is an exploratory **exposed-data analysis only** in
+`mechinterp/bpd/experiments/amm10_exposed_dissection/`.
+The original AMM09R1 frozen 18-feature strategy-memory policy ranks
+six allowed component masks using nine candidate-varying terms,
+principally cosine alignment and delayed readout changes. Its
+analytical compression was verified on all 8,192 exposed TRAINING
+donor cases with zero mask-choice disagreements. Eightfold
+root-heldout TRAINING ablation gave 40.14% full-ridge accuracy,
+38.51% simple cosine heuristic, and 28.02% ridge without alignment.
+On already-scored DEVELOPMENT receipts, frozen memory scored
+38.15% and a hindsight best fixed mask per model scored 35.12%;
+the descriptive +3.03pp root-bootstrap interval crosses zero.
+Read AMM10 `RESULTS.md` and `ANALYSIS_PLAN.md` before interpreting
+these selection-exposed results. AMM10 gives no additional
+EvalMath readiness and has no root-generation code. Its 19
+analysis arms are all reported, including negative controls.
+
 AMM09R1's 128 confirmation roots are **SEALED**. Its separately registered
 64-root development study under the accepted CPU recipe measured a
 +13.6230pp memory-only advantage over the training-selected pooled mask,
