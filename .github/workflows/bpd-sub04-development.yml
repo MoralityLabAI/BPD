@@ -1,0 +1,133 @@
+name: BPD-SUB-04 original source-locked eight-root transition-closure development
+
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/experiments/sub04/EXECUTE_LOCK.json'
+
+permissions:
+  contents: read
+
+jobs:
+  original-eight:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 80
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Admit frozen first registration and exact original source/roster
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import json, subprocess
+          root=Path('mechinterp/bpd/experiments/sub04')
+          j=json.loads((root/'EXECUTE_LOCK.json').read_text())
+          assert j['study']=='BPD-SUB-04'
+          assert j['execution']=='first_original_eight_root_engineering'
+          assert j['roots']==list(range(1500,1508))
+          assert j['smoke']==1499
+          assert j['training_steps']==256
+          assert j['train']==2048 and j['discovery']==512
+          assert j['selection']==512 and j['heldout']==1024
+          assert j['rank']==8 and j['optimization_steps']==80
+          assert j['joint_lambda']==.5 and j['optimizer_lr']==.02
+          assert j['minimum_state_rms_gain']==.020
+          assert j['sham_angles']==[.2,.4,.6,.8]
+          assert j['shams']==8
+          assert j['confirmation_models_generated'] is False
+          assert j['evalmath_commit']=='6d9c28dbe8e4c42b3fba76ae7adb84aed9f0921a'
+          for commit in ('e329b4db54b72d15f67e9c3aef847601b0ff0d80',
+                         j['source_commit_sha']):
+              subprocess.run(['git','merge-base','--is-ancestor',commit,'HEAD'],check=True)
+          for f in ('PROTOCOL.md','experiment.py','test_experiment.py','audit_original.py'):
+              subprocess.run(['git','diff','--exit-code',j['source_commit_sha'],
+                              'HEAD','--',str(root/f)],check=True)
+          original=subprocess.check_output(['git','show',
+              'e329b4db54b72d15f67e9c3aef847601b0ff0d80:'+str(root/'PROTOCOL.md')])
+          assert original==(root/'PROTOCOL.md').read_bytes()
+          subprocess.run(['git','diff','--exit-code',
+              'dfd25cec230c8674e05a1b8fa6c14a20d2d642b9',
+              'HEAD','--',
+              'mechinterp/bpd/experiments/sub01/experiment.py',
+              'mechinterp/bpd/experiments/sub02/experiment.py',
+              'mechinterp/bpd/experiments/sub03/experiment.py'],check=True)
+          print('SOURCE_LOCK_AND_COHORT_EXACT')
+          PY
+      - name: Install pinned CPU dependencies
+        run: |
+          python -m pip install --disable-pip-version-check 'numpy==2.2.6' 'pytest==8.3.5'
+          python -m pip install --disable-pip-version-check 'torch==2.5.1' --index-url https://download.pytorch.org/whl/cpu
+      - name: Recheck exact quotient structure before scoring any new model
+        run: |
+          python -m compileall -q mechinterp/bpd/experiments/sub04
+          python -m pytest -q mechinterp/bpd/experiments/sub04/test_experiment.py
+      - name: Train and score the original eight roots once
+        run: |
+          mkdir -p /tmp/sub04
+          python -m mechinterp.bpd.experiments.sub04.experiment \
+            --phase development --ack-development \
+            --output /tmp/sub04/original_eight.json \
+            --pilot-out /tmp/sub04/evalmath_pilot.json
+      - name: Independently audit original entire engineering receipt
+        run: |
+          set -euo pipefail
+          python mechinterp/bpd/experiments/sub04/audit_original.py \
+            --receipt /tmp/sub04/original_eight.json \
+            --out /tmp/sub04/INDEPENDENT_AUDIT.json
+      - name: Run pinned strict EvalMath as an explicit no-confirmation pilot
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path('/tmp/sub04')
+          s=json.loads((root/'original_eight.json').read_text())['summary']
+          assert s['attempted_roots']==8
+          assert s['independent_sham_tail_calibrated'] is False
+          gate={'study':'BPD-SUB-04','phase':'ENGINEERING_ONLY',
+                'registered_verdict':s['verdict'],
+                'independent_roots':8,'eligible_roots':s['eligible_roots'],
+                'confirmed_science':'NOT_READY',
+                'calibration_roots_generated':False,
+                'confirmation_roots_generated':False}
+          (root/'GATE.json').write_text(json.dumps(gate,indent=2,sort_keys=True)+'\n')
+          PY
+          if test -f /tmp/sub04/evalmath_pilot.json; then
+            curl -fLsS \
+              'https://raw.githubusercontent.com/MoralityLabAI/EvalMath/6d9c28dbe8e4c42b3fba76ae7adb84aed9f0921a/skills/evalmath-mechinterp-power/scripts/preflight.py' \
+              -o /tmp/sub04/evalmath_preflight_pinned.py
+            set +e
+            python /tmp/sub04/evalmath_preflight_pinned.py \
+              --pilot /tmp/sub04/evalmath_pilot.json \
+              --out /tmp/sub04/EVALMATH_PREFLIGHT.json --strict
+            status=$?
+            set -e
+            test "$status" -eq 2
+            python - <<'PY'
+          from pathlib import Path
+          import json
+          root=Path('/tmp/sub04')
+          gate=json.loads((root/'GATE.json').read_text())
+          result=json.loads((root/'EVALMATH_PREFLIGHT.json').read_text())
+          assert result['decision']=='REDESIGN_OR_PILOT_ONLY'
+          assert result['pilot_worlds']<=8
+          assert result['upper_sham_quantile'] is None
+          assert 'sham_quantile_uncalibrated' in result['reasons']
+          gate['evalmath_decision']=result['decision']
+          gate['evalmath_strict_exit_code']=2
+          gate['evalmath_reasons']=result['reasons']
+          (root/'GATE.json').write_text(json.dumps(gate,indent=2,sort_keys=True)+'\n')
+          print(json.dumps(gate,sort_keys=True))
+          PY
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bpd-sub04-original-eight-root-transition-closure
+          path: /tmp/sub04/
+          retention-days: 90
