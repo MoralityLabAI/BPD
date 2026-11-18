@@ -1,0 +1,40 @@
+{
+  "study": "BPD-SUB-04",
+  "execution": "first_original_eight_root_engineering",
+  "registered_protocol_commit": "e329b4db54b72d15f67e9c3aef847601b0ff0d80",
+  "source_commit_sha": "4b1c6daa31d74b9b4daacf3ab5b160da46f1c525",
+  "roots": [
+    1500,
+    1501,
+    1502,
+    1503,
+    1504,
+    1505,
+    1506,
+    1507
+  ],
+  "smoke": 1499,
+  "training_steps": 256,
+  "train": 2048,
+  "discovery": 512,
+  "selection": 512,
+  "heldout": 1024,
+  "rank": 8,
+  "optimization_steps": 80,
+  "joint_lambda": 0.5,
+  "optimizer_lr": 0.02,
+  "sham_angles": [
+    0.2,
+    0.4,
+    0.6,
+    0.8
+  ],
+  "shams": 8,
+  "minimum_state_rms_gain": 0.02,
+  "physical_dose_alpha_fraction": 0.25,
+  "scientific_phase": "engineering_only",
+  "evalmath_commit": "6d9c28dbe8e4c42b3fba76ae7adb84aed9f0921a",
+  "confirmation_models_generated": false,
+  "calibration_models_generated": false,
+  "protected_roots_status": "strictly_sealed"
+}
