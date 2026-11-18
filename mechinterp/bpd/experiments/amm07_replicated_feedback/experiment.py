@@ -246,31 +246,38 @@ def analyze(run:dict,pf:dict)->dict:
 
 
 def evaluate(phase:str,memory:dict|None=None,pf:dict|None=None,release:dict|None=None)->dict:
+    """All confirmation checks run before any new model-root generation."""
     admit(phase,memory,pf,release)
     assert memory is not None
     rows=[score_one(phase,i,memory) for i in range(m.PHASE_N[phase])]
     totals={k:sum(r['policy_hits'][k] for r in rows) for k in ARMS}
     out={'schema':SCHEMA+'/cohort','experiment':NAME,'phase':phase,
          'source_sha256':source_sha256(),'training_memory_sha256':memory['sha256'],
-         'n_independent_roots':len(rows),'n_calibration_pairs_per_root':N_LOCAL,
-         'calibration_feedback_bits_per_root':N_LOCAL*2,
+         'n_independent_roots':len(rows),
+         'n_calibration_pairs_per_root':N_LOCAL,
+         'calibration_feedback_bits_per_root':N_LOCAL*4,
          'n_test_pairs_per_root':m.PAIRS,'test_cases':m.PAIRS*len(rows),
          'totals':totals,'rows':rows}
     if phase=='development':
         out['preflight_input']=preflight_input(out)
         out['posthoc_oracle_headroom_hits']=sum(
-            r['heldout']['diagnostics']['casewise_oracle_hits_audit_only']-r['policy_hits']['always_update']
-            for r in rows)
-        out['gate_accepted_roots']=sum(r['gate_decision']['accepted'] for r in rows)
-        strata={q:[r for r in rows if r['hidden_judge_quality_audit_only']==q]
-                for q in ('low_noise','high_noise')}
-        out['gate_acceptance_by_hidden_quality_audit_only']={
-            q:sum(r['gate_decision']['accepted'] for r in rr)/len(rr)
-            for q,rr in strata.items()}
-        out['gate_acceptance_quality_gap_audit_only']=(
-            out['gate_acceptance_by_hidden_quality_audit_only']['low_noise']
-            -out['gate_acceptance_by_hidden_quality_audit_only']['high_noise'])
+            r['heldout']['diagnostics']['casewise_oracle_hits_audit_only']
+            -r['policy_hits']['quality_blind'] for r in rows)
         out['posthoc_oracle_headroom_rate']=out['posthoc_oracle_headroom_hits']/out['test_cases']
+        out['correct_quality_roots']=sum(r['quality_classifier_correct_audit_only'] for r in rows)
+        out['high_fidelity_roots']=sum(r['factor_fidelity_flag_audit_only'] for r in rows)
+        out['quality_detection_by_hidden_stratum_audit_only']={
+            q:{'roots':sum(r['hidden_judge_quality_audit_only']==q for r in rows),
+               'correct':sum(r['quality_classifier_correct_audit_only']
+                   for r in rows if r['hidden_judge_quality_audit_only']==q)}
+            for q in ('low_noise','high_noise')}
+        out['fidelity_strata_diagnostic_only']={
+            label:{'roots':sum(r['factor_fidelity_flag_audit_only']==flag for r in rows),
+                   'aware_success':sum(r['policy_hits']['quality_aware'] for r in rows
+                                      if r['factor_fidelity_flag_audit_only']==flag),
+                   'blind_success':sum(r['policy_hits']['quality_blind'] for r in rows
+                                      if r['factor_fidelity_flag_audit_only']==flag)}
+            for label,flag in [('high_fidelity',True),('flagged_fit',False)]}
     else:
         out['preflight_sha256']=m.digest(pf)
         out['release_sha256']=m.digest(release)
@@ -279,6 +286,7 @@ def evaluate(phase:str,memory:dict|None=None,pf:dict|None=None,release:dict|None
 
 
 def compact(run:dict)->dict:
+    """Small locked receipt; full raw case values are reproducible from source."""
     if run['phase']=='training':
         return {'schema':SCHEMA+'/training_lock','source_sha256':run['source_sha256'],
                 'memory_sha256':run['sha256'],'pooled_action':run['pooled_action'],
@@ -292,17 +300,19 @@ def compact(run:dict)->dict:
          'totals':run['totals'],
          'all_case_bits_sha256':m.digest([{'root':r['root'],
                'clean_calibration':r['calibration_clean_audit_only']['candidate_bits'],
-               'noisy_calibration':r['agent_visible_noisy_feedback']['reported_bits'],
-               'gate':{'accepted':r['gate_decision']['accepted'],
-                       'log_bayes_factor':r['gate_decision']['log_bayes_factor']},
+               'duplicate_reports':r['agent_visible_duplicate_reports']['reported_replicates'],
+               'quality':r['reliability_posterior'],
+               'fidelity_flag':r['factor_fidelity_flag_audit_only'],
                'candidate_bits':r['heldout']['candidate_bits'],
                'policy_actions':r['policy_actions'],'policy_bits':r['policy_bits'],
-               'repeat_bits':r['repeatability']['always_update_bits']} for r in run['rows']]),
+               'repeat_bits':r['repeatability']['blind_bits']} for r in run['rows']]),
          'full_receipt_sha256':m.digest(run)}
     if run['phase']=='development':
         out['headroom_rate']=run['posthoc_oracle_headroom_rate']
-        out['gate_accepted_roots']=run['gate_accepted_roots']
-        out['gate_quality_acceptance_gap']=run['gate_acceptance_quality_gap_audit_only']
+        out['correct_quality_roots']=run['correct_quality_roots']
+        out['high_fidelity_roots']=run['high_fidelity_roots']
+        out['quality_strata']=run['quality_detection_by_hidden_stratum_audit_only']
+        out['fidelity_strata']=run['fidelity_strata_diagnostic_only']
         out['preflight_input_sha256']=m.digest(run['preflight_input'])
     else:
         out['preflight_sha256']=run['preflight_sha256']
