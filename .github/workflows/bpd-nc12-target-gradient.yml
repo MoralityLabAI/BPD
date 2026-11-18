@@ -29,7 +29,9 @@ jobs:
           p=Path('mechinterp/bpd/experiments/nc12/EXECUTE_LOCK.json')
           lock=json.loads(p.read_text())
           assert lock['study']=='BPD-NC-12'
-          assert lock['status']=='SOURCE_LOCK_BEFORE_FIRST_NC12_MODEL_TRAINING'
+          assert lock['status']=='SOURCE_LOCK_AMENDED_BEFORE_FIRST_NC12_DEVELOPMENT_ROOT'
+          assert len(lock['predevelopment_amendments'])==1
+          assert lock['predevelopment_amendments'][0]['first_development_job'].startswith('skipped')
           assert lock['protocol_first_commit']=='6a4b5ebc16fae730f17b0e5dac5564eaf419c071'
           assert lock['roots']==list(range(1200,1208))
           assert lock['excluded_smoke_root']==1199
