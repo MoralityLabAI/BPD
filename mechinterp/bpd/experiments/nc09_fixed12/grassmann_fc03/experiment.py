@@ -29,7 +29,7 @@ from mechinterp.bpd.experiments.nc05.experiment import clean_dose_rms
 from mechinterp.bpd.experiments.nc08.experiment import passwise_source_candidates
 from mechinterp.bpd.experiments.nc09_fixed12 import experiment as nc09
 from mechinterp.bpd.experiments.nc09_fixed12.tangent_sham_calibration.tangent_shams import build_derivative_matched_shams as frozen_fc02_sampler
-from mechinterp.bpd.experiments.nc09_fixed12.grassmann_fc03.solver import fit_constrained_grassmann
+from mechinterp.bpd.experiments.nc09_fixed12.grassmann_fc03.solver import fit_constrained_grassmann, projector_digest
 
 ROOT=Path(__file__).resolve().parent
 PROTO_SHA=hashlib.sha256((ROOT/"PROTOCOL.md").read_bytes()).hexdigest()
@@ -157,6 +157,7 @@ def evaluate_calibration_root(seed:int,*,steps:int=384,discovery_n:int=1024,
         "full_mask_closure":closure,
         "modelscore_nonzero_count":modelscore["model_score_nonzero_count"],
         "source_rank12_optimum":optimum,
+        "source_dp12_projector_receipt":projector_digest(arms["dp12"]["projector"]) if arms["dp12"]["eligible"] else None,
         "physical_source_gain":gain,
         "dp12_source_write_rms":dpdose,
         "flat3_source_write_rms":flatdose,
