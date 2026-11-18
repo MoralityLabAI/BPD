@@ -6,6 +6,28 @@ AMM-06 tests a **preregistered, held-out local-feedback trust gate**. The model 
 
 The global memory is ridge regression on 64 freshly trained synthetic 4D rank-two recurrent model roots, each with 128 independently generated donor pairs. For each new model, the trust gate fits a residual from the *first four* calibration pairs, evaluates its noisy predictive likelihood against frozen memory on the *last four*, and accepts the full 16-label update only when the **mixture log Bayes factor exceeds ln 2**. Both accepted and rejected paths choose one causal BPD component per test case using the same three unlabeled continuation readouts. The true donor label and donor-future continuation are audit-only; all active candidate patches have the same L2 dose.
 
+## Completed development study and scientific hold
+
+[RESULTS.md](RESULTS.md) and the exact source-locked receipts under
+`results/` record all 64 independently trained development models.
+The selective gate gained **0.81 percentage points** over always
+updating local feedback, with 23 positive, 17 negative and 24 tied
+roots. Frozen training-only memory remained ahead by 0.45 points.
+
+The corrected 64-root EvalMath preflight returned
+**`REDESIGN_OR_PILOT_ONLY`**, with a 12.5-point 95/95 repeatability
+floor against a registered 8-point minimum and 15-point target.
+The gate accepted only seven roots (minimum eight), and the
+low-noise minus high-noise acceptance difference was 9.375 points
+(minimum ten). Every negative and failed factor-fit root remains
+in the receipts.
+
+**All 128 independent AMM-06 confirmation roots remain SEALED.
+Do not execute `--phase confirmation`, create a release manifest,
+or interpret the negative planner receipt as authorization.**
+The original source files remain unchanged so hosted CI can
+replay training and development deterministically.
+
 ## Source-locked CPU workflow
 
 Requires Python 3.12 and PyTorch CPU:
