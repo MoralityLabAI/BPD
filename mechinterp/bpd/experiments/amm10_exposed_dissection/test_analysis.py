@@ -78,6 +78,23 @@ class AMM10Tests(unittest.TestCase):
         self.assertTrue(all(c==0 for c in a.heuristic(x,"max_cosine")))
         self.assertTrue(all(c==0 for c in a.heuristic(x,"max_cardinality")))
 
+    def test_mathematically_identical_mask_ties_across_float_ulp(self):
+        # For a cardinality-only policy, masks 3,4,5 are exactly the same
+        # feature row. A vectorized dot product can differ by one ulp.
+        x=np.zeros((2,6,18),dtype=np.float64)
+        x[:,:,0]=1.
+        x[:,:,1]=np.array([1,1,1,2,2,2])/3.
+        s=np.array([[.07,.07,.07,.21834327270398918,
+                     .2183432727039892,.2183432727039892]]*2)
+        # Ordinary argmax chooses 4 even though 3 has identical inputs.
+        self.assertEqual(np.argmax(s,axis=1).tolist(),[4,4])
+        fixed=a.identical_feature_ties(x,(0,1),s)
+        self.assertEqual(np.argmax(fixed,axis=1).tolist(),[3,3])
+        self.assertTrue(bool(np.array_equal(fixed[:,3],fixed[:,4])))
+        # Distinct feature rows remain distinguishable; exact tie only.
+        self.assertEqual(fixed[0,0],s[0,0])
+        self.assertEqual(fixed[0,3],s[0,3])
+
     def test_root_effect_bootstrap_reproducible(self):
         x=[4]*31+[-3]*24+[0]*9
         y=[0]*64
