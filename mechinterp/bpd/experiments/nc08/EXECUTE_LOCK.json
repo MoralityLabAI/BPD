@@ -1,0 +1,42 @@
+{
+  "study": "BPD-NC-08",
+  "execution": "first_original_eight_root_development",
+  "registration_date": "2026-11-18",
+  "prospective_protocol_first_commit": "27e09f396392f9ba0c8a169b84aea3712ed4c6cc",
+  "source_commit_sha": "7bb6beb828f87f22cac199b265eda786f856d7ba",
+  "model_roots": [
+    800,
+    801,
+    802,
+    803,
+    804,
+    805,
+    806,
+    807
+  ],
+  "excluded_engineering_seed": 799,
+  "training_steps": 384,
+  "train_samples": 2048,
+  "discovery": 1024,
+  "selector": 512,
+  "final_heldout": 1024,
+  "budgets": [
+    8,
+    10,
+    12,
+    14
+  ],
+  "per_pass_ranks": [
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "sham_proposals": 2048,
+  "shams": 8,
+  "bootstrap_draws": 2000,
+  "bootstrap_seed": 808008,
+  "excluded_preflight_green_run": 44265050981,
+  "source_policy": "Archive first original development result and every failed root. Do not modify protected source, ranks, selection rule, shams, thresholds or seeds after this lock. Independent >=59 calibration and >=32 confirmation roots remain sealed."
+}
