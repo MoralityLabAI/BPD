@@ -27,16 +27,29 @@ jobs:
           python -m pip install --index-url https://download.pytorch.org/whl/cpu 'torch==2.10.0+cpu'
       - name: Excluded-root unit tests and native BPDModel parity
         run: python -m unittest discover -s mechinterp/bpd/theory/cq08_nuisance_mediation/tests -v
+      - name: Frozen exact-weight independent/native replay against original development receipt
+        run: python -m mechinterp.bpd.theory.cq08_nuisance_mediation.checkpoint_replay --check
       - name: Hosted independent eight-root raw development receipt
         run: python -m mechinterp.bpd.theory.cq08_nuisance_mediation.experiment --phase development --backend independent --out /tmp/cq08_dev_host_independent.json
       - name: Hosted native BPDModel/TiedComponentLinear raw development receipt
         run: python -m mechinterp.bpd.theory.cq08_nuisance_mediation.experiment --phase development --backend native --out /tmp/cq08_dev_host_native.json
-      - name: Strict independent vs native and frozen cross-host count audit
+      - name: Cross-host retraining drift diagnostic (preserve non-bit-exact results)
+        id: retrain_drift
+        continue-on-error: true
         run: |
           python -m mechinterp.bpd.theory.cq08_nuisance_mediation.host_audit \
             --independent /tmp/cq08_dev_host_independent.json \
             --native /tmp/cq08_dev_host_native.json \
             --out /tmp/cq08_host_drift_audit.json
+      - name: Fresh hosted independent/native backend parity is mandatory
+        run: |
+          python - <<'PY'
+          import json
+          p=json.load(open('/tmp/cq08_host_drift_audit.json'))
+          if p['backend_parity']!='PASS':
+              raise SystemExit('Fresh training native/independent execution mismatch')
+          print('Backend parity PASS; cross-host frozen retraining parity:',p['frozen_receipt_parity'])
+          PY
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -53,6 +66,25 @@ jobs:
           python -m mechinterp.bpd.theory.cq08_nuisance_mediation.power --development /tmp/cq08_dev.json --strict
           rc=$?
           if test "$rc" -ne 2; then echo "ERROR: expected blocked strict preflight exit 2, got $rc"; exit 1; fi
+      - name: Source-locked independent 59-root sham preflight is reproducible
+        run: |
+          python - <<'PY'
+          import json,base64,gzip,hashlib
+          from pathlib import Path
+          from mechinterp.bpd.theory.cq08_nuisance_mediation.reference import load_frozen
+          from mechinterp.bpd.theory.cq08_nuisance_mediation.power import preflight
+          p=Path('mechinterp/bpd/theory/cq08_nuisance_mediation/results')
+          lock=json.loads((p/'SHAM_LOCK.json').read_text())
+          raw=(p/'cq08_sham_independent.json.gz.b64').read_bytes()
+          assert hashlib.sha256(raw).hexdigest()==lock['sham_gzip_base64_sha256']
+          sham=json.loads(gzip.decompress(base64.b64decode(raw)))
+          now=preflight(load_frozen(),sham)
+          frozen=json.loads((p/'preflight_after_59_shams.json').read_text())
+          assert now==frozen, 'changed planning gate'
+          assert now['decision']=='READY_FOR_CONFIRMATION'
+          assert lock['confirmed_release']=='NOT RELEASED'
+          print('59 independent sham roots and preflight hashes verified; confirmation sealed')
+          PY
       - name: Confirmation remains locked
         run: |
           if test -e mechinterp/bpd/theory/cq08_nuisance_mediation/CONFIRM_UNLOCK.json; then
