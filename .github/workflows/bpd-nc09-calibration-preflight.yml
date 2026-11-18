@@ -1,0 +1,63 @@
+name: BPD NC09-FC01 59-root calibration source-only preflight
+
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/experiments/nc09_fixed12/calibration/**'
+      - '.github/workflows/bpd-nc09-calibration-preflight.yml'
+      - '.github/workflows/bpd-nc09-calibration-registered.yml'
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/nc09_fixed12/calibration/**'
+      - '.github/workflows/bpd-nc09-calibration-preflight.yml'
+      - '.github/workflows/bpd-nc09-calibration-registered.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  excluded-root-11999:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check prospective first protocol and frozen NC09 physical experiment
+        run: |
+          set -euo pipefail
+          git cat-file -e c7d9a99414b3e674ae5525507ac0e2fc1b86619f^{commit}
+          git merge-base --is-ancestor c7d9a99414b3e674ae5525507ac0e2fc1b86619f HEAD
+          git show c7d9a99414b3e674ae5525507ac0e2fc1b86619f:mechinterp/bpd/experiments/nc09_fixed12/calibration/PROTOCOL.md > /tmp/nc09-cal-protocol-first.md
+          cmp /tmp/nc09-cal-protocol-first.md mechinterp/bpd/experiments/nc09_fixed12/calibration/PROTOCOL.md
+          git cat-file -e 978ba2d3087e6175a16617676db5573853063ca6^{commit}
+      - name: Install pinned original 20D CPU tensor environment
+        run: |
+          python -m pip install --disable-pip-version-check pytest 'numpy>=1.26' scipy==1.14.1
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Source-only excluded 11999 physical BPD and prospective 59-root decisions
+        run: |
+          python -m compileall -q mechinterp/bpd/experiments/nc09_fixed12/calibration
+          python -m pytest -q mechinterp/bpd/experiments/nc09_fixed12/calibration/test_experiment.py mechinterp/bpd/experiments/nc09_fixed12/calibration/test_aggregate.py
+      - name: Independently audit first 59-root calibration and pinned EvalMath publication
+        run: python -m pytest -q mechinterp/bpd/experiments/nc09_fixed12/calibration/test_published_results.py
+
+  exact-nonparametric-coverage-arithmetic:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Install pinned Lean 4.19.0
+        run: |
+          curl --fail --location --retry 3 https://github.com/leanprover/lean4/releases/download/v4.19.0/lean-4.19.0-linux.tar.zst -o /tmp/lean.tar.zst
+          tar --zstd -xf /tmp/lean.tar.zst -C /tmp
+          echo '/tmp/lean-4.19.0-linux/bin' >> "$GITHUB_PATH"
+      - name: Kernel-check exact 59-root 95/95 maximum coverage arithmetic
+        run: |
+          set -euo pipefail
+          lean mechinterp/bpd/experiments/nc09_fixed12/calibration/CalibrationCoverage.lean | tee /tmp/cal95.txt
+          grep -q 'BPD.NC09Calibration.exact_59_root_95_95_arithmetic' /tmp/cal95.txt
+          if grep -E 'sorryAx|ofReduceBool' /tmp/cal95.txt; then exit 1; fi
