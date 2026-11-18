@@ -1,0 +1,44 @@
+name: BPD-SUB-01 causal grain source and excluded-root smoke
+
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/experiments/sub01/**'
+      - '.github/workflows/bpd-sub01-source.yml'
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/sub01/**'
+      - '.github/workflows/bpd-sub01-source.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  source-only:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check protocol-first history and immutable registration
+        run: |
+          git merge-base --is-ancestor fe46c382fa69f9d7a2390bad0cff64245861ff1e HEAD
+          git show fe46c382fa69f9d7a2390bad0cff64245861ff1e:mechinterp/bpd/experiments/sub01/PROTOCOL.md > /tmp/sub01-registered.md
+          cmp /tmp/sub01-registered.md mechinterp/bpd/experiments/sub01/PROTOCOL.md
+      - name: Install CPU dependencies
+        run: |
+          python -m pip install --disable-pip-version-check pytest 'numpy>=1.26'
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Structural tests and excluded smoke only
+        run: |
+          python -m compileall -q mechinterp/bpd/experiments/sub01
+          python -m pytest -q mechinterp/bpd/experiments/sub01/test_experiment.py
+          python -m mechinterp.bpd.experiments.sub01.experiment --phase smoke --output /tmp/sub01-smoke.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sub01-excluded-smoke
+          path: /tmp/sub01-smoke.json
