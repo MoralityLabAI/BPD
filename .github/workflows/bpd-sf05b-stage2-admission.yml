@@ -1,0 +1,112 @@
+name: BPD-SF05B Stage 2-A excluded source-aware admission and public output audit
+
+on:
+  push:
+    branches:
+      - "research/bpd-sf05b-stage2-excluded-*"
+    paths:
+      - ".github/workflows/bpd-sf05b-stage2-admission.yml"
+  pull_request:
+    paths:
+      - "mechinterp/bpd/theory/sf05b_stage2_admission/**"
+      - ".github/workflows/bpd-sf05b-stage2-admission.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-locked-excluded-model-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pinned CPU torch
+        run: python -m pip install "torch==2.5.1"
+      - name: Verify prospective source hashes and untouched scientific roots
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json,subprocess
+          from pathlib import Path
+          root=Path('mechinterp/bpd/theory/sf05b_stage2_admission')
+          lock=json.loads((root/'LOCK.json').read_text())
+          assert lock['status']=='PROSPECTIVE_SOURCE_HASHES_FROZEN_BEFORE_EXCLUDED_ROOT_MODEL_SCORING'
+          assert lock['seeds']==[901,902] and lock['excluded_design_roots_only']
+          assert lock['new_calibration_roots_executed']==0
+          assert lock['new_confirmation_roots_executed']==0
+          assert lock['cohort_samples_per_root']=={'authorized_unconditional':512,'authorized_high_contrast':512,'public_U':512}
+          for rel,sha in lock['files'].items():
+              got=subprocess.check_output(['git','hash-object',str(root/rel)],text=True).strip()
+              assert got==sha, f'{rel}: {got} != {sha}'
+          for rel,sha in lock['upstream_source_blobs'].items():
+              got=subprocess.check_output(['git','hash-object',rel],text=True).strip()
+              assert got==sha, f'{rel}: {got} != {sha}'
+          print('SF05B Stage2-A source locked before model-level scoring; excluded 901/902 only')
+          PY
+      - name: Source strata, filter denominators, poisoned input, root ban
+        run: python -m unittest discover -s mechinterp/bpd/theory/sf05b_stage2_admission/tests -v
+      - name: Native BPD seven-call physical parity on excluded seed
+        run: python -m mechinterp.bpd.theory.sf05b_stage1.native_parity
+      - name: Train excluded teachers and score three independent heldout source cohorts
+        shell: bash
+        run: |
+          python -m mechinterp.bpd.theory.sf05b_stage2_admission.evaluate \
+            --roots 901 902 --samples 512 --shams 16 \
+            --out /tmp/sf05b_stage2a_raw.json > /tmp/sf05b_stage2a_stdout.json
+      - name: Audit complete eligibility ladder and public population
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json,math
+          x=json.load(open('/tmp/sf05b_stage2a_raw.json'))
+          assert x['roots']==[901,902]
+          assert len(x['rows'])==2
+          for r in x['rows']:
+              assert r['seed'] in (901,902)
+              assert r['policy_training']['training_family']=='train'
+              assert r['policy_training']['inference_uses_oracle'] is False
+              for name in ('authorized_unconditional','authorized_high_contrast','public_U'):
+                  c=r['cohorts'][name]
+                  assert c['retained']==512 and c['ladder']['generated']==512
+                  if name=='authorized_high_contrast':
+                      assert c['attempted_candidates']==2048
+                      assert c['qualified_candidates']>=512
+                      assert c['ladder']['source_label_gap_ge_0p30']==512
+                  if name=='public_U':
+                      assert c['ladder']['authorized_role_count']==0
+                      assert c['ladder']['source_label_change_count']==0
+                  else:
+                      assert c['ladder']['authorized_role_count']==512
+                      assert c['ladder']['all_model_filters_count']<=c['ladder']['after_clean_then_boundary_count']<=c['ladder']['both_clean_teacher_correct_count']<=512
+                  for arm in c['scores'].values():
+                      assert arm['prequery_readout_max_error']<=1e-6
+                      assert math.isfinite(arm['public_abs_mean'])
+                  for pol in c['policy_correction'].values():
+                      assert pol['max_budget_excess']<=1e-6
+                  print('SF05B_STAGE2_A='+json.dumps({
+                      'seed':r['seed'],'cohort':name,
+                      'generated':c['ladder']['generated'],
+                      'eligible':c['ladder']['all_model_filters_count'],
+                      'source_label_gap_mean':c['ladder']['source_label_abs_gap_mean'],
+                      'both_clean_correct':c['ladder']['both_clean_teacher_correct_count'],
+                      'clean_boundary':c['ladder']['after_clean_then_boundary_count'],
+                      'full_donor_recovery':c['scores']['bpd_full_raw']['authorized_donor_recovery'],
+                      'learned_recovery':c['scores']['bpd_full_learned']['authorized_donor_recovery'],
+                      'public_delta_raw':c['scores']['bpd_full_raw']['public_abs_mean'],
+                      'public_delta_learned':c['scores']['bpd_full_learned']['public_abs_mean'],
+                      'public_delta_oracle':c['scores']['bpd_full_oracle']['public_abs_mean'],
+                      'teacher_public_mae':c['clean_public_recipient_mae']
+                  }))
+          print('SF05B Stage2-A excluded-root engineering complete; new scientific roots = 0')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sf05b-stage2a-excluded-model-admission-raw
+          path: |
+            /tmp/sf05b_stage2a_raw.json
+            /tmp/sf05b_stage2a_stdout.json

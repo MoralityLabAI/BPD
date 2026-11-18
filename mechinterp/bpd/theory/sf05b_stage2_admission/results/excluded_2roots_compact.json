@@ -1,0 +1,140 @@
+{
+  "experiment": "BPD-SF05B Stage2-A",
+  "evidence_class": "excluded-root trained-model source-aware donor pilot",
+  "exact_source_locked_run": "https://github.com/MoralityLabAI/BPD/actions/runs/44221039293",
+  "raw_artifact": "https://github.com/MoralityLabAI/BPD/actions/runs/44221039293/artifacts/14390902136",
+  "raw_json_sha256": "77dc1730bfab6341de24e8d36ed55f8710c3f7cd8ec00a498af309048cf52958",
+  "model_roots": [
+    901,
+    902
+  ],
+  "reserved_scientific_roots_executed": {
+    "calibration": 0,
+    "confirmation": 0
+  },
+  "counts": {
+    "generated_per_cohort_per_root": 512,
+    "high_contrast_candidates_per_root": 2048,
+    "random_shams_per_kind_per_authorized_cohort": 16
+  },
+  "old_stage1_eligible_per_root": {
+    "901": 18,
+    "902": 13
+  },
+  "results": [
+    {
+      "seed": 901,
+      "independent_heldout_teacher_mae": 0.07455842196941376,
+      "independent_heldout_teacher_public_mae": 0.03812113031744957,
+      "cohorts": {
+        "authorized_unconditional": {
+          "generated": 512,
+          "attempted": 512,
+          "exact_target_gap_mean": 0.5230816602706909,
+          "both_clean_teacher_correct": 237,
+          "boundary_pass_independent": 125,
+          "after_clean_and_boundary": 58,
+          "model_future_gap_pass_independent": 399,
+          "eligible": 43,
+          "full_physical_recovery": 1,
+          "learned_full_recovery": 1,
+          "public_raw_abs_mean": 0.041262924671173096,
+          "public_learned_abs_mean": 0.034471817314624786,
+          "public_oracle_abs_mean": 0.000015432078726007603,
+          "signed_sham_corrected_auth_mean": 0.11046512029133737
+        },
+        "authorized_high_contrast": {
+          "generated": 512,
+          "attempted": 2048,
+          "qualified": 1351,
+          "exact_target_gap_mean": 0.7115603685379028,
+          "both_clean_teacher_correct": 198,
+          "boundary_pass_independent": 108,
+          "after_clean_and_boundary": 42,
+          "model_future_gap_pass_independent": 491,
+          "eligible": 42,
+          "full_physical_recovery": 1,
+          "learned_full_recovery": 1,
+          "public_raw_abs_mean": 0.0412987656891346,
+          "public_learned_abs_mean": 0.033632103353738785,
+          "public_oracle_abs_mean": 0.000013925236999057233,
+          "signed_sham_corrected_auth_mean": 0.23214286472648382
+        },
+        "public_U": {
+          "generated": 512,
+          "attempted": 512,
+          "eligible_authorized": 0,
+          "source_target_gap_mean": 0,
+          "public_clean_recipient_mae": 0.0419938825070858,
+          "clean_tag_swap_public_abs_effect": 0.03980790078639984,
+          "public_raw_abs_mean": 0.04167872667312622,
+          "public_learned_abs_mean": 0.03409397602081299,
+          "public_oracle_abs_mean": 0.000015692370652686805,
+          "learned_below_0p02_fraction": 0.3828125
+        }
+      }
+    },
+    {
+      "seed": 902,
+      "independent_heldout_teacher_mae": 0.09602513164281845,
+      "independent_heldout_teacher_public_mae": 0.04825656861066818,
+      "cohorts": {
+        "authorized_unconditional": {
+          "generated": 512,
+          "attempted": 512,
+          "exact_target_gap_mean": 0.5396592020988464,
+          "both_clean_teacher_correct": 153,
+          "boundary_pass_independent": 114,
+          "after_clean_and_boundary": 32,
+          "model_future_gap_pass_independent": 381,
+          "eligible": 20,
+          "full_physical_recovery": 1,
+          "learned_full_recovery": 1,
+          "public_raw_abs_mean": 0.07023921608924866,
+          "public_learned_abs_mean": 0.06522843986749649,
+          "public_oracle_abs_mean": 0.00001070767029887065,
+          "signed_sham_corrected_auth_mean": 0.10000000218860805
+        },
+        "authorized_high_contrast": {
+          "generated": 512,
+          "attempted": 2048,
+          "qualified": 1344,
+          "exact_target_gap_mean": 0.7483785152435303,
+          "both_clean_teacher_correct": 155,
+          "boundary_pass_independent": 118,
+          "after_clean_and_boundary": 29,
+          "model_future_gap_pass_independent": 474,
+          "eligible": 29,
+          "full_physical_recovery": 1,
+          "learned_full_recovery": 1,
+          "public_raw_abs_mean": 0.06911838799715042,
+          "public_learned_abs_mean": 0.06439028680324554,
+          "public_oracle_abs_mean": 0.00001240693381987612,
+          "signed_sham_corrected_auth_mean": 0.07112069032154977
+        },
+        "public_U": {
+          "generated": 512,
+          "attempted": 512,
+          "eligible_authorized": 0,
+          "source_target_gap_mean": 0,
+          "public_clean_recipient_mae": 0.055098313838243484,
+          "clean_tag_swap_public_abs_effect": 0.06965716928243637,
+          "public_raw_abs_mean": 0.0728512704372406,
+          "public_learned_abs_mean": 0.06716746091842651,
+          "public_oracle_abs_mean": 0.000012318385415710509,
+          "learned_below_0p02_fraction": 0.197265625
+        }
+      }
+    }
+  ],
+  "statements": {
+    "engineering_tests": 7,
+    "native_fullmask_max_error": 9.5367431640625e-7,
+    "native_donor_write_max_error": 7.152557373046875e-7,
+    "model_level_eligibility_comparison": "Cross-cohort descriptive only; old Stage1 uniform-role histories differ from new source-aware cohorts.",
+    "new_scientific_inference": "none; only two previously excluded teacher roots",
+    "limiting_factors": "Model clean-recipient/donor answer accuracy and prequery current-readout agreement, not source-oracle label contrast.",
+    "public_error_reference_target": 0.02,
+    "protected": "ARG-03-N sealed holdout, fresh root rosters unchanged"
+  }
+}
