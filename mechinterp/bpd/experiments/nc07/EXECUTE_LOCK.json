@@ -1,0 +1,36 @@
+{
+  "study": "BPD-NC-07",
+  "execution": "first_original_eight_root_development",
+  "registration_date": "2026-11-18",
+  "prospective_protocol_first_sha": "c798a5b50ee78a0b430a69dfe34a474b89919b37",
+  "source_commit_sha": "72585435e538325485d6c1ead25e41d27e06af3b",
+  "roots": [
+    700,
+    701,
+    702,
+    703,
+    704,
+    705,
+    706,
+    707
+  ],
+  "excluded_smoke_seed": 699,
+  "training_steps": 384,
+  "train_samples": 2048,
+  "gradient_discovery": 1024,
+  "rank_selection": 512,
+  "final_heldout": 1024,
+  "frozen_ranks": [
+    2,
+    3,
+    4,
+    6
+  ],
+  "retained_write_gain": 1,
+  "shams": 8,
+  "sham_proposals": 1024,
+  "bootstrap_repeats": 2000,
+  "bootstrap_seed": 707007,
+  "source_only_preflight_green_run": 44260474688,
+  "evidence_policy": "Retain every original trained root, selector candidate, source-only sham, heldout task NLL and ENGINEERING_POSITIVE/ENGINEERING_NULL_OR_INELIGIBLE without rescoring. Future independent calibration/confirmation roots are sealed."
+}

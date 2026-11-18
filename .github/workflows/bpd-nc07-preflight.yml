@@ -1,0 +1,45 @@
+name: BPD-NC-07 adaptive-rank source-only admission
+
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/experiments/nc07/**'
+      - '.github/workflows/bpd-nc07-preflight.yml'
+      - '.github/workflows/bpd-nc07-development.yml'
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/nc07/**'
+      - '.github/workflows/bpd-nc07-preflight.yml'
+      - '.github/workflows/bpd-nc07-development.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  source-only-excluded-699:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify protocol committed before first implementation
+        run: |
+          set -euo pipefail
+          git cat-file -e c798a5b50ee78a0b430a69dfe34a474b89919b37^{commit}
+          git merge-base --is-ancestor c798a5b50ee78a0b430a69dfe34a474b89919b37 HEAD
+          git show c798a5b50ee78a0b430a69dfe34a474b89919b37:mechinterp/bpd/experiments/nc07/PROTOCOL.md > /tmp/nc07-protocol-first.md
+          cmp /tmp/nc07-protocol-first.md mechinterp/bpd/experiments/nc07/PROTOCOL.md
+      - name: Install frozen compatible numerical dependencies
+        run: |
+          python -m pip install --disable-pip-version-check pytest 'numpy>=1.26' scipy==1.14.1
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Root 699 only, source-only KL selector and synthetic decision
+        run: |
+          python -m compileall -q mechinterp/bpd/experiments/nc07
+          python -m pytest -q mechinterp/bpd/experiments/nc07/test_experiment.py mechinterp/bpd/experiments/nc07/test_aggregate.py
+      - name: Independently audit original eight-root published outcomes and source hashes
+        run: python -m pytest -q mechinterp/bpd/experiments/nc07/test_published_results.py
