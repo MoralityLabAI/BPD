@@ -52,7 +52,7 @@ FIELDS=(
     "qualified_sham_proposals","dose_gain","clean_nll","dp12_nll",
     "flat3_nll","flat3_dose_nll","flat4_nll","reverse_nll",
     "flat3_minus_dp12","doseflat3_minus_dp12","dp12_minus_clean",
-    "dp12_minus_flat4","sham_minus_dp12","reverse_minus_dp12",
+    "dp12_minus_flat4","matched_sham_minus_dp12","reverse_minus_dp12",
 )
 METRICS=(
     "flat3_minus_dp12","doseflat3_minus_dp12","dp12_minus_clean",
