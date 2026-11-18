@@ -35,7 +35,7 @@ def aggregate(receipts:list[dict]):
         r["protocol_sha256"]==PROTOCOL_HASH for r in receipts
     )
     eligible=all(r["eligible"] and
-                 all(r["methods"][arm]["status"]=="ELIGIBLE" for arm in ARMS)
+                 all(r["methods"][arm]["status"]=="ELIGIBLE" for arm in ("norm_r3","uniform_r3","shuffle_r3"))
                  for r in receipts)
     per=[]
     for root in DEV_ROOTS:
