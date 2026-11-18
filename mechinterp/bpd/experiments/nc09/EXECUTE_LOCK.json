@@ -1,0 +1,39 @@
+{
+  "study": "BPD-NC-09",
+  "source_only_protocol_commit": "22e00fc22cdd5e3403d936294232bcfc051aa2e2",
+  "excluded_source_smoke_run": "https://github.com/MoralityLabAI/BPD/actions/runs/44268270808",
+  "excluded_source_smoke_root": 899,
+  "excluded_source_test_count": 14,
+  "development_seeds": [
+    900,
+    901,
+    902,
+    903,
+    904,
+    905,
+    906,
+    907
+  ],
+  "training_steps": 640,
+  "train_base_cases": 2048,
+  "discovery_base_cases": 1024,
+  "evaluation_base_cases": 1024,
+  "sham_proposals": 2048,
+  "locked_git_blobs": {
+    "mechinterp/bpd/experiments/nc09/PROTOCOL.md": "841a92559b8fe870ba2da30c4635926031523bf6",
+    "mechinterp/bpd/experiments/nc09/core.py": "89f663b4db61a257fa27004b34e097d878197323",
+    "mechinterp/bpd/experiments/nc09/experiment.py": "0fb8254b768f93fa0b69a2c762c71b5de9e261f0",
+    "mechinterp/bpd/experiments/nc09/aggregate.py": "80502ed3f3fbed4820fc957ad7d15322c68d92d3",
+    "mechinterp/bpd/experiments/nc09/preflight_manifest.py": "592bc00f6285eec3eccdf8c11f7595555e3f2ac0",
+    "mechinterp/bpd/experiments/nc09/test_experiment.py": "a9e95292c0185f88f99080bd9e79fd9443089109",
+    "mechinterp/bpd/experiments/nc02/experiment.py": "a2d6eaf33ed1669816d5612bca1223ea2dd8c794",
+    "mechinterp/bpd/components.py": "c0906e73a993738871812572e267e2ef5f9595d3",
+    "mechinterp/bpd/config.py": "2df19dfbe1ff4949f7ad516c8f715f2e4263cf71"
+  },
+  "evalmath_pinned_commit": "6d9c28dbe8e4c42b3fba76ae7adb84aed9f0921a",
+  "pytorch_version": "2.5.1",
+  "numpy_version": "2.5.5",
+  "python_version": "3.12",
+  "scientific_confirmation": "SEALED",
+  "source_binding": "Git blob SHA-1 is checked for every imported and study source before a single new development root is trained. Execution lock committed after 14 passing source tests and 899 excluded-root smoke, before roots 900..907."
+}
