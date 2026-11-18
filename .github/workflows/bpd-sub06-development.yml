@@ -1,0 +1,146 @@
+name: BPD-SUB-06 original eight-root matched-source-fit development
+
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/experiments/sub06/EXECUTE_LOCK.json'
+
+permissions:
+  contents: read
+
+jobs:
+  original-eight:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 100
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify prospective protocol, original source and untouched protected files
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import json, subprocess
+          root=Path('mechinterp/bpd/experiments/sub06')
+          lock=json.loads((root/'EXECUTE_LOCK.json').read_text())
+          assert lock['study']=='BPD-SUB-06'
+          assert lock['execution']=='original_eight_independent_source_fits'
+          assert lock['roots']==list(range(1700,1708))
+          assert lock['excluded_smoke']==1699
+          assert lock['train']==2048 and lock['discovery']==512
+          assert lock['selection']==512 and lock['heldout']==1024
+          assert lock['training_steps']==256 and lock['fitting_steps_each']==120
+          assert lock['rank']==8 and lock['matched_wrong_fits']==7
+          assert lock['effect_minimum']==.010
+          assert lock['wrong_output_schedules']==[
+              [1,2,3,0],[2,3,0,1],[3,0,1,2],[1,0,3,2],
+              [2,1,0,3],[0,2,1,3],[3,2,1,0]]
+          assert lock['wrong_transition_schedules']==[
+              [1,2,0],[2,0,1],[0,1,2],[1,0,2],
+              [2,1,0],[0,2,1],[2,1,0]]
+          assert lock['confirmation_roots_generated'] is False
+          assert lock['calibration_roots_generated'] is False
+          assert lock['evalmath_commit']=='6d9c28dbe8e4c42b3fba76ae7adb84aed9f0921a'
+          for commit in (
+              '066761af88c5a98e48071fad07048f762c370ef4',
+              lock['source_commit_sha'],
+          ):
+              subprocess.run(['git','merge-base','--is-ancestor',commit,'HEAD'],check=True)
+          first=subprocess.check_output(['git','show',
+              '066761af88c5a98e48071fad07048f762c370ef4:'+str(root/'PROTOCOL.md')])
+          assert first==(root/'PROTOCOL.md').read_bytes()
+          for name in ('PROTOCOL.md','THEORY.md','experiment.py',
+                       'test_experiment.py','audit_original.py'):
+              subprocess.run(['git','diff','--exit-code',lock['source_commit_sha'],
+                 'HEAD','--',str(root/name)],check=True)
+          subprocess.run(['git','diff','--exit-code',
+              '96efcef65e05552461158db252e4b8ba64175536','HEAD','--',
+              'mechinterp/bpd/experiments/sub01/experiment.py',
+              'mechinterp/bpd/experiments/sub02/experiment.py',
+              'mechinterp/bpd/experiments/sub03/experiment.py',
+              'mechinterp/bpd/experiments/sub04/experiment.py',
+              'mechinterp/bpd/experiments/sub05/experiment.py'],check=True)
+          print('SUB06_ORIGINAL_EIGHT_SOURCE_LOCK_AND_SEALS_PASS')
+          PY
+      - name: Install pinned CPU dependencies
+        run: |
+          python -m pip install --disable-pip-version-check 'numpy==2.2.6' 'pytest==8.3.5'
+          python -m pip install --disable-pip-version-check 'torch==2.5.1' --index-url https://download.pytorch.org/whl/cpu
+      - name: Recheck source and excluded tests before development exposure
+        run: |
+          python -m compileall -q mechinterp/bpd/experiments/sub06
+          python -m pytest -q mechinterp/bpd/experiments/sub06/test_experiment.py
+      - name: Train and score eight independent source roots once
+        run: |
+          mkdir -p /tmp/sub06
+          python -m mechinterp.bpd.experiments.sub06.experiment \
+            --phase development --ack-development \
+            --output /tmp/sub06/original_eight.json \
+            --pilot-out /tmp/sub06/evalmath_pilot.json
+      - name: Independent full original-receipt audit, including strongest fitted null
+        run: |
+          set -euo pipefail
+          python mechinterp/bpd/experiments/sub06/audit_original.py \
+            --receipt /tmp/sub06/original_eight.json \
+            --output /tmp/sub06/INDEPENDENT_AUDIT.json
+      - name: Apply strict pinned EvalMath while retaining sealed science
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          root=Path('/tmp/sub06')
+          s=json.loads((root/'original_eight.json').read_text())['summary']
+          assert s['attempted_roots']==8
+          assert s['independent_95_95_null_tail_calibrated'] is False
+          assert s['future_calibration']=='UNGENERATED_SEALED'
+          assert s['future_confirmation']=='UNGENERATED_SEALED'
+          gate={
+              'study':'BPD-SUB-06',
+              'phase':'ENGINEERING_ONLY',
+              'original_verdict':s['verdict'],
+              'independent_roots':8,
+              'eligible_roots':s['eligible_roots'],
+              'calibration_roots_generated':False,
+              'confirmation_roots_generated':False,
+              'science':'REDESIGN_OR_PILOT_ONLY',
+          }
+          (root/'GATE.json').write_text(json.dumps(gate,sort_keys=True,indent=2)+'\n')
+          PY
+          if test -f /tmp/sub06/evalmath_pilot.json; then
+            curl -fLsS \
+              'https://raw.githubusercontent.com/MoralityLabAI/EvalMath/6d9c28dbe8e4c42b3fba76ae7adb84aed9f0921a/skills/evalmath-mechinterp-power/scripts/preflight.py' \
+              -o /tmp/sub06/evalmath_preflight_pinned.py
+            set +e
+            python /tmp/sub06/evalmath_preflight_pinned.py \
+              --pilot /tmp/sub06/evalmath_pilot.json \
+              --out /tmp/sub06/EVALMATH_PREFLIGHT.json --strict
+            status=$?
+            set -e
+            test "$status" -eq 2
+            python - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path('/tmp/sub06')
+          result=json.loads((root/'EVALMATH_PREFLIGHT.json').read_text())
+          gate=json.loads((root/'GATE.json').read_text())
+          assert result['decision']=='REDESIGN_OR_PILOT_ONLY'
+          assert result['pilot_worlds']<=8
+          assert result['upper_sham_quantile'] is None
+          assert 'sham_quantile_uncalibrated' in result['reasons']
+          gate['evalmath_exit_code']=2
+          gate['evalmath_reasons']=result['reasons']
+          (root/'GATE.json').write_text(json.dumps(gate,sort_keys=True,indent=2)+'\n')
+          print(json.dumps(gate,sort_keys=True))
+          PY
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bpd-sub06-original-eight-fitted-wrongclock
+          path: /tmp/sub06/
+          retention-days: 90

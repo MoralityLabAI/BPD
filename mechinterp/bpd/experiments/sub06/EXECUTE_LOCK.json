@@ -1,0 +1,116 @@
+{
+  "study": "BPD-SUB-06",
+  "execution": "original_eight_independent_source_fits",
+  "preregistration_commit": "066761af88c5a98e48071fad07048f762c370ef4",
+  "source_commit_sha": "9b45123b63c46f757174af23a86a82a5675272a4",
+  "roots": [
+    1700,
+    1701,
+    1702,
+    1703,
+    1704,
+    1705,
+    1706,
+    1707
+  ],
+  "excluded_smoke": 1699,
+  "training_steps": 256,
+  "train": 2048,
+  "discovery": 512,
+  "selection": 512,
+  "heldout": 1024,
+  "rank": 8,
+  "fitting_steps_each": 120,
+  "matched_wrong_fits": 7,
+  "wrong_output_schedules": [
+    [
+      1,
+      2,
+      3,
+      0
+    ],
+    [
+      2,
+      3,
+      0,
+      1
+    ],
+    [
+      3,
+      0,
+      1,
+      2
+    ],
+    [
+      1,
+      0,
+      3,
+      2
+    ],
+    [
+      2,
+      1,
+      0,
+      3
+    ],
+    [
+      0,
+      2,
+      1,
+      3
+    ],
+    [
+      3,
+      2,
+      1,
+      0
+    ]
+  ],
+  "wrong_transition_schedules": [
+    [
+      1,
+      2,
+      0
+    ],
+    [
+      2,
+      0,
+      1
+    ],
+    [
+      0,
+      1,
+      2
+    ],
+    [
+      1,
+      0,
+      2
+    ],
+    [
+      2,
+      1,
+      0
+    ],
+    [
+      0,
+      2,
+      1
+    ],
+    [
+      2,
+      1,
+      0
+    ]
+  ],
+  "effect_minimum": 0.01,
+  "optimizer_lr": 0.02,
+  "output_weight": 0.35,
+  "smooth_weight": 0.5,
+  "physical_impulse_norm_fraction": 0.25,
+  "evalmath_commit": "6d9c28dbe8e4c42b3fba76ae7adb84aed9f0921a",
+  "source_only_admission_run": 44293945374,
+  "calibration_roots_generated": false,
+  "confirmation_roots_generated": false,
+  "protected_test_sources": "SEALED"
+}
