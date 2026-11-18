@@ -1,0 +1,23 @@
+{
+  "alpha": 0.05,
+  "approx_resolvable_effect": 0.17690505148002364,
+  "approx_roots_80pct_power": 2,
+  "calibrated_95th_percentile_95pct_confidence_bound": 0.1328125,
+  "calibration_order_statistic_rank": 59,
+  "confirmation_roots_planned": 32,
+  "decision": "READY_FOR_CONFIRMATION",
+  "development_root_sd": 0.0493664521307957,
+  "development_roots": 8,
+  "effective_variation_floor": 0.15,
+  "independent_unit": "one new physical recurrence, BPD fit, and nuisance world",
+  "limits": "Normal approximation is planning only; the sealed confirmation remains unopened until an explicit post-preflight release.",
+  "mean_development_effect": 0.244140625,
+  "minimum_scientific_effect": 0.15,
+  "observed_worst_development_sham": 0.078125,
+  "planned_comparisons": 2,
+  "reasons": [],
+  "schema": "EvalMath/CQ08-separate-sham-preflight/v1",
+  "sham_calibration_roots": 59,
+  "source": "8 exposed development roots and distinct 59-root random-vs-random sham population",
+  "target_effect": 0.3
+}
