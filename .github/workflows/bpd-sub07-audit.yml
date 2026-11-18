@@ -1,0 +1,117 @@
+name: BPD-SUB-07 independent audit of frozen original run
+
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/experiments/sub07/AUDIT_LOCK.json'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  original-readonly:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify original source unchanged and protected cohorts sealed
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json,subprocess
+          from pathlib import Path
+          root=Path('mechinterp/bpd/experiments/sub07')
+          j=json.loads((root/'AUDIT_LOCK.json').read_text())
+          assert j['study']=='BPD-SUB-07'
+          assert j['action']=='read_only_original_receipt_audit'
+          assert j['original_run_id']==44307622000
+          assert j['original_artifact_id']==14428937156
+          assert j['original_sha256']=='cc0d465aa5c75825180e5674f986f86ed8af8987ca12ec9c787d36e8e0ebb930'
+          assert j['retraining_allowed'] is False and j['confirmation_generated'] is False
+          for f in ('PROTOCOL.md','oracle.py','source.py','experiment.py','test_experiment.py'):
+              subprocess.run(['git','diff','--exit-code',
+                '9b44567211e2894981ae2eaf875e3ca36b7689ef',
+                'HEAD','--',str(root/f)],check=True)
+          frozen=subprocess.check_output(['git','show',
+            '35aea0f112c096d2bf563e50b4485ad3cd2ee26d:'+str(root/'PROTOCOL.md')])
+          assert frozen==(root/'PROTOCOL.md').read_bytes()
+          print('SUB07_ORIGINAL_SOURCE_AND_PROTOCOL_UNCHANGED')
+          PY
+      - uses: actions/download-artifact@v4
+        with:
+          name: bpd-sub07-original-8-root-six-token-depth-causal
+          run-id: 44307622000
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: /tmp/sub07-original
+      - name: Install pinned Python dependencies used by BPD package import
+        run: |
+          python -m pip install --disable-pip-version-check 'numpy==2.2.6'
+          python -m pip install --disable-pip-version-check 'torch==2.5.1' --index-url https://download.pytorch.org/whl/cpu
+      - name: Audit immutable original JSON and reconstruct all registered gates
+        run: |
+          set -euo pipefail
+          echo "cc0d465aa5c75825180e5674f986f86ed8af8987ca12ec9c787d36e8e0ebb930  /tmp/sub07-original/original_eight.json" | sha256sum --check
+          mkdir -p /tmp/sub07-audited
+          python -m mechinterp.bpd.experiments.sub07.audit_original \
+            --receipt /tmp/sub07-original/original_eight.json \
+            --out /tmp/sub07-audited/INDEPENDENT_AUDIT.json
+      - name: Run pinned strict EvalMath on original eligible roots
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          j=json.loads(Path('/tmp/sub07-original/original_eight.json').read_text())
+          s=j['summary']
+          assert s['attempted_roots']==8
+          assert s['eligible_roots']==3
+          assert s['ineligible_roots']==[1800,1801,1802,1804,1807]
+          assert s['verdict']=='ENGINEERING_NULL_OR_INELIGIBLE'
+          assert s['future_calibration']=='UNGENERATED_SEALED'
+          assert s['future_confirmation']=='UNGENERATED_SEALED'
+          gate={'study':'BPD-SUB-07','phase':'READ_ONLY_FIRST_RUN_AUDIT',
+            'original_run_id':44307622000,'original_population_unchanged':True,
+            'registered_verdict':s['verdict'],
+            'eligible_roots':s['eligible_roots'],'attempted_roots':8,
+            'calibration_generated':False,'confirmation_generated':False}
+          Path('/tmp/sub07-audited/GATE.json').write_text(
+            json.dumps(gate,sort_keys=True,indent=2)+'\n')
+          PY
+          curl -fLsS \
+            'https://raw.githubusercontent.com/MoralityLabAI/EvalMath/6d9c28dbe8e4c42b3fba76ae7adb84aed9f0921a/skills/evalmath-mechinterp-power/scripts/preflight.py' \
+            -o /tmp/sub07-audited/evalmath_preflight_pinned.py
+          set +e
+          python /tmp/sub07-audited/evalmath_preflight_pinned.py \
+            --pilot /tmp/sub07-original/evalmath_pilot.json \
+            --out /tmp/sub07-audited/EVALMATH_PREFLIGHT.json --strict
+          status=$?
+          set -e
+          test "$status" -eq 2
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          root=Path('/tmp/sub07-audited')
+          pre=json.loads((root/'EVALMATH_PREFLIGHT.json').read_text())
+          assert pre['decision']=='REDESIGN_OR_PILOT_ONLY'
+          assert pre['pilot_worlds']==3
+          assert pre['upper_sham_quantile'] is None
+          assert 'sham_quantile_uncalibrated' in pre['reasons']
+          assert 'too_few_pilot_worlds' in pre['reasons']
+          gate=json.loads((root/'GATE.json').read_text())
+          gate['evalmath_decision']=pre['decision']
+          gate['evalmath_strict_exit_code']=2
+          gate['evalmath_reasons']=pre['reasons']
+          (root/'GATE.json').write_text(json.dumps(gate,sort_keys=True,indent=2)+'\n')
+          print(json.dumps(gate,sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bpd-sub07-readonly-original-audit-and-evalmath
+          path: /tmp/sub07-audited/

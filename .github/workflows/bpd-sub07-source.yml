@@ -1,0 +1,71 @@
+name: BPD-SUB-07 exact oracle, GRU Jacobians and excluded smoke
+
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/experiments/sub07/**'
+      - '.github/workflows/bpd-sub07-source.yml'
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/sub07/**'
+      - '.github/workflows/bpd-sub07-source.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  oracle-and-source-only:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify protocol first, all earlier experiment runners unchanged
+        run: |
+          set -euxo pipefail
+          git merge-base --is-ancestor 35aea0f112c096d2bf563e50b4485ad3cd2ee26d HEAD
+          git show 35aea0f112c096d2bf563e50b4485ad3cd2ee26d:mechinterp/bpd/experiments/sub07/PROTOCOL.md > /tmp/sub07-frozen-protocol.md
+          cmp /tmp/sub07-frozen-protocol.md mechinterp/bpd/experiments/sub07/PROTOCOL.md
+          git diff --exit-code 2a8e0f59d96a3455617b9cc58ef1411248b4b205 HEAD -- \
+            mechinterp/bpd/experiments/sub01/experiment.py \
+            mechinterp/bpd/experiments/sub02/experiment.py \
+            mechinterp/bpd/experiments/sub03/experiment.py \
+            mechinterp/bpd/experiments/sub04/experiment.py \
+            mechinterp/bpd/experiments/sub05/experiment.py \
+            mechinterp/bpd/experiments/sub06/experiment.py
+      - name: Pin source and exact-oracle dependencies
+        run: |
+          python -m pip install --disable-pip-version-check 'numpy==2.2.6' 'pytest==8.3.5'
+          python -m pip install --disable-pip-version-check 'torch==2.5.1' --index-url https://download.pytorch.org/whl/cpu
+      - name: All oracle/projection structural tests before any fresh root
+        run: |
+          python -m compileall -q mechinterp/bpd/experiments/sub07
+          python -m pytest -q mechinterp/bpd/experiments/sub07/test_experiment.py
+          python - <<'PY'
+          from mechinterp.bpd.experiments.sub07.oracle import exact_task_certificate
+          import json
+          from pathlib import Path
+          j=exact_task_certificate()
+          assert j['positives']==2291
+          assert j['prefix2']['bayes_correct']==2399
+          assert j['prefix4']['bayes_correct']==2735
+          assert j['token_counts']['bayes_correct']==2335
+          Path('/tmp/sub07-exact-oracle.json').write_text(
+              json.dumps(j,sort_keys=True,indent=2)+'\n')
+          print('FINITE_SEQUENTIAL_ORACLE_SOURCE_PASS')
+          PY
+      - name: Source-only excluded smoke root 1799
+        run: |
+          python -m mechinterp.bpd.experiments.sub07.experiment --phase smoke \
+            --output /tmp/sub07-smoke.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sub07-excluded-smoke-and-exact-oracle
+          path: |
+            /tmp/sub07-smoke.json
+            /tmp/sub07-exact-oracle.json

@@ -1,0 +1,152 @@
+name: BPD-SUB-07 original six-token eight-root depth and matched-clock development
+
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/experiments/sub07/EXECUTE_LOCK.json'
+
+permissions:
+  contents: read
+
+jobs:
+  first-independent-eight:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 110
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check original protocol-first commit, locked model and seal perimeter
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json,subprocess
+          from pathlib import Path
+          root=Path('mechinterp/bpd/experiments/sub07')
+          lock=json.loads((root/'EXECUTE_LOCK.json').read_text())
+          assert lock['study']=='BPD-SUB-07'
+          assert lock['phase']=='original_eight_root_engineering_only'
+          assert lock['roots']==list(range(1800,1808))
+          assert lock['excluded_smoke']==1799
+          assert lock['source_steps']==1200
+          assert lock['model_width']==32
+          assert lock['rank']==20
+          assert lock['sequence_length']==6
+          assert lock['vocab']==4
+          assert lock['train']==2048
+          assert lock['discovery']==512
+          assert lock['dose']==512
+          assert lock['heldout']==1024
+          assert lock['jacobian_source_rows']==64
+          assert lock['stationary_steps']==80
+          assert lock['matched_fit_steps']==120
+          assert lock['effect_minimum']==.010
+          assert lock['original_oracle_positive_count']==2291
+          assert lock['oracle_prefix2_correct']==2399
+          assert lock['oracle_counts_correct']==2335
+          assert lock['calibration_generated'] is False
+          assert lock['confirmation_generated'] is False
+          assert lock['evalmath_commit']=='6d9c28dbe8e4c42b3fba76ae7adb84aed9f0921a'
+          for sha in ('35aea0f112c096d2bf563e50b4485ad3cd2ee26d',
+                      lock['source_commit']):
+              subprocess.run(['git','merge-base','--is-ancestor',sha,'HEAD'],
+                  check=True)
+          original=subprocess.check_output(['git','show',
+              '35aea0f112c096d2bf563e50b4485ad3cd2ee26d:'+str(root/'PROTOCOL.md')])
+          assert original==(root/'PROTOCOL.md').read_bytes()
+          for name in ('PROTOCOL.md','oracle.py','source.py',
+                       'experiment.py','test_experiment.py','audit_original.py'):
+              subprocess.run(['git','diff','--exit-code',lock['source_commit'],
+                  'HEAD','--',str(root/name)],check=True)
+          subprocess.run(['git','diff','--exit-code',
+              '2a8e0f59d96a3455617b9cc58ef1411248b4b205','HEAD','--',
+              'mechinterp/bpd/experiments/sub01/experiment.py',
+              'mechinterp/bpd/experiments/sub02/experiment.py',
+              'mechinterp/bpd/experiments/sub03/experiment.py',
+              'mechinterp/bpd/experiments/sub04/experiment.py',
+              'mechinterp/bpd/experiments/sub05/experiment.py',
+              'mechinterp/bpd/experiments/sub06/experiment.py'],check=True)
+          print('SUB07_PRE_DATA_PROTOCOL_SOURCE_AND_ROSTER_LOCK_PASS')
+          PY
+      - name: Install pinned CPU dependencies
+        run: |
+          python -m pip install --disable-pip-version-check 'numpy==2.2.6' 'pytest==8.3.5'
+          python -m pip install --disable-pip-version-check 'torch==2.5.1' --index-url https://download.pytorch.org/whl/cpu
+      - name: Re-run exact-oracle and causal source tests before models
+        run: |
+          python -m compileall -q mechinterp/bpd/experiments/sub07
+          python -m pytest -q mechinterp/bpd/experiments/sub07/test_experiment.py
+      - name: Execute original eight independent source models and all fitted controls
+        run: |
+          mkdir -p /tmp/sub07
+          python -m mechinterp.bpd.experiments.sub07.experiment \
+            --phase development --ack-development \
+            --output /tmp/sub07/original_eight.json \
+            --pilot-out /tmp/sub07/evalmath_pilot.json
+      - name: Independent reproduction of original root outcomes and exact oracle
+        run: |
+          set -euo pipefail
+          python -m mechinterp.bpd.experiments.sub07.audit_original \
+            --receipt /tmp/sub07/original_eight.json \
+            --out /tmp/sub07/INDEPENDENT_AUDIT.json
+      - name: Strict EvalMath record, no independent sham or confirmation release
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path('/tmp/sub07')
+          summary=json.loads((root/'original_eight.json').read_text())['summary']
+          assert summary['attempted_roots']==8
+          assert summary['scientific_sham_tail_calibrated'] is False
+          assert summary['future_calibration']=='UNGENERATED_SEALED'
+          assert summary['future_confirmation']=='UNGENERATED_SEALED'
+          gate={
+            'study':'BPD-SUB-07',
+            'phase':'ENGINEERING_ONLY',
+            'original_verdict':summary['verdict'],
+            'source_roots':8,
+            'eligible_roots':summary['eligible_roots'],
+            'depth_task_oracle':'EXACT_ORACLE_PASS',
+            'calibration_generated':False,
+            'confirmation_generated':False,
+            'scientific_readiness':'REDESIGN_OR_PILOT_ONLY',
+          }
+          (root/'GATE.json').write_text(json.dumps(gate,indent=2,sort_keys=True)+'\n')
+          PY
+          if test -f /tmp/sub07/evalmath_pilot.json; then
+            curl -fLsS \
+              'https://raw.githubusercontent.com/MoralityLabAI/EvalMath/6d9c28dbe8e4c42b3fba76ae7adb84aed9f0921a/skills/evalmath-mechinterp-power/scripts/preflight.py' \
+              -o /tmp/sub07/evalmath_preflight_pinned.py
+            set +e
+            python /tmp/sub07/evalmath_preflight_pinned.py \
+              --pilot /tmp/sub07/evalmath_pilot.json \
+              --out /tmp/sub07/EVALMATH_PREFLIGHT.json --strict
+            status=$?
+            set -e
+            test "$status" -eq 2
+            python - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path('/tmp/sub07')
+          pre=json.loads((root/'EVALMATH_PREFLIGHT.json').read_text())
+          assert pre['decision']=='REDESIGN_OR_PILOT_ONLY'
+          assert pre['pilot_worlds']<=8
+          assert pre['upper_sham_quantile'] is None
+          assert 'sham_quantile_uncalibrated' in pre['reasons']
+          gate=json.loads((root/'GATE.json').read_text())
+          gate['evalmath_strict_exit_code']=2
+          gate['evalmath_reasons']=pre['reasons']
+          (root/'GATE.json').write_text(json.dumps(gate,indent=2,sort_keys=True)+'\n')
+          print(json.dumps(gate,sort_keys=True))
+          PY
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bpd-sub07-original-8-root-six-token-depth-causal
+          path: /tmp/sub07/
+          retention-days: 90
