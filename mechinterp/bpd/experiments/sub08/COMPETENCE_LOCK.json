@@ -1,0 +1,58 @@
+{
+  "schema": 1,
+  "phase": "prospective_source_competence_only",
+  "protocol_commit": "8bcbd7220b8d6d4d4c01ddc1bf9db6f82862ac17",
+  "source_commit": "b6c391c1d05cf72df85ede28135c9955f46c5c9c",
+  "width": 48,
+  "updates": 2400,
+  "roots": [
+    1900,
+    1901,
+    1902,
+    1903,
+    1904,
+    1905,
+    1906,
+    1907
+  ],
+  "max_attempts_per_root": 1,
+  "source_hashes": {
+    "mechinterp/bpd/experiments/sub08/DESIGN_PROTOCOL.md": "2138399a16af09735197cdfd58cd33fb7b6a7c63ac8fcdad48003fae876bd95c",
+    "mechinterp/bpd/experiments/sub08/EXACT_ORACLE.json": "5bc3ad93270551c1f6f4c14a04c209b945eda341272f25cb6b7619bdb996c6dc",
+    "mechinterp/bpd/experiments/sub08/INHERITED_SUB07_PILOT.json": "2648af6e89b7fb03ff8bf780be0f21d066c5f7799470dea3ec43ad2357f28058",
+    "mechinterp/bpd/experiments/sub08/INHERITED_SUB07_PREFLIGHT.json": "eac89c6e6d13c3db23db2a110cda9c71098a8c1e67deb419bdeecf8fc3a102cf",
+    "mechinterp/bpd/experiments/sub08/audit.py": "4780c29d96f6c43868bef3ffb4dd999c1fbdd30d88e5f4b6207794bb0ac70c2f",
+    "mechinterp/bpd/experiments/sub08/evalmath_preflight_pinned.py": "34fafe934679bc5f085e885e8382f17a752907e2014b9a3d1dffd34585d81426",
+    "mechinterp/bpd/experiments/sub08/oracle.py": "963257376620265cf436d323fc6d7b134367f57123c42cdff41584f5448dd6bf",
+    "mechinterp/bpd/experiments/sub08/run.py": "e5143cf1a2d41d972b377bab92df0780f0039f11cf710d3f21623eb107abacdf",
+    "mechinterp/bpd/experiments/sub08/source.py": "9fbda424acfe8d30286bb0181d5bb8869d536893e2e20f8582b0fc9a7a9d5480",
+    "mechinterp/bpd/experiments/sub08/test_audit.py": "6b482ad94cec0d4ddb5a5b45ba64af01322acbb0d4ad61ace99cd4d0cf9a2a46",
+    "mechinterp/bpd/experiments/sub08/test_oracle.py": "af913bcb9078d4aefaa073e2402b90ac0cec0f93042fd1aecb3522332f6c3667",
+    "mechinterp/bpd/experiments/sub08/test_source.py": "9429bbb993e457bbd51a76b1864772a0c6f0f4a3fcb973de725199924a127a8f"
+  },
+  "runtime": {
+    "deterministic_algorithms": true,
+    "device": "cpu",
+    "dtype": "float32",
+    "numpy": "2.3.5",
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "python": "3.12.14",
+    "python_minor": "3.12",
+    "torch": "2.5.1+cpu",
+    "torch_threads": 1
+  },
+  "partition_hashes": {
+    "heldout": "34e8e8974ac7fb156e247d99eb2b14283dc29569d55b562b0aa5477e433b0b92",
+    "reserved_dose": "be6accc45558be6dc089608d0b280d1bd68ed84ec401b82fb5e922de59d35d34",
+    "train": "83476f17cb79f4edfd549f3aa7b95322e4023d9a7ea60be1f3d753e98b1b60ea",
+    "validation": "16cb2f2d43d95e793969c97dcadb4188ef848a220ebd7812c6f47c04e5473e77"
+  },
+  "design_manifest_sha256": "86c27e7c036cafe9314ebed365e4b124b0f623d0ebd6dca9b4952fad81bdd59b",
+  "design_audit_sha256": "f6e5efa5b88ad1e3f1d5566e572b8b418b9ba4045fdc1d7a893f04eefc8aa511",
+  "design_selection_sha256": "280b2243a4f1d183a33ffd099caaf53f732ece8fd75a5a3f3cf6fcbf74590b50",
+  "design_archive_sha256": "8797e0837f658c8a7e07d3c656348f85c901644e9800a1d66aa0803f8a8b301e",
+  "causal_units_authorized": 0,
+  "design_results_commit": "c568f78304c23577ce2898486b3395e28e126b8e",
+  "created_at_utc": "2026-11-18 13:47:55 UTC"
+}
+
