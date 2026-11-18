@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "filename": "sub08_original_full_state_competence.zip",
+  "file_size_bytes": 3701428,
+  "sha256": "71ff22e5d0b39894c2bceeb2b15721501cad39f9e4c89015c4b0c290790d2bef",
+  "original_design_only_archive_sha256": "8797e0837f658c8a7e07d3c656348f85c901644e9800a1d66aa0803f8a8b301e",
+  "archive_members": 75,
+  "design_checkpoint_files": 12,
+  "design_training_trajectories": 6,
+  "prospective_checkpoint_files": 8,
+  "prospective_training_roots": 8,
+  "source_commit": "b6c391c1d05cf72df85ede28135c9955f46c5c9c",
+  "release_commit": "256d01346720662e6c957169b19973b644b06620",
+  "result_commit": "cbb616e06696116b894512c7007bb73c54236b1d",
+  "verdict": "SOURCE_COMPETENCE_PASS",
+  "scientific_status": "CAUSAL_STUDY_NOT_RUN",
+  "integrity_checks": "ZIP CRC, unique member paths, every member SHA256, original source hashes and every checkpoint hash verified",
+  "contents": "All original raw rows and checkpoints, design selection, release lock, frozen source, independent audits, report and SHA256 index",
+  "availability": "Original bundle delivered with the research handoff; authenticated file access is required. This repository stores the compact receipts and full source."
+}
