@@ -1,0 +1,47 @@
+name: BPD-PD-15 excluded-seed objective and source registration preflight
+
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/theory/pd15/**'
+      - '.github/workflows/bpd-pd15-preflight.yml'
+      - '.github/workflows/bpd-pd15-registered.yml'
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/theory/pd15/**'
+      - '.github/workflows/bpd-pd15-preflight.yml'
+      - '.github/workflows/bpd-pd15-registered.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  excluded-source-and-frozen-registration:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify CONFIG and PROTOCOL were frozen before any PD15 code
+        run: |
+          set -euo pipefail
+          git cat-file -e 348b3dd6441d0a3b9708708cac04dc4ca19db392^{commit}
+          git cat-file -e 2155631b9babe259c97ea89649dbb2bf063c8fe2^{commit}
+          git merge-base --is-ancestor 348b3dd6441d0a3b9708708cac04dc4ca19db392 HEAD
+          git merge-base --is-ancestor 2155631b9babe259c97ea89649dbb2bf063c8fe2 HEAD
+          git show 348b3dd6441d0a3b9708708cac04dc4ca19db392:mechinterp/bpd/theory/pd15/CONFIG.json > /tmp/pd15-original-config.json
+          git show 2155631b9babe259c97ea89649dbb2bf063c8fe2:mechinterp/bpd/theory/pd15/PROTOCOL.md > /tmp/pd15-original-protocol.md
+          cmp mechinterp/bpd/theory/pd15/CONFIG.json /tmp/pd15-original-config.json
+          cmp mechinterp/bpd/theory/pd15/PROTOCOL.md /tmp/pd15-original-protocol.md
+      - name: Install pinned CPU numerical and testing runtime
+        run: |
+          python -m pip install --disable-pip-version-check pytest 'numpy>=1.26' scipy==1.14.1
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Check excluded 4001 source, pair scores, physics and frozen criteria
+        run: |
+          python -m compileall -q mechinterp/bpd/theory/pd15
+          python -m pytest -q mechinterp/bpd/theory/pd15/test_experiment.py
