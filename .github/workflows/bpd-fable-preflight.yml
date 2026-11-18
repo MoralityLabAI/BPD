@@ -110,6 +110,7 @@ jobs:
         run: |
           python -m pytest -q mechinterp/bpd/theory/pd13/test_experiment.py
           python -m pytest -q mechinterp/bpd/theory/pd13/test_published_results.py
+          python -m pytest -q mechinterp/bpd/theory/pd14/test_published_results.py
       - name: Verify source module syntax
         run: |
           python -m compileall -q mechinterp/bpd

@@ -1,0 +1,47 @@
+name: BPD-PD-14 preflight excluded-seed and frozen-registration checks
+
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/theory/pd14/**'
+      - '.github/workflows/bpd-pd14-preflight.yml'
+      - '.github/workflows/bpd-pd14-registered.yml'
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/theory/pd14/**'
+      - '.github/workflows/bpd-pd14-preflight.yml'
+      - '.github/workflows/bpd-pd14-registered.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  registered-source-preflight:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Confirm scientific protocol and seed roster precede implementations
+        run: |
+          set -euxo pipefail
+          git cat-file -e 09a2034d7c905fe93777ea11b656990c894f2311^{commit}
+          git cat-file -e 1ac0a91934c35deff0cdc3c1fbf117321dffd33a^{commit}
+          git merge-base --is-ancestor 09a2034d7c905fe93777ea11b656990c894f2311 HEAD
+          git merge-base --is-ancestor 1ac0a91934c35deff0cdc3c1fbf117321dffd33a HEAD
+          git show 09a2034d7c905fe93777ea11b656990c894f2311:mechinterp/bpd/theory/pd14/CONFIG.json > /tmp/bpd-pd14-config-frozen.json
+          git show 1ac0a91934c35deff0cdc3c1fbf117321dffd33a:mechinterp/bpd/theory/pd14/PROTOCOL.md > /tmp/bpd-pd14-protocol-frozen.md
+          cmp mechinterp/bpd/theory/pd14/CONFIG.json /tmp/bpd-pd14-config-frozen.json
+          cmp mechinterp/bpd/theory/pd14/PROTOCOL.md /tmp/bpd-pd14-protocol-frozen.md
+      - name: Install pinned CPU torch, scipy and pytest
+        run: |
+          python -m pip install --disable-pip-version-check pytest 'numpy>=1.26' scipy==1.14.1
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Run excluded engineering seed only
+        run: |
+          python -m compileall -q mechinterp/bpd/theory/pd14
+          python -m pytest -q mechinterp/bpd/theory/pd14/test_experiment.py

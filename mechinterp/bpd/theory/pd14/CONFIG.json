@@ -1,0 +1,207 @@
+{
+  "study_id": "BPD-PD-14",
+  "registration_date": "2026-11-18",
+  "status": "prospective_frozen_before_pd14_model_training",
+  "predecessor": {
+    "pd13_merged_pr": 51,
+    "pd13_scientific_pass": false,
+    "pd13_priority2048_successes": 2,
+    "pd13_lex2048_successes": 2,
+    "pd13_oracle_successes": 32,
+    "pd13_posthoc_objective_pr": 57,
+    "pd13_posthoc_strong_sigma_crossing_approx": 0.0688879
+  },
+  "scientific_question": "On 32 fresh clustered 16D PD12 sources, does lowering Gaussian zero-mass smoothing from the PD13 width to a value below the strong-margin population remix crossover improve strict heldout mechanism recovery under matched nine-sweep full-angle Givens search? At equal candidate budget, does independent QR restart selection improve recovery over nine sweeps from the original initialization?",
+  "seed_cells": [
+    {
+      "id": "clustered16d_strong",
+      "dimension": 16,
+      "support_distribution": "clustered",
+      "margin": "strong",
+      "seeds": [
+        2707,
+        2711,
+        2713,
+        2719,
+        2729,
+        2731,
+        2741,
+        2749,
+        2753,
+        2767,
+        2777,
+        2789,
+        2791,
+        2797,
+        2801,
+        2803
+      ]
+    },
+    {
+      "id": "clustered16d_weak",
+      "dimension": 16,
+      "support_distribution": "clustered",
+      "margin": "weak",
+      "seeds": [
+        2819,
+        2833,
+        2837,
+        2843,
+        2851,
+        2857,
+        2861,
+        2879,
+        2887,
+        2897,
+        2903,
+        2909,
+        2917,
+        2927,
+        2939,
+        2953
+      ]
+    }
+  ],
+  "engineering_seed": 4001,
+  "source": {
+    "generator": "EXACT PD12 rotation_for_seed and sample_batch, physical_model, evaluate_family unchanged",
+    "train_boards": 2048,
+    "train_rng_offset": 100000,
+    "heldout_boards_per_family": 96,
+    "heldout_rng_offset": 200000,
+    "heldout_family_stride": 10000,
+    "diagnostic_boards": 1024,
+    "diagnostic_rng_offset": 310000,
+    "diagnostic_family": "train",
+    "passes": 4,
+    "dimension": 16,
+    "support_distribution": "clustered",
+    "cluster_probability": 0.85,
+    "strong_amplitude_range": [
+      0.75,
+      1.25
+    ],
+    "weak_amplitude_range": [
+      0.25,
+      1.25
+    ],
+    "heldout_families": [
+      "k1_seen",
+      "k2_seen",
+      "k3_seen",
+      "k4_seen",
+      "k2_unseen",
+      "k3_unseen",
+      "k4_unseen",
+      "transition_unseen"
+    ],
+    "reserved_source_cohort": "exact 32 seed+rotation units independent of PD12/PD13, each used in one margin cell"
+  },
+  "widths": {
+    "wide": {
+      "strong": 0.15,
+      "weak": 0.05
+    },
+    "narrow": {
+      "strong": 0.05,
+      "weak": 0.02
+    }
+  },
+  "arms": [
+    {
+      "key": "wide_single",
+      "kind": "search",
+      "width": "wide",
+      "search": "single_long"
+    },
+    {
+      "key": "narrow_single",
+      "kind": "search",
+      "width": "narrow",
+      "search": "single_long"
+    },
+    {
+      "key": "wide_restart",
+      "kind": "search",
+      "width": "wide",
+      "search": "three_restarts"
+    },
+    {
+      "key": "narrow_restart",
+      "kind": "search",
+      "width": "narrow",
+      "search": "three_restarts"
+    },
+    {
+      "key": "planted_Q_oracle",
+      "kind": "oracle",
+      "width": null,
+      "search": null
+    }
+  ],
+  "optimizer": {
+    "pair_order": "EXACT lexicographic i<j, all 120 pairs, zero angle among 37 grid points",
+    "candidate_angles": 37,
+    "angle_range_degrees": [
+      -90,
+      90
+    ],
+    "single_long_sweeps": 9,
+    "restart_count": 3,
+    "restart_sweeps": 3,
+    "candidates_per_learned_arm": 39960,
+    "observed_vectors": 8192,
+    "candidate_by_vector_comparisons_per_learned_arm": 327352320,
+    "restarts": "r=0 original PD12 initial_random_basis(seed,16); r=1,2 deterministic-sign QR with generator seed 610000+model_seed+1000003*r; exactly three total starts",
+    "restart_selection": "maximum unlabelled full-training-pool Gaussian zero-mass score after 3 sweeps; tie within 1e-12 chooses lowest restart index; no q/label/test",
+    "same_dataset_and_shared_first_start": true,
+    "one_thread": true,
+    "source_labels_forbidden": true
+  },
+  "scoring": {
+    "mean_read_cos_min": 0.9,
+    "overall_MSE_max": 0.035,
+    "per_family_MSE_max": 0.05,
+    "seen_full_fourpass_support_min": 0.8,
+    "unseen_full_fourpass_support_min": 0.7,
+    "exact_binary_masks": true,
+    "nonzero_search_updates": true,
+    "primary_margin": "strong",
+    "primary_arm": "narrow_single",
+    "primary_control": "wide_single",
+    "primary_n_strong": 16,
+    "primary_min_narrow_strong_successes": 8,
+    "primary_net_paired_wins_min": 6,
+    "primary_exact_mcnemar_p_max": 0.05,
+    "separate_objective_consistency_gate": "At least 15 of 16 strong diagnostic pools must satisfy mass(Q)>mass(fourpair_Q, sigma=0.05) and mass(Q)<mass(fourpair_Q, sigma=0.15)",
+    "objective_consistency_min_dual_signs": 15,
+    "science_pass_requires_mechanism_and_consistency": true,
+    "secondary": "wide_restart vs wide_single, narrow_restart vs narrow_single, wide_restart vs narrow_restart in each margin; report paired counts with no additional significance claim"
+  },
+  "statistics": {
+    "n_total": 32,
+    "n_per_margin": 16,
+    "unit": "seed+16D source rotation",
+    "primary_exact_two_sided_mcnemar": true,
+    "Wilson95": true,
+    "no_pseudoreplication_of_heldout_trajectories": true
+  },
+  "execution": {
+    "python": "3.12",
+    "torch": "2.5.1+cpu",
+    "scipy": "1.14.1",
+    "cpu_threads": 1,
+    "max_RSS_GiB": 3,
+    "workflow_timeout_minutes": 60,
+    "first_run_archive_days": 90
+  },
+  "evidence": {
+    "lock_source_sha_before_scientific_run": true,
+    "original_full_160_arm_json": true,
+    "strict_success_by_cell": true,
+    "per_seed_results": true,
+    "candidate_evaluation_parity": true,
+    "raw_source_rotation_hashes": true,
+    "original_PD12_PD13_unchanged": true
+  }
+}

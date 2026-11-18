@@ -1,0 +1,117 @@
+name: BPD-PD-14 first registered 32-rotation Gaussian-width and restart factorial
+
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/theory/pd14/EXECUTE_LOCK.json'
+
+permissions:
+  contents: read
+
+jobs:
+  first-registered-pd14:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify exactly one immutable registered source and first cohort
+        run: |
+          python - <<'PY'
+          import json,subprocess
+          from pathlib import Path
+          root=Path('mechinterp/bpd/theory/pd14')
+          lock=json.loads((root/'EXECUTE_LOCK.json').read_text())
+          cfg=json.loads((root/'CONFIG.json').read_text())
+          assert cfg['study_id']==lock['study_id']=='BPD-PD-14'
+          assert lock['execution']=='first_registered_full_cohort'
+          assert lock['units']==32 and lock['arms_per_seed']==5
+          assert cfg['scoring']['primary_margin']=='strong'
+          assert cfg['scoring']['primary_arm']=='narrow_single'
+          assert cfg['scoring']['primary_control']=='wide_single'
+          assert len({s for c in cfg['seed_cells'] for s in c['seeds']})==32
+          assert len(cfg['arms'])==5
+          assert cfg['optimizer']['candidates_per_learned_arm']==39960
+          assert cfg['source']['train_boards']==2048
+          assert cfg['source']['diagnostic_boards']==1024
+          sha=lock['source_commit_sha']
+          subprocess.run(['git','merge-base','--is-ancestor',sha,'HEAD'],check=True)
+          protected=[
+            str(root/f) for f in ('CONFIG.json','PROTOCOL.md','experiment.py','test_experiment.py')
+          ]
+          protected += [
+            'mechinterp/bpd/theory/pd12/experiment.py',
+            'mechinterp/bpd/theory/pd12/CONFIG.json',
+            'mechinterp/bpd/theory/pd13/posthoc_zero_mass_audit.py',
+            'mechinterp/bpd/theory/pd02/experiment.py',
+            'mechinterp/bpd/components.py',
+            'mechinterp/bpd/config.py'
+          ]
+          subprocess.run(['git','diff','--exit-code',sha,'HEAD','--',*protected],check=True)
+          print('PD14 protected original source is unchanged since',sha)
+          PY
+      - name: Install pinned Python CPU runtime
+        run: |
+          python -m pip install --disable-pip-version-check pytest 'numpy>=1.26' scipy==1.14.1
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Check excluded seed and frozen controls before new scientific seeds
+        run: python -m pytest -q mechinterp/bpd/theory/pd14/test_experiment.py
+      - name: Run 32 independent rotations and five prospective arms each
+        run: python -m mechinterp.bpd.theory.pd14.experiment --out /tmp/bpd-pd14-original-first-run.json
+      - name: Independently audit complete 160-arm raw evidence
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path('mechinterp/bpd/theory/pd14')
+          c=json.loads((root/'CONFIG.json').read_text())
+          r=json.loads(Path('/tmp/bpd-pd14-original-first-run.json').read_text())
+          s=r['summary']
+          assert r['study_id']==s['study_id']=='BPD-PD-14'
+          assert s['registered'] and s['units']==32 and s['arms']==160
+          assert len(r['arms'])==160 and len(r['diagnostics'])==32
+          seeds={seed for cell in c['seed_cells'] for seed in cell['seeds']}
+          arms={a['key'] for a in c['arms']}
+          assert {(row['seed'],row['arm']) for row in r['arms']}=={
+            (seed,arm) for seed in seeds for arm in arms
+          }
+          assert {d['seed'] for d in r['diagnostics']}==seeds
+          assert {d['margin'] for d in r['diagnostics']}=={'strong','weak'}
+          for seed in seeds:
+            rows=[z for z in r['arms'] if z['seed']==seed]
+            assert len(rows)==5
+            for key in ('hidden_rotation_sha256','training_full_pool_sha256',
+                        'initial_random_basis_sha256'):
+              assert len({z[key] for z in rows})==1
+          for x in r['arms']:
+            assert set(x['heldout']['per_family'])==set(c['source']['heldout_families'])
+            assert all(z['binary_mask'] for z in x['heldout']['per_family'].values())
+            t=x['training']
+            if x['arm']=='planted_Q_oracle':
+              assert x['uses_true_Q_for_optimizer']
+              assert t['candidate_angle_scores']==0
+            else:
+              assert not x['uses_true_Q_for_optimizer']
+              assert t['candidate_angle_scores']==39960
+              assert t['candidate_scalar_projection_evaluations']==327352320
+              assert t['training_board_count']==2048 and t['candidate_sweeps_total']==9
+              assert t['orthogonality_max_error']<1e-4
+              assert len(t['restart_final_masses'])==(3 if x['arm'].endswith('restart') else 1)
+          print('PD14 first original registered scientific verdict:',s['registered_scientific_passed'])
+          print('PD14 objective consistency gate:',s['objective_consistency_gate_passed'])
+          print('PD14 primary mechanism gate:',s['primary_mechanism_gate_passed'])
+          print('PD14 success by cell:',s['success_by_cell'])
+          print('PD14 exact McNemar:',s['strong_McNemar_exact_two_sided_p'])
+          PY
+      - name: Archive immutable original scientific evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bpd-pd14-original-first-run-${{ github.run_id }}
+          path: /tmp/bpd-pd14-original-first-run.json
+          retention-days: 90
+          if-no-files-found: warn

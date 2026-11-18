@@ -1,0 +1,17 @@
+{
+  "study_id": "BPD-PD-14",
+  "execution": "first_registered_full_cohort",
+  "registered_date": "2026-11-18",
+  "config_first_committed_sha": "09a2034d7c905fe93777ea11b656990c894f2311",
+  "protocol_frozen_sha": "1ac0a91934c35deff0cdc3c1fbf117321dffd33a",
+  "source_commit_sha": "34c0e55b014d02d8178c78dbb98d7348f233ae7d",
+  "units": 32,
+  "cells": 2,
+  "arms_per_seed": 5,
+  "excluded_engineering_seed": 4001,
+  "excluded_seed_CI_run": 44222375452,
+  "excluded_seed_CI_conclusion": "success",
+  "lean_budget_CI_run": 44222442868,
+  "lean_budget_CI_conclusion": "success",
+  "source_policy": "Do not alter config, protocol, experiment, test, source generator, or scoring after release. Archive original 160-arm scientific PASS/FAIL and every failure unchanged."
+}
