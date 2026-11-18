@@ -1,0 +1,14 @@
+{
+  "study": "BPD-SUB-02",
+  "phase": "original_readonly_audit",
+  "frozen_source_commit": "1104c916f517a2403e52ec4ad462366189817496",
+  "original_run": 44269044080,
+  "original_artifact": 14411157818,
+  "original_zip_sha256": "a486c2f66d848586ee93f05b41d9c3ed2dc08ff51c11b3fc4db7867b2c39f52c",
+  "original_json_sha256": "3f736bcc90d331a00ae8927857d3ee2454029a653e729538cbe1538bbd2e2c12",
+  "allow_retrain": false,
+  "original_engineering_verdict": "ENGINEERING_SIGNAL_ONLY",
+  "protected_confirmation": "not_read_or_generated",
+  "audit_attempt": 2,
+  "audit_change": "remove accidental backslash before GITHUB_TOKEN expression; no data or source changes"
+}

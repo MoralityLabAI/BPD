@@ -1,0 +1,33 @@
+{
+  "study": "BPD-SUB-02",
+  "phase": "first_original_eight_root_engineering",
+  "registered_protocol_commit": "0a1bda9e48715f7d9e758a5cacffe79eaf8f170e",
+  "source_commit_sha": "1104c916f517a2403e52ec4ad462366189817496",
+  "excluded_smoke": 1299,
+  "roots": [
+    1300,
+    1301,
+    1302,
+    1303,
+    1304,
+    1305,
+    1306,
+    1307
+  ],
+  "steps": 256,
+  "train": 2048,
+  "discovery": 512,
+  "calibration": 512,
+  "heldout": 1024,
+  "ranks": [
+    8,
+    10
+  ],
+  "primary_rank": 8,
+  "shams": 8,
+  "effect_floor_logit_rms": 0.15,
+  "physical_impulse_alpha_fraction": 0.25,
+  "source_dependency_sub01_physical_prefix": "38dc50de5b7faf2e8dde54862c9666de65832de4",
+  "confirmation": "strictly_sealed",
+  "population": "fresh_independent_engineering_roots_only"
+}

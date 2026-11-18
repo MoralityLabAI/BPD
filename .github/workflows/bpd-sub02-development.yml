@@ -1,0 +1,101 @@
+name: BPD-SUB-02 first source-locked eight-root observability development
+
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/experiments/sub02/EXECUTE_LOCK.json'
+
+permissions:
+  contents: read
+
+jobs:
+  original-eight:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify registered population, prospective protocol and frozen source
+        run: |
+          set -euxo pipefail
+          python - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          base = Path('mechinterp/bpd/experiments/sub02')
+          lock=json.loads((base/'EXECUTE_LOCK.json').read_text())
+          assert lock['study']=='BPD-SUB-02'
+          assert lock['phase']=='first_original_eight_root_engineering'
+          assert lock['roots']==list(range(1300,1308))
+          assert lock['excluded_smoke']==1299
+          assert lock['steps']==256
+          assert lock['train']==2048
+          assert lock['discovery']==512 and lock['calibration']==512
+          assert lock['heldout']==1024 and lock['ranks']==[8,10]
+          assert lock['primary_rank']==8 and lock['shams']==8
+          assert lock['effect_floor_logit_rms']==0.15
+          for commit in ('0a1bda9e48715f7d9e758a5cacffe79eaf8f170e',lock['source_commit_sha']):
+              subprocess.run(['git','merge-base','--is-ancestor',commit,'HEAD'],check=True)
+          for name in ('PROTOCOL.md','THEORY.md','experiment.py','test_experiment.py'):
+              subprocess.run(['git','diff','--exit-code',
+                    lock['source_commit_sha'],'HEAD','--',str(base/name)],check=True)
+          frozen=subprocess.check_output(['git','show',
+             '0a1bda9e48715f7d9e758a5cacffe79eaf8f170e:'+str(base/'PROTOCOL.md')])
+          assert frozen == (base/'PROTOCOL.md').read_bytes()
+          path='mechinterp/bpd/experiments/sub01/experiment.py'
+          original=subprocess.check_output(['git','show',
+             '38dc50de5b7faf2e8dde54862c9666de65832de4:'+path]).decode()
+          actual=Path(path).read_text()
+          assert original.split('\ndef main()',1)[0]==actual.split('\ndef main()',1)[0]
+          print('SUB02_SOURCE_AND_PROTOCOL_LOCK_PASS')
+          PY
+      - name: Install CPU dependencies
+        run: |
+          python -m pip install --disable-pip-version-check pytest 'numpy>=1.26'
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Recheck source math before exposure to eight roots
+        run: |
+          python -m compileall -q mechinterp/bpd/experiments/sub02
+          python -m pytest -q mechinterp/bpd/experiments/sub02/test_experiment.py
+      - name: Train and evaluate first eight fresh models exactly once
+        run: |
+          python -m mechinterp.bpd.experiments.sub02.experiment --phase development --ack-development --output /tmp/sub02_original_eight.json
+      - name: Audit complete original raw receipts and frozen primary decision
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json, statistics
+          j=json.loads(Path('/tmp/sub02_original_eight.json').read_text())
+          roots=j['roots']; a=j['summary']
+          assert [r['root'] for r in roots] == list(range(1300,1308))
+          assert a['root_ids']==list(range(1300,1308))
+          assert a['independent_roots']==8 and a['primary_rank']==8
+          assert len({r['source_sha256'] for r in roots})==1
+          assert len({r['protocol_sha256'] for r in roots})==1
+          assert len({r['dependency_sub01_sha256'] for r in roots})==1
+          assert a['registered_minimum_mean_effect']==0.15
+          assert a['independent_sham_tail_calibrated'] is False
+          assert a['verdict'] in ('ENGINEERING_SIGNAL_ONLY','ENGINEERING_NULL_OR_INELIGIBLE')
+          for r in roots:
+              assert r['data_sizes']=={'train':2048,'discovery':512,'calibration':512,'heldout':1024}
+              assert set(r['arms'])=={'8','10'}
+              for rank in ('8','10'):
+                  arm=r['arms'][rank]
+                  assert len(arm['eight_same_dose_random_shams'])==8
+                  for method in ('pca','observability'):
+                      f=arm[method]['fiber']
+                      assert f['max_dose_deviation']<=5e-6
+                      assert f['max_null_projection']<=5e-6
+                  assert abs(arm['mean_primary_comparator_pca_minus_obs_logit_rms']
+                             -(arm['pca']['fiber']['terminal_logit_rms']
+                             -arm['observability']['fiber']['terminal_logit_rms'])) < 1e-10
+          print('ORIGINAL_SUB02_EIGHT_ROOT_RECEIPT_PASS')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bpd-sub02-first-original-eight-root-development
+          path: /tmp/sub02_original_eight.json
