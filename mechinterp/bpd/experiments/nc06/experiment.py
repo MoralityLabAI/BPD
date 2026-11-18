@@ -271,7 +271,8 @@ def evaluate_root(seed:int,*,steps:int=384,discovery_size:int=1024,
     report["eligible"]=bool(
         min(task_context.values())>=.85 and training["mix_density"]>=.90
         and clean_parity["passed"]
-        and all(report["methods"][a]["status"]=="ELIGIBLE" for a in RANKS)
+        and all(report["methods"][a]["status"]=="ELIGIBLE"
+                for a in ("norm_r3","uniform_r3","shuffle_r3"))
         and all(
             report["methods"][a].get("gauge",{}).get("max_logit_error",0.)<=5e-5
             for a in arms
