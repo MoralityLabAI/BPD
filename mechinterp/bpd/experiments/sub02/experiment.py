@@ -20,6 +20,7 @@ from mechinterp.bpd.experiments.sub01.experiment import (
     WIDTH, PASSES, TRAIN_SIZE, DISCOVERY_SIZE, SELECTION_SIZE, HELDOUT_SIZE,
     SHAMS, ALPHA_FRACTION, Looper, sample_x, external_labels,
     pca_projectors, fiber_score, projected_rollout, gauge_score, rms,
+    impulse_directions,
     random_orthogonal, bernoulli_kl,
 )
 
@@ -200,17 +201,18 @@ def evaluate_root(seed: int, *, steps: int = STEPS):
         gauge = gauge_score(model, xh[:128], seed, alpha)
         arms = score_root(model, seed, xh, pca_all, obs, alpha)
         # Calibration remains readout-free and cannot update any projectors.
-        physical_dose_calibration = {
-            str(rank): {
-                "pca": fiber_score(model, xc, pca_all[rank],
-                                   torch.eye(WIDTH)-pca_all[rank],
-                                   alpha, seed, 3)["max_dose_deviation"],
-                "obs": fiber_score(model, xc, obs[rank],
-                                   torch.eye(WIDTH)-obs[rank],
-                                   alpha, seed, 3)["max_dose_deviation"],
-            }
-            for rank in RANKS
-        }
+        physical_dose_calibration = {}
+        for rank in RANKS:
+            checks = {}
+            for mode, projector in (("pca", pca_all[rank]),
+                                    ("obs", obs[rank])):
+                delta = impulse_directions(
+                    seed, 3, xc, torch.eye(WIDTH) - projector, alpha,
+                )
+                checks[mode] = float(
+                    (delta.norm(dim=-1) - alpha).abs().max()
+                )
+            physical_dose_calibration[str(rank)] = checks
     gauge_ok = (gauge["max_clean_logit_error"] <= 5e-5
                 and gauge["max_transported_impulse_logit_error"] <= 5e-5
                 and gauge["max_clean_state_error"] <= 5e-5
