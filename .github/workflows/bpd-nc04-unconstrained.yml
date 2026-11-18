@@ -1,0 +1,82 @@
+name: BPD-NC-04 dense recurrence self-score (engineering)
+on:
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/nc04/**'
+      - '.github/workflows/bpd-nc04-unconstrained.yml'
+  workflow_dispatch:
+
+jobs:
+  source-and-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install CPU environment
+        run: python -m pip install 'torch==2.5.1' 'numpy>=1.26' 'pytest>=8'
+      - name: Source-only consistency, oracle-blindness and causal parity tests
+        run: |
+          python -m compileall -q mechinterp/bpd/experiments/nc04
+          python -m pytest -q mechinterp/bpd/experiments/nc04/test_experiment.py
+      - name: One-root engineering smoke (reduced cases and sham proposals)
+        run: |
+          python -m mechinterp.bpd.experiments.nc04.experiment \
+            --seed 400 --steps 384 --discovery-size 256 --evaluation-size 256 \
+            --proposals 256 --out /tmp/nc04_smoke.json
+          python - <<'PY'
+          import json
+          x=json.load(open('/tmp/nc04_smoke.json'))
+          assert x['study']=='BPD-NC-04' and x['phase']=='ENGINEERING'
+          assert x['protocol_commit']=='0c84c56f8f747737833f0c51201d369dcb24a790'
+          print('task',x['context_accuracy'],x['model_task_passed'])
+          for name,arm in x['bases'].items():
+              print('smoke',name,arm['status'],arm['closure'])
+          print('zero_head',x['negative_controls']['zero_readout'])
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nc04-engineering-smoke
+          path: /tmp/nc04_smoke.json
+          if-no-files-found: warn
+
+  development:
+    runs-on: ubuntu-latest
+    needs: source-and-smoke
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install CPU environment
+        run: python -m pip install 'torch==2.5.1' 'numpy>=1.26' 'pytest>=8'
+      - name: Eight fresh trained dense recurrence roots with independent evaluation
+        run: |
+          mkdir -p /tmp/nc04_development
+          for seed in 400 401 402 403 404 405 406 407; do
+            python -m mechinterp.bpd.experiments.nc04.experiment \
+              --seed "$seed" --steps 384 --discovery-size 1024 \
+              --evaluation-size 1024 --out "/tmp/nc04_development/nc04_root_${seed}.json"
+          done
+          python -m mechinterp.bpd.experiments.nc04.aggregate \
+            --directory /tmp/nc04_development \
+            --out /tmp/nc04_development/NC04_ENGINEERING_SUMMARY.json
+          python - <<'PY'
+          import json
+          d=json.load(open('/tmp/nc04_development/NC04_ENGINEERING_SUMMARY.json'))
+          assert d['n_independent_roots']==8
+          assert d['phase']=='ENGINEERING'
+          assert d['development_resolution'] in ('ENGINEERING_POSITIVE_CONTROL','NOT_RESOLVED_OR_FAILED')
+          assert d['confirmation'].startswith('SEALED')
+          print('scientific result',d['development_resolution'])
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nc04-eight-trained-model-engineering-roots
+          path: /tmp/nc04_development/
+          if-no-files-found: warn
