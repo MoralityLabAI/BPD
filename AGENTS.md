@@ -19,6 +19,22 @@ does not thereby repair clean reasoning. Observational probes and exact
 linear-algebraic BPD witnesses belong to different evidence classes from
 native model-causal claims.
 
+AMM-08's 128 independent confirmation model roots are **SEALED**.
+The preregistered 64-root development study on 6D, rank-three
+three-pass trained recurrences found +3.24pp memory-over-local ridge
+accuracy, with Holm-adjusted root sign p=.00463. Its paired root
+95% interval [+0.66,+5.62]pp falls below the registered +8pp
+mechanistic floor, and corrected EvalMath returned
+`REDESIGN_OR_PILOT_ONLY`. The 18-feature memory-only policy
+chose the full 3-component mask on 99.50% of cases and produced
+exactly the same outcomes as a fixed pooled mask. All eight
+low-fidelity model roots were retained in the ITT analysis.
+Do not run AMM-08 `--phase confirmation`, issue its release
+manifest, infer genuine casewise transfer from the nominal root
+significance, or reuse the protected cohort. Review
+`mechinterp/bpd/experiments/amm08_rank3_causal_memory/RESULTS.md`
+and `results/PREFLIGHT.json` before proposing a new test.
+
 AMM-07's 128 independent confirmation model roots are **SEALED**.
 Its 64-model development study learned the hidden feedback quality on
 59 roots but produced only +0.305pp causal gain above a matched-fit
