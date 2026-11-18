@@ -8,5 +8,7 @@
   "original_execution_commit": "242c4bb2cf0323435b154a214f8976e247712104",
   "original_cli_failure": "KeyError gauge evaluating eager dict default in print after JSON was saved",
   "original_receipt_bytes": "unchanged",
-  "retraining_allowed": false
+  "retraining_allowed": false,
+  "audit_attempt": 2,
+  "audit_change": "sort decoded JSON rank keys numerically; enforce shell pipefail"
 }
