@@ -52,6 +52,10 @@ def aggregate(records:list[dict]):
                 r["protocol_sha256"]!=PROTO_HASH:
             raise AssertionError("Wrong NC07 source or phase")
         selected=r["selected_rank"]
+        chosen_by_source=next((rank for rank in (2,3,4,6)
+            if r["selector_by_rank"][str(rank)]["eligible"]),None)
+        if chosen_by_source!=selected:
+            raise AssertionError("Final choice differs from frozen source-only smallest-rank rule")
         scores=r["heldout"] or {}
         score=scores.get("selected")
         fixed3=scores.get("fixed_rank3")
@@ -72,7 +76,11 @@ def aggregate(records:list[dict]):
             row["selected_minus_fixed4"]=row["selected_nll"]-row["fixed4_nll"]
         roots.append(row)
     eligible=all(r["eligible"] and r["selected_rank"] in (2,3,4,6)
-                 for r in records)
+                 for r in records) and all(
+        all(isinstance(row.get(k),(int,float)) for k in (
+            "clean_nll","selected_nll","fixed4_nll","matched_sham_advantage"
+        )) for row in roots
+    )
     if eligible:
         matrix=[(x["selected_keep_cost"],x["matched_sham_advantage"],
                  x["selected_minus_fixed4"]) for x in roots]
