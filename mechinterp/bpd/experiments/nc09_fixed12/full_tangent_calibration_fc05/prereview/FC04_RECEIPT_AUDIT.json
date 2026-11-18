@@ -1,0 +1,188 @@
+{
+  "archive_SHA256": "477e40d3e2d90005d7ab60739db2f263f5e91c4ca60656b0834c7811769ee5ac",
+  "summary_SHA256": "946eb13540e0562242cc92b1f65f56918177cf58ac621498ba8767b147976a4f",
+  "root_hashes_all_match": true,
+  "mean": 0.009626356652006507,
+  "root_sd_ddof1": 0.012908669277708831,
+  "bootstrap95": [
+    0.0030566319037461653,
+    0.01525057583785383
+  ],
+  "positive_roots": 15,
+  "negative_roots": [
+    {
+      "root": 15014,
+      "S": -0.025271453894674778,
+      "FC03": 8,
+      "FC02": 8,
+      "corrections": 14,
+      "extra_line_trials": 0,
+      "max_corrections_chart": 3
+    }
+  ],
+  "min_pairwise_chordal": 0.29776706517607654,
+  "DP_chordal_range": [
+    0.24740395925452288,
+    0.24740395925452305
+  ],
+  "max_symmetry_error": 5.551115123125783e-17,
+  "max_idempotence_error": 9.43689570931383e-16,
+  "max_trace_error": 6.217248937900877e-15,
+  "max_projector_eigenvalue_error": 2.6645352591003757e-15,
+  "max_receipt_source_errors_physical_abs_mean_ratio_rms_ratio": [
+    0.05006206538629032,
+    0.9913148347543254,
+    0.9821498699568361
+  ],
+  "total_corrections": 348,
+  "all_first_eight_charts_admitted": true,
+  "extra_line_search_trials": 74,
+  "max_corrections_any_chart": 14,
+  "max_root_T_diagnostic": 0.13956370949745178,
+  "per_root": [
+    {
+      "root": 15000,
+      "S": 0.003960545174777508,
+      "FC03": 8,
+      "FC02": 8,
+      "corrections": 19,
+      "extra_line_trials": 0,
+      "max_corrections_chart": 3
+    },
+    {
+      "root": 15001,
+      "S": 0.03125712275505066,
+      "FC03": 8,
+      "FC02": 8,
+      "corrections": 20,
+      "extra_line_trials": 10,
+      "max_corrections_chart": 5
+    },
+    {
+      "root": 15002,
+      "S": 0.0017691189423203468,
+      "FC03": 0,
+      "FC02": 1,
+      "corrections": 41,
+      "extra_line_trials": 28,
+      "max_corrections_chart": 9
+    },
+    {
+      "root": 15003,
+      "S": 0.016329120844602585,
+      "FC03": 8,
+      "FC02": 8,
+      "corrections": 16,
+      "extra_line_trials": 0,
+      "max_corrections_chart": 3
+    },
+    {
+      "root": 15004,
+      "S": 0.019534822553396225,
+      "FC03": 8,
+      "FC02": 8,
+      "corrections": 20,
+      "extra_line_trials": 2,
+      "max_corrections_chart": 4
+    },
+    {
+      "root": 15005,
+      "S": 0.0033141663298010826,
+      "FC03": 8,
+      "FC02": 8,
+      "corrections": 10,
+      "extra_line_trials": 0,
+      "max_corrections_chart": 2
+    },
+    {
+      "root": 15006,
+      "S": 0.01083308830857277,
+      "FC03": 8,
+      "FC02": 8,
+      "corrections": 18,
+      "extra_line_trials": 0,
+      "max_corrections_chart": 3
+    },
+    {
+      "root": 15007,
+      "S": 0.002749442122876644,
+      "FC03": 8,
+      "FC02": 3,
+      "corrections": 16,
+      "extra_line_trials": 0,
+      "max_corrections_chart": 3
+    },
+    {
+      "root": 15008,
+      "S": 0.0027155037969350815,
+      "FC03": 8,
+      "FC02": 8,
+      "corrections": 8,
+      "extra_line_trials": 0,
+      "max_corrections_chart": 2
+    },
+    {
+      "root": 15009,
+      "S": 0.017042512074112892,
+      "FC03": 5,
+      "FC02": 4,
+      "corrections": 27,
+      "extra_line_trials": 0,
+      "max_corrections_chart": 4
+    },
+    {
+      "root": 15010,
+      "S": 0.007815063931047916,
+      "FC03": 8,
+      "FC02": 8,
+      "corrections": 9,
+      "extra_line_trials": 0,
+      "max_corrections_chart": 2
+    },
+    {
+      "root": 15011,
+      "S": 0.026975691318511963,
+      "FC03": 8,
+      "FC02": 8,
+      "corrections": 13,
+      "extra_line_trials": 0,
+      "max_corrections_chart": 3
+    },
+    {
+      "root": 15012,
+      "S": 0.018268872052431107,
+      "FC03": 8,
+      "FC02": 8,
+      "corrections": 16,
+      "extra_line_trials": 0,
+      "max_corrections_chart": 3
+    },
+    {
+      "root": 15013,
+      "S": 0.009649597108364105,
+      "FC03": 0,
+      "FC02": 0,
+      "corrections": 27,
+      "extra_line_trials": 1,
+      "max_corrections_chart": 6
+    },
+    {
+      "root": 15014,
+      "S": -0.025271453894674778,
+      "FC03": 8,
+      "FC02": 8,
+      "corrections": 14,
+      "extra_line_trials": 0,
+      "max_corrections_chart": 3
+    },
+    {
+      "root": 15015,
+      "S": 0.0070784930139780045,
+      "FC03": 0,
+      "FC02": 0,
+      "corrections": 74,
+      "extra_line_trials": 33,
+      "max_corrections_chart": 14
+    }
+  ]
+}
