@@ -116,6 +116,8 @@ jobs:
           python -m pytest -q mechinterp/bpd/theory/pd15/test_published_results.py
       - name: PD16 first 32-root shuffled-weight placebo source/receipt audit
         run: python -m pytest -q mechinterp/bpd/theory/pd16/test_published_results.py
+      - name: PD17 first registered 32-root radial source and receipt replay
+        run: python -m pytest -q mechinterp/bpd/theory/pd17/test_published_results.py
       - name: Verify source module syntax
         run: |
           python -m compileall -q mechinterp/bpd

@@ -1,0 +1,45 @@
+name: BPD-PD-17 source-only radial-camouflage and angular feasibility preflight
+
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/theory/pd17/**'
+      - '.github/workflows/bpd-pd17-source-preflight.yml'
+      - '.github/workflows/bpd-pd17-registered.yml'
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/theory/pd17/**'
+      - '.github/workflows/bpd-pd17-source-preflight.yml'
+      - '.github/workflows/bpd-pd17-registered.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  excluded-source-and-registered-math:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Confirm source seeds and protocol were pinned before implementation
+        run: |
+          set -euxo pipefail
+          git merge-base --is-ancestor 2bdea40b83f60f17d9af2f396c69a6d62a0952c2 HEAD
+          git merge-base --is-ancestor a190856c6447102c7a9a3d6aee08a4d4cb2db28f HEAD
+          git show 2bdea40b83f60f17d9af2f396c69a6d62a0952c2:mechinterp/bpd/theory/pd17/CONFIG.json > /tmp/pd17-config-frozen.json
+          git show a190856c6447102c7a9a3d6aee08a4d4cb2db28f:mechinterp/bpd/theory/pd17/PROTOCOL.md > /tmp/pd17-protocol-frozen.md
+          cmp mechinterp/bpd/theory/pd17/CONFIG.json /tmp/pd17-config-frozen.json
+          cmp mechinterp/bpd/theory/pd17/PROTOCOL.md /tmp/pd17-protocol-frozen.md
+      - name: Install pinned CPU runtime
+        run: |
+          python -m pip install --disable-pip-version-check pytest 'numpy>=1.26' scipy==1.14.1
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Verify exact-rational hyperplane theorem and excluded seed 4001 only
+        run: |
+          python -m compileall -q mechinterp/bpd/theory/pd17
+          python -m pytest -q mechinterp/bpd/theory/pd17/test_source.py mechinterp/bpd/theory/pd17/test_experiment.py

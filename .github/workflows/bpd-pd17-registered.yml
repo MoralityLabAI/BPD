@@ -1,0 +1,133 @@
+name: BPD-PD-17 first registered paired radial-camouflage 256-arm cohort
+
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/theory/pd17/EXECUTE_LOCK.json'
+
+permissions:
+  contents: read
+
+jobs:
+  first-registered-pd17:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify 32-root two-law source lock and frozen scientific gates
+        run: |
+          python - <<'PY'
+          import json,subprocess
+          from pathlib import Path
+          root=Path('mechinterp/bpd/theory/pd17')
+          c=json.loads((root/'CONFIG.json').read_text())
+          lock=json.loads((root/'EXECUTE_LOCK.json').read_text())
+          assert c['study_id']==lock['study_id']=='BPD-PD-17'
+          assert lock['execution']=='first_registered_full_cohort'
+          assert len(c['seeds'])==len(set(c['seeds']))==lock['units']==32
+          assert set(c['source_laws'])=={'original','radial_camouflage'}
+          assert len(c['arms'])==lock['arms_per_law']==4
+          assert c['givens']['candidate_angle_scores']==39960
+          assert c['givens']['candidate_by_vector_evaluations']==327352320
+          assert c['scoring']['primary_min_mean_interaction']==.4
+          assert c['scoring']['original_norm_replication_min_successes']==24
+          assert c['scoring']['angular_camouflage_feasibility_min_successes']==24
+          assert c['scoring']['source_independence_gate_min_roots']==30
+          sha=lock['source_commit_sha']
+          subprocess.run(['git','merge-base','--is-ancestor',sha,'HEAD'],check=True)
+          protected=[str(root/f) for f in (
+            'CONFIG.json','PROTOCOL.md','source.py','angular.py',
+            'exact_source_math.py','experiment.py','test_source.py','test_experiment.py'
+          )]
+          protected += [
+            'mechinterp/bpd/theory/pd12/experiment.py',
+            'mechinterp/bpd/theory/pd12/CONFIG.json',
+            'mechinterp/bpd/theory/pd15/experiment.py',
+            'mechinterp/bpd/theory/pd15/CONFIG.json',
+            'mechinterp/bpd/theory/pd02/experiment.py',
+            'mechinterp/bpd/components.py',
+            'mechinterp/bpd/config.py'
+          ]
+          subprocess.run(['git','diff','--exit-code',sha,'HEAD','--',*protected],check=True)
+          print('PD17 frozen source and paired root protocol admitted:',sha)
+          PY
+      - name: Install pinned CPU numerical runtime
+        run: |
+          python -m pip install --disable-pip-version-check pytest 'numpy>=1.26' scipy==1.14.1
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Independently recheck excluded engineering root 4001
+        run: python -m pytest -q mechinterp/bpd/theory/pd17/test_source.py mechinterp/bpd/theory/pd17/test_experiment.py
+      - name: Execute 32 independent Q roots under both laws and all four arms
+        run: python -m mechinterp.bpd.theory.pd17.experiment --out /tmp/bpd-pd17-original-first-run.json
+      - name: Audit all 256 original native BPD mechanism receipts
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          c=json.loads(Path('mechinterp/bpd/theory/pd17/CONFIG.json').read_text())
+          r=json.loads(Path('/tmp/bpd-pd17-original-first-run.json').read_text())
+          s=r['summary']
+          seeds=set(c['seeds'])
+          laws=set(c['source_laws'])
+          arms={x['key'] for x in c['arms']}
+          assert r['study_id']==s['study_id']=='BPD-PD-17'
+          assert s['registered'] and s['units']==32 and s['arms']==256
+          assert len(r['arms'])==256 and len(r['diagnostics'])==32
+          assert {(x['seed'],x['law'],x['arm']) for x in r['arms']}=={
+            (seed,law,arm) for seed in seeds for law in laws for arm in arms
+          }
+          assert {d['seed'] for d in r['diagnostics']}==seeds
+          assert set(s['success_by_law_and_arm'])==laws
+          assert len(s['root_interactions'])==32
+          assert s['root_bootstrap']['resamples']==10000
+          for seed in seeds:
+            rows=[x for x in r['arms'] if x['seed']==seed]
+            assert len(rows)==8
+            assert len({x['q_sha256'] for x in rows})==1
+            for law in laws:
+              local=[x for x in rows if x['law']==law]
+              assert len(local)==4
+              assert len({x['training_pool_sha256'] for x in local})==1
+              assert len({x['training_support_sha256'] for x in local})==1
+              assert len({x['initial_random_basis_sha256'] for x in local})==1
+            assert len({x['training_support_sha256'] for x in rows})==1
+          for x in r['arms']:
+            assert set(x['heldout']['per_family'])==set(c['families'])
+            assert all(v['binary_mask'] for v in x['heldout']['per_family'].values())
+            assert all(v['boards']==96 for v in x['heldout']['per_family'].values())
+            t=x['training']
+            if x['arm']=='planted_Q_oracle':
+              assert x['uses_Q_in_optimizer'] and t['candidate_angle_scores']==0
+            elif x['arm']=='angular_atoms':
+              assert not x['uses_Q_in_optimizer'] and t['candidate_angle_scores']==0
+              assert t['candidate_count']==1024 and t['observed_vector_count']==8192
+              assert t['angular_scalar_multiplications']==1024*8192*16
+            else:
+              assert not x['uses_Q_in_optimizer']
+              assert t['candidate_angle_scores']==39960
+              assert t['candidate_scalar_projection_evaluations']==327352320
+              assert t['training_board_count']==2048 and t['training_observed_vectors']==8192
+              assert t['pair_sweeps']==9 and t['orthogonality_max_error']<1e-4
+          for d in r['diagnostics']:
+            assert d['true_K_used_only_postfit']
+            assert d['paired_support_sha256']
+          print('PD17 first registered scientific result:',s['registered_scientific_passed'])
+          print('PD17 source independence admitted:',s['radial_source_gate_passed'])
+          print('PD17 Q-oracle physical admission:',s['physical_oracles_admitted'])
+          print('PD17 root-level mean interaction:',s['mean_root_interaction'])
+          print('PD17 paired bootstrap:',s['root_bootstrap'])
+          print('PD17 per-law outcomes:',s['success_by_law_and_arm'])
+          PY
+      - name: Archive complete original 256-arm paired scientific receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bpd-pd17-original-first-run-${{ github.run_id }}
+          path: /tmp/bpd-pd17-original-first-run.json
+          retention-days: 90
+          if-no-files-found: warn
