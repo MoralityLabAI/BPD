@@ -182,7 +182,6 @@ def score_fiber(model: Looper, x: torch.Tensor, p: torch.Tensor,
     return score
 
 
-@torch.no_grad()
 def evaluate_root(seed: int, *, steps: int = STEPS):
     model, training = train_source(seed, steps=steps)
     xd = sample_x(seed, 2, DISCOVERY_N)
