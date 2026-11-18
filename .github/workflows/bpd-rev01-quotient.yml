@@ -1,0 +1,22 @@
+name: BPD-REV-01 exact delayed posterior quotient
+on:
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/theory/revision_predictive_quotient/**'
+      - '.github/workflows/bpd-rev01-quotient.yml'
+  push:
+    paths:
+      - 'mechinterp/bpd/theory/revision_predictive_quotient/**'
+      - '.github/workflows/bpd-rev01-quotient.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  exact-source:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m unittest discover -s mechinterp/bpd/theory/revision_predictive_quotient -p 'test_*.py' -v
