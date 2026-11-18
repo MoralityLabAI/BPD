@@ -1,0 +1,74 @@
+{
+  "artifacts": [
+    {
+      "id": 14422145511,
+      "name": "amm09r-cpu-ubuntu-22.04",
+      "sha256": "0a689f99a52307e593d1addf9d43b285f56369dbfe408dec21d854344a31bb3a"
+    },
+    {
+      "id": 14421711658,
+      "name": "amm09r-cpu-ubuntu-24.04",
+      "sha256": "39bb9fb6face065bd10751fb90bb6d8b3f709fac2f512abceaec44948a3a735d"
+    },
+    {
+      "id": 14421647706,
+      "name": "amm09r-exact-portability-verdict",
+      "sha256": "08d4435775b2514284ee3dab64cf96165783a7db025c3fa173d350949ba639f8"
+    }
+  ],
+  "comparison_file_sha256": "b5009dd7082b4e9ded59d1704553f3debfa8bdf12d405e5877f0a94ce3973d6b",
+  "confirmation_accessed": false,
+  "receipt_files": {
+    "amm09r-cpu-ubuntu-22.04/amm09r/receipt-baseline32-1.json": {
+      "bytes": 16949341,
+      "sha256": "a10afd5cbdbb19f1692a65e43345d8af02f228e727174d75a4d1690c2811b6db"
+    },
+    "amm09r-cpu-ubuntu-22.04/amm09r/receipt-baseline32-2.json": {
+      "bytes": 16949341,
+      "sha256": "0cfe63a67138d320f09b48b6444a81f5bad11178ac05048300f8eeae8237be1a"
+    },
+    "amm09r-cpu-ubuntu-22.04/amm09r/receipt-historical-1.json": {
+      "bytes": 176402,
+      "sha256": "87695939b8b3ece67366a5b28340e1a515717727237d3d7bbcde3a16d49207ca"
+    },
+    "amm09r-cpu-ubuntu-22.04/amm09r/receipt-historical-2.json": {
+      "bytes": 176402,
+      "sha256": "1c707e2c55c9ec9f5332aae875e59ac811b93cea4ed9c88aa75d06a4a23e8ae7"
+    },
+    "amm09r-cpu-ubuntu-22.04/amm09r/receipt-pinned32-1.json": {
+      "bytes": 16958253,
+      "sha256": "5cca8d369dae17a0ffad91e954b6a3887ce7112d8e433cf2809620a341223fe0"
+    },
+    "amm09r-cpu-ubuntu-22.04/amm09r/receipt-pinned32-2.json": {
+      "bytes": 16958253,
+      "sha256": "8e381f2d2ffddd322e5ce1ef2bc2e242bc2c808b320a6e6c073bad99b7952b63"
+    },
+    "amm09r-cpu-ubuntu-24.04/amm09r/receipt-baseline32-1.json": {
+      "bytes": 16949185,
+      "sha256": "1b6b943021cded80141ff6889543ee35f23e8b9a3ebc370a39036d20ec67ab99"
+    },
+    "amm09r-cpu-ubuntu-24.04/amm09r/receipt-baseline32-2.json": {
+      "bytes": 16949185,
+      "sha256": "a1689ff2569443e46f73d3e262b1fbedafe994886fea60ca10344921d8c038d0"
+    },
+    "amm09r-cpu-ubuntu-24.04/amm09r/receipt-historical-1.json": {
+      "bytes": 176246,
+      "sha256": "e424a052465b13140fedd15a7c11632b7ded62ea3e63fbc2422d094d38a21ff0"
+    },
+    "amm09r-cpu-ubuntu-24.04/amm09r/receipt-historical-2.json": {
+      "bytes": 176246,
+      "sha256": "66e5c3f653c7bf6011dc07f174c506a5a0319761dfc83953aa29bc6a370e54b8"
+    },
+    "amm09r-cpu-ubuntu-24.04/amm09r/receipt-pinned32-1.json": {
+      "bytes": 16958101,
+      "sha256": "02c0c6610bfc56de4aefc0a54428a65c2e3c09e7ae4faf4cabc6145fff0f5d70"
+    },
+    "amm09r-cpu-ubuntu-24.04/amm09r/receipt-pinned32-2.json": {
+      "bytes": 16958101,
+      "sha256": "b43775ba004e343acd3fa44e81e2c4050642b350c0047523d2daffe91e4f1397"
+    }
+  },
+  "run_id": 44291185512,
+  "schema": "bpd.amm09r.archived_receipts.v1",
+  "source_commit": "6fecc60dbb083230847819ee04b442b9aa9015c1"
+}

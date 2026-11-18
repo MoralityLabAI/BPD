@@ -1,0 +1,346 @@
+{
+  "confirmation_authorized": false,
+  "cpu_models": [
+    "AMD EPYC 7763 64-Core Processor",
+    "AMD EPYC 9V74 80-Core Processor"
+  ],
+  "descriptive_only": false,
+  "distinct_cpu_models_observed": true,
+  "gates": {
+    "all_receipts_valid": true,
+    "all_registered_repeats_present": true,
+    "all_registered_sources_equal": true,
+    "pinned_payloads_bit_exact": true,
+    "pinned_runtime_settings": true,
+    "pinned_sources_equal": true,
+    "registered_software": true,
+    "torch_binaries_equal": true,
+    "two_distinct_hosts": true
+  },
+  "groups": {
+    "engineering/baseline32": {
+      "all_payloads_exact": true,
+      "comparisons": [
+        {
+          "candidate_bit_examples": [],
+          "candidate_bit_examples_truncated": false,
+          "candidate_bit_flips": 0,
+          "different_values": 0,
+          "exact": true,
+          "examples": [],
+          "examples_truncated": false,
+          "first_differing_recorded_stage": null,
+          "left_file": "amm09r-cpu-ubuntu-22.04/amm09r/receipt-baseline32-1.json",
+          "max_absolute_numeric_difference": 0.0,
+          "numeric_differences": 0,
+          "right_file": "amm09r-cpu-ubuntu-22.04/amm09r/receipt-baseline32-2.json"
+        },
+        {
+          "candidate_bit_examples": [],
+          "candidate_bit_examples_truncated": false,
+          "candidate_bit_flips": 0,
+          "different_values": 0,
+          "exact": true,
+          "examples": [],
+          "examples_truncated": false,
+          "first_differing_recorded_stage": null,
+          "left_file": "amm09r-cpu-ubuntu-22.04/amm09r/receipt-baseline32-1.json",
+          "max_absolute_numeric_difference": 0.0,
+          "numeric_differences": 0,
+          "right_file": "amm09r-cpu-ubuntu-24.04/amm09r/receipt-baseline32-1.json"
+        },
+        {
+          "candidate_bit_examples": [],
+          "candidate_bit_examples_truncated": false,
+          "candidate_bit_flips": 0,
+          "different_values": 0,
+          "exact": true,
+          "examples": [],
+          "examples_truncated": false,
+          "first_differing_recorded_stage": null,
+          "left_file": "amm09r-cpu-ubuntu-22.04/amm09r/receipt-baseline32-1.json",
+          "max_absolute_numeric_difference": 0.0,
+          "numeric_differences": 0,
+          "right_file": "amm09r-cpu-ubuntu-24.04/amm09r/receipt-baseline32-2.json"
+        }
+      ],
+      "complete": true,
+      "historical_comparisons_to_original": [
+        {
+          "comparison": null,
+          "file": "amm09r-cpu-ubuntu-22.04/amm09r/receipt-baseline32-1.json"
+        },
+        {
+          "comparison": null,
+          "file": "amm09r-cpu-ubuntu-22.04/amm09r/receipt-baseline32-2.json"
+        },
+        {
+          "comparison": null,
+          "file": "amm09r-cpu-ubuntu-24.04/amm09r/receipt-baseline32-1.json"
+        },
+        {
+          "comparison": null,
+          "file": "amm09r-cpu-ubuntu-24.04/amm09r/receipt-baseline32-2.json"
+        }
+      ],
+      "matching_source_hashes": true,
+      "observed_slots": [
+        [
+          "ubuntu-22.04",
+          1
+        ],
+        [
+          "ubuntu-22.04",
+          2
+        ],
+        [
+          "ubuntu-24.04",
+          1
+        ],
+        [
+          "ubuntu-24.04",
+          2
+        ]
+      ],
+      "receipt_count": 4
+    },
+    "engineering/pinned32": {
+      "all_payloads_exact": true,
+      "comparisons": [
+        {
+          "candidate_bit_examples": [],
+          "candidate_bit_examples_truncated": false,
+          "candidate_bit_flips": 0,
+          "different_values": 0,
+          "exact": true,
+          "examples": [],
+          "examples_truncated": false,
+          "first_differing_recorded_stage": null,
+          "left_file": "amm09r-cpu-ubuntu-22.04/amm09r/receipt-pinned32-1.json",
+          "max_absolute_numeric_difference": 0.0,
+          "numeric_differences": 0,
+          "right_file": "amm09r-cpu-ubuntu-22.04/amm09r/receipt-pinned32-2.json"
+        },
+        {
+          "candidate_bit_examples": [],
+          "candidate_bit_examples_truncated": false,
+          "candidate_bit_flips": 0,
+          "different_values": 0,
+          "exact": true,
+          "examples": [],
+          "examples_truncated": false,
+          "first_differing_recorded_stage": null,
+          "left_file": "amm09r-cpu-ubuntu-22.04/amm09r/receipt-pinned32-1.json",
+          "max_absolute_numeric_difference": 0.0,
+          "numeric_differences": 0,
+          "right_file": "amm09r-cpu-ubuntu-24.04/amm09r/receipt-pinned32-1.json"
+        },
+        {
+          "candidate_bit_examples": [],
+          "candidate_bit_examples_truncated": false,
+          "candidate_bit_flips": 0,
+          "different_values": 0,
+          "exact": true,
+          "examples": [],
+          "examples_truncated": false,
+          "first_differing_recorded_stage": null,
+          "left_file": "amm09r-cpu-ubuntu-22.04/amm09r/receipt-pinned32-1.json",
+          "max_absolute_numeric_difference": 0.0,
+          "numeric_differences": 0,
+          "right_file": "amm09r-cpu-ubuntu-24.04/amm09r/receipt-pinned32-2.json"
+        }
+      ],
+      "complete": true,
+      "historical_comparisons_to_original": [
+        {
+          "comparison": null,
+          "file": "amm09r-cpu-ubuntu-22.04/amm09r/receipt-pinned32-1.json"
+        },
+        {
+          "comparison": null,
+          "file": "amm09r-cpu-ubuntu-22.04/amm09r/receipt-pinned32-2.json"
+        },
+        {
+          "comparison": null,
+          "file": "amm09r-cpu-ubuntu-24.04/amm09r/receipt-pinned32-1.json"
+        },
+        {
+          "comparison": null,
+          "file": "amm09r-cpu-ubuntu-24.04/amm09r/receipt-pinned32-2.json"
+        }
+      ],
+      "matching_source_hashes": true,
+      "observed_slots": [
+        [
+          "ubuntu-22.04",
+          1
+        ],
+        [
+          "ubuntu-22.04",
+          2
+        ],
+        [
+          "ubuntu-24.04",
+          1
+        ],
+        [
+          "ubuntu-24.04",
+          2
+        ]
+      ],
+      "receipt_count": 4
+    },
+    "historical/baseline32": {
+      "all_payloads_exact": true,
+      "comparisons": [
+        {
+          "candidate_bit_examples": [],
+          "candidate_bit_examples_truncated": false,
+          "candidate_bit_flips": 0,
+          "different_values": 0,
+          "exact": true,
+          "examples": [],
+          "examples_truncated": false,
+          "first_differing_recorded_stage": null,
+          "left_file": "amm09r-cpu-ubuntu-22.04/amm09r/receipt-historical-1.json",
+          "max_absolute_numeric_difference": 0.0,
+          "numeric_differences": 0,
+          "right_file": "amm09r-cpu-ubuntu-22.04/amm09r/receipt-historical-2.json"
+        },
+        {
+          "candidate_bit_examples": [],
+          "candidate_bit_examples_truncated": false,
+          "candidate_bit_flips": 0,
+          "different_values": 0,
+          "exact": true,
+          "examples": [],
+          "examples_truncated": false,
+          "first_differing_recorded_stage": null,
+          "left_file": "amm09r-cpu-ubuntu-22.04/amm09r/receipt-historical-1.json",
+          "max_absolute_numeric_difference": 0.0,
+          "numeric_differences": 0,
+          "right_file": "amm09r-cpu-ubuntu-24.04/amm09r/receipt-historical-1.json"
+        },
+        {
+          "candidate_bit_examples": [],
+          "candidate_bit_examples_truncated": false,
+          "candidate_bit_flips": 0,
+          "different_values": 0,
+          "exact": true,
+          "examples": [],
+          "examples_truncated": false,
+          "first_differing_recorded_stage": null,
+          "left_file": "amm09r-cpu-ubuntu-22.04/amm09r/receipt-historical-1.json",
+          "max_absolute_numeric_difference": 0.0,
+          "numeric_differences": 0,
+          "right_file": "amm09r-cpu-ubuntu-24.04/amm09r/receipt-historical-2.json"
+        }
+      ],
+      "complete": true,
+      "historical_comparisons_to_original": [
+        {
+          "comparison": {
+            "candidate_bit_changes": 0,
+            "changed_roots": [],
+            "current_policy_sha256": "c536d7bda5c49507138708e6fd9e0187bbb057990248116aa73cfd40777e95ef",
+            "current_pooled": 4,
+            "entire_original_payload_equal": true,
+            "max_abs_rounded_coefficient_difference": 0.0,
+            "original_file_sha256": "a55080a1d09f99cbea0d99182cbe4ca38214b90b65ee0a3adc1af2d828858313",
+            "original_policy_sha256": "c536d7bda5c49507138708e6fd9e0187bbb057990248116aa73cfd40777e95ef",
+            "original_pooled": 4,
+            "policy_sha256_equal": true,
+            "weight_mismatch_roots": {
+              "factor_weight_sha256": [],
+              "teacher_weight_sha256": []
+            }
+          },
+          "file": "amm09r-cpu-ubuntu-22.04/amm09r/receipt-historical-1.json"
+        },
+        {
+          "comparison": {
+            "candidate_bit_changes": 0,
+            "changed_roots": [],
+            "current_policy_sha256": "c536d7bda5c49507138708e6fd9e0187bbb057990248116aa73cfd40777e95ef",
+            "current_pooled": 4,
+            "entire_original_payload_equal": true,
+            "max_abs_rounded_coefficient_difference": 0.0,
+            "original_file_sha256": "a55080a1d09f99cbea0d99182cbe4ca38214b90b65ee0a3adc1af2d828858313",
+            "original_policy_sha256": "c536d7bda5c49507138708e6fd9e0187bbb057990248116aa73cfd40777e95ef",
+            "original_pooled": 4,
+            "policy_sha256_equal": true,
+            "weight_mismatch_roots": {
+              "factor_weight_sha256": [],
+              "teacher_weight_sha256": []
+            }
+          },
+          "file": "amm09r-cpu-ubuntu-22.04/amm09r/receipt-historical-2.json"
+        },
+        {
+          "comparison": {
+            "candidate_bit_changes": 0,
+            "changed_roots": [],
+            "current_policy_sha256": "c536d7bda5c49507138708e6fd9e0187bbb057990248116aa73cfd40777e95ef",
+            "current_pooled": 4,
+            "entire_original_payload_equal": true,
+            "max_abs_rounded_coefficient_difference": 0.0,
+            "original_file_sha256": "a55080a1d09f99cbea0d99182cbe4ca38214b90b65ee0a3adc1af2d828858313",
+            "original_policy_sha256": "c536d7bda5c49507138708e6fd9e0187bbb057990248116aa73cfd40777e95ef",
+            "original_pooled": 4,
+            "policy_sha256_equal": true,
+            "weight_mismatch_roots": {
+              "factor_weight_sha256": [],
+              "teacher_weight_sha256": []
+            }
+          },
+          "file": "amm09r-cpu-ubuntu-24.04/amm09r/receipt-historical-1.json"
+        },
+        {
+          "comparison": {
+            "candidate_bit_changes": 0,
+            "changed_roots": [],
+            "current_policy_sha256": "c536d7bda5c49507138708e6fd9e0187bbb057990248116aa73cfd40777e95ef",
+            "current_pooled": 4,
+            "entire_original_payload_equal": true,
+            "max_abs_rounded_coefficient_difference": 0.0,
+            "original_file_sha256": "a55080a1d09f99cbea0d99182cbe4ca38214b90b65ee0a3adc1af2d828858313",
+            "original_policy_sha256": "c536d7bda5c49507138708e6fd9e0187bbb057990248116aa73cfd40777e95ef",
+            "original_pooled": 4,
+            "policy_sha256_equal": true,
+            "weight_mismatch_roots": {
+              "factor_weight_sha256": [],
+              "teacher_weight_sha256": []
+            }
+          },
+          "file": "amm09r-cpu-ubuntu-24.04/amm09r/receipt-historical-2.json"
+        }
+      ],
+      "matching_source_hashes": true,
+      "observed_slots": [
+        [
+          "ubuntu-22.04",
+          1
+        ],
+        [
+          "ubuntu-22.04",
+          2
+        ],
+        [
+          "ubuntu-24.04",
+          1
+        ],
+        [
+          "ubuntu-24.04",
+          2
+        ]
+      ],
+      "receipt_count": 4
+    }
+  },
+  "hardware_scope": "different recorded CPU models",
+  "receipt_errors": [],
+  "registered_gate_passed": true,
+  "registration_commit": "ffc7143e3b597d840c5000a94a45b45d964931cf",
+  "schema": "bpd.amm09r.comparison.v1",
+  "scientific_evidence": false
+}

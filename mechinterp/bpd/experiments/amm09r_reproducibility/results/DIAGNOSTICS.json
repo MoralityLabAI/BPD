@@ -1,0 +1,391 @@
+{
+  "baseline_payload_sha256": "4b0a4eb402abbc7c083994897f75f186812ac9a8581ebb7fa31b580f95ff3993",
+  "baseline_to_pinned_diagnostic": {
+    "assay_bit_flips": 15,
+    "assay_label_denominator": 24576,
+    "attribution": "Changing the combined registered runtime settings changed the initial tensors. This supports an initialization-dispatch mechanism but does not isolate which setting caused the historical failed replay.",
+    "rows": [
+      {
+        "initialization": {
+          "I": {
+            "bytes_equal": false,
+            "max_abs_difference": 3.8743019104003906e-07
+          },
+          "O": {
+            "bytes_equal": false,
+            "max_abs_difference": 1.4901161193847656e-08
+          },
+          "U": {
+            "bytes_equal": false,
+            "max_abs_difference": 1.6391277313232422e-07
+          },
+          "V": {
+            "bytes_equal": false,
+            "max_abs_difference": 1.1920928955078125e-07
+          }
+        },
+        "root": "engineering/0000",
+        "six_mask_bit_flips": {
+          "engineering": 6,
+          "training_pairs": 3
+        },
+        "training_streams_equal": true
+      },
+      {
+        "initialization": {
+          "I": {
+            "bytes_equal": false,
+            "max_abs_difference": 5.364418029785156e-07
+          },
+          "O": {
+            "bytes_equal": false,
+            "max_abs_difference": 1.8812716007232666e-07
+          },
+          "U": {
+            "bytes_equal": false,
+            "max_abs_difference": 1.1920928955078125e-07
+          },
+          "V": {
+            "bytes_equal": false,
+            "max_abs_difference": 2.551823854446411e-07
+          }
+        },
+        "root": "engineering/0001",
+        "six_mask_bit_flips": {
+          "engineering": 0,
+          "training_pairs": 0
+        },
+        "training_streams_equal": true
+      },
+      {
+        "initialization": {
+          "I": {
+            "bytes_equal": false,
+            "max_abs_difference": 8.940696716308594e-08
+          },
+          "O": {
+            "bytes_equal": false,
+            "max_abs_difference": 1.1920928955078125e-07
+          },
+          "U": {
+            "bytes_equal": false,
+            "max_abs_difference": 3.2782554626464844e-07
+          },
+          "V": {
+            "bytes_equal": false,
+            "max_abs_difference": 1.1920928955078125e-07
+          }
+        },
+        "root": "engineering/0002",
+        "six_mask_bit_flips": {
+          "engineering": 0,
+          "training_pairs": 0
+        },
+        "training_streams_equal": true
+      },
+      {
+        "initialization": {
+          "I": {
+            "bytes_equal": false,
+            "max_abs_difference": 4.470348358154297e-08
+          },
+          "O": {
+            "bytes_equal": false,
+            "max_abs_difference": 4.246830940246582e-07
+          },
+          "U": {
+            "bytes_equal": false,
+            "max_abs_difference": 2.086162567138672e-07
+          },
+          "V": {
+            "bytes_equal": false,
+            "max_abs_difference": 1.3690441846847534e-07
+          }
+        },
+        "root": "engineering/0003",
+        "six_mask_bit_flips": {
+          "engineering": 0,
+          "training_pairs": 0
+        },
+        "training_streams_equal": true
+      },
+      {
+        "initialization": {
+          "I": {
+            "bytes_equal": false,
+            "max_abs_difference": 3.166496753692627e-07
+          },
+          "O": {
+            "bytes_equal": false,
+            "max_abs_difference": 2.086162567138672e-07
+          },
+          "U": {
+            "bytes_equal": false,
+            "max_abs_difference": 8.940696716308594e-08
+          },
+          "V": {
+            "bytes_equal": false,
+            "max_abs_difference": 1.601874828338623e-07
+          }
+        },
+        "root": "engineering/0004",
+        "six_mask_bit_flips": {
+          "engineering": 9,
+          "training_pairs": 3
+        },
+        "training_streams_equal": true
+      },
+      {
+        "initialization": {
+          "I": {
+            "bytes_equal": false,
+            "max_abs_difference": 1.341104507446289e-07
+          },
+          "O": {
+            "bytes_equal": false,
+            "max_abs_difference": 2.384185791015625e-07
+          },
+          "U": {
+            "bytes_equal": false,
+            "max_abs_difference": 4.470348358154297e-08
+          },
+          "V": {
+            "bytes_equal": false,
+            "max_abs_difference": 3.8743019104003906e-07
+          }
+        },
+        "root": "engineering/0005",
+        "six_mask_bit_flips": {
+          "engineering": 0,
+          "training_pairs": 0
+        },
+        "training_streams_equal": true
+      },
+      {
+        "initialization": {
+          "I": {
+            "bytes_equal": false,
+            "max_abs_difference": 1.6391277313232422e-07
+          },
+          "O": {
+            "bytes_equal": false,
+            "max_abs_difference": 1.1920928955078125e-07
+          },
+          "U": {
+            "bytes_equal": false,
+            "max_abs_difference": 1.4901161193847656e-07
+          },
+          "V": {
+            "bytes_equal": false,
+            "max_abs_difference": 2.7567148208618164e-07
+          }
+        },
+        "root": "engineering/0006",
+        "six_mask_bit_flips": {
+          "engineering": 0,
+          "training_pairs": 0
+        },
+        "training_streams_equal": true
+      },
+      {
+        "initialization": {
+          "I": {
+            "bytes_equal": false,
+            "max_abs_difference": 1.7657293938100338e-07
+          },
+          "O": {
+            "bytes_equal": false,
+            "max_abs_difference": 3.8743019104003906e-07
+          },
+          "U": {
+            "bytes_equal": false,
+            "max_abs_difference": 2.086162567138672e-07
+          },
+          "V": {
+            "bytes_equal": false,
+            "max_abs_difference": 2.384185791015625e-07
+          }
+        },
+        "root": "engineering/0007",
+        "six_mask_bit_flips": {
+          "engineering": 0,
+          "training_pairs": 0
+        },
+        "training_streams_equal": true
+      }
+    ],
+    "source_inputs_equal_on_all_roots": true,
+    "training_bit_flips": 6,
+    "training_label_denominator": 6144
+  },
+  "confirmation_authorized": false,
+  "evidence_class": "excluded engineering; no scientific effect claim",
+  "historical_all_four_entire_payloads_equal_original": true,
+  "n_engineering_roots": 8,
+  "n_historical_training_roots": 64,
+  "physical": {
+    "max_active_dose_error": 2.384185791015625e-07,
+    "max_all_registered_assays_active_dose_error": 2.384185791015625e-07,
+    "max_gl3_canonical_component_error": 1.7763568394002505e-15,
+    "max_gl3_full_operator_error": 4.440892098500626e-16,
+    "max_immediate_readout_displacement": 0.0,
+    "max_native_reference_error": 0.0,
+    "roots_passed": 8
+  },
+  "pinned_payload_sha256": "907de7a3aa0237d13f442c10ef93ec5a44ad81efb301c08fc345e8cc218f47f6",
+  "process_repeats_per_worker_and_recipe": 2,
+  "registration_commit": "ffc7143e3b597d840c5000a94a45b45d964931cf",
+  "schema": "bpd.amm09r.engineering_diagnostics.v1",
+  "scientific_evidence": false,
+  "source_commit": "6fecc60dbb083230847819ee04b442b9aa9015c1",
+  "unit": "one separately trained 6D rank-three teacher and BPD model root",
+  "workers": {
+    "ubuntu-22.04": {
+      "configuration": {
+        "checkout_commit": "6fecc60dbb083230847819ee04b442b9aa9015c1",
+        "container_digest": null,
+        "cpu_capability": "DEFAULT",
+        "cpu_flags": "fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl tsc_reliable nonstop_tsc cpuid extd_apicid aperfmperf tsc_known_freq pni pclmulqdq ssse3 fma cx16 pcid sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm cmp_legacy svm cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw topoext vmmcall fsgsbase bmi1 avx2 smep bmi2 erms invpcid avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves user_shstk avx512_bf16 clzero xsaveerptr rdpru amd_ibpb_ret arat npt nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold v_vmsave_vmload avx512vbmi umip avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid fsrm",
+        "cpu_model": "AMD EPYC 9V74 80-Core Processor",
+        "cpu_vendor": "AuthenticAMD",
+        "deterministic_algorithms": true,
+        "distribution_record_sha256": {
+          "numpy": "d8c5b8192a299ca152919aa5fd5b9bd319bcf24edf58c3d4cf74a2571d7f8342",
+          "torch": "303251f6933840dc3432134aef45d8db3755dfeff80ee71fb2b0fac217e11f59"
+        },
+        "environment": {
+          "ATEN_CPU_CAPABILITY": "default",
+          "MKL_CBWR": "COMPATIBLE",
+          "MKL_DYNAMIC": "FALSE",
+          "MKL_NUM_THREADS": "1",
+          "OMP_DYNAMIC": "FALSE",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "PYTHONHASHSEED": "0"
+        },
+        "execution_environment": "native-hosted-worker",
+        "host_id": "runnervmy75tu",
+        "machine": "x86_64",
+        "num_interop_threads": 1,
+        "num_threads": 1,
+        "numpy": "2.2.6",
+        "packages": [
+          "Jinja2==3.1.6",
+          "MarkupSafe==3.0.3",
+          "filelock==4.2.4",
+          "fsspec==2026.9.0",
+          "mpmath==1.3.0",
+          "networkx==3.7",
+          "numpy==2.2.6",
+          "pip==26.3",
+          "setuptools==78.1.0",
+          "sympy==1.14.0",
+          "torch==2.10.0+cpu",
+          "typing_extensions==4.16.0"
+        ],
+        "parallel_info": "ATen/Parallel:\n\tat::get_num_threads() : 1\n\tat::get_num_interop_threads() : 1\nOpenMP 201511 (a.k.a. OpenMP 4.5)\n\tomp_get_max_threads() : 1\nIntel(R) oneAPI Math Kernel Library Version 2024.2-Product Build 20240605 for Intel(R) 64 architecture applications\n\tmkl_get_max_threads() : 1\nIntel(R) MKL-DNN v3.7.1 (Git Hash 8d263e693366ef8db40acc569cc7d8edf644556d)\nstd::thread::hardware_concurrency() : 4\nEnvironment variables:\n\tOMP_NUM_THREADS : 1\n\tMKL_NUM_THREADS : 1\nATen parallel backend: OpenMP\n",
+        "platform": "Linux-6.8.0-1070-azure-x86_64-with-glibc2.35",
+        "process_id": 2031,
+        "process_ordinal": 1,
+        "python": "3.12.12",
+        "python_executable_sha256": "dd58cccfe5044c7739450f583611f95edf242ae0c437e25860f92ef88ae14ccb",
+        "registered_software": true,
+        "runner": {
+          "GITHUB_JOB": "cpu-worker",
+          "GITHUB_RUN_ATTEMPT": "1",
+          "GITHUB_RUN_ID": "44291185512",
+          "GITHUB_SHA": "5fa76d2249916e1f8b7929b48e28d64791df69cd",
+          "ImageOS": "ubuntu22",
+          "ImageVersion": "20261111.360.2",
+          "RUNNER_ARCH": "X64",
+          "RUNNER_NAME": "GitHub Actions 1000028172",
+          "RUNNER_OS": "Linux"
+        },
+        "torch": "2.10.0+cpu",
+        "torch_binary_sha256": {
+          "_C.so": "2a4e075c33f292a709006fe69bca669e681351fad1fcddd7c957fcf96362d1a8",
+          "libtorch_cpu.so": "4dc5b3a649b61d8f39be127866bc258dda19d74e339f449fe18103db63e8d76f"
+        },
+        "torch_config": "PyTorch built with:\n  - GCC 13.3\n  - C++ Version: 201703\n  - Intel(R) oneAPI Math Kernel Library Version 2024.2-Product Build 20240605 for Intel(R) 64 architecture applications\n  - Intel(R) MKL-DNN v3.7.1 (Git Hash 8d263e693366ef8db40acc569cc7d8edf644556d)\n  - OpenMP 201511 (a.k.a. OpenMP 4.5)\n  - LAPACK is enabled (usually provided by MKL)\n  - NNPACK is enabled\n  - CPU capability usage: DEFAULT\n  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, COMMIT_SHA=449b1768410104d3ed79d3bcfe4ba1d65c7f22c0, CXX_COMPILER=/opt/rh/gcc-toolset-13/root/usr/bin/c++, CXX_FLAGS= -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOCUPTI -DLIBKINETO_NOROCTRACER -DLIBKINETO_NOXPUPTI=ON -DUSE_FBGEMM -DUSE_PYTORCH_QNNPACK -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -O2 -fPIC -DC10_NODEPRECATED -Wall -Wextra -Werror=return-type -Werror=non-virtual-dtor -Werror=range-loop-construct -Werror=bool-operation -Wnarrowing -Wno-missing-field-initializers -Wno-unknown-pragmas -Wno-unused-parameter -Wno-strict-overflow -Wno-strict-aliasing -Wno-stringop-overflow -Wsuggest-override -Wno-psabi -Wno-error=old-style-cast -faligned-new -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Wno-dangling-reference -Wno-error=dangling-reference -Wno-stringop-overflow, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, TORCH_VERSION=2.10.0, USE_CUDA=0, USE_CUDNN=OFF, USE_CUSPARSELT=OFF, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=OFF, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, USE_XCCL=OFF, USE_XPU=OFF, \n",
+        "torch_git": "449b1768410104d3ed79d3bcfe4ba1d65c7f22c0",
+        "worker": "ubuntu-22.04"
+      },
+      "cpu": "AMD EPYC 9V74 80-Core Processor",
+      "host_id": "runnervmy75tu"
+    },
+    "ubuntu-24.04": {
+      "configuration": {
+        "checkout_commit": "6fecc60dbb083230847819ee04b442b9aa9015c1",
+        "container_digest": null,
+        "cpu_capability": "DEFAULT",
+        "cpu_flags": "fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl tsc_reliable nonstop_tsc cpuid extd_apicid aperfmperf tsc_known_freq pni pclmulqdq ssse3 fma cx16 pcid sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm cmp_legacy svm cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw topoext vmmcall fsgsbase bmi1 avx2 smep bmi2 erms invpcid rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 xsaves user_shstk clzero xsaveerptr rdpru arat npt nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold v_vmsave_vmload umip vaes vpclmulqdq rdpid fsrm",
+        "cpu_model": "AMD EPYC 7763 64-Core Processor",
+        "cpu_vendor": "AuthenticAMD",
+        "deterministic_algorithms": true,
+        "distribution_record_sha256": {
+          "numpy": "d8c5b8192a299ca152919aa5fd5b9bd319bcf24edf58c3d4cf74a2571d7f8342",
+          "torch": "303251f6933840dc3432134aef45d8db3755dfeff80ee71fb2b0fac217e11f59"
+        },
+        "environment": {
+          "ATEN_CPU_CAPABILITY": "default",
+          "MKL_CBWR": "COMPATIBLE",
+          "MKL_DYNAMIC": "FALSE",
+          "MKL_NUM_THREADS": "1",
+          "OMP_DYNAMIC": "FALSE",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "PYTHONHASHSEED": "0"
+        },
+        "execution_environment": "native-hosted-worker",
+        "host_id": "runnervm8axu0",
+        "machine": "x86_64",
+        "num_interop_threads": 1,
+        "num_threads": 1,
+        "numpy": "2.2.6",
+        "packages": [
+          "Jinja2==3.1.6",
+          "MarkupSafe==3.0.3",
+          "filelock==4.2.4",
+          "fsspec==2026.9.0",
+          "mpmath==1.3.0",
+          "networkx==3.7",
+          "numpy==2.2.6",
+          "pip==26.3",
+          "setuptools==78.1.0",
+          "sympy==1.14.0",
+          "torch==2.10.0+cpu",
+          "typing_extensions==4.16.0"
+        ],
+        "parallel_info": "ATen/Parallel:\n\tat::get_num_threads() : 1\n\tat::get_num_interop_threads() : 1\nOpenMP 201511 (a.k.a. OpenMP 4.5)\n\tomp_get_max_threads() : 1\nIntel(R) oneAPI Math Kernel Library Version 2024.2-Product Build 20240605 for Intel(R) 64 architecture applications\n\tmkl_get_max_threads() : 1\nIntel(R) MKL-DNN v3.7.1 (Git Hash 8d263e693366ef8db40acc569cc7d8edf644556d)\nstd::thread::hardware_concurrency() : 4\nEnvironment variables:\n\tOMP_NUM_THREADS : 1\n\tMKL_NUM_THREADS : 1\nATen parallel backend: OpenMP\n",
+        "platform": "Linux-7.0.0-1017-azure-x86_64-with-glibc2.39",
+        "process_id": 2545,
+        "process_ordinal": 1,
+        "python": "3.12.12",
+        "python_executable_sha256": "a63496e80d3fceef521a96c0885529dcc03272e2111f37ae3e652bfd112980d8",
+        "registered_software": true,
+        "runner": {
+          "GITHUB_JOB": "cpu-worker",
+          "GITHUB_RUN_ATTEMPT": "1",
+          "GITHUB_RUN_ID": "44291185512",
+          "GITHUB_SHA": "5fa76d2249916e1f8b7929b48e28d64791df69cd",
+          "ImageOS": "ubuntu24",
+          "ImageVersion": "20261111.370.1",
+          "RUNNER_ARCH": "X64",
+          "RUNNER_NAME": "GitHub Actions 1000028173",
+          "RUNNER_OS": "Linux"
+        },
+        "torch": "2.10.0+cpu",
+        "torch_binary_sha256": {
+          "_C.so": "2a4e075c33f292a709006fe69bca669e681351fad1fcddd7c957fcf96362d1a8",
+          "libtorch_cpu.so": "4dc5b3a649b61d8f39be127866bc258dda19d74e339f449fe18103db63e8d76f"
+        },
+        "torch_config": "PyTorch built with:\n  - GCC 13.3\n  - C++ Version: 201703\n  - Intel(R) oneAPI Math Kernel Library Version 2024.2-Product Build 20240605 for Intel(R) 64 architecture applications\n  - Intel(R) MKL-DNN v3.7.1 (Git Hash 8d263e693366ef8db40acc569cc7d8edf644556d)\n  - OpenMP 201511 (a.k.a. OpenMP 4.5)\n  - LAPACK is enabled (usually provided by MKL)\n  - NNPACK is enabled\n  - CPU capability usage: DEFAULT\n  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, COMMIT_SHA=449b1768410104d3ed79d3bcfe4ba1d65c7f22c0, CXX_COMPILER=/opt/rh/gcc-toolset-13/root/usr/bin/c++, CXX_FLAGS= -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOCUPTI -DLIBKINETO_NOROCTRACER -DLIBKINETO_NOXPUPTI=ON -DUSE_FBGEMM -DUSE_PYTORCH_QNNPACK -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -O2 -fPIC -DC10_NODEPRECATED -Wall -Wextra -Werror=return-type -Werror=non-virtual-dtor -Werror=range-loop-construct -Werror=bool-operation -Wnarrowing -Wno-missing-field-initializers -Wno-unknown-pragmas -Wno-unused-parameter -Wno-strict-overflow -Wno-strict-aliasing -Wno-stringop-overflow -Wsuggest-override -Wno-psabi -Wno-error=old-style-cast -faligned-new -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Wno-dangling-reference -Wno-error=dangling-reference -Wno-stringop-overflow, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, TORCH_VERSION=2.10.0, USE_CUDA=0, USE_CUDNN=OFF, USE_CUSPARSELT=OFF, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=OFF, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, USE_XCCL=OFF, USE_XPU=OFF, \n",
+        "torch_git": "449b1768410104d3ed79d3bcfe4ba1d65c7f22c0",
+        "worker": "ubuntu-24.04"
+      },
+      "cpu": "AMD EPYC 7763 64-Core Processor",
+      "host_id": "runnervm8axu0"
+    }
+  },
+  "workflow_run": 44291185512
+}

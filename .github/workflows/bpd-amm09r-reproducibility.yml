@@ -6,6 +6,11 @@ on:
       - 'mechinterp/bpd/experiments/amm09r_reproducibility/**'
       - '.github/workflows/bpd-amm09r-reproducibility.yml'
   workflow_dispatch:
+    inputs:
+      run_engineering:
+        description: Repeat the registered excluded engineering matrix
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -13,6 +18,7 @@ permissions:
 
 jobs:
   cpu-worker:
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.run_engineering }}
     strategy:
       fail-fast: false
       matrix:
@@ -108,14 +114,53 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12.12'
-      - uses: actions/download-artifact@v4
+      - name: Download current explicit engineering run
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.run_engineering }}
+        uses: actions/download-artifact@v4
         with:
           pattern: amm09r-cpu-*
           path: /tmp/amm09r-workers
+      - name: Download immutable registered engineering receipts
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.run_engineering }}
+        uses: actions/download-artifact@v4
+        with:
+          run-id: 44291185512
+          github-token: ${{ github.token }}
+          pattern: amm09r-cpu-*
+          path: /tmp/amm09r-workers
+      - name: Verify every archived receipt and current instrument source
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.run_engineering }}
+        run: |
+          python - <<'PYCODE'
+          import hashlib, importlib.util, json, pathlib
+          root = pathlib.Path('mechinterp/bpd/experiments/amm09r_reproducibility')
+          manifest = json.loads((root / 'results/RECEIPTS.json').read_text())
+          source = importlib.util.spec_from_file_location('amm09r_runner', root / 'run.py')
+          runner = importlib.util.module_from_spec(source)
+          source.loader.exec_module(runner)
+          expected_source = runner.source_hashes()
+          directory = pathlib.Path('/tmp/amm09r-workers')
+          assert len(manifest['receipt_files']) == 12
+          for relative, expected in manifest['receipt_files'].items():
+              data = (directory / relative).read_bytes()
+              assert hashlib.sha256(data).hexdigest() == expected['sha256'], relative
+              assert len(data) == expected['bytes'], relative
+              assert json.loads(data)['source_sha256'] == expected_source, relative
+          assert hashlib.sha256((root / 'results/ENGINEERING_ACCEPTANCE.json').read_bytes()).hexdigest() == manifest['comparison_file_sha256']
+          PYCODE
       - name: Require complete cross-worker bit-exact pinned32 replay
         run: |
           python mechinterp/bpd/experiments/amm09r_reproducibility/compare.py \
             --directory /tmp/amm09r-workers --out /tmp/amm09r-comparison.json
+      - name: Match the recorded acceptance result
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.run_engineering }}
+        run: |
+          python - <<'PYCODE'
+          import json, pathlib
+          actual = json.loads(pathlib.Path('/tmp/amm09r-comparison.json').read_text())
+          expected = json.loads(pathlib.Path('mechinterp/bpd/experiments/amm09r_reproducibility/results/ENGINEERING_ACCEPTANCE.json').read_text())
+          assert actual == expected
+          PYCODE
       - uses: actions/upload-artifact@v4
         if: always()
         with:
