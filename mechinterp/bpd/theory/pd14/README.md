@@ -38,3 +38,14 @@ Restart effects and both weak-margin comparisons are secondary descriptive outco
 - The registered first-run workflow executes only upon committing EXECUTE_LOCK.json **after source and CI gates are green**. It archives full evidence independently of scientific PASS/FAIL.
 
 The original PD-13 first-run evidence, scoring, and post-hoc diagnostic remain unchanged.
+
+
+## Frozen first-run outcome
+
+The original source-locked [GitHub Actions run #44222789694](https://github.com/MoralityLabAI/BPD/actions/runs/44222789694) completed all 160 arms with engineering PASS and **registered scientific FAIL**. [RESULTS_20261118.md](RESULTS_20261118.md) preserves the complete analysis, [PER_SEED_20261118.csv](PER_SEED_20261118.csv) fixes every paired seed outcome and [test_published_results.py](test_published_results.py) independently checks the frozen source and archive.
+
+On strong-margin clustered 16D, wide_single recovered **0/16** and narrow_single **3/16**; net +3 narrow-only, exact McNemar **p=0.25**, below the registered recovery requirement. The independent objective-consistency diagnostic passed **16/16**, confirming the predeclared Gaussian 45° remix-sign reversal at the two widths.
+
+On weak-margin 16D, wide_single recovered **16/16**, narrow_single **1/16** and both three-restart arms **0/16**. This is a registered secondary descriptive result: nine sweeps at the original weak width succeeded uniformly, while three sweeps per restart and cold narrow smoothing underperformed. The planted Q oracle recovered all 32.
+
+The immutable 160-arm [original JSON artifact #14392996069](https://github.com/MoralityLabAI/BPD/actions/runs/44222789694/artifacts/14392996069) has SHA256 \`605f0433e58c2d6b77952d553c007ff3a623429a636a34624852ad0fff7b4a22\`; the registered source/config/protocol and scientific gate remain unchanged.
