@@ -82,20 +82,28 @@ def aggregate(receipts: list[dict]) -> dict:
         }
         output["bases"][kind]=out
     comparisons=[r["bases"]["rotated"].get("comparison_to_native",{}) for r in rs]
-    output["orthogonal_equivariance"]={
-        "max_physical_map_relative_error":max(
-            c.get("projector_map_relative_error",float("inf")) for c in comparisons),
-        "max_heldout_retain_logit_delta":max(
-            c.get("retain_logit_max_delta",float("inf")) for c in comparisons),
-        "max_factor_projector_transport_abs_error":max(
-            c.get("factor_projector_transport_error",float("inf")) for c in comparisons),
+    # A blocked scientific arm must still serialize a valid complete receipt.
+    # Do not encode missing measurements as Infinity/NaN or silently omit roots.
+    equivariant_fields = {
+        "max_physical_map_relative_error":"projector_map_relative_error",
+        "max_heldout_retain_logit_delta":"retain_logit_max_delta",
+        "max_factor_projector_transport_abs_error":"factor_projector_transport_error",
     }
+    output["orthogonal_equivariance"]={}
+    for destination, source in equivariant_fields.items():
+        samples=[c.get(source) for c in comparisons]
+        output["orthogonal_equivariance"][destination] = (
+            max(samples) if len(samples)==len(rs) and all(isinstance(v,(int,float)) for v in samples)
+            else None
+        )
     n=output["bases"]["native"]
     q=output["bases"]["rotated"]
     good = (
         output["model_task_pass_count"] == 8
         and output["zero_readout_null_pass_count"] == 8
         and len(n["eligible_root_seeds"]) == 8 and len(q["eligible_root_seeds"]) == 8
+        and output["orthogonal_equivariance"]["max_physical_map_relative_error"] is not None
+        and output["orthogonal_equivariance"]["max_heldout_retain_logit_delta"] is not None
         and output["orthogonal_equivariance"]["max_physical_map_relative_error"] <=1e-4
         and output["orthogonal_equivariance"]["max_heldout_retain_logit_delta"] <=5e-5
     )
