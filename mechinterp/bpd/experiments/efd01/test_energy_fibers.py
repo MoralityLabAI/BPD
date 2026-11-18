@@ -99,6 +99,31 @@ class EnergyFiberTests(unittest.TestCase):
         self.assertEqual(f.lower_bound, 2)
         self.assertEqual(delayed_rank(np.eye(3), f)["rank"], 2)
 
+    def test_very_large_energy_gradient_does_not_erase_head_constraints(self):
+        a = np.eye(4)[:2]
+        g = np.array([0., 0., 1.e13, 0.])
+        f = energy_fiber(a, g)
+        self.assertEqual((f.current_rank, f.joint_rank, f.dimension),
+                         (2, 3, 1))
+        np.testing.assert_allclose(a @ f.projector, 0., rtol=0., atol=1.e-12)
+        np.testing.assert_allclose(g @ f.projector, 0., rtol=0., atol=1.e-2)
+        shams = tangent_shams(f, radius=.25, count=8, seed=61059)
+        np.testing.assert_allclose(shams @ a.T, 0., rtol=0., atol=1.e-12)
+
+    def test_independent_head_row_scales_preserve_energy_fiber(self):
+        a = np.eye(5)[:2]
+        scaled = a.copy()
+        scaled[0] *= 1.e12
+        scaled[1] *= 1.e-6
+        g = np.array([0., 0., 10., 0., 0.])
+        f = energy_fiber(a, g)
+        f_scaled = energy_fiber(scaled, g)
+        self.assertEqual((f.dimension, f_scaled.dimension), (2, 2))
+        np.testing.assert_allclose(f.projector, f_scaled.projector,
+                                   rtol=0., atol=1.e-11)
+        np.testing.assert_allclose(scaled @ f_scaled.projector,
+                                   0., rtol=0., atol=1.e-10)
+
     def test_validate_nonfinite_inputs(self):
         with self.assertRaises(ValueError):
             energy_fiber(np.eye(3), np.array([np.nan, 0., 0.]))
