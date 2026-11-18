@@ -1,0 +1,37 @@
+{
+  "study": "BPD-SUB-01",
+  "phase": "first_original_eight_root_engineering",
+  "registered_protocol_commit": "fe46c382fa69f9d7a2390bad0cff64245861ff1e",
+  "source_commit_sha": "38dc50de5b7faf2e8dde54862c9666de65832de4",
+  "excluded_smoke": 1199,
+  "roots": [
+    1200,
+    1201,
+    1202,
+    1203,
+    1204,
+    1205,
+    1206,
+    1207
+  ],
+  "steps": 256,
+  "train": 2048,
+  "discovery": 512,
+  "selection": 512,
+  "heldout": 1024,
+  "ranks": [
+    2,
+    4,
+    6,
+    8,
+    10
+  ],
+  "shams_per_rank": 8,
+  "source_only_selection_max_kl_nats": 0.025,
+  "source_only_selection_max_fiber_logit_rms": 0.05,
+  "physical_impulse_alpha_fraction_discovery_h1_rms": 0.25,
+  "minimum_mechanistic_sham_advantage_logit_rms": 0.03,
+  "population": "independent_trained_development_models_only",
+  "confirmed_statistical_status": "prospective_eight_root_engineering_only",
+  "protected_test_sources": "not read or generated"
+}
