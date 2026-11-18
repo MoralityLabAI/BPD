@@ -1,0 +1,124 @@
+name: BPD-PD-15 first registered 32-source norm-weighted 16D cohort
+
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/theory/pd15/EXECUTE_LOCK.json'
+
+permissions:
+  contents: read
+
+jobs:
+  first-registered-norm-weighted:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify original source and frozen exact scientific decision
+        run: |
+          python - <<'PY'
+          import json,subprocess
+          from pathlib import Path
+          root=Path('mechinterp/bpd/theory/pd15')
+          lock=json.loads((root/'EXECUTE_LOCK.json').read_text())
+          cfg=json.loads((root/'CONFIG.json').read_text())
+          assert cfg['study_id']==lock['study_id']=='BPD-PD-15'
+          assert lock['execution']=='first_registered_full_cohort'
+          assert len(set(cfg['seed_cell']['seeds']))==lock['units']==32
+          assert len(cfg['arms'])==lock['arms_per_seed']==5
+          assert cfg['seed_cell']['margin']=='strong'
+          assert cfg['source']['train_boards']==2048
+          assert cfg['source']['diagnostic_boards']==1024
+          assert cfg['objective']['candidate_angle_scores_per_learned_arm']==39960
+          assert cfg['objective']['candidate_scalar_projection_evaluations_per_learned_arm']==327352320
+          assert cfg['weights']=={'none':0,'norm1':1}
+          assert cfg['scoring']['primary_arm']=='weighted_wide'
+          assert cfg['scoring']['primary_control']=='uniform_wide'
+          assert cfg['scoring']['primary_min_successes']==18
+          assert cfg['scoring']['primary_net_paired_wins_min']==10
+          assert cfg['scoring']['objective_consistency_min_dual_signs']==30
+          sha=lock['source_commit_sha']
+          subprocess.run(['git','merge-base','--is-ancestor',sha,'HEAD'],check=True)
+          protected=[str(root/f) for f in
+                     ('CONFIG.json','PROTOCOL.md','experiment.py','test_experiment.py')]
+          protected += ['mechinterp/bpd/theory/pd12/experiment.py',
+                        'mechinterp/bpd/theory/pd12/CONFIG.json',
+                        'mechinterp/bpd/theory/pd13/posthoc_zero_mass_audit.py',
+                        'mechinterp/bpd/theory/pd14/experiment.py',
+                        'mechinterp/bpd/theory/pd02/experiment.py',
+                        'mechinterp/bpd/components.py',
+                        'mechinterp/bpd/config.py']
+          subprocess.run(['git','diff','--exit-code',sha,'HEAD','--',*protected],check=True)
+          print('PD15 original frozen source locked at',sha)
+          PY
+      - name: Install pinned Python 3.12 CPU numerical runtime
+        run: |
+          python -m pip install --disable-pip-version-check pytest 'numpy>=1.26' scipy==1.14.1
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Run excluded seed 4001 and frozen scientific scoring tests
+        run: python -m pytest -q mechinterp/bpd/theory/pd15/test_experiment.py
+      - name: Run frozen 32 independent seed/rotation units and five arms
+        run: python -m mechinterp.bpd.theory.pd15.experiment --out /tmp/bpd-pd15-first-registered-full.json
+      - name: Independently audit all source-locked arms and objective diagnostics
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          c=json.loads(Path('mechinterp/bpd/theory/pd15/CONFIG.json').read_text())
+          r=json.loads(Path('/tmp/bpd-pd15-first-registered-full.json').read_text())
+          s=r['summary']
+          seeds=set(c['seed_cell']['seeds'])
+          arms={a['key'] for a in c['arms']}
+          assert r['study_id']==s['study_id']=='BPD-PD-15'
+          assert s['registered'] and s['units']==32 and s['arms']==160
+          assert len(r['arms'])==160 and len(r['diagnostics'])==32
+          assert len({(row['seed'],row['arm']) for row in r['arms']})==160
+          assert {(row['seed'],row['arm']) for row in r['arms']}=={
+            (seed,arm) for seed in seeds for arm in arms
+          }
+          assert {x['seed'] for x in r['diagnostics']}==seeds
+          for seed in seeds:
+            group=[x for x in r['arms'] if x['seed']==seed]
+            assert len(group)==5
+            for key in ('hidden_rotation_sha256','initial_random_basis_sha256',
+                        'training_full_pool_sha256'):
+              assert len({x[key] for x in group})==1
+          specs={x['key']:x for x in c['arms']}
+          for row in r['arms']:
+            assert set(row['heldout']['per_family'])==set(c['source']['heldout_families'])
+            assert all(v['binary_mask'] for v in row['heldout']['per_family'].values())
+            t=row['training']
+            if row['arm']=='planted_Q_oracle':
+              assert row['uses_true_Q_for_optimizer']
+              assert t['candidate_angle_scores']==0
+            else:
+              assert not row['uses_true_Q_for_optimizer']
+              assert t['candidate_angle_scores']==39960
+              assert t['candidate_scalar_projection_evaluations']==327352320
+              assert t['training_board_count']==2048
+              assert t['training_observed_vectors']==8192
+              assert t['pair_sweeps']==9
+              assert t['orthogonality_max_error']<1e-4
+              assert t['lambda']==c['weights'][specs[row['arm']]['weight']]
+              assert t['sigma']==c['widths'][specs[row['arm']]['width']]
+              assert len(t['mass_by_sweep'])==10
+              assert t['training_weight_effective_sample_size']>0
+          print('PD15 registered objective diagnostic gate:',s['objective_consistency_gate_passed'])
+          print('PD15 registered mechanism gate:',s['primary_mechanism_gate_passed'])
+          print('PD15 first-run original scientific PASS/FAIL:',s['registered_scientific_passed'])
+          print('PD15 seed-level success counts:',s['success_by_arm'])
+          print('PD15 paired exact McNemar:',s['McNemar_exact_two_sided_p'])
+          PY
+      - name: Archive original 160-arm registered scientific receipt unchanged
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bpd-pd15-original-registered-${{ github.run_id }}
+          path: /tmp/bpd-pd15-first-registered-full.json
+          retention-days: 90
+          if-no-files-found: warn

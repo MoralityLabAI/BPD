@@ -111,6 +111,9 @@ jobs:
           python -m pytest -q mechinterp/bpd/theory/pd13/test_experiment.py
           python -m pytest -q mechinterp/bpd/theory/pd13/test_published_results.py
           python -m pytest -q mechinterp/bpd/theory/pd14/test_published_results.py
+      - name: PD15 independent 32-source first-run scientific receipt and SHA replay
+        run: |
+          python -m pytest -q mechinterp/bpd/theory/pd15/test_published_results.py
       - name: Verify source module syntax
         run: |
           python -m compileall -q mechinterp/bpd

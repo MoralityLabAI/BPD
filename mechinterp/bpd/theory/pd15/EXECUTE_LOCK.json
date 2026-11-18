@@ -1,0 +1,17 @@
+{
+  "study_id": "BPD-PD-15",
+  "execution": "first_registered_full_cohort",
+  "registered_date": "2026-11-18",
+  "source_commit_sha": "1e68d8c19ec1653e8aeb3dc7c29a96a92804a4f3",
+  "config_first_commit": "348b3dd6441d0a3b9708708cac04dc4ca19db392",
+  "protocol_registration_commit": "2155631b9babe259c97ea89649dbb2bf063c8fe2",
+  "cells": 1,
+  "units": 32,
+  "arms_per_seed": 5,
+  "engineering_excluded_seed": 4001,
+  "excluded_seed_CI_run": 44232868581,
+  "excluded_seed_CI_conclusion": "SUCCESS on identical experiment source before documentation-only commits",
+  "Lean_CI_run": 44232897283,
+  "Lean_CI_conclusion": "SUCCESS on exact 39960 angle and 327352320 candidate-by-vector budget",
+  "provenance_policy": "Retain original 160-arm first-run JSON and strict frozen PASS/FAIL. Never change registered seeds, source, weight law, widths, masks or recovery thresholds after run."
+}
