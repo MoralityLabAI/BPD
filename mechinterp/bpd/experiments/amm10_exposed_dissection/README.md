@@ -6,6 +6,31 @@ AMM-09R1 TRAINING and DEVELOPMENT roots exclusively for explanatory
 analysis. The study has no new prospective scientific claim and no
 confirmation runner.
 
+## Verified original-receipt findings
+
+[RESULTS.md](RESULTS.md) retains all **19** predeclared training-root
+ablations/controls and the immutable exposed-development diagnostic audit.
+
+The frozen 18-feature linear policy has a **nine-term candidate-varying
+ranking**, verified on all 8,192 original exposed training cases with
+zero pre- or post-clipping action mismatches and a maximum unrounded
+score error of 1.32e-9. On eight root-held-out folds, the full
+18-feature ridge reaches **40.14%**, a simple alignment-cosine
+heuristic **38.51%**, and a re-fitted ridge without cosine alignment
+**28.02%**. Compact causal features tie the full ridge in total
+successes, with 787 differing choices.
+
+Among original development actions, the frozen memory reaches
+**38.15%** and a hindsight best *fixed mask per model* reaches
+**35.12%**. This is a descriptive +3.03pp advantage with a
+root-bootstrap interval [−0.03,+6.24]pp, a result that remains
+selection-exposed. Memory changes masks within all 64 model roots.
+
+**AMM10 creates no new EvalMath confirmation verdict.** A fresh
+registered AMM11 must compare learned transfer to the analytical
+cosine rule on entirely new model roots. Every historical protected
+confirmation cohort remains sealed.
+
 ## Questions
 
 The original 18-feature linear strategy-memory policy receives six equal-dose
