@@ -1,0 +1,46 @@
+name: BPD-DT03 source-only task and causal contract regression
+on:
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/depth_steering_gym/dt03_*.py'
+      - 'mechinterp/bpd/experiments/depth_steering_gym/test_dt03_contract.py'
+      - 'mechinterp/bpd/experiments/depth_steering_gym/DT03_REVIEW.md'
+      - '.github/workflows/bpd-dt03-source.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.11','3.13']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install pinned CPU dependencies
+        run: python -m pip install 'torch==2.5.1' 'numpy>=1.26,<3'
+      - name: Verify archived source locks
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json,subprocess
+          d=Path('mechinterp/bpd/experiments/depth_steering_gym')
+          for name in ('LOCK_STAGE0.json','LOCK_CI.json'):
+              lock=json.loads((d/name).read_text())
+              for path,sha in lock['files'].items():
+                  actual=subprocess.check_output(['git','hash-object',str(d/path)],text=True).strip()
+                  assert actual==sha,(name,path,actual,sha)
+          PY
+      - name: Test repaired source contracts and unchanged DT01 suite
+        env:
+          OMP_NUM_THREADS: '1'
+          MKL_NUM_THREADS: '1'
+        run: |
+          python -m unittest \
+            mechinterp.bpd.experiments.depth_steering_gym.test_dt03_contract \
+            mechinterp.bpd.experiments.depth_steering_gym.test_gym -v
