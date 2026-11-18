@@ -1,0 +1,155 @@
+{
+  "casewise_six_mask_oracle_hits_audit_only": 15539,
+  "comparisons": {
+    "memory_only_vs_pooled": {
+      "control": "pooled",
+      "difference_successes": 4842,
+      "exact_one_sided_root_sign_p": 4.880836543307357e-10,
+      "four_comparison_holm_p": 1.9523346173229428e-9,
+      "mean_independent_root_effect": 0.14776611328125,
+      "negative_roots": 8,
+      "paired_root_bootstrap_95_ci": [
+        0.111541748046875,
+        0.186614990234375
+      ],
+      "positive_roots": 55,
+      "tied_roots": 1,
+      "treatment": "memory_only"
+    },
+    "memory_plus_local_vs_local_ridge": {
+      "control": "local_ridge",
+      "difference_successes": 2169,
+      "exact_one_sided_root_sign_p": 0.00002889186002460152,
+      "four_comparison_holm_p": 0.00008667558007380456,
+      "mean_independent_root_effect": 0.066192626953125,
+      "negative_roots": 15,
+      "paired_root_bootstrap_95_ci": [
+        0.04315185546875,
+        0.091400146484375
+      ],
+      "positive_roots": 47,
+      "tied_roots": 2,
+      "treatment": "memory_plus_local"
+    },
+    "memory_plus_local_vs_memory_only": {
+      "control": "memory_only",
+      "difference_successes": -1576,
+      "exact_one_sided_root_sign_p": 0.9999961674158098,
+      "four_comparison_holm_p": 0.9999961674158098,
+      "mean_independent_root_effect": -0.048095703125,
+      "negative_roots": 47,
+      "paired_root_bootstrap_95_ci": [
+        -0.068023681640625,
+        -0.029296875
+      ],
+      "positive_roots": 14,
+      "tied_roots": 3,
+      "treatment": "memory_plus_local"
+    },
+    "memory_plus_local_vs_pooled": {
+      "control": "pooled",
+      "difference_successes": 3266,
+      "exact_one_sided_root_sign_p": 0.00005852770815016151,
+      "four_comparison_holm_p": 0.00011705541630032301,
+      "mean_independent_root_effect": 0.09967041015625,
+      "negative_roots": 16,
+      "paired_root_bootstrap_95_ci": [
+        0.06298828125,
+        0.13751220703125
+      ],
+      "positive_roots": 47,
+      "tied_roots": 1,
+      "treatment": "memory_plus_local"
+    }
+  },
+  "confirmation_authorization_reason": "A separate human-approved, source/policy/preflight-bound release manifest is still required; all 128 confirmation roots remain sealed.",
+  "confirmation_authorized": false,
+  "corrected_evalmath_decision": "READY_FOR_CONFIRMATION",
+  "development_admission_gates": {
+    "fidelity": true,
+    "four_comparison_adjusted_sign_p": true,
+    "meaningful_primary_effect_and_uncertainty": true,
+    "oracle_headroom": true,
+    "physical_equal_dose": true,
+    "preflight_ready": true
+  },
+  "evidence": "development only; explicit independent source-preserving repair",
+  "experiment": "BPD-AMM-09",
+  "high_fidelity_models": 63,
+  "historical_analysis_mistake": "Original experiment.py.analysis treated every comparison key as memory_plus_local minus control; preflight_input correctly used memory_only minus pooled",
+  "locked_original_case_bits_sha256": "fe6f801c9788c9f5805dfb762a350357fef4513ba53d964bb1c418d7fbc21f55",
+  "matched_sham_95_95_tolerance_bound": 0.064453125,
+  "max_active_dose_error": 4.76837158203125e-7,
+  "max_immediate_readout_drift": 0,
+  "mechanistic_variation_floor": 0.08,
+  "memory_only_cases_differing_from_pooled": 21459,
+  "models_selecting_multiple_masks": {
+    "local_count": 0,
+    "local_ridge": 64,
+    "memory_only": 64,
+    "memory_plus_local": 64,
+    "pooled": 0,
+    "random_mask": 64
+  },
+  "n_independent_model_roots": 64,
+  "n_test_cases_per_root": 512,
+  "oracle_headroom_above_pooled_audit_only": 0.277801513671875,
+  "original_source_primary_mislabeled_mean": 0.09967041015625,
+  "policy_action_histograms": {
+    "local_count": {
+      "mask_0": 7168,
+      "mask_1": 6656,
+      "mask_2": 2048,
+      "mask_3": 5120,
+      "mask_4": 6144,
+      "mask_5": 5632
+    },
+    "local_ridge": {
+      "mask_0": 4695,
+      "mask_1": 5545,
+      "mask_2": 4053,
+      "mask_3": 6569,
+      "mask_4": 5950,
+      "mask_5": 5956
+    },
+    "memory_only": {
+      "mask_0": 57,
+      "mask_1": 2,
+      "mask_2": 0,
+      "mask_3": 15007,
+      "mask_4": 11309,
+      "mask_5": 6393
+    },
+    "memory_plus_local": {
+      "mask_0": 2046,
+      "mask_1": 1429,
+      "mask_2": 1551,
+      "mask_3": 11814,
+      "mask_4": 8966,
+      "mask_5": 6962
+    },
+    "pooled": {
+      "mask_0": 0,
+      "mask_1": 0,
+      "mask_2": 0,
+      "mask_3": 0,
+      "mask_4": 32768,
+      "mask_5": 0
+    },
+    "random_mask": {
+      "mask_0": 5416,
+      "mask_1": 5422,
+      "mask_2": 5466,
+      "mask_3": 5488,
+      "mask_4": 5469,
+      "mask_5": 5507
+    }
+  },
+  "schema": "bpd.amm09.two_slot_memory.v1/post_data_registered_analysis_correction",
+  "source_sha256": {
+    "case.py": "f72788b058d7eff58218ed4e0c729437820a8cfdd2518609409f2fc7fec9132a",
+    "experiment.py": "57af128ca48ef2dcd527abfcd443373705ecd046a460d53bafe2a0222df56897",
+    "models.py": "2fec8382c067147d60d9f2d4fe8d171ce3d5e15f405afffbbab5389023bc1a03"
+  },
+  "training_policy_sha256": "c536d7bda5c49507138708e6fd9e0187bbb057990248116aa73cfd40777e95ef"
+}
