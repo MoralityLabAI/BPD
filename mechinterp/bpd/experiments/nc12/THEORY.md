@@ -19,12 +19,10 @@ has `rank(C_t) ≤ min(q,20)`. For q=4,8,16, the usual orthogonal polar factor i
 
 NC-12 therefore fits a single orthogonal **activation prior** `R_act,t` on an independent 128-row paired, unlabeled calibration sample. The registered low-query Jacobian map is
 
-[
-R_{q,t}=operatorname{polar}left(
- rac{G_{A,t}^	op G_{B,t}}{q}
- + 0.05,R_{mathrm{act},t}
-ight).
-]
+```text
+R_(q,t) = polar(G_A(q,t)^T G_B(q,t)/q + 0.05 R_act,t)
+```
+
 
 For a generic nonsingular matrix `M=UΣV^T`, `polar(M)=UV^T`, and
 
@@ -32,10 +30,10 @@ For a generic nonsingular matrix `M=UΣV^T`, `polar(M)=UV^T`, and
 
 Multiplication by the activation prior's inverse reveals the regularizer's geometry:
 
-[
-(C_t+0.05 R_{mathrm{act},t}) R_{mathrm{act},t}^	op
-= C_t R_{mathrm{act},t}^	op + 0.05I.
-]
+```text
+(C_t + 0.05 R_act,t) R_act,t^T = C_t R_act,t^T + 0.05 I
+```
+
 
 The ridge stabilizes directions invisible to q Jacobian rows. Its numerical singular-value diagnostics are recorded, and its fixed coefficient is **not optimized from held-out task behavior**. This gives a deterministic chart rule without asserting that the chart is a true isomorphism of independent learned model circuits.
 
@@ -45,12 +43,12 @@ Transport uses `P_A→B,q,t=R_q,t^T P_A,t R_q,t`. Each `P` is a symmetric rank-f
 
 For a clean trajectory, let `z_t` denote its physical prewrite read, `U_B=W_B^T`, and `g_t` the target logit's local derivative with respect to the write. The first-order effect of retaining a projected write at one pass is approximated by
 
-[
-Delta s approx sum_{t=0}^{3}
-g_{w,t}^{	op}left[alpha,P_{q,t}U_Bz_t - U_Bz_tight]
-]
+```text
+Delta_s ~= sum_t [(alpha * z_t P_(q,t) U_B - z_t U_B) dot g_(w,t)]
+```
 
-with an appropriate column/row transpose convention. Higher-order terms include changes to later recurrent hidden states, their nonlinear Jacobians and feedback into subsequent writes. Consequently, maximizing paired-Jacobian alignment is a **source-only observational objective**. Evaluating native BPD closed-loop interventions on *untouched* external task labels is required to determine whether the transported rank-four write retains predictive behavior.
+
+where `z_t` is a physical prewrite **row vector**, `U_B=W_B^T` and `g_(w,t)` is its post-write **column** score gradient. Higher-order recurrent effects are omitted from this first-order approximation. Higher-order terms include changes to later recurrent hidden states, their nonlinear Jacobians and feedback into subsequent writes. Consequently, maximizing paired-Jacobian alignment is a **source-only observational objective**. Evaluating native BPD closed-loop interventions on *untouched* external task labels is required to determine whether the transported rank-four write retains predictive behavior.
 
 The direct B-only comparator is especially consequential: with q target gradient rows, it may extract a rank-four B subspace more efficiently than a source-assisted orthogonal map, especially if A and B's internal nonlinear transforms differ substantially even on the shared input branch.
 
@@ -60,13 +58,11 @@ Each q cell uses a nested prefix of the same 32 B Jacobian rows. Therefore the *
 
 Dose matching is performed on `split=6`, disjoint from gradient calibration and held-out task testing. For rank-four projectors `P`, the retained clean write energy is proportional to
 
-[
-D_B(P)^2 =
-rac{1}{4cdot 20}sum_{t=0}^{3}
-operatorname{tr}left[
- E(a_{B,t}a_{B,t}^{	op}),P_t
- W_B^{	op}W_B,P_tight].
-]
+```text
+D_B(P)^2 = (1/(4*20)) sum_t tr(M_t P_t (U_B U_B^T) P_t)
+M_t = E[a_(B,t)^T a_(B,t)]  (with a_(B,t) a row vector)
+```
+
 
 This matches the physical `mix` write RMS by gain calibration within fixed bounds [0.5,1.5]. The physical nulls use independent local angular projector draws, accepting the first eight within ±15% of the transported projector's discovery-dose RMS. Physical-write RMS matching controls energy, although it does not equate downstream causal Jacobians or clean-to-intervention state-distribution shifts.
 
