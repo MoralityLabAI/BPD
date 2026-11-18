@@ -45,7 +45,10 @@ def activation_and_gradients(bpd: BPDModel, model: PlantedLooper,
     a_rows, g_rows = [], []
     layer = bpd.wrappers["mix"]
     for offset in range(0, len(x), bs):
-        xx, yy = x[offset:offset+bs], y[offset:offset+bs]
+        # BPDModel freezes the target weights; the input must keep a graph
+        # to obtain gradients at intermediate shared physical write sites.
+        xx = x[offset:offset+bs].clone().requires_grad_(True)
+        yy = y[offset:offset+bs]
         with bpd.target_capture():
             scores, _ = model(xx, capture=True)
             sign = torch.where(yy, 1., -1.)
