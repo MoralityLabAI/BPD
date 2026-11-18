@@ -1,0 +1,109 @@
+name: BPD-BPD-NC-10 cross-model Procrustes transfer (engineering only)
+on:
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/nc10/**'
+      - '.github/workflows/bpd-nc10-cross-task.yml'
+  workflow_dispatch:
+
+jobs:
+  source-audit-and-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install source-locked CPU dependencies
+        run: python -m pip install 'torch==2.5.1' 'numpy>=1.26' 'pytest>=8'
+      - name: Verify pretraining protocol and source blob lock
+        run: |
+          python - <<'PY'
+          import json,subprocess
+          from pathlib import Path
+          p=Path('mechinterp/bpd/experiments/nc10/EXECUTE_LOCK.json')
+          lock=json.loads(p.read_text())
+          assert lock['status']=='SOURCE_LOCK_BEFORE_FIRST_NC10_MODEL_ROOT'
+          assert lock['protocol_first_commit']=='4354c624103fcc1f7f10125d29b5356583eb3b3d'
+          for path,sha in lock['source_blob_sha1'].items():
+              observed=subprocess.check_output(['git','hash-object',path],text=True).strip()
+              assert observed==sha,(path,observed,sha)
+          assert lock['engineering_roots']==list(range(1000,1008))
+          print('NC-10 protocol/source locked before data')
+          PY
+      - name: Native BPD factor-gauge, task-split, Procrustes and label-seal unit tests
+        run: |
+          python -m compileall -q mechinterp/bpd/experiments/nc10
+          python -m pytest -q mechinterp/bpd/experiments/nc10/test_experiment.py
+      - name: Excluded engineering root 999 source sanity smoke
+        run: |
+          python -m mechinterp.bpd.experiments.nc10.experiment \
+            --root 999 --steps 384 --discovery-size 256 \
+            --alignment-size 1024 --evaluation-size 256 \
+            --proposals 256 --out /tmp/nc10_smoke_999.json
+          python - <<'PY'
+          import json
+          x=json.load(open('/tmp/nc10_smoke_999.json'))
+          assert x['root']==999 and x['phase']=='ENGINEERING'
+          assert x['protocol_commit']=='4354c624103fcc1f7f10125d29b5356583eb3b3d'
+          print('excluded smoke source/target closures',x['closure'])
+          print('root admission (descriptive only)',x['eligible'],x['eligibility_reasons'])
+          print('sham matching',x.get('sham_matching'))
+          print('shared branch contrast',x['contrasts'].get('shared_transfer_deficit_vs_B_owned'))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nc10-excluded-root-source-smoke
+          path: /tmp/nc10_smoke_999.json
+          if-no-files-found: warn
+
+  development-eight-pairs:
+    runs-on: ubuntu-latest
+    needs: source-audit-and-smoke
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install registered CPU dependencies
+        run: python -m pip install 'torch==2.5.1' 'numpy>=1.26' 'pytest>=8'
+      - name: Verify original implementation source blobs before fresh training
+        run: |
+          python - <<'PY'
+          import json,subprocess
+          lock=json.load(open('mechinterp/bpd/experiments/nc10/EXECUTE_LOCK.json'))
+          for path,sha in lock['source_blob_sha1'].items():
+              assert subprocess.check_output(['git','hash-object',path],text=True).strip()==sha,path
+          PY
+      - name: Eight pairs of independently trained recurrent models and frozen transfer comparison
+        run: |
+          mkdir -p /tmp/nc10_development
+          for root in 1000 1001 1002 1003 1004 1005 1006 1007; do
+            python -m mechinterp.bpd.experiments.nc10.experiment \
+              --root "$root" --steps 384 --discovery-size 1024 \
+              --alignment-size 1024 --evaluation-size 1024 \
+              --proposals 2048 --out "/tmp/nc10_development/nc10_root_${root}.json"
+          done
+          python -m mechinterp.bpd.experiments.nc10.aggregate \
+            --directory /tmp/nc10_development \
+            --out /tmp/nc10_development/NC10_ORIGINAL_SUMMARY.json
+          python - <<'PY'
+          import json
+          a=json.load(open('/tmp/nc10_development/NC10_ORIGINAL_SUMMARY.json'))
+          assert a['n_independent_paired_training_roots']==8
+          assert a['training_models']==16
+          assert len(a['contrasts'])==4
+          assert a['scientific_status']=='NOT_CONFIRMATORY'
+          assert a['development_verdict'] in ('ENGINEERING_CROSS_TASK_TRANSFER','ENGINEERING_NULL_OR_INELIGIBLE')
+          assert a['confirmation'].startswith('SEALED')
+          print('Frozen independent-root scientific outcome',a['development_verdict'])
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nc10-original-eight-paired-model-root-receipts
+          path: /tmp/nc10_development/
+          if-no-files-found: warn
