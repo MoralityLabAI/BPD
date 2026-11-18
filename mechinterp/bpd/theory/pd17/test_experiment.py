@@ -83,8 +83,7 @@ def test_native_angular_method_on_excluded_camouflage_source():
 def _synthetic(*,original_norm=32,cam_norm=0,cam_uniform=0,
                cam_angular=32,original_uniform=0,diagnostic_count=32,
                oracle_fails=0):
-    rows,d=[]
-    # Reassign to avoid hidden access to measured real roots.
+    # Synthetic root outcomes only; registered scientific seeds are not evaluated.
     rows=[]
     diagnostics=[]
     for i,seed in enumerate(SEEDS):
