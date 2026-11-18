@@ -1,0 +1,64 @@
+name: BPD NC09-FC04 source-only full-tangent Jacobian preflight
+
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/experiments/nc09_fixed12/full_tangent_fc04/**'
+      - '.github/workflows/bpd-nc09-fc04-preflight.yml'
+      - '.github/workflows/bpd-nc09-fc04-full-smoke.yml'
+      - '.github/workflows/bpd-nc09-fc04-registered.yml'
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/nc09_fixed12/full_tangent_fc04/**'
+      - '.github/workflows/bpd-nc09-fc04-preflight.yml'
+      - '.github/workflows/bpd-nc09-fc04-full-smoke.yml'
+      - '.github/workflows/bpd-nc09-fc04-registered.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  excluded-source-14999-and-jacobian:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Ensure first prospective protocol precedes source implementation
+        run: |
+          set -euo pipefail
+          git merge-base --is-ancestor e51938e4cf96ac4d34ffeaca3afdb52b84969db9 HEAD
+          git show e51938e4cf96ac4d34ffeaca3afdb52b84969db9:mechinterp/bpd/experiments/nc09_fixed12/full_tangent_fc04/PROTOCOL.md > /tmp/fc04-original-protocol.md
+          cmp /tmp/fc04-original-protocol.md mechinterp/bpd/experiments/nc09_fixed12/full_tangent_fc04/PROTOCOL.md
+      - name: Install CPU Torch/Python compatible with frozen NC09 experiments
+        run: |
+          python -m pip install --disable-pip-version-check pytest 'numpy>=1.26' scipy==1.14.1
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Verify excluded native physical teacher, full-tangent QR and 16-root gate
+        run: |
+          python -m compileall -q mechinterp/bpd/experiments/nc09_fixed12/full_tangent_fc04
+          python -m pytest -q \
+            mechinterp/bpd/experiments/nc09_fixed12/full_tangent_fc04/test_solver.py \
+            mechinterp/bpd/experiments/nc09_fixed12/full_tangent_fc04/test_aggregate.py
+
+  lean-rank-source-certificate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Install Lean 4.19.0 kernel
+        run: |
+          curl --fail --location --retry 3 https://github.com/leanprover/lean4/releases/download/v4.19.0/lean-4.19.0-linux.tar.zst -o /tmp/lean.tar.zst
+          tar --zstd -xf /tmp/lean.tar.zst -C /tmp
+          echo '/tmp/lean-4.19.0-linux/bin' >> "$GITHUB_PATH"
+      - name: Kernel prove full tangent parameter dimension and source budgets
+        run: |
+          set -euo pipefail
+          lean mechinterp/bpd/experiments/nc09_fixed12/full_tangent_fc04/TangentBudget.lean | tee /tmp/fc04-lean.txt
+          grep -q 'BPD.NC09FC04.complement_parameter_budget' /tmp/fc04-lean.txt
+          grep -q 'BPD.NC09FC04.original_chart_evaluation_budget' /tmp/fc04-lean.txt
+          if grep -E 'sorryAx|ofReduceBool' /tmp/fc04-lean.txt; then exit 1; fi
