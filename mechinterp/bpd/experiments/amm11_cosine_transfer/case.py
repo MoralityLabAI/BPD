@@ -80,6 +80,7 @@ def score(phase:str,index:int,f:m.Factors,split:str,n:int):
         maxvisible=max(float(p[:,0].abs().max()) for p in active)
         return {"root":m.root_key(phase,index),"split":split,"n":n,
                 "features":features["features"].tolist(),
+                "features_sha256":m.digest(features["features"].tolist()),
                 "candidate_bits":bits,
                 "candidate_hits":{name:value.count("1") for name,value in bits.items()},
                 "diagnostics":{
