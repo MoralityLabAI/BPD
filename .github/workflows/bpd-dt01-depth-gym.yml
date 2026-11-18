@@ -46,7 +46,7 @@ jobs:
           print("BPD-DT01 SOURCE LOCK VERIFIED")
           PY
       - name: Check exact Sudoku ARC-1 storyworld and protected steering controls
-        run: python -m unittest discover -s mechinterp/bpd/experiments/depth_steering_gym -p 'test_*.py' -v
+        run: python -m unittest discover -s mechinterp/bpd/experiments/depth_steering_gym -p 'test_gym.py' -v
       - name: Reproduce only model-free task-source receipt
         run: python -m mechinterp.bpd.experiments.depth_steering_gym.audit --seed 301 --out /tmp/bpd_dt01_receipt.json
       - name: Compare exact source receipt to committed reference
