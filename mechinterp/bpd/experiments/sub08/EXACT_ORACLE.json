@@ -1,0 +1,516 @@
+{
+  "class_counts": [
+    781,
+    1146,
+    1024,
+    1145
+  ],
+  "class_encoding": "2*a+b",
+  "entropy_bits": 1.9840417326022144,
+  "initial_state": [
+    0,
+    1
+  ],
+  "labels_le_i64_sha256": "b36a036a7b91dac363bdb15939ed2f0ce5143cd60f50b7633865409f13a1d999",
+  "n_cases": 4096,
+  "order_witness": {
+    "class_a": 2,
+    "class_b": 3,
+    "common_counts": [
+      2,
+      2,
+      1,
+      1
+    ],
+    "tokens_a": [
+      0,
+      0,
+      1,
+      1,
+      3,
+      2
+    ],
+    "tokens_b": [
+      0,
+      0,
+      1,
+      1,
+      2,
+      3
+    ]
+  },
+  "partition_rng": "numpy.random.default_rng/PCG64",
+  "partition_seed": 246810,
+  "partitions": {
+    "heldout": {
+      "class_counts": [
+        189,
+        304,
+        254,
+        277
+      ],
+      "entropy_bits": 1.9792321555660273,
+      "features": {
+        "last_token": {
+          "bayes_accuracy": 0.296875,
+          "bayes_correct_numerator": 304,
+          "bayes_denominator": 1024,
+          "conditional_entropy_bits": 1.9673309492787958,
+          "feature": "last_token",
+          "n_cases": 1024,
+          "n_feature_values": 4
+        },
+        "prefix_0": {
+          "bayes_accuracy": 0.296875,
+          "bayes_correct_numerator": 304,
+          "bayes_denominator": 1024,
+          "conditional_entropy_bits": 1.9792321555660273,
+          "feature": "prefix_0",
+          "n_cases": 1024,
+          "n_feature_values": 1
+        },
+        "prefix_1": {
+          "bayes_accuracy": 0.302734375,
+          "bayes_correct_numerator": 310,
+          "bayes_denominator": 1024,
+          "conditional_entropy_bits": 1.9674309981006406,
+          "feature": "prefix_1",
+          "n_cases": 1024,
+          "n_feature_values": 4
+        },
+        "prefix_2": {
+          "bayes_accuracy": 0.3388671875,
+          "bayes_correct_numerator": 347,
+          "bayes_denominator": 1024,
+          "conditional_entropy_bits": 1.9323492016226975,
+          "feature": "prefix_2",
+          "n_cases": 1024,
+          "n_feature_values": 16
+        },
+        "prefix_3": {
+          "bayes_accuracy": 0.3984375,
+          "bayes_correct_numerator": 408,
+          "bayes_denominator": 1024,
+          "conditional_entropy_bits": 1.8129972912169399,
+          "feature": "prefix_3",
+          "n_cases": 1024,
+          "n_feature_values": 64
+        },
+        "prefix_4": {
+          "bayes_accuracy": 0.5185546875,
+          "bayes_correct_numerator": 531,
+          "bayes_denominator": 1024,
+          "conditional_entropy_bits": 1.344820104642103,
+          "feature": "prefix_4",
+          "n_cases": 1024,
+          "n_feature_values": 253
+        },
+        "prefix_5": {
+          "bayes_accuracy": 0.73828125,
+          "bayes_correct_numerator": 756,
+          "bayes_denominator": 1024,
+          "conditional_entropy_bits": 0.5688469361429072,
+          "feature": "prefix_5",
+          "n_cases": 1024,
+          "n_feature_values": 697
+        },
+        "prefix_6": {
+          "bayes_accuracy": 1.0,
+          "bayes_correct_numerator": 1024,
+          "bayes_denominator": 1024,
+          "conditional_entropy_bits": 0.0,
+          "feature": "prefix_6",
+          "n_cases": 1024,
+          "n_feature_values": 1024
+        },
+        "token_counts": {
+          "bayes_accuracy": 0.4384765625,
+          "bayes_correct_numerator": 449,
+          "bayes_denominator": 1024,
+          "conditional_entropy_bits": 1.653534524541205,
+          "feature": "token_counts",
+          "n_cases": 1024,
+          "n_feature_values": 79
+        }
+      },
+      "ids_sha256": "34e8e8974ac7fb156e247d99eb2b14283dc29569d55b562b0aa5477e433b0b92",
+      "n_cases": 1024
+    },
+    "reserved_dose": {
+      "class_counts": [
+        102,
+        136,
+        122,
+        152
+      ],
+      "entropy_bits": 1.9849272099272737,
+      "features": {
+        "last_token": {
+          "bayes_accuracy": 0.32421875,
+          "bayes_correct_numerator": 166,
+          "bayes_denominator": 512,
+          "conditional_entropy_bits": 1.94374199169148,
+          "feature": "last_token",
+          "n_cases": 512,
+          "n_feature_values": 4
+        },
+        "prefix_0": {
+          "bayes_accuracy": 0.296875,
+          "bayes_correct_numerator": 152,
+          "bayes_denominator": 512,
+          "conditional_entropy_bits": 1.9849272099272737,
+          "feature": "prefix_0",
+          "n_cases": 512,
+          "n_feature_values": 1
+        },
+        "prefix_1": {
+          "bayes_accuracy": 0.306640625,
+          "bayes_correct_numerator": 157,
+          "bayes_denominator": 512,
+          "conditional_entropy_bits": 1.9685249783159224,
+          "feature": "prefix_1",
+          "n_cases": 512,
+          "n_feature_values": 4
+        },
+        "prefix_2": {
+          "bayes_accuracy": 0.353515625,
+          "bayes_correct_numerator": 181,
+          "bayes_denominator": 512,
+          "conditional_entropy_bits": 1.912418072041473,
+          "feature": "prefix_2",
+          "n_cases": 512,
+          "n_feature_values": 16
+        },
+        "prefix_3": {
+          "bayes_accuracy": 0.447265625,
+          "bayes_correct_numerator": 229,
+          "bayes_denominator": 512,
+          "conditional_entropy_bits": 1.6629333877208083,
+          "feature": "prefix_3",
+          "n_cases": 512,
+          "n_feature_values": 64
+        },
+        "prefix_4": {
+          "bayes_accuracy": 0.623046875,
+          "bayes_correct_numerator": 319,
+          "bayes_denominator": 512,
+          "conditional_entropy_bits": 0.9415792176975158,
+          "feature": "prefix_4",
+          "n_cases": 512,
+          "n_feature_values": 228
+        },
+        "prefix_5": {
+          "bayes_accuracy": 0.876953125,
+          "bayes_correct_numerator": 449,
+          "bayes_denominator": 512,
+          "conditional_entropy_bits": 0.25641447756864116,
+          "feature": "prefix_5",
+          "n_cases": 512,
+          "n_feature_values": 432
+        },
+        "prefix_6": {
+          "bayes_accuracy": 1.0,
+          "bayes_correct_numerator": 512,
+          "bayes_denominator": 512,
+          "conditional_entropy_bits": 0.0,
+          "feature": "prefix_6",
+          "n_cases": 512,
+          "n_feature_values": 512
+        },
+        "token_counts": {
+          "bayes_accuracy": 0.4921875,
+          "bayes_correct_numerator": 252,
+          "bayes_denominator": 512,
+          "conditional_entropy_bits": 1.5085354666504682,
+          "feature": "token_counts",
+          "n_cases": 512,
+          "n_feature_values": 73
+        }
+      },
+      "ids_sha256": "be6accc45558be6dc089608d0b280d1bd68ed84ec401b82fb5e922de59d35d34",
+      "n_cases": 512
+    },
+    "train": {
+      "class_counts": [
+        384,
+        548,
+        525,
+        591
+      ],
+      "entropy_bits": 1.9825762736548858,
+      "features": {
+        "last_token": {
+          "bayes_accuracy": 0.298828125,
+          "bayes_correct_numerator": 612,
+          "bayes_denominator": 2048,
+          "conditional_entropy_bits": 1.9692336001835697,
+          "feature": "last_token",
+          "n_cases": 2048,
+          "n_feature_values": 4
+        },
+        "prefix_0": {
+          "bayes_accuracy": 0.28857421875,
+          "bayes_correct_numerator": 591,
+          "bayes_denominator": 2048,
+          "conditional_entropy_bits": 1.9825762736548858,
+          "feature": "prefix_0",
+          "n_cases": 2048,
+          "n_feature_values": 1
+        },
+        "prefix_1": {
+          "bayes_accuracy": 0.2890625,
+          "bayes_correct_numerator": 592,
+          "bayes_denominator": 2048,
+          "conditional_entropy_bits": 1.9777784690839482,
+          "feature": "prefix_1",
+          "n_cases": 2048,
+          "n_feature_values": 4
+        },
+        "prefix_2": {
+          "bayes_accuracy": 0.31640625,
+          "bayes_correct_numerator": 648,
+          "bayes_denominator": 2048,
+          "conditional_entropy_bits": 1.9454940460851429,
+          "feature": "prefix_2",
+          "n_cases": 2048,
+          "n_feature_values": 16
+        },
+        "prefix_3": {
+          "bayes_accuracy": 0.3701171875,
+          "bayes_correct_numerator": 758,
+          "bayes_denominator": 2048,
+          "conditional_entropy_bits": 1.8617060718233343,
+          "feature": "prefix_3",
+          "n_cases": 2048,
+          "n_feature_values": 64
+        },
+        "prefix_4": {
+          "bayes_accuracy": 0.45263671875,
+          "bayes_correct_numerator": 927,
+          "bayes_denominator": 2048,
+          "conditional_entropy_bits": 1.6098052738801398,
+          "feature": "prefix_4",
+          "n_cases": 2048,
+          "n_feature_values": 256
+        },
+        "prefix_5": {
+          "bayes_accuracy": 0.58935546875,
+          "bayes_correct_numerator": 1207,
+          "bayes_denominator": 2048,
+          "conditional_entropy_bits": 0.9700408571807869,
+          "feature": "prefix_5",
+          "n_cases": 2048,
+          "n_feature_values": 959
+        },
+        "prefix_6": {
+          "bayes_accuracy": 1.0,
+          "bayes_correct_numerator": 2048,
+          "bayes_denominator": 2048,
+          "conditional_entropy_bits": 0.0,
+          "feature": "prefix_6",
+          "n_cases": 2048,
+          "n_feature_values": 2048
+        },
+        "token_counts": {
+          "bayes_accuracy": 0.412109375,
+          "bayes_correct_numerator": 844,
+          "bayes_denominator": 2048,
+          "conditional_entropy_bits": 1.7052148483616612,
+          "feature": "token_counts",
+          "n_cases": 2048,
+          "n_feature_values": 81
+        }
+      },
+      "ids_sha256": "83476f17cb79f4edfd549f3aa7b95322e4023d9a7ea60be1f3d753e98b1b60ea",
+      "n_cases": 2048
+    },
+    "validation": {
+      "class_counts": [
+        106,
+        158,
+        123,
+        125
+      ],
+      "entropy_bits": 1.9847475661422485,
+      "features": {
+        "last_token": {
+          "bayes_accuracy": 0.30859375,
+          "bayes_correct_numerator": 158,
+          "bayes_denominator": 512,
+          "conditional_entropy_bits": 1.9639969413474256,
+          "feature": "last_token",
+          "n_cases": 512,
+          "n_feature_values": 4
+        },
+        "prefix_0": {
+          "bayes_accuracy": 0.30859375,
+          "bayes_correct_numerator": 158,
+          "bayes_denominator": 512,
+          "conditional_entropy_bits": 1.9847475661422485,
+          "feature": "prefix_0",
+          "n_cases": 512,
+          "n_feature_values": 1
+        },
+        "prefix_1": {
+          "bayes_accuracy": 0.326171875,
+          "bayes_correct_numerator": 167,
+          "bayes_denominator": 512,
+          "conditional_entropy_bits": 1.9690596504381588,
+          "feature": "prefix_1",
+          "n_cases": 512,
+          "n_feature_values": 4
+        },
+        "prefix_2": {
+          "bayes_accuracy": 0.37109375,
+          "bayes_correct_numerator": 190,
+          "bayes_denominator": 512,
+          "conditional_entropy_bits": 1.8926807956032783,
+          "feature": "prefix_2",
+          "n_cases": 512,
+          "n_feature_values": 16
+        },
+        "prefix_3": {
+          "bayes_accuracy": 0.46484375,
+          "bayes_correct_numerator": 238,
+          "bayes_denominator": 512,
+          "conditional_entropy_bits": 1.6147172832602432,
+          "feature": "prefix_3",
+          "n_cases": 512,
+          "n_feature_values": 63
+        },
+        "prefix_4": {
+          "bayes_accuracy": 0.662109375,
+          "bayes_correct_numerator": 339,
+          "bayes_denominator": 512,
+          "conditional_entropy_bits": 0.8511573778913232,
+          "feature": "prefix_4",
+          "n_cases": 512,
+          "n_feature_values": 230
+        },
+        "prefix_5": {
+          "bayes_accuracy": 0.853515625,
+          "bayes_correct_numerator": 437,
+          "bayes_denominator": 512,
+          "conditional_entropy_bits": 0.30328947756864116,
+          "feature": "prefix_5",
+          "n_cases": 512,
+          "n_feature_values": 411
+        },
+        "prefix_6": {
+          "bayes_accuracy": 1.0,
+          "bayes_correct_numerator": 512,
+          "bayes_denominator": 512,
+          "conditional_entropy_bits": 0.0,
+          "feature": "prefix_6",
+          "n_cases": 512,
+          "n_feature_values": 512
+        },
+        "token_counts": {
+          "bayes_accuracy": 0.501953125,
+          "bayes_correct_numerator": 257,
+          "bayes_denominator": 512,
+          "conditional_entropy_bits": 1.4854747333541023,
+          "feature": "token_counts",
+          "n_cases": 512,
+          "n_feature_values": 75
+        }
+      },
+      "ids_sha256": "16cb2f2d43d95e793969c97dcadb4188ef848a220ebd7812c6f47c04e5473e77",
+      "n_cases": 512
+    }
+  },
+  "permutation_ids_sha256": "8b6e461708695df9954cb83e87a90db73a377118e7d524f622ffd45faafd3a00",
+  "population_features": {
+    "last_token": {
+      "bayes_accuracy": 0.2900390625,
+      "bayes_correct_numerator": 1188,
+      "bayes_denominator": 4096,
+      "conditional_entropy_bits": 1.9710811331302205,
+      "feature": "last_token",
+      "n_cases": 4096,
+      "n_feature_values": 4
+    },
+    "prefix_0": {
+      "bayes_accuracy": 0.27978515625,
+      "bayes_correct_numerator": 1146,
+      "bayes_denominator": 4096,
+      "conditional_entropy_bits": 1.9840417326022144,
+      "feature": "prefix_0",
+      "n_cases": 4096,
+      "n_feature_values": 1
+    },
+    "prefix_1": {
+      "bayes_accuracy": 0.280029296875,
+      "bayes_correct_numerator": 1147,
+      "bayes_denominator": 4096,
+      "conditional_entropy_bits": 1.9783108498476654,
+      "feature": "prefix_1",
+      "n_cases": 4096,
+      "n_feature_values": 4
+    },
+    "prefix_2": {
+      "bayes_accuracy": 0.30078125,
+      "bayes_correct_numerator": 1232,
+      "bayes_denominator": 4096,
+      "conditional_entropy_bits": 1.9524555047742644,
+      "feature": "prefix_2",
+      "n_cases": 4096,
+      "n_feature_values": 16
+    },
+    "prefix_3": {
+      "bayes_accuracy": 0.330810546875,
+      "bayes_correct_numerator": 1355,
+      "bayes_denominator": 4096,
+      "conditional_entropy_bits": 1.9019985009692608,
+      "feature": "prefix_3",
+      "n_cases": 4096,
+      "n_feature_values": 64
+    },
+    "prefix_4": {
+      "bayes_accuracy": 0.3798828125,
+      "bayes_correct_numerator": 1556,
+      "bayes_denominator": 4096,
+      "conditional_entropy_bits": 1.7986760756062732,
+      "feature": "prefix_4",
+      "n_cases": 4096,
+      "n_feature_values": 256
+    },
+    "prefix_5": {
+      "bayes_accuracy": 0.480224609375,
+      "bayes_correct_numerator": 1967,
+      "bayes_denominator": 4096,
+      "conditional_entropy_bits": 1.5072985075979963,
+      "feature": "prefix_5",
+      "n_cases": 4096,
+      "n_feature_values": 1024
+    },
+    "prefix_6": {
+      "bayes_accuracy": 1.0,
+      "bayes_correct_numerator": 4096,
+      "bayes_denominator": 4096,
+      "conditional_entropy_bits": 0.0,
+      "feature": "prefix_6",
+      "n_cases": 4096,
+      "n_feature_values": 4096
+    },
+    "token_counts": {
+      "bayes_accuracy": 0.391357421875,
+      "bayes_correct_numerator": 1603,
+      "bayes_denominator": 4096,
+      "conditional_entropy_bits": 1.7382962674771758,
+      "feature": "token_counts",
+      "n_cases": 4096,
+      "n_feature_values": 84
+    }
+  },
+  "schema": "bpd-sub08-exact-oracle-v1",
+  "scope": "Exact finite-domain information certificate; no architecture-depth theorem.",
+  "sequence_length": 6,
+  "sequences_le_i64_sha256": "cd8a5356ddb5a4a603620fb3566ed20bbd643f52d8bf431d7345d81b82cf6bdc",
+  "token_names": [
+    "X",
+    "S",
+    "C",
+    "R"
+  ]
+}

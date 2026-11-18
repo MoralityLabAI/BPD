@@ -1,0 +1,1424 @@
+{
+  "audit_valid": true,
+  "causal_status": "CAUSAL_STUDY_NOT_RUN",
+  "completed_root_count": 8,
+  "design_candidates": [
+    {
+      "parameter_updates": 19132800,
+      "passed": true,
+      "pilots": [
+        {
+          "accuracy": 1.0,
+          "minimum_recall": 1.0,
+          "passed": true,
+          "seed": 1890
+        },
+        {
+          "accuracy": 1.0,
+          "minimum_recall": 1.0,
+          "passed": true,
+          "seed": 1891
+        },
+        {
+          "accuracy": 1.0,
+          "minimum_recall": 1.0,
+          "passed": true,
+          "seed": 1892
+        }
+      ],
+      "updates": 2400,
+      "width": 48
+    },
+    {
+      "parameter_updates": 28699200,
+      "passed": true,
+      "pilots": [
+        {
+          "accuracy": 1.0,
+          "minimum_recall": 1.0,
+          "passed": true,
+          "seed": 1890
+        },
+        {
+          "accuracy": 1.0,
+          "minimum_recall": 1.0,
+          "passed": true,
+          "seed": 1891
+        },
+        {
+          "accuracy": 1.0,
+          "minimum_recall": 1.0,
+          "passed": true,
+          "seed": 1892
+        }
+      ],
+      "updates": 3600,
+      "width": 48
+    },
+    {
+      "parameter_updates": 32880000,
+      "passed": true,
+      "pilots": [
+        {
+          "accuracy": 0.998046875,
+          "minimum_recall": 0.9905660377358491,
+          "passed": true,
+          "seed": 1890
+        },
+        {
+          "accuracy": 1.0,
+          "minimum_recall": 1.0,
+          "passed": true,
+          "seed": 1891
+        },
+        {
+          "accuracy": 1.0,
+          "minimum_recall": 1.0,
+          "passed": true,
+          "seed": 1892
+        }
+      ],
+      "updates": 2400,
+      "width": 64
+    },
+    {
+      "parameter_updates": 49320000,
+      "passed": true,
+      "pilots": [
+        {
+          "accuracy": 0.998046875,
+          "minimum_recall": 0.9905660377358491,
+          "passed": true,
+          "seed": 1890
+        },
+        {
+          "accuracy": 1.0,
+          "minimum_recall": 1.0,
+          "passed": true,
+          "seed": 1891
+        },
+        {
+          "accuracy": 1.0,
+          "minimum_recall": 1.0,
+          "passed": true,
+          "seed": 1892
+        }
+      ],
+      "updates": 3600,
+      "width": 64
+    }
+  ],
+  "exact95_interval_for_training_seed_gate_probability": [
+    0.6305833524471807,
+    1.0
+  ],
+  "limitations": [
+    "Common fixed task and sequence partition; roots estimate training-seed reliability only.",
+    "No source-model forward replay in this independent review; original recorded parity and checkpoint hashes checked.",
+    "No causal outcomes, fitted clocks, intervention dose, matched shams or mechanistic power estimate in this phase.",
+    "Remote commit existence and ordering are established by parent GitHub receipts; this review verifies source and archive hash consistency."
+  ],
+  "lock_sha256": "66c26c2651545ab6200262fa84c3a414e809fcf6a8a0ff80ad238f32eb47cf94",
+  "manifest_sha256": "b2b7ba51b80d127d278a0e177fe1fdaaa9f14d4cc6b84cf05cc6af077f9af230",
+  "original_root_count": 8,
+  "passing_roots": 8,
+  "prospective_roots": [
+    {
+      "eligible": true,
+      "heldout": {
+        "accuracy": 1.0,
+        "class_counts": [
+          189,
+          304,
+          254,
+          277
+        ],
+        "class_recall": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "confusion": [
+          [
+            189,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            304,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            254,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            277
+          ]
+        ],
+        "correct": 1024,
+        "last_token_accuracy": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "n": 1024,
+        "nll": 0.0007947236712995805,
+        "prefix2_accuracy": 0.3017578125,
+        "prefix2_consistency_max": 0.0,
+        "prefix4_accuracy": 0.369140625,
+        "prefix4_consistency_max": 0.0
+      },
+      "heldout_bag_margin": 0.5615234375,
+      "heldout_prefix4_margin": 0.4814453125,
+      "seed": 1900,
+      "status": "complete",
+      "train": {
+        "accuracy": 1.0,
+        "class_counts": [
+          384,
+          548,
+          525,
+          591
+        ],
+        "class_recall": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "confusion": [
+          [
+            384,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            548,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            525,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            591
+          ]
+        ],
+        "correct": 2048,
+        "last_token_accuracy": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "n": 2048,
+        "nll": 0.00046975424425989835
+      },
+      "validation": {
+        "accuracy": 1.0,
+        "class_counts": [
+          106,
+          158,
+          123,
+          125
+        ],
+        "class_recall": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "confusion": [
+          [
+            106,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            158,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            123,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            125
+          ]
+        ],
+        "correct": 512,
+        "last_token_accuracy": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "n": 512,
+        "nll": 0.000675316771915125
+      }
+    },
+    {
+      "eligible": true,
+      "heldout": {
+        "accuracy": 1.0,
+        "class_counts": [
+          189,
+          304,
+          254,
+          277
+        ],
+        "class_recall": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "confusion": [
+          [
+            189,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            304,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            254,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            277
+          ]
+        ],
+        "correct": 1024,
+        "last_token_accuracy": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "n": 1024,
+        "nll": 0.0007410724227050578,
+        "prefix2_accuracy": 0.3046875,
+        "prefix2_consistency_max": 0.0,
+        "prefix4_accuracy": 0.369140625,
+        "prefix4_consistency_max": 0.0
+      },
+      "heldout_bag_margin": 0.5615234375,
+      "heldout_prefix4_margin": 0.4814453125,
+      "seed": 1901,
+      "status": "complete",
+      "train": {
+        "accuracy": 1.0,
+        "class_counts": [
+          384,
+          548,
+          525,
+          591
+        ],
+        "class_recall": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "confusion": [
+          [
+            384,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            548,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            525,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            591
+          ]
+        ],
+        "correct": 2048,
+        "last_token_accuracy": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "n": 2048,
+        "nll": 0.0005540078275455696
+      },
+      "validation": {
+        "accuracy": 1.0,
+        "class_counts": [
+          106,
+          158,
+          123,
+          125
+        ],
+        "class_recall": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "confusion": [
+          [
+            106,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            158,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            123,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            125
+          ]
+        ],
+        "correct": 512,
+        "last_token_accuracy": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "n": 512,
+        "nll": 0.0007221855262709497
+      }
+    },
+    {
+      "eligible": true,
+      "heldout": {
+        "accuracy": 1.0,
+        "class_counts": [
+          189,
+          304,
+          254,
+          277
+        ],
+        "class_recall": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "confusion": [
+          [
+            189,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            304,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            254,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            277
+          ]
+        ],
+        "correct": 1024,
+        "last_token_accuracy": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "n": 1024,
+        "nll": 0.000635465943731451,
+        "prefix2_accuracy": 0.3046875,
+        "prefix2_consistency_max": 0.0,
+        "prefix4_accuracy": 0.369140625,
+        "prefix4_consistency_max": 0.0
+      },
+      "heldout_bag_margin": 0.5615234375,
+      "heldout_prefix4_margin": 0.4814453125,
+      "seed": 1902,
+      "status": "complete",
+      "train": {
+        "accuracy": 1.0,
+        "class_counts": [
+          384,
+          548,
+          525,
+          591
+        ],
+        "class_recall": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "confusion": [
+          [
+            384,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            548,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            525,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            591
+          ]
+        ],
+        "correct": 2048,
+        "last_token_accuracy": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "n": 2048,
+        "nll": 0.00046209994133891366
+      },
+      "validation": {
+        "accuracy": 1.0,
+        "class_counts": [
+          106,
+          158,
+          123,
+          125
+        ],
+        "class_recall": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "confusion": [
+          [
+            106,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            158,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            123,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            125
+          ]
+        ],
+        "correct": 512,
+        "last_token_accuracy": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "n": 512,
+        "nll": 0.0005322015053732013
+      }
+    },
+    {
+      "eligible": true,
+      "heldout": {
+        "accuracy": 1.0,
+        "class_counts": [
+          189,
+          304,
+          254,
+          277
+        ],
+        "class_recall": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "confusion": [
+          [
+            189,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            304,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            254,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            277
+          ]
+        ],
+        "correct": 1024,
+        "last_token_accuracy": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "n": 1024,
+        "nll": 0.0008582924147678944,
+        "prefix2_accuracy": 0.3046875,
+        "prefix2_consistency_max": 0.0,
+        "prefix4_accuracy": 0.369140625,
+        "prefix4_consistency_max": 0.0
+      },
+      "heldout_bag_margin": 0.5615234375,
+      "heldout_prefix4_margin": 0.4814453125,
+      "seed": 1903,
+      "status": "complete",
+      "train": {
+        "accuracy": 1.0,
+        "class_counts": [
+          384,
+          548,
+          525,
+          591
+        ],
+        "class_recall": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "confusion": [
+          [
+            384,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            548,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            525,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            591
+          ]
+        ],
+        "correct": 2048,
+        "last_token_accuracy": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "n": 2048,
+        "nll": 0.0005974749308047128
+      },
+      "validation": {
+        "accuracy": 1.0,
+        "class_counts": [
+          106,
+          158,
+          123,
+          125
+        ],
+        "class_recall": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "confusion": [
+          [
+            106,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            158,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            123,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            125
+          ]
+        ],
+        "correct": 512,
+        "last_token_accuracy": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "n": 512,
+        "nll": 0.000803070088286883
+      }
+    },
+    {
+      "eligible": true,
+      "heldout": {
+        "accuracy": 1.0,
+        "class_counts": [
+          189,
+          304,
+          254,
+          277
+        ],
+        "class_recall": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "confusion": [
+          [
+            189,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            304,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            254,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            277
+          ]
+        ],
+        "correct": 1024,
+        "last_token_accuracy": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "n": 1024,
+        "nll": 0.0005731781795679631,
+        "prefix2_accuracy": 0.3046875,
+        "prefix2_consistency_max": 0.0,
+        "prefix4_accuracy": 0.369140625,
+        "prefix4_consistency_max": 0.0
+      },
+      "heldout_bag_margin": 0.5615234375,
+      "heldout_prefix4_margin": 0.4814453125,
+      "seed": 1904,
+      "status": "complete",
+      "train": {
+        "accuracy": 1.0,
+        "class_counts": [
+          384,
+          548,
+          525,
+          591
+        ],
+        "class_recall": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "confusion": [
+          [
+            384,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            548,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            525,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            591
+          ]
+        ],
+        "correct": 2048,
+        "last_token_accuracy": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "n": 2048,
+        "nll": 0.0004711759181244089
+      },
+      "validation": {
+        "accuracy": 1.0,
+        "class_counts": [
+          106,
+          158,
+          123,
+          125
+        ],
+        "class_recall": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "confusion": [
+          [
+            106,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            158,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            123,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            125
+          ]
+        ],
+        "correct": 512,
+        "last_token_accuracy": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "n": 512,
+        "nll": 0.0006033287781213771
+      }
+    },
+    {
+      "eligible": true,
+      "heldout": {
+        "accuracy": 1.0,
+        "class_counts": [
+          189,
+          304,
+          254,
+          277
+        ],
+        "class_recall": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "confusion": [
+          [
+            189,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            304,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            254,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            277
+          ]
+        ],
+        "correct": 1024,
+        "last_token_accuracy": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "n": 1024,
+        "nll": 0.0006976649011260667,
+        "prefix2_accuracy": 0.3046875,
+        "prefix2_consistency_max": 0.0,
+        "prefix4_accuracy": 0.369140625,
+        "prefix4_consistency_max": 0.0
+      },
+      "heldout_bag_margin": 0.5615234375,
+      "heldout_prefix4_margin": 0.4814453125,
+      "seed": 1905,
+      "status": "complete",
+      "train": {
+        "accuracy": 1.0,
+        "class_counts": [
+          384,
+          548,
+          525,
+          591
+        ],
+        "class_recall": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "confusion": [
+          [
+            384,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            548,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            525,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            591
+          ]
+        ],
+        "correct": 2048,
+        "last_token_accuracy": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "n": 2048,
+        "nll": 0.0005427433602713022
+      },
+      "validation": {
+        "accuracy": 1.0,
+        "class_counts": [
+          106,
+          158,
+          123,
+          125
+        ],
+        "class_recall": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "confusion": [
+          [
+            106,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            158,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            123,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            125
+          ]
+        ],
+        "correct": 512,
+        "last_token_accuracy": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "n": 512,
+        "nll": 0.0007409038178192298
+      }
+    },
+    {
+      "eligible": true,
+      "heldout": {
+        "accuracy": 1.0,
+        "class_counts": [
+          189,
+          304,
+          254,
+          277
+        ],
+        "class_recall": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "confusion": [
+          [
+            189,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            304,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            254,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            277
+          ]
+        ],
+        "correct": 1024,
+        "last_token_accuracy": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "n": 1024,
+        "nll": 0.0004913470042792839,
+        "prefix2_accuracy": 0.3046875,
+        "prefix2_consistency_max": 0.0,
+        "prefix4_accuracy": 0.369140625,
+        "prefix4_consistency_max": 0.0
+      },
+      "heldout_bag_margin": 0.5615234375,
+      "heldout_prefix4_margin": 0.4814453125,
+      "seed": 1906,
+      "status": "complete",
+      "train": {
+        "accuracy": 1.0,
+        "class_counts": [
+          384,
+          548,
+          525,
+          591
+        ],
+        "class_recall": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "confusion": [
+          [
+            384,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            548,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            525,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            591
+          ]
+        ],
+        "correct": 2048,
+        "last_token_accuracy": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "n": 2048,
+        "nll": 0.00038463117173015215
+      },
+      "validation": {
+        "accuracy": 1.0,
+        "class_counts": [
+          106,
+          158,
+          123,
+          125
+        ],
+        "class_recall": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "confusion": [
+          [
+            106,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            158,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            123,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            125
+          ]
+        ],
+        "correct": 512,
+        "last_token_accuracy": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "n": 512,
+        "nll": 0.00047818735684075186
+      }
+    },
+    {
+      "eligible": true,
+      "heldout": {
+        "accuracy": 1.0,
+        "class_counts": [
+          189,
+          304,
+          254,
+          277
+        ],
+        "class_recall": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "confusion": [
+          [
+            189,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            304,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            254,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            277
+          ]
+        ],
+        "correct": 1024,
+        "last_token_accuracy": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "n": 1024,
+        "nll": 0.0008404609428241192,
+        "prefix2_accuracy": 0.3046875,
+        "prefix2_consistency_max": 0.0,
+        "prefix4_accuracy": 0.369140625,
+        "prefix4_consistency_max": 0.0
+      },
+      "heldout_bag_margin": 0.5615234375,
+      "heldout_prefix4_margin": 0.4814453125,
+      "seed": 1907,
+      "status": "complete",
+      "train": {
+        "accuracy": 1.0,
+        "class_counts": [
+          384,
+          548,
+          525,
+          591
+        ],
+        "class_recall": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "confusion": [
+          [
+            384,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            548,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            525,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            591
+          ]
+        ],
+        "correct": 2048,
+        "last_token_accuracy": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "n": 2048,
+        "nll": 0.0006179778858412162
+      },
+      "validation": {
+        "accuracy": 1.0,
+        "class_counts": [
+          106,
+          158,
+          123,
+          125
+        ],
+        "class_recall": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "confusion": [
+          [
+            106,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            158,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            123,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            125
+          ]
+        ],
+        "correct": 512,
+        "last_token_accuracy": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "n": 512,
+        "nll": 0.0008204340000546612
+      }
+    }
+  ],
+  "protocol_commit": "8bcbd7220b8d6d4d4c01ddc1bf9db6f82862ac17",
+  "read_only_files_verified": 57,
+  "schema": "sub08-independent-postrun-review-v1",
+  "selected_config": {
+    "updates": 2400,
+    "width": 48
+  },
+  "source_commit": "b6c391c1d05cf72df85ede28135c9955f46c5c9c",
+  "verdict": "SOURCE_COMPETENCE_PASS"
+}
