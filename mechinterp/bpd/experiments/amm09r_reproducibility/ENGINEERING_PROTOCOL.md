@@ -104,3 +104,11 @@ historical AMM09 source reproduction unless original training hashes match.
 No scientific p-values, causal effect claims, or confirmation release follow
 from the engineering policy fixture. Pinned EvalMath is required for any
 subsequent scientific development study.
+
+### Physical-check detail frozen with the first source commit
+
+The first source commit also checks the fixed diagonal GL(3) rescale
+diag(2, .5, 1) and the signed permutation [[0,0,-1],[1,0,0],[0,1,0]].
+The same 1e-9 full-operator and conditional 1e-8 canonical-component bounds
+apply to these transforms. This detail is recorded before the first harness
+execution. No model outputs informed it.
