@@ -67,11 +67,36 @@ def energy_fiber(current_jacobian, energy_gradient, *, rtol=RTOL, atol=ATOL):
     if g.size == 0:
         raise ValueError("empty physical state")
     a = matrix(current_jacobian, width=len(g))
-    _, _, rank_a, _ = row_nullspace(a, rtol=rtol, atol=atol)
+    # First enforce every independent current-readout row in its OWN scale.
+    # A single SVD of [A; g] can drop real head constraints when ||g||>>||A||.
+    # Row normalization retains Euclidean row spans and is invariant to
+    # individually rescaling any nonzero current observable.
+    row_norms = np.linalg.norm(a, axis=1)
+    normalized_a = a.copy()
+    nonzero = row_norms > atol
+    if nonzero.any():
+        normalized_a[nonzero] /= row_norms[nonzero, None]
+    normalized_a[~nonzero] = 0.
+    current_basis, _, rank_a, _ = row_nullspace(
+        normalized_a, rtol=rtol, atol=atol)
+    # Intersect the ALREADY readout-null physical space with the energy row.
+    # Use the original full gradient norm for its relative significance test.
+    restricted_g = g @ current_basis
+    energy_cutoff = max(atol, rtol * float(np.linalg.norm(g)))
+    g_restricted_norm = float(np.linalg.norm(restricted_g))
+    if g_restricted_norm > energy_cutoff:
+        restricted_basis, _, _, _ = row_nullspace(
+            (restricted_g / g_restricted_norm)[None, :],
+            rtol=rtol, atol=atol)
+        basis = current_basis @ restricted_basis
+        joint_rank = rank_a + 1
+    else:
+        basis = current_basis
+        joint_rank = rank_a
     constraints = np.concatenate((a, g[None, :]), axis=0)
-    basis, singular, joint_rank, threshold = row_nullspace(
-        constraints, rtol=rtol, atol=atol
-    )
+    # Raw singular values are telemetry, not a valid common-scale rank rule.
+    singular = np.linalg.svd(constraints, compute_uv=False)
+    threshold = energy_cutoff
     projector = basis @ basis.T
     dimension = len(g) - joint_rank
     lower_bound = len(g) - rank_a - 1
