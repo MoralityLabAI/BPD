@@ -1,0 +1,13 @@
+{
+  "study": "BPD-NC09-FC05",
+  "phase": "ORIGINAL_SMOKE_REPLAY_AUDIT",
+  "source_commit_sha": "cf877e2b3bfd9ca41ce296ec55df311ad6dc7394",
+  "source_manifest_sha256": "8e8500cd4c3d82ba9bce3e86d1405be13da544e7dc9435dee4742f2a58861628",
+  "original_run_id": 44317319540,
+  "original_artifact_id": 14433326335,
+  "original_root_sha256": "e7c00303308e44606cc05b64ad31057dbbea5339d6b48ccff37f47ff31a825bc",
+  "original_workflow_conclusion": "failure",
+  "new_models_trained": 0,
+  "new_task_evaluations": 0,
+  "purpose": "Replay the exact original source and compare all8 projector hashes and33 parameter states after restoring the frozen eigh basis stride; preserve original failed workflow."
+}
