@@ -20,6 +20,7 @@ from mechinterp.bpd.config import AblationConfig
 from mechinterp.bpd.experiments.nc02.experiment import PASSES, WIDTH, sample_x, parity
 from mechinterp.bpd.experiments.nc04.experiment import DenseLooper, factor_basis
 from mechinterp.bpd.experiments.nc05.experiment import projectors_at_ranks, clean_dose_rms
+from mechinterp.bpd.experiments.nc03.experiment import basis_transport
 from mechinterp.bpd.experiments.nc06.experiment import local_matched_shams
 from mechinterp.bpd.experiments.nc10.experiment import task_labels, procrustes, prewrite_states, transport, clean_reference
 from mechinterp.bpd.experiments.nc11.experiment import (
