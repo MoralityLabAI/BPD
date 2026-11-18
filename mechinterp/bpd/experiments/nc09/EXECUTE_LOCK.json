@@ -1,0 +1,33 @@
+{
+  "study": "BPD-NC-09",
+  "status": "SOURCE_LOCK_BEFORE_FIRST_MODEL_TRAINING",
+  "protocol_first_commit": "e85724a42b97d9fa41f82cf76d537e71832250a7",
+  "source_tree_preexecution_commit": "3cd1fb79b7e5c45271daf65abacd74b2b2425ab6",
+  "engineering_roots": [
+    900,
+    901,
+    902,
+    903,
+    904,
+    905,
+    906,
+    907
+  ],
+  "smoke_only_root": 899,
+  "models_per_root": 2,
+  "source_blob_sha1": {
+    "mechinterp/bpd/experiments/nc09/PROTOCOL.md": "d79a1740e4455b991133cf97fb71930ea6bc6a3f",
+    "mechinterp/bpd/experiments/nc09/experiment.py": "fe5db4d1bbb61adbbc3db8fdcd142f05be97b281",
+    "mechinterp/bpd/experiments/nc09/aggregate.py": "d1695559e31b6d78a6a87160e3d2fb28e6e2fc8b",
+    "mechinterp/bpd/experiments/nc09/test_experiment.py": "c837e3531051fb27508f3d450d48736d3bc76e26"
+  },
+  "training_steps": 384,
+  "train_examples_per_task": 2048,
+  "discovery": 1024,
+  "alignment": 1024,
+  "evaluation": 1024,
+  "sham_proposals": 2048,
+  "shams_required": 8,
+  "conditions": "Run source checks, then one excluded smoke root 899, then eight engineering root pairs. Any source change must produce a separately logged engineering amendment before first development run. Scientific failure must remain intact.",
+  "confirmation": "SEALED"
+}
