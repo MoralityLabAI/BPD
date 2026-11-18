@@ -109,7 +109,6 @@ def test_excluded_model_physical_evaluation_and_source_split():
     assert rec["sham_admission"]["proposals"]==96
     assert rec["sham_admission"]["selected"]<=2
     assert rec["selected_sham_score_source_only"]
-    assert rec["source_sha256"]==hashlib.sha256(
-        __import__("mechinterp.bpd.experiments.nc09_fixed12.tangent_sham_calibration.experiment",fromlist=["__file__"]).__file__
-            and open(__import__("mechinterp.bpd.experiments.nc09_fixed12.tangent_sham_calibration.experiment",fromlist=["__file__"]).__file__,"rb").read()
-    ).hexdigest()
+    from mechinterp.bpd.experiments.nc09_fixed12.tangent_sham_calibration import experiment as source_module
+    from pathlib import Path
+    assert rec["source_sha256"]==hashlib.sha256(Path(source_module.__file__).read_bytes()).hexdigest()
