@@ -1,0 +1,218 @@
+{
+  "actual_noisy_feedback_flips": 1227,
+  "casewise_semantic_sha256": "55fde352d3495a8bbf473ff5914688df4f007da25785b135808082e031cfe48f",
+  "comparisons": {
+    "compact_vs_cosine": {
+      "control": "cosine",
+      "difference_hits": 749,
+      "exact_sign_p": 8.081907283078588e-8,
+      "holm_adjusted_p": 3.232762913231435e-7,
+      "mean_root_effect": 0.022857666015625,
+      "negative_roots": 10,
+      "positive_roots": 50,
+      "root_bootstrap_95": [
+        0.01214599609375,
+        0.033538818359375
+      ],
+      "tied_roots": 4,
+      "treatment": "compact_memory"
+    },
+    "full_vs_compact": {
+      "control": "compact_memory",
+      "difference_hits": -115,
+      "exact_sign_p": 0.5504618431735705,
+      "holm_adjusted_p": 1,
+      "mean_root_effect": -0.003509521484375,
+      "negative_roots": 31,
+      "positive_roots": 31,
+      "root_bootstrap_95": [
+        -0.012420654296875,
+        0.0047607421875
+      ],
+      "tied_roots": 2,
+      "treatment": "full_memory"
+    },
+    "full_vs_cosine": {
+      "control": "cosine",
+      "difference_hits": 634,
+      "exact_sign_p": 0.001335218141403533,
+      "holm_adjusted_p": 0.004005654424210599,
+      "mean_root_effect": 0.01934814453125,
+      "negative_roots": 18,
+      "positive_roots": 42,
+      "root_bootstrap_95": [
+        0.006378173828125,
+        0.03240966796875
+      ],
+      "tied_roots": 4,
+      "treatment": "full_memory"
+    },
+    "full_vs_pooled": {
+      "control": "pooled",
+      "difference_hits": 5362,
+      "exact_sign_p": 5.253616358570287e-9,
+      "holm_adjusted_p": 2.6268081792851436e-8,
+      "mean_root_effect": 0.16363525390625,
+      "negative_roots": 9,
+      "positive_roots": 53,
+      "root_bootstrap_95": [
+        0.121826171875,
+        0.20611572265625
+      ],
+      "tied_roots": 2,
+      "treatment": "full_memory"
+    },
+    "local_update_vs_full": {
+      "control": "full_memory",
+      "difference_hits": -1648,
+      "exact_sign_p": 0.9999944384884998,
+      "holm_adjusted_p": 1,
+      "mean_root_effect": -0.05029296875,
+      "negative_roots": 48,
+      "positive_roots": 15,
+      "root_bootstrap_95": [
+        -0.06964111328125,
+        -0.0328369140625
+      ],
+      "tied_roots": 1,
+      "treatment": "memory_plus_local"
+    }
+  },
+  "confirmation_roots_scored": 0,
+  "evidence": "development-only synthetic trained linear BPD, original archives",
+  "fidelity_roots": 55,
+  "independent_cosine_sham_95_95_max": 0.07421875,
+  "mask_histograms": {
+    "compact_memory": {
+      "mask_0": 374,
+      "mask_1": 2,
+      "mask_2": 5,
+      "mask_3": 15427,
+      "mask_4": 10352,
+      "mask_5": 6608
+    },
+    "cosine": {
+      "mask_0": 524,
+      "mask_1": 55,
+      "mask_2": 35,
+      "mask_3": 15514,
+      "mask_4": 10067,
+      "mask_5": 6573
+    },
+    "full_memory": {
+      "mask_0": 360,
+      "mask_1": 0,
+      "mask_2": 51,
+      "mask_3": 14372,
+      "mask_4": 11266,
+      "mask_5": 6719
+    },
+    "local_ridge": {
+      "mask_0": 2915,
+      "mask_1": 2241,
+      "mask_2": 2516,
+      "mask_3": 10015,
+      "mask_4": 8623,
+      "mask_5": 6458
+    },
+    "max_cardinality": {
+      "mask_0": 0,
+      "mask_1": 0,
+      "mask_2": 0,
+      "mask_3": 32768,
+      "mask_4": 0,
+      "mask_5": 0
+    },
+    "memory_plus_local": {
+      "mask_0": 1050,
+      "mask_1": 249,
+      "mask_2": 905,
+      "mask_3": 13189,
+      "mask_4": 10929,
+      "mask_5": 6446
+    },
+    "pooled": {
+      "mask_0": 0,
+      "mask_1": 0,
+      "mask_2": 0,
+      "mask_3": 0,
+      "mask_4": 32768,
+      "mask_5": 0
+    },
+    "random_mask": {
+      "mask_0": 5336,
+      "mask_1": 5580,
+      "mask_2": 5392,
+      "mask_3": 5398,
+      "mask_4": 5526,
+      "mask_5": 5536
+    }
+  },
+  "max_immediate_readout_drift": 0,
+  "max_physical_dose_error": 4.76837158203125e-7,
+  "mean_primary_effect": 0.01934814453125,
+  "n_feedback_bits": 6144,
+  "n_independent_model_roots": 64,
+  "n_test_cases": 32768,
+  "original_evalmath_verdict": "REDESIGN_OR_PILOT_ONLY",
+  "raw_development_sha256": "074d6d1ca8c3f3dc9f4847b437a7fa028393b7291a9004d905d088c8efe1a0cd",
+  "raw_preflight_sha256": "ab347a148fee80342e8b580bff4ef323972cbf3556756e2ee681f53983f03844",
+  "raw_training_sha256": "88f4ff475f301f77f21839d25ac4fa42930a7c3ed723a87428fcc43a479ca2f6",
+  "registered_scientific_minimum": 0.08,
+  "schema": "bpd.amm11.cosine_transfer.v1/independent_raw_receipt_audit",
+  "scientific_verdict": "REDESIGN_OR_PILOT_ONLY",
+  "source_families": {
+    "basalt": {
+      "compact_memory": 7607,
+      "cosine": 7067,
+      "full_donor": 16384,
+      "full_memory": 7544,
+      "local_ridge": 5744,
+      "max_cardinality": 3410,
+      "memory_plus_local": 6738,
+      "pooled": 4847,
+      "random_dark": 736,
+      "random_dark_b": 737,
+      "random_mask": 2612,
+      "sham": 0
+    },
+    "wren": {
+      "compact_memory": 6906,
+      "cosine": 6697,
+      "full_donor": 15645,
+      "full_memory": 6854,
+      "local_ridge": 4952,
+      "max_cardinality": 4080,
+      "memory_plus_local": 6012,
+      "pooled": 4189,
+      "random_dark": 724,
+      "random_dark_b": 736,
+      "random_mask": 2539,
+      "sham": 8
+    }
+  },
+  "source_sha256": {
+    "PROTOCOL.md": "3cdec1745742fd22c10665fdc7aa117dad2f04714490e4b04d7831c20c4e472a",
+    "RUNTIME.json": "45d553342de905f5c12b24573252c7386708f4f90d9e41a9685b0aa3fff73341",
+    "__init__.py": "ebc8c1d4338ace26a14ac2a0d1fe34b506f18c8428f0994496bf389a47f055f5",
+    "case.py": "ab3a293cfdd2bec0d9799fd982fd62475ab021b283761b044790eb33c7b08797",
+    "experiment.py": "d9e018b2f1c1021e386afd0ac761fc5c8bfb740398917a7341aed0c8510a4a82",
+    "models.py": "fd08f118a538e87b107a807932b83a5c954ed55f35de2fc312df8cb9917076f1",
+    "test_experiment.py": "39698b14ac4638efe6e443cd35e7e968099d8cf780c0165acc721fcf8a34b886"
+  },
+  "totals": {
+    "compact_memory": 14513,
+    "cosine": 13764,
+    "full_donor": 32029,
+    "full_memory": 14398,
+    "local_ridge": 10696,
+    "max_cardinality": 7490,
+    "memory_plus_local": 12750,
+    "pooled": 9036,
+    "random_dark": 1460,
+    "random_dark_b": 1473,
+    "random_mask": 5151,
+    "sham": 8
+  },
+  "training_policy_sha256": "eef8c22c96737ee027297b3fbffe58d11df3d13b31a7b9d55a5a0ae98840ab08"
+}

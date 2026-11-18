@@ -1,0 +1,60 @@
+name: BPD-AMM-11 original development independent audit
+
+on:
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/amm11_cosine_transfer/**'
+      - '.github/workflows/bpd-amm11-archived-audit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  independently-rebuild-original-development:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.12'
+      - name: Download once-scored original AMM11 development and training receipt
+        uses: actions/download-artifact@v4
+        with:
+          run-id: 44318979715
+          github-token: ${{ github.token }}
+          name: amm11-full-source-locked-cpu-receipts
+          path: /tmp/amm11_original
+      - name: Validate original hosted raw SHA-256 before any inference
+        shell: bash
+        run: |
+          echo '88f4ff475f301f77f21839d25ac4fa42930a7c3ed723a87428fcc43a479ca2f6  /tmp/amm11_original/amm11_training.json' | sha256sum -c -
+          echo '074d6d1ca8c3f3dc9f4847b437a7fa028393b7291a9004d905d088c8efe1a0cd  /tmp/amm11_original/amm11_development.json' | sha256sum -c -
+          echo 'ab347a148fee80342e8b580bff4ef323972cbf3556756e2ee681f53983f03844  /tmp/amm11_original/amm11_preflight.json' | sha256sum -c -
+      - name: Reconstruct all original candidate decisions, root sign/bootstraps and preflight
+        shell: bash
+        run: |
+          args=(
+            --training /tmp/amm11_original/amm11_training.json
+            --development /tmp/amm11_original/amm11_development.json
+            --preflight /tmp/amm11_original/amm11_preflight.json
+            --training-lock mechinterp/bpd/experiments/amm11_cosine_transfer/results/TRAINING_LOCK.json
+            --development-lock mechinterp/bpd/experiments/amm11_cosine_transfer/results/DEVELOPMENT_LOCK.json
+          )
+          python mechinterp/bpd/experiments/amm11_cosine_transfer/audit_development.py \
+            "${args[@]}" --out /tmp/amm11_independent_audit.json
+          if test -f mechinterp/bpd/experiments/amm11_cosine_transfer/results/AUDIT_LOCK.json; then
+            python mechinterp/bpd/experiments/amm11_cosine_transfer/audit_development.py \
+              "${args[@]}" --check-lock mechinterp/bpd/experiments/amm11_cosine_transfer/results/AUDIT_LOCK.json
+            echo 'AMM11 INDEPENDENT ORIGINAL-RECEIPT FIVE-CONTRAST AUDIT PASS'
+          fi
+      - name: Archive standalone audit and model-root diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: amm11-standalone-source-locked-development-audit
+          retention-days: 30
+          if-no-files-found: ignore
+          path: /tmp/amm11_independent_audit.json
