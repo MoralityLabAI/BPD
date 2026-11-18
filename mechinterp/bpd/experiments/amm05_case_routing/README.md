@@ -35,6 +35,20 @@ failures. The registered primary science minimum is +8 percentage
 points, with the corrected EvalMath 95th-quantile/95%-confidence
 independent-world sham tolerance gate and three Holm-adjusted contrasts.
 
+## Completed development decision: 2026-11-18
+
+The 64 independent model-root development cohort is complete. [RESULTS.md](RESULTS.md)
+records all candidate policy outcomes, cluster-level uncertainty and source
+provenance. Memory+noisy-local improved on equal-budget local ridge by
+**+5.87 percentage points**, with 38 positive, 12 negative and 14 tied
+independent model roots. The repeatability-calibrated 95/95 variation
+floor is **+14.06 points**, so the corrected EvalMath preflight gave
+`REDESIGN_OR_PILOT_ONLY`. **All 128 AMM-05 confirmation model roots
+remain sealed.** Do not create a confirmation release manifest or call
+`--phase confirmation` based on this cohort. The immutable code and
+source hashes are preserved so the hosted workflow can reproduce every
+training/development root and per-case action.
+
 ## Run on CPU
 
 Python 3.12 and CPU PyTorch 2.10.0 are pinned in hosted CI.
