@@ -1,0 +1,166 @@
+name: BPD-NC-09 Fixed12 first source-locked 16-model-root development
+
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/experiments/nc09_fixed12/EXECUTE_LOCK.json'
+
+permissions:
+  contents: read
+
+jobs:
+  first-registered-fixed12-development:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Freeze source commit, independent 16-root roster and all scientific gates
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json,subprocess
+          root=Path('mechinterp/bpd/experiments/nc09_fixed12')
+          l=json.loads((root/'EXECUTE_LOCK.json').read_text())
+          assert l['study']=='BPD-NC-09-fixed12'
+          assert l['execution']=='first_original_sixteen_root_development'
+          assert l['roots']==list(range(900,916))
+          assert l['excluded_engineering_seed']==899
+          assert l['training_steps']==384
+          assert l['training_examples']==2048
+          assert l['discovery_examples']==1024
+          assert l['model_only_validation_examples']==512
+          assert l['heldout_examples']==1024
+          assert l['source_total_rank']==12
+          assert l['sham_proposals']==4096 and l['shams']==8
+          assert l['bootstrap_repeats']==4096 and l['bootstrap_seed']==909009
+          sha=l['source_commit_sha']
+          subprocess.run(['git','merge-base','--is-ancestor',sha,'HEAD'],check=True)
+          subprocess.run(['git','merge-base','--is-ancestor',
+            'e14d54cd08bf99306b31e491ade4e94d72f823f0','HEAD'],check=True)
+          protected=[str(root/f) for f in (
+            'PROTOCOL.md','THEORY.md','experiment.py','aggregate.py',
+            'test_experiment.py','test_aggregate.py','Fixed12Budget.lean'
+          )]+[
+            'mechinterp/bpd/experiments/nc02/experiment.py',
+            'mechinterp/bpd/experiments/nc03/experiment.py',
+            'mechinterp/bpd/experiments/nc04/experiment.py',
+            'mechinterp/bpd/experiments/nc05/experiment.py',
+            'mechinterp/bpd/experiments/nc06/experiment.py',
+            'mechinterp/bpd/experiments/nc07/experiment.py',
+            'mechinterp/bpd/experiments/nc08/experiment.py',
+            'mechinterp/bpd/components.py',
+            'mechinterp/bpd/config.py',
+          ]
+          subprocess.run(['git','diff','--exit-code',sha,'HEAD','--',*protected],check=True)
+          print('First NC09 Fixed12 prospective source pinned at',sha)
+          PY
+      - name: Install pinned Python 3.12 CPU numerical runtime
+        run: |
+          python -m pip install --disable-pip-version-check pytest 'numpy>=1.26' scipy==1.14.1
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Admit source with excluded 899 and synthetic fixed-root bootstrap tests
+        run: |
+          python -m pytest -q mechinterp/bpd/experiments/nc09_fixed12/test_experiment.py mechinterp/bpd/experiments/nc09_fixed12/test_aggregate.py
+      - name: Train 16 untouched dense recurrent models and evaluate all fixed controls
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/nc09-fixed12-original
+          for root in 900 901 902 903 904 905 906 907 908 909 910 911 912 913 914 915; do
+            python -m mechinterp.bpd.experiments.nc09_fixed12.experiment \
+              --root "$root" --steps 384 --discovery 1024 --selector 512 \
+              --heldout 1024 --sham-proposals 4096 --shams 8 \
+              --out "/tmp/nc09-fixed12-original/nc09_fixed12_root_$root.json"
+          done
+      - name: Aggregate frozen 16-model-root original engineering verdict
+        run: |
+          python -m mechinterp.bpd.experiments.nc09_fixed12.aggregate \
+            --root-dir /tmp/nc09-fixed12-original \
+            --out /tmp/nc09-fixed12-original/NC09_FIXED12_ORIGINAL_SUMMARY.json
+      - name: Independently audit every root, exact source allocation and causal controls
+        run: |
+          python - <<'PY'
+          import hashlib,itertools,json,math
+          from pathlib import Path
+          root=Path('/tmp/nc09-fixed12-original')
+          s=json.loads((root/'NC09_FIXED12_ORIGINAL_SUMMARY.json').read_text())
+          assert s['study']=='BPD-NC-09-fixed12' and s['phase']=='DEVELOPMENT'
+          assert s['evidence_class']=='ENGINEERING_ONLY'
+          assert s['independent_model_roots']==16 and len(s['per_root'])==16
+          assert {r['root'] for r in s['per_root']}==set(range(900,916))
+          assert s['model_budget']==12 and s['physical_reference_budget']==16
+          assert s['confirmed_scientific_result'] is False
+          assert s['calibration_roots_evaluated']==s['confirmation_roots_evaluated']==0
+          assert s['registered_verdict'] in ('DEVELOPMENT_POSITIVE','DEVELOPMENT_NULL_OR_INELIGIBLE')
+          keys={
+              'all_sixteen_native_roots_and_eight_shams',
+              'fixed12_beats_equal12_flat3',
+              'fixed12_beats_dose_matched_flat3',
+              'absolute_task_fidelity',
+              'near_rank4_task_fidelity',
+              'source_dose_matched_sham_specificity',
+          }
+          assert set(s['gates'])==keys
+          for seed in range(900,916):
+            path=root/('nc09_fixed12_root_%d.json'%seed)
+            r=json.loads(path.read_text())
+            assert r['study']=='BPD-NC-09-fixed12' and r['phase']=='DEVELOPMENT'
+            assert r['root']==seed and r['training']['steps']==384
+            assert r['splits']=={
+              'train':2048,'discovery':1024,'selector_diagnostics':512,'heldout':1024
+            }
+            assert r['protocol_sha256']==s['protocol_sha256']
+            assert r['clean_closure']['passed']
+            c={int(t):{int(k):v for k,v in a.items()}
+               for t,a in r['passwise_source_candidates'].items()}
+            best=None
+            for ranks in itertools.product((2,3,4,5,6),repeat=4):
+              if sum(ranks)!=12 or not all(c[t][z]['eligible'] for t,z in enumerate(ranks)):
+                continue
+              cost=sum(c[t][z]['squared_local_omitted_model_score']
+                       for t,z in enumerate(ranks))
+              if best is None or cost<best[0]-1e-12 or (
+                     abs(cost-best[0])<=1e-12 and ranks<best[1]):
+                best=(cost,ranks)
+            proposed=r['fixed_budget12_allocation']
+            assert (best is None)==(proposed is None)
+            if best is not None:
+              assert proposed['total_rank']==12 and tuple(proposed['ranks'])==best[1]
+              assert abs(proposed['source_proxy_loss']-best[0])<=1e-10
+              assert r['arms']['flat3']['total_rank']==12
+              assert r['arms']['flat3_dose']['total_rank']==12
+              assert r['arms']['flat4']['total_rank']==16
+              assert r['sham_admission']['proposals']==4096
+              assert r['sham_admission']['selected']<=8
+            if r['eligible']:
+              assert r['sham_admission']['selected']==8
+              assert 0.5<=r['dose_matched_flat3_gain']<=1.5
+              assert abs(
+                r['dose_matched_flat3_gain']*r['flat3_source_write_rms']-
+                r['dp12_source_write_rms']
+              )<=1e-8
+              for a in ('dp12','flat3','flat3_dose','flat4'):
+                assert r['heldout'][a] is not None
+                assert len(r['heldout'][a]['kl_by_pass_nats'])==4
+                assert r['gauge'][a]['physical_map_relative_error']<=1e-4
+                assert r['gauge'][a]['max_complete_rollout_logit_error']<=5e-5
+              assert len(r['sham_task_nlls'])==8
+            print('NC09 Fixed12 original root',seed,'sha256',
+                  hashlib.sha256(path.read_bytes()).hexdigest(),
+                  'ranks',proposed['ranks'] if proposed else None,
+                  'eligible',r['eligible'])
+          print('Original 16-root verdict:',s['registered_verdict'])
+          print('Original gates:',s['gates'])
+          PY
+      - name: Archive original 16 independently trained model receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bpd-nc09-fixed12-first16-${{ github.run_id }}
+          path: /tmp/nc09-fixed12-original/
+          retention-days: 90
+          if-no-files-found: warn
