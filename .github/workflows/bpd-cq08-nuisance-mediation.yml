@@ -27,10 +27,25 @@ jobs:
           python -m pip install --index-url https://download.pytorch.org/whl/cpu 'torch==2.10.0+cpu'
       - name: Excluded-root unit tests and native BPDModel parity
         run: python -m unittest discover -s mechinterp/bpd/theory/cq08_nuisance_mediation/tests -v
-      - name: Source-locked independent eight-root development replay
-        run: python -m mechinterp.bpd.theory.cq08_nuisance_mediation.reference --backend independent --check
-      - name: Source-locked native BPDModel/TiedComponentLinear development parity
-        run: python -m mechinterp.bpd.theory.cq08_nuisance_mediation.reference --backend native --check
+      - name: Hosted independent eight-root raw development receipt
+        run: python -m mechinterp.bpd.theory.cq08_nuisance_mediation.experiment --phase development --backend independent --out /tmp/cq08_dev_host_independent.json
+      - name: Hosted native BPDModel/TiedComponentLinear raw development receipt
+        run: python -m mechinterp.bpd.theory.cq08_nuisance_mediation.experiment --phase development --backend native --out /tmp/cq08_dev_host_native.json
+      - name: Strict independent vs native and frozen cross-host count audit
+        run: |
+          python -m mechinterp.bpd.theory.cq08_nuisance_mediation.host_audit \
+            --independent /tmp/cq08_dev_host_independent.json \
+            --native /tmp/cq08_dev_host_native.json \
+            --out /tmp/cq08_host_drift_audit.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cq08-hosted-native-independent-drift
+          if-no-files-found: warn
+          path: |
+            /tmp/cq08_dev_host_independent.json
+            /tmp/cq08_dev_host_native.json
+            /tmp/cq08_host_drift_audit.json
       - name: EvalMath strict preflight blocks without sham calibration
         run: |
           python -c "import json;from mechinterp.bpd.theory.cq08_nuisance_mediation.reference import load_frozen;open('/tmp/cq08_dev.json','w').write(json.dumps(load_frozen()))"
