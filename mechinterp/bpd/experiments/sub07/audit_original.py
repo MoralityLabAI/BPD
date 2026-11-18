@@ -53,7 +53,9 @@ def audit(receipt:dict):
     assert summary["scientific_sham_tail_calibrated"] is False
     assert summary["future_calibration"]=="UNGENERATED_SEALED"
     assert summary["future_confirmation"]=="UNGENERATED_SEALED"
-    cert=exact_task_certificate()
+    # Normalize only JSON container syntax: original tuples serialize as lists.
+    # The underlying oracle and frozen first-run receipt remain unchanged.
+    cert=json.loads(json.dumps(exact_task_certificate()))
     assert cert["positives"]==2291
     sets=split_indices()
     assert len(set(int(v) for seqs in sets.values() for v in seqs))==4096
