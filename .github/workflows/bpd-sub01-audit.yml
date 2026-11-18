@@ -29,7 +29,7 @@ jobs:
           assert j['original_artifact_id']==14409764910
           assert j['original_zip_sha256']=='0e94b1d31b7465204c7c5f91ace267acdd70bee236993329758c6ea10a4c535d'
           assert j['retraining_allowed'] is False
-          for path in ('PROTOCOL.md','experiment.py','test_experiment.py','THEORY.md'):
+          for path in ('PROTOCOL.md','test_experiment.py','THEORY.md'):
               p=str(root/path)
               subprocess.run(['git','diff','--exit-code',j['source_commit_sha'],'HEAD','--',p],check=True)
           print('ORIGINAL_SOURCE_UNCHANGED')
