@@ -32,14 +32,14 @@ jobs:
       - name: Independently recompute all registered root effects from the original candidate and choice bits
         shell: bash
         run: |
-          python -m mechinterp.bpd.experiments.amm09_two_slot_memory.audit_development \
+          python mechinterp/bpd/experiments/amm09_two_slot_memory/audit_development.py \
             --development /tmp/amm09_first_run/amm09_development.json \
             --training-lock mechinterp/bpd/experiments/amm09_two_slot_memory/results/TRAINING_LOCK.json \
             --development-lock mechinterp/bpd/experiments/amm09_two_slot_memory/results/DEVELOPMENT_LOCK.json \
             --preflight mechinterp/bpd/experiments/amm09_two_slot_memory/results/PREFLIGHT.json \
             --out /tmp/amm09_original_primary_analysis.json
           if test -f mechinterp/bpd/experiments/amm09_two_slot_memory/results/ANALYSIS_CORRECTED.json; then
-            python -m mechinterp.bpd.experiments.amm09_two_slot_memory.audit_development \
+            python mechinterp/bpd/experiments/amm09_two_slot_memory/audit_development.py \
               --development /tmp/amm09_first_run/amm09_development.json \
               --training-lock mechinterp/bpd/experiments/amm09_two_slot_memory/results/TRAINING_LOCK.json \
               --development-lock mechinterp/bpd/experiments/amm09_two_slot_memory/results/DEVELOPMENT_LOCK.json \
