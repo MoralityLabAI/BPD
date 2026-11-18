@@ -1,0 +1,47 @@
+name: BPD-EFD-01 conditional fiber rank Lean certificate
+on:
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/theory/EnergyFiberRank.lean'
+      - '.github/workflows/bpd-efd01-rank-lean.yml'
+  push:
+    paths:
+      - 'mechinterp/bpd/theory/EnergyFiberRank.lean'
+      - '.github/workflows/bpd-efd01-rank-lean.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  kernel-certificate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install existing repository-pinned Lean 4.19.0
+        run: |
+          curl --fail --location --retry 3 https://github.com/leanprover/lean4/releases/download/v4.19.0/lean-4.19.0-linux.tar.zst -o /tmp/lean.tar.zst
+          tar --zstd -xf /tmp/lean.tar.zst -C /tmp
+          echo '/tmp/lean-4.19.0-linux/bin' >> "$GITHUB_PATH"
+      - name: Check EFD-01 conditional rank certificate
+        run: |
+          lean --version
+          lean mechinterp/bpd/theory/EnergyFiberRank.lean | tee /tmp/energy-fiber-lean-axioms.txt
+          python - <<'PY'
+          from pathlib import Path
+          s=Path('/tmp/energy-fiber-lean-axioms.txt').read_text()
+          for required in (
+              'BPD.EnergyFiberRank.energy_fiber_loses_at_most_one_dimension',
+              'BPD.EnergyFiberRank.energy_dark_dimension_lower_bound',
+              'BPD.EnergyFiberRank.future_rank_le_energy_dark_dimension',
+              'BPD.EnergyFiberRank.positive_delayed_rank_requires_spare_dimension'):
+              assert required in s, f'missing kernel certificate: {required}'
+          assert 'sorryAx' not in s, 'incomplete proof'
+          assert 'ofReduceBool' not in s
+          print('Conditional physical rank-budget certificate kernel checked')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: efd01-conditional-rank
+          path: /tmp/energy-fiber-lean-axioms.txt
+          if-no-files-found: warn
