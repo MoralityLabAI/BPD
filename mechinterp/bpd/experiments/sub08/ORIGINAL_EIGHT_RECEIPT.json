@@ -1,0 +1,73 @@
+{
+  "audit_sha256": "975b807622bd2692ed4e22c01e35ca87a12d58c1663e2280d2d41a3156b06aca",
+  "causal_units_measured": 0,
+  "design_results_commit": "c568f78304c23577ce2898486b3395e28e126b8e",
+  "distinct_heldout_sequences": 1024,
+  "elapsed_seconds": 49.910112380981445,
+  "files": {
+    "AUDIT.json": "975b807622bd2692ed4e22c01e35ca87a12d58c1663e2280d2d41a3156b06aca",
+    "checkpoints/seed1900_w48_u2400.pt": "e4bcb79619555ccc6f284e76778681d364fc684e47a3c3b3c126dc1521e5eaee",
+    "checkpoints/seed1901_w48_u2400.pt": "6b286bef77606f16139087fc275708f80f732d2157b14c6c4367e0c6156ca4f8",
+    "checkpoints/seed1902_w48_u2400.pt": "2cb3a614bc7bd5e43e871b4d65aa9865e41cd78093d39fe473258acd013eac8a",
+    "checkpoints/seed1903_w48_u2400.pt": "ef26a11c32f2f166346db17a2a87b8a1b0cd33c4cf1e90848e23767cbf7bd4b9",
+    "checkpoints/seed1904_w48_u2400.pt": "77c2cdb81647a2d6920060f13b8cf7436326b57705e7e74bc8ef839d58f944f0",
+    "checkpoints/seed1905_w48_u2400.pt": "1a9efaca960944d0d19926be5d3efb15731b2c171ed3a85ff038b5f8a808c7f9",
+    "checkpoints/seed1906_w48_u2400.pt": "bf12ca23240795beda0e95ee5d60cfdad18b346a64535340277864a778c196bd",
+    "checkpoints/seed1907_w48_u2400.pt": "0126999691bb922484e0e2c8918f8609943aaf53a002c52c6dec38c7d0668962",
+    "lock.json": "66c26c2651545ab6200262fa84c3a414e809fcf6a8a0ff80ad238f32eb47cf94",
+    "manifest.json": "b2b7ba51b80d127d278a0e177fe1fdaaa9f14d4cc6b84cf05cc6af077f9af230",
+    "roots/seed1900_w48_u2400.json": "ce79ccfac9c410924831d7c0eecb4e062a85210450db2cf032818de17dbdbae6",
+    "roots/seed1901_w48_u2400.json": "986c33489011afa257c416c076279c9c2b894f3b750d8a85c40adace6dc3787c",
+    "roots/seed1902_w48_u2400.json": "535ce622f8740b7d91adcb18657a680e23a24949572bdc0ef4843386c0414aae",
+    "roots/seed1903_w48_u2400.json": "612fc2931fb8be5345324b7c9b3576cf1e1b41ca763d49092ecf1e6db3fb57ed",
+    "roots/seed1904_w48_u2400.json": "e285b5f6053057150c0966d9f86efb162188ddb5bc671bf35eae9f5cfd8de4da",
+    "roots/seed1905_w48_u2400.json": "e242f85ed2d0546303010b0841272270c9fa751d74f7a5086dd7ffd3a032f0d2",
+    "roots/seed1906_w48_u2400.json": "d845c17e7cd898fa3d07ebcfcc86bd707812fa4a946165a4eda7e168ea42bc08",
+    "roots/seed1907_w48_u2400.json": "cc89a9dd284f0883953fe7a9ccc4ec7ea67df3ac8c96aaeecbfb45a1536e1cf7"
+  },
+  "heldout_model_sequence_observations": 8192,
+  "manifest_sha256": "b2b7ba51b80d127d278a0e177fe1fdaaa9f14d4cc6b84cf05cc6af077f9af230",
+  "partition_hashes": {
+    "heldout": "34e8e8974ac7fb156e247d99eb2b14283dc29569d55b562b0aa5477e433b0b92",
+    "reserved_dose": "be6accc45558be6dc089608d0b280d1bd68ed84ec401b82fb5e922de59d35d34",
+    "train": "83476f17cb79f4edfd549f3aa7b95322e4023d9a7ea60be1f3d753e98b1b60ea",
+    "validation": "16cb2f2d43d95e793969c97dcadb4188ef848a220ebd7812c6f47c04e5473e77"
+  },
+  "passed_roots": 8,
+  "planned_roots": 8,
+  "protocol_commit": "8bcbd7220b8d6d4d4c01ddc1bf9db6f82862ac17",
+  "release_commit": "256d01346720662e6c957169b19973b644b06620",
+  "role": "prospective_source_competence",
+  "root_success_exact95": [
+    0.6305833524471807,
+    1.0
+  ],
+  "runtime": {
+    "deterministic_algorithms": true,
+    "device": "cpu",
+    "dtype": "float32",
+    "numpy": "2.3.5",
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "python": "3.12.14",
+    "python_minor": "3.12",
+    "torch": "2.5.1+cpu",
+    "torch_threads": 1
+  },
+  "schema": 1,
+  "source_commit": "b6c391c1d05cf72df85ede28135c9955f46c5c9c",
+  "source_hashes": {
+    "mechinterp/bpd/experiments/sub08/DESIGN_PROTOCOL.md": "2138399a16af09735197cdfd58cd33fb7b6a7c63ac8fcdad48003fae876bd95c",
+    "mechinterp/bpd/experiments/sub08/EXACT_ORACLE.json": "5bc3ad93270551c1f6f4c14a04c209b945eda341272f25cb6b7619bdb996c6dc",
+    "mechinterp/bpd/experiments/sub08/INHERITED_SUB07_PILOT.json": "2648af6e89b7fb03ff8bf780be0f21d066c5f7799470dea3ec43ad2357f28058",
+    "mechinterp/bpd/experiments/sub08/INHERITED_SUB07_PREFLIGHT.json": "eac89c6e6d13c3db23db2a110cda9c71098a8c1e67deb419bdeecf8fc3a102cf",
+    "mechinterp/bpd/experiments/sub08/audit.py": "4780c29d96f6c43868bef3ffb4dd999c1fbdd30d88e5f4b6207794bb0ac70c2f",
+    "mechinterp/bpd/experiments/sub08/evalmath_preflight_pinned.py": "34fafe934679bc5f085e885e8382f17a752907e2014b9a3d1dffd34585d81426",
+    "mechinterp/bpd/experiments/sub08/oracle.py": "963257376620265cf436d323fc6d7b134367f57123c42cdff41584f5448dd6bf",
+    "mechinterp/bpd/experiments/sub08/run.py": "e5143cf1a2d41d972b377bab92df0780f0039f11cf710d3f21623eb107abacdf",
+    "mechinterp/bpd/experiments/sub08/source.py": "9fbda424acfe8d30286bb0181d5bb8869d536893e2e20f8582b0fc9a7a9d5480",
+    "mechinterp/bpd/experiments/sub08/test_audit.py": "6b482ad94cec0d4ddb5a5b45ba64af01322acbb0d4ad61ace99cd4d0cf9a2a46",
+    "mechinterp/bpd/experiments/sub08/test_oracle.py": "af913bcb9078d4aefaa073e2402b90ac0cec0f93042fd1aecb3522332f6c3667",
+    "mechinterp/bpd/experiments/sub08/test_source.py": "9429bbb993e457bbd51a76b1864772a0c6f0f4a3fcb973de725199924a127a8f"
+  },
+  "verdict": "SOURCE_COMPETENCE_PASS"
+}

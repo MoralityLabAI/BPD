@@ -1,0 +1,4490 @@
+{
+  "audit_valid": true,
+  "causal_effect_floor": null,
+  "causal_power": null,
+  "causal_units_measured": 0,
+  "errors": [],
+  "failed_roots": 0,
+  "manifest_sha256": "b2b7ba51b80d127d278a0e177fe1fdaaa9f14d4cc6b84cf05cc6af077f9af230",
+  "matched_sham_floor": null,
+  "n_expected_records": 8,
+  "n_records": 8,
+  "n_roots": 8,
+  "oracle_certificate": {
+    "class_counts": [
+      781,
+      1146,
+      1024,
+      1145
+    ],
+    "heldout_correct_ceilings": {
+      "counts": 449,
+      "last": 304,
+      "prefix2": 347,
+      "prefix4": 531
+    },
+    "heldout_n": 1024,
+    "partition_hashes": {
+      "heldout": "34e8e8974ac7fb156e247d99eb2b14283dc29569d55b562b0aa5477e433b0b92",
+      "reserved_dose": "be6accc45558be6dc089608d0b280d1bd68ed84ec401b82fb5e922de59d35d34",
+      "train": "83476f17cb79f4edfd549f3aa7b95322e4023d9a7ea60be1f3d753e98b1b60ea",
+      "validation": "16cb2f2d43d95e793969c97dcadb4188ef848a220ebd7812c6f47c04e5473e77"
+    },
+    "population_correct_ceilings": {
+      "counts": 1603,
+      "last": 1188,
+      "prefix2": 1232,
+      "prefix4": 1556
+    },
+    "population_n": 4096
+  },
+  "passed_roots": 8,
+  "physical_dose": null,
+  "role": "prospective",
+  "root_results": [
+    {
+      "checkpoint_replay_max": 0.0,
+      "checkpoint_sha256": "e4bcb79619555ccc6f284e76778681d364fc684e47a3c3b3c126dc1521e5eaee",
+      "completed_updates": 2400,
+      "copied_aggregate_metrics_used": false,
+      "gates": {
+        "checkpoint_replay": true,
+        "counts_gap": true,
+        "exact_updates": true,
+        "finite_weights_and_logits": true,
+        "full_width_parity": true,
+        "heldout_accuracy": true,
+        "heldout_class_recall": true,
+        "prefix2_bayes_ceiling": true,
+        "prefix4_bayes_ceiling": true,
+        "prefix4_gap": true,
+        "receipt_integrity": true
+      },
+      "initial_state_sha256": "e8d5fb5746d35dbf110474449a1d44bae7af23e5e344777c24fd74477ce65872",
+      "metrics": {
+        "heldout": {
+          "accuracy": 1.0,
+          "class_correct": [
+            189,
+            304,
+            254,
+            277
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            189,
+            304,
+            254,
+            277
+          ],
+          "confusion": [
+            [
+              189,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              304,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              254,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              277
+            ]
+          ],
+          "correct": 1024,
+          "correct_ceilings": {
+            "counts": 449,
+            "last": 304,
+            "prefix2": 347,
+            "prefix4": 531
+          },
+          "counts_margin": 0.5615234375,
+          "ids_sha256": "34e8e8974ac7fb156e247d99eb2b14283dc29569d55b562b0aa5477e433b0b92",
+          "n": 1024,
+          "nll": 0.0007947236712995805,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 262,
+              "n": 262,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 261,
+              "n": 261,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 248,
+              "n": 248,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 253,
+              "n": 253,
+              "token": 3
+            }
+          ],
+          "prefix4_margin": 0.4814453125
+        },
+        "train": {
+          "accuracy": 1.0,
+          "class_correct": [
+            384,
+            548,
+            525,
+            591
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            384,
+            548,
+            525,
+            591
+          ],
+          "confusion": [
+            [
+              384,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              548,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              525,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              591
+            ]
+          ],
+          "correct": 2048,
+          "ids_sha256": "83476f17cb79f4edfd549f3aa7b95322e4023d9a7ea60be1f3d753e98b1b60ea",
+          "n": 2048,
+          "nll": 0.00046975424425989835,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 486,
+              "n": 486,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 515,
+              "n": 515,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 526,
+              "n": 526,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 521,
+              "n": 521,
+              "token": 3
+            }
+          ]
+        },
+        "validation": {
+          "accuracy": 1.0,
+          "class_correct": [
+            106,
+            158,
+            123,
+            125
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            106,
+            158,
+            123,
+            125
+          ],
+          "confusion": [
+            [
+              106,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              158,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              123,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              125
+            ]
+          ],
+          "correct": 512,
+          "ids_sha256": "16cb2f2d43d95e793969c97dcadb4188ef848a220ebd7812c6f47c04e5473e77",
+          "n": 512,
+          "nll": 0.000675316771915125,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 131,
+              "n": 131,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 129,
+              "n": 129,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 124,
+              "n": 124,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 128,
+              "n": 128,
+              "token": 3
+            }
+          ]
+        }
+      },
+      "passed": true,
+      "path": "roots/seed1900_w48_u2400.json",
+      "prefix": {
+        "prefix2": {
+          "accuracy": 0.3017578125,
+          "class_correct": [
+            31,
+            120,
+            85,
+            73
+          ],
+          "class_recall": [
+            0.164021164021164,
+            0.39473684210526316,
+            0.3346456692913386,
+            0.26353790613718414
+          ],
+          "class_support": [
+            189,
+            304,
+            254,
+            277
+          ],
+          "confusion": [
+            [
+              31,
+              53,
+              69,
+              36
+            ],
+            [
+              11,
+              120,
+              96,
+              77
+            ],
+            [
+              15,
+              101,
+              85,
+              53
+            ],
+            [
+              12,
+              114,
+              78,
+              73
+            ]
+          ],
+          "consistency_max": 0.0,
+          "correct": 309,
+          "correct_ceiling": 347,
+          "ids_sha256": "34e8e8974ac7fb156e247d99eb2b14283dc29569d55b562b0aa5477e433b0b92",
+          "n": 1024,
+          "nll": 5.221587761295616,
+          "per_last_token": [
+            {
+              "accuracy": 0.29389312977099236,
+              "class_recall": [
+                0.06153846153846154,
+                0.4358974358974359,
+                0.4117647058823529,
+                0.2647058823529412
+              ],
+              "correct": 77,
+              "n": 262,
+              "token": 0
+            },
+            {
+              "accuracy": 0.2796934865900383,
+              "class_recall": [
+                0.23529411764705882,
+                0.3291139240506329,
+                0.2753623188405797,
+                0.25316455696202533
+              ],
+              "correct": 73,
+              "n": 261,
+              "token": 1
+            },
+            {
+              "accuracy": 0.2862903225806452,
+              "class_recall": [
+                0.13953488372093023,
+                0.3918918918918919,
+                0.29577464788732394,
+                0.25
+              ],
+              "correct": 71,
+              "n": 248,
+              "token": 2
+            },
+            {
+              "accuracy": 0.34782608695652173,
+              "class_recall": [
+                0.2765957446808511,
+                0.4246575342465753,
+                0.38095238095238093,
+                0.2857142857142857
+              ],
+              "correct": 88,
+              "n": 253,
+              "token": 3
+            }
+          ]
+        },
+        "prefix4": {
+          "accuracy": 0.369140625,
+          "class_correct": [
+            87,
+            123,
+            66,
+            102
+          ],
+          "class_recall": [
+            0.4603174603174603,
+            0.40460526315789475,
+            0.25984251968503935,
+            0.36823104693140796
+          ],
+          "class_support": [
+            189,
+            304,
+            254,
+            277
+          ],
+          "confusion": [
+            [
+              87,
+              18,
+              62,
+              22
+            ],
+            [
+              12,
+              123,
+              64,
+              105
+            ],
+            [
+              40,
+              77,
+              66,
+              71
+            ],
+            [
+              10,
+              90,
+              75,
+              102
+            ]
+          ],
+          "consistency_max": 0.0,
+          "correct": 378,
+          "correct_ceiling": 531,
+          "ids_sha256": "34e8e8974ac7fb156e247d99eb2b14283dc29569d55b562b0aa5477e433b0b92",
+          "n": 1024,
+          "nll": 6.43151843078508,
+          "per_last_token": [
+            {
+              "accuracy": 0.40076335877862596,
+              "class_recall": [
+                0.12307692307692308,
+                0.5,
+                0.4117647058823529,
+                0.5441176470588235
+              ],
+              "correct": 105,
+              "n": 262,
+              "token": 0
+            },
+            {
+              "accuracy": 0.2835249042145594,
+              "class_recall": [
+                0.5882352941176471,
+                0.34177215189873417,
+                0.14492753623188406,
+                0.21518987341772153
+              ],
+              "correct": 74,
+              "n": 261,
+              "token": 1
+            },
+            {
+              "accuracy": 0.3346774193548387,
+              "class_recall": [
+                0.627906976744186,
+                0.32432432432432434,
+                0.23943661971830985,
+                0.25
+              ],
+              "correct": 83,
+              "n": 248,
+              "token": 2
+            },
+            {
+              "accuracy": 0.45849802371541504,
+              "class_recall": [
+                0.6808510638297872,
+                0.4520547945205479,
+                0.2857142857142857,
+                0.4714285714285714
+              ],
+              "correct": 116,
+              "n": 253,
+              "token": 3
+            }
+          ]
+        }
+      },
+      "replay_errors": {
+        "heldout.logits": 0.0,
+        "heldout.prefix2_logits": 0.0,
+        "heldout.prefix4_logits": 0.0,
+        "train.logits": 0.0,
+        "validation.logits": 0.0
+      },
+      "seed": 1900,
+      "status": "complete",
+      "updates": 2400,
+      "width": 48
+    },
+    {
+      "checkpoint_replay_max": 0.0,
+      "checkpoint_sha256": "6b286bef77606f16139087fc275708f80f732d2157b14c6c4367e0c6156ca4f8",
+      "completed_updates": 2400,
+      "copied_aggregate_metrics_used": false,
+      "gates": {
+        "checkpoint_replay": true,
+        "counts_gap": true,
+        "exact_updates": true,
+        "finite_weights_and_logits": true,
+        "full_width_parity": true,
+        "heldout_accuracy": true,
+        "heldout_class_recall": true,
+        "prefix2_bayes_ceiling": true,
+        "prefix4_bayes_ceiling": true,
+        "prefix4_gap": true,
+        "receipt_integrity": true
+      },
+      "initial_state_sha256": "19236699b4a11ff4ef4047c481279752c548830292727abc5eba40175361f3c6",
+      "metrics": {
+        "heldout": {
+          "accuracy": 1.0,
+          "class_correct": [
+            189,
+            304,
+            254,
+            277
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            189,
+            304,
+            254,
+            277
+          ],
+          "confusion": [
+            [
+              189,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              304,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              254,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              277
+            ]
+          ],
+          "correct": 1024,
+          "correct_ceilings": {
+            "counts": 449,
+            "last": 304,
+            "prefix2": 347,
+            "prefix4": 531
+          },
+          "counts_margin": 0.5615234375,
+          "ids_sha256": "34e8e8974ac7fb156e247d99eb2b14283dc29569d55b562b0aa5477e433b0b92",
+          "n": 1024,
+          "nll": 0.0007410724227050578,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 262,
+              "n": 262,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 261,
+              "n": 261,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 248,
+              "n": 248,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 253,
+              "n": 253,
+              "token": 3
+            }
+          ],
+          "prefix4_margin": 0.4814453125
+        },
+        "train": {
+          "accuracy": 1.0,
+          "class_correct": [
+            384,
+            548,
+            525,
+            591
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            384,
+            548,
+            525,
+            591
+          ],
+          "confusion": [
+            [
+              384,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              548,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              525,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              591
+            ]
+          ],
+          "correct": 2048,
+          "ids_sha256": "83476f17cb79f4edfd549f3aa7b95322e4023d9a7ea60be1f3d753e98b1b60ea",
+          "n": 2048,
+          "nll": 0.0005540078275455696,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 486,
+              "n": 486,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 515,
+              "n": 515,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 526,
+              "n": 526,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 521,
+              "n": 521,
+              "token": 3
+            }
+          ]
+        },
+        "validation": {
+          "accuracy": 1.0,
+          "class_correct": [
+            106,
+            158,
+            123,
+            125
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            106,
+            158,
+            123,
+            125
+          ],
+          "confusion": [
+            [
+              106,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              158,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              123,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              125
+            ]
+          ],
+          "correct": 512,
+          "ids_sha256": "16cb2f2d43d95e793969c97dcadb4188ef848a220ebd7812c6f47c04e5473e77",
+          "n": 512,
+          "nll": 0.0007221855262709497,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 131,
+              "n": 131,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 129,
+              "n": 129,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 124,
+              "n": 124,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 128,
+              "n": 128,
+              "token": 3
+            }
+          ]
+        }
+      },
+      "passed": true,
+      "path": "roots/seed1901_w48_u2400.json",
+      "prefix": {
+        "prefix2": {
+          "accuracy": 0.3046875,
+          "class_correct": [
+            31,
+            120,
+            68,
+            93
+          ],
+          "class_recall": [
+            0.164021164021164,
+            0.39473684210526316,
+            0.2677165354330709,
+            0.33574007220216606
+          ],
+          "class_support": [
+            189,
+            304,
+            254,
+            277
+          ],
+          "confusion": [
+            [
+              31,
+              53,
+              61,
+              44
+            ],
+            [
+              11,
+              120,
+              71,
+              102
+            ],
+            [
+              15,
+              101,
+              68,
+              70
+            ],
+            [
+              12,
+              114,
+              58,
+              93
+            ]
+          ],
+          "consistency_max": 0.0,
+          "correct": 312,
+          "correct_ceiling": 347,
+          "ids_sha256": "34e8e8974ac7fb156e247d99eb2b14283dc29569d55b562b0aa5477e433b0b92",
+          "n": 1024,
+          "nll": 5.108628499863025,
+          "per_last_token": [
+            {
+              "accuracy": 0.3015267175572519,
+              "class_recall": [
+                0.06153846153846154,
+                0.4358974358974359,
+                0.3333333333333333,
+                0.35294117647058826
+              ],
+              "correct": 79,
+              "n": 262,
+              "token": 0
+            },
+            {
+              "accuracy": 0.29118773946360155,
+              "class_recall": [
+                0.23529411764705882,
+                0.3291139240506329,
+                0.2318840579710145,
+                0.3291139240506329
+              ],
+              "correct": 76,
+              "n": 261,
+              "token": 1
+            },
+            {
+              "accuracy": 0.2782258064516129,
+              "class_recall": [
+                0.13953488372093023,
+                0.3918918918918919,
+                0.2112676056338028,
+                0.31666666666666665
+              ],
+              "correct": 69,
+              "n": 248,
+              "token": 2
+            },
+            {
+              "accuracy": 0.34782608695652173,
+              "class_recall": [
+                0.2765957446808511,
+                0.4246575342465753,
+                0.31746031746031744,
+                0.34285714285714286
+              ],
+              "correct": 88,
+              "n": 253,
+              "token": 3
+            }
+          ]
+        },
+        "prefix4": {
+          "accuracy": 0.369140625,
+          "class_correct": [
+            87,
+            123,
+            66,
+            102
+          ],
+          "class_recall": [
+            0.4603174603174603,
+            0.40460526315789475,
+            0.25984251968503935,
+            0.36823104693140796
+          ],
+          "class_support": [
+            189,
+            304,
+            254,
+            277
+          ],
+          "confusion": [
+            [
+              87,
+              18,
+              62,
+              22
+            ],
+            [
+              12,
+              123,
+              64,
+              105
+            ],
+            [
+              40,
+              77,
+              66,
+              71
+            ],
+            [
+              10,
+              90,
+              75,
+              102
+            ]
+          ],
+          "consistency_max": 0.0,
+          "correct": 378,
+          "correct_ceiling": 531,
+          "ids_sha256": "34e8e8974ac7fb156e247d99eb2b14283dc29569d55b562b0aa5477e433b0b92",
+          "n": 1024,
+          "nll": 6.068308010528265,
+          "per_last_token": [
+            {
+              "accuracy": 0.40076335877862596,
+              "class_recall": [
+                0.12307692307692308,
+                0.5,
+                0.4117647058823529,
+                0.5441176470588235
+              ],
+              "correct": 105,
+              "n": 262,
+              "token": 0
+            },
+            {
+              "accuracy": 0.2835249042145594,
+              "class_recall": [
+                0.5882352941176471,
+                0.34177215189873417,
+                0.14492753623188406,
+                0.21518987341772153
+              ],
+              "correct": 74,
+              "n": 261,
+              "token": 1
+            },
+            {
+              "accuracy": 0.3346774193548387,
+              "class_recall": [
+                0.627906976744186,
+                0.32432432432432434,
+                0.23943661971830985,
+                0.25
+              ],
+              "correct": 83,
+              "n": 248,
+              "token": 2
+            },
+            {
+              "accuracy": 0.45849802371541504,
+              "class_recall": [
+                0.6808510638297872,
+                0.4520547945205479,
+                0.2857142857142857,
+                0.4714285714285714
+              ],
+              "correct": 116,
+              "n": 253,
+              "token": 3
+            }
+          ]
+        }
+      },
+      "replay_errors": {
+        "heldout.logits": 0.0,
+        "heldout.prefix2_logits": 0.0,
+        "heldout.prefix4_logits": 0.0,
+        "train.logits": 0.0,
+        "validation.logits": 0.0
+      },
+      "seed": 1901,
+      "status": "complete",
+      "updates": 2400,
+      "width": 48
+    },
+    {
+      "checkpoint_replay_max": 0.0,
+      "checkpoint_sha256": "2cb3a614bc7bd5e43e871b4d65aa9865e41cd78093d39fe473258acd013eac8a",
+      "completed_updates": 2400,
+      "copied_aggregate_metrics_used": false,
+      "gates": {
+        "checkpoint_replay": true,
+        "counts_gap": true,
+        "exact_updates": true,
+        "finite_weights_and_logits": true,
+        "full_width_parity": true,
+        "heldout_accuracy": true,
+        "heldout_class_recall": true,
+        "prefix2_bayes_ceiling": true,
+        "prefix4_bayes_ceiling": true,
+        "prefix4_gap": true,
+        "receipt_integrity": true
+      },
+      "initial_state_sha256": "3c4655b1fb0d5707d8a5087b59bffa1dc5bb4dd75331d3064ab200d02c1e37b7",
+      "metrics": {
+        "heldout": {
+          "accuracy": 1.0,
+          "class_correct": [
+            189,
+            304,
+            254,
+            277
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            189,
+            304,
+            254,
+            277
+          ],
+          "confusion": [
+            [
+              189,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              304,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              254,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              277
+            ]
+          ],
+          "correct": 1024,
+          "correct_ceilings": {
+            "counts": 449,
+            "last": 304,
+            "prefix2": 347,
+            "prefix4": 531
+          },
+          "counts_margin": 0.5615234375,
+          "ids_sha256": "34e8e8974ac7fb156e247d99eb2b14283dc29569d55b562b0aa5477e433b0b92",
+          "n": 1024,
+          "nll": 0.000635465943731451,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 262,
+              "n": 262,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 261,
+              "n": 261,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 248,
+              "n": 248,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 253,
+              "n": 253,
+              "token": 3
+            }
+          ],
+          "prefix4_margin": 0.4814453125
+        },
+        "train": {
+          "accuracy": 1.0,
+          "class_correct": [
+            384,
+            548,
+            525,
+            591
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            384,
+            548,
+            525,
+            591
+          ],
+          "confusion": [
+            [
+              384,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              548,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              525,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              591
+            ]
+          ],
+          "correct": 2048,
+          "ids_sha256": "83476f17cb79f4edfd549f3aa7b95322e4023d9a7ea60be1f3d753e98b1b60ea",
+          "n": 2048,
+          "nll": 0.00046209994133891366,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 486,
+              "n": 486,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 515,
+              "n": 515,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 526,
+              "n": 526,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 521,
+              "n": 521,
+              "token": 3
+            }
+          ]
+        },
+        "validation": {
+          "accuracy": 1.0,
+          "class_correct": [
+            106,
+            158,
+            123,
+            125
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            106,
+            158,
+            123,
+            125
+          ],
+          "confusion": [
+            [
+              106,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              158,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              123,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              125
+            ]
+          ],
+          "correct": 512,
+          "ids_sha256": "16cb2f2d43d95e793969c97dcadb4188ef848a220ebd7812c6f47c04e5473e77",
+          "n": 512,
+          "nll": 0.0005322015053732013,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 131,
+              "n": 131,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 129,
+              "n": 129,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 124,
+              "n": 124,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 128,
+              "n": 128,
+              "token": 3
+            }
+          ]
+        }
+      },
+      "passed": true,
+      "path": "roots/seed1902_w48_u2400.json",
+      "prefix": {
+        "prefix2": {
+          "accuracy": 0.3046875,
+          "class_correct": [
+            31,
+            120,
+            68,
+            93
+          ],
+          "class_recall": [
+            0.164021164021164,
+            0.39473684210526316,
+            0.2677165354330709,
+            0.33574007220216606
+          ],
+          "class_support": [
+            189,
+            304,
+            254,
+            277
+          ],
+          "confusion": [
+            [
+              31,
+              53,
+              61,
+              44
+            ],
+            [
+              11,
+              120,
+              71,
+              102
+            ],
+            [
+              15,
+              101,
+              68,
+              70
+            ],
+            [
+              12,
+              114,
+              58,
+              93
+            ]
+          ],
+          "consistency_max": 0.0,
+          "correct": 312,
+          "correct_ceiling": 347,
+          "ids_sha256": "34e8e8974ac7fb156e247d99eb2b14283dc29569d55b562b0aa5477e433b0b92",
+          "n": 1024,
+          "nll": 5.272766403550044,
+          "per_last_token": [
+            {
+              "accuracy": 0.3015267175572519,
+              "class_recall": [
+                0.06153846153846154,
+                0.4358974358974359,
+                0.3333333333333333,
+                0.35294117647058826
+              ],
+              "correct": 79,
+              "n": 262,
+              "token": 0
+            },
+            {
+              "accuracy": 0.29118773946360155,
+              "class_recall": [
+                0.23529411764705882,
+                0.3291139240506329,
+                0.2318840579710145,
+                0.3291139240506329
+              ],
+              "correct": 76,
+              "n": 261,
+              "token": 1
+            },
+            {
+              "accuracy": 0.2782258064516129,
+              "class_recall": [
+                0.13953488372093023,
+                0.3918918918918919,
+                0.2112676056338028,
+                0.31666666666666665
+              ],
+              "correct": 69,
+              "n": 248,
+              "token": 2
+            },
+            {
+              "accuracy": 0.34782608695652173,
+              "class_recall": [
+                0.2765957446808511,
+                0.4246575342465753,
+                0.31746031746031744,
+                0.34285714285714286
+              ],
+              "correct": 88,
+              "n": 253,
+              "token": 3
+            }
+          ]
+        },
+        "prefix4": {
+          "accuracy": 0.369140625,
+          "class_correct": [
+            87,
+            123,
+            66,
+            102
+          ],
+          "class_recall": [
+            0.4603174603174603,
+            0.40460526315789475,
+            0.25984251968503935,
+            0.36823104693140796
+          ],
+          "class_support": [
+            189,
+            304,
+            254,
+            277
+          ],
+          "confusion": [
+            [
+              87,
+              18,
+              62,
+              22
+            ],
+            [
+              12,
+              123,
+              64,
+              105
+            ],
+            [
+              40,
+              77,
+              66,
+              71
+            ],
+            [
+              10,
+              90,
+              75,
+              102
+            ]
+          ],
+          "consistency_max": 0.0,
+          "correct": 378,
+          "correct_ceiling": 531,
+          "ids_sha256": "34e8e8974ac7fb156e247d99eb2b14283dc29569d55b562b0aa5477e433b0b92",
+          "n": 1024,
+          "nll": 6.193775860338668,
+          "per_last_token": [
+            {
+              "accuracy": 0.40076335877862596,
+              "class_recall": [
+                0.12307692307692308,
+                0.5,
+                0.4117647058823529,
+                0.5441176470588235
+              ],
+              "correct": 105,
+              "n": 262,
+              "token": 0
+            },
+            {
+              "accuracy": 0.2835249042145594,
+              "class_recall": [
+                0.5882352941176471,
+                0.34177215189873417,
+                0.14492753623188406,
+                0.21518987341772153
+              ],
+              "correct": 74,
+              "n": 261,
+              "token": 1
+            },
+            {
+              "accuracy": 0.3346774193548387,
+              "class_recall": [
+                0.627906976744186,
+                0.32432432432432434,
+                0.23943661971830985,
+                0.25
+              ],
+              "correct": 83,
+              "n": 248,
+              "token": 2
+            },
+            {
+              "accuracy": 0.45849802371541504,
+              "class_recall": [
+                0.6808510638297872,
+                0.4520547945205479,
+                0.2857142857142857,
+                0.4714285714285714
+              ],
+              "correct": 116,
+              "n": 253,
+              "token": 3
+            }
+          ]
+        }
+      },
+      "replay_errors": {
+        "heldout.logits": 0.0,
+        "heldout.prefix2_logits": 0.0,
+        "heldout.prefix4_logits": 0.0,
+        "train.logits": 0.0,
+        "validation.logits": 0.0
+      },
+      "seed": 1902,
+      "status": "complete",
+      "updates": 2400,
+      "width": 48
+    },
+    {
+      "checkpoint_replay_max": 0.0,
+      "checkpoint_sha256": "ef26a11c32f2f166346db17a2a87b8a1b0cd33c4cf1e90848e23767cbf7bd4b9",
+      "completed_updates": 2400,
+      "copied_aggregate_metrics_used": false,
+      "gates": {
+        "checkpoint_replay": true,
+        "counts_gap": true,
+        "exact_updates": true,
+        "finite_weights_and_logits": true,
+        "full_width_parity": true,
+        "heldout_accuracy": true,
+        "heldout_class_recall": true,
+        "prefix2_bayes_ceiling": true,
+        "prefix4_bayes_ceiling": true,
+        "prefix4_gap": true,
+        "receipt_integrity": true
+      },
+      "initial_state_sha256": "59d5307bb2a3f7cd00233c9909bba04f9b570775ef12a390206bafe0ece44760",
+      "metrics": {
+        "heldout": {
+          "accuracy": 1.0,
+          "class_correct": [
+            189,
+            304,
+            254,
+            277
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            189,
+            304,
+            254,
+            277
+          ],
+          "confusion": [
+            [
+              189,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              304,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              254,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              277
+            ]
+          ],
+          "correct": 1024,
+          "correct_ceilings": {
+            "counts": 449,
+            "last": 304,
+            "prefix2": 347,
+            "prefix4": 531
+          },
+          "counts_margin": 0.5615234375,
+          "ids_sha256": "34e8e8974ac7fb156e247d99eb2b14283dc29569d55b562b0aa5477e433b0b92",
+          "n": 1024,
+          "nll": 0.0008582924147678944,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 262,
+              "n": 262,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 261,
+              "n": 261,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 248,
+              "n": 248,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 253,
+              "n": 253,
+              "token": 3
+            }
+          ],
+          "prefix4_margin": 0.4814453125
+        },
+        "train": {
+          "accuracy": 1.0,
+          "class_correct": [
+            384,
+            548,
+            525,
+            591
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            384,
+            548,
+            525,
+            591
+          ],
+          "confusion": [
+            [
+              384,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              548,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              525,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              591
+            ]
+          ],
+          "correct": 2048,
+          "ids_sha256": "83476f17cb79f4edfd549f3aa7b95322e4023d9a7ea60be1f3d753e98b1b60ea",
+          "n": 2048,
+          "nll": 0.0005974749308047128,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 486,
+              "n": 486,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 515,
+              "n": 515,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 526,
+              "n": 526,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 521,
+              "n": 521,
+              "token": 3
+            }
+          ]
+        },
+        "validation": {
+          "accuracy": 1.0,
+          "class_correct": [
+            106,
+            158,
+            123,
+            125
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            106,
+            158,
+            123,
+            125
+          ],
+          "confusion": [
+            [
+              106,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              158,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              123,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              125
+            ]
+          ],
+          "correct": 512,
+          "ids_sha256": "16cb2f2d43d95e793969c97dcadb4188ef848a220ebd7812c6f47c04e5473e77",
+          "n": 512,
+          "nll": 0.000803070088286883,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 131,
+              "n": 131,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 129,
+              "n": 129,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 124,
+              "n": 124,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 128,
+              "n": 128,
+              "token": 3
+            }
+          ]
+        }
+      },
+      "passed": true,
+      "path": "roots/seed1903_w48_u2400.json",
+      "prefix": {
+        "prefix2": {
+          "accuracy": 0.3046875,
+          "class_correct": [
+            31,
+            120,
+            68,
+            93
+          ],
+          "class_recall": [
+            0.164021164021164,
+            0.39473684210526316,
+            0.2677165354330709,
+            0.33574007220216606
+          ],
+          "class_support": [
+            189,
+            304,
+            254,
+            277
+          ],
+          "confusion": [
+            [
+              31,
+              53,
+              61,
+              44
+            ],
+            [
+              11,
+              120,
+              71,
+              102
+            ],
+            [
+              15,
+              101,
+              68,
+              70
+            ],
+            [
+              12,
+              114,
+              58,
+              93
+            ]
+          ],
+          "consistency_max": 0.0,
+          "correct": 312,
+          "correct_ceiling": 347,
+          "ids_sha256": "34e8e8974ac7fb156e247d99eb2b14283dc29569d55b562b0aa5477e433b0b92",
+          "n": 1024,
+          "nll": 4.881624537279498,
+          "per_last_token": [
+            {
+              "accuracy": 0.3015267175572519,
+              "class_recall": [
+                0.06153846153846154,
+                0.4358974358974359,
+                0.3333333333333333,
+                0.35294117647058826
+              ],
+              "correct": 79,
+              "n": 262,
+              "token": 0
+            },
+            {
+              "accuracy": 0.29118773946360155,
+              "class_recall": [
+                0.23529411764705882,
+                0.3291139240506329,
+                0.2318840579710145,
+                0.3291139240506329
+              ],
+              "correct": 76,
+              "n": 261,
+              "token": 1
+            },
+            {
+              "accuracy": 0.2782258064516129,
+              "class_recall": [
+                0.13953488372093023,
+                0.3918918918918919,
+                0.2112676056338028,
+                0.31666666666666665
+              ],
+              "correct": 69,
+              "n": 248,
+              "token": 2
+            },
+            {
+              "accuracy": 0.34782608695652173,
+              "class_recall": [
+                0.2765957446808511,
+                0.4246575342465753,
+                0.31746031746031744,
+                0.34285714285714286
+              ],
+              "correct": 88,
+              "n": 253,
+              "token": 3
+            }
+          ]
+        },
+        "prefix4": {
+          "accuracy": 0.369140625,
+          "class_correct": [
+            87,
+            123,
+            66,
+            102
+          ],
+          "class_recall": [
+            0.4603174603174603,
+            0.40460526315789475,
+            0.25984251968503935,
+            0.36823104693140796
+          ],
+          "class_support": [
+            189,
+            304,
+            254,
+            277
+          ],
+          "confusion": [
+            [
+              87,
+              18,
+              62,
+              22
+            ],
+            [
+              12,
+              123,
+              64,
+              105
+            ],
+            [
+              40,
+              77,
+              66,
+              71
+            ],
+            [
+              10,
+              90,
+              75,
+              102
+            ]
+          ],
+          "consistency_max": 0.0,
+          "correct": 378,
+          "correct_ceiling": 531,
+          "ids_sha256": "34e8e8974ac7fb156e247d99eb2b14283dc29569d55b562b0aa5477e433b0b92",
+          "n": 1024,
+          "nll": 6.127617478855981,
+          "per_last_token": [
+            {
+              "accuracy": 0.40076335877862596,
+              "class_recall": [
+                0.12307692307692308,
+                0.5,
+                0.4117647058823529,
+                0.5441176470588235
+              ],
+              "correct": 105,
+              "n": 262,
+              "token": 0
+            },
+            {
+              "accuracy": 0.2835249042145594,
+              "class_recall": [
+                0.5882352941176471,
+                0.34177215189873417,
+                0.14492753623188406,
+                0.21518987341772153
+              ],
+              "correct": 74,
+              "n": 261,
+              "token": 1
+            },
+            {
+              "accuracy": 0.3346774193548387,
+              "class_recall": [
+                0.627906976744186,
+                0.32432432432432434,
+                0.23943661971830985,
+                0.25
+              ],
+              "correct": 83,
+              "n": 248,
+              "token": 2
+            },
+            {
+              "accuracy": 0.45849802371541504,
+              "class_recall": [
+                0.6808510638297872,
+                0.4520547945205479,
+                0.2857142857142857,
+                0.4714285714285714
+              ],
+              "correct": 116,
+              "n": 253,
+              "token": 3
+            }
+          ]
+        }
+      },
+      "replay_errors": {
+        "heldout.logits": 0.0,
+        "heldout.prefix2_logits": 0.0,
+        "heldout.prefix4_logits": 0.0,
+        "train.logits": 0.0,
+        "validation.logits": 0.0
+      },
+      "seed": 1903,
+      "status": "complete",
+      "updates": 2400,
+      "width": 48
+    },
+    {
+      "checkpoint_replay_max": 0.0,
+      "checkpoint_sha256": "77c2cdb81647a2d6920060f13b8cf7436326b57705e7e74bc8ef839d58f944f0",
+      "completed_updates": 2400,
+      "copied_aggregate_metrics_used": false,
+      "gates": {
+        "checkpoint_replay": true,
+        "counts_gap": true,
+        "exact_updates": true,
+        "finite_weights_and_logits": true,
+        "full_width_parity": true,
+        "heldout_accuracy": true,
+        "heldout_class_recall": true,
+        "prefix2_bayes_ceiling": true,
+        "prefix4_bayes_ceiling": true,
+        "prefix4_gap": true,
+        "receipt_integrity": true
+      },
+      "initial_state_sha256": "193f0d539fb465eae488b49bd6240618e6a6116b7d4f5b5df01dcaa7633234d7",
+      "metrics": {
+        "heldout": {
+          "accuracy": 1.0,
+          "class_correct": [
+            189,
+            304,
+            254,
+            277
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            189,
+            304,
+            254,
+            277
+          ],
+          "confusion": [
+            [
+              189,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              304,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              254,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              277
+            ]
+          ],
+          "correct": 1024,
+          "correct_ceilings": {
+            "counts": 449,
+            "last": 304,
+            "prefix2": 347,
+            "prefix4": 531
+          },
+          "counts_margin": 0.5615234375,
+          "ids_sha256": "34e8e8974ac7fb156e247d99eb2b14283dc29569d55b562b0aa5477e433b0b92",
+          "n": 1024,
+          "nll": 0.0005731781795679631,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 262,
+              "n": 262,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 261,
+              "n": 261,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 248,
+              "n": 248,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 253,
+              "n": 253,
+              "token": 3
+            }
+          ],
+          "prefix4_margin": 0.4814453125
+        },
+        "train": {
+          "accuracy": 1.0,
+          "class_correct": [
+            384,
+            548,
+            525,
+            591
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            384,
+            548,
+            525,
+            591
+          ],
+          "confusion": [
+            [
+              384,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              548,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              525,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              591
+            ]
+          ],
+          "correct": 2048,
+          "ids_sha256": "83476f17cb79f4edfd549f3aa7b95322e4023d9a7ea60be1f3d753e98b1b60ea",
+          "n": 2048,
+          "nll": 0.0004711759181244089,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 486,
+              "n": 486,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 515,
+              "n": 515,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 526,
+              "n": 526,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 521,
+              "n": 521,
+              "token": 3
+            }
+          ]
+        },
+        "validation": {
+          "accuracy": 1.0,
+          "class_correct": [
+            106,
+            158,
+            123,
+            125
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            106,
+            158,
+            123,
+            125
+          ],
+          "confusion": [
+            [
+              106,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              158,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              123,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              125
+            ]
+          ],
+          "correct": 512,
+          "ids_sha256": "16cb2f2d43d95e793969c97dcadb4188ef848a220ebd7812c6f47c04e5473e77",
+          "n": 512,
+          "nll": 0.0006033287781213771,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 131,
+              "n": 131,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 129,
+              "n": 129,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 124,
+              "n": 124,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 128,
+              "n": 128,
+              "token": 3
+            }
+          ]
+        }
+      },
+      "passed": true,
+      "path": "roots/seed1904_w48_u2400.json",
+      "prefix": {
+        "prefix2": {
+          "accuracy": 0.3046875,
+          "class_correct": [
+            31,
+            120,
+            68,
+            93
+          ],
+          "class_recall": [
+            0.164021164021164,
+            0.39473684210526316,
+            0.2677165354330709,
+            0.33574007220216606
+          ],
+          "class_support": [
+            189,
+            304,
+            254,
+            277
+          ],
+          "confusion": [
+            [
+              31,
+              53,
+              61,
+              44
+            ],
+            [
+              11,
+              120,
+              71,
+              102
+            ],
+            [
+              15,
+              101,
+              68,
+              70
+            ],
+            [
+              12,
+              114,
+              58,
+              93
+            ]
+          ],
+          "consistency_max": 0.0,
+          "correct": 312,
+          "correct_ceiling": 347,
+          "ids_sha256": "34e8e8974ac7fb156e247d99eb2b14283dc29569d55b562b0aa5477e433b0b92",
+          "n": 1024,
+          "nll": 5.02216163400929,
+          "per_last_token": [
+            {
+              "accuracy": 0.3015267175572519,
+              "class_recall": [
+                0.06153846153846154,
+                0.4358974358974359,
+                0.3333333333333333,
+                0.35294117647058826
+              ],
+              "correct": 79,
+              "n": 262,
+              "token": 0
+            },
+            {
+              "accuracy": 0.29118773946360155,
+              "class_recall": [
+                0.23529411764705882,
+                0.3291139240506329,
+                0.2318840579710145,
+                0.3291139240506329
+              ],
+              "correct": 76,
+              "n": 261,
+              "token": 1
+            },
+            {
+              "accuracy": 0.2782258064516129,
+              "class_recall": [
+                0.13953488372093023,
+                0.3918918918918919,
+                0.2112676056338028,
+                0.31666666666666665
+              ],
+              "correct": 69,
+              "n": 248,
+              "token": 2
+            },
+            {
+              "accuracy": 0.34782608695652173,
+              "class_recall": [
+                0.2765957446808511,
+                0.4246575342465753,
+                0.31746031746031744,
+                0.34285714285714286
+              ],
+              "correct": 88,
+              "n": 253,
+              "token": 3
+            }
+          ]
+        },
+        "prefix4": {
+          "accuracy": 0.369140625,
+          "class_correct": [
+            87,
+            123,
+            66,
+            102
+          ],
+          "class_recall": [
+            0.4603174603174603,
+            0.40460526315789475,
+            0.25984251968503935,
+            0.36823104693140796
+          ],
+          "class_support": [
+            189,
+            304,
+            254,
+            277
+          ],
+          "confusion": [
+            [
+              87,
+              18,
+              62,
+              22
+            ],
+            [
+              12,
+              123,
+              64,
+              105
+            ],
+            [
+              40,
+              77,
+              66,
+              71
+            ],
+            [
+              10,
+              90,
+              75,
+              102
+            ]
+          ],
+          "consistency_max": 0.0,
+          "correct": 378,
+          "correct_ceiling": 531,
+          "ids_sha256": "34e8e8974ac7fb156e247d99eb2b14283dc29569d55b562b0aa5477e433b0b92",
+          "n": 1024,
+          "nll": 6.204457405641968,
+          "per_last_token": [
+            {
+              "accuracy": 0.40076335877862596,
+              "class_recall": [
+                0.12307692307692308,
+                0.5,
+                0.4117647058823529,
+                0.5441176470588235
+              ],
+              "correct": 105,
+              "n": 262,
+              "token": 0
+            },
+            {
+              "accuracy": 0.2835249042145594,
+              "class_recall": [
+                0.5882352941176471,
+                0.34177215189873417,
+                0.14492753623188406,
+                0.21518987341772153
+              ],
+              "correct": 74,
+              "n": 261,
+              "token": 1
+            },
+            {
+              "accuracy": 0.3346774193548387,
+              "class_recall": [
+                0.627906976744186,
+                0.32432432432432434,
+                0.23943661971830985,
+                0.25
+              ],
+              "correct": 83,
+              "n": 248,
+              "token": 2
+            },
+            {
+              "accuracy": 0.45849802371541504,
+              "class_recall": [
+                0.6808510638297872,
+                0.4520547945205479,
+                0.2857142857142857,
+                0.4714285714285714
+              ],
+              "correct": 116,
+              "n": 253,
+              "token": 3
+            }
+          ]
+        }
+      },
+      "replay_errors": {
+        "heldout.logits": 0.0,
+        "heldout.prefix2_logits": 0.0,
+        "heldout.prefix4_logits": 0.0,
+        "train.logits": 0.0,
+        "validation.logits": 0.0
+      },
+      "seed": 1904,
+      "status": "complete",
+      "updates": 2400,
+      "width": 48
+    },
+    {
+      "checkpoint_replay_max": 0.0,
+      "checkpoint_sha256": "1a9efaca960944d0d19926be5d3efb15731b2c171ed3a85ff038b5f8a808c7f9",
+      "completed_updates": 2400,
+      "copied_aggregate_metrics_used": false,
+      "gates": {
+        "checkpoint_replay": true,
+        "counts_gap": true,
+        "exact_updates": true,
+        "finite_weights_and_logits": true,
+        "full_width_parity": true,
+        "heldout_accuracy": true,
+        "heldout_class_recall": true,
+        "prefix2_bayes_ceiling": true,
+        "prefix4_bayes_ceiling": true,
+        "prefix4_gap": true,
+        "receipt_integrity": true
+      },
+      "initial_state_sha256": "10884835aae1f11396d1259d73427d5422e108e19c1a9a3b3c440ac9bb605389",
+      "metrics": {
+        "heldout": {
+          "accuracy": 1.0,
+          "class_correct": [
+            189,
+            304,
+            254,
+            277
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            189,
+            304,
+            254,
+            277
+          ],
+          "confusion": [
+            [
+              189,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              304,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              254,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              277
+            ]
+          ],
+          "correct": 1024,
+          "correct_ceilings": {
+            "counts": 449,
+            "last": 304,
+            "prefix2": 347,
+            "prefix4": 531
+          },
+          "counts_margin": 0.5615234375,
+          "ids_sha256": "34e8e8974ac7fb156e247d99eb2b14283dc29569d55b562b0aa5477e433b0b92",
+          "n": 1024,
+          "nll": 0.0006976649011260667,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 262,
+              "n": 262,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 261,
+              "n": 261,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 248,
+              "n": 248,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 253,
+              "n": 253,
+              "token": 3
+            }
+          ],
+          "prefix4_margin": 0.4814453125
+        },
+        "train": {
+          "accuracy": 1.0,
+          "class_correct": [
+            384,
+            548,
+            525,
+            591
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            384,
+            548,
+            525,
+            591
+          ],
+          "confusion": [
+            [
+              384,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              548,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              525,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              591
+            ]
+          ],
+          "correct": 2048,
+          "ids_sha256": "83476f17cb79f4edfd549f3aa7b95322e4023d9a7ea60be1f3d753e98b1b60ea",
+          "n": 2048,
+          "nll": 0.0005427433602713022,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 486,
+              "n": 486,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 515,
+              "n": 515,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 526,
+              "n": 526,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 521,
+              "n": 521,
+              "token": 3
+            }
+          ]
+        },
+        "validation": {
+          "accuracy": 1.0,
+          "class_correct": [
+            106,
+            158,
+            123,
+            125
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            106,
+            158,
+            123,
+            125
+          ],
+          "confusion": [
+            [
+              106,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              158,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              123,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              125
+            ]
+          ],
+          "correct": 512,
+          "ids_sha256": "16cb2f2d43d95e793969c97dcadb4188ef848a220ebd7812c6f47c04e5473e77",
+          "n": 512,
+          "nll": 0.0007409038178192298,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 131,
+              "n": 131,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 129,
+              "n": 129,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 124,
+              "n": 124,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 128,
+              "n": 128,
+              "token": 3
+            }
+          ]
+        }
+      },
+      "passed": true,
+      "path": "roots/seed1905_w48_u2400.json",
+      "prefix": {
+        "prefix2": {
+          "accuracy": 0.3046875,
+          "class_correct": [
+            31,
+            120,
+            68,
+            93
+          ],
+          "class_recall": [
+            0.164021164021164,
+            0.39473684210526316,
+            0.2677165354330709,
+            0.33574007220216606
+          ],
+          "class_support": [
+            189,
+            304,
+            254,
+            277
+          ],
+          "confusion": [
+            [
+              31,
+              53,
+              61,
+              44
+            ],
+            [
+              11,
+              120,
+              71,
+              102
+            ],
+            [
+              15,
+              101,
+              68,
+              70
+            ],
+            [
+              12,
+              114,
+              58,
+              93
+            ]
+          ],
+          "consistency_max": 0.0,
+          "correct": 312,
+          "correct_ceiling": 347,
+          "ids_sha256": "34e8e8974ac7fb156e247d99eb2b14283dc29569d55b562b0aa5477e433b0b92",
+          "n": 1024,
+          "nll": 5.173200571979406,
+          "per_last_token": [
+            {
+              "accuracy": 0.3015267175572519,
+              "class_recall": [
+                0.06153846153846154,
+                0.4358974358974359,
+                0.3333333333333333,
+                0.35294117647058826
+              ],
+              "correct": 79,
+              "n": 262,
+              "token": 0
+            },
+            {
+              "accuracy": 0.29118773946360155,
+              "class_recall": [
+                0.23529411764705882,
+                0.3291139240506329,
+                0.2318840579710145,
+                0.3291139240506329
+              ],
+              "correct": 76,
+              "n": 261,
+              "token": 1
+            },
+            {
+              "accuracy": 0.2782258064516129,
+              "class_recall": [
+                0.13953488372093023,
+                0.3918918918918919,
+                0.2112676056338028,
+                0.31666666666666665
+              ],
+              "correct": 69,
+              "n": 248,
+              "token": 2
+            },
+            {
+              "accuracy": 0.34782608695652173,
+              "class_recall": [
+                0.2765957446808511,
+                0.4246575342465753,
+                0.31746031746031744,
+                0.34285714285714286
+              ],
+              "correct": 88,
+              "n": 253,
+              "token": 3
+            }
+          ]
+        },
+        "prefix4": {
+          "accuracy": 0.369140625,
+          "class_correct": [
+            87,
+            123,
+            66,
+            102
+          ],
+          "class_recall": [
+            0.4603174603174603,
+            0.40460526315789475,
+            0.25984251968503935,
+            0.36823104693140796
+          ],
+          "class_support": [
+            189,
+            304,
+            254,
+            277
+          ],
+          "confusion": [
+            [
+              87,
+              18,
+              62,
+              22
+            ],
+            [
+              12,
+              123,
+              64,
+              105
+            ],
+            [
+              40,
+              77,
+              66,
+              71
+            ],
+            [
+              10,
+              90,
+              75,
+              102
+            ]
+          ],
+          "consistency_max": 0.0,
+          "correct": 378,
+          "correct_ceiling": 531,
+          "ids_sha256": "34e8e8974ac7fb156e247d99eb2b14283dc29569d55b562b0aa5477e433b0b92",
+          "n": 1024,
+          "nll": 6.522718823916491,
+          "per_last_token": [
+            {
+              "accuracy": 0.40076335877862596,
+              "class_recall": [
+                0.12307692307692308,
+                0.5,
+                0.4117647058823529,
+                0.5441176470588235
+              ],
+              "correct": 105,
+              "n": 262,
+              "token": 0
+            },
+            {
+              "accuracy": 0.2835249042145594,
+              "class_recall": [
+                0.5882352941176471,
+                0.34177215189873417,
+                0.14492753623188406,
+                0.21518987341772153
+              ],
+              "correct": 74,
+              "n": 261,
+              "token": 1
+            },
+            {
+              "accuracy": 0.3346774193548387,
+              "class_recall": [
+                0.627906976744186,
+                0.32432432432432434,
+                0.23943661971830985,
+                0.25
+              ],
+              "correct": 83,
+              "n": 248,
+              "token": 2
+            },
+            {
+              "accuracy": 0.45849802371541504,
+              "class_recall": [
+                0.6808510638297872,
+                0.4520547945205479,
+                0.2857142857142857,
+                0.4714285714285714
+              ],
+              "correct": 116,
+              "n": 253,
+              "token": 3
+            }
+          ]
+        }
+      },
+      "replay_errors": {
+        "heldout.logits": 0.0,
+        "heldout.prefix2_logits": 0.0,
+        "heldout.prefix4_logits": 0.0,
+        "train.logits": 0.0,
+        "validation.logits": 0.0
+      },
+      "seed": 1905,
+      "status": "complete",
+      "updates": 2400,
+      "width": 48
+    },
+    {
+      "checkpoint_replay_max": 0.0,
+      "checkpoint_sha256": "bf12ca23240795beda0e95ee5d60cfdad18b346a64535340277864a778c196bd",
+      "completed_updates": 2400,
+      "copied_aggregate_metrics_used": false,
+      "gates": {
+        "checkpoint_replay": true,
+        "counts_gap": true,
+        "exact_updates": true,
+        "finite_weights_and_logits": true,
+        "full_width_parity": true,
+        "heldout_accuracy": true,
+        "heldout_class_recall": true,
+        "prefix2_bayes_ceiling": true,
+        "prefix4_bayes_ceiling": true,
+        "prefix4_gap": true,
+        "receipt_integrity": true
+      },
+      "initial_state_sha256": "9b8ea30027d4843fe91e880cb1413ee3de3bd004440879617918297606022bd3",
+      "metrics": {
+        "heldout": {
+          "accuracy": 1.0,
+          "class_correct": [
+            189,
+            304,
+            254,
+            277
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            189,
+            304,
+            254,
+            277
+          ],
+          "confusion": [
+            [
+              189,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              304,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              254,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              277
+            ]
+          ],
+          "correct": 1024,
+          "correct_ceilings": {
+            "counts": 449,
+            "last": 304,
+            "prefix2": 347,
+            "prefix4": 531
+          },
+          "counts_margin": 0.5615234375,
+          "ids_sha256": "34e8e8974ac7fb156e247d99eb2b14283dc29569d55b562b0aa5477e433b0b92",
+          "n": 1024,
+          "nll": 0.0004913470042792839,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 262,
+              "n": 262,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 261,
+              "n": 261,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 248,
+              "n": 248,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 253,
+              "n": 253,
+              "token": 3
+            }
+          ],
+          "prefix4_margin": 0.4814453125
+        },
+        "train": {
+          "accuracy": 1.0,
+          "class_correct": [
+            384,
+            548,
+            525,
+            591
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            384,
+            548,
+            525,
+            591
+          ],
+          "confusion": [
+            [
+              384,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              548,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              525,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              591
+            ]
+          ],
+          "correct": 2048,
+          "ids_sha256": "83476f17cb79f4edfd549f3aa7b95322e4023d9a7ea60be1f3d753e98b1b60ea",
+          "n": 2048,
+          "nll": 0.00038463117173015215,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 486,
+              "n": 486,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 515,
+              "n": 515,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 526,
+              "n": 526,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 521,
+              "n": 521,
+              "token": 3
+            }
+          ]
+        },
+        "validation": {
+          "accuracy": 1.0,
+          "class_correct": [
+            106,
+            158,
+            123,
+            125
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            106,
+            158,
+            123,
+            125
+          ],
+          "confusion": [
+            [
+              106,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              158,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              123,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              125
+            ]
+          ],
+          "correct": 512,
+          "ids_sha256": "16cb2f2d43d95e793969c97dcadb4188ef848a220ebd7812c6f47c04e5473e77",
+          "n": 512,
+          "nll": 0.00047818735684075186,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 131,
+              "n": 131,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 129,
+              "n": 129,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 124,
+              "n": 124,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 128,
+              "n": 128,
+              "token": 3
+            }
+          ]
+        }
+      },
+      "passed": true,
+      "path": "roots/seed1906_w48_u2400.json",
+      "prefix": {
+        "prefix2": {
+          "accuracy": 0.3046875,
+          "class_correct": [
+            31,
+            120,
+            68,
+            93
+          ],
+          "class_recall": [
+            0.164021164021164,
+            0.39473684210526316,
+            0.2677165354330709,
+            0.33574007220216606
+          ],
+          "class_support": [
+            189,
+            304,
+            254,
+            277
+          ],
+          "confusion": [
+            [
+              31,
+              53,
+              61,
+              44
+            ],
+            [
+              11,
+              120,
+              71,
+              102
+            ],
+            [
+              15,
+              101,
+              68,
+              70
+            ],
+            [
+              12,
+              114,
+              58,
+              93
+            ]
+          ],
+          "consistency_max": 0.0,
+          "correct": 312,
+          "correct_ceiling": 347,
+          "ids_sha256": "34e8e8974ac7fb156e247d99eb2b14283dc29569d55b562b0aa5477e433b0b92",
+          "n": 1024,
+          "nll": 5.607525562623083,
+          "per_last_token": [
+            {
+              "accuracy": 0.3015267175572519,
+              "class_recall": [
+                0.06153846153846154,
+                0.4358974358974359,
+                0.3333333333333333,
+                0.35294117647058826
+              ],
+              "correct": 79,
+              "n": 262,
+              "token": 0
+            },
+            {
+              "accuracy": 0.29118773946360155,
+              "class_recall": [
+                0.23529411764705882,
+                0.3291139240506329,
+                0.2318840579710145,
+                0.3291139240506329
+              ],
+              "correct": 76,
+              "n": 261,
+              "token": 1
+            },
+            {
+              "accuracy": 0.2782258064516129,
+              "class_recall": [
+                0.13953488372093023,
+                0.3918918918918919,
+                0.2112676056338028,
+                0.31666666666666665
+              ],
+              "correct": 69,
+              "n": 248,
+              "token": 2
+            },
+            {
+              "accuracy": 0.34782608695652173,
+              "class_recall": [
+                0.2765957446808511,
+                0.4246575342465753,
+                0.31746031746031744,
+                0.34285714285714286
+              ],
+              "correct": 88,
+              "n": 253,
+              "token": 3
+            }
+          ]
+        },
+        "prefix4": {
+          "accuracy": 0.369140625,
+          "class_correct": [
+            87,
+            123,
+            66,
+            102
+          ],
+          "class_recall": [
+            0.4603174603174603,
+            0.40460526315789475,
+            0.25984251968503935,
+            0.36823104693140796
+          ],
+          "class_support": [
+            189,
+            304,
+            254,
+            277
+          ],
+          "confusion": [
+            [
+              87,
+              18,
+              62,
+              22
+            ],
+            [
+              12,
+              123,
+              64,
+              105
+            ],
+            [
+              40,
+              77,
+              66,
+              71
+            ],
+            [
+              10,
+              90,
+              75,
+              102
+            ]
+          ],
+          "consistency_max": 0.0,
+          "correct": 378,
+          "correct_ceiling": 531,
+          "ids_sha256": "34e8e8974ac7fb156e247d99eb2b14283dc29569d55b562b0aa5477e433b0b92",
+          "n": 1024,
+          "nll": 6.286339856359597,
+          "per_last_token": [
+            {
+              "accuracy": 0.40076335877862596,
+              "class_recall": [
+                0.12307692307692308,
+                0.5,
+                0.4117647058823529,
+                0.5441176470588235
+              ],
+              "correct": 105,
+              "n": 262,
+              "token": 0
+            },
+            {
+              "accuracy": 0.2835249042145594,
+              "class_recall": [
+                0.5882352941176471,
+                0.34177215189873417,
+                0.14492753623188406,
+                0.21518987341772153
+              ],
+              "correct": 74,
+              "n": 261,
+              "token": 1
+            },
+            {
+              "accuracy": 0.3346774193548387,
+              "class_recall": [
+                0.627906976744186,
+                0.32432432432432434,
+                0.23943661971830985,
+                0.25
+              ],
+              "correct": 83,
+              "n": 248,
+              "token": 2
+            },
+            {
+              "accuracy": 0.45849802371541504,
+              "class_recall": [
+                0.6808510638297872,
+                0.4520547945205479,
+                0.2857142857142857,
+                0.4714285714285714
+              ],
+              "correct": 116,
+              "n": 253,
+              "token": 3
+            }
+          ]
+        }
+      },
+      "replay_errors": {
+        "heldout.logits": 0.0,
+        "heldout.prefix2_logits": 0.0,
+        "heldout.prefix4_logits": 0.0,
+        "train.logits": 0.0,
+        "validation.logits": 0.0
+      },
+      "seed": 1906,
+      "status": "complete",
+      "updates": 2400,
+      "width": 48
+    },
+    {
+      "checkpoint_replay_max": 0.0,
+      "checkpoint_sha256": "0126999691bb922484e0e2c8918f8609943aaf53a002c52c6dec38c7d0668962",
+      "completed_updates": 2400,
+      "copied_aggregate_metrics_used": false,
+      "gates": {
+        "checkpoint_replay": true,
+        "counts_gap": true,
+        "exact_updates": true,
+        "finite_weights_and_logits": true,
+        "full_width_parity": true,
+        "heldout_accuracy": true,
+        "heldout_class_recall": true,
+        "prefix2_bayes_ceiling": true,
+        "prefix4_bayes_ceiling": true,
+        "prefix4_gap": true,
+        "receipt_integrity": true
+      },
+      "initial_state_sha256": "37b5057ae03f474199af01c7130c22370d509cacc8477e52f68b1bdedf13ff57",
+      "metrics": {
+        "heldout": {
+          "accuracy": 1.0,
+          "class_correct": [
+            189,
+            304,
+            254,
+            277
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            189,
+            304,
+            254,
+            277
+          ],
+          "confusion": [
+            [
+              189,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              304,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              254,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              277
+            ]
+          ],
+          "correct": 1024,
+          "correct_ceilings": {
+            "counts": 449,
+            "last": 304,
+            "prefix2": 347,
+            "prefix4": 531
+          },
+          "counts_margin": 0.5615234375,
+          "ids_sha256": "34e8e8974ac7fb156e247d99eb2b14283dc29569d55b562b0aa5477e433b0b92",
+          "n": 1024,
+          "nll": 0.0008404609428241192,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 262,
+              "n": 262,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 261,
+              "n": 261,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 248,
+              "n": 248,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 253,
+              "n": 253,
+              "token": 3
+            }
+          ],
+          "prefix4_margin": 0.4814453125
+        },
+        "train": {
+          "accuracy": 1.0,
+          "class_correct": [
+            384,
+            548,
+            525,
+            591
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            384,
+            548,
+            525,
+            591
+          ],
+          "confusion": [
+            [
+              384,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              548,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              525,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              591
+            ]
+          ],
+          "correct": 2048,
+          "ids_sha256": "83476f17cb79f4edfd549f3aa7b95322e4023d9a7ea60be1f3d753e98b1b60ea",
+          "n": 2048,
+          "nll": 0.0006179778858412162,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 486,
+              "n": 486,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 515,
+              "n": 515,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 526,
+              "n": 526,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 521,
+              "n": 521,
+              "token": 3
+            }
+          ]
+        },
+        "validation": {
+          "accuracy": 1.0,
+          "class_correct": [
+            106,
+            158,
+            123,
+            125
+          ],
+          "class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "class_support": [
+            106,
+            158,
+            123,
+            125
+          ],
+          "confusion": [
+            [
+              106,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              158,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              123,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              125
+            ]
+          ],
+          "correct": 512,
+          "ids_sha256": "16cb2f2d43d95e793969c97dcadb4188ef848a220ebd7812c6f47c04e5473e77",
+          "n": 512,
+          "nll": 0.0008204340000546612,
+          "per_last_token": [
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 131,
+              "n": 131,
+              "token": 0
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 129,
+              "n": 129,
+              "token": 1
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 124,
+              "n": 124,
+              "token": 2
+            },
+            {
+              "accuracy": 1.0,
+              "class_recall": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "correct": 128,
+              "n": 128,
+              "token": 3
+            }
+          ]
+        }
+      },
+      "passed": true,
+      "path": "roots/seed1907_w48_u2400.json",
+      "prefix": {
+        "prefix2": {
+          "accuracy": 0.3046875,
+          "class_correct": [
+            31,
+            120,
+            68,
+            93
+          ],
+          "class_recall": [
+            0.164021164021164,
+            0.39473684210526316,
+            0.2677165354330709,
+            0.33574007220216606
+          ],
+          "class_support": [
+            189,
+            304,
+            254,
+            277
+          ],
+          "confusion": [
+            [
+              31,
+              53,
+              61,
+              44
+            ],
+            [
+              11,
+              120,
+              71,
+              102
+            ],
+            [
+              15,
+              101,
+              68,
+              70
+            ],
+            [
+              12,
+              114,
+              58,
+              93
+            ]
+          ],
+          "consistency_max": 0.0,
+          "correct": 312,
+          "correct_ceiling": 347,
+          "ids_sha256": "34e8e8974ac7fb156e247d99eb2b14283dc29569d55b562b0aa5477e433b0b92",
+          "n": 1024,
+          "nll": 5.354458050073068,
+          "per_last_token": [
+            {
+              "accuracy": 0.3015267175572519,
+              "class_recall": [
+                0.06153846153846154,
+                0.4358974358974359,
+                0.3333333333333333,
+                0.35294117647058826
+              ],
+              "correct": 79,
+              "n": 262,
+              "token": 0
+            },
+            {
+              "accuracy": 0.29118773946360155,
+              "class_recall": [
+                0.23529411764705882,
+                0.3291139240506329,
+                0.2318840579710145,
+                0.3291139240506329
+              ],
+              "correct": 76,
+              "n": 261,
+              "token": 1
+            },
+            {
+              "accuracy": 0.2782258064516129,
+              "class_recall": [
+                0.13953488372093023,
+                0.3918918918918919,
+                0.2112676056338028,
+                0.31666666666666665
+              ],
+              "correct": 69,
+              "n": 248,
+              "token": 2
+            },
+            {
+              "accuracy": 0.34782608695652173,
+              "class_recall": [
+                0.2765957446808511,
+                0.4246575342465753,
+                0.31746031746031744,
+                0.34285714285714286
+              ],
+              "correct": 88,
+              "n": 253,
+              "token": 3
+            }
+          ]
+        },
+        "prefix4": {
+          "accuracy": 0.369140625,
+          "class_correct": [
+            87,
+            123,
+            66,
+            102
+          ],
+          "class_recall": [
+            0.4603174603174603,
+            0.40460526315789475,
+            0.25984251968503935,
+            0.36823104693140796
+          ],
+          "class_support": [
+            189,
+            304,
+            254,
+            277
+          ],
+          "confusion": [
+            [
+              87,
+              18,
+              62,
+              22
+            ],
+            [
+              12,
+              123,
+              64,
+              105
+            ],
+            [
+              40,
+              77,
+              66,
+              71
+            ],
+            [
+              10,
+              90,
+              75,
+              102
+            ]
+          ],
+          "consistency_max": 0.0,
+          "correct": 378,
+          "correct_ceiling": 531,
+          "ids_sha256": "34e8e8974ac7fb156e247d99eb2b14283dc29569d55b562b0aa5477e433b0b92",
+          "n": 1024,
+          "nll": 6.212539692659595,
+          "per_last_token": [
+            {
+              "accuracy": 0.40076335877862596,
+              "class_recall": [
+                0.12307692307692308,
+                0.5,
+                0.4117647058823529,
+                0.5441176470588235
+              ],
+              "correct": 105,
+              "n": 262,
+              "token": 0
+            },
+            {
+              "accuracy": 0.2835249042145594,
+              "class_recall": [
+                0.5882352941176471,
+                0.34177215189873417,
+                0.14492753623188406,
+                0.21518987341772153
+              ],
+              "correct": 74,
+              "n": 261,
+              "token": 1
+            },
+            {
+              "accuracy": 0.3346774193548387,
+              "class_recall": [
+                0.627906976744186,
+                0.32432432432432434,
+                0.23943661971830985,
+                0.25
+              ],
+              "correct": 83,
+              "n": 248,
+              "token": 2
+            },
+            {
+              "accuracy": 0.45849802371541504,
+              "class_recall": [
+                0.6808510638297872,
+                0.4520547945205479,
+                0.2857142857142857,
+                0.4714285714285714
+              ],
+              "correct": 116,
+              "n": 253,
+              "token": 3
+            }
+          ]
+        }
+      },
+      "replay_errors": {
+        "heldout.logits": 0.0,
+        "heldout.prefix2_logits": 0.0,
+        "heldout.prefix4_logits": 0.0,
+        "train.logits": 0.0,
+        "validation.logits": 0.0
+      },
+      "seed": 1907,
+      "status": "complete",
+      "updates": 2400,
+      "width": 48
+    }
+  ],
+  "root_success_exact95": [
+    0.6305833524471807,
+    1.0
+  ],
+  "root_success_fraction": 1.0,
+  "schema": 1,
+  "scientific_status": "CAUSAL_STUDY_NOT_RUN",
+  "selected_config": {
+    "updates": 2400,
+    "width": 48
+  },
+  "verdict": "SOURCE_COMPETENCE_PASS"
+}
