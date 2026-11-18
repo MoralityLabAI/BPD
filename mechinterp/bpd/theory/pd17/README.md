@@ -36,3 +36,10 @@ The frozen primary quantity is the **within-root interaction** in norm-vs-unifor
 - [SourceBudget.lean](SourceBudget.lean): kernel-certified registered singleton, sample, and candidate counts
 
 The [excluded-source preflight #44240421795](https://github.com/MoralityLabAI/BPD/actions/runs/44240421795) passed. The source-only mathematical and engineering results are separate from the prospectively frozen 32-root scientific test. No trained nonlinear TRM mechanism recovery is implied; that requires a separate gauge-covariant, actual closed-loop intervention protocol guided by NC-04, LOOPSCOPE-08 and EvalMath variation floors.
+
+
+## First original scientific result: PASS
+
+[Source-locked Actions #44240903680](https://github.com/MoralityLabAI/BPD/actions/runs/44240903680) completed all 256 arms and engineering gates. **Norm-weighted Givens: 32/32 mechanisms original, 0/32 radial camouflage.** Unweighted Givens: 0/32 in both laws. The **observed-only angular-ray** method and planted-Q oracle each recovered 32/32 under BOTH laws, showing the camouflaged factors remained identifiable. Every paired root had interaction +1; original mean interaction +1.0 and registered 10,000-draw root-bootstrap [1,1]. All 32 norm/cardinality source checks and Q-oracle checks passed.
+
+The original source had mean corr(K,||x||²)=+.927679 and weighted ESS 48.43%; camouflaged correlation −.001946 and weighted ESS 99.63%. Full original [results report](RESULTS_20261118.md), [32-root CSV](PER_ROOT_20261118.csv), [independent publication audit](test_published_results.py), and [immutable 256-arm JSON #14399632638](https://github.com/MoralityLabAI/BPD/actions/runs/44240903680/artifacts/14399632638) preserve every source and failure (raw JSON SHA256 c75c16e4f901df4b6c0d6c97f92711fe7763555c8fe77402e146d5e6f918c321). Trained nonlinear recurrent transfer remains untested.
