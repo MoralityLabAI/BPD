@@ -17,6 +17,8 @@ permissions:
 
 jobs:
   native-mini-trm-cpu:
+    # First historical training readout is immutable; later PRs only run DT03 source checks.
+    if: github.sha == '3fecec00117342ec75b7ec899663afdbf440b33b'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
