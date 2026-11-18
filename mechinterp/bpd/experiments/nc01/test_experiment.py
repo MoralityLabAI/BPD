@@ -7,7 +7,7 @@ from mechinterp.bpd.components import BPDModel
 from mechinterp.bpd.config import AblationConfig
 from mechinterp.bpd.experiments.nc01.experiment import (
     PASSES, WIDTH, TinyLooper, attribution_selection, choose_matched_shams,
-    closure_check, communities_from_selection, direct_write_rms, evaluate_masks,
+    closure_check, communities_from_selection, direct_write_rms, evaluate_masks, binary_kl,
     labels_from_teacher, make_basis, node_mask, sample_x, set_basis, train_student,
 )
 
@@ -112,3 +112,10 @@ def test_sparse_three_node_chain_is_a_valid_connected_community():
     assert len(groups) == 1
     assert groups[0]["nodes"] == [0, 1, 2]
     assert groups[0]["internal_phi_mass"] > 0.0
+
+
+def test_float64_kl_audit_does_not_invent_parity_failure_for_tiny_logits():
+    clean = torch.tensor([[0.5, 1.0, -1.0]], dtype=torch.float32)
+    near = (clean.double() + 7.45e-8).float()
+    assert float(binary_kl(clean, near).abs().max()) < 1e-12
+    assert float(binary_kl(clean, clean).abs().max()) < 1e-12
