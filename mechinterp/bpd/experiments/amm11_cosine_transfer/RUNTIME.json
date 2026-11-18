@@ -1,0 +1,27 @@
+{
+  "schema": "bpd.amm11.cpu_runtime.v1",
+  "versions": {
+    "numpy": "2.2.6",
+    "python": "3.12.12",
+    "torch": "2.10.0+cpu"
+  },
+  "torch_git": "449b1768410104d3ed79d3bcfe4ba1d65c7f22c0",
+  "torch_binary_sha256": {
+    "_C.so": "2a4e075c33f292a709006fe69bca669e681351fad1fcddd7c957fcf96362d1a8",
+    "libtorch_cpu.so": "4dc5b3a649b61d8f39be127866bc258dda19d74e339f449fe18103db63e8d76f"
+  },
+  "environment": {
+    "ATEN_CPU_CAPABILITY": "default",
+    "MKL_CBWR": "COMPATIBLE",
+    "MKL_DYNAMIC": "FALSE",
+    "MKL_NUM_THREADS": "1",
+    "OMP_DYNAMIC": "FALSE",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "PYTHONHASHSEED": "0"
+  },
+  "precision": "float32",
+  "numpy_solver": "float64",
+  "confirmation_sealed": true,
+  "provenance": "AMM09R1 accepted CPU recipe on EPYC 9V74 and 7763"
+}
