@@ -133,3 +133,27 @@ def test_phase_and_seed_gate_do_not_expose_confirmation_roots():
         evaluate_root(999,steps=1,discovery_size=4,evaluation_size=4)
     with pytest.raises(ValueError):
         evaluate_root(200,steps=1,discovery_size=4,evaluation_size=4)
+
+
+def test_blocked_root_aggregate_is_finite_and_not_scientific_success():
+    import json
+    from mechinterp.bpd.experiments.nc03.aggregate import aggregate
+    from mechinterp.bpd.experiments.nc03.experiment import ROOTS, PROTOCOL_COMMIT
+    data=[]
+    for seed in ROOTS:
+        data.append({
+            "study":"BPD-NC-03", "phase":"ENGINEERING", "seed":seed,
+            "protocol_commit":PROTOCOL_COMMIT,
+            "data":{"training":2048,"discovery":1024,"evaluation":1024},
+            "training":{"training_steps":128}, "task_passed":False,
+            "nulls":{"zero_readout":{"status":"NO_IDENTIFIABLE_SUBSPACE",
+                                   "projector_returned":False,"gradient_max_abs":0}},
+            "source_sha256":"fixture-source", "protocol_sha256":"fixture-protocol",
+            "bases":{"native":{"closure":{"passed":True},"status":"NO_IDENTIFIABLE_SUBSPACE"},
+                     "rotated":{"closure":{"passed":True},"status":"NO_IDENTIFIABLE_SUBSPACE"}}
+        })
+    summary=aggregate(data)
+    assert summary["development_resolution"]=="NOT_RESOLVED_OR_FAILED"
+    assert summary["orthogonal_equivariance"]["max_physical_map_relative_error"] is None
+    assert summary["bases"]["rotated"]["root_keep_only_KL_advantage"]["n_independent_roots"] == 0
+    json.dumps(summary,allow_nan=False)
