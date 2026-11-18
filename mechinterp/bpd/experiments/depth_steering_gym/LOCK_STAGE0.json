@@ -1,0 +1,33 @@
+{
+  "experiment": "BPD-DT01",
+  "status": "STAGE0_SOURCE_LOCKED_BEFORE_MODEL_EXPERIMENT",
+  "date": "2026-11-18",
+  "files": {
+    "PROTOCOL.md": "2ed7dcb4e340179ee3a4eee343074b1681658e0c",
+    "README.md": "a1bf19921cd0e96f405251b0588ac286250bfff8",
+    "SOURCE_RECEIPT.json": "63ceef80c81a7e6b20b3c74c1706707520fedfac",
+    "__init__.py": "86fb0a91be79d244ce070e52954f88b551d9323c",
+    "audit.py": "9d2ddf1e0f1b57e7122c3ff75c8af63a966eeed6",
+    "steering.py": "6e3895dac1c5c9334e8e32131ac653cb6c673fb1",
+    "test_gym.py": "88da1094bf612da4c290849efeb751bc70161f42",
+    "training.py": "3ae7c8713dce17242deee6615611fabf5388efe4",
+    "worlds.py": "3ad626a188c07b18e29dfde7e897de568838c5e1"
+  },
+  "calibration_depths": [
+    2,
+    4,
+    6
+  ],
+  "heldout_depths": [
+    8,
+    12
+  ],
+  "source_only": true,
+  "neural_model_training_completed": false,
+  "mechanistic_steering_scored": false,
+  "live_qwen_run": false,
+  "official_arc_agi1_scored": false,
+  "parent_cgc02": "https://github.com/MoralityLabAI/Compactification-Theory/pull/247",
+  "stage1_rules": "freeze model/checkpoint, root-disjoint train and eval, complete normalized observer, physical BPD refits, signed-Jacobian matched null and root-level evaluation before training/scoring",
+  "sealed_case_rule": "ARG-03-N 168-case heldout untouched"
+}
