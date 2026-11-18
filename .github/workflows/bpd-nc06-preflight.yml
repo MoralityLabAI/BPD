@@ -40,3 +40,5 @@ jobs:
         run: |
           python -m compileall -q mechinterp/bpd/experiments/nc06
           python -m pytest -q mechinterp/bpd/experiments/nc06/test_experiment.py mechinterp/bpd/experiments/nc06/test_aggregate.py
+      - name: Re-audit published original eight-root result and source locks
+        run: python -m pytest -q mechinterp/bpd/experiments/nc06/test_published_results.py
