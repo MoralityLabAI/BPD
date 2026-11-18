@@ -1,0 +1,84 @@
+{
+  "all_candidate_action_case_bits_sha256": "fe6f801c9788c9f5805dfb762a350357fef4513ba53d964bb1c418d7fbc21f55",
+  "analysis": {
+    "comparisons": {
+      "memory_only_vs_pooled": {
+        "exact_one_sided_root_sign_p": 0.00005852770815016151,
+        "holm_adjusted_p": 0.00017558312445048452,
+        "mean_root_effect": 0.09967041015625,
+        "negative_roots": 16,
+        "positive_roots": 47,
+        "root_bootstrap_95_ci": [
+          0.064849853515625,
+          0.13671875
+        ],
+        "tied_roots": 1
+      },
+      "memory_plus_local_vs_local_ridge": {
+        "exact_one_sided_root_sign_p": 0.00002889186002460152,
+        "holm_adjusted_p": 0.00011556744009840608,
+        "mean_root_effect": 0.066192626953125,
+        "negative_roots": 15,
+        "positive_roots": 47,
+        "root_bootstrap_95_ci": [
+          0.04315185546875,
+          0.091400146484375
+        ],
+        "tied_roots": 2
+      },
+      "memory_plus_local_vs_memory_only": {
+        "exact_one_sided_root_sign_p": 0.9999961674158098,
+        "holm_adjusted_p": 0.9999961674158098,
+        "mean_root_effect": -0.048095703125,
+        "negative_roots": 47,
+        "positive_roots": 14,
+        "root_bootstrap_95_ci": [
+          -0.068023681640625,
+          -0.029296875
+        ],
+        "tied_roots": 3
+      },
+      "memory_plus_local_vs_pooled": {
+        "exact_one_sided_root_sign_p": 0.00005852770815016151,
+        "holm_adjusted_p": 0.00017558312445048452,
+        "mean_root_effect": 0.09967041015625,
+        "negative_roots": 16,
+        "positive_roots": 47,
+        "root_bootstrap_95_ci": [
+          0.06298828125,
+          0.13751220703125
+        ],
+        "tied_roots": 1
+      }
+    },
+    "schema": "bpd.amm09.two_slot_memory.v1/analysis",
+    "status": "development_only"
+  },
+  "high_fidelity_roots": 63,
+  "independent_roots": 64,
+  "max_equal_dose_error": 4.76837158203125e-7,
+  "max_immediate_readout_displacement": 0,
+  "oracle_headroom_rate_audit_only": 0.277801513671875,
+  "phase": "development",
+  "preflight_input_sha256": "88b1f5115e7b6c72dcb9fae4151bf2f3290a91e0739939897ef36fe77d72ca59",
+  "schema": "bpd.amm09.two_slot_memory.v1/cohort_lock",
+  "source_sha256": {
+    "case.py": "f72788b058d7eff58218ed4e0c729437820a8cfdd2518609409f2fc7fec9132a",
+    "experiment.py": "57af128ca48ef2dcd527abfcd443373705ecd046a460d53bafe2a0222df56897",
+    "models.py": "2fec8382c067147d60d9f2d4fe8d171ce3d5e15f405afffbbab5389023bc1a03"
+  },
+  "total_test_cases": 32768,
+  "totals": {
+    "full_donor": 32503,
+    "local_count": 6064,
+    "local_ridge": 7533,
+    "memory_only": 11278,
+    "memory_plus_local": 9702,
+    "pooled": 6436,
+    "random_dark": 1522,
+    "random_dark_b": 1560,
+    "random_mask": 4542,
+    "sham": 1
+  },
+  "training_policy_sha256": "c536d7bda5c49507138708e6fd9e0187bbb057990248116aa73cfd40777e95ef"
+}

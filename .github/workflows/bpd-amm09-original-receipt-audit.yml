@@ -1,0 +1,53 @@
+name: BPD-AMM-09 original-receipt independent primary audit
+on:
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/amm09_two_slot_memory/**'
+      - '.github/workflows/bpd-amm09-original-receipt-audit.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  original-development-scientific-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Download original prospective source-locked hosted raw receipts
+        uses: actions/download-artifact@v4
+        with:
+          run-id: 44281548742
+          github-token: ${{ github.token }}
+          name: amm09-two-slot-cpu-source-locked-receipts
+          path: /tmp/amm09_first_run
+      - name: Check exact original uploaded raw development evidence hash
+        shell: bash
+        run: |
+          printf '%s  %s\n' '0423c8302c9cbb99b9413ac7e22cfcc7d0f10d921eff06c0f4a17cda33ff3925' '/tmp/amm09_first_run/amm09_development.json' | sha256sum -c -
+          printf '%s  %s\n' 'a55080a1d09f99cbea0d99182cbe4ca38214b90b65ee0a3adc1af2d828858313' '/tmp/amm09_first_run/amm09_training.json' | sha256sum -c -
+      - name: Independently recompute all registered root effects from the original candidate and choice bits
+        shell: bash
+        run: |
+          python mechinterp/bpd/experiments/amm09_two_slot_memory/audit_development.py \
+            --development /tmp/amm09_first_run/amm09_development.json \
+            --training-lock mechinterp/bpd/experiments/amm09_two_slot_memory/results/TRAINING_LOCK.json \
+            --development-lock mechinterp/bpd/experiments/amm09_two_slot_memory/results/DEVELOPMENT_LOCK.json \
+            --preflight mechinterp/bpd/experiments/amm09_two_slot_memory/results/PREFLIGHT.json \
+            --out /tmp/amm09_original_primary_analysis.json
+          if test -f mechinterp/bpd/experiments/amm09_two_slot_memory/results/ANALYSIS_CORRECTED.json; then
+            python mechinterp/bpd/experiments/amm09_two_slot_memory/audit_development.py \
+              --development /tmp/amm09_first_run/amm09_development.json \
+              --training-lock mechinterp/bpd/experiments/amm09_two_slot_memory/results/TRAINING_LOCK.json \
+              --development-lock mechinterp/bpd/experiments/amm09_two_slot_memory/results/DEVELOPMENT_LOCK.json \
+              --preflight mechinterp/bpd/experiments/amm09_two_slot_memory/results/PREFLIGHT.json \
+              --check-lock mechinterp/bpd/experiments/amm09_two_slot_memory/results/ANALYSIS_CORRECTED.json
+          fi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: amm09-independent-corrected-scientific-audit
+          retention-days: 30
+          path: /tmp/amm09_original_primary_analysis.json

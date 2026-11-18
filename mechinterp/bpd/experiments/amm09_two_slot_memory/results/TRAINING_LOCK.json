@@ -1,0 +1,40 @@
+{
+  "global_coefficients": [
+    0.1199,
+    0.0959,
+    -0.0054,
+    -0.0008,
+    -0.1301,
+    -0.0131,
+    -0.0036,
+    0.2313,
+    0.0376,
+    -0.1925,
+    -0.0483,
+    -0.0031,
+    0.0132,
+    0.0063,
+    0.3032,
+    -0.1279,
+    -0.2179,
+    0.0143
+  ],
+  "independent_roots": 64,
+  "pooled_action": 4,
+  "schema": "bpd.amm09.two_slot_memory.v1/training_lock",
+  "source_sha256": {
+    "case.py": "f72788b058d7eff58218ed4e0c729437820a8cfdd2518609409f2fc7fec9132a",
+    "experiment.py": "57af128ca48ef2dcd527abfcd443373705ecd046a460d53bafe2a0222df56897",
+    "models.py": "2fec8382c067147d60d9f2d4fe8d171ce3d5e15f405afffbbab5389023bc1a03"
+  },
+  "train_candidate_hits": {
+    "mask_0": 999,
+    "mask_1": 599,
+    "mask_2": 522,
+    "mask_3": 1786,
+    "mask_4": 1801,
+    "mask_5": 1425
+  },
+  "training_case_bits_sha256": "c46dc9aebe2834559ec18e0f936d2b2cbfff962553ed10905123199de555192d",
+  "training_policy_sha256": "c536d7bda5c49507138708e6fd9e0187bbb057990248116aa73cfd40777e95ef"
+}
