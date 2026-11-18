@@ -41,3 +41,21 @@ jobs:
         run: |
           python -m compileall -q mechinterp/bpd/experiments/nc08
           python -m pytest -q mechinterp/bpd/experiments/nc08/test_experiment.py mechinterp/bpd/experiments/nc08/test_aggregate.py
+
+  exact-slot-budget-certificate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Install pinned Lean 4.19 kernel
+        run: |
+          curl --fail --location --retry 3 https://github.com/leanprover/lean4/releases/download/v4.19.0/lean-4.19.0-linux.tar.zst -o /tmp/lean.tar.zst
+          tar --zstd -xf /tmp/lean.tar.zst -C /tmp
+          echo '/tmp/lean-4.19.0-linux/bin' >> "$GITHUB_PATH"
+      - name: Kernel check the frozen passwise rank budget
+        run: |
+          set -euo pipefail
+          lean mechinterp/bpd/experiments/nc08/PasswiseBudget.lean | tee /tmp/nc08-lean.txt
+          grep 'BPD.NC08.all_frozen_candidate_budgets_below_flat_four' /tmp/nc08-lean.txt
+          grep 'BPD.NC08.rank_twelve_saves_four_physical_slots' /tmp/nc08-lean.txt
+          if grep -E 'sorryAx|ofReduceBool' /tmp/nc08-lean.txt; then exit 1; fi
