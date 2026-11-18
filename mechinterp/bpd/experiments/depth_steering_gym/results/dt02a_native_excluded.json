@@ -1,0 +1,316 @@
+{
+  "experiment": "BPD-DT02-A",
+  "evidence_class": "trained engineering on excluded seeds",
+  "supervised_depths": [
+    2,
+    4,
+    6
+  ],
+  "heldout_depths": [
+    8,
+    12
+  ],
+  "synthetic_arc_only": true,
+  "official_arc1_evaluated": false,
+  "full_task_jacobian_null_evaluated": false,
+  "torch": "2.5.1+cu124",
+  "updates": 64,
+  "roots": [
+    {
+      "seed": 901,
+      "family": {
+        "sudoku4": {
+          "final_loss": 0.4546700417995453,
+          "checkpoint_sha256": "c56b5196e6a0dcbfc1a0361eb0903da2e87acc42a7c71d922e80156f48920031",
+          "parameter_count": 14082,
+          "eval": {
+            "8": {
+              "token_accuracy": 0.7919921875,
+              "exact_task_accuracy": 0.0,
+              "board_legality": 0.0,
+              "n": 64,
+              "task_label_provenance": "independent exact host oracle",
+              "official_arc1": false
+            },
+            "12": {
+              "token_accuracy": 0.7919921875,
+              "exact_task_accuracy": 0.0,
+              "board_legality": 0.0,
+              "n": 64,
+              "task_label_provenance": "independent exact host oracle",
+              "official_arc1": false
+            }
+          },
+          "protected_steering": {
+            "protected_all_vocab_max_error": 2.384185791015625e-07,
+            "rank_head": 11,
+            "n": 8,
+            "physical_svd_basis_rank": 8,
+            "depths": {
+              "4": {
+                "zero": {
+                  "donor_token_agreement": 0.2421875,
+                  "donor_board_agreement": 0.0,
+                  "logit_mse": 7.47107458114624,
+                  "edit_norm": 0.0
+                },
+                "full_dark": {
+                  "donor_token_agreement": 0.234375,
+                  "donor_board_agreement": 0.0,
+                  "logit_mse": 7.631308078765869,
+                  "edit_norm": 3.0169289112091064
+                },
+                "physical_svd8_dark": {
+                  "donor_token_agreement": 0.25,
+                  "donor_board_agreement": 0.0,
+                  "logit_mse": 7.391814231872559,
+                  "edit_norm": 2.294090509414673
+                }
+              },
+              "8": {
+                "zero": {
+                  "donor_token_agreement": 0.2578125,
+                  "donor_board_agreement": 0.0,
+                  "logit_mse": 7.439797401428223,
+                  "edit_norm": 0.0
+                },
+                "full_dark": {
+                  "donor_token_agreement": 0.2578125,
+                  "donor_board_agreement": 0.0,
+                  "logit_mse": 7.451066017150879,
+                  "edit_norm": 3.0169289112091064
+                },
+                "physical_svd8_dark": {
+                  "donor_token_agreement": 0.2578125,
+                  "donor_board_agreement": 0.0,
+                  "logit_mse": 7.432968616485596,
+                  "edit_norm": 2.294090509414673
+                }
+              },
+              "12": {
+                "zero": {
+                  "donor_token_agreement": 0.2578125,
+                  "donor_board_agreement": 0.0,
+                  "logit_mse": 7.439820766448975,
+                  "edit_norm": 0.0
+                },
+                "full_dark": {
+                  "donor_token_agreement": 0.2578125,
+                  "donor_board_agreement": 0.0,
+                  "logit_mse": 7.4372758865356445,
+                  "edit_norm": 3.0169289112091064
+                },
+                "physical_svd8_dark": {
+                  "donor_token_agreement": 0.2578125,
+                  "donor_board_agreement": 0.0,
+                  "logit_mse": 7.437795162200928,
+                  "edit_norm": 2.294090509414673
+                }
+              }
+            },
+            "claim_boundary": "state-level physical SVD steering engineering control; no fitted BPD sparse components or full signed-Jacobian null"
+          }
+        },
+        "arc_style": {
+          "final_loss": 0.7924887537956238,
+          "checkpoint_sha256": "241a61b1be81774aa2cb986d67e790ca2b3579c0bb3bf12d1befd933407c7133",
+          "parameter_count": 14082,
+          "eval": {
+            "8": {
+              "token_accuracy": 0.3505859375,
+              "exact_task_accuracy": 0.0,
+              "board_legality": null,
+              "n": 64,
+              "task_label_provenance": "independent exact host oracle",
+              "official_arc1": false
+            },
+            "12": {
+              "token_accuracy": 0.3505859375,
+              "exact_task_accuracy": 0.0,
+              "board_legality": null,
+              "n": 64,
+              "task_label_provenance": "independent exact host oracle",
+              "official_arc1": false
+            }
+          }
+        },
+        "storyworld": {
+          "final_loss": 0.14820347726345062,
+          "checkpoint_sha256": "589fe59fed69e06157a744885610fc2f95567610e12245dd4600d477cd3343b8",
+          "parameter_count": 14082,
+          "eval": {
+            "8": {
+              "token_accuracy": 0.953125,
+              "exact_task_accuracy": 0.953125,
+              "board_legality": null,
+              "n": 64,
+              "task_label_provenance": "independent exact host oracle",
+              "official_arc1": false
+            },
+            "12": {
+              "token_accuracy": 0.953125,
+              "exact_task_accuracy": 0.953125,
+              "board_legality": null,
+              "n": 64,
+              "task_label_provenance": "independent exact host oracle",
+              "official_arc1": false,
+              "terminal_episodes": 16,
+              "host_ending_success_rate": 0.0,
+              "ending_histogram": {
+                "unfinished": 16
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "seed": 902,
+      "family": {
+        "sudoku4": {
+          "final_loss": 0.4623994529247284,
+          "checkpoint_sha256": "00bc64915bc3d847147348f17d62151342b3e3288750af2e7ae2672ac77d8152",
+          "parameter_count": 14082,
+          "eval": {
+            "8": {
+              "token_accuracy": 0.7841796875,
+              "exact_task_accuracy": 0.0,
+              "board_legality": 0.0,
+              "n": 64,
+              "task_label_provenance": "independent exact host oracle",
+              "official_arc1": false
+            },
+            "12": {
+              "token_accuracy": 0.7744140625,
+              "exact_task_accuracy": 0.0,
+              "board_legality": 0.0,
+              "n": 64,
+              "task_label_provenance": "independent exact host oracle",
+              "official_arc1": false
+            }
+          },
+          "protected_steering": {
+            "protected_all_vocab_max_error": 1.7881393432617188e-07,
+            "rank_head": 11,
+            "n": 8,
+            "physical_svd_basis_rank": 8,
+            "depths": {
+              "4": {
+                "zero": {
+                  "donor_token_agreement": 0.2890625,
+                  "donor_board_agreement": 0.0,
+                  "logit_mse": 7.94795036315918,
+                  "edit_norm": 0.0
+                },
+                "full_dark": {
+                  "donor_token_agreement": 0.2890625,
+                  "donor_board_agreement": 0.0,
+                  "logit_mse": 7.932667255401611,
+                  "edit_norm": 2.7401065826416016
+                },
+                "physical_svd8_dark": {
+                  "donor_token_agreement": 0.2734375,
+                  "donor_board_agreement": 0.0,
+                  "logit_mse": 7.894613742828369,
+                  "edit_norm": 2.5423271656036377
+                }
+              },
+              "8": {
+                "zero": {
+                  "donor_token_agreement": 0.3046875,
+                  "donor_board_agreement": 0.0,
+                  "logit_mse": 7.959813594818115,
+                  "edit_norm": 0.0
+                },
+                "full_dark": {
+                  "donor_token_agreement": 0.3046875,
+                  "donor_board_agreement": 0.0,
+                  "logit_mse": 7.949350357055664,
+                  "edit_norm": 2.7401065826416016
+                },
+                "physical_svd8_dark": {
+                  "donor_token_agreement": 0.3046875,
+                  "donor_board_agreement": 0.0,
+                  "logit_mse": 7.958796977996826,
+                  "edit_norm": 2.5423271656036377
+                }
+              },
+              "12": {
+                "zero": {
+                  "donor_token_agreement": 0.3046875,
+                  "donor_board_agreement": 0.0,
+                  "logit_mse": 7.966778755187988,
+                  "edit_norm": 0.0
+                },
+                "full_dark": {
+                  "donor_token_agreement": 0.3046875,
+                  "donor_board_agreement": 0.0,
+                  "logit_mse": 7.9676361083984375,
+                  "edit_norm": 2.7401065826416016
+                },
+                "physical_svd8_dark": {
+                  "donor_token_agreement": 0.3046875,
+                  "donor_board_agreement": 0.0,
+                  "logit_mse": 7.968520641326904,
+                  "edit_norm": 2.5423271656036377
+                }
+              }
+            },
+            "claim_boundary": "state-level physical SVD steering engineering control; no fitted BPD sparse components or full signed-Jacobian null"
+          }
+        },
+        "arc_style": {
+          "final_loss": 0.9922186732292175,
+          "checkpoint_sha256": "71560ed2c15b7e30c5f93a197b4b4eb8738310c919aae14496cf7300fba4c76c",
+          "parameter_count": 14082,
+          "eval": {
+            "8": {
+              "token_accuracy": 0.3310546875,
+              "exact_task_accuracy": 0.0,
+              "board_legality": null,
+              "n": 64,
+              "task_label_provenance": "independent exact host oracle",
+              "official_arc1": false
+            },
+            "12": {
+              "token_accuracy": 0.3310546875,
+              "exact_task_accuracy": 0.0,
+              "board_legality": null,
+              "n": 64,
+              "task_label_provenance": "independent exact host oracle",
+              "official_arc1": false
+            }
+          }
+        },
+        "storyworld": {
+          "final_loss": 0.0767466202378273,
+          "checkpoint_sha256": "ab68589308849992e3cdd3a3c6273ae4ab7023b305399b07b1021a40f690fc56",
+          "parameter_count": 14082,
+          "eval": {
+            "8": {
+              "token_accuracy": 0.921875,
+              "exact_task_accuracy": 0.921875,
+              "board_legality": null,
+              "n": 64,
+              "task_label_provenance": "independent exact host oracle",
+              "official_arc1": false
+            },
+            "12": {
+              "token_accuracy": 0.921875,
+              "exact_task_accuracy": 0.921875,
+              "board_legality": null,
+              "n": 64,
+              "task_label_provenance": "independent exact host oracle",
+              "official_arc1": false,
+              "terminal_episodes": 16,
+              "host_ending_success_rate": 0.0,
+              "ending_histogram": {
+                "unfinished": 16
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}
