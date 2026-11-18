@@ -40,8 +40,8 @@ def audit(receipt: dict) -> dict:
         assert row["training"]["training_steps"] == 256
         assert row["data_sizes"] == {"train": 2048, "discovery": 512,
                                      "selection": 512, "heldout": 1024}
-        assert tuple(int(x) for x in row["selection"]) == RANKS
-        assert tuple(int(x) for x in row["all_ranks"]) == RANKS
+        assert tuple(sorted(int(x) for x in row["selection"])) == RANKS
+        assert tuple(sorted(int(x) for x in row["all_ranks"])) == RANKS
         chosen = [
             rank for rank in RANKS
             if row["selection"][str(rank)]["clean_to_projected_kl_nats"] <= .025
