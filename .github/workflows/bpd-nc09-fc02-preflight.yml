@@ -43,3 +43,5 @@ jobs:
           python -m pytest -q \
             mechinterp/bpd/experiments/nc09_fixed12/tangent_sham_calibration/test_experiment.py \
             mechinterp/bpd/experiments/nc09_fixed12/tangent_sham_calibration/test_aggregate.py
+      - name: Verify first 59-root publication and frozen source SHA without retraining
+        run: python -m pytest -q mechinterp/bpd/experiments/nc09_fixed12/tangent_sham_calibration/test_published_results.py
