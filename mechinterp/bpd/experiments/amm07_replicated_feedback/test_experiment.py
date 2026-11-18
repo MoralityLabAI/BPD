@@ -147,12 +147,24 @@ class AMM07Tests(unittest.TestCase):
 
     @staticmethod
     def fake_memory():
+        rows=[{'root':m.root_key('training',i),'assay':
+               {'candidate_bits':{'component_0':'0','component_1':'1'}}} for i in range(64)]
+        digest=m.digest([{'root':r['root'],'candidate_bits':r['assay']['candidate_bits']} for r in rows])
         d={'schema':m.SCHEMA+'/training_memory','source_sha256':e.source_sha256(),
            'experiment':e.NAME,'phase':'training','independent_training_roots':64,
-           'rows':[{'root':m.root_key('training',i)} for i in range(64)],
+           'rows':rows,'train_rows_sha256':digest,
            'coefficients':[.5]+[0.]*10,'pooled_action':0}
-        d['sha256']=m.digest(d)
+        d['sha256']=m.digest({k:v for k,v in d.items() if k!='rows'})
         return d
+
+    def test_compact_policy_memory_guards_numeric_source(self):
+        d=self.fake_memory()
+        self.assertTrue(e.validate_memory(d))
+        d['coefficients'][0]=.50001
+        with self.assertRaises(ValueError):e.validate_memory(d)
+        d=self.fake_memory()
+        d['rows'][0]['assay']['candidate_bits']['component_0']='1'
+        with self.assertRaises(ValueError):e.validate_memory(d)
 
     def test_confirmation_hard_guard_before_root_access(self):
         memory=self.fake_memory()
