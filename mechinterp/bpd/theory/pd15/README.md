@@ -37,3 +37,12 @@ The other two learned arms report the bandwidth/weight interaction as descriptiv
 - \`bpd-pd15-registered.yml\`: one-time source SHA lock and 160-arm raw JSON archive
 
 The objective witness uses true Q **only** to score a known off-axis transformation in the diagnostic after fitting. Weight construction and all searches accept only observed x.
+
+
+## Original registered scientific result: PASS
+
+The [first source-locked 160-arm GitHub Actions run #44233123380](https://github.com/MoralityLabAI/BPD/actions/runs/44233123380) completed all engineering and scientific checks. The registered primary **weighted_wide recovered 32/32 mechanisms versus 0/32 for uniform_wide**, a clean 32-0 paired contingency with **exact two-sided McNemar p=4.656612873077393e-10**. The independent fixed-remix objective consistency diagnostic also passed on 32/32 newly seeded source pools. **Both frozen scientific gates PASS.**
+
+The secondary weighted_narrow arm recovered 27/32 versus 10/32 for uniform_narrow, with the privileged planted-Q oracle at 32/32. Weighted_wide achieved exactly **100% four-pass support on every board and all eight withheld/seen families**, with zero false-on and false-off component gates. Mean matched read cosine was 0.99560 and mean held-out MSE 0.001293.
+
+The original result, including all failures and source hashes, is retained in [RESULTS_20261118.md](RESULTS_20261118.md), [PER_SEED_20261118.csv](PER_SEED_20261118.csv), [test_published_results.py](test_published_results.py), and the [immutable full original JSON artifact #14396987094](https://github.com/MoralityLabAI/BPD/actions/runs/44233123380/artifacts/14396987094). The archive SHA256 is 94e47c61b9020a092cb2062e40681ef2e7b6693904ae42bdb5bdd196163015ee. All predeclared scientific source files, thresholds and older results remain unchanged.
