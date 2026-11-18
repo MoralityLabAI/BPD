@@ -6,6 +6,29 @@ Each new model receives **16 independent local calibration pairs**. Both candida
 
 For each independent model root there are **1024 fresh test donor pairs** and **1024 separate repeatability pairs**. Its quality classification and BPD factor fidelity are measured from independent sources and reported for auditing, without discarding failed models. The registered primary scientific minimum is +8 percentage points, with three Holm-adjusted root-level contrasts and the corrected EvalMath nonparametric 95/95 sham calibration. There are 64 independent development roots and 128 **sealed** confirmation roots.
 
+## Completed development study and scientific confirmation hold
+
+[RESULTS.md](RESULTS.md) and the registered `results/DEVELOPMENT_LOCK.json`
+record 64 independent model roots, each with 1024 heldout and 1024
+repeatability cases. Bayesian duplicate disagreements identified judge
+quality correctly on **59/64 roots**, and 64/64 passed the prespecified
+factor-fitting fidelity diagnostics. The source-replayed primary
+quality-aware advantage over a matched-fit quality-blind comparator was
+**+0.305 percentage points** with 17 benefiting roots, 17 harmed and
+30 tied; the one-sided Holm-adjusted root sign p was **1.0**. A stronger
+fixed-mixture policy using all calibration pairs scored higher.
+
+The corrected EvalMath 95/95 variation floor was 5.08pp, with an 8pp
+scientific minimum. The strict planner returned
+**`REDESIGN_OR_PILOT_ONLY`**. The audit-only per-case oracle
+headroom (7.875%) also missed its separate 8pp confirmation veto.
+**All 128 AMM-07 confirmation model roots remain sealed.**
+Do not run `--phase confirmation`, fabricate a READY preflight,
+or approve a release manifest for this cohort. The historical
+floating-point training mismatch and corrective source amendment
+are preserved in [AMENDMENT_TRAINING_NUMERIC.md](AMENDMENT_TRAINING_NUMERIC.md).
+The final code/coefficients remain frozen for exact behavioral replay.
+
 ## Source-locked CPU workflow
 
 Run from the BPD repository root on Python 3.12 with CPU PyTorch 2.10:
