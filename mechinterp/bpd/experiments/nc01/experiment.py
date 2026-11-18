@@ -150,9 +150,12 @@ def factor_schedule(batch: int, mask: torch.Tensor) -> PassMaskSchedule:
 
 def binary_kl(clean: torch.Tensor, altered: torch.Tensor) -> torch.Tensor:
     """Per-example, per-pass KL for two-class logits [-s,+s], in nats."""
-    p = F.softmax(torch.stack((-clean, clean), dim=-1), dim=-1)
-    q_log = F.log_softmax(torch.stack((-altered, altered), dim=-1), dim=-1)
-    p_log = F.log_softmax(torch.stack((-clean, clean), dim=-1), dim=-1)
+    # Reference logits may differ by <1e-7. Float32 softmax-KL cancellation
+    # can report an unphysical positive KL near 1e-7; audit in float64.
+    clean64, altered64 = clean.double(), altered.double()
+    p = F.softmax(torch.stack((-clean64, clean64), dim=-1), dim=-1)
+    q_log = F.log_softmax(torch.stack((-altered64, altered64), dim=-1), dim=-1)
+    p_log = F.log_softmax(torch.stack((-clean64, clean64), dim=-1), dim=-1)
     return (p * (p_log - q_log)).sum(dim=-1)
 
 
