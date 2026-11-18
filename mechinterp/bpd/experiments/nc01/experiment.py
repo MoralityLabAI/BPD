@@ -242,7 +242,7 @@ def communities_from_selection(selected: torch.Tensor,
         nodes.sort()
         if not 2 <= len(nodes) <= MAX_COMMUNITY:
             continue
-        score = sum(adjacency[a][b] for a in nodes for b in nodes if a < b)
+        score = sum(adjacency[a].get(b, 0.0) for a in nodes for b in nodes if a < b)
         out.append({
             "nodes": nodes,
             "size": len(nodes),
