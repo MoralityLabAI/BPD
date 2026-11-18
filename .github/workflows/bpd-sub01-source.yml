@@ -36,7 +36,7 @@ jobs:
       - name: Structural tests and excluded smoke only
         run: |
           python -m compileall -q mechinterp/bpd/experiments/sub01
-          python -m pytest -q mechinterp/bpd/experiments/sub01/test_experiment.py
+          python -m pytest -q mechinterp/bpd/experiments/sub01/test_experiment.py mechinterp/bpd/experiments/sub01/test_cli_maintenance.py
           python -m mechinterp.bpd.experiments.sub01.experiment --phase smoke --output /tmp/sub01-smoke.json
       - uses: actions/upload-artifact@v4
         with:
