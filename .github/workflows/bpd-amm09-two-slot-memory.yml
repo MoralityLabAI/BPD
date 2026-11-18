@@ -1,0 +1,99 @@
+name: BPD-AMM-09 two-slot bounded causal strategy memory
+
+on:
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/amm09_two_slot_memory/**'
+      - '.github/workflows/bpd-amm09-two-slot-memory.yml'
+  workflow_dispatch:
+
+jobs:
+  independent-root-cpu:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install CPU-only PyTorch and numpy
+        run: python -m pip install --index-url https://download.pytorch.org/whl/cpu 'torch==2.10.0+cpu' 'numpy>=1.26'
+      - name: Run excluded-root engineer, full-dose, gauge, native BPD and seal tests
+        run: python -m unittest mechinterp.bpd.experiments.amm09_two_slot_memory.test_experiment -v
+      - name: Source-locked 64 independent training models
+        shell: bash
+        run: |
+          python -m mechinterp.bpd.experiments.amm09_two_slot_memory.experiment \
+            --phase training --out /tmp/amm09_training.json
+          python - <<'PY'
+          import json,pathlib
+          from mechinterp.bpd.experiments.amm09_two_slot_memory import experiment as e
+          run=json.load(open('/tmp/amm09_training.json'))
+          lock=e.compact(run)
+          print('AMM09_TRAINING_LOCK='+json.dumps(lock,sort_keys=True))
+          f=pathlib.Path('mechinterp/bpd/experiments/amm09_two_slot_memory/results/TRAINING_LOCK.json')
+          if f.exists():
+              assert lock==json.loads(f.read_text()),'source/policy/training-bit digest mismatch'
+              print('AMM09 exact training policy/bit replay PASS')
+          else:
+              print('AMM09 TRAINING ONLY: development requires a committed training lock')
+          PY
+      - name: Independent development only after training policy lock
+        shell: bash
+        run: |
+          if test -f mechinterp/bpd/experiments/amm09_two_slot_memory/results/TRAINING_LOCK.json; then
+            python -m mechinterp.bpd.experiments.amm09_two_slot_memory.experiment \
+              --phase development --memory /tmp/amm09_training.json \
+              --out /tmp/amm09_development.json
+            python - <<'PY'
+          import json,pathlib
+          from mechinterp.bpd.experiments.amm09_two_slot_memory import experiment as e
+          run=json.load(open('/tmp/amm09_development.json'))
+          lock=e.compact(run)
+          print('AMM09_DEVELOPMENT_LOCK='+json.dumps(lock,sort_keys=True))
+          f=pathlib.Path('mechinterp/bpd/experiments/amm09_two_slot_memory/results/DEVELOPMENT_LOCK.json')
+          if f.exists():
+              assert lock==json.loads(f.read_text()),'rootwise candidate, action or sham replay mismatch'
+              print('AMM09 independent development all-case semantic replay PASS')
+          else:
+              print('AMM09 first development receipt; freeze its original data and all-root verdict')
+          PY
+          else
+            echo 'AMM09 development STOPPED: training/source lock absent'
+          fi
+      - name: Pinned corrected independent-root EvalMath 95/95 gate
+        shell: bash
+        run: |
+          if test -f /tmp/amm09_development.json; then
+            curl -fsSL https://raw.githubusercontent.com/MoralityLabAI/EvalMath/6d9c28dbe8e4c42b3fba76ae7adb84aed9f0921a/skills/evalmath-mechinterp-power/scripts/preflight.py -o /tmp/amm09_evalmath.py
+            python - <<'PY'
+          import json
+          d=json.load(open('/tmp/amm09_development.json'))
+          json.dump(d['preflight_input'],open('/tmp/amm09_pilot.json','w'))
+          PY
+            python /tmp/amm09_evalmath.py --pilot /tmp/amm09_pilot.json --out /tmp/amm09_preflight.json
+            python - <<'PY'
+          import json,pathlib
+          p=json.load(open('/tmp/amm09_preflight.json'))
+          print('AMM09_PREFLIGHT='+json.dumps(p,sort_keys=True))
+          f=pathlib.Path('mechinterp/bpd/experiments/amm09_two_slot_memory/results/PREFLIGHT.json')
+          if f.exists():
+              assert p==json.loads(f.read_text()),'pinned EvalMath preflight mismatch'
+              print('AMM09 pinned independent-root preflight replay PASS')
+          print('128 AMM09 CONFIRMATION ROOTS REMAIN SEALED')
+          PY
+          else
+            echo 'AMM09 no development: preflight blocked'
+          fi
+      - name: Archive independent source and complete training/development case receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: amm09-two-slot-cpu-source-locked-receipts
+          retention-days: 30
+          if-no-files-found: ignore
+          path: |
+            /tmp/amm09_training.json
+            /tmp/amm09_development.json
+            /tmp/amm09_pilot.json
+            /tmp/amm09_preflight.json
