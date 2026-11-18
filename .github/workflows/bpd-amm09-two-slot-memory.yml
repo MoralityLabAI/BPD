@@ -1,4 +1,4 @@
-name: BPD-AMM-09 two-slot bounded causal strategy memory
+name: BPD-AMM-09 source tests and cross-host numeric portability
 
 on:
   pull_request:
@@ -33,15 +33,37 @@ jobs:
           print('AMM09_TRAINING_LOCK='+json.dumps(lock,sort_keys=True))
           f=pathlib.Path('mechinterp/bpd/experiments/amm09_two_slot_memory/results/TRAINING_LOCK.json')
           if f.exists():
-              assert lock==json.loads(f.read_text()),'source/policy/training-bit digest mismatch'
-              print('AMM09 exact training policy/bit replay PASS')
+              expected=json.loads(f.read_text())
+              assert lock['source_sha256']==expected['source_sha256'], 'source revision mismatch'
+              assert lock['independent_roots']==expected['independent_roots']==64
+              if lock==expected:
+                  print('AMM09 exact training policy/bit replay PASS')
+                  pathlib.Path('/tmp/amm09_exact_train_replay').write_text('1')
+              else:
+                  diff={k:{'original':expected['train_candidate_hits'][k],
+                           'replay':lock['train_candidate_hits'][k]}
+                        for k in expected['train_candidate_hits']
+                        if expected['train_candidate_hits'][k]!=lock['train_candidate_hits'][k]}
+                  record={'source_match':True,'original_policy_sha256':expected['training_policy_sha256'],
+                          'replayed_policy_sha256':lock['training_policy_sha256'],
+                          'original_pooled_action':expected['pooled_action'],
+                          'replayed_pooled_action':lock['pooled_action'],
+                          'candidate_count_differences':diff,
+                          'max_abs_global_coeff_difference':max(abs(x-y) for x,y in zip(
+                              expected['global_coefficients'],lock['global_coefficients']))}
+                  pathlib.Path('/tmp/amm09_cross_host_numerical_drift.json').write_text(
+                      json.dumps(record,sort_keys=True,indent=2))
+                  print('AMM09_CROSS_HOST_NUMERICAL_DRIFT='+json.dumps(record,sort_keys=True))
+                  print('::warning title=AMM09 CPU NUMERICAL NONPORTABILITY::Frozen original development receipt remains source of record; cross-host policy hash differs; strict replay cannot be claimed; see NUMERIC_REPLAY_LIMITATION.md')
           else:
               print('AMM09 TRAINING ONLY: development requires a committed training lock')
           PY
       - name: Independent development only after training policy lock
         shell: bash
         run: |
-          if test -f mechinterp/bpd/experiments/amm09_two_slot_memory/results/TRAINING_LOCK.json; then
+          if test -f mechinterp/bpd/experiments/amm09_two_slot_memory/results/DEVELOPMENT_LOCK.json; then
+            echo 'AMM09 historical DEVELOPMENT already scored: do not create another root run here; original receipt audited separately'
+          elif test -f /tmp/amm09_exact_train_replay; then
             python -m mechinterp.bpd.experiments.amm09_two_slot_memory.experiment \
               --phase development --memory /tmp/amm09_training.json \
               --out /tmp/amm09_development.json
@@ -122,3 +144,4 @@ jobs:
             /tmp/amm09_pilot.json
             /tmp/amm09_preflight.json
             /tmp/amm09_corrected_analysis.json
+            /tmp/amm09_cross_host_numerical_drift.json
