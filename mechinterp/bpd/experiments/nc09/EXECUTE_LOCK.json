@@ -1,6 +1,6 @@
 {
   "study": "BPD-NC-09",
-  "status": "SOURCE_LOCK_BEFORE_FIRST_MODEL_TRAINING",
+  "status": "SOURCE_LOCK_AMENDED_BEFORE_FIRST_DEVELOPMENT_ROOT",
   "protocol_first_commit": "e85724a42b97d9fa41f82cf76d537e71832250a7",
   "source_tree_preexecution_commit": "3cd1fb79b7e5c45271daf65abacd74b2b2425ab6",
   "engineering_roots": [
@@ -17,9 +17,9 @@
   "models_per_root": 2,
   "source_blob_sha1": {
     "mechinterp/bpd/experiments/nc09/PROTOCOL.md": "d79a1740e4455b991133cf97fb71930ea6bc6a3f",
-    "mechinterp/bpd/experiments/nc09/experiment.py": "fe5db4d1bbb61adbbc3db8fdcd142f05be97b281",
+    "mechinterp/bpd/experiments/nc09/experiment.py": "3ddfbb92a1ec9a0b92bb64575191846c6cd338db",
     "mechinterp/bpd/experiments/nc09/aggregate.py": "d1695559e31b6d78a6a87160e3d2fb28e6e2fc8b",
-    "mechinterp/bpd/experiments/nc09/test_experiment.py": "c837e3531051fb27508f3d450d48736d3bc76e26"
+    "mechinterp/bpd/experiments/nc09/test_experiment.py": "ddace0e5f50b8e688410a52eb99786ade2e50088"
   },
   "training_steps": 384,
   "train_examples_per_task": 2048,
@@ -29,5 +29,16 @@
   "sham_proposals": 2048,
   "shams_required": 8,
   "conditions": "Run source checks, then one excluded smoke root 899, then eight engineering root pairs. Any source change must produce a separately logged engineering amendment before first development run. Scientific failure must remain intact.",
-  "confirmation": "SEALED"
+  "confirmation": "SEALED",
+  "source_tree_amended_predevelopment_commit": "d9aebbe7eecd142f3bd006f77895bb06a3f2188b",
+  "amendments": [
+    {
+      "kind": "PREDEVELOPMENT_ENGINEERING_ONLY",
+      "initial_ci_run": "https://github.com/MoralityLabAI/BPD/actions/runs/44268471316",
+      "initial_outcome": "7 passing unit tests, 3 broadcasting failures; development eight-root job skipped",
+      "source_change": "replace source@R batch matmul with einsum nti,tij->ntj in Procrustes; same correction in planted replay test",
+      "modified_scientific_protocol": false,
+      "first_development_root_evaluated_before_fix": false
+    }
+  ]
 }
