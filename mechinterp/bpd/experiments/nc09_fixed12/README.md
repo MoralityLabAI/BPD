@@ -13,3 +13,24 @@ Independent 1024-example true-label final evaluation, four-pass KL, source-dose 
 The fixed 4096-draw whole-model-root bootstrap uses RNG 909009. A failed criterion stays **DEVELOPMENT_NULL_OR_INELIGIBLE**. Original raw model-root artifacts and source hashes remain frozen after first launch; prior NC-05–08 results are unchanged. Independent sham calibration (>=59 roots), EvalMath power preflight and 32-root scientific confirmation remain sealed and ungenerated.
 
 See [THEORY.md](THEORY.md) for the physical source-dose gain, finite multiple-choice rank knapsack and limits of first-order score-loss proxies.
+
+
+## Original prospective result: DEVELOPMENT_POSITIVE
+
+The [first source-locked 16-model development run #44268539237](https://github.com/MoralityLabAI/BPD/actions/runs/44268539237) completed the original cohort with engineering PASS and **all six registered developmental gates PASS**. All 16 roots admitted their eight physical shams. The allocated passwise projectors remained at exactly 12 total dimensions, against the 16-direction flat-rank-four reference.
+
+| Paired true-label final NLL (nats) | Mean | 95% independent-root bootstrap |
+| --- | ---: | --- |
+| Flat rank3 minus source-DP12 | **+0.02718** | [+0.01170,+0.04646] |
+| Source-dose-matched flat rank3 minus source-DP12 | **+0.02802** | [+0.01185,+0.04827] |
+| DP12 minus clean teacher | +0.01493 | [+0.00774,+0.02380] |
+| DP12 minus flat rank4 | +0.00701 | [+0.00267,+0.01243] |
+| Matched same-tuple physical sham minus DP12 | **+0.05341** | [+0.03898,+0.06769] |
+
+All sixteen models individually favored DP12 over **both** 12-dimensional flat-rank-three controls. The source-RMS-dose-matched gain averaged **0.999956** (range .972897–1.041753). The selected passwise rank allocations were (4,3,3,2) on nine models, (4,4,2,2) on four, and (5,3,2,2) on three, with more retained physical directions early in the recurrence.
+
+The predeclared descriptive reversed-rank-order placebo was **+0.10827 nats** worse than DP12 on average with the same 12-slot budget. One individual model root, 903, had higher absolute task cost and a negative local sham margin; the original registered *mean/root-bootstrap* gates passed and the raw counterexample is retained.
+
+[Full frozen first-run report](RESULTS_20261118.md) · [all sixteen root outcomes](PER_ROOT_20261118.csv) · [independent SHA and raw 17-member artifact audit](test_published_results.py) · [original GitHub Actions artifact #14410589675](https://github.com/MoralityLabAI/BPD/actions/runs/44268539237/artifacts/14410589675). The original ZIP SHA256 is **585bec0fea7fd43fa21c2e7d3e32a0794ef760692a644ec52c8a6faf9e10fc89**.
+
+This is **successful development evidence**, with a separate independent 59-root sham calibration, EvalMath power preflight and new 32-root scientific confirmation still sealed.
