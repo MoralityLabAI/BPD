@@ -10,6 +10,48 @@ Every policy sees the same 18-dimensional per-mask causal-response feature vecto
 
 The **primary question** is whether case-conditioned **memory_only** exceeds the **strongest fixed pooled permitted mask** selected on the *same global training corpus*. The registered secondaries compare memory-plus-local against pooled, local ridge and memory-only. All four root-level positive comparisons receive Holm adjustment. The independent sample is **64 newly trained development model roots**, each with 512 heldout and 512 independent repeatability donor cases. A 95/95 nonparametric sham calibration and the fixed +8-point scientific minimum govern confirmation admission.
 
+## Prospective development completed; confirmation sealed
+
+The original first-run 64-model developmental cohort is archived in the
+[original hosted artifact](https://github.com/MoralityLabAI/BPD/actions/runs/44281548742).
+[RESULTS.md](RESULTS.md) contains every arm, the four registered
+independent-root comparisons, fidelity and physical-dose audits.
+The preregistered primary **memory_only minus strongest fixed pooled
+mask (0,2)** was **+14.78 percentage points** across 32,768 heldout
+cases, **55 positive / 8 negative / 1 tied model roots**. Its corrected
+four-test Holm p was **1.95e-9**, and root-bootstrap 95% interval
+**[+11.15,+18.66]pp**. It passes the registered +8pp minimum,
+while memory-plus-local adaptation was weaker than memory alone.
+
+Two post-development audit qualifications apply. First, the
+frozen `experiment.py.analysis()` mislabels the primary comparator's
+treatment numerator, although the preregistered `preflight_input`
+uses the right memory-only-versus-pooled contrast. The separately
+committed [analysis amendment](AMENDMENT_POST_DEV_ANALYSIS.md),
+`audit_development.py` and `results/ANALYSIS_CORRECTED.json`
+restore all four root tests from the original policy and candidate
+bits without modifying frozen model or action code.
+
+Second, [NUMERIC_REPLAY_LIMITATION.md](NUMERIC_REPLAY_LIMITATION.md)
+documents 27/49,152 changed training outcome bits across CPU
+workers with the same model source. **Exact cross-host retraining
+is unresolved.** The dedicated original-receipt audit downloads
+and hashes the original hosted evidence and verifies its true
+root-level analysis. The main CI reports nonportable retraining
+as an explicit warning and never re-evaluates an already scored
+development population.
+
+Corrected EvalMath returned `READY_FOR_CONFIRMATION` using
+the correctly registered effect and a **6.45pp** 95/95 sham bound;
+63/64 model roots meet the fidelity veto and the allowed six-mask
+oracle has 27.78pp headroom over pooled. **ALL 128 AMM09
+CONFIRMATION ROOTS REMAIN SEALED.** The protocol additionally requires
+a separately committed *human-approved* source-policy-preflight
+release manifest, which is absent. The replay limitation calls
+for further prospective deterministic-backend validation before
+interpreting a confirmation run. Do not invoke `--phase confirmation`
+or imply real-agent/LLM transfer.
+
 ## CPU reproducibility
 
 Run from BPD repository root with Python 3.12 and CPU PyTorch 2.10:
