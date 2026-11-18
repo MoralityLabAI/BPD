@@ -1,0 +1,16 @@
+{
+  "study_id": "BPD-PD-16",
+  "execution": "first_registered_full_cohort",
+  "registration_date": "2026-11-18",
+  "config_first_commit": "225d6ab8dca1ad7b8676105446467655935e00cd",
+  "protocol_registration_commit": "06b95ae95322f274b00a566fac71ca7a04be5b4c",
+  "source_commit_sha": "c0e53efb26182308bc87ed7b58e06fe0a0d17168",
+  "units": 32,
+  "arms_per_seed": 4,
+  "excluded_engineering_seed": 4001,
+  "engineering_CI_run": 44236914803,
+  "engineering_CI_conclusion": "success",
+  "Lean_CI_run": 44236937601,
+  "Lean_CI_conclusion": "success",
+  "provenance_policy": "Retain original first 128-arm JSON and frozen scientific PASS/FAIL; no rerun or threshold/seed/source modification after unsealing."
+}

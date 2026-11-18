@@ -1,0 +1,47 @@
+name: BPD-PD-16 preflight matched norm-shuffle placebo and source checks
+
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/theory/pd16/**'
+      - '.github/workflows/bpd-pd16-preflight.yml'
+      - '.github/workflows/bpd-pd16-registered.yml'
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/theory/pd16/**'
+      - '.github/workflows/bpd-pd16-preflight.yml'
+      - '.github/workflows/bpd-pd16-registered.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  excluded-source-and-permutation-controls:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify frozen CONFIG and PROTOCOL preceded PD16 scientific implementation
+        run: |
+          set -euo pipefail
+          git cat-file -e 225d6ab8dca1ad7b8676105446467655935e00cd^{commit}
+          git cat-file -e 06b95ae95322f274b00a566fac71ca7a04be5b4c^{commit}
+          git merge-base --is-ancestor 225d6ab8dca1ad7b8676105446467655935e00cd HEAD
+          git merge-base --is-ancestor 06b95ae95322f274b00a566fac71ca7a04be5b4c HEAD
+          git show 225d6ab8dca1ad7b8676105446467655935e00cd:mechinterp/bpd/theory/pd16/CONFIG.json > /tmp/pd16-config-frozen.json
+          git show 06b95ae95322f274b00a566fac71ca7a04be5b4c:mechinterp/bpd/theory/pd16/PROTOCOL.md > /tmp/pd16-protocol-frozen.md
+          cmp mechinterp/bpd/theory/pd16/CONFIG.json /tmp/pd16-config-frozen.json
+          cmp mechinterp/bpd/theory/pd16/PROTOCOL.md /tmp/pd16-protocol-frozen.md
+      - name: Install pinned CPU torch, SciPy and pytest
+        run: |
+          python -m pip install --disable-pip-version-check pytest 'numpy>=1.26' scipy==1.14.1
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Check excluded seed 4001 and synthetic decision tests
+        run: |
+          python -m compileall -q mechinterp/bpd/theory/pd16
+          python -m pytest -q mechinterp/bpd/theory/pd16/test_experiment.py
