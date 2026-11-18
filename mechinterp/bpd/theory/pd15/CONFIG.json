@@ -1,0 +1,225 @@
+{
+  "study_id": "BPD-PD-15",
+  "registration_date": "2026-11-18",
+  "status": "prospective_frozen_before_any_pd15_scientific_training",
+  "predecessor": {
+    "pd13_first_run": 44140294730,
+    "pd13_scientific_pass": false,
+    "pd14_first_run": 44222789694,
+    "pd14_scientific_pass": false,
+    "pd14_strong_narrow_single": 3,
+    "pd14_strong_wide_single": 0,
+    "pd14_weak_wide_single": 16,
+    "pd14_weak_narrow_single": 1,
+    "pd14_strong_objective_dual_sign": 16,
+    "posthoc_weight_lambda_crossover_approx": 0.5325283039253107
+  },
+  "scientific_question": "Does norm-weighting observed clustered strong-margin 16D data by exp(-||x||²) improve complete physical BPD mechanism recovery over the original unweighted Gaussian zero-mass objective, holding sigma=0.15, original QR, 2048 training boards and nine full-angle Givens sweeps constant? Is the planted basis favored over the predeclared anchored-pair 45deg remix in independent weighted objective diagnostics?",
+  "seed_cell": {
+    "id": "clustered16d_strong",
+    "dimension": 16,
+    "support_distribution": "clustered",
+    "margin": "strong",
+    "seeds": [
+      3001,
+      3011,
+      3019,
+      3023,
+      3037,
+      3041,
+      3049,
+      3061,
+      3067,
+      3079,
+      3083,
+      3089,
+      3109,
+      3119,
+      3121,
+      3137,
+      3163,
+      3167,
+      3169,
+      3181,
+      3187,
+      3191,
+      3203,
+      3209,
+      3217,
+      3221,
+      3229,
+      3251,
+      3253,
+      3257,
+      3259,
+      3271
+    ]
+  },
+  "engineering_seed": 4001,
+  "source": {
+    "generator": "EXACT PD12 rotation_for_seed, initial_random_basis, support_banks, sample_batch, physical_model and evaluate_family; all unchanged",
+    "train_boards": 2048,
+    "training_rng_offset": 100000,
+    "passes": 4,
+    "heldout_boards_per_family": 96,
+    "heldout_rng_offset": 200000,
+    "heldout_family_stride": 10000,
+    "diagnostic_boards": 1024,
+    "diagnostic_rng_offset": 310000,
+    "diagnostic_family": "train",
+    "dimension": 16,
+    "cluster_probability": 0.85,
+    "active_magnitude_range": [
+      0.75,
+      1.25
+    ],
+    "support_cardinalities": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "heldout_families": [
+      "k1_seen",
+      "k2_seen",
+      "k3_seen",
+      "k4_seen",
+      "k2_unseen",
+      "k3_unseen",
+      "k4_unseen",
+      "transition_unseen"
+    ],
+    "shared_training_pool": "Every learned arm sees the same 2048 observed boards and first QR. No latent support, true Q, cardinality or heldout samples in optimizer."
+  },
+  "widths": {
+    "wide": 0.15,
+    "narrow": 0.05
+  },
+  "weights": {
+    "none": 0,
+    "norm1": 1
+  },
+  "arms": [
+    {
+      "key": "uniform_wide",
+      "kind": "search",
+      "width": "wide",
+      "weight": "none"
+    },
+    {
+      "key": "weighted_wide",
+      "kind": "search",
+      "width": "wide",
+      "weight": "norm1"
+    },
+    {
+      "key": "uniform_narrow",
+      "kind": "search",
+      "width": "narrow",
+      "weight": "none"
+    },
+    {
+      "key": "weighted_narrow",
+      "kind": "search",
+      "width": "narrow",
+      "weight": "norm1"
+    },
+    {
+      "key": "planted_Q_oracle",
+      "kind": "oracle",
+      "width": null,
+      "weight": null
+    }
+  ],
+  "objective": {
+    "unweighted": "max mean_over_rows_and_observed_x exp(-0.5*(xV/sigma)^2), identical to PD12 global37",
+    "weighted": "max sum_over_x w(x)*sum_over_read_j exp(-0.5*((xV)_j/sigma)^2)/(16*sum_over_x w(x))",
+    "weight_formula": "w(x)=exp(-lambda*sum_{j=1}^{16} x_j^2), computed on observed dense x only, lambda=1.0 for weighted arms; lambda=0 for controls",
+    "weight_normalization": "Per-seed fixed sum weights, no clipping, thresholding, fitting, label access or learned weight",
+    "weight_orthogonality": "||x||² is invariant under latent orthogonal Q, so w computed without latent Q",
+    "sigma_fixed_by_arm": true,
+    "pair_order": "all 120 i<j in lexicographic order, repeated 9 times",
+    "sweeps": 9,
+    "angle_grid": 37,
+    "angle_range_degrees": [
+      -90,
+      90
+    ],
+    "exact_tie_tolerance": 1e-12,
+    "candidate_angle_scores_per_learned_arm": 39960,
+    "observed_vectors_per_learned_arm": 8192,
+    "candidate_scalar_projection_evaluations_per_learned_arm": 327352320,
+    "orthonormal_factors": "V 16x16 orthogonal, U=V.T; double Givens updates",
+    "sample_weight_extra_cost": "separately record norm calculation, exp(-norm^2), weighted reductions, wall time",
+    "population_analytic_witness": {
+      "sigma": 0.15,
+      "remix_pair_axes": [
+        [
+          0,
+          1
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          12,
+          13
+        ]
+      ],
+      "lambda0_remix_minus_planted_approx": 0.01194736,
+      "lambda1_remix_minus_planted_approx": -0.00951834,
+      "expected_effective_sample_fraction_lambda1_approx": 0.4843,
+      "expected_population_crossover_lambda_approx": 0.5325283,
+      "method": "exact PD12 support enumeration and 1D/2D uniform-amplitude Gauss-Legendre quadrature; posthoc PD14 motivation, not a prescored result"
+    }
+  },
+  "scoring": {
+    "mean_read_cos_min": 0.9,
+    "overall_MSE_max": 0.035,
+    "per_family_MSE_max": 0.05,
+    "seen_full_fourpass_support_min": 0.8,
+    "unseen_full_fourpass_support_min": 0.7,
+    "exact_binary_masks": true,
+    "nonzero_search_updates": true,
+    "primary_arm": "weighted_wide",
+    "primary_control": "uniform_wide",
+    "primary_min_successes": 18,
+    "primary_net_paired_wins_min": 10,
+    "primary_exact_mcnemar_p_max": 0.05,
+    "objective_consistency_gate": "On at least 30/32 independently generated diagnostic pools, lambda=0 at sigma=.15 must favor anchored 45-degree four-pair remix over Q while lambda=1 at same sigma favors Q over remix",
+    "objective_consistency_min_dual_signs": 30,
+    "scientific_pass_requires_mechanism_and_objective": true,
+    "secondary": "weighted_narrow vs uniform_narrow, narrow vs wide within each weight law; descriptive paired counts, no additional significance gate"
+  },
+  "statistics": {
+    "n_total": 32,
+    "n_strong": 32,
+    "independent_unit": "seed+16D orthogonal source Q",
+    "paired_exact_McNemar": true,
+    "Wilson95": true,
+    "heldout_boards_not_independent_units": true
+  },
+  "execution": {
+    "python": "3.12",
+    "torch": "2.5.1+cpu",
+    "scipy": "1.14.1",
+    "cpu_threads": 1,
+    "max_RSS_GiB": 3,
+    "workflow_timeout_minutes": 90,
+    "first_run_archive_retention_days": 90
+  },
+  "evidence": {
+    "config_and_protocol_commit_before_scientific_models": true,
+    "excluded_seed_only_for_preflight": true,
+    "one_source_commit_execute_lock": true,
+    "first_160_arm_full_JSON": true,
+    "per_seed_CSV": true,
+    "strict_science_verdict": true,
+    "source_gens_and_PD01_to_PD14_unchanged": true
+  }
+}
