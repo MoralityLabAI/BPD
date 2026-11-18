@@ -1,0 +1,64 @@
+name: BPD-DT01 causal-depth TRM task source and steering tests
+on:
+  pull_request:
+    paths:
+      - "mechinterp/bpd/experiments/depth_steering_gym/**"
+      - ".github/workflows/bpd-dt01-depth-gym.yml"
+  push:
+    branches:
+      - "research/bpd-dt01-*"
+    paths:
+      - "mechinterp/bpd/experiments/depth_steering_gym/**"
+      - ".github/workflows/bpd-dt01-depth-gym.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-geometry-and-task-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install CPU Torch for steering geometry
+        run: python -m pip install "torch==2.5.1"
+      - name: Verify frozen source Git blobs and zero model-training claims
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          root=Path("mechinterp/bpd/experiments/depth_steering_gym")
+          lock=json.loads((root/"LOCK_STAGE0.json").read_text())
+          assert lock["experiment"]=="BPD-DT01"
+          assert lock["status"]=="STAGE0_SOURCE_LOCKED_BEFORE_MODEL_EXPERIMENT"
+          assert lock["calibration_depths"]==[2,4,6]
+          assert lock["heldout_depths"]==[8,12]
+          assert lock["source_only"]
+          assert not lock["mechanistic_steering_scored"]
+          for name,sha in lock["files"].items():
+              actual=subprocess.check_output(["git","hash-object",str(root/name)],text=True).strip()
+              assert actual==sha,(name,actual,sha)
+          print("BPD-DT01 SOURCE LOCK VERIFIED")
+          PY
+      - name: Check exact Sudoku ARC-1 storyworld and protected steering controls
+        run: python -m unittest discover -s mechinterp/bpd/experiments/depth_steering_gym -p 'test_*.py' -v
+      - name: Reproduce only model-free task-source receipt
+        run: python -m mechinterp.bpd.experiments.depth_steering_gym.audit --seed 301 --out /tmp/bpd_dt01_receipt.json
+      - name: Compare exact source receipt to committed reference
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          source=Path("mechinterp/bpd/experiments/depth_steering_gym/SOURCE_RECEIPT.json")
+          replay=json.loads(Path("/tmp/bpd_dt01_receipt.json").read_text())
+          assert replay==json.loads(source.read_text()),"source-only audit drift"
+          assert replay["status"]=="source_only"
+          assert not replay["native_trm_run"] and not replay["official_arc1_scored"]
+          print("BPD-DT01 exact source receipt parity PASS; no trained checkpoint evaluated")
+          PY
