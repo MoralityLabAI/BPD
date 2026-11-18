@@ -1,0 +1,75 @@
+{
+  "archive_artifacts": {
+    "choices": {
+      "file": "root_2601299_choices.npz",
+      "sha256": "2ab981db80460ba2d5b8b8e781d6cad4bbe3484645214913f3fd97eecceaf763"
+    },
+    "eval": {
+      "file": "root_2601299_eval.npz",
+      "sha256": "694b19a9e97ea92738c7b79117389e502ebcdcf27b9d8f31bdab4877aadfa8c9"
+    },
+    "frozen": {
+      "file": "root_2601299_frozen.json",
+      "sha256": "4b6ac064632db5ceaeb8d09044fcea46eba59e3341c28c3836b509aa39a0f543"
+    },
+    "weights": {
+      "file": "root_2601299_weights.npz",
+      "sha256": "a00878d89451df6431d7d8d6762f5621b00441fe2c5bb5e3dcd23b27db9cf5e2"
+    }
+  },
+  "audit_passed": true,
+  "audit_sha256": "6711f4faac631740ee8d9ebd408a3e91f6c4578986f8021cd2afc7c0ff3481e8",
+  "global_failures": [],
+  "maximum_raw_nll_absolute_error_nats": 5.28901228924461e-08,
+  "note": "Six D-sham searches had no registered bracket. Scientific thresholds, proposal order, gains, root roster and model recipe stayed fixed.",
+  "phase": "EXCLUDED_SMOKE",
+  "precommit_source_lock_sha256": "7b655dc8966f49925af413c4b6413459e4dcca212d35422e348b67947b06aada",
+  "purpose": "First local source smoke, preceding committed development execution lock. No development pair generated.",
+  "receipt_sha256": "84faa1a461a359da8af07646c9d863577ca0efe04cce53d7f5c104e557ec131a",
+  "root": 2601299,
+  "scientific_arm_failures": {
+    "sham_D_0": {
+      "admitted": false,
+      "reasons": [
+        "NO_REGISTERED_BRACKET",
+        "unscored"
+      ]
+    },
+    "sham_D_1": {
+      "admitted": false,
+      "reasons": [
+        "NO_REGISTERED_BRACKET",
+        "unscored"
+      ]
+    },
+    "sham_D_2": {
+      "admitted": false,
+      "reasons": [
+        "NO_REGISTERED_BRACKET",
+        "unscored"
+      ]
+    },
+    "sham_D_3": {
+      "admitted": false,
+      "reasons": [
+        "NO_REGISTERED_BRACKET",
+        "unscored"
+      ]
+    },
+    "sham_D_4": {
+      "admitted": false,
+      "reasons": [
+        "NO_REGISTERED_BRACKET",
+        "unscored"
+      ]
+    },
+    "sham_D_6": {
+      "admitted": false,
+      "reasons": [
+        "NO_REGISTERED_BRACKET",
+        "unscored"
+      ]
+    }
+  },
+  "study": "BPD-NC-13"
+}
