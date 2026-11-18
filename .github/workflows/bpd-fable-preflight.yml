@@ -114,6 +114,8 @@ jobs:
       - name: PD15 independent 32-source first-run scientific receipt and SHA replay
         run: |
           python -m pytest -q mechinterp/bpd/theory/pd15/test_published_results.py
+      - name: PD16 first 32-root shuffled-weight placebo source/receipt audit
+        run: python -m pytest -q mechinterp/bpd/theory/pd16/test_published_results.py
       - name: Verify source module syntax
         run: |
           python -m compileall -q mechinterp/bpd
