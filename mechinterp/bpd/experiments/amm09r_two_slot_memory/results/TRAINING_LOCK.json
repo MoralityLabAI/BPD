@@ -1,0 +1,74 @@
+{
+  "engineering_acceptance_sha256": "b5009dd7082b4e9ded59d1704553f3debfa8bdf12d405e5877f0a94ce3973d6b",
+  "global_coefficients": [
+    0.0972,
+    0.1778,
+    0.0005,
+    0.007,
+    -0.1598,
+    0.0114,
+    0.0057,
+    0.2491,
+    0.019,
+    -0.227,
+    -0.0218,
+    -0.0051,
+    -0.0096,
+    -0.0057,
+    0.3037,
+    0.0291,
+    -0.1921,
+    -0.0289
+  ],
+  "independent_roots": 64,
+  "pooled_action": 4,
+  "runtime_signature": {
+    "cpu_capability": "DEFAULT",
+    "default_dtype": "torch.float32",
+    "deterministic_algorithms": true,
+    "environment": {
+      "ATEN_CPU_CAPABILITY": "default",
+      "MKL_CBWR": "COMPATIBLE",
+      "MKL_DYNAMIC": "FALSE",
+      "MKL_NUM_THREADS": "1",
+      "OMP_DYNAMIC": "FALSE",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "PYTHONHASHSEED": "0"
+    },
+    "num_interop_threads": 1,
+    "num_threads": 1,
+    "numpy": "2.2.6",
+    "python": "3.12.12",
+    "torch": "2.10.0+cpu",
+    "torch_binary_sha256": {
+      "_C.so": "2a4e075c33f292a709006fe69bca669e681351fad1fcddd7c957fcf96362d1a8",
+      "libtorch_cpu.so": "4dc5b3a649b61d8f39be127866bc258dda19d74e339f449fe18103db63e8d76f"
+    },
+    "torch_git": "449b1768410104d3ed79d3bcfe4ba1d65c7f22c0"
+  },
+  "schema": "bpd.amm09r1.two_slot_memory.v1/training_lock",
+  "source_sha256": {
+    "../../../../.github/workflows/bpd-amm09r1-fresh-development.yml": "6e576e9397af8711e4d5d7e0327d00acafded5891d43740e2392e55c2c6db048",
+    "PROTOCOL.md": "ffb5e1b87c5e2bab772806a6083fe3b812f45df50681f2a8075dfa5868cf4d41",
+    "RUNTIME.json": "b49dcc1bdf2f77bf6d0afe3515c9edc3eadedf30a7b2c7b4d209e734f7f35391",
+    "__init__.py": "4db3ae625fb58f7f16ef1be2e6ca0d9c68573a7c57f63451fdadf3f665aecc5b",
+    "audit.py": "66eb6a64842851fa233a797b3406fa882501b51af829023d8f66e156b95ef582",
+    "case.py": "8828f1c0e5a707fa01058eafc228eea6a94aa4498191a562d69ea2498a130fc2",
+    "experiment.py": "a4f4c9206351ea69e08ee4c1c73ab02beab1a595ba36ca60588a2cdde89da725",
+    "models.py": "1eba4b73c88aa49effbf74ef70897f41888dda3574ce1712a75cb80b3e68f3e1",
+    "run.py": "517e1fc98855a348b44d7055bd47d9ff37528c9d9700ef7ba61da70ba6d1c6f9",
+    "test_experiment.py": "c50e2cd7ce169d98e809f81fb4eda1513f49178ac99fae738c51db544b13b7ee"
+  },
+  "train_candidate_hits": {
+    "mask_0": 853,
+    "mask_1": 548,
+    "mask_2": 447,
+    "mask_3": 1822,
+    "mask_4": 2091,
+    "mask_5": 1406
+  },
+  "training_case_bits_sha256": "5582aba9bdd1a3363aaa9ed6339cbdea05bb47a068f6e1bb932347f606702351",
+  "training_policy_sha256": "b34b9a322ff5aeaa517eb5edd4bf0aced9ccf70f0bf97383d8e6cca79de2f0e9",
+  "training_rows_sha256": "0151486c65a59e9a8f08f8ab090703432da056a05fc7a0b906c141f454d3b27d"
+}

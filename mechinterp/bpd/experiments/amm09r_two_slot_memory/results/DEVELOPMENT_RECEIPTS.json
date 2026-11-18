@@ -1,0 +1,51 @@
+{
+  "artifacts": [
+    {
+      "artifact_id": 14422494322,
+      "bytes": 248231,
+      "name": "amm09r1-development-source-locked",
+      "sha256": "9cf3ab0173e12a03653e43949e23598892780db294214cc95b44d376b709b659"
+    },
+    {
+      "artifact_id": 14422169704,
+      "bytes": 415,
+      "name": "amm09r1-training-replay-verdict",
+      "sha256": "338b57ab19288891bac8fffc4a7ecb495a6f211d4fa76259bbfd58396d0b2e7a"
+    }
+  ],
+  "confirmation_authorized": false,
+  "development_admitted": true,
+  "receipt_files": {
+    "analysis.json": {
+      "bytes": 52996,
+      "sha256": "298c63e967471496bdd87788c30d425f09454836068d3ed9b2eef66a34ebaa06"
+    },
+    "development-lock.json": {
+      "bytes": 5275,
+      "sha256": "bd0e9434ccfa6898681e11054bb03e015edd4dc583d16624006e6696a79c5961"
+    },
+    "development.json": {
+      "bytes": 1868507,
+      "sha256": "682473974fa15db6005dab588d66d73c2a58bba1d5c8f1f4a91a93899ea88e5a"
+    },
+    "host.json": {
+      "bytes": 1030,
+      "sha256": "c958ca69353b6f604fcefcc86b03ce09b38b05987c2b940f08debe5478a8ec20"
+    },
+    "pilot.json": {
+      "bytes": 8976,
+      "sha256": "4c1c72406cacc14722f0dde843a90c64599b1a4ca86191d174d25edc50dffd82"
+    },
+    "preflight.json": {
+      "bytes": 1024,
+      "sha256": "bf4454264fbe24f62503889e27985e13090ee507de029990d4ede430f871b599"
+    }
+  },
+  "run_attempt": 1,
+  "run_id": 44295607653,
+  "run_number": 2,
+  "schema": "bpd.amm09r1.development_receipts.v1",
+  "source_commit": "f9bac29a8e386c8285b94818f1087e3681e1cdcd",
+  "training_lock_commit": "bbcbae41c3e8cd5264c297e5d457ca726995a735",
+  "workflow_url": "https://github.com/MoralityLabAI/BPD/actions/runs/44295607653"
+}

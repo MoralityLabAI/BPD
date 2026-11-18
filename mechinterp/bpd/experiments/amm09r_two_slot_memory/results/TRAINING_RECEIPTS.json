@@ -1,0 +1,61 @@
+{
+  "artifacts": [
+    {
+      "artifact_id": 14423700585,
+      "bytes": 4540117,
+      "name": "amm09r1-training-ubuntu-24.04",
+      "sha256": "153b69b4669ac50cdcda1964bcce56b757447792cbfae8868faa6157060ab3ed"
+    },
+    {
+      "artifact_id": 14422678908,
+      "bytes": 4540117,
+      "name": "amm09r1-training-ubuntu-22.04",
+      "sha256": "7effbe88df547bed77866b6cd2e01168c511e06fb8529362b3de55035d741f2b"
+    },
+    {
+      "artifact_id": 14421799950,
+      "bytes": 415,
+      "name": "amm09r1-training-replay-verdict",
+      "sha256": "d8429269605a4c039b1263d91ca0e4e3249b3ca734ab1ad1bfb696d52e12f5e8"
+    }
+  ],
+  "confirmation_authorized": false,
+  "development_execution": {
+    "event": "pull_request",
+    "run_attempt": 1,
+    "run_number": 2,
+    "workflow": "BPD-AMM-09R1 prospective development"
+  },
+  "receipt_files": {
+    "amm09r1-training-ubuntu-22.04/host.json": {
+      "bytes": 1030,
+      "sha256": "a668f663cc7d3c440fedf51c119427b24d2588335867341ea256ca7fc368f79e"
+    },
+    "amm09r1-training-ubuntu-22.04/training-lock.json": {
+      "bytes": 2667,
+      "sha256": "963b7d5978e28a49124a39420577ef9724079484d548993574c6aebcb9d330e0"
+    },
+    "amm09r1-training-ubuntu-22.04/training.json": {
+      "bytes": 16143086,
+      "sha256": "015f8c78181514a0702e56ad707444699e48b377d9bf29da8ec60a42a0d48d30"
+    },
+    "amm09r1-training-ubuntu-24.04/host.json": {
+      "bytes": 1030,
+      "sha256": "d90ab26b3d67ef7a5d77621772d52ef7f19e3f364bfad98e4cc246d6d633ed4e"
+    },
+    "amm09r1-training-ubuntu-24.04/training-lock.json": {
+      "bytes": 2667,
+      "sha256": "963b7d5978e28a49124a39420577ef9724079484d548993574c6aebcb9d330e0"
+    },
+    "amm09r1-training-ubuntu-24.04/training.json": {
+      "bytes": 16143086,
+      "sha256": "015f8c78181514a0702e56ad707444699e48b377d9bf29da8ec60a42a0d48d30"
+    }
+  },
+  "run_attempt": 1,
+  "run_id": 44294944939,
+  "run_number": 1,
+  "schema": "bpd.amm09r1.training_receipts.v1",
+  "source_commit": "f9bac29a8e386c8285b94818f1087e3681e1cdcd",
+  "workflow_url": "https://github.com/MoralityLabAI/BPD/actions/runs/44294944939"
+}
