@@ -45,3 +45,22 @@ jobs:
           python -m pytest -q \
             mechinterp/bpd/experiments/nc09_fixed12/grassmann_fc03/test_solver.py \
             mechinterp/bpd/experiments/nc09_fixed12/grassmann_fc03/test_aggregate.py
+
+
+  kernel-check-frozen-source-budget:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Install Lean 4.19.0 kernel
+        run: |
+          curl --fail --location --retry 3 https://github.com/leanprover/lean4/releases/download/v4.19.0/lean-4.19.0-linux.tar.zst -o /tmp/lean.tar.zst
+          tar --zstd -xf /tmp/lean.tar.zst -C /tmp
+          echo '/tmp/lean-4.19.0-linux/bin' >> "$GITHUB_PATH"
+      - name: Prove 12-slot and eight-parameter Grassmann budget in Lean
+        run: |
+          set -euo pipefail
+          lean mechinterp/bpd/experiments/nc09_fixed12/grassmann_fc03/GrassmannBudget.lean | tee /tmp/fc03-lean.txt
+          grep -q 'BPD.NC09FC03.registered_source_budget' /tmp/fc03-lean.txt
+          grep -q 'BPD.NC09FC03.source_chart_optimizer_budget' /tmp/fc03-lean.txt
+          if grep -E 'sorryAx|ofReduceBool' /tmp/fc03-lean.txt; then exit 1; fi
