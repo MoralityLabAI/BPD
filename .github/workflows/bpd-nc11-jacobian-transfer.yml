@@ -1,0 +1,118 @@
+name: BPD-NC-11 equal-budget Jacobian transfer (engineering only)
+on:
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/nc11/PROTOCOL.md'
+      - 'mechinterp/bpd/experiments/nc11/experiment.py'
+      - 'mechinterp/bpd/experiments/nc11/aggregate.py'
+      - 'mechinterp/bpd/experiments/nc11/test_experiment.py'
+      - 'mechinterp/bpd/experiments/nc11/EXECUTE_LOCK.json'
+      - '.github/workflows/bpd-nc11-jacobian-transfer.yml'
+  workflow_dispatch:
+
+jobs:
+  source-checks-and-excluded-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned CPU verification dependencies
+        run: python -m pip install 'torch==2.5.1' 'numpy>=1.26' 'pytest>=8'
+      - name: Assert source-first protocol and exact Git blob lock before any training
+        run: |
+          python - <<'PY'
+          import subprocess,json
+          from pathlib import Path
+          lock=json.loads(Path('mechinterp/bpd/experiments/nc11/EXECUTE_LOCK.json').read_text())
+          assert lock['study']=='BPD-NC-11'
+          assert lock['status']=='SOURCE_LOCK_BEFORE_FIRST_NC11_MODEL_TRAINING'
+          assert lock['protocol_first_commit']=='60b65642c03cb3064912aa3929582479aa21dd20'
+          assert lock['engineering_roots']==list(range(1100,1108))
+          assert lock['source_smoke_only']==1099
+          for path,sha in lock['source_blob_sha1'].items():
+              actual=subprocess.check_output(['git','hash-object',path],text=True).strip()
+              assert actual==sha,(path,actual,sha)
+          print('NC11 source/protocol lock verified')
+          PY
+      - name: Source-only unit tests for Jacobian, target-budget and native BPD
+        run: |
+          python -m compileall -q mechinterp/bpd/experiments/nc11
+          python -m pytest -q mechinterp/bpd/experiments/nc11/test_experiment.py
+      - name: Independently initialized, excluded root 1099 smoke
+        run: |
+          python -m mechinterp.bpd.experiments.nc11.experiment \
+            --root 1099 --steps 384 --discovery-size 256 \
+            --calibration-pool-size 512 --dose-size 256 \
+            --evaluation-size 256 --proposals 256 \
+            --out /tmp/nc11_smoke_1099.json
+          python - <<'PY'
+          import json
+          x=json.load(open('/tmp/nc11_smoke_1099.json'))
+          assert x['study']=='BPD-NC-11' and x['phase']=='ENGINEERING'
+          assert x['root']==1099
+          assert x['protocol_commit']=='60b65642c03cb3064912aa3929582479aa21dd20'
+          print('smoke eligible',x['eligible'],'reasons',x['excluded_reasons'])
+          print('calibration',x['calibration'].get('calibration_used'),x['calibration'].get('positive_context_examples_in_pool'))
+          print('source shams',x['shams'])
+          print('scored contrasts',x['comparisons'])
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nc11-excluded-smoke-original-receipt
+          path: /tmp/nc11_smoke_1099.json
+          if-no-files-found: warn
+
+  development-eight-pairs:
+    runs-on: ubuntu-latest
+    needs: source-checks-and-excluded-smoke
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned CPU environment
+        run: python -m pip install 'torch==2.5.1' 'numpy>=1.26'
+      - name: Recheck unchanged source-lock before first development root
+        run: |
+          python - <<'PY'
+          import subprocess,json
+          lock=json.load(open('mechinterp/bpd/experiments/nc11/EXECUTE_LOCK.json'))
+          for path,sha in lock['source_blob_sha1'].items():
+              assert subprocess.check_output(['git','hash-object',path],text=True).strip()==sha,path
+          print('Development source lock closed')
+          PY
+      - name: Train and evaluate eight fresh pairs, preserving all causal controls
+        run: |
+          mkdir -p /tmp/nc11_development
+          for root in 1100 1101 1102 1103 1104 1105 1106 1107; do
+            python -m mechinterp.bpd.experiments.nc11.experiment \
+              --root "$root" --steps 384 --discovery-size 1024 \
+              --calibration-pool-size 512 --dose-size 1024 \
+              --evaluation-size 1024 --proposals 2048 \
+              --out "/tmp/nc11_development/nc11_root_${root}.json"
+          done
+          python -m mechinterp.bpd.experiments.nc11.aggregate \
+            --directory /tmp/nc11_development \
+            --out /tmp/nc11_development/NC11_ORIGINAL_SUMMARY.json
+          python - <<'PY'
+          import json
+          x=json.load(open('/tmp/nc11_development/NC11_ORIGINAL_SUMMARY.json'))
+          assert x['n_independent_model_pairs']==8
+          assert x['n_independently_trained_models']==16
+          assert len(x['contrasts'])==4
+          assert x['scientific_status']=='NOT_CONFIRMATORY'
+          assert x['development_verdict'] in ('ENGINEERING_JACOBIAN_TRANSFER','ENGINEERING_NULL_OR_INELIGIBLE')
+          assert x['confirmation'].startswith('SEALED')
+          print('NC11 prospective outcome',x['development_verdict'])
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nc11-source-locked-original-eight-pair-receipts
+          path: /tmp/nc11_development/
+          if-no-files-found: warn
