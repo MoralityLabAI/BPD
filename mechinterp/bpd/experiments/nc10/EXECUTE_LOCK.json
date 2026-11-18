@@ -1,0 +1,33 @@
+{
+  "study": "BPD-NC-10",
+  "status": "SOURCE_LOCK_BEFORE_FIRST_NC10_MODEL_ROOT",
+  "protocol_first_commit": "4354c624103fcc1f7f10125d29b5356583eb3b3d",
+  "source_snapshot_commit": "612d5b14b0dff6867a63026eafd47d82a0f44471",
+  "engineering_roots": [
+    1000,
+    1001,
+    1002,
+    1003,
+    1004,
+    1005,
+    1006,
+    1007
+  ],
+  "smoke_only_root": 999,
+  "models_per_root": 2,
+  "source_blob_sha1": {
+    "mechinterp/bpd/experiments/nc10/PROTOCOL.md": "747f9173ac1ddd9556fcf8864d59ecef516fed32",
+    "mechinterp/bpd/experiments/nc10/experiment.py": "3686c332bff73def2396f6af7622b2d351e1ce57",
+    "mechinterp/bpd/experiments/nc10/aggregate.py": "991422b0a1c63172d9ca42ce61fd90530fa2416b",
+    "mechinterp/bpd/experiments/nc10/test_experiment.py": "0a1b8195dbfa07237f585384b9a6cf7180ab8b9d"
+  },
+  "train_each_model": 2048,
+  "training_steps": 384,
+  "discovery_inputs": 1024,
+  "alignment_inputs": 1024,
+  "evaluation_inputs": 1024,
+  "sham_proposals": 2048,
+  "required_shams": 8,
+  "prior_collision": "NC-09 independently trained model draft PR #89 closed; path and root identifiers replaced BEFORE NC-10 data",
+  "confirmation": "SEALED"
+}
