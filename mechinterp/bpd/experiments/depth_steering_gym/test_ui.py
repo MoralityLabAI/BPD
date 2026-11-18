@@ -98,7 +98,7 @@ class UIDataContracts(unittest.TestCase):
             task_fixture("story",3,horizon=3)
         with self.assertRaisesRegex(ValueError,"action"):
             task_fixture("story",3,actions=("invent_action",))
-        with self.assertRaisesRegex(ValueError,"after terminal"):
+        with self.assertRaisesRegex(ValueError,"action history"):
             task_fixture("story",3,actions=("listen",)*13)
         with self.assertRaises(KeyError):
             api_response("/api/secret",{},self.archive)
