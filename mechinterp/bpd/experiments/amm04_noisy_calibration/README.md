@@ -4,6 +4,18 @@ The pre-data registration is [PROTOCOL.md](PROTOCOL.md), committed at `31e46035`
 
 The repeated model training architecture, external task labels, SVD-canonical BPD factor geometry and equal-dose current-dark interventions remain disclosed. The cross-model ridge prior is trained only on 64 new model roots, each with 96 donor pairs, and frozen before evaluating 64 disjoint development roots. Both `memory_calibrated` and `local_only` see exactly **8 noisy local component observations** per model. `local_only` uses signed-gain geometry to break feedback ties. Memory has its explicitly disclosed amortized training cost. The new `repeatability` split measures variation of the *same fixed local-only policy* on fresh pairs.
 
+## Development decision (2026-11-18)
+
+The study has completed its development cohort. Read [RESULTS.md](RESULTS.md)
+and the locked `results/DEVELOPMENT_LOCK.json` and `results/PREFLIGHT.json`.
+**The corrected EvalMath preflight returned REDESIGN_OR_PILOT_ONLY. All
+128 confirmation model roots remain sealed and must not be accessed.**
+The registered primary gain was +3.61pp with only three positive independent
+model roots, below the preregistered +8pp scientific minimum. The source
+remains unchanged for exact replay, and the earlier historical model cohorts
+are unaffected. Do not fabricate a READY preflight receipt or run
+`--phase confirmation`.
+
 ## CPU experiment
 
 ```bash
