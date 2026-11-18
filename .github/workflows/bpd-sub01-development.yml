@@ -1,0 +1,89 @@
+name: BPD-SUB-01 first source-locked eight-root causal grain development
+
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/experiments/sub01/EXECUTE_LOCK.json'
+
+permissions:
+  contents: read
+
+jobs:
+  first-eight-development:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify pre-data protocol, exact model roster and immutable execution source
+        run: |
+          python - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          base = Path('mechinterp/bpd/experiments/sub01')
+          lock = json.loads((base/'EXECUTE_LOCK.json').read_text())
+          assert lock['study'] == 'BPD-SUB-01'
+          assert lock['phase'] == 'first_original_eight_root_engineering'
+          assert lock['roots'] == list(range(1200, 1208))
+          assert lock['excluded_smoke'] == 1199
+          assert lock['steps'] == 256
+          assert lock['train'] == 2048 and lock['discovery'] == 512
+          assert lock['selection'] == 512 and lock['heldout'] == 1024
+          assert lock['ranks'] == [2,4,6,8,10]
+          assert lock['shams_per_rank'] == 8
+          for commit in ('fe46c382fa69f9d7a2390bad0cff64245861ff1e', lock['source_commit_sha']):
+              subprocess.run(['git','merge-base','--is-ancestor',commit,'HEAD'],check=True)
+          for name in ('PROTOCOL.md','THEORY.md','experiment.py','test_experiment.py'):
+              path=str(base/name)
+              subprocess.run(['git','diff','--exit-code',lock['source_commit_sha'],'HEAD','--',path],check=True)
+          old=subprocess.check_output(['git','show',
+              'fe46c382fa69f9d7a2390bad0cff64245861ff1e:'+str(base/'PROTOCOL.md')])
+          assert old == (base/'PROTOCOL.md').read_bytes()
+          print('SOURCE_AND_PROTOCOL_LOCK_PASS')
+          PY
+      - name: Install CPU dependencies
+        run: |
+          python -m pip install --disable-pip-version-check pytest 'numpy>=1.26'
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Independent structural preflight
+        run: |
+          python -m compileall -q mechinterp/bpd/experiments/sub01
+          python -m pytest -q mechinterp/bpd/experiments/sub01/test_experiment.py
+      - name: Train eight new roots and score frozen development protocol once
+        run: |
+          python -m mechinterp.bpd.experiments.sub01.experiment --phase development --ack-development --output /tmp/sub01_original_eight.json
+      - name: Audit original population, rank selection and complete sham family
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          j=json.loads(Path('/tmp/sub01_original_eight.json').read_text())
+          roots=j['roots']
+          assert [r['root'] for r in roots] == list(range(1200,1208))
+          assert j['summary']['units'] == 8
+          assert j['summary']['root_ids'] == list(range(1200,1208))
+          assert len({r['protocol_sha256'] for r in roots}) == 1
+          assert len({r['source_sha256'] for r in roots}) == 1
+          for r in roots:
+              assert len(r['all_ranks']) == 5
+              assert len(r['selection']) == 5
+              assert len(r['contexts']) == 2
+              for rank in ('2','4','6','8','10'):
+                  assert len(r['all_ranks'][rank]['eight_same_dose_sham_logit_rms']) == 8
+                  assert r['all_ranks'][rank]['fiber']['max_dose_deviation'] <= 5e-6
+                  assert r['all_ranks'][rank]['fiber']['max_null_projection'] <= 5e-6
+              if r['selected_rank'] is not None:
+                  assert r['selected_rank'] in (2,4,6,8,10)
+          assert j['summary']['verdict'] in (
+              'ENGINEERING_SIGNAL_ONLY','ENGINEERING_NULL_OR_INELIGIBLE')
+          print('ORIGINAL_EIGHT_RECEIPT_AUDIT_PASS')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bpd-sub01-original-eight-root-development
+          path: /tmp/sub01_original_eight.json
