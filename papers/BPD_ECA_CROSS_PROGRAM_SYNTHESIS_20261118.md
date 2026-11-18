@@ -95,3 +95,7 @@ ECA-05 independent audit with acknowledged floating-point tie variance: https://
 MathCan authorization quotient: https://github.com/patrickdugan/MathCan/pull/140
 
 All source identities, issuer regimes, audit gold labels and signing keys in ECA are synthetic. New BPD tests require a separate source/seed registration. No real institutional issuer authentication, natural language agent behavior, or transfer to larger models has been established.
+
+## Implementation handoff (BPD-ECA-01)
+
+The registered follow-up is implemented in [Control-Harness PR #55](https://github.com/MoralityLabAI/Control-Harness/pull/55) to run against the original ECA-04 model artifact without copying or retraining its parameters. The experiment uses six-pass native recurrent-state transfer, a training-only rank-two ridge projector to the exact Bayesian posterior log odds, eight rank-matched physical-dose-matched random projector shams per independent world, a separate 64-root 95/95 sham-variation calibration set, and 96 new development roots. The exact [EvalMath mechinterp-power preflight](https://github.com/MoralityLabAI/EvalMath/tree/main/skills/evalmath-mechinterp-power) gates any protected confirmation. The intervention target is the frozen model's own donor-prefix/source-suffix counterfactual; source-root-level statistical evidence and task-action alignment are reported separately. This handoff is subject to the BPD AGENTS.md seal restrictions.
