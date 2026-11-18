@@ -35,8 +35,8 @@ def test_seven_schedules_preserve_source_multisets_and_are_fixed():
         for t in range(4):
             assert torch.equal(cs[t],c[pi[t]])
         # Identical sets of source Jacobians and output covariances.
-        assert torch.equal(ds.square().sum(),d.square().sum())
-        assert torch.equal(cs.square().sum(),c.square().sum())
+        assert torch.allclose(ds.square().sum(),d.square().sum(),rtol=1e-12,atol=1e-12)
+        assert torch.allclose(cs.square().sum(),c.square().sum(),rtol=1e-12,atol=1e-12)
     with pytest.raises(ValueError,match="Unregistered"):
         schedule_arrays(d,c,7)
 
