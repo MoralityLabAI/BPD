@@ -417,11 +417,15 @@ def main() -> None:
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_text(serialized + "\n", encoding="utf-8")
-    print(json.dumps(
-        {"summary": receipt.get("summary", {
+    if "summary" in receipt:
+        compact = receipt["summary"]
+    else:
+        compact = {
             "study": STUDY, "root": SMOKE,
-            "gauge": receipt["gauge"], "selected_rank": receipt["selected_rank"],
-        })}, sort_keys=True))
+            "gauge": receipt["gauge"],
+            "selected_rank": receipt["selected_rank"],
+        }
+    print(json.dumps({"summary": compact}, sort_keys=True))
 
 
 if __name__ == "__main__":
