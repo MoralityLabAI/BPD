@@ -127,7 +127,8 @@ def spectrum_preserving_shams(
     if obs.shape != (WIDTH, WIDTH):
         raise ValueError("Expected rank-eight physical projector")
     entries = []
-    full = obs.double()
+    # Keep float64 eigenvector geometry until the final physical cast.
+    full = eigvecs[:, -RANK:] @ eigvecs[:, -RANK:].T
     for idx in range(SHAMS):
         if idx < 4:
             kind = "local_spectral_rotation"
