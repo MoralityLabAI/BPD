@@ -1,0 +1,120 @@
+name: BPD-PD-16 first registered norm-weight permutation placebo cohort
+
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/theory/pd16/EXECUTE_LOCK.json'
+
+permissions:
+  contents: read
+
+jobs:
+  first-registered-pd16-placebo:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify source-locked original independent placebo factorial
+        run: |
+          python - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          root=Path('mechinterp/bpd/theory/pd16')
+          cfg=json.loads((root/'CONFIG.json').read_text())
+          lock=json.loads((root/'EXECUTE_LOCK.json').read_text())
+          assert cfg['study_id']==lock['study_id']=='BPD-PD-16'
+          assert lock['execution']=='first_registered_full_cohort'
+          assert len(cfg['seed_cell']['seeds'])==len(set(cfg['seed_cell']['seeds']))==32
+          assert lock['units']==32 and lock['arms_per_seed']==4
+          assert cfg['objective']['sigma']==0.15 and cfg['objective']['lambda']==1
+          assert cfg['objective']['sweeps']==9 and cfg['objective']['candidate_angle_scores']==39960
+          assert cfg['objective']['candidate_by_vector_scores']==327352320
+          assert cfg['scoring']['primary_arm']=='norm_aligned'
+          assert cfg['scoring']['primary_control']=='norm_shuffled'
+          assert cfg['scoring']['diagnostic_min_passing_seeds']==30
+          sha=lock['source_commit_sha']
+          subprocess.run(['git','merge-base','--is-ancestor',sha,'HEAD'],check=True)
+          protected=[str(root/f) for f in
+                     ('CONFIG.json','PROTOCOL.md','experiment.py','test_experiment.py')]
+          protected+=['mechinterp/bpd/theory/pd15/experiment.py',
+                     'mechinterp/bpd/theory/pd15/CONFIG.json',
+                     'mechinterp/bpd/theory/pd12/experiment.py',
+                     'mechinterp/bpd/theory/pd12/CONFIG.json',
+                     'mechinterp/bpd/theory/pd02/experiment.py',
+                     'mechinterp/bpd/components.py',
+                     'mechinterp/bpd/config.py']
+          subprocess.run(['git','diff','--exit-code',sha,'HEAD','--',*protected],check=True)
+          print('PD16 original exact shuffled-weight source locked at',sha)
+          PY
+      - name: Install pinned Python CPU torch and SciPy
+        run: |
+          python -m pip install --disable-pip-version-check pytest 'numpy>=1.26' scipy==1.14.1
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Run excluded source seed 4001 and fixed scientific scoring gates
+        run: python -m pytest -q mechinterp/bpd/theory/pd16/test_experiment.py
+      - name: Execute 32 frozen independent rotations and four arms
+        run: python -m mechinterp.bpd.theory.pd16.experiment --out /tmp/bpd-pd16-original-first-run.json
+      - name: Independently audit 128 original arm and 32 placebo diagnostic receipts
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          c=json.loads(Path('mechinterp/bpd/theory/pd16/CONFIG.json').read_text())
+          r=json.loads(Path('/tmp/bpd-pd16-original-first-run.json').read_text())
+          s=r['summary']
+          seeds=set(c['seed_cell']['seeds'])
+          arms={a['key'] for a in c['arms']}
+          assert r['study_id']==s['study_id']=='BPD-PD-16'
+          assert s['registered'] and s['units']==32 and s['arms']==128
+          assert len(r['arms'])==128 and len(r['diagnostics'])==32
+          assert {(z['seed'],z['arm']) for z in r['arms']}=={
+            (seed,arm) for seed in seeds for arm in arms
+          }
+          assert {d['seed'] for d in r['diagnostics']}==seeds
+          for seed in seeds:
+            rows=[z for z in r['arms'] if z['seed']==seed]
+            assert len(rows)==4
+            for key in ('hidden_rotation_sha256','initial_random_basis_sha256',
+                        'training_full_pool_sha256'):
+              assert len({z[key] for z in rows})==1
+            a=next(z for z in rows if z['arm']=='norm_aligned')['training']
+            b=next(z for z in rows if z['arm']=='norm_shuffled')['training']
+            assert abs(a['training_weight_effective_sample_size']-
+                       b['training_weight_effective_sample_size'])<1e-10
+          for d in r['diagnostics']:
+            assert d['weight_multiset_exact']
+            assert d['privileged_support_used_only_for_postfit_diagnostic']
+            assert d['ESS_abs_diff']<1e-10
+          for row in r['arms']:
+            assert set(row['heldout']['per_family'])==set(c['source']['heldout_families'])
+            assert all(v['binary_mask'] for v in row['heldout']['per_family'].values())
+            t=row['training']
+            if row['arm']=='planted_Q_oracle':
+              assert row['uses_true_Q_for_optimizer']
+              assert t['candidate_angle_scores']==0
+            else:
+              assert not row['uses_true_Q_for_optimizer']
+              assert t['candidate_angle_scores']==39960
+              assert t['candidate_scalar_projection_evaluations']==327352320
+              assert t['training_board_count']==2048
+              assert t['training_observed_vectors']==8192
+              assert t['pair_sweeps']==9
+              assert t['orthogonality_max_error']<1e-4
+          print('PD16 first-run frozen scientific verdict:',s['registered_scientific_passed'])
+          print('PD16 aligned vs shuffled recovery:',s['success_by_arm'])
+          print('PD16 norm-k diagnostic:',s['norm_cardinality_diagnostic_passes'])
+          print('PD16 exact two-sided McNemar:',s['McNemar_exact_two_sided_p'])
+          PY
+      - name: Archive immutable full original 128-arm scientific receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bpd-pd16-original-first-run-${{ github.run_id }}
+          path: /tmp/bpd-pd16-original-first-run.json
+          retention-days: 90
+          if-no-files-found: warn

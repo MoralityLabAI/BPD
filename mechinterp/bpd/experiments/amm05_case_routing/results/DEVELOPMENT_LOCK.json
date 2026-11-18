@@ -1,0 +1,29 @@
+{
+  "all_case_bits_sha256": "7db132e014e0deaa66bdbde5b387326febd7c82d826f8e373f8c41eecfdf0850",
+  "full_receipt_sha256": "0192fa2fb4bcd84f714bab850929e7a8a5235dfebd0ea74ded59798f23c2c556",
+  "headroom_rate": 0.16748046875,
+  "independent_roots": 64,
+  "memory_sha256": "e9cfdbccf68d9209004ad99ac9527d127860ae06e171e4c68bdaff346eaa2fa5",
+  "phase": "development",
+  "preflight_input_sha256": "5d5a6395fb20f8675c11f553e3dc4297e1e359aa26988e4bed76306cea08867d",
+  "schema": "bpd.amm05.case_routing.v1/cohort_lock",
+  "source_sha256": {
+    "case.py": "91c1230188f5f0551dc38fa1382796985f3c668ebe710e12700059fdc215b1b3",
+    "experiment.py": "6f3df2911a64beaba325a3b8c001864300a72a9a3d18243d36fb030bc9db76cf",
+    "models.py": "32a5296e7b488e67b4350011748e3db8f3e507eea552e44249b24ca0dd6471ff"
+  },
+  "test_cases": 8192,
+  "totals": {
+    "full_donor": 8188,
+    "geometry_rule": 2041,
+    "local_count": 3070,
+    "local_ridge": 3160,
+    "memory_calibrated": 3641,
+    "memory_only": 3796,
+    "pooled": 3286,
+    "random_component": 2608,
+    "random_dark": 1563,
+    "random_dark_b": 1705,
+    "sham": 0
+  }
+}

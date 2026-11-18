@@ -46,6 +46,7 @@ jobs:
           lean mechinterp/bpd/theory/pd13/PairOrderBudget.lean | tee -a /tmp/bpd-optimal-basis-axioms.txt
           lean mechinterp/bpd/theory/pd14/PairRestartBudget.lean | tee -a /tmp/bpd-optimal-basis-axioms.txt
           lean mechinterp/bpd/theory/pd15/NormWeightBudget.lean | tee -a /tmp/bpd-optimal-basis-axioms.txt
+          lean mechinterp/bpd/theory/pd16/ShuffleBudget.lean | tee -a /tmp/bpd-optimal-basis-axioms.txt
           lean mechinterp/bpd/theory/pd17/SourceBudget.lean | tee -a /tmp/bpd-optimal-basis-axioms.txt
           python - <<'PY'
           from pathlib import Path
@@ -71,6 +72,7 @@ jobs:
           assert 'BPD.PD13.sample_weighted_evaluations_increase_eightfold' in s
           assert 'BPD.PD14.equal_exact_sample_weighted_budget' in s
           assert 'BPD.PD15.exactly_327352320_candidate_by_vector_scores' in s
+          assert 'BPD.PD16.each_three_searches_has_327352320_scalar_scores' in s
           assert 'BPD.PD17.exact_original_paired_cohort_size' in s
           assert 'BPD.PD06.heldout_pairs_distinct_from_seen' in s
           print('Lean kernel proof declarations checked; foundational axioms only')
