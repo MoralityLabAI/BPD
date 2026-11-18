@@ -72,6 +72,16 @@ class AMM11Tests(unittest.TestCase):
             self.assertEqual(self.assay["candidate_hits"][key],bits.count("1"))
         self.assertNotIn("target",self.assay)
 
+    def test_candidate_features_have_integrity_digest(self):
+        self.assertIn("features_sha256",self.assay)
+        self.assertEqual(self.assay["features_sha256"],m.digest(self.assay["features"]))
+        self.assertEqual(self.calibration["features_sha256"],m.digest(self.calibration["features"]))
+        corrupted=dict(self.assay)
+        copied=[[list(f) for f in case] for case in self.assay["features"]]
+        copied[0][0][14]+=1
+        corrupted["features"]=copied
+        self.assertNotEqual(corrupted["features_sha256"],m.digest(corrupted["features"]))
+
     def test_source_safe_cosine_decision(self):
         p=dict(self.policy)
         x=torch.tensor(self.assay["features"],dtype=torch.float64)
