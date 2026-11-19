@@ -1,0 +1,47 @@
+name: BPD-DT05 native instruments and resource checks
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/experiments/depth_steering_gym/dt05/**'
+      - '.github/workflows/bpd-dt05-engineering.yml'
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/depth_steering_gym/dt05/**'
+      - '.github/workflows/bpd-dt05-engineering.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  native-source-and-engineering:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    env:
+      HF_HUB_OFFLINE: '1'
+      OMP_NUM_THREADS: '2'
+      MKL_NUM_THREADS: '2'
+    steps:
+      - name: Preserve frozen source line endings
+        run: git config --global core.autocrlf false
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install CPU test dependencies
+        run: |
+          python -m pip install torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install numpy psutil
+      - name: Verify original source and archived evidence locks
+        run: python -m mechinterp.bpd.experiments.depth_steering_gym.dt04.verify_source --skip-runtime
+      - name: Exercise native instruments and resource contracts
+        run: python -m unittest discover -s mechinterp/bpd/experiments/depth_steering_gym/dt05 -t . -p 'test_*.py' -v
+      - name: Excluded implementation smoke
+        run: python -m mechinterp.bpd.experiments.depth_steering_gym.dt05.runner smoke --out runs/dt05-ci-smoke --device cpu --cpu-threads 2 --min-host-available-gib 0.25
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: dt05-engineering-${{ matrix.os }}
+          path: runs/dt05-ci-smoke/*.json

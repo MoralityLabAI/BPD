@@ -1,0 +1,141 @@
+{
+  "checkpoint_replay": {
+    "all_ema_per_case_depth_outcomes_match": true,
+    "sha256": "2282ef95ef3b8a02113fd1761c58a33a2f437bfec8dd27c5db97b8c7d8428de9"
+  },
+  "confirmation_roots_executed": 0,
+  "cuda_available": false,
+  "date": "2026-11-19",
+  "development_roots_executed": 0,
+  "gpu_speedup_measured": false,
+  "historical_locks": {
+    "dt02_archive_verified": true,
+    "dt04_files_checked": 25,
+    "execute_lock_sha256": "05ecc5d49b8bb28ccc339329f0dfc5c645e9fdd510315a3931bd869e87cec233",
+    "historical_files_checked": 12,
+    "protocol_commit": "8e02d09c1f67e82b6aed61199df6603a766758b9",
+    "source_check": "PASS"
+  },
+  "limits": [
+    "CPU smoke is excluded from scientific summaries.",
+    "GPU throughput and CUDA memory remain unmeasured here.",
+    "Windows execution is delegated to the added CI matrix.",
+    "Matched-dose causal transport study remains future development."
+  ],
+  "native_smoke": {
+    "arms": [
+      "ema",
+      "fixed",
+      "online",
+      "random",
+      "raw"
+    ],
+    "cache": {
+      "bytes_used": 58368,
+      "entries": 1,
+      "evictions": 0,
+      "hits": 4,
+      "max_bytes": 8388608,
+      "max_entries": 128,
+      "misses": 0
+    },
+    "factor_updates": 2,
+    "memory_final": {
+      "cgroup_available_bytes": null,
+      "cuda_allocated_bytes": null,
+      "cuda_free_bytes": null,
+      "cuda_peak_allocated_bytes": null,
+      "cuda_peak_reserved_bytes": null,
+      "cuda_reserved_bytes": null,
+      "cuda_total_bytes": null,
+      "device": "cpu",
+      "errors": [],
+      "host_available_bytes": 9270661120,
+      "host_commit_bytes": null,
+      "host_peak_rss_bytes": 326127616,
+      "host_rss_bytes": 314535936,
+      "host_source": "psutil",
+      "host_total_bytes": 10451427328
+    },
+    "scientific_root_count": 0,
+    "source": {
+      "digest": "67925f3a00089af25d38097bf2335d1096240e3acc19c379b6e0485ce1f9fca2",
+      "dt04_parent_commit": "1082496445cb99e85cf346597aa87d4cb28f7059",
+      "files_sha256": {
+        "AGENTS.md": "c4e04491487fb923f51183082fb249056b714aff03b5af0d4ace92caadaa8284",
+        "mechinterp/bpd/adapters/trm.py": "6d73c0fadde6d662cc2be01bbeba6908e9df528234fa4084b6220752308b83e0",
+        "mechinterp/bpd/components.py": "388cb539cccb87ae65d56e5fbae175d6aee138df24d1bab43cde755156b748a5",
+        "mechinterp/bpd/experiments/depth_steering_gym/dt03_causal.py": "eabb3fb0435bb56ab29011bff95f95759fc172233095962c79abef096268040c",
+        "mechinterp/bpd/experiments/depth_steering_gym/dt03_tasks.py": "4234ba7502e1c88c627982de27ec9dcaa93f694dcf8d3e79438ab7ac2be5d07d",
+        "mechinterp/bpd/experiments/depth_steering_gym/dt04/DESIGN_PREFLIGHT.json": "1f1cf12a2b0e69bc52847e16a70e6bbcdcdcf318f820342191dffdce82f14e4d",
+        "mechinterp/bpd/experiments/depth_steering_gym/dt04/PROTOCOL_DT04.md": "1f8bff10eddd588a990978773204de1e9ae925a5fb9102e0cc0f7580f0032f59",
+        "mechinterp/bpd/experiments/depth_steering_gym/dt04/README.md": "e1d422abe5d9171e36abb8e0639177983dabeecc7bb37e2bf3c7e535840c46b4",
+        "mechinterp/bpd/experiments/depth_steering_gym/dt04/__init__.py": "c22c766a699057bf00d7829a874a7eb15d5b67eb4fd833003d7fe2ddd39d9324",
+        "mechinterp/bpd/experiments/depth_steering_gym/dt04/aggregate.py": "e2f95fc073159878e1d224bf0f1eb7378941f54ad35868c489281880a1fec4c6",
+        "mechinterp/bpd/experiments/depth_steering_gym/dt04/causal.py": "8987d4d6164811c9fb77d8e5b98e430f25eef1ee3882923df2ce0cd2f588e19b",
+        "mechinterp/bpd/experiments/depth_steering_gym/dt04/hardware_7m_audit.py": "5ec1725db198d11cb031ee8db8c18acd021158fffa6c23467bfbff30ecf24778",
+        "mechinterp/bpd/experiments/depth_steering_gym/dt04/memory_guard.py": "f6b419d48bd7b3385ab761ba9940f071520fc5bf28f5047968db837d0125ca28",
+        "mechinterp/bpd/experiments/depth_steering_gym/dt04/runner.py": "801428388ef486b85bba579bd0e98ecd215d659c040ec6925fb44e654969613f",
+        "mechinterp/bpd/experiments/depth_steering_gym/dt04/tasks.py": "82f5f4b04f4a8111d09d290f584f0330249352458f48050f0109ac2dc4b079b6",
+        "mechinterp/bpd/experiments/depth_steering_gym/dt04/test_dt04.py": "fd264ca10d227443bd526607313a79175f5db57d051603bfe79acafc3e63b755",
+        "mechinterp/bpd/experiments/depth_steering_gym/dt04/test_dt04_ui.py": "4fc15628b544346986fe7bc2f5edee6f0cb20e496b0334394166ef1ea05219c2",
+        "mechinterp/bpd/experiments/depth_steering_gym/dt04/ui/index.html": "acdaa42fb57e6ff437ead534866eaf1bca47359771eaeaf65ae60f0f81528169",
+        "mechinterp/bpd/experiments/depth_steering_gym/dt04/ui_server.py": "f4992ad9f7d1d198bd63da08ce96bbe204399643a564f8d938a4b85bd82c6155",
+        "mechinterp/bpd/experiments/depth_steering_gym/dt04/verify_source.py": "ba34f8f24a5ed7d36165fbbc89236fa767d9755676912b858021a8e53311a97f",
+        "mechinterp/bpd/experiments/depth_steering_gym/dt05/PROTOCOL_DT05.md": "37697aa9b486fa24c769e498f76ed725c74ad1300a3e1bf1abad27175337d868",
+        "mechinterp/bpd/experiments/depth_steering_gym/dt05/README.md": "30afd42b68f7ce53ba4107c0f5d6a05a1c1ff9182ac2620a252cdcdcd9c82039",
+        "mechinterp/bpd/experiments/depth_steering_gym/dt05/REVIEW_DT04.md": "39016af9dd3ae5b40f282ca3c6e660688a3e4e26e0f094fe56b4e7ca210fe555",
+        "mechinterp/bpd/experiments/depth_steering_gym/dt05/__init__.py": "92a24cd881d313d0e301c509250fad6cc3af5bb7837a5b561ae47cc2926b1e6f",
+        "mechinterp/bpd/experiments/depth_steering_gym/dt05/calibration.py": "a0f574871dbb5dc8dec502e3604f20f8259c7fd9ffd08944296be98ac46e3f1c",
+        "mechinterp/bpd/experiments/depth_steering_gym/dt05/evaluation.py": "e8aaad6c8472e6bbafeb18232726e6b8fab12c89bfd65259ce8ff525acd6e146",
+        "mechinterp/bpd/experiments/depth_steering_gym/dt05/evidence/DT04_PREFLIGHT_INPUT.json": "bc0a9cd0ac7dc2ce4750c4103c6654d3b8cdcf1607614c175aba2fea1638c01e",
+        "mechinterp/bpd/experiments/depth_steering_gym/dt05/evidence/DT04_PREFLIGHT_REPRODUCED.json": "938192a791e5580af512ec3ab47563c1ce1dd7f6cdde64262523b3c2ee9dccbd",
+        "mechinterp/bpd/experiments/depth_steering_gym/dt05/evidence/REPRODUCTION.json": "f4d58b1497f59518363a1094fec9c4973da7eeb16c8c420613a0dcb5b9e22c24",
+        "mechinterp/bpd/experiments/depth_steering_gym/dt05/resources.py": "3319be7bdbdb290fb9b4baed9bd92700db268be9772e5c124a38078934e5a25d",
+        "mechinterp/bpd/experiments/depth_steering_gym/dt05/runner.py": "15276fdfe5882bccf4809af1776dfa7cf339aad8fa183d8132942096da40b8fb",
+        "mechinterp/bpd/experiments/depth_steering_gym/dt05/techniques.py": "c499a58f250da873a6fb88d5d0825a79b32fef0b7ee2cbf9dd7f711b6346206e",
+        "mechinterp/bpd/experiments/depth_steering_gym/dt05/test_calibration.py": "29c4b1ab14d08547accb9f45136ec875cacac0fe51ace2584497d01402e35d69",
+        "mechinterp/bpd/experiments/depth_steering_gym/dt05/test_evaluation.py": "38f17a6dc72d72ed6130d82f4f87403ede66a205a3facaf81478e82884d29601",
+        "mechinterp/bpd/experiments/depth_steering_gym/dt05/test_resources.py": "4df9107f7f28c7d1e323258735f4a3b82eee0a7a2ce87b29c9456e26907d5274",
+        "mechinterp/bpd/experiments/depth_steering_gym/dt05/test_runner.py": "ceb3238879820248e574a459aa60d02f1c4dde6e77ecc7188d83863f2610a7a9",
+        "mechinterp/bpd/experiments/depth_steering_gym/dt05/test_techniques.py": "6b32bbb2d1a9c5dfd4ccf61dffd790ad05a9ec31dca300f65e71a4e7c79d2d4d",
+        "mechinterp/bpd/experiments/depth_steering_gym/dt05/test_training.py": "ffd83f3005481dfbe4eef30746e1ac254aa3728603f3b55f7dd5c8e7d743471b",
+        "mechinterp/bpd/experiments/depth_steering_gym/dt05/training.py": "1c97884e139858a46a022ed68bc9410da47cf51a075e06a32e547f6043213a34",
+        "mechinterp/bpd/experiments/depth_steering_gym/steering.py": "ea4fe14677b4882a72852ff5500efa5cdaf2ae5e596ba88d49bda1ab4f8612bf",
+        "mechinterp/bpd/experiments/depth_steering_gym/training.py": "4f0079297d60a70db75fdcd19934a3f87c91375ffaa3630747d4a54b7c28f83f",
+        "mechinterp/bpd/experiments/depth_steering_gym/worlds.py": "15eeb361b340d3e5fc98cf0427803d14f5c3d64cd5aa375aa18340d1cea4628f",
+        "mechinterp/bpd/experiments/nc09_fixed12/calibration/evalmath_preflight.py": "c2621a7900930f81ed53799ce439ee1c8f2d7006918a04ef57b5381630d15494",
+        "mechinterp/bpd/nulls.py": "aa7f9f2ddd6ea42c36f63429c6f5e9569537dd373bc73fd79a937da6b2fa202e",
+        "mechinterp/loopscope02/scripts/trm_sudoku.py": "8999c821a55659e9139f892bc6f23455c4a011c71aca2995731fc50e9d2254df"
+      },
+      "git_dirty": true,
+      "git_head": "1082496445cb99e85cf346597aa87d4cb28f7059",
+      "historical": {
+        "dt02_archive_verified": true,
+        "dt04_files_checked": 25,
+        "execute_lock_sha256": "05ecc5d49b8bb28ccc339329f0dfc5c645e9fdd510315a3931bd869e87cec233",
+        "historical_files_checked": 12,
+        "protocol_commit": "8e02d09c1f67e82b6aed61199df6603a766758b9",
+        "source_check": "PASS"
+      }
+    },
+    "status": "PASS",
+    "teacher_updates": 2
+  },
+  "parent_commit": "1082496445cb99e85cf346597aa87d4cb28f7059",
+  "runtime": {
+    "cuda_available": false,
+    "numpy": "2.3.5",
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "torch": "2.5.1+cpu"
+  },
+  "schema": "BPD-DT05/verification/v1",
+  "scope": "source and excluded engineering validation",
+  "unit_tests": {
+    "command": "python -m unittest discover -s mechinterp/bpd/experiments/depth_steering_gym/dt05 -t . -p 'test_*.py'",
+    "failed": 0,
+    "passed": 70
+  },
+  "windows_runtime_tested_locally": false
+}
