@@ -19,6 +19,7 @@ from .causal_instruments import (
     probe_depth_causal_rank,
     run_transport_vs_static_unit,
     select_protected_task_gramian_vjp,
+    topk_set_overlap_fraction,
 )
 from .resources import BoundedTensorCache, MemoryBudget
 from .techniques import principal_angles_deg
@@ -123,6 +124,23 @@ class CausalInstrumentsTests(unittest.TestCase):
         pf = evaluate_transport_protocol_with_evalmath([unit1, unit2], protocol=proto, n_eval_boards_per_unit=3)
         self.assertEqual(pf["evalmath_result"]["schema"], "EvalMath/mechinterp-power-preflight/v1")
         self.assertEqual(pf["evalmath_result"]["decision"], "REDESIGN_OR_PILOT_ONLY")
+
+    def test_topk_overlap_uses_unordered_set_membership(self):
+        # Previously a positionwise same-slot check produced 0 for permutations.
+        online = torch.tensor([[[0, 1, 2, 3], [3, 2, 1, 0]]])
+        same_set = torch.tensor([[[3, 2, 1, 0], [0, 1, 2, 3]]])
+        self.assertEqual(topk_set_overlap_fraction(online, same_set), 1.0)
+
+        half_shared = torch.tensor([[[0, 1, 4, 5], [4, 5, 2, 3]]])
+        self.assertEqual(topk_set_overlap_fraction(online, half_shared), 0.5)
+
+        disjoint = torch.tensor([[[4, 5, 6, 7], [4, 5, 6, 7]]])
+        self.assertEqual(topk_set_overlap_fraction(online, disjoint), 0.0)
+
+        with self.assertRaises(ValueError):
+            topk_set_overlap_fraction(online, online[..., :3])
+        with self.assertRaises(ValueError):
+            topk_set_overlap_fraction(torch.empty(0, dtype=torch.long), torch.empty(0, dtype=torch.long))
 
     def test_autonomous_routing_benchmark_shares_vu_and_tracks_teacher_fidelity(self):
         cache = BoundedTensorCache(4 * 1024**2)

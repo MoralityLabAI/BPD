@@ -6,6 +6,8 @@ DT05 adds runnable development instruments beside the frozen DT04 campaign at
 execution lock, and results retain their original bytes.
 
 Read [the report review](REVIEW_DT04.md) for the evidence and discrepancies.
+
+The [post-pilot routing-overlap erratum](ERRATUM_TOPK_OVERLAP_20261119.md) corrects the diagnostic from rank-position agreement to unordered top-k set intersection. The first pilot's archived receipts remain immutable; a separate excluded local replay is required to obtain corrected numerical overlap values.
 [The development protocol](PROTOCOL_DT05.md) describes the allowed population
 and comparison limits. GPU performance and new model accuracy still require
 measurements on the target machine.

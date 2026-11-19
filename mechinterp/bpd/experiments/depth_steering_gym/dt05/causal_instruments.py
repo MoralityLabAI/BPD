@@ -806,6 +806,22 @@ def evaluate_transport_protocol_with_evalmath(
 
 
 @torch.no_grad()
+def topk_set_overlap_fraction(online_indices: Tensor, teacher_indices: Tensor) -> float:
+    """Fraction of online top-k component IDs also selected by the teacher.
+
+    The final dimension contains unique top-k indices. Comparisons across
+    positions in that dimension are deliberately order-invariant. The historical
+    DT05 pilot used *positionwise* equality and mislabeled it as set overlap.
+    Its recorded JSON remains immutable; future receipts use this correction.
+    """
+    if online_indices.shape != teacher_indices.shape or online_indices.ndim < 1:
+        raise ValueError("online/teacher top-k index tensors must have the same non-scalar shape")
+    if online_indices.shape[-1] == 0:
+        raise ValueError("top-k must be positive")
+    common = (online_indices.unsqueeze(-1) == teacher_indices.unsqueeze(-2)).any(dim=-1)
+    return float(common.float().mean().item())
+
+
 def benchmark_autonomous_routing(
     teacher: nn.Module,
     student: nn.Module,
@@ -945,11 +961,8 @@ def benchmark_autonomous_routing(
                         for c_idx in range(c_start, c_end):
                             m_on = online_call_masks[nm][c_idx]
                             m_tc = teacher_masks_by_chunk[chunk_i][nm][c_idx]
-                            # Set overlap fraction |S_online cap S_teacher| / k via one-hot dot product
-                            c_width = wrappers[nm].C
-                            oh_on = F.one_hot(m_on, c_width).float()
-                            oh_tc = F.one_hot(m_tc, c_width).float()
-                            frac = float(((oh_on * oh_tc).sum(dim=-1) / wrappers[nm].top_k).mean().item())
+                            # Compare selected sets, irrespective of top-k ranking order.
+                            frac = topk_set_overlap_fraction(m_on, m_tc)
                             overlaps.append(frac)
                     online_vs_teacher_overlap_by_step[d].append(sum(overlaps) / max(1, len(overlaps)))
 
