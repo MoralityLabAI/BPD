@@ -10,7 +10,7 @@ The prior implementation described `online_vs_teacher_topk_set_overlap_by_step` 
 (F.one_hot(m_on, C) * F.one_hot(m_tc, C)).sum(dim=-1).mean() / k
 ```
 
-Both `m_on` and `m_tc` contain **ranked** top-k component indices. Elementwise multiplication aligns corresponding **rank positions**, yielding the fraction of positions with identical component IDs. Its results around `0.019–0.024` are therefore **rank-position agreement**, not order-invariant component-set intersection. Two selections containing precisely the same components in a different order can have a reported value of zero. For independent uniform k=12 subsets of C=24 components, the true set-intersection fraction has expectation 0.5.
+Both `m_on` and `m_tc` contain **ranked** top-k component indices. Elementwise multiplication aligns corresponding **rank positions**. The code divides each position's equality indicator by `k` and then averages those `k` positions, yielding **rank-position agreement divided by `k`**, with a maximum of `1/k` even when the ordered lists match exactly. The recorded `0.019–0.024` values should be multiplied by `12` to recover the ordered rank-position match fraction; they cannot recover the unordered component-set intersection. Two selections containing precisely the same components in a different order can have a reported value of zero. For independent uniform k=12 subsets of C=24 components, the true set-intersection fraction has expectation 0.5.
 
 The fix measures `(m_on.unsqueeze(-1) == m_tc.unsqueeze(-2)).any(dim=-1).float().mean()` and rejects malformed input shapes. Regression cases cover equal sets in reverse order, half-shared sets, disjoint sets, and malformed inputs.
 
