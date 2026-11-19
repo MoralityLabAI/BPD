@@ -115,12 +115,16 @@ def _windows_memory() -> dict[str, int]:
         raise OSError(ctypes.get_last_error(), "GetProcessMemoryInfo failed")
     if not kernel.GlobalMemoryStatusEx(ctypes.byref(status)):
         raise OSError(ctypes.get_last_error(), "GlobalMemoryStatusEx failed")
+    swap_total = max(0, int(status.ullTotalPageFile) - int(status.ullTotalPhys))
+    swap_avail = max(0, int(status.ullAvailPageFile) - int(status.ullAvailPhys))
     return {
         "host_rss_bytes": int(counters.WorkingSetSize),
         "host_peak_rss_bytes": int(counters.PeakWorkingSetSize),
         "host_commit_bytes": int(counters.PrivateUsage),
         "host_available_bytes": int(status.ullAvailPhys),
         "host_total_bytes": int(status.ullTotalPhys),
+        "host_swap_total_bytes": swap_total,
+        "host_swap_used_bytes": max(0, swap_total - swap_avail),
     }
 
 
@@ -138,6 +142,7 @@ def memory_snapshot(device: str = "cpu") -> dict:
         "device": dev,
         "host_rss_bytes": None, "host_peak_rss_bytes": None,
         "host_commit_bytes": None, "host_available_bytes": None, "host_total_bytes": None,
+        "host_swap_total_bytes": None, "host_swap_used_bytes": None,
         "cuda_allocated_bytes": None, "cuda_reserved_bytes": None,
         "cuda_peak_allocated_bytes": None, "cuda_peak_reserved_bytes": None,
         "cuda_free_bytes": None, "cuda_total_bytes": None,
@@ -148,12 +153,16 @@ def memory_snapshot(device: str = "cpu") -> dict:
         process = psutil.Process(os.getpid())
         mem = process.memory_info()
         system = psutil.virtual_memory()
+        swap = psutil.swap_memory()
         snap.update({
             "host_rss_bytes": int(mem.rss),
             "host_peak_rss_bytes": int(mem.peak_wset) if hasattr(mem, "peak_wset") else None,
             "host_commit_bytes": int(mem.private) if hasattr(mem, "private") else None,
             "host_available_bytes": int(system.available),
-            "host_total_bytes": int(system.total), "host_source": "psutil",
+            "host_total_bytes": int(system.total),
+            "host_swap_total_bytes": int(swap.total),
+            "host_swap_used_bytes": int(swap.used),
+            "host_source": "psutil",
         })
     except Exception as exc:
         snap["errors"].append(f"psutil: {type(exc).__name__}: {exc}")
@@ -164,11 +173,19 @@ def memory_snapshot(device: str = "cpu") -> dict:
             elif sys.platform.startswith("linux"):
                 process = _proc_fields(Path("/proc/self/status"))
                 system = _proc_fields(Path("/proc/meminfo"))
+                swap_total = system.get("SwapTotal")
+                swap_free = system.get("SwapFree")
                 snap.update({
                     "host_rss_bytes": process.get("VmRSS"),
                     "host_peak_rss_bytes": process.get("VmHWM"),
                     "host_available_bytes": system.get("MemAvailable"),
-                    "host_total_bytes": system.get("MemTotal"), "host_source": "procfs",
+                    "host_total_bytes": system.get("MemTotal"),
+                    "host_swap_total_bytes": swap_total,
+                    "host_swap_used_bytes": (
+                        max(0, swap_total - swap_free)
+                        if swap_total is not None and swap_free is not None else None
+                    ),
+                    "host_source": "procfs",
                 })
             else:
                 snap["errors"].append("current RSS and system availability require psutil on this platform")
@@ -379,7 +396,36 @@ class BoundedTensorCache:
         self.hits = 0
         self.misses = 0
         self.evictions = 0
+        self.rejected_admissions = 0
+        self.recomputations_avoided = 0
+        self.bytes_saved_from_recompute = 0
         self._items: OrderedDict[str, tuple[object, int]] = OrderedDict()
+
+    def can_admit_live(
+        self,
+        required_bytes: int,
+        budget: MemoryBudget,
+        *,
+        snapshot: dict | None = None,
+        device: str = "cpu",
+        snapshot_fn: Callable[[str], dict] = memory_snapshot,
+        working_copy_multiplier: float = 1.0,
+    ) -> bool:
+        """Check cache byte cap and live host RSS / available-RAM reserves before cloning."""
+        if isinstance(required_bytes, bool) or not isinstance(required_bytes, int) or required_bytes <= 0:
+            return False
+        if required_bytes > self.max_bytes:
+            return False
+        if not math.isfinite(working_copy_multiplier) or working_copy_multiplier < 1.0:
+            raise ValueError("working_copy_multiplier must be >= 1.0")
+        snap = snapshot if snapshot is not None else snapshot_fn(device)
+        rss = _required_number(snap, "host_rss_bytes")
+        avail = _required_number(snap, "host_available_bytes")
+        needed = required_bytes * working_copy_multiplier
+        return (
+            rss + needed <= budget.max_host_rss_gib * GIB
+            and avail - needed >= budget.min_host_available_gib * GIB
+        )
 
     def put(self, key: str, value: object) -> bool:
         import torch
@@ -389,6 +435,7 @@ class BoundedTensorCache:
             raise ValueError("cache accepts dense CPU tensors only")
         size = int(value.numel() * value.element_size())
         if size == 0 or size > self.max_bytes:
+            self.rejected_admissions += 1
             return False
         while self._items and (
             self.bytes_used - (self._items[key][1] if key in self._items else 0) + size > self.max_bytes
@@ -408,18 +455,45 @@ class BoundedTensorCache:
         self.bytes_used += size
         return True
 
+    def put_admitted(
+        self,
+        key: str,
+        value: object,
+        budget: MemoryBudget,
+        *,
+        snapshot: dict | None = None,
+        device: str = "cpu",
+        snapshot_fn: Callable[[str], dict] = memory_snapshot,
+        working_copy_multiplier: float = 1.0,
+    ) -> bool:
+        """Admit a CPU tensor only when both cache cap and live host RAM reserves allow."""
+        import torch
+        if not isinstance(key, str) or not key or len(key) > 512:
+            raise ValueError("nonempty bounded string key required")
+        if not isinstance(value, torch.Tensor) or value.layout != torch.strided or value.device.type != "cpu":
+            raise ValueError("cache accepts dense CPU tensors only")
+        size = int(value.numel() * value.element_size())
+        if not self.can_admit_live(
+            size, budget, snapshot=snapshot, device=device,
+            snapshot_fn=snapshot_fn, working_copy_multiplier=working_copy_multiplier,
+        ):
+            self.rejected_admissions += 1
+            return False
+        return self.put(key, value)
+
     def get(self, key: str):
         if key not in self._items:
             self.misses += 1
             return None
-        tensor, _ = self._items[key]
+        tensor, size = self._items[key]
         result = tensor.clone()
         self._items.move_to_end(key)
         self.hits += 1
+        self.recomputations_avoided += int(tensor.shape[0]) if tensor.ndim >= 1 else 1
+        self.bytes_saved_from_recompute += size
         return result
 
-    def get_rows(self, key: str, indices):
-        """Copy selected rows with CPU int64 indices, without cloning the full entry."""
+    def _validate_row_lookup(self, key: str, indices):
         import torch
         if not isinstance(indices, torch.Tensor) or indices.device.type != "cpu" or indices.dtype != torch.int64 or indices.ndim != 1:
             raise ValueError("row indices must be a one-dimensional CPU int64 tensor")
@@ -431,16 +505,123 @@ class BoundedTensorCache:
             raise ValueError("row selection requires a tensor with at least one axis")
         if indices.numel() and (int(indices.min()) < 0 or int(indices.max()) >= tensor.shape[0]):
             raise ValueError("cache row index out of range")
+        return tensor
+
+    def get_rows(self, key: str, indices):
+        """Copy selected rows with CPU int64 indices, without cloning the full entry."""
+        tensor = self._validate_row_lookup(key, indices)
+        if tensor is None:
+            return None
         result = tensor.index_select(0, indices)
         self._items.move_to_end(key)
         self.hits += 1
+        row_count = int(indices.numel())
+        self.recomputations_avoided += row_count
+        self.bytes_saved_from_recompute += int(result.numel() * result.element_size())
         return result
+
+    def get_rows_into(self, key: str, indices, out):
+        """Gather selected rows directly into a preallocated caller CPU buffer (pinned or pageable)."""
+        import torch
+        if not isinstance(out, torch.Tensor) or out.device.type != "cpu" or not out.is_contiguous():
+            raise ValueError("out must be a contiguous CPU tensor")
+        tensor = self._validate_row_lookup(key, indices)
+        if tensor is None:
+            return None
+        expected_shape = (int(indices.numel()), *tensor.shape[1:])
+        if out.shape != expected_shape or out.dtype != tensor.dtype:
+            raise ValueError(f"out buffer shape/dtype mismatch: expected {expected_shape} {tensor.dtype}")
+        torch.index_select(tensor, 0, indices, out=out)
+        self._items.move_to_end(key)
+        self.hits += 1
+        row_count = int(indices.numel())
+        self.recomputations_avoided += row_count
+        self.bytes_saved_from_recompute += int(out.numel() * out.element_size())
+        return out
 
     def clear(self) -> None:
         self._items.clear()
         self.bytes_used = 0
 
-    def stats(self) -> dict[str, int]:
-        return {"max_bytes": self.max_bytes, "max_entries": self.max_entries, "bytes_used": self.bytes_used,
-                "entries": len(self._items), "hits": self.hits, "misses": self.misses,
-                "evictions": self.evictions}
+    def stats(self) -> dict[str, int | float]:
+        total = self.hits + self.misses
+        return {
+            "max_bytes": self.max_bytes,
+            "max_entries": self.max_entries,
+            "bytes_used": self.bytes_used,
+            "entries": len(self._items),
+            "hits": self.hits,
+            "misses": self.misses,
+            "hit_rate": float(self.hits / total) if total else 0.0,
+            "evictions": self.evictions,
+            "rejected_admissions": self.rejected_admissions,
+            "recomputations_avoided": self.recomputations_avoided,
+            "bytes_saved_from_recompute": self.bytes_saved_from_recompute,
+        }
+
+
+class ReusableTransferBuffer:
+    """Reusable host staging (pinned when targeting CUDA with sufficient free RAM) and device buffer.
+
+    Eliminates per-step host/device tensor allocation churn and enables asynchronous
+    PCIe H2D DMA transfers when live host available RAM safely supports WDDM page-locking
+    (>= 1.5 GiB free physical RAM); degrades gracefully to pageable staging under host RAM pressure.
+    """
+
+    def __init__(
+        self,
+        shape: tuple[int, ...],
+        dtype,
+        device: str | object,
+        *,
+        pin_memory: bool = True,
+        min_pin_available_gib: float = 1.5,
+    ):
+        import torch
+        if not shape or any(isinstance(d, bool) or not isinstance(d, int) or d < 1 for d in shape):
+            raise ValueError("ReusableTransferBuffer requires positive integer dimensions")
+        self.dev = torch.device(device)
+        self.shape = tuple(shape)
+        self.dtype = dtype
+        want_pin = bool(pin_memory and self.dev.type == "cuda" and torch.cuda.is_available())
+        if want_pin and min_pin_available_gib > 0:
+            snap = memory_snapshot("cpu")
+            avail = snap.get("host_available_bytes")
+            nbytes_est = math.prod(self.shape) * torch.empty((), dtype=dtype).element_size()
+            if avail is None or avail - nbytes_est < min_pin_available_gib * GIB:
+                want_pin = False
+        self.pinned = False
+        if want_pin:
+            try:
+                self.host = torch.empty(self.shape, dtype=dtype, device="cpu", pin_memory=True)
+                self.pinned = True
+            except RuntimeError:
+                self.host = torch.empty(self.shape, dtype=dtype, device="cpu", pin_memory=False)
+        else:
+            self.host = torch.empty(self.shape, dtype=dtype, device="cpu", pin_memory=False)
+        self.device_buf = torch.empty(self.shape, dtype=dtype, device=self.dev) if self.dev.type != "cpu" else self.host
+        self.transfers = 0
+
+    @property
+    def nbytes(self) -> int:
+        return int(self.host.numel() * self.host.element_size())
+
+    def stage_and_send(self, cpu_source=None, *, count: int | None = None, stream=None):
+        """Copy optional ``cpu_source`` into ``host[:count]`` and transfer to ``device_buf[:count]``."""
+        import torch
+        rows = self.shape[0] if count is None else int(count)
+        if rows < 0 or rows > self.shape[0]:
+            raise ValueError("transfer row count out of bounds")
+        host_view = self.host[:rows]
+        if cpu_source is not None:
+            host_view.copy_(cpu_source, non_blocking=False)
+        self.transfers += 1
+        if self.dev.type == "cpu":
+            return host_view
+        dev_view = self.device_buf[:rows]
+        if stream is not None:
+            with torch.cuda.stream(stream):
+                dev_view.copy_(host_view, non_blocking=self.pinned)
+        else:
+            dev_view.copy_(host_view, non_blocking=self.pinned)
+        return dev_view

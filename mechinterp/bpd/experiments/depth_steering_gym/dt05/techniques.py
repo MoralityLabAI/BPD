@@ -22,6 +22,14 @@ def _integer_matrix(value: Tensor, name: str) -> None:
         raise ValueError(f"{name} batch must be nonempty")
 
 
+def _sudoku_groups_stacked(flat: Tensor, size: int) -> Tensor:
+    """Return stacked ``[batch, 3, size, size]`` rows, columns, and boxes."""
+    box = math.isqrt(size)
+    grid = flat.reshape(-1, size, size)
+    boxes = grid.reshape(-1, box, box, box, box).permute(0, 1, 3, 2, 4).reshape(-1, size, size)
+    return torch.stack((grid, grid.transpose(1, 2), boxes), dim=1)
+
+
 def _sudoku_groups(flat: Tensor, size: int) -> tuple[Tensor, Tensor, Tensor]:
     box = math.isqrt(size)
     grid = flat.reshape(-1, size, size)
@@ -36,11 +44,10 @@ def _validate_givens(givens: Tensor) -> int:
         raise ValueError("Only flat 4x4 and 9x9 Sudoku boards are supported")
     if bool(((givens < 0) | (givens > size)).any()):
         raise ValueError(f"Givens must be blank 0 or digits 1..{size}")
-    for group in _sudoku_groups(givens, size):
-        ordered = group.sort(dim=-1).values
-        duplicate = (ordered[..., 1:] == ordered[..., :-1]) & (ordered[..., 1:] != 0)
-        if bool(duplicate.any()):
-            raise ValueError("Givens contain conflicting row, column, or box clues")
+    ordered = _sudoku_groups_stacked(givens, size).sort(dim=-1).values
+    duplicate = (ordered[..., 1:] == ordered[..., :-1]) & (ordered[..., 1:] != 0)
+    if bool(duplicate.any()):
+        raise ValueError("Givens contain conflicting row, column, or box clues")
     return size
 
 
@@ -48,11 +55,11 @@ def _valid_mask(pred_digits: Tensor, givens: Tensor, size: int) -> Tensor:
     _integer_matrix(pred_digits, "pred_digits")
     if pred_digits.shape != givens.shape or pred_digits.device != givens.device:
         raise ValueError("Predictions and givens must share shape and device")
-    expected = torch.arange(1, size + 1, device=pred_digits.device)
-    valid = ((givens == 0) | (pred_digits == givens)).all(dim=-1)
-    for group in _sudoku_groups(pred_digits, size):
-        valid = valid & (group.sort(dim=-1).values == expected).all(dim=-1).all(dim=-1)
-    return valid
+    expected = torch.arange(1, size + 1, device=pred_digits.device, dtype=pred_digits.dtype)
+    clue_ok = ((givens == 0) | (pred_digits == givens)).all(dim=-1)
+    ordered = _sudoku_groups_stacked(pred_digits, size).sort(dim=-1).values
+    groups_ok = (ordered == expected).all(dim=-1).all(dim=-1).all(dim=-1)
+    return clue_ok & groups_ok
 
 
 def sudoku_valid_mask(pred_digits: Tensor, givens_digits: Tensor) -> Tensor:
@@ -153,6 +160,16 @@ class OnlineTopKLinear(nn.Module):
         else:
             indices = strength.argsort(descending=True, stable=True)[:top_k]
         self.register_buffer("control_indices", indices)
+        # Non-persistent runtime caches (never alter state_dict keys).
+        self._cache_sig: tuple | None = None
+        self._cached_u_norm: Tensor | None = None
+        self._cached_v_ctrl: Tensor | None = None
+        self._cached_u_ctrl: Tensor | None = None
+        self._external_mask_queue: list[Tensor] | None = None
+        self._telemetry_enabled: bool = False
+        self._telemetry_counts: Tensor | None = None
+        self._telemetry_token_calls: int = 0
+        self._telemetry_active_sum: int = 0
 
     @classmethod
     def from_factors(cls, V: Tensor, U: Tensor, top_k: int, *, bias: Tensor | None = None,
@@ -178,21 +195,97 @@ class OnlineTopKLinear(nn.Module):
             raise TypeError("Expected a factor wrapper with V and U tensors")
         return cls(wrapper.V, wrapper.U, top_k, bias=getattr(wrapper, "bias", None), mode=mode, seed=seed)
 
+    def _ensure_eval_cache(self) -> tuple[Tensor, Tensor, Tensor]:
+        sig = (
+            self.V.data_ptr(), self.V._version,
+            self.U.data_ptr(), self.U._version,
+            self.control_indices.data_ptr(), self.control_indices._version,
+            self.V.device, self.V.dtype,
+        )
+        if self._cache_sig != sig:
+            with torch.no_grad():
+                self._cached_u_norm = self.U.detach().norm(dim=-1)
+                idx = self.control_indices
+                self._cached_v_ctrl = self.V.detach().index_select(1, idx).contiguous()
+                self._cached_u_ctrl = self.U.detach().index_select(0, idx).contiguous()
+                self._cache_sig = sig
+        return self._cached_u_norm, self._cached_v_ctrl, self._cached_u_ctrl  # type: ignore[return-value]
+
+    def reset_routing_telemetry(self, enabled: bool = True) -> None:
+        self._telemetry_enabled = bool(enabled)
+        self._telemetry_counts = torch.zeros(self.C, dtype=torch.int64, device=self.V.device) if enabled else None
+        self._telemetry_token_calls = 0
+        self._telemetry_active_sum = 0
+
+    def routing_telemetry(self) -> dict:
+        if self._telemetry_counts is None:
+            return {"enabled": False}
+        counts = self._telemetry_counts.detach().cpu()
+        total_tok = max(1, self._telemetry_token_calls)
+        probs = counts.double() / max(1.0, float(counts.sum().item()))
+        nz = probs[probs > 0]
+        entropy = float(-(nz * nz.log()).sum().item()) if nz.numel() else 0.0
+        return {
+            "enabled": True,
+            "components": self.C,
+            "declared_top_k": self.top_k,
+            "mode": self.mode,
+            "token_positions_routed": self._telemetry_token_calls,
+            "mean_active_components_per_token": float(self._telemetry_active_sum / total_tok),
+            "unique_active_components": int((counts > 0).sum().item()),
+            "active_component_fraction": float((counts > 0).float().mean().item()),
+            "effective_component_entropy_rank": float(math.exp(entropy)) if nz.numel() else 0.0,
+            "component_activation_counts": counts.tolist(),
+        }
+
+    def _record_selected(self, selected: Tensor, n_tokens: int) -> None:
+        if not self._telemetry_enabled or self._telemetry_counts is None:
+            return
+        with torch.no_grad():
+            flat = selected.reshape(-1)
+            self._telemetry_counts.scatter_add_(0, flat, torch.ones_like(flat, dtype=torch.int64))
+            self._telemetry_token_calls += int(n_tokens)
+            self._telemetry_active_sum += int(flat.numel())
+
     def forward(self, x: Tensor) -> Tensor:
         if x.ndim < 1 or x.shape[-1] != self.in_features or not x.is_floating_point():
             raise ValueError("Input must have the factor input width and floating dtype")
         xf = x.to(dtype=self.V.dtype)
-        if self.top_k == self.C:
+        need_grad = torch.is_grad_enabled() and (self.V.requires_grad or self.U.requires_grad or xf.requires_grad)
+        n_tokens = int(xf.numel() // self.in_features)
+        if self._external_mask_queue is not None:
+            if not self._external_mask_queue:
+                raise RuntimeError("External routing mask queue exhausted during forward")
+            ext_selected = self._external_mask_queue.pop(0)
+            acts = xf @ self.V
+            mask = torch.zeros_like(acts).scatter_(-1, ext_selected, 1)
+            output = (acts * mask) @ self.U
+            self._record_selected(ext_selected, n_tokens)
+        elif self.top_k == self.C:
             output = (xf @ self.V) @ self.U
+            if self._telemetry_enabled and self._telemetry_counts is not None:
+                with torch.no_grad():
+                    self._telemetry_counts.add_(n_tokens)
+                    self._telemetry_token_calls += n_tokens
+                    self._telemetry_active_sum += n_tokens * self.C
         elif self.mode == "online":
             acts = xf @ self.V
-            scores = acts.abs() * self.U.norm(dim=-1)
+            u_norm = self.U.norm(dim=-1) if need_grad else self._ensure_eval_cache()[0]
+            scores = acts.abs() * u_norm
             selected = scores.topk(self.top_k, dim=-1).indices
             mask = torch.zeros_like(acts).scatter_(-1, selected, 1)
             output = (acts * mask) @ self.U
+            self._record_selected(selected, n_tokens)
         else:
-            indices = self.control_indices
-            output = (xf @ self.V[:, indices]) @ self.U[indices]
+            if need_grad:
+                indices = self.control_indices
+                output = (xf @ self.V[:, indices]) @ self.U[indices]
+            else:
+                _, v_ctrl, u_ctrl = self._ensure_eval_cache()
+                output = (xf @ v_ctrl) @ u_ctrl
+            if self._telemetry_enabled:
+                expanded = self.control_indices.expand(n_tokens, self.top_k)
+                self._record_selected(expanded, n_tokens)
         if self.bias is not None:
             output = output + self.bias
         return output.to(dtype=x.dtype)
@@ -267,9 +360,95 @@ def _check_tolerances(rtol: float, atol: float) -> None:
         raise ValueError("Tolerances must be finite and nonnegative")
 
 
-def transport_basis_jvp(step: Callable[[Tensor], Tensor], state: Tensor, basis: Tensor, *,
-                        project: Callable[[Tensor], Tensor] | None = None,
-                        rtol: float = 1e-6, atol: float = 1e-9) -> tuple[Tensor, dict]:
+def principal_angles_deg(basis_a: Tensor, basis_b: Tensor) -> dict:
+    """Compute canonical principal angles (degrees) and Frobenius subspace overlap."""
+    if basis_a.ndim != 2 or basis_b.ndim != 2 or basis_a.shape[0] != basis_b.shape[0]:
+        raise ValueError("Bases must be 2D matrices sharing ambient state dimension")
+    if basis_a.shape[1] == 0 or basis_b.shape[1] == 0:
+        return {
+            "rank_a": int(basis_a.shape[1]),
+            "rank_b": int(basis_b.shape[1]),
+            "cosines": [],
+            "angles_deg": [],
+            "min_angle_deg": 90.0,
+            "mean_angle_deg": 90.0,
+            "max_angle_deg": 90.0,
+            "subspace_overlap": 0.0,
+        }
+    a64 = basis_a.detach().double()
+    b64 = basis_b.detach().double()
+    for tag, mat in (("basis_a", a64), ("basis_b", b64)):
+        eye = torch.eye(mat.shape[1], device=mat.device, dtype=torch.float64)
+        if float((mat.T @ mat - eye).abs().max()) > 1e-4:
+            raise ValueError(f"{tag} must have orthonormal columns")
+    svals = torch.linalg.svdvals(a64.T @ b64).clamp(0.0, 1.0)
+    angles = [float(math.degrees(math.acos(float(sv.item())))) for sv in svals]
+    overlap = float(svals.pow(2).mean().item())
+    return {
+        "rank_a": int(a64.shape[1]),
+        "rank_b": int(b64.shape[1]),
+        "cosines": svals.detach().cpu().tolist(),
+        "angles_deg": angles,
+        "min_angle_deg": min(angles),
+        "mean_angle_deg": sum(angles) / len(angles),
+        "max_angle_deg": max(angles),
+        "subspace_overlap": overlap,
+    }
+
+
+def _jvp_columns_loop(step: Callable[[Tensor], Tensor], state: Tensor, basis: Tensor, work_dtype: torch.dtype) -> Tensor:
+    derivatives = []
+    for index in range(basis.shape[1]):
+        value, derivative = torch.func.jvp(step, (state,), (basis[:, index].reshape_as(state),))
+        if not isinstance(value, Tensor) or value.shape != state.shape or derivative.shape != state.shape:
+            raise ValueError("Recurrent step must preserve state shape")
+        if not bool(torch.isfinite(value).all() & torch.isfinite(derivative).all()):
+            raise ValueError("Transport produced a nonfinite state or derivative")
+        derivatives.append(derivative.detach().reshape(-1).to(dtype=work_dtype))
+    return torch.stack(derivatives, dim=1)
+
+
+def _jvp_columns_chunked_vmap(
+    step: Callable[[Tensor], Tensor],
+    state: Tensor,
+    basis: Tensor,
+    work_dtype: torch.dtype,
+    chunk_size: int,
+) -> Tensor:
+    primal = step(state)
+    if not isinstance(primal, Tensor) or primal.shape != state.shape:
+        raise ValueError("Recurrent step must preserve state shape")
+    if not bool(torch.isfinite(primal).all()):
+        raise ValueError("Transport produced a nonfinite state or derivative")
+
+    def single_jvp(col: Tensor) -> Tensor:
+        val, deriv = torch.func.jvp(step, (state,), (col.reshape_as(state),))
+        if not isinstance(val, Tensor) or val.shape != state.shape or deriv.shape != state.shape:
+            raise ValueError("Recurrent step must preserve state shape")
+        return deriv.reshape(-1)
+
+    batched = torch.func.vmap(single_jvp, in_dims=1, out_dims=1)
+    chunks = []
+    for offset in range(0, basis.shape[1], chunk_size):
+        sub = basis[:, offset:offset + chunk_size]
+        derivs = batched(sub)
+        if not bool(torch.isfinite(derivs).all()):
+            raise ValueError("Transport produced a nonfinite state or derivative")
+        chunks.append(derivs.detach().to(dtype=work_dtype))
+    return torch.cat(chunks, dim=1)
+
+
+def transport_basis_jvp(
+    step: Callable[[Tensor], Tensor],
+    state: Tensor,
+    basis: Tensor,
+    *,
+    project: Callable[[Tensor], Tensor] | None = None,
+    rtol: float = 1e-6,
+    atol: float = 1e-9,
+    chunk_size: int = 8,
+    mode: str = "auto",
+) -> tuple[Tensor, dict]:
     """Transport one case's orthonormal basis through one local recurrent step.
 
     ``basis`` is ``[state.numel(), rank]``; optional ``project`` maps rows of
@@ -279,6 +458,10 @@ def transport_basis_jvp(step: Callable[[Tensor], Tensor], state: Tensor, basis: 
     This instrument establishes local derivatives, not causal task improvement.
     """
     _check_tolerances(rtol, atol)
+    if isinstance(chunk_size, bool) or not isinstance(chunk_size, int) or chunk_size < 1:
+        raise ValueError("chunk_size must be a positive integer")
+    if mode not in {"auto", "vmap", "loop"}:
+        raise ValueError("mode must be auto, vmap, or loop")
     if not state.is_floating_point() or basis.ndim != 2 or not basis.is_floating_point():
         raise ValueError("State and rank-2 basis must be floating tensors")
     if basis.shape[0] != state.numel() or not 1 <= basis.shape[1] <= state.numel():
@@ -293,16 +476,21 @@ def transport_basis_jvp(step: Callable[[Tensor], Tensor], state: Tensor, basis: 
     orth_error = float(((columns.T @ columns) - identity).abs().max())
     if orth_error > 1e-4:
         raise ValueError("Input transport basis must be orthonormal")
-    derivatives = []
+    executed_mode = mode
     with torch.nn.attention.sdpa_kernel(torch.nn.attention.SDPBackend.MATH):
-        for index in range(basis.shape[1]):
-            value, derivative = torch.func.jvp(step, (state,), (basis[:, index].reshape_as(state),))
-            if not isinstance(value, Tensor) or value.shape != state.shape or derivative.shape != state.shape:
-                raise ValueError("Recurrent step must preserve state shape")
-            if not bool(torch.isfinite(value).all() & torch.isfinite(derivative).all()):
-                raise ValueError("Transport produced a nonfinite state or derivative")
-            derivatives.append(derivative.detach().reshape(-1).to(dtype=work_dtype))
-    transported = torch.stack(derivatives, dim=1)
+        if mode == "loop" or basis.shape[1] == 1:
+            transported = _jvp_columns_loop(step, state, basis, work_dtype)
+            executed_mode = "loop"
+        elif mode == "vmap":
+            transported = _jvp_columns_chunked_vmap(step, state, basis, work_dtype, chunk_size)
+            executed_mode = "vmap"
+        else:
+            try:
+                transported = _jvp_columns_chunked_vmap(step, state, basis, work_dtype, chunk_size)
+                executed_mode = "vmap"
+            except RuntimeError:
+                transported = _jvp_columns_loop(step, state, basis, work_dtype)
+                executed_mode = "loop"
     denom = transported.norm().clamp_min(torch.finfo(work_dtype).tiny)
     closure = float((transported - columns @ (columns.T @ transported)).norm() / denom)
     projected = transported if project is None else project(transported.T).T
@@ -313,6 +501,7 @@ def transport_basis_jvp(step: Callable[[Tensor], Tensor], state: Tensor, basis: 
     threshold = atol + rtol * float(singular.max())
     rank = int((singular > threshold).sum())
     result = left[:, :rank].to(dtype=basis.dtype)
+    drift = principal_angles_deg(columns, result.to(dtype=work_dtype)) if rank > 0 else principal_angles_deg(columns, result.to(dtype=work_dtype))
     return result, {
         "input_rank": int(basis.shape[1]),
         "output_rank": rank,
@@ -322,6 +511,9 @@ def transport_basis_jvp(step: Callable[[Tensor], Tensor], state: Tensor, basis: 
         "input_orthogonality_max_error": orth_error,
         "one_step_closure_defect": closure,
         "protected_projection_escape": escape,
+        "principal_angle_drift_from_input": drift,
+        "jvp_execution_mode": executed_mode,
+        "jvp_chunk_size": chunk_size,
         "evidence_class": "local derivative instrument; causal benefit unmeasured",
         "dense_state_jacobian_allocated": False,
     }

@@ -1,0 +1,476 @@
+{
+  "cohorts": {
+    "excluded_engineering_smoke_root": 2605999,
+    "reserved_development_roots": {
+      "auto_launch_all_prohibited": true,
+      "count": 59,
+      "end": 2605058,
+      "start": 2605000
+    },
+    "sealed_protected_cohorts": [
+      "BPD-DT04 confirmation roots 2604100..2604355",
+      "ARG-03-N 168-case test.jsonl",
+      "NC09 / AMM-03..06 confirmation populations"
+    ]
+  },
+  "environment": {
+    "network_egress_permitted": false,
+    "python_min_version": "3.11",
+    "required_env": {
+      "HF_HUB_OFFLINE": "1",
+      "PYTHONUNBUFFERED": "1"
+    },
+    "weight_autodownload_permitted": false
+  },
+  "gym_id": "bpd-dt05-trm-sudoku",
+  "repository": {
+    "branch": "gym/TRM-Sodoku",
+    "git_revision": "8ccdcb2ed7ed937805efbd4276c524932321f95a",
+    "gym_directory": "mechinterp/bpd/experiments/depth_steering_gym/dt05",
+    "line_endings": "lf",
+    "source_lock_sha256": "689a25c95cad4bd99e12204285eba3a9be507ea36106d1bed1416c0dc0e09345",
+    "url": "https://github.com/MoralityLabAI/BPD",
+    "working_directory": "."
+  },
+  "schema": "Tesseract/gym-manifest-provisional/v1",
+  "schema_mapping_doc": "mechinterp/bpd/experiments/depth_steering_gym/dt05/TESSERACT_INTEGRATION.md",
+  "schema_status": "provisional_adapter",
+  "study_id": "BPD-DT05",
+  "target_hardware_envelope": {
+    "cpu_threads_request": 8,
+    "device": "cuda:0",
+    "reference_gpu": "NVIDIA GeForce RTX 5080 (16 GB VRAM)",
+    "system_ram_ceiling_gib": 12.0,
+    "system_ram_min_available_reserve_gib": 4.0,
+    "system_ram_request_gib": 8.0,
+    "vram_ceiling_gib": 12.5,
+    "vram_min_free_reserve_gib": 1.0,
+    "vram_request_gib": 10.0
+  },
+  "workloads": [
+    {
+      "accumulation_steps": 2,
+      "args": [
+        "--device",
+        "cuda:0",
+        "--cpu-threads",
+        "8",
+        "--execution-mode",
+        "optimized",
+        "--out",
+        "runs/dt05/tesseract/smoke-${RUN_ID}",
+        "--max-host-rss-gib",
+        "12.0",
+        "--min-host-available-gib",
+        "4.0",
+        "--max-cuda-reserved-gib",
+        "12.5",
+        "--min-cuda-free-gib",
+        "1.0"
+      ],
+      "artifacts": {
+        "output_dir": "runs/dt05/tesseract/smoke-${RUN_ID}",
+        "primary_receipt": "runs/dt05/tesseract/smoke-${RUN_ID}/SMOKE.json",
+        "stdout_protocol": "jsonl_events_and_final_summary"
+      },
+      "command": [
+        "python",
+        "-m",
+        "mechinterp.bpd.experiments.depth_steering_gym.dt05.runner",
+        "smoke"
+      ],
+      "description": "Excluded root 2605999 end-to-end mini-TRM smoke on GPU.",
+      "device": "cuda:0",
+      "evidence_scope": "engineering",
+      "id": "engineering_smoke_cuda",
+      "logical_batch": 8,
+      "microbatch": 4,
+      "model_config": {
+        "h_cycles": 1,
+        "hidden_size": 32,
+        "l_cycles": 1,
+        "l_layers": 1,
+        "num_heads": 4,
+        "puzzle_emb_len": 1,
+        "seq_len": 16
+      },
+      "permitted": true,
+      "precision": "fp32",
+      "profile": "mini",
+      "resources": {
+        "cpu_threads": 8,
+        "system_ram_gib": 4.0,
+        "vram_gib": 2.0
+      },
+      "retry_policy": {
+        "auto_retry_permitted": true,
+        "max_attempts": 2,
+        "requires_fresh_out_path": true,
+        "resume_in_place_permitted": false
+      },
+      "timeout": {
+        "graceful_cancel_signal": "SIGINT",
+        "kill_escalation_seconds": 15,
+        "wall_seconds": 300
+      }
+    },
+    {
+      "accumulation_steps": 1,
+      "args": [
+        "--profile",
+        "dt04",
+        "--stage",
+        "training",
+        "--device",
+        "cuda:0",
+        "--precision",
+        "bf16",
+        "--cuda-graph",
+        "--logical-batch",
+        "128",
+        "--candidates",
+        "8",
+        "16",
+        "32",
+        "64",
+        "128",
+        "--cpu-threads",
+        "8",
+        "--out",
+        "runs/dt05/tesseract/cal-dt04-train-${RUN_ID}.json",
+        "--max-host-rss-gib",
+        "12.0",
+        "--min-host-available-gib",
+        "4.0",
+        "--max-cuda-reserved-gib",
+        "12.5",
+        "--min-cuda-free-gib",
+        "1.0"
+      ],
+      "artifacts": {
+        "output_dir": "runs/dt05/tesseract",
+        "primary_receipt": "runs/dt05/tesseract/cal-dt04-train-${RUN_ID}.json",
+        "stdout_protocol": "json_summary"
+      },
+      "command": [
+        "python",
+        "-m",
+        "mechinterp.bpd.experiments.depth_steering_gym.dt05.runner",
+        "calibrate"
+      ],
+      "description": "Isolated microbatch forward/backward calibration for dt04 profile.",
+      "device": "cuda:0",
+      "evidence_scope": "engineering",
+      "id": "calibrate_dt04_training_bf16",
+      "logical_batch": 128,
+      "microbatch": 128,
+      "model_config": {
+        "h_cycles": 1,
+        "hidden_size": 96,
+        "l_cycles": 2,
+        "l_layers": 2,
+        "num_heads": 4,
+        "puzzle_emb_len": 2,
+        "seq_len": 16
+      },
+      "permitted": true,
+      "precision": "bf16",
+      "profile": "dt04",
+      "resources": {
+        "cpu_threads": 8,
+        "system_ram_gib": 4.0,
+        "vram_gib": 2.5
+      },
+      "retry_policy": {
+        "auto_retry_permitted": true,
+        "max_attempts": 2,
+        "requires_fresh_out_path": true,
+        "resume_in_place_permitted": false
+      },
+      "timeout": {
+        "graceful_cancel_signal": "SIGINT",
+        "kill_escalation_seconds": 15,
+        "wall_seconds": 600
+      }
+    },
+    {
+      "accumulation_steps": 1,
+      "args": [
+        "--profile",
+        "full_7m",
+        "--device",
+        "cuda:0",
+        "--precision",
+        "bf16",
+        "--execution-mode",
+        "optimized",
+        "--checkpoint-act",
+        "--logical-batch",
+        "32",
+        "--candidates",
+        "1",
+        "2",
+        "4",
+        "8",
+        "16",
+        "32",
+        "--cpu-threads",
+        "8",
+        "--out",
+        "runs/dt05/tesseract/step-7m-train-${RUN_ID}.json",
+        "--max-host-rss-gib",
+        "12.0",
+        "--min-host-available-gib",
+        "4.0",
+        "--max-cuda-reserved-gib",
+        "12.5",
+        "--min-cuda-free-gib",
+        "1.0"
+      ],
+      "artifacts": {
+        "output_dir": "runs/dt05/tesseract",
+        "primary_receipt": "runs/dt05/tesseract/step-7m-train-${RUN_ID}.json",
+        "stdout_protocol": "json_summary"
+      },
+      "command": [
+        "python",
+        "-m",
+        "mechinterp.bpd.experiments.depth_steering_gym.dt05.runner",
+        "calibrate-step"
+      ],
+      "description": "Full optimizer-step + CPU prep + pinned H2D + EMA benchmark for full_7m.",
+      "device": "cuda:0",
+      "evidence_scope": "engineering",
+      "id": "benchmark_full_step_7m_checkpointed",
+      "logical_batch": 32,
+      "microbatch": 32,
+      "model_config": {
+        "h_cycles": 3,
+        "hidden_size": 512,
+        "l_cycles": 6,
+        "l_layers": 2,
+        "num_heads": 8,
+        "puzzle_emb_len": 16,
+        "seq_len": 81
+      },
+      "permitted": true,
+      "precision": "bf16",
+      "profile": "full_7m",
+      "resources": {
+        "cpu_threads": 8,
+        "system_ram_gib": 6.0,
+        "vram_gib": 10.0
+      },
+      "retry_policy": {
+        "auto_retry_permitted": true,
+        "max_attempts": 2,
+        "requires_fresh_out_path": true,
+        "resume_in_place_permitted": false
+      },
+      "timeout": {
+        "graceful_cancel_signal": "SIGINT",
+        "kill_escalation_seconds": 20,
+        "wall_seconds": 1200
+      }
+    },
+    {
+      "accumulation_steps": 4,
+      "args": [
+        "--profile",
+        "full_7m",
+        "--stage",
+        "inference",
+        "--device",
+        "cuda:0",
+        "--precision",
+        "bf16",
+        "--cuda-graph",
+        "--logical-batch",
+        "256",
+        "--candidates",
+        "16",
+        "32",
+        "64",
+        "128",
+        "256",
+        "--cpu-threads",
+        "8",
+        "--out",
+        "runs/dt05/tesseract/cal-7m-infer-${RUN_ID}.json",
+        "--max-host-rss-gib",
+        "12.0",
+        "--min-host-available-gib",
+        "4.0",
+        "--max-cuda-reserved-gib",
+        "12.5",
+        "--min-cuda-free-gib",
+        "1.0"
+      ],
+      "artifacts": {
+        "output_dir": "runs/dt05/tesseract",
+        "primary_receipt": "runs/dt05/tesseract/cal-7m-infer-${RUN_ID}.json",
+        "stdout_protocol": "json_summary"
+      },
+      "command": [
+        "python",
+        "-m",
+        "mechinterp.bpd.experiments.depth_steering_gym.dt05.runner",
+        "calibrate"
+      ],
+      "description": "Isolated 8-ACT-step inference microbatch calibration for full_7m.",
+      "device": "cuda:0",
+      "evidence_scope": "engineering",
+      "id": "calibrate_7m_inference_bf16",
+      "logical_batch": 256,
+      "microbatch": 64,
+      "model_config": {
+        "h_cycles": 3,
+        "hidden_size": 512,
+        "l_cycles": 6,
+        "l_layers": 2,
+        "num_heads": 8,
+        "puzzle_emb_len": 16,
+        "seq_len": 81
+      },
+      "permitted": true,
+      "precision": "bf16",
+      "profile": "full_7m",
+      "resources": {
+        "cpu_threads": 8,
+        "system_ram_gib": 4.0,
+        "vram_gib": 6.0
+      },
+      "retry_policy": {
+        "auto_retry_permitted": true,
+        "max_attempts": 2,
+        "requires_fresh_out_path": true,
+        "resume_in_place_permitted": false
+      },
+      "timeout": {
+        "graceful_cancel_signal": "SIGINT",
+        "kill_escalation_seconds": 15,
+        "wall_seconds": 600
+      }
+    },
+    {
+      "accumulation_steps": 1,
+      "args": [
+        "--plan",
+        "${FROZEN_PLAN_JSON}",
+        "--root",
+        "${DEV_ROOT}",
+        "--device",
+        "cuda:0",
+        "--cpu-threads",
+        "8",
+        "--execution-mode",
+        "optimized",
+        "--out",
+        "${CAMPAIGN_DIR}"
+      ],
+      "artifacts": {
+        "attempt_lease": "${CAMPAIGN_DIR}/attempted_${DEV_ROOT}.json",
+        "checkpoints": [
+          "${CAMPAIGN_DIR}/root_${DEV_ROOT}/raw.pt",
+          "${CAMPAIGN_DIR}/root_${DEV_ROOT}/ema.pt",
+          "${CAMPAIGN_DIR}/root_${DEV_ROOT}/online_factors.pt"
+        ],
+        "output_dir": "${CAMPAIGN_DIR}/root_${DEV_ROOT}",
+        "primary_receipt": "${CAMPAIGN_DIR}/root_${DEV_ROOT}/RECEIPT.json",
+        "stdout_protocol": "jsonl_events_and_final_summary"
+      },
+      "command": [
+        "python",
+        "-m",
+        "mechinterp.bpd.experiments.depth_steering_gym.dt05.runner",
+        "run"
+      ],
+      "description": "Execute ONE registered DT05 development root (2605000..2605058) from a frozen plan.",
+      "device": "cuda:0",
+      "eval_depths": [
+        2,
+        4,
+        6,
+        8,
+        12
+      ],
+      "evidence_scope": "development",
+      "fit_depths": [
+        2,
+        4,
+        6
+      ],
+      "id": "development_single_root_dt04",
+      "logical_batch": 128,
+      "microbatch": 128,
+      "model_config": {
+        "h_cycles": 1,
+        "hidden_size": 96,
+        "l_cycles": 2,
+        "l_layers": 2,
+        "num_heads": 4,
+        "puzzle_emb_len": 2,
+        "seq_len": 16
+      },
+      "permitted": true,
+      "precision": "bf16",
+      "profile": "dt04",
+      "requires_explicit_user_root_selection": true,
+      "requires_frozen_plan_and_evalmath_preflight": true,
+      "resources": {
+        "cpu_threads": 8,
+        "system_ram_gib": 8.0,
+        "vram_gib": 4.0
+      },
+      "retry_policy": {
+        "auto_retry_permitted": false,
+        "max_attempts": 1,
+        "requires_fresh_out_path": false,
+        "restriction_reason": "Each development root 2605000..2605058 reserves an immutable attempt lease; failed/cancelled roots must remain in the campaign ledger.",
+        "resume_in_place_permitted": false
+      },
+      "timeout": {
+        "graceful_cancel_signal": "SIGINT",
+        "kill_escalation_seconds": 30,
+        "on_timeout_or_cancel": "writes RECEIPT.json with status CANCELLED or FAILED; root lease remains consumed",
+        "wall_seconds": 1800
+      }
+    },
+    {
+      "accumulation_steps": 1,
+      "args": [],
+      "artifacts": {
+        "output_dir": "",
+        "primary_receipt": "",
+        "stdout_protocol": "none"
+      },
+      "command": [],
+      "description": "Placeholder entry documenting sealed confirmation cohorts; runner must refuse launch.",
+      "device": "cuda:0",
+      "evidence_scope": "protected",
+      "id": "protected_confirmation_seal",
+      "logical_batch": 128,
+      "microbatch": 128,
+      "permitted": false,
+      "precision": "bf16",
+      "profile": "dt04",
+      "resources": {
+        "cpu_threads": 0,
+        "system_ram_gib": 0.0,
+        "vram_gib": 0.0
+      },
+      "retry_policy": {
+        "auto_retry_permitted": false,
+        "max_attempts": 0,
+        "requires_fresh_out_path": true,
+        "restriction_reason": "EvalMath verdict is REDESIGN_OR_PILOT_ONLY; confirmation cohorts remain strictly sealed.",
+        "resume_in_place_permitted": false
+      },
+      "timeout": {
+        "graceful_cancel_signal": "SIGINT",
+        "kill_escalation_seconds": 0,
+        "wall_seconds": 0
+      }
+    }
+  ]
+}

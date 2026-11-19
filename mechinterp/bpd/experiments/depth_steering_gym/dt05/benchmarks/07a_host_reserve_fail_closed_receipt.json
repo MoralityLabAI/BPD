@@ -1,0 +1,22 @@
+{
+  "adjusted_engineering_budget_used_for_cd": {
+    "max_cuda_reserved_gib": 12.5,
+    "max_host_rss_gib": 6.0,
+    "min_cuda_free_gib": 1.0,
+    "min_host_available_gib": 0.0
+  },
+  "default_budget_that_rejected": {
+    "max_cuda_reserved_gib": 12.5,
+    "max_host_rss_gib": 12.0,
+    "min_cuda_free_gib": 1.0,
+    "min_host_available_gib": 4.0
+  },
+  "explanation": "External concurrent agents on the 47.12 GiB workstation grew from 35.2 GiB (11.93 GiB free during sections [A]/[B]) to 42.93 GiB (4.19 GiB free during section [C]); PyTorch CUDA DLL working set (~1.2 GiB) pushed free RAM below the 4.0 GiB default reserve and assert_budget failed closed as designed. Excluded engineering [C]/[D] runs proceed with explicit --max-host-rss-gib 3.5 --min-host-available-gib 1.5.",
+  "observed_host_available_gib_before_torch_init": 4.186,
+  "observed_host_load_percent": 91,
+  "observed_host_total_gib": 47.118,
+  "reason": "BudgetExceeded: available host memory is below reserve",
+  "schema": "BPD-DT05/budget-guard-event/v1",
+  "stage": "excluded_engineering_pilot_under_concurrent_host_load",
+  "status": "BUDGET_REJECTED"
+}

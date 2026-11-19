@@ -8,7 +8,7 @@ import torch
 from torch import nn
 import torch.nn.functional as F
 
-from .evaluation import evaluate_policy, rollout_first_valid, transport_diagnostic
+from .evaluation import analyze_batch_composition_effects, evaluate_policy, rollout_first_valid, transport_diagnostic
 from .resources import BudgetExceeded, MemoryBudget
 
 
@@ -163,6 +163,19 @@ class EvaluationTests(unittest.TestCase):
         self.assertFalse(result["future_labels_used"])
         self.assertFalse(result["fitted_task_gramian"])
         self.assertFalse(result["measured_causal_benefit"])
+
+    @patch("mechinterp.bpd.experiments.depth_steering_gym.dt05.evaluation.memory_snapshot", side_effect=fake_memory)
+    def test_batch_composition_analysis_preserves_outcomes_without_gold(self, _memory):
+        tokens, gold = fixture()
+        report = analyze_batch_composition_effects(
+            ToyTrajectory(), tokens, gold, depths=(2, 4), microbatches=(1, 2, 3),
+        )
+        self.assertFalse(report["selection_uses_gold"])
+        self.assertEqual(len(report["runs"]), 9)
+        for row in report["runs"]:
+            self.assertEqual(row["prediction_disagreements_vs_reference"], 0)
+            self.assertEqual(row["selected_depth_disagreements_vs_reference"], 0)
+            self.assertEqual(row["compact_case_steps"], 10)
 
 
 if __name__ == "__main__":

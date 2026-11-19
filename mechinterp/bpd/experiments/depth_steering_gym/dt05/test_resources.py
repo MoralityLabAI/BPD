@@ -10,7 +10,7 @@ import torch
 
 from .resources import (
     GIB, BoundedTensorCache, BudgetExceeded, MemoryBudget,
-    assert_budget, calibrate_microbatch, memory_snapshot,
+    ReusableTransferBuffer, assert_budget, calibrate_microbatch, memory_snapshot,
 )
 
 
@@ -174,6 +174,28 @@ class ResourceTests(unittest.TestCase):
         cache.clear()
         self.assertEqual(cache.stats()["bytes_used"], 0)
         self.assertEqual(cache.stats()["entries"], 0)
+
+    def test_live_ram_admission_get_rows_into_and_transfer_buffer(self):
+        cache = BoundedTensorCache(1024)
+        budget = MemoryBudget(max_host_rss_gib=12.0, min_host_available_gib=4.0)
+        self.assertTrue(cache.put_admitted("ok", torch.arange(12, dtype=torch.float32).reshape(3, 4),
+                                           budget, snapshot=snapshot()))
+        self.assertFalse(cache.put_admitted("deny", torch.ones(4),
+                                            budget, snapshot=snapshot(host_available_bytes=3 * GIB)))
+        self.assertGreaterEqual(cache.stats()["rejected_admissions"], 1)
+        out = torch.empty((2, 4), dtype=torch.float32)
+        idx = torch.tensor([2, 0], dtype=torch.int64)
+        res = cache.get_rows_into("ok", idx, out)
+        self.assertIs(res, out)
+        torch.testing.assert_close(out[0], torch.tensor([8., 9., 10., 11.]))
+        self.assertEqual(cache.stats()["recomputations_avoided"], 2)
+        self.assertGreater(cache.stats()["hit_rate"], 0.0)
+
+        buf = ReusableTransferBuffer((4, 3), torch.long, "cpu", pin_memory=False)
+        src = torch.arange(6, dtype=torch.long).reshape(2, 3)
+        sent = buf.stage_and_send(src, count=2)
+        self.assertTrue(torch.equal(sent, src))
+        self.assertEqual(buf.transfers, 1)
 
 
 if __name__ == "__main__":

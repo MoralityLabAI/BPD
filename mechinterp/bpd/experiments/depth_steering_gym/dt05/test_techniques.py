@@ -11,6 +11,7 @@ from .techniques import (
     FirstValidStopper,
     HeadNullProjector,
     OnlineTopKLinear,
+    principal_angles_deg,
     replace_online_factors,
     sudoku_valid_mask,
     transport_basis_jvp,
@@ -278,6 +279,36 @@ class NativeInstrumentTests(unittest.TestCase):
             actual_h, actual_l = model.act_step(high, low, embed)
         torch.testing.assert_close(actual_h, expected_h, atol=1e-5, rtol=1e-5)
         torch.testing.assert_close(actual_l, expected_l, atol=1e-5, rtol=1e-5)
+
+    def test_vmap_and_loop_transport_match_and_principal_angles_work(self):
+        gen = torch.Generator().manual_seed(912)
+        a = torch.randn((12, 12), generator=gen, dtype=torch.float64)
+        state = torch.randn(12, generator=gen, dtype=torch.float64)
+        basis, _ = torch.linalg.qr(torch.randn((12, 4), generator=gen, dtype=torch.float64))
+        step = lambda x: torch.tanh(a @ x) + 0.1 * x
+        m_vmap, i_vmap = transport_basis_jvp(step, state, basis, chunk_size=2, mode="vmap")
+        m_loop, i_loop = transport_basis_jvp(step, state, basis, mode="loop")
+        self.assertEqual(i_vmap["jvp_execution_mode"], "vmap")
+        self.assertEqual(i_loop["jvp_execution_mode"], "loop")
+        torch.testing.assert_close(m_vmap @ m_vmap.T, m_loop @ m_loop.T, atol=1e-10, rtol=1e-10)
+        angles = principal_angles_deg(m_vmap, m_loop)
+        self.assertAlmostEqual(angles["subspace_overlap"], 1.0, places=9)
+        self.assertLess(angles["max_angle_deg"], 1e-4)
+
+    def test_online_topk_eval_cache_and_routing_telemetry(self):
+        V = torch.eye(4)
+        U = torch.diag(torch.tensor([5., 4., 2., 1.]))
+        mod = OnlineTopKLinear.from_factors(V, U, 2, mode="online")
+        mod.eval()
+        mod.reset_routing_telemetry(True)
+        with torch.no_grad():
+            y = mod(torch.tensor([[1., 0.1, 2., 0.1], [0.1, 3., 0.1, 4.]]))
+        tel = mod.routing_telemetry()
+        self.assertTrue(tel["enabled"])
+        self.assertAlmostEqual(tel["mean_active_components_per_token"], 2.0)
+        self.assertGreaterEqual(tel["unique_active_components"], 2)
+        self.assertEqual(set(mod.state_dict()), {"V", "U", "control_indices"})
+        self.assertEqual(y.shape, (2, 4))
 
 
 if __name__ == "__main__":

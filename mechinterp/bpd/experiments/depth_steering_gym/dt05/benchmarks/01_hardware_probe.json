@@ -1,0 +1,89 @@
+{
+  "bf16_supported": true,
+  "cpu": {
+    "architecture": "AMD64",
+    "logical_threads": 20,
+    "name": "AMD Ryzen AI 9 365 w/ Radeon 880M",
+    "physical_cores": 10
+  },
+  "cuda_runtime_version": "12.8",
+  "cudnn_version": 91900,
+  "gpu": {
+    "compute_capability": "12.0",
+    "index": 0,
+    "multi_processor_count": 60,
+    "name": "NVIDIA GeForce RTX 5080 Laptop GPU",
+    "nvidia_smi_idle": {
+      "clocks.current.graphics": "22",
+      "clocks.current.memory": "405",
+      "driver_version": "577.05",
+      "enforced.power.limit": "80.00",
+      "memory.free": "15915",
+      "memory.total": "16303",
+      "memory.used": "1",
+      "name": "NVIDIA GeForce RTX 5080 Laptop GPU",
+      "power.draw": "8.27",
+      "pstate": "P8",
+      "temperature.gpu": "44",
+      "utilization.gpu": "0",
+      "utilization.memory": "1"
+    },
+    "total_memory_bytes": 17094475776,
+    "total_memory_gib": 15.92
+  },
+  "measured_bandwidth": {
+    "gpu_vram_d2d_copy_512mib_gb_per_s": 594.157,
+    "host_dram_copy_gb_per_s": 11.38,
+    "host_dram_triad_gb_per_s": 9.896,
+    "nvidia_smi_under_vram_load": {
+      "clocks.current.graphics": "1492",
+      "clocks.current.memory": "11001",
+      "driver_version": "577.05",
+      "enforced.power.limit": "80.00",
+      "memory.free": "14600",
+      "memory.total": "16303",
+      "memory.used": "1316",
+      "name": "NVIDIA GeForce RTX 5080 Laptop GPU",
+      "power.draw": "11.32",
+      "pstate": "P2",
+      "temperature.gpu": "45",
+      "utilization.gpu": "0",
+      "utilization.memory": "0"
+    },
+    "pcie_d2h_pinned_64mib_gb_per_s": 12.555,
+    "pcie_h2d_pageable_64mib_gb_per_s": 3.683,
+    "pcie_h2d_pinned_64mib_gb_per_s": 12.498
+  },
+  "memory_snapshot_post_probe": {
+    "cuda_allocated_bytes": 0,
+    "cuda_free_bytes": 15647899648,
+    "cuda_peak_allocated_bytes": 1140850688,
+    "cuda_peak_reserved_bytes": 1140850688,
+    "cuda_reserved_bytes": 0,
+    "cuda_total_bytes": 17094475776,
+    "device": "cuda:0",
+    "errors": [],
+    "host_available_bytes": 12802174976,
+    "host_commit_bytes": 2207662080,
+    "host_peak_rss_bytes": 1349566464,
+    "host_rss_bytes": 735137792,
+    "host_source": "psutil",
+    "host_total_bytes": 50592600064
+  },
+  "os": "Windows-11-10.0.26200-SP0",
+  "python_version": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "schema": "BPD-DT05/hardware-capability-probe/v1",
+  "system_memory": {
+    "available_bytes": 12807172096,
+    "available_gib": 11.928,
+    "percent_used": 74.7,
+    "physical_total_bytes": 50592600064,
+    "physical_total_gib": 47.118,
+    "swap_percent": 3.7,
+    "swap_total_bytes": 60883787776,
+    "swap_total_gib": 56.702,
+    "swap_used_bytes": 2266931200,
+    "swap_used_gib": 2.111
+  },
+  "torch_version": "2.11.0+cu128"
+}

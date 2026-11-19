@@ -116,6 +116,15 @@ class RunnerTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "cohort"):
             runner.read_plan(path)
 
+    def test_bitmask_solver_matches_reference_count_solutions(self):
+        from ..worlds import count_solutions, sudoku4
+        for seed in (860_701, 860_702):
+            c = sudoku4(seed, "engineering", blanks=6)
+            self.assertEqual(runner._count_solutions_bitmask(c.givens, limit=2), count_solutions(c.givens, limit=2))
+        empty9 = tuple((0,) * 9 for _ in range(9))
+        cnt, _ = runner._count_solutions_bitmask(empty9, limit=2)
+        self.assertEqual(cnt, 2)
+
 
 if __name__ == "__main__":
     unittest.main()

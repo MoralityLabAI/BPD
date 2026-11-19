@@ -1,0 +1,102 @@
+{
+  "evaluate_policy_64cases_dt04_seconds": 0.8054,
+  "evaluate_policy_raw_vs_compact_seconds": {
+    "compact_policy_seconds": 0.3509,
+    "raw_fixed_seconds": 0.4318
+  },
+  "factor_fit_20steps_dt04_seconds": 11.6504,
+  "factor_fit_cache_stats": {
+    "bytes_used": 11010048,
+    "entries": 1,
+    "evictions": 0,
+    "hits": 40,
+    "max_bytes": 536870912,
+    "max_entries": 128,
+    "misses": 0
+  },
+  "git_commit": "8ccdcb2ed7ed937805efbd4276c524932321f95a",
+  "nvidia_smi_post_profile": {
+    "clocks.current.graphics": "2662",
+    "clocks.current.memory": "810",
+    "driver_version": "577.05",
+    "enforced.power.limit": "80.00",
+    "memory.free": "13924",
+    "memory.total": "16303",
+    "memory.used": "1992",
+    "name": "NVIDIA GeForce RTX 5080 Laptop GPU",
+    "power.draw": "49.42",
+    "pstate": "P5",
+    "temperature.gpu": "57",
+    "utilization.gpu": "7",
+    "utilization.memory": "4"
+  },
+  "schema": "BPD-DT05/baseline-execution-profile/v1",
+  "training_step_breakdown": {
+    "dt04_bf16_mb128": {
+      "examples_per_second": 587.51,
+      "median_step_ms": 217.867,
+      "peak_cuda_allocated_bytes": 414777344,
+      "peak_cuda_reserved_bytes": 845152256,
+      "stage_median_ms": {
+        "cpu_sample_augment": 0.942,
+        "ema_update": 0.845,
+        "forward_backward": 210.475,
+        "grad_clip_and_adamw": 3.423,
+        "h2d_transfer": 0.38,
+        "memory_guard_post": 2.035,
+        "memory_guard_pre": 1.441
+      },
+      "updates_per_second": 4.59
+    },
+    "dt04_bf16_mb32": {
+      "examples_per_second": 148.81,
+      "median_step_ms": 860.161,
+      "peak_cuda_allocated_bytes": 120762880,
+      "peak_cuda_reserved_bytes": 845152256,
+      "stage_median_ms": {
+        "cpu_sample_augment": 1.13,
+        "ema_update": 0.841,
+        "forward_backward": 851.702,
+        "grad_clip_and_adamw": 3.145,
+        "h2d_transfer": 0.4,
+        "memory_guard_post": 1.976,
+        "memory_guard_pre": 1.547
+      },
+      "updates_per_second": 1.163
+    },
+    "dt04_fp32_mb128": {
+      "examples_per_second": 619.67,
+      "median_step_ms": 206.56,
+      "peak_cuda_allocated_bytes": 734710272,
+      "peak_cuda_reserved_bytes": 845152256,
+      "stage_median_ms": {
+        "cpu_sample_augment": 0.999,
+        "ema_update": 0.756,
+        "forward_backward": 196.516,
+        "grad_clip_and_adamw": 3.376,
+        "h2d_transfer": 0.332,
+        "memory_guard_post": 2.111,
+        "memory_guard_pre": 1.407
+      },
+      "updates_per_second": 4.841
+    },
+    "dt04_fp32_mb32": {
+      "examples_per_second": 159.28,
+      "median_step_ms": 803.62,
+      "peak_cuda_allocated_bytes": 200469504,
+      "peak_cuda_reserved_bytes": 226492416,
+      "stage_median_ms": {
+        "cpu_sample_augment": 1.067,
+        "ema_update": 0.844,
+        "forward_backward": 794.738,
+        "grad_clip_and_adamw": 3.18,
+        "h2d_transfer": 0.378,
+        "memory_guard_post": 2.161,
+        "memory_guard_pre": 1.634
+      },
+      "updates_per_second": 1.244
+    }
+  },
+  "transport_jvp_rank8_dt04_seconds": 0.7366,
+  "transport_jvp_rank8_full7m_seconds": 5.8905
+}

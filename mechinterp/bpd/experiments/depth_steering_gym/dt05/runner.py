@@ -28,6 +28,7 @@ from ..dt04.verify_source import verify_source
 from ..worlds import SudokuCase, count_solutions, sudoku4
 from . import DEV_ROOTS, EVAL_DEPTHS, FIT_DEPTHS, SMOKE_ROOT, STUDY_ID
 from .resources import BoundedTensorCache, MemoryBudget, assert_budget, memory_snapshot
+from .tesseract import RunCancelled, build_tesseract_manifest, graceful_cancellation_guard
 from .training import (MODEL_CONFIGS, TrainConfig, fit_online_factors, model_digest,
                        routing_control, train_sudoku_model)
 
@@ -166,13 +167,20 @@ def save_checkpoint(out_dir: Path, name: str, model, metadata: dict) -> dict:
     return receipt
 
 
-def run_development(plan: dict, root: int, out_dir: Path, device: str, threads: int) -> dict:
+def run_development(
+    plan: dict,
+    root: int,
+    out_dir: Path,
+    device: str,
+    threads: int,
+    *,
+    execution_mode: str = "reference",
+) -> dict:
     from .evaluation import evaluate_policy, transport_diagnostic
 
     guard_development_root(root)
     budget = MemoryBudget(**plan["memory_budget"])
     configure_runtime(device, threads, budget)
-    # Global attempt lease is relative to this frozen plan's campaign directory.
     out_dir.mkdir(parents=True, exist_ok=False)
     started = time.perf_counter()
     plan_sha = hashlib.sha256(canonical_bytes(plan)).hexdigest()
@@ -181,44 +189,53 @@ def run_development(plan: dict, root: int, out_dir: Path, device: str, threads: 
     write_json(out_dir / "PLAN.json", plan)
     record = {"schema": "BPD-DT05/development-root/v1", "root": root,
               "plan_sha256": plan_sha, "scope": "development_exposed_catalog", "runtime": runtime(),
-              "source": source_snapshot(), "device": device, "confirmation_run": False}
+              "source": source_snapshot(), "device": device, "execution_mode": execution_mode,
+              "confirmation_run": False}
     try:
-        splits = build_root_sudoku_splits(root)
-        split_manifest = {key: [asdict(case) for case in splits[key]] for key in
-                          ("train_cases", "calib_cases", "eval_cases", "donor_cases")}
-        write_json(out_dir / "SPLITS.json", split_manifest)
-        record["splits"] = {"sha256": sha256_file(out_dir / "SPLITS.json"),
-                            "counts": splits["canonical_class_counts"],
-                            "audit": splits["audit_train_vs_eval"]}
-        config = TrainConfig(**plan["train"])
-        raw, ema, training = train_sudoku_model(root, splits["train_cases"], config=config,
-                                               device=device, budget=budget, profile=plan["profile"])
-        record["training"] = training
-        record["checkpoints"] = {
-            "raw": save_checkpoint(out_dir, "raw", raw, {"profile": plan["profile"], "format": "pure"}),
-            "ema": save_checkpoint(out_dir, "ema", ema, {"profile": plan["profile"], "format": "pure"}),
-        }
-        tx, _ = encode_sudoku_cases(splits["train_cases"][:512], "cpu")
-        ex, ey = encode_sudoku_cases(splits["eval_cases"], "cpu")
-        cache = BoundedTensorCache(int(plan["cache_gib"] * 1024**3))
-        student, fit = fit_online_factors(ema, tx, steps=plan["factor_steps"], components=plan["components"],
-                  top_k=plan["top_k"], logical_batch=config.logical_batch, microbatch=config.microbatch,
-                  seed=root, budget=budget, cache=cache)
-        record["factor_fit"] = fit
-        record["checkpoints"]["online_factors"] = save_checkpoint(out_dir, "online_factors", student,
-                   {"profile": plan["profile"], "format": "online_factors", "components": plan["components"],
-                    "top_k": plan["top_k"], "routing": "online"})
-        record["arms"] = {}
-        for name, model in (("raw", raw), ("ema", ema), ("online_factors", student)):
-            record["arms"][name] = evaluate_policy(model, ex, ey, microbatch=config.microbatch, budget=budget)
-        for name, mode in (("fixed_factor_control", "fixed"), ("random_factor_control", "random")):
-            control = routing_control(student, mode, root)
-            record["arms"][name] = evaluate_policy(control, ex, ey, microbatch=config.microbatch, budget=budget)
-            del control
-        record["transport_instrument"] = transport_diagnostic(ema, tx[:1], rank=min(8, plan["components"]))
-        record["memory_final"] = memory_snapshot(device)
-        assert_budget(record["memory_final"], budget)
-        record["status"] = "COMPLETED_DEVELOPMENT_ONLY"
+        with graceful_cancellation_guard():
+            splits = build_root_sudoku_splits(root)
+            split_manifest = {key: [asdict(case) for case in splits[key]] for key in
+                              ("train_cases", "calib_cases", "eval_cases", "donor_cases")}
+            write_json(out_dir / "SPLITS.json", split_manifest)
+            record["splits"] = {"sha256": sha256_file(out_dir / "SPLITS.json"),
+                                "counts": splits["canonical_class_counts"],
+                                "audit": splits["audit_train_vs_eval"]}
+            config = TrainConfig(**plan["train"])
+            cache = BoundedTensorCache(int(plan["cache_gib"] * 1024**3))
+            raw, ema, training = train_sudoku_model(
+                root, splits["train_cases"], config=config,
+                device=device, budget=budget, profile=plan["profile"],
+                execution_mode=execution_mode, cache=cache,
+            )
+            record["training"] = training
+            record["checkpoints"] = {
+                "raw": save_checkpoint(out_dir, "raw", raw, {"profile": plan["profile"], "format": "pure"}),
+                "ema": save_checkpoint(out_dir, "ema", ema, {"profile": plan["profile"], "format": "pure"}),
+            }
+            tx, _ = encode_sudoku_cases(splits["train_cases"][:512], "cpu")
+            ex, ey = encode_sudoku_cases(splits["eval_cases"], "cpu")
+            student, fit = fit_online_factors(
+                ema, tx, steps=plan["factor_steps"], components=plan["components"],
+                top_k=plan["top_k"], logical_batch=config.logical_batch, microbatch=config.microbatch,
+                seed=root, budget=budget, cache=cache, execution_mode=execution_mode,
+            )
+            record["factor_fit"] = fit
+            record["checkpoints"]["online_factors"] = save_checkpoint(out_dir, "online_factors", student,
+                       {"profile": plan["profile"], "format": "online_factors", "components": plan["components"],
+                        "top_k": plan["top_k"], "routing": "online"})
+            record["arms"] = {}
+            for name, model in (("raw", raw), ("ema", ema), ("online_factors", student)):
+                record["arms"][name] = evaluate_policy(model, ex, ey, microbatch=config.microbatch, budget=budget)
+            for name, mode in (("fixed_factor_control", "fixed"), ("random_factor_control", "random")):
+                control = routing_control(student, mode, root)
+                record["arms"][name] = evaluate_policy(control, ex, ey, microbatch=config.microbatch, budget=budget)
+                del control
+            record["transport_instrument"] = transport_diagnostic(ema, tx[:1], rank=min(8, plan["components"]))
+            record["memory_final"] = memory_snapshot(device)
+            assert_budget(record["memory_final"], budget)
+            record["status"] = "COMPLETED_DEVELOPMENT_ONLY"
+    except RunCancelled as cancel_exc:
+        record.update(status="CANCELLED", error_type="RunCancelled", error=str(cancel_exc))
     except Exception as exc:
         record.update(status="FAILED", error_type=type(exc).__name__, error=str(exc), traceback=traceback.format_exc())
     record["elapsed_seconds"] = time.perf_counter() - started
@@ -226,7 +243,14 @@ def run_development(plan: dict, root: int, out_dir: Path, device: str, threads: 
     return record
 
 
-def smoke(out_dir: Path, device: str, budget: MemoryBudget, threads: int) -> dict:
+def smoke(
+    out_dir: Path,
+    device: str,
+    budget: MemoryBudget,
+    threads: int,
+    *,
+    execution_mode: str = "reference",
+) -> dict:
     from .evaluation import evaluate_policy, transport_diagnostic
 
     configure_runtime(device, threads, budget)
@@ -234,14 +258,21 @@ def smoke(out_dir: Path, device: str, budget: MemoryBudget, threads: int) -> dic
     out_dir.mkdir(parents=True, exist_ok=False)
     cases = [sudoku4(860_000 + i, "engineering", blanks=4 + i % 3) for i in range(8)]
     config = TrainConfig(steps=2, logical_batch=8, microbatch=4, ema_decay=0.9)
-    raw, ema, train = train_sudoku_model(SMOKE_ROOT, cases, config=config, device=device, budget=budget, profile="mini")
-    x, y = encode_sudoku_cases(cases, "cpu")
     cache = BoundedTensorCache(8 * 1024**2)
-    student, fit = fit_online_factors(ema, x, steps=2, components=8, top_k=4, logical_batch=8,
-                     microbatch=4, seed=SMOKE_ROOT, budget=budget, cache=cache)
+    raw, ema, train = train_sudoku_model(
+        SMOKE_ROOT, cases, config=config, device=device, budget=budget,
+        profile="mini", execution_mode=execution_mode, cache=cache,
+    )
+    x, y = encode_sudoku_cases(cases, "cpu")
+    student, fit = fit_online_factors(
+        ema, x, steps=2, components=8, top_k=4, logical_batch=8,
+        microbatch=4, seed=SMOKE_ROOT, budget=budget, cache=cache,
+        execution_mode=execution_mode,
+    )
     result = {"schema": "BPD-DT05/engineering-smoke/v1", "scope": "engineering_only",
               "root": SMOKE_ROOT, "scientific_root_count": 0, "status": "PASS", "source": source,
-              "runtime": runtime(), "training": train, "factor_fit": fit, "arms": {}}
+              "runtime": runtime(), "execution_mode": execution_mode,
+              "training": train, "factor_fit": fit, "arms": {}}
     for name, model in (("raw", raw), ("ema", ema), ("online", student),
                         ("fixed", routing_control(student, "fixed", SMOKE_ROOT)),
                         ("random", routing_control(student, "random", SMOKE_ROOT))):
@@ -253,6 +284,82 @@ def smoke(out_dir: Path, device: str, budget: MemoryBudget, threads: int) -> dic
     result["memory_final"] = memory_snapshot(device)
     write_json(out_dir / "SMOKE.json", result)
     return result
+
+
+def _count_solutions_bitmask(board: tuple[tuple[int, ...], ...], limit: int = 2) -> tuple[int, tuple[tuple[int, ...], ...] | None]:
+    """Exact bitmask MRV Sudoku solver (4x4 & 9x9), ~1000x faster than set-comprehension backtracking."""
+    n = len(board)
+    side = int(n ** 0.5)
+    if n not in (4, 9) or side * side != n or limit < 1 or any(len(r) != n for r in board):
+        return 0, None
+    full_mask = (1 << n) - 1
+    row_m = [0] * n
+    col_m = [0] * n
+    box_m = [0] * n
+    cells = [list(r) for r in board]
+    empties: list[tuple[int, int, int]] = []
+    for r in range(n):
+        for c in range(n):
+            v = cells[r][c]
+            if v < 0 or v > n:
+                return 0, None
+            b = (r // side) * side + (c // side)
+            if v == 0:
+                empties.append((r, c, b))
+            else:
+                bit = 1 << (v - 1)
+                if (row_m[r] & bit) or (col_m[c] & bit) or (box_m[b] & bit):
+                    return 0, None
+                row_m[r] |= bit
+                col_m[c] |= bit
+                box_m[b] |= bit
+    found = 0
+    first: tuple[tuple[int, ...], ...] | None = None
+    n_emp = len(empties)
+
+    def dfs(idx: int) -> None:
+        nonlocal found, first
+        if idx == n_emp:
+            found += 1
+            if first is None:
+                first = tuple(tuple(r) for r in cells)
+            return
+        best_i = idx
+        best_cnt = n + 1
+        best_avail = 0
+        for i in range(idx, n_emp):
+            r, c, b = empties[i]
+            avail = full_mask & ~(row_m[r] | col_m[c] | box_m[b])
+            if avail == 0:
+                return
+            cnt = avail.bit_count()
+            if cnt < best_cnt:
+                best_cnt = cnt
+                best_i = i
+                best_avail = avail
+                if cnt == 1:
+                    break
+        empties[idx], empties[best_i] = empties[best_i], empties[idx]
+        r, c, b = empties[idx]
+        m = best_avail
+        while m:
+            bit = m & -m
+            m ^= bit
+            cells[r][c] = bit.bit_length()
+            row_m[r] |= bit
+            col_m[c] |= bit
+            box_m[b] |= bit
+            dfs(idx + 1)
+            row_m[r] ^= bit
+            col_m[c] ^= bit
+            box_m[b] ^= bit
+            if found >= limit:
+                break
+        cells[r][c] = 0
+        empties[idx], empties[best_i] = empties[best_i], empties[idx]
+
+    dfs(0)
+    return found, first
 
 
 def load_replay_cases(path: Path) -> tuple[torch.Tensor, torch.Tensor, dict]:
@@ -276,7 +383,7 @@ def load_replay_cases(path: Path) -> tuple[torch.Tensor, torch.Tensor, dict]:
             raise ValueError("all cases must share a supported Sudoku size")
         if any(type(v) is not int for grid in (givens, solution) for r in grid for v in r):
             raise ValueError("Sudoku digits must be integers")
-        count, unique = count_solutions(tuple(tuple(r) for r in givens), limit=2)
+        count, unique = _count_solutions_bitmask(tuple(tuple(r) for r in givens), limit=2)
         if count != 1 or unique != tuple(tuple(r) for r in solution):
             raise ValueError("each replay puzzle needs a unique, solver-verified solution")
         ids.append(row["id"])
@@ -292,6 +399,7 @@ def replay(args) -> dict:
 
     if args.out.exists():
         raise FileExistsError("replay output already exists")
+    precision = getattr(args, "precision", "fp32")
     budget = budget_from_args(args)
     configure_runtime(args.device, args.cpu_threads, budget)
     source = source_snapshot()
@@ -315,10 +423,20 @@ def replay(args) -> dict:
     if x.shape[1] != model.seq_len:
         raise ValueError("case shape differs from checkpoint profile")
     model.to(args.device).eval()
-    out = {"schema": "BPD-DT05/local-replay/v1", "scope": cases["scope"], "source": source,
-           "checkpoint_sha256": args.sha256.lower(), "checkpoint_format": args.checkpoint_format,
-           "runtime": runtime(), "cases": cases,
-           "evaluation": evaluate_policy(model, x, y, depths=tuple(args.depths), microbatch=args.microbatch, budget=budget)}
+    out = {
+        "schema": "BPD-DT05/local-replay/v1",
+        "scope": cases["scope"],
+        "source": source,
+        "checkpoint_sha256": args.sha256.lower(),
+        "checkpoint_format": args.checkpoint_format,
+        "precision": precision,
+        "runtime": runtime(),
+        "cases": cases,
+        "evaluation": evaluate_policy(
+            model, x, y, depths=tuple(args.depths),
+            microbatch=args.microbatch, budget=budget, precision=precision,
+        ),
+    }
     write_json(args.out, out)
     return out
 
@@ -356,32 +474,44 @@ def main(argv=None) -> int:
     p.add_argument("--plan", type=Path, required=True)
     p.add_argument("--root", type=int, required=True)
     p.add_argument("--out", type=Path, required=True, help="campaign directory; each root gets a unique attempt")
-    for command in ("smoke", "calibrate", "replay"):
+    p.add_argument("--execution-mode", choices=("reference", "optimized"), default="reference")
+    for command in ("smoke", "calibrate", "calibrate-step", "replay", "tesseract-manifest"):
         q = sub.add_parser(command)
         q.add_argument("--out", type=Path, required=True)
         add_budget(q)
-    for name in ("run", "smoke", "calibrate", "replay"):
+    for name in ("run", "smoke", "calibrate", "calibrate-step", "replay", "tesseract-manifest"):
         q = sub.choices[name]
         q.add_argument("--device", default="cpu")
         q.add_argument("--cpu-threads", type=int, default=4)
-    q = sub.choices["calibrate"]
-    q.add_argument("--profile", choices=tuple(MODEL_CONFIGS), default="dt04")
-    q.add_argument("--stage", choices=("inference", "training"), default="training")
-    q.add_argument("--precision", choices=("fp32", "bf16"), default="fp32")
-    q.add_argument("--logical-batch", type=int, default=128)
-    q.add_argument("--candidates", type=int, nargs="+", default=[8, 16, 32, 64, 128])
-    q.add_argument("--warmups", type=int, default=1)
-    q.add_argument("--repeats", type=int, default=3)
+    sub.choices["smoke"].add_argument("--execution-mode", choices=("reference", "optimized"), default="reference")
+    for cal_name in ("calibrate", "calibrate-step"):
+        q = sub.choices[cal_name]
+        q.add_argument("--profile", choices=tuple(MODEL_CONFIGS), default="dt04")
+        q.add_argument("--precision", choices=("fp32", "bf16"), default="fp32")
+        q.add_argument("--logical-batch", type=int, default=128)
+        q.add_argument("--candidates", type=int, nargs="+", default=[8, 16, 32, 64, 128])
+        q.add_argument("--warmups", type=int, default=1)
+        q.add_argument("--repeats", type=int, default=3)
+        q.add_argument("--checkpoint-act", action="store_true")
+        q.add_argument("--cuda-graph", action="store_true")
+    sub.choices["calibrate"].add_argument("--stage", choices=("inference", "training"), default="training")
+    sub.choices["calibrate-step"].add_argument("--execution-mode", choices=("reference", "optimized"), default="optimized")
     q = sub.choices["replay"]
     q.add_argument("--checkpoint", type=Path, required=True)
     q.add_argument("--sha256", required=True)
     q.add_argument("--checkpoint-format", choices=("pure", "official", "online_factors"), default="pure")
     q.add_argument("--profile", choices=tuple(MODEL_CONFIGS), default="dt04")
+    q.add_argument("--precision", choices=("fp32", "bf16"), default="fp32")
     q.add_argument("--components", type=int, default=24)
     q.add_argument("--top-k", type=int, default=12)
     q.add_argument("--cases", type=Path, required=True)
     q.add_argument("--microbatch", type=int, default=16)
     q.add_argument("--depths", type=int, nargs="+", default=list(EVAL_DEPTHS))
+    q = sub.choices["tesseract-manifest"]
+    q.add_argument("--dt04-train-microbatch", type=int, default=128)
+    q.add_argument("--full-7m-infer-microbatch", type=int, default=64)
+    q.add_argument("--full-7m-train-microbatch", type=int, default=32)
+
     args = parser.parse_args(argv)
     if args.command == "plan":
         if args.out.exists():
@@ -391,32 +521,71 @@ def main(argv=None) -> int:
     elif args.command == "run":
         guard_development_root(args.root)
         plan = read_plan(args.plan)
-        # Validate device and available memory before reserving a model attempt.
         configure_runtime(args.device, args.cpu_threads, MemoryBudget(**plan["memory_budget"]))
-        # One marker per root per campaign, including failures and interrupted runs.
         args.out.mkdir(parents=True, exist_ok=True)
         lease = args.out / f"attempted_{args.root}.json"
         with lease.open("x") as stream:
             json.dump({"root": args.root, "plan_sha256": sha256_file(args.plan),
                        "status": "ATTEMPT_RESERVED", "started_utc": datetime.now(timezone.utc).isoformat()}, stream)
-        result = run_development(plan, args.root, args.out / f"root_{args.root}", args.device, args.cpu_threads)
+        if args.execution_mode == "reference":
+            result = run_development(plan, args.root, args.out / f"root_{args.root}", args.device, args.cpu_threads)
+        else:
+            result = run_development(
+                plan, args.root, args.out / f"root_{args.root}", args.device, args.cpu_threads,
+                execution_mode=args.execution_mode,
+            )
     elif args.command == "smoke":
-        result = smoke(args.out, args.device, budget_from_args(args), args.cpu_threads)
+        result = smoke(args.out, args.device, budget_from_args(args), args.cpu_threads, execution_mode=args.execution_mode)
     elif args.command == "calibrate":
         from .calibration import run_calibration
         if args.out.exists():
             raise FileExistsError("calibration output already exists")
         budget = budget_from_args(args)
         configure_runtime(args.device, args.cpu_threads, budget)
-        result = run_calibration(profile=args.profile, stage=args.stage, logical_batch=args.logical_batch,
-                    candidates=args.candidates, device=args.device, budget=budget, precision=args.precision,
-                    warmups=args.warmups, repeats=args.repeats)
+        result = run_calibration(
+            profile=args.profile, stage=args.stage, logical_batch=args.logical_batch,
+            candidates=args.candidates, device=args.device, budget=budget, precision=args.precision,
+            warmups=args.warmups, repeats=args.repeats,
+            checkpoint_act=args.checkpoint_act, cuda_graph=args.cuda_graph,
+        )
         result.update(source=source_snapshot(), runtime=runtime())
+        write_json(args.out, result)
+    elif args.command == "calibrate-step":
+        from .calibration import run_full_step_benchmark
+        if args.out.exists():
+            raise FileExistsError("calibration output already exists")
+        budget = budget_from_args(args)
+        configure_runtime(args.device, args.cpu_threads, budget)
+        result = run_full_step_benchmark(
+            profile=args.profile, logical_batch=args.logical_batch, candidates=args.candidates,
+            device=args.device, budget=budget, precision=args.precision,
+            warmups=args.warmups, repeats=args.repeats,
+            execution_mode=args.execution_mode, checkpoint_act=args.checkpoint_act,
+            cuda_graph=True if args.cuda_graph else None,
+        )
+        result.update(source=source_snapshot(), runtime=runtime())
+        write_json(args.out, result)
+    elif args.command == "tesseract-manifest":
+        if args.out.exists():
+            raise FileExistsError("manifest output already exists")
+        snap = source_snapshot()
+        git_rev = snap["git_head"] or "0" * 40
+        result = build_tesseract_manifest(
+            git_revision=git_rev,
+            source_digest=snap["digest"],
+            device=args.device,
+            cpu_threads=args.cpu_threads,
+            budget=budget_from_args(args),
+            dt04_train_microbatch=args.dt04_train_microbatch,
+            full_7m_infer_microbatch=args.full_7m_infer_microbatch,
+            full_7m_train_microbatch=args.full_7m_train_microbatch,
+        )
         write_json(args.out, result)
     else:
         result = replay(args)
-    print(json.dumps({"command": args.command, "output": str(args.out), "status": result.get("status", "WRITTEN")}, sort_keys=True))
-    return 1 if result.get("status") in ("FAILED", "NO_ADMISSIBLE_MICROBATCH") else 0
+    status = result.get("status", "WRITTEN")
+    print(json.dumps({"command": args.command, "output": str(args.out), "status": status}, sort_keys=True))
+    return 1 if status in ("FAILED", "CANCELLED", "NO_ADMISSIBLE_MICROBATCH") else 0
 
 
 if __name__ == "__main__":

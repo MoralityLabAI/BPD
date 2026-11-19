@@ -6,7 +6,7 @@ from unittest.mock import patch
 
 import torch
 
-from .calibration import run_calibration
+from .calibration import run_calibration, run_full_step_benchmark
 from .resources import MemoryBudget
 
 
@@ -76,6 +76,26 @@ class NativeCalibrationTests(unittest.TestCase):
         torch.testing.assert_close(torch.random.get_rng_state(), before)
         self.assertEqual(torch.backends.cuda.matmul.allow_tf32, old_matmul)
         self.assertEqual(torch.backends.cudnn.allow_tf32, old_cudnn)
+
+    def test_full_step_benchmark_measures_all_stages_and_restores_rng(self):
+        before = torch.random.get_rng_state().clone()
+        for mode in ("reference", "optimized"):
+            report = run_full_step_benchmark(
+                "mini", 4, [2, 4], "cpu", self.budget,
+                warmups=0, repeats=1, execution_mode=mode, checkpoint_act=(mode == "optimized"),
+            )
+            self.assertEqual(report["status"], "BENCHMARKED")
+            self.assertIn(report["selected_microbatch"], (2, 4))
+            self.assertFalse(report["scientific_cohorts_accessed"])
+            ok = [t for t in report["trials"] if t["status"] == "OK"]
+            self.assertEqual(len(ok), 2)
+            stages = ok[0]["stage_median_seconds"]
+            for key in ("data_preparation", "h2d_transfer", "forward_backward_accumulated",
+                        "grad_clip_and_optimizer_step", "ema_update"):
+                self.assertGreaterEqual(stages[key], 0.0)
+            self.assertEqual(ok[0]["ema_updates_completed"], 1)
+            self.assertNotEqual(ok[0]["post_trial_weights_sha256"], report["initial_weights_sha256"])
+        torch.testing.assert_close(torch.random.get_rng_state(), before)
 
 
 if __name__ == "__main__":
