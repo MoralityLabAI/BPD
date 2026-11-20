@@ -1,0 +1,130 @@
+{
+  "alpha": "0.05",
+  "confirm_units_planned": 128,
+  "experiment_id": "BPD-DT05-transported-vs-static-gramian-depth8",
+  "heldout_sealed": true,
+  "independent_unit": "independently trained PureSudokuTRM model root",
+  "measurement_resolution": "1/16",
+  "pilot": [
+    {
+      "paired_effect": "1/16",
+      "sham_effects": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "unit_id": "excluded_pilot_root_2605900"
+    },
+    {
+      "paired_effect": "-1/16",
+      "sham_effects": [
+        "-3/128",
+        "-3/128",
+        "-3/128",
+        "-3/128",
+        "-3/128",
+        "5/128",
+        "5/128",
+        "5/128"
+      ],
+      "unit_id": "excluded_pilot_root_2605901"
+    },
+    {
+      "paired_effect": "0",
+      "sham_effects": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "unit_id": "excluded_pilot_root_2605902"
+    },
+    {
+      "paired_effect": "0",
+      "sham_effects": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "unit_id": "excluded_pilot_root_2605903"
+    },
+    {
+      "paired_effect": "-1/16",
+      "sham_effects": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "unit_id": "excluded_pilot_root_2605904"
+    },
+    {
+      "paired_effect": "0",
+      "sham_effects": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "unit_id": "excluded_pilot_root_2605905"
+    },
+    {
+      "paired_effect": "0",
+      "sham_effects": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "unit_id": "excluded_pilot_root_2605906"
+    },
+    {
+      "paired_effect": "0",
+      "sham_effects": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "unit_id": "excluded_pilot_root_2605907"
+    }
+  ],
+  "pilot_from_development_only": true,
+  "planned_comparisons": 2,
+  "schema_version": 1,
+  "scientific_min_effect": "0.10",
+  "sham_confidence": "0.95",
+  "sham_quantile": "0.95",
+  "target_effect": "0.15",
+  "units_independent": true
+}

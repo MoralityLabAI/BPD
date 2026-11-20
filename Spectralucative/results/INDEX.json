@@ -1,0 +1,72 @@
+{
+  "artifact_id": 14656190637,
+  "artifact_sha256": "30fdc014d02ae955d52844d9599c28f042bc337d9ffd1307e8b6609536b1d52c",
+  "attempts": [
+    {
+      "conclusion": "failure",
+      "error": "TypeError: _spectral_pair() got multiple values for argument matrix",
+      "head_commit": "8db1628529ba99975763fe7f72d185a16979a860",
+      "registered_study_initializations_started": 0,
+      "resolution": "Renamed the helper operator argument; numerical choices and tolerances retained.",
+      "run_id": 44788732297,
+      "stage": "native unit-test fixture receipt construction",
+      "url": "https://github.com/MoralityLabAI/BPD/actions/runs/44788732297"
+    },
+    {
+      "all_registered_masks_retained": true,
+      "conclusion": "success",
+      "head_commit": "b0c086083a1a1bef68077ac16c3205c6cfd1274c",
+      "registered_study_initializations_completed": 4,
+      "run_id": 44789012873,
+      "url": "https://github.com/MoralityLabAI/BPD/actions/runs/44789012873"
+    }
+  ],
+  "checks": {
+    "archived_dt02_receipt_checked": true,
+    "ci_tests_passed": 53,
+    "distinct_model_state_hashes": 4,
+    "frozen_dt04_sources_checked": 25,
+    "historical_dt05_preflight_exact_reproduction": true,
+    "historical_locked_files_checked": 12,
+    "independent_ci_replay_passed": true,
+    "independent_recovered_packet_replay_passed": true,
+    "replay_payload_sha256": "f0c2dec1a1cda129d9bf8ad4bbe962ad7755229256cac07d98d20cc8a3f2bd1b"
+  },
+  "destination_branch": "gym/TRM-Sodoku",
+  "evidence_class": "engineering_implementation_only",
+  "execution_commit": "fc5b93beba567fb7148bf8e412f52d0ced887dd3",
+  "files": {
+    "spectralucative_cpu_init_2026112100.json": {
+      "bytes": 977861,
+      "sha256": "54dd709f297d84253f63f3a835fec22a19251c42b0aca097312896f09d7aacc4"
+    },
+    "spectralucative_cpu_init_2026112101.json": {
+      "bytes": 984121,
+      "sha256": "6cc63fa488d14f8c1c2ee14c4c14fecfeb5643684d3482b1a7d9c88793fab47e"
+    },
+    "spectralucative_cpu_init_2026112102.json": {
+      "bytes": 981361,
+      "sha256": "b4ebc092a2f781223c557252e730aea2c86c3e5f5da532dfc3153227ab9024c8"
+    },
+    "spectralucative_cpu_init_2026112103.json": {
+      "bytes": 986995,
+      "sha256": "da058583398fa07ab974cffb0dca4b93f72d9fa2ade9ff7514da315cf1a1d574"
+    },
+    "summary.json": {
+      "bytes": 4101,
+      "sha256": "065f5e254b26f85dfac96faa895a26a26d12114b6a6b1cd02afba620064cc592"
+    },
+    "verification.json": {
+      "bytes": 3311,
+      "sha256": "3efb806b1099bd78c5439525bdba84c01e7913696e4cf2fa68968d77fd06312b"
+    }
+  },
+  "lossless_recovery_bundle_sha256": "d85504bc8eb325e32be2c7a701dcd86662ad049cf509edbe324ab387ffee3b0e",
+  "native_receipt_file_count": 6,
+  "receipt_directory": "run-44789012873",
+  "schema": "BPD/Spectralucative/archive-index/v1",
+  "source_branch": "research/spectralucative-20261121",
+  "source_head_commit": "b0c086083a1a1bef68077ac16c3205c6cfd1274c",
+  "successful_run_id": 44789012873,
+  "successful_run_url": "https://github.com/MoralityLabAI/BPD/actions/runs/44789012873"
+}

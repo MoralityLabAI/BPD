@@ -1,0 +1,86 @@
+{
+  "schema": "Spectralucative/protocol/v1",
+  "experiment_id": "BPD-SPECTRALUCATIVE-01",
+  "evidence_class": "engineering_implementation_only",
+  "purpose": "Apply finite spectral mathematics to actual BPD component masks and native recurrent-state Jacobians.",
+  "source_base": {
+    "repository": "MoralityLabAI/BPD",
+    "branch": "gym/TRM-Sodoku",
+    "commit": "420631c8835475c8b7a1f5f55f01a40ed4fb543e"
+  },
+  "formal_source": {
+    "repository": "patrickdugan/OntologicalProofs",
+    "commit": "520006b4611f549ad9f0501dfee250f4052ce7e4",
+    "lean": "4.35.0",
+    "modules": [
+      "Neoplatonic.LTR.TraceDeterminant",
+      "Neoplatonic.LTR.WalshFourier",
+      "Neoplatonic.LTR.ApproximateIntertwining"
+    ]
+  },
+  "unit": "independently initialized native miniature TRM; repeated transitions and component masks remain measurements within that initialization",
+  "engineering_initializations": 4,
+  "seed_namespace": "BPD-SPECTRALUCATIVE-01/excluded-engineering",
+  "seeds": [2026112100, 2026112101, 2026112102, 2026112103],
+  "model": {
+    "builder": "mechinterp.bpd.adapters.trm.build_mini_trm",
+    "hidden_size": 8,
+    "num_heads": 1,
+    "l_layers": 1,
+    "h_cycles": 1,
+    "l_cycles": 1,
+    "puzzle_emb_len": 1,
+    "seq_len": 4,
+    "full_output_head_rows": 11,
+    "initialization": "random",
+    "training_updates": 0,
+    "checkpoint_downloads": 0,
+    "state": "complete pair (z_h,z_l), including the prefix position"
+  },
+  "design": {
+    "warmup_outer_transitions": 1,
+    "outer_transitions": 4,
+    "subspace_rank": 3,
+    "mask_bits": 4,
+    "mask_rows_per_initialization": 16,
+    "component_module": "layers.0.down_proj",
+    "intervention_location": "first invocation of the first measured transition, at the first token after the prefix",
+    "ablation_mode": "zero",
+    "sphere_rescale": false,
+    "residual_weight": "retained for every mask",
+    "walsh_response": "the 44-coordinate final full-head logit-delta vector, covering four token positions and all eleven head rows; squared logit drift is recorded separately",
+    "primary_contrast": "all-components retained versus the native target for implementation parity; numerical identities use every recorded mask and transition",
+    "physical_dose": "record delivered write displacement and full-state displacement; the Boolean cube intentionally includes different doses",
+    "causal_controls": "full mask target parity, zero component mask with retained residual, finite-difference JVP checks, and explicit local linearization remainder",
+    "planned_and_actual_comparisons": "all 16 mask responses and all four ordered transitions are retained for every initialization; no winner-only reporting",
+    "scientific_variation_floor": null,
+    "scientific_variation_floor_reason": "This packet tests instruments and mathematical identities. A future task-effect benchmark must register its own endpoint and meaningful effect.",
+    "matched_sham_floor": null,
+    "matched_sham_floor_reason": "The mask cube varies dose and is not a matched-sham causal contrast. The separate historical DT05 preflight is preserved in evidence/.",
+    "estimated_resolution_power": "not estimated for a new mechanism claim",
+    "readout_selection_exposure": "fully exposed engineering token fixture; the entire final full-head logit-delta vector is fixed as the response before execution",
+    "confirmation_units_planned": 0,
+    "scientific_roots_consumed": 0,
+    "reserved_development_roots_consumed": 0
+  },
+  "mathematical_checks": {
+    "trace_series": "Require q=|z|*||A||_infinity<1. Report raw z=1 eligibility separately from an explicitly damped local operator. Bound the omitted logarithm tail by d*q^(K+1)/((K+1)*(1-q)).",
+    "transport": "Use chronological products of state-dependent Jacobians and rectangular inclusion maps. Preserve leakage and the nonlinear finite-displacement remainder.",
+    "walsh": "Require a complete unique Boolean mask cube and uniform weighting. Verify Parseval and the energy omitted by degree truncation.",
+    "arithmetic": "Floating-point diagnostics with declared tolerances; the analytic tail bound excludes rounding error. The nonautonomous extension has an algebraic derivation and numerical tests."
+  },
+  "execution": {
+    "device": "cpu",
+    "cpu_threads": 2,
+    "gpu_runs": 0,
+    "host": "public GitHub Actions",
+    "default_runtime_limit_minutes": 20
+  },
+  "failure_rules": [
+    "Reject nonfinite matrices, mismatched dimensions, incomplete mask cubes and duplicate mask identifiers.",
+    "Refuse a trace-series truncation certificate outside its explicit norm domain.",
+    "Fail checks when all-ones component masks do not recover target outputs within the declared tolerance.",
+    "Retain every engineering initialization and every mask outcome, including diagnostic failures.",
+    "Reject a receipt that changes its engineering evidence class or claims scientific readiness."
+  ]
+}
