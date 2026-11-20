@@ -1,0 +1,88 @@
+{
+  "artifacts": {
+    "evidence/historical_dt05_input.json": {
+      "bytes": 2350,
+      "sha256": "d25121b4c5da0e6596ae0c54f54e61be57d22ff52eaa806b3744a615c8564af6"
+    },
+    "evidence/historical_dt05_preflight.json": {
+      "bytes": 1123,
+      "sha256": "d87303d07d934d21c69cbff27c7dc906e928cf3d9865d30a451f40407e9ba80c"
+    },
+    "vendor/evalmath_preflight.py": {
+      "bytes": 6779,
+      "sha256": "c2621a7900930f81ed53799ce439ee1c8f2d7006918a04ef57b5381630d15494"
+    }
+  },
+  "checkpoint_downloads": 0,
+  "evidence_class": "historical_development_gate_reproduction",
+  "execution": {
+    "argv": [
+      "python3",
+      "vendor/evalmath_preflight.py",
+      "--pilot",
+      "evidence/historical_dt05_input.json",
+      "--out",
+      "evidence/historical_dt05_preflight.json",
+      "--strict"
+    ],
+    "combined_output": "",
+    "exit_status": 2,
+    "expected_exit_status": 2,
+    "working_directory": "Spectralucative"
+  },
+  "gpu_runs": 0,
+  "historical_experiment_id": "BPD-DT05-transported-vs-static-gramian-depth8",
+  "input_serialization": "json.dumps(spec, sort_keys=True, indent=2) + '\\n', UTF-8",
+  "interpretation": {
+    "decision": "REDESIGN_OR_PILOT_ONLY",
+    "historical_verdict_changed": false,
+    "new_study_readiness": "not_assessed",
+    "reasons": [
+      "sham_quantile_uncalibrated",
+      "pilot_effect_not_above_mechanistic_variation_floor"
+    ],
+    "scope": "Reproduction of the historical DT05 development gate. Spectralucative engineering diagnostics have no new causal readiness result."
+  },
+  "populations_consumed": {
+    "confirmation_roots": 0,
+    "new_model_roots": 0,
+    "reserved_dt05_development_roots": 0
+  },
+  "reproduction": {
+    "input_hash_equals_archived": true,
+    "result_equals_archived": true,
+    "script_hash_equals_archived": true
+  },
+  "schema": "Spectralucative/historical-gate-provenance/v1",
+  "sources": {
+    "bpd": {
+      "archived_input_sha256": "d25121b4c5da0e6596ae0c54f54e61be57d22ff52eaa806b3744a615c8564af6",
+      "archived_scope": "excluded_engineering_pilot_only",
+      "archived_source_digest": "689a25c95cad4bd99e12204285eba3a9be507ea36106d1bed1416c0dc0e09345",
+      "archived_source_git_dirty": true,
+      "archived_source_git_head": "8ccdcb2ed7ed937805efbd4276c524932321f95a",
+      "commit": "420631c8835475c8b7a1f5f55f01a40ed4fb543e",
+      "git_blob_sha": "dbfad11c2e9933703baa1ee00cee31e09310aa5a",
+      "input_json_pointer": "/evalmath_preflight/input_spec",
+      "path": "mechinterp/bpd/experiments/depth_steering_gym/dt05/benchmarks/07_dynamic_transport_and_evalmath.json",
+      "repository": "MoralityLabAI/BPD",
+      "result_json_pointer": "/evalmath_preflight/evalmath_result",
+      "url": "https://github.com/MoralityLabAI/BPD/blob/420631c8835475c8b7a1f5f55f01a40ed4fb543e/mechinterp/bpd/experiments/depth_steering_gym/dt05/benchmarks/07_dynamic_transport_and_evalmath.json"
+    },
+    "evalmath": {
+      "commit": "9708f1edaf1cb25904b88b07c3f23c1899df7cac",
+      "git_blob_sha": "0ff062f76f5534d9f18425f986ae3e750397f50c",
+      "path": "skills/evalmath-mechinterp-power/scripts/preflight.py",
+      "repository": "MoralityLabAI/EvalMath",
+      "sha256": "c2621a7900930f81ed53799ce439ee1c8f2d7006918a04ef57b5381630d15494",
+      "url": "https://github.com/MoralityLabAI/EvalMath/blob/9708f1edaf1cb25904b88b07c3f23c1899df7cac/skills/evalmath-mechinterp-power/scripts/preflight.py"
+    },
+    "skill": {
+      "commit": "9708f1edaf1cb25904b88b07c3f23c1899df7cac",
+      "git_blob_sha": "c1c60a502e0e512b77387056da4e1036c68b09dc",
+      "path": "skills/evalmath-mechinterp-power/SKILL.md",
+      "repository": "MoralityLabAI/EvalMath",
+      "url": "https://github.com/MoralityLabAI/EvalMath/blob/9708f1edaf1cb25904b88b07c3f23c1899df7cac/skills/evalmath-mechinterp-power/SKILL.md"
+    }
+  }
+}
