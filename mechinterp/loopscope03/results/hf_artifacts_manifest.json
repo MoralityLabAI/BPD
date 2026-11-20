@@ -1,0 +1,184 @@
+{
+  "schema": "moralitylab.loopscope03.hf_artifacts_manifest.v1",
+  "hf_dataset_repo": "AlephFunk/loopscope03-trm-trajectories-and-probes",
+  "hf_dataset_url": "https://huggingface.co/datasets/AlephFunk/loopscope03-trm-trajectories-and-probes",
+  "github_repo": "https://github.com/MoralityLabAI/BPD/tree/main/mechinterp/loopscope03",
+  "pre_registration_commit": "b1ec77550997cbc5ae2cd84618af74e8f34e38e7",
+  "total_files": 18,
+  "total_bytes": 52116588393,
+  "files": [
+    {
+      "filename": "gaoxin492_C5_N100.pt",
+      "bytes": 30736925,
+      "sha256": "4a522d91d4e582346125959c45d1493f1df6e7c400a4adec65aaea4d1c294d3e",
+      "kind": "probe_or_metadata",
+      "blob_uri": "https://huggingface.co/datasets/AlephFunk/loopscope03-trm-trajectories-and-probes/blob/main/gaoxin492_C5_N100.pt",
+      "resolve_uri": "https://huggingface.co/datasets/AlephFunk/loopscope03-trm-trajectories-and-probes/resolve/main/gaoxin492_C5_N100.pt"
+    },
+    {
+      "filename": "gaoxin492_C5_N2700.pt",
+      "bytes": 30736949,
+      "sha256": "4c0e15d881c868e4fdad64d813f61c99ebefebad65359fb4d904fc7087823823",
+      "kind": "probe_or_metadata",
+      "blob_uri": "https://huggingface.co/datasets/AlephFunk/loopscope03-trm-trajectories-and-probes/blob/main/gaoxin492_C5_N2700.pt",
+      "resolve_uri": "https://huggingface.co/datasets/AlephFunk/loopscope03-trm-trajectories-and-probes/resolve/main/gaoxin492_C5_N2700.pt"
+    },
+    {
+      "filename": "gaoxin492_C5_N300.pt",
+      "bytes": 30736925,
+      "sha256": "bc2002deec3ff670d1d261e06d4215cd3393f9bb3e570820f5ea4ee3939fcc08",
+      "kind": "probe_or_metadata",
+      "blob_uri": "https://huggingface.co/datasets/AlephFunk/loopscope03-trm-trajectories-and-probes/blob/main/gaoxin492_C5_N300.pt",
+      "resolve_uri": "https://huggingface.co/datasets/AlephFunk/loopscope03-trm-trajectories-and-probes/resolve/main/gaoxin492_C5_N300.pt"
+    },
+    {
+      "filename": "gaoxin492_C5_N8100.pt",
+      "bytes": 30736949,
+      "sha256": "10a13b3f709c7743dfc304466d72071bd6add358671aa82968f20cb9fada6c2a",
+      "kind": "probe_or_metadata",
+      "blob_uri": "https://huggingface.co/datasets/AlephFunk/loopscope03-trm-trajectories-and-probes/blob/main/gaoxin492_C5_N8100.pt",
+      "resolve_uri": "https://huggingface.co/datasets/AlephFunk/loopscope03-trm-trajectories-and-probes/resolve/main/gaoxin492_C5_N8100.pt"
+    },
+    {
+      "filename": "gaoxin492_all_tf_ladder_v2.pt",
+      "bytes": 130646725,
+      "sha256": "634d5e06e9492b825c5e058d6ea3f1fde8740fcd8407cdba0baa5e5b973b35b4",
+      "kind": "probe_or_metadata",
+      "blob_uri": "https://huggingface.co/datasets/AlephFunk/loopscope03-trm-trajectories-and-probes/blob/main/gaoxin492_all_tf_ladder_v2.pt",
+      "resolve_uri": "https://huggingface.co/datasets/AlephFunk/loopscope03-trm-trajectories-and-probes/resolve/main/gaoxin492_all_tf_ladder_v2.pt"
+    },
+    {
+      "filename": "gaoxin492_refill_bundle.pt",
+      "bytes": 90208909,
+      "sha256": "9b44f3834aaf6b9004046677d208ac92388f1ef0973e57f10183d23f8791741c",
+      "kind": "probe_or_metadata",
+      "blob_uri": "https://huggingface.co/datasets/AlephFunk/loopscope03-trm-trajectories-and-probes/blob/main/gaoxin492_refill_bundle.pt",
+      "resolve_uri": "https://huggingface.co/datasets/AlephFunk/loopscope03-trm-trajectories-and-probes/resolve/main/gaoxin492_refill_bundle.pt"
+    },
+    {
+      "filename": "gaoxin492_stage1_done.json",
+      "bytes": 93604,
+      "sha256": "82b842978827b0997ddba96749db92d9482fdb28d1b39c8fa30b321c462cc804",
+      "kind": "probe_or_metadata",
+      "blob_uri": "https://huggingface.co/datasets/AlephFunk/loopscope03-trm-trajectories-and-probes/blob/main/gaoxin492_stage1_done.json",
+      "resolve_uri": "https://huggingface.co/datasets/AlephFunk/loopscope03-trm-trajectories-and-probes/resolve/main/gaoxin492_stage1_done.json"
+    },
+    {
+      "filename": "gaoxin492_traj_8100_meta.pt",
+      "bytes": 28870573,
+      "sha256": "a521a5ae104af474b87786025cea0b9e08e30280594d70b01a470660db621f1d",
+      "kind": "probe_or_metadata",
+      "blob_uri": "https://huggingface.co/datasets/AlephFunk/loopscope03-trm-trajectories-and-probes/blob/main/gaoxin492_traj_8100_meta.pt",
+      "resolve_uri": "https://huggingface.co/datasets/AlephFunk/loopscope03-trm-trajectories-and-probes/resolve/main/gaoxin492_traj_8100_meta.pt"
+    },
+    {
+      "filename": "gaoxin492_traj_8100_zh.bf16.mmap",
+      "bytes": 12872908800,
+      "sha256": "1541130aaf95647aec1a7b8343ee9c2bcc8650efa854fbfe8112127cf197fb49",
+      "kind": "bf16_trajectory_memmap",
+      "memmap_dtype": "uint16 (torch.bfloat16 bitpattern)",
+      "memmap_shape": [
+        8100,
+        16,
+        97,
+        512
+      ],
+      "blob_uri": "https://huggingface.co/datasets/AlephFunk/loopscope03-trm-trajectories-and-probes/blob/main/gaoxin492_traj_8100_zh.bf16.mmap",
+      "resolve_uri": "https://huggingface.co/datasets/AlephFunk/loopscope03-trm-trajectories-and-probes/resolve/main/gaoxin492_traj_8100_zh.bf16.mmap"
+    },
+    {
+      "filename": "gaoxin492_traj_8100_zl.bf16.mmap",
+      "bytes": 12872908800,
+      "sha256": "a364e68041a72b6a15a6fc21ff7aafa41140d4314883e7c74fac47f3c0403a56",
+      "kind": "bf16_trajectory_memmap",
+      "memmap_dtype": "uint16 (torch.bfloat16 bitpattern)",
+      "memmap_shape": [
+        8100,
+        16,
+        97,
+        512
+      ],
+      "blob_uri": "https://huggingface.co/datasets/AlephFunk/loopscope03-trm-trajectories-and-probes/blob/main/gaoxin492_traj_8100_zl.bf16.mmap",
+      "resolve_uri": "https://huggingface.co/datasets/AlephFunk/loopscope03-trm-trajectories-and-probes/resolve/main/gaoxin492_traj_8100_zl.bf16.mmap"
+    },
+    {
+      "filename": "sudoku_extreme_full_train_prefix2mb.csv",
+      "bytes": 2399956,
+      "sha256": "874f4de40656b0c3f826dc845e16decaf51b79ae6a0ba93119ade885ed544508",
+      "kind": "probe_or_metadata",
+      "blob_uri": "https://huggingface.co/datasets/AlephFunk/loopscope03-trm-trajectories-and-probes/blob/main/sudoku_extreme_full_train_prefix2mb.csv",
+      "resolve_uri": "https://huggingface.co/datasets/AlephFunk/loopscope03-trm-trajectories-and-probes/resolve/main/sudoku_extreme_full_train_prefix2mb.csv"
+    },
+    {
+      "filename": "yagizdevre_C5_N8100.pt",
+      "bytes": 30736973,
+      "sha256": "94161ea5be7b60cccea4c326c85afd7197ba5799a53563856fc17cc0d0e6b306",
+      "kind": "probe_or_metadata",
+      "blob_uri": "https://huggingface.co/datasets/AlephFunk/loopscope03-trm-trajectories-and-probes/blob/main/yagizdevre_C5_N8100.pt",
+      "resolve_uri": "https://huggingface.co/datasets/AlephFunk/loopscope03-trm-trajectories-and-probes/resolve/main/yagizdevre_C5_N8100.pt"
+    },
+    {
+      "filename": "yagizdevre_all_tf_ladder_v2.pt",
+      "bytes": 99877739,
+      "sha256": "9f63ff839a3afb230aea9599ced4e352f8918cdbb64b40e63f24fb45af2a67e5",
+      "kind": "probe_or_metadata",
+      "blob_uri": "https://huggingface.co/datasets/AlephFunk/loopscope03-trm-trajectories-and-probes/blob/main/yagizdevre_all_tf_ladder_v2.pt",
+      "resolve_uri": "https://huggingface.co/datasets/AlephFunk/loopscope03-trm-trajectories-and-probes/resolve/main/yagizdevre_all_tf_ladder_v2.pt"
+    },
+    {
+      "filename": "yagizdevre_refill_bundle.pt",
+      "bytes": 90208965,
+      "sha256": "94f183b84f928546fac081ee4def82e8e101fd2c799ece1d9c07dea9990a2158",
+      "kind": "probe_or_metadata",
+      "blob_uri": "https://huggingface.co/datasets/AlephFunk/loopscope03-trm-trajectories-and-probes/blob/main/yagizdevre_refill_bundle.pt",
+      "resolve_uri": "https://huggingface.co/datasets/AlephFunk/loopscope03-trm-trajectories-and-probes/resolve/main/yagizdevre_refill_bundle.pt"
+    },
+    {
+      "filename": "yagizdevre_stage1_done.json",
+      "bytes": 91420,
+      "sha256": "cc1868445394b79f04a9561a4a24d153db9b87941ba145fb32b060703e903eb4",
+      "kind": "probe_or_metadata",
+      "blob_uri": "https://huggingface.co/datasets/AlephFunk/loopscope03-trm-trajectories-and-probes/blob/main/yagizdevre_stage1_done.json",
+      "resolve_uri": "https://huggingface.co/datasets/AlephFunk/loopscope03-trm-trajectories-and-probes/resolve/main/yagizdevre_stage1_done.json"
+    },
+    {
+      "filename": "yagizdevre_traj_8100_meta.pt",
+      "bytes": 28870581,
+      "sha256": "17483d380dca543277973d8ea2c8b593791e93317c302cbc0be2c130a55bd2b4",
+      "kind": "probe_or_metadata",
+      "blob_uri": "https://huggingface.co/datasets/AlephFunk/loopscope03-trm-trajectories-and-probes/blob/main/yagizdevre_traj_8100_meta.pt",
+      "resolve_uri": "https://huggingface.co/datasets/AlephFunk/loopscope03-trm-trajectories-and-probes/resolve/main/yagizdevre_traj_8100_meta.pt"
+    },
+    {
+      "filename": "yagizdevre_traj_8100_zh.bf16.mmap",
+      "bytes": 12872908800,
+      "sha256": "492f926f5df909ad6f401a89bf02d6e47445977c9de05cd0b932d90d0c183e71",
+      "kind": "bf16_trajectory_memmap",
+      "memmap_dtype": "uint16 (torch.bfloat16 bitpattern)",
+      "memmap_shape": [
+        8100,
+        16,
+        97,
+        512
+      ],
+      "blob_uri": "https://huggingface.co/datasets/AlephFunk/loopscope03-trm-trajectories-and-probes/blob/main/yagizdevre_traj_8100_zh.bf16.mmap",
+      "resolve_uri": "https://huggingface.co/datasets/AlephFunk/loopscope03-trm-trajectories-and-probes/resolve/main/yagizdevre_traj_8100_zh.bf16.mmap"
+    },
+    {
+      "filename": "yagizdevre_traj_8100_zl.bf16.mmap",
+      "bytes": 12872908800,
+      "sha256": "ee03657f210342c5c6f85e2a7c3f32e41e43be43d85904bb4d8b38fe1a73dd40",
+      "kind": "bf16_trajectory_memmap",
+      "memmap_dtype": "uint16 (torch.bfloat16 bitpattern)",
+      "memmap_shape": [
+        8100,
+        16,
+        97,
+        512
+      ],
+      "blob_uri": "https://huggingface.co/datasets/AlephFunk/loopscope03-trm-trajectories-and-probes/blob/main/yagizdevre_traj_8100_zl.bf16.mmap",
+      "resolve_uri": "https://huggingface.co/datasets/AlephFunk/loopscope03-trm-trajectories-and-probes/resolve/main/yagizdevre_traj_8100_zl.bf16.mmap"
+    }
+  ],
+  "hf_commit_sha": "5a1c023b41fe15d78c4541677a61b8def4d80a46"
+}
