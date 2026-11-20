@@ -1,0 +1,85 @@
+{
+  "historical_gate": {
+    "decision": "REDESIGN_OR_PILOT_ONLY",
+    "exact_reproduction": true,
+    "strict_exit_status": 2
+  },
+  "native_run": {
+    "confirmation_roots": 0,
+    "engineering_initializations_checked": 4,
+    "evidence_class": "engineering_implementation_only",
+    "scientific_roots": 0,
+    "scope": "Independent arithmetic replay of stored observations; native model execution is recorded separately.",
+    "units": [
+      {
+        "complete_walsh_cube_checked": true,
+        "delivered_component_writes_checked": true,
+        "engineering_initialization_id": "spectralucative_cpu_init_2026112100",
+        "evidence_class": "engineering_implementation_only",
+        "factor_parity_checked": true,
+        "finite_displacement_arithmetic_checked": true,
+        "frozen_comparison_checked": true,
+        "full_state_spectra_checked": true,
+        "mask_response_binding_checked": true,
+        "native_jvp_arithmetic_checked": true,
+        "source_files_checked": 23,
+        "spectral_steps_checked": 4,
+        "transport_checked": true
+      },
+      {
+        "complete_walsh_cube_checked": true,
+        "delivered_component_writes_checked": true,
+        "engineering_initialization_id": "spectralucative_cpu_init_2026112101",
+        "evidence_class": "engineering_implementation_only",
+        "factor_parity_checked": true,
+        "finite_displacement_arithmetic_checked": true,
+        "frozen_comparison_checked": true,
+        "full_state_spectra_checked": true,
+        "mask_response_binding_checked": true,
+        "native_jvp_arithmetic_checked": true,
+        "source_files_checked": 23,
+        "spectral_steps_checked": 4,
+        "transport_checked": true
+      },
+      {
+        "complete_walsh_cube_checked": true,
+        "delivered_component_writes_checked": true,
+        "engineering_initialization_id": "spectralucative_cpu_init_2026112102",
+        "evidence_class": "engineering_implementation_only",
+        "factor_parity_checked": true,
+        "finite_displacement_arithmetic_checked": true,
+        "frozen_comparison_checked": true,
+        "full_state_spectra_checked": true,
+        "mask_response_binding_checked": true,
+        "native_jvp_arithmetic_checked": true,
+        "source_files_checked": 23,
+        "spectral_steps_checked": 4,
+        "transport_checked": true
+      },
+      {
+        "complete_walsh_cube_checked": true,
+        "delivered_component_writes_checked": true,
+        "engineering_initialization_id": "spectralucative_cpu_init_2026112103",
+        "evidence_class": "engineering_implementation_only",
+        "factor_parity_checked": true,
+        "finite_displacement_arithmetic_checked": true,
+        "frozen_comparison_checked": true,
+        "full_state_spectra_checked": true,
+        "mask_response_binding_checked": true,
+        "native_jvp_arithmetic_checked": true,
+        "source_files_checked": 23,
+        "spectral_steps_checked": 4,
+        "transport_checked": true
+      }
+    ]
+  },
+  "passed": true,
+  "payload_sha256": "f0c2dec1a1cda129d9bf8ad4bbe962ad7755229256cac07d98d20cc8a3f2bd1b",
+  "roundoff_certified": false,
+  "schema": "BPD/Spectralucative/verification/v1",
+  "verification_tolerances": {
+    "absolute": 1e-09,
+    "float32_factor_absolute": 2e-07,
+    "relative": 2e-07
+  }
+}

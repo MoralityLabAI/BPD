@@ -12,6 +12,10 @@ The four-token fixture measures implementation behavior; it supplies zero
 trained-model or task-performance results. The protocol is in
 [`PROTOCOL.json`](PROTOCOL.json).
 
+The [first completed run](RESULTS.md) passed 53 tests and independent replay.
+Its complete matrices, intervention responses, and execution history are
+saved under [`results/`](results/).
+
 ## What this adds to BPD
 
 BPD already exposes one physical factor pair per shared matrix and
