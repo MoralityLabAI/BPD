@@ -120,10 +120,10 @@ def _state_digest(model):
     return digest.hexdigest()
 
 
-def _spectral_pair(matrix, step, **extra):
-    z = 0.5 / max(1.0, matrix_inf_norm(matrix))
-    return dict(step=step, raw=trace_logdet_diagnostic(matrix, z=1.0),
-                damped=trace_logdet_diagnostic(matrix, z=z), **extra)
+def _spectral_pair(operator, step, **extra):
+    z = 0.5 / max(1.0, matrix_inf_norm(operator))
+    return dict(step=step, raw=trace_logdet_diagnostic(operator, z=1.0),
+                damped=trace_logdet_diagnostic(operator, z=z), **extra)
 
 
 def _frozen_comparison(jacobians, reduced, basis):
