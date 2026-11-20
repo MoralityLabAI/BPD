@@ -1,0 +1,76 @@
+name: BPD Spectralucative CPU instruments
+
+on:
+  push:
+    branches: [main, 'gym/TRM-Sodoku']
+    paths:
+      - 'Spectralucative/**'
+      - '.github/workflows/bpd-spectralucative.yml'
+  pull_request:
+    paths:
+      - 'Spectralucative/**'
+      - '.github/workflows/bpd-spectralucative.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: spectralucative-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  cpu-instruments:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      HF_HUB_OFFLINE: '1'
+      TRANSFORMERS_OFFLINE: '1'
+      CUDA_VISIBLE_DEVICES: ''
+      OMP_NUM_THREADS: '2'
+      MKL_NUM_THREADS: '2'
+      PYTHONHASHSEED: '0'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install CPU dependencies
+        run: python -m pip install -r Spectralucative/requirements.txt
+      - name: Reproduce the historical development gate
+        run: python -m Spectralucative.verify --historical-only --out runs/spectralucative-historical.json
+      - name: Preserve frozen BPD source and evidence
+        run: python -m mechinterp.bpd.experiments.depth_steering_gym.dt04.verify_source --skip-runtime
+      - name: Check numerical identities and native interfaces
+        run: python -m unittest discover -s Spectralucative/tests -t . -p 'test_*.py' -v
+      - name: Run four excluded native engineering initializations
+        run: python -m Spectralucative.native --out runs/spectralucative --roots 4 --steps 4 --rank 3 --components 4 --cpu-threads 2
+      - name: Independently replay recorded matrices and mask cubes
+        run: python -m Spectralucative.verify --run runs/spectralucative --out runs/spectralucative/verification.json
+      - name: Export a lossless receipt bundle
+        if: always()
+        run: |
+          python - <<'PY'
+          import base64, gzip, hashlib, json
+          from pathlib import Path
+          root = Path('runs/spectralucative')
+          files = {str(p.relative_to(root)): p.read_text(encoding='utf-8')
+                   for p in sorted(root.rglob('*.json'))} if root.exists() else {}
+          if files:
+              payload = json.dumps(files, sort_keys=True, separators=(',', ':')).encode()
+              encoded = base64.b64encode(gzip.compress(payload, mtime=0)).decode('ascii')
+              print('SPECTRALUCATIVE_BUNDLE_SHA256', hashlib.sha256(payload).hexdigest())
+              for i in range(0, len(encoded), 12000):
+                  print('SPECTRALUCATIVE_BUNDLE_CHUNK', i // 12000, encoded[i:i+12000])
+              print('SPECTRALUCATIVE_BUNDLE_END', len(files))
+          else:
+              print('No native receipts were produced.')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: spectralucative-${{ github.run_id }}
+          path: |
+            runs/spectralucative/
+            runs/spectralucative-historical.json
+          retention-days: 30

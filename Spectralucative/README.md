@@ -7,6 +7,7 @@ for exactly in the underlying finite mathematics.
 
 The first study runs the repository's native miniature TRM and real
 `BPDModel` wrappers on CPU. Its four models start from random initialization.
+One warmup transition precedes the four measured transitions.
 The four-token fixture measures implementation behavior; it supplies zero
 trained-model or task-performance results. The protocol is in
 [`PROTOCOL.json`](PROTOCOL.json).
@@ -23,7 +24,7 @@ those instruments with signed matrices and finite-horizon error accounting.
 | Signed state Jacobian projected into a chosen subspace | Trace powers and a determinant expansion with a stated truncation bound | Describes feedback within that frozen local operator. |
 | State-dependent Jacobians across actual passes | Ordered transport products with leakage and a norm envelope | Measures how far a reduced model drifts from the full linearized trajectory. |
 | Full-head logit response over every mask of four components | Walsh coefficients, Parseval, and residual energy after dropping higher degrees | Measures how much of this intervention response needs interactions among several components. |
-| BPD read/write factors and retained weight residual | Exact linear-layer intertwining witness | Identifies the part of linear closure error contributed by the retained residual. |
+| BPD factors of a square linear recurrence and its retained weight residual | Exact linear-layer intertwining witness | Identifies the part of linear closure error contributed by the retained residual. |
 
 The existing `compute_transition_operator` pools RMS attribution magnitudes.
 It describes an attribution graph. Signed state Jacobians are recorded here
@@ -93,14 +94,21 @@ outside that next subspace. A nonlinear model also needs a finite-displacement
 remainder. Native receipts retain that measurement so the tangent estimate
 can be compared with the delivered perturbation.
 
-There is also a direct factor-level application. In column-state convention,
+There is also a direct factor-level application to a square recurrent weight.
+In column-state convention,
 `W_hat = U^T V^T`, `L = V^T`, and `K = V^T U^T` satisfy
 `K L = L W_hat`. For `W = W_hat + DeltaW`, the closure defect is
-`K L - L W = -V^T DeltaW`. A nonlinear return path needs its own Jacobian.
+`K L - L W = -V^T DeltaW`. For a rectangular physical matrix, a Jacobian `R`
+from its output back to its next input is needed to form `V^T R U^T`.
+The native study uses the full recurrent-state Jacobian, which includes that
+return path and the other state updates.
 
 ## Complete component-mask cubes
 
 Each Boolean bit keeps or removes one BPD component at a declared invocation.
+The invocation is the first one in the first measured transition, at the first
+token after the prefix. This study uses zero ablation with sphere rescaling
+disabled.
 The residual weight remains active in every condition. Thus the all-ones
 mask has a target-parity check, while the all-zeros mask still contains the
 retained residual and bias.
@@ -160,12 +168,12 @@ python -m unittest discover -s Spectralucative/tests -p 'test_math.py' -v
 ### Run the native CPU study
 
 ```bash
-python -m pip install torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
-python -m pip install numpy
+python -m pip install -r Spectralucative/requirements.txt
 python -m Spectralucative.native --out runs/spectralucative --roots 4 --steps 4 --rank 3 --components 4 --cpu-threads 2
+python -m Spectralucative.verify --run runs/spectralucative --out runs/spectralucative/verification.json
 ```
 
 The GitHub Actions workflow runs the independent receipt verifier after the
-native study and uploads its receipts. All checkpoints, protected cohorts,
-historical outcomes and production routing policies retain their existing
-roles.
+native study and uploads its receipts. It also reruns the historical preflight
+and checks BPD's frozen source and evidence. The standalone historical replay
+is available through `python -m Spectralucative.verify --historical-only`.

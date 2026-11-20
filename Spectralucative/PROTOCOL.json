@@ -38,11 +38,15 @@
     "state": "complete pair (z_h,z_l), including the prefix position"
   },
   "design": {
+    "warmup_outer_transitions": 1,
     "outer_transitions": 4,
     "subspace_rank": 3,
     "mask_bits": 4,
     "mask_rows_per_initialization": 16,
     "component_module": "layers.0.down_proj",
+    "intervention_location": "first invocation of the first measured transition, at the first token after the prefix",
+    "ablation_mode": "zero",
+    "sphere_rescale": false,
     "residual_weight": "retained for every mask",
     "walsh_response": "the 44-coordinate final full-head logit-delta vector, covering four token positions and all eleven head rows; squared logit drift is recorded separately",
     "primary_contrast": "all-components retained versus the native target for implementation parity; numerical identities use every recorded mask and transition",
