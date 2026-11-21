@@ -85,3 +85,7 @@ mechinterp/bpd/
 - Wang & Reid (2026), *Looped Transformers under the Jacobian Lens: Does the Global Workspace Survive Recurrence?*, `arXiv:2609.01924` — https://arxiv.org/abs/2609.01924
 - Internal foundations: `mechinterp/loopscope01` (`LoopedChase`, `TCA`), `mechinterp/loopscope02` (`PureSudokuTRM`, $F_1 / F_6 = 1{,}808.4$), `mechinterp/loopscope03` ($V_t / C_t / R_t$ ledger & sphere calibration), and `papers/shared_weights_dark_fibers/PAPER.md` (`v014`).
 
+
+## Inkling 2 Mini cross-loop routing (21 November 2026)
+
+The [INK-BPD-01 source-only study](experiments/inkling_routing/INKLING_BPD_IMPLICATIONS_20261121.md) reviews Thinking Machines' loop architecture and Goodfire's block-reader/outlier and coda-lens analysis alongside today's NEC-03Q development null. It specifies physical selector-versus-content interventions, dose-matched shams, loop-clock confounds and full-continuation tests before any BPD mechanism claim. Pure-stdlib algebraic checks live in `experiments/inkling_routing/routing_math.py`. Existing NC-13 and LOOPSCOPE-03 results are unchanged.
