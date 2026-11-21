@@ -45,11 +45,17 @@ jobs:
         run: python mechinterp/bpd/experiments/inkling_routing/run_native_dev.py --out "$RUNNER_TEMP/inkbpd02_native_development.json"
       - name: Byte-identical deterministic CPU replay
         run: python mechinterp/bpd/experiments/inkling_routing/run_native_dev.py --out "$RUNNER_TEMP/inkbpd02_native_development.json" --check
+      - name: Strong direct gate competence controls on new development roots
+        run: python mechinterp/bpd/experiments/inkling_routing/run_gate_control.py --out "$RUNNER_TEMP/inkbpd03_gate_dev.json"
+      - name: Reproduce direct gate competence controls
+        run: python mechinterp/bpd/experiments/inkling_routing/run_gate_control.py --out "$RUNNER_TEMP/inkbpd03_gate_dev.json" --check
       - name: Preserve development evidence and all admission outcomes
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: ink-bpd02-native-dev
-          path: ${{ runner.temp }}/inkbpd02_native_development.json
+          path: |
+            ${{ runner.temp }}/inkbpd02_native_development.json
+            ${{ runner.temp }}/inkbpd03_gate_dev.json
           if-no-files-found: warn
           retention-days: 90
