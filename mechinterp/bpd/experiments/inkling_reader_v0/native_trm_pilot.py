@@ -102,7 +102,7 @@ def count_solutions(question: str, *, limit: int = 2) -> int:
 
 def _permute_sudoku(seed: int, holes: int = 22) -> tuple[str, str]:
     """Produce reproducible clue/target pairs from a Sudoku-valid solved board."""
-    if type(seed) is not int or type(holes) is not int or not 0 <= holes <= 40:
+    if type(seed) is not int or type(holes) is not int or not 0 <= holes <= 55:
         raise ValueError("seed and hole count out of bounds")
     rng = random.Random(seed)
     bands = list(range(3))
@@ -340,7 +340,7 @@ def run_campaign(
         "schema_version": SCHEMA,
         "evidence_class": "native_pretrained_development" if pretrained else "untrained_native_plumbing_smoke",
         "model": model_id, "model_sha256": model_sha, "pretrained": pretrained,
-        "roots": roots, "arms": list(ARMS), "outer_steps": outer_steps,
+        "roots": roots, "seed": seed, "arms": list(ARMS), "outer_steps": outer_steps,
         "actual_model_h_cycles": model.h_cycles, "actual_model_l_cycles": model.l_cycles,
         "relative_dose": relative_dose, "holes": holes, "patch_h_cycle": patch_h_cycle,
         "max_clean_parity_difference": parity,
