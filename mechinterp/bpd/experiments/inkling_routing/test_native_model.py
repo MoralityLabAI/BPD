@@ -54,6 +54,21 @@ class NativeRoutingTests(unittest.TestCase):
         self.assertEqual(len(calls),3)
         self.assertEqual(tuple(calls[0].shape),(5,2,16))
 
+    def test_direct_gate_controls_are_native_separate_positive_controls(self):
+        torch.manual_seed(11)
+        model=TinyCrossLoopRouter().eval()
+        batch=make_batch(504,21)
+        clean=model(batch)
+        single=model(batch,hook_pass=1,gate_control="invert_at_hook")
+        all_pass=model(batch,gate_control="invert_all")
+        self.assertTrue(torch.allclose(single["beta3"][0],clean["beta3"][0]))
+        self.assertTrue(torch.allclose(single["beta3"][1],1-clean["beta3"][1],atol=1e-6))
+        self.assertTrue(torch.allclose(all_pass["beta3"][0],1-clean["beta3"][0],atol=1e-6))
+        self.assertGreater((all_pass["logits"]-clean["logits"]).abs().max().item(),1e-6)
+        self.assertGreater((single["logits"]-clean["logits"]).abs().max().item(),1e-6)
+        with self.assertRaisesRegex(ValueError,"cannot be mixed"):
+            model(batch,pair=(0,1),gate_control="invert_all")
+
     def test_short_cpu_training_changes_clean_model(self):
         model,info=train_source(steps=45,seed=103,width=16)
         self.assertGreater(info["parameters"],0)
