@@ -27,4 +27,6 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Run source-only unittest fixtures
-        run: python -m unittest discover -s mechinterp/bpd/experiments/inkling_reader_v0 -p 'test_*.py' -v
+        run: |
+          python -m unittest discover -s mechinterp/bpd/experiments/inkling_reader_v0 -p 'test_reader_probe.py' -v
+          python -m unittest discover -s mechinterp/bpd/experiments/inkling_reader_v0 -p 'test_positive_control_audit.py' -v
