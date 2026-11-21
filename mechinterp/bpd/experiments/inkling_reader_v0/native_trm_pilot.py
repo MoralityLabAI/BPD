@@ -288,8 +288,8 @@ def run_campaign(
     holes: int = 22,
     patch_h_cycle: int = 1,
 ) -> dict[str, Any]:
-    if type(roots) is not int or not 1 <= roots <= 8:
-        raise ValueError("roots must be in 1..8")
+    if type(roots) is not int or not 1 <= roots <= 32:
+        raise ValueError("roots must be in 1..32")
     if len(model_sha) != 64:
         raise ValueError("checkpoint SHA-256 required")
     model.eval()
