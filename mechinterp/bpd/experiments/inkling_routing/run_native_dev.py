@@ -11,6 +11,7 @@ import argparse
 import hashlib
 import itertools
 import json
+import struct
 from pathlib import Path
 
 import torch
@@ -110,7 +111,11 @@ def main():
     sha = hashlib.sha256()
     for name, value in sorted(params.items()):
         sha.update(name.encode())
-        sha.update(value.detach().cpu().numpy().tobytes())
+        tensor=value.detach().cpu().contiguous()
+        values=tensor.reshape(-1).tolist()
+        sha.update(str(tuple(tensor.shape)).encode())
+        sha.update(str(tensor.dtype).encode())
+        sha.update(struct.pack("<%sf" % len(values), *values))
     admitted = [r for r in roots if r["joint_admitted"] > 0]
     report = {"schema": "bpd/ink-bpd02-native-dev/v1",
               "evidence_class": "source-selected, developmental native synthetic PyTorch model",
