@@ -44,9 +44,9 @@ Result: **31.25% fewer outer recurrent steps**, 31.174% lower measured
 native forward seconds, 31.177% lower policy-level elapsed seconds.
 These are sums over sequential model calls on a hosted GitHub CPU runner,
 not amortized parallel serving, GPU inference throughput or watt-hours.
-Two outer steps each involve three H-cycles and seven L_level calls per
-H-cycle (six L followed by one H), for 42 versus 33/48 × 42 total
-L_level block applications under this model and cohort.
+Each outer step involves three H-cycles with seven L_level calls per
+H-cycle (six L followed by one H): 21 calls per step. Across the cohort,
+that is 1,008 L_level calls at fixed depth versus 693 with verifier exit.
 
 Exactly 15 roots halted after the first verifier-valid Sudoku grid.
 Eight more were successfully completed after two; one remained unsolved
