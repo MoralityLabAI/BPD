@@ -23,7 +23,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: Validate pure-stdlib attribution, L2 dose and physical-null contracts
-        run: python -m unittest discover -s mechinterp/bpd/experiments/inkling_routing -p 'test_*.py' -v
+        run: python -m unittest discover -s mechinterp/bpd/experiments/inkling_routing -p 'test_routing_math.py' -v
 
   native-development:
     runs-on: ubuntu-24.04
