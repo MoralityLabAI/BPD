@@ -77,6 +77,7 @@ def _policy_details(
             "second_pass_verified": row["second_pass_verified"],
             "first_pass_candidate": row["first_candidate"],
             "second_pass_candidate": row["second_candidate"],
+            "first_step_features": row["features"],
             "frozen_controller_score": float(_logit_model(
                 np.array(row["features"], dtype=np.float64), params,
             )),
