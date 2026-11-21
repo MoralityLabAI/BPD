@@ -7,3 +7,7 @@ python -m unittest discover -s mechinterp/bpd/experiments/inkling_routing -p 'te
 ```
 
 The audit contains two-block routing gap/coordinate contributions, signed projection shares, norm-and-L2-matched orthogonal shams, and three-term route/content/interactivity decomposition. It does not hook real Inkling modules, implement the Goodfire full attention-residual gates, or read full model trajectories. A future adapter will need exact block output and gate semantics.
+
+## Native PyTorch engineering pilot
+
+INK-BPD-02 runs a small learned, shared-weight recurrent router with a **real writer-tensor hook** and native full continuation. [The frozen development protocol](INK_BPD02_NATIVE_PROTOCOL.md) specifies source-only coordinate selection, an orthogonal equal-dose disjoint sham and 12 synthetic task roots. [The native runner](run_native_dev.py) records all assigned cases, joint sham admission, final task outcomes, selector-only/content-only interventions and the checkpoint tensor digest. It is separate from pretrained Inkling evidence and leaves previous cohorts intact.
