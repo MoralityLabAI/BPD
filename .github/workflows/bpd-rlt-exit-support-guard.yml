@@ -7,11 +7,15 @@ on:
     paths:
       - "mechinterp/bpd/experiments/inkling_reader_v0/exit_support_guard.py"
       - "mechinterp/bpd/experiments/inkling_reader_v0/test_exit_support_guard.py"
+      - "mechinterp/bpd/experiments/inkling_reader_v0/test_exit_support_guard_audit.py"
+      - "mechinterp/bpd/experiments/inkling_reader_v0/audit_exit_support_guard.py"
       - ".github/workflows/bpd-rlt-exit-support-guard.yml"
   pull_request:
     paths:
       - "mechinterp/bpd/experiments/inkling_reader_v0/exit_support_guard.py"
       - "mechinterp/bpd/experiments/inkling_reader_v0/test_exit_support_guard.py"
+      - "mechinterp/bpd/experiments/inkling_reader_v0/test_exit_support_guard_audit.py"
+      - "mechinterp/bpd/experiments/inkling_reader_v0/audit_exit_support_guard.py"
       - ".github/workflows/bpd-rlt-exit-support-guard.yml"
   workflow_dispatch:
 
@@ -45,6 +49,8 @@ jobs:
           python -m pip install "numpy>=1.24,<3" "huggingface_hub>=0.24,<1"
       - name: Verify cutoff rule, native state continuation and fresh roots
         run: python -m unittest mechinterp.bpd.experiments.inkling_reader_v0.test_exit_support_guard -v
+      - name: Check independent source-only verifier and resealed tamper controls
+        run: python -m unittest mechinterp.bpd.experiments.inkling_reader_v0.test_exit_support_guard_audit -v
       - name: Fetch immutable original controller
         uses: actions/download-artifact@v4
         with:
@@ -59,6 +65,13 @@ jobs:
             python -m mechinterp.bpd.experiments.inkling_reader_v0.exit_support_guard \
             --source runs/frozen --model gaoxin492 --roots-per-panel 24 \
             --out runs/rlt_exit_support_guard
+      - name: Independent replay of exact board grades and frozen stopping decisions
+        if: github.event_name == 'push'
+        run: |
+          python -m mechinterp.bpd.experiments.inkling_reader_v0.audit_exit_support_guard \
+            --source runs/rlt_exit_support_guard \
+            --frozen runs/frozen/report.json \
+            --out runs/rlt_exit_support_guard/independent_audit.json
       - name: Retain real paired verifier-grade and timing receipts
         if: always()
         uses: actions/upload-artifact@v4
