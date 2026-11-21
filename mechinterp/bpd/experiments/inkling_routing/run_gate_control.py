@@ -20,6 +20,18 @@ def score(model, seed, cases, hook_pass=1):
     all_pass=model(batch,hook_pass=hook_pass,gate_control="invert_all")
     outputs={"clean":clean,"single":single,"all":all_pass}
     preds={k: x["logits"].argmax(dim=-1)==batch.labels for k,x in outputs.items()}
+    # Post-result diagnostic: distinguish true task-error repair from mere
+    # decision robustness. Intermediate readouts are native model heads,
+    # evaluated after each recurrent step with the same frozen weights.
+    intermediate={
+        k:[(x["intermediate_logits"][t].argmax(dim=-1)==batch.labels)
+           for t in range(model.loops)]
+        for k,x in outputs.items()
+    }
+    gate_step=hook_pass
+    induced=(intermediate["clean"][gate_step] & ~intermediate["single"][gate_step])
+    restored=(induced & preds["single"])
+
     if not torch.allclose(single["beta3"][0],clean["beta3"][0],atol=1e-6):
         raise RuntimeError("one-pass control changed earlier clean read")
     if not torch.allclose(single["beta3"][hook_pass],1-clean["beta3"][hook_pass],atol=1e-6):
@@ -32,6 +44,10 @@ def score(model, seed, cases, hook_pass=1):
         return float(torch.linalg.vector_norm(outputs[key]["logits"]-clean["logits"],dim=-1).mean().item())
     return {"root_id":f"dev-{seed}","assigned":cases,
             "accuracy":{k:acc(k) for k in outputs},
+            "per_pass_correct":{k:[int(t.sum().item()) for t in hist]
+                                for k,hist in intermediate.items()},
+            "gate_step_clean_correct_but_single_wrong":int(induced.sum().item()),
+            "gate_step_error_recovered_by_final":int(restored.sum().item()),
             "logit_l2":{"single":disp("single"),"all":disp("all")},
             "originally_correct_corrupted":{
                 k:int((preds["clean"] & ~preds[k]).sum().item())
@@ -66,6 +82,11 @@ def main():
             "mean_single_logit_l2":sum(r["logit_l2"]["single"] for r in rows)/len(rows),
             "mean_all_logit_l2":sum(r["logit_l2"]["all"] for r in rows)/len(rows),
             "per_root":rows,
+            "post_result_diagnostic":{
+                "induced_gate_step_errors":sum(r["gate_step_clean_correct_but_single_wrong"] for r in rows),
+                "subsequently_recovered":sum(r["gate_step_error_recovered_by_final"] for r in rows),
+                "scope":"post-result analysis of originally exposed development roots, not preregistered confirmation"
+            },
             "limits":["Gate inversion has no physically matched writer-dose sham.",
                       "All roots share one trained model and are development-only.",
                       "No pretrained Inkling checkpoint, actual Goodfire coordinator or BPD component was intervened upon."]}
