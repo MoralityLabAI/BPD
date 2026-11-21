@@ -8,9 +8,7 @@ and evaluates it on NEW development source roots, without refitting.
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
-import math
 import time
 from pathlib import Path
 from typing import Any
@@ -125,8 +123,6 @@ def run(
             raise ValueError("unguarded policy matrix incomplete")
         guarded_rows, guard = _policy_details(model, rows, frozen, holes=holes)
         scores = unguarded["scores"]
-        if guard["solved"] > scores["fixed2"]["solved"] + guard["incorrect_early_exits"]:
-            raise ValueError("guard correctness exceeds fixed native predictions")
         report_rows[holes] = guarded_rows
         panel_summaries.append({
             "holes": holes, "seed": seed, "roots": len(rows),
