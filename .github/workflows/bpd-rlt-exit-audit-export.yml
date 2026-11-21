@@ -1,0 +1,60 @@
+name: RLT learned exit independent audit and DataGoblin train export
+
+on:
+  push:
+    branches:
+      - research/rlt-learned-exit-20261121
+    paths:
+      - "mechinterp/bpd/experiments/inkling_reader_v0/audit_learned_exit.py"
+      - "mechinterp/bpd/experiments/inkling_reader_v0/export_datagoblin.py"
+      - "mechinterp/bpd/experiments/inkling_reader_v0/test_export_datagoblin.py"
+      - ".github/workflows/bpd-rlt-exit-audit-export.yml"
+  pull_request:
+    paths:
+      - "mechinterp/bpd/experiments/inkling_reader_v0/audit_learned_exit.py"
+      - "mechinterp/bpd/experiments/inkling_reader_v0/export_datagoblin.py"
+      - "mechinterp/bpd/experiments/inkling_reader_v0/test_export_datagoblin.py"
+      - ".github/workflows/bpd-rlt-exit-audit-export.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  audit-and-export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Test verifier and training custody fixtures without Torch
+        run: |
+          python -m unittest discover -s mechinterp/bpd/experiments/inkling_reader_v0 -p 'test_export_datagoblin.py' -v
+          python -m py_compile mechinterp/bpd/experiments/inkling_reader_v0/audit_learned_exit.py
+      - name: Fetch original SHA-bound pretrained learned-exit receipts
+        uses: actions/download-artifact@v4
+        with:
+          name: bpd-rlt-learned-exit-first-dev
+          path: runs/source
+          run-id: 44911864342
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Audit independent roots and all policy decisions
+        run: |
+          python mechinterp/bpd/experiments/inkling_reader_v0/audit_learned_exit.py \
+            --source runs/source --out runs/independent_audit.json
+      - name: Export verifier-grounded TRAIN-only corpus to DataGoblin
+        run: |
+          python mechinterp/bpd/experiments/inkling_reader_v0/export_datagoblin.py \
+            --source runs/source --out runs/datagoblin_train
+      - name: Archive evidence and training corpus
+        uses: actions/upload-artifact@v4
+        with:
+          name: bpd-learned-rlt-exit-audited-dg-train
+          path: |
+            runs/independent_audit.json
+            runs/datagoblin_train/
+          if-no-files-found: error
+          retention-days: 30

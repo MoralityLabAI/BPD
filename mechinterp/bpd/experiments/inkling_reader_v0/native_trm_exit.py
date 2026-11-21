@@ -15,7 +15,7 @@ import math
 import time
 from collections import Counter
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 import torch
 from torch import Tensor
@@ -36,8 +36,11 @@ def native_rollout(
     *,
     max_outer_steps: int,
     stop_when_verified: bool,
+    stop_decider: Callable[[dict[str, float]], bool] | None = None,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     """One uninterrupted recurrence; later steps reuse the preceding state."""
+    if stop_when_verified and stop_decider is not None:
+        raise ValueError("exact and learned exits require separate policies")
     if type(max_outer_steps) is not int or not 1 <= max_outer_steps <= 8:
         raise ValueError("max_outer_steps must be in 1..8")
     if len(question) != 81 or "." not in question:
@@ -48,6 +51,7 @@ def native_rollout(
     blank = [index for index, value in enumerate(question) if value == "."]
     observations: list[dict[str, Any]] = []
     start = time.perf_counter()
+    stopped_by_decider = False
     for step in range(1, max_outer_steps + 1):
         began = time.perf_counter()
         z_h, z_l = model.act_step(z_h, z_l, embedded)
@@ -59,20 +63,36 @@ def native_rollout(
         check_sec = time.perf_counter() - verify_started
         margin = torch.topk(logits[blank], k=2, dim=-1).values
         margins = (margin[:, 0] - margin[:, 1]).tolist()
+        sorted_margins = sorted(margins)
+        probabilities = torch.softmax(logits[blank], dim=-1)
+        entropies = -(probabilities * probabilities.clamp_min(1e-12).log()).sum(dim=-1)
+        features = {
+            "mean_blank_logit_margin": sum(margins) / len(margins),
+            "min_blank_logit_margin": min(margins),
+            "p10_blank_logit_margin": sorted_margins[int(0.1 * (len(margins) - 1))],
+            "median_blank_logit_margin": sorted_margins[len(margins) // 2],
+            "mean_blank_entropy": float(entropies.mean()),
+            "mean_blank_top_probability": float(probabilities.max(dim=-1).values.mean()),
+        }
         observations.append({
             "outer_step": step,
             "candidate": prediction,
             "sudoku_checker_passed": checked,
-            "mean_blank_logit_margin": sum(margins) / len(margins),
-            "min_blank_logit_margin": min(margins),
+            **features,
             "native_step_seconds": round(step_compute_sec, 6),
             "exact_check_seconds": round(check_sec, 6),
         })
         if checked and stop_when_verified:
             break
+        if step < max_outer_steps and stop_decider is not None and bool(stop_decider(dict(features))):
+            stopped_by_decider = True
+            break
     return observations, {
         "realized_outer_steps": len(observations),
-        "stop_reason": "verified" if observations[-1]["sudoku_checker_passed"] else "depth_budget",
+        "stop_reason": (
+            "learned_exit" if stopped_by_decider else
+            "verified" if observations[-1]["sudoku_checker_passed"] else "depth_budget"
+        ),
         "elapsed_seconds": round(time.perf_counter() - start, 6),
     }
 
