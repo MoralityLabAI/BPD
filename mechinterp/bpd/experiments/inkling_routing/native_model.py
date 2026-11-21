@@ -92,9 +92,13 @@ class TinyCrossLoopRouter(nn.Module):
 
     def forward(self, batch: Batch, *, hook_pass: int = 1,
                 pair: tuple[int, int] | None = None, dose: float = .16,
-                mode: str = "full") -> dict[str, Tensor]:
+                mode: str = "full", gate_control: str = "none") -> dict[str, Tensor]:
         if mode not in ("full", "selector_only", "content_only"):
             raise ValueError("mode must be full/selector_only/content_only")
+        if gate_control not in ("none", "invert_at_hook", "invert_all"):
+            raise ValueError("gate_control must be none/invert_at_hook/invert_all")
+        if pair is not None and gate_control != "none":
+            raise ValueError("gate-inversion control cannot be mixed with physical writer patch")
         if pair is not None and not 0 <= hook_pass < self.loops:
             raise ValueError("hook pass out of range")
         src = self._source(batch)
@@ -123,6 +127,11 @@ class TinyCrossLoopRouter(nn.Module):
             normalized = F.normalize(choose, p=2, dim=-1) * math.sqrt(self.width)
             scores = (normalized * q[:, None, :]).sum(-1) / math.sqrt(self.width)
             gate = F.softmax(scores, dim=-1)
+            # Deliberately strong DIRECT gate intervention. This is an
+            # unmatched-dose positive control and is scored separately from
+            # the physically dose-matched writer interventions.
+            if gate_control == "invert_all" or (gate_control == "invert_at_hook" and step == hook_pass):
+                gate = torch.flip(gate, dims=(-1,))
             message = (content * gate[:, :, None]).sum(1)
             state = torch.tanh(.35 * self.core(state) + self.mix(message))
             betas.append(gate[:, 1])
