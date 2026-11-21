@@ -4,7 +4,7 @@ from __future__ import annotations
 import math
 import unittest
 
-from mechinterp.bpd.experiments.inkling_routing.routing_math import (
+from routing_math import (
     l2, message, paired_dose_audit, path_decomposition,
     projective_shares, rms, rms_normalize, rotate_pair_at_fixed_dose, route_gap,
 )
