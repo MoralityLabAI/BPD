@@ -70,6 +70,16 @@ jobs:
             --model gaoxin492 --roots 24 --holes 40 --outer-steps 2 \
             --relative-dose 0.5 --patch-h-cycle 1 \
             --out runs/inkling_native_trm_hard_depth2_20261121.json
+          timeout --signal=TERM --kill-after=15s 780s \
+            python -m mechinterp.bpd.experiments.inkling_reader_v0.native_trm_pilot \
+            --model gaoxin492 --roots 24 --seed 20261122 --holes 50 --outer-steps 1 \
+            --relative-dose 0.5 --patch-h-cycle 1 \
+            --out runs/inkling_native_trm_50blank_depth1_20261122.json
+          timeout --signal=TERM --kill-after=15s 780s \
+            python -m mechinterp.bpd.experiments.inkling_reader_v0.native_trm_pilot \
+            --model gaoxin492 --roots 24 --seed 20261122 --holes 50 --outer-steps 2 \
+            --relative-dose 0.5 --patch-h-cycle 1 \
+            --out runs/inkling_native_trm_50blank_depth2_20261122.json
       - name: Independently replay Sudoku outcomes and raw dose receipts
         if: github.event_name == 'push'
         run: |
@@ -78,6 +88,8 @@ jobs:
             runs/inkling_native_trm_hard_early_20261121.json \
             runs/inkling_native_trm_hard_late_20261121.json \
             runs/inkling_native_trm_hard_depth2_20261121.json \
+            runs/inkling_native_trm_50blank_depth1_20261122.json \
+            runs/inkling_native_trm_50blank_depth2_20261122.json \
             --out runs/inkling_native_trm_receipt_audit.json
       - name: Retain native model evidence
         if: always()
