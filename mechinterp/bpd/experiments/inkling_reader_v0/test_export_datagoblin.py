@@ -8,9 +8,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from mechinterp.bpd.experiments.inkling_reader_v0.export_datagoblin import (
-    MODEL_SHA, _digest, _hash, export,
-)
+from export_datagoblin import MODEL_SHA, _digest, _hash, export
 
 
 def _solution(index: int) -> str:
