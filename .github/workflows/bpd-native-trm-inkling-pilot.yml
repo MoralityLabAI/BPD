@@ -50,10 +50,10 @@ jobs:
       - name: Run pinned public pretrained checkpoint on one fresh root
         if: github.event_name == 'push'
         run: |
-          timeout --signal=TERM --kill-after=15s 780s
-          python -m mechinterp.bpd.experiments.inkling_reader_v0.native_trm_pilot
-          --model gaoxin492 --roots 1 --outer-steps 1
-          --out runs/inkling_native_trm_pilot_20261121.json
+          timeout --signal=TERM --kill-after=15s 780s \
+            python -m mechinterp.bpd.experiments.inkling_reader_v0.native_trm_pilot \
+            --model gaoxin492 --roots 1 --outer-steps 1 \
+            --out runs/inkling_native_trm_pilot_20261121.json
       - name: Retain native model evidence
         if: always()
         uses: actions/upload-artifact@v4
