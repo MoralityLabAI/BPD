@@ -148,6 +148,9 @@ def audit(source: Path, frozen_report: Path) -> dict[str, Any]:
             score = row["frozen_controller_score"]
             if type(score) not in (int, float) or not math.isfinite(score):
                 raise ValueError("invalid controller output")
+            recomputed_score = _probability(row.get("first_step_features"), controller)
+            if not math.isclose(score, recomputed_score, abs_tol=1e-10):
+                raise ValueError("frozen trained classifier score does not replay")
             if not math.isclose(score, row["reference_learned_score"], abs_tol=1e-12):
                 raise ValueError("inconsistent frozen controller score")
             policies = row["reference_policies"]
