@@ -49,7 +49,7 @@ def audit(paths: list[Path]) -> dict[str, Any]:
     if not paths:
         raise ValueError("at least one matrix required")
     summaries = []
-    cohort: dict[str, str] | None = None
+    cohorts: dict[tuple[int | None, int | None, int], dict[str, str]] = {}
     for path in paths:
         report = _read(path)
         if (
@@ -114,10 +114,10 @@ def audit(paths: list[Path]) -> dict[str, Any]:
                 raise ValueError("zero/control parity or root pairing failed")
             current[root] = clean["question"]
         if report["roots"] > 1:
-            if cohort is None:
-                cohort = current
-            elif cohort != current:
+            cohort_key = (report.get("seed"), report.get("holes"), report["roots"])
+            if cohort_key in cohorts and cohorts[cohort_key] != current:
                 raise ValueError("cohort changed across pass/patch conditions")
+            cohorts[cohort_key] = current
         metrics = {}
         for arm in sorted(ARMS):
             selected = [rows[arm] for rows in groups.values()]
