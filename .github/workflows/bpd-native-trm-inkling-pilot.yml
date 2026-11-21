@@ -47,18 +47,34 @@ jobs:
         run: >-
           python -m unittest
           mechinterp.bpd.experiments.inkling_reader_v0.test_native_trm_pilot -v
-      - name: Run pinned public pretrained checkpoint on one fresh root
+      - name: Run SHA-pinned pretrained pilot and harder paired development cohort
         if: github.event_name == 'push'
         run: |
+          set -euo pipefail
           timeout --signal=TERM --kill-after=15s 780s \
             python -m mechinterp.bpd.experiments.inkling_reader_v0.native_trm_pilot \
-            --model gaoxin492 --roots 1 --outer-steps 1 \
+            --model gaoxin492 --roots 1 --holes 22 --outer-steps 1 \
             --out runs/inkling_native_trm_pilot_20261121.json
+          timeout --signal=TERM --kill-after=15s 780s \
+            python -m mechinterp.bpd.experiments.inkling_reader_v0.native_trm_pilot \
+            --model gaoxin492 --roots 24 --holes 40 --outer-steps 1 \
+            --relative-dose 0.5 --patch-h-cycle 1 \
+            --out runs/inkling_native_trm_hard_early_20261121.json
+          timeout --signal=TERM --kill-after=15s 780s \
+            python -m mechinterp.bpd.experiments.inkling_reader_v0.native_trm_pilot \
+            --model gaoxin492 --roots 24 --holes 40 --outer-steps 1 \
+            --relative-dose 0.5 --patch-h-cycle 2 \
+            --out runs/inkling_native_trm_hard_late_20261121.json
+          timeout --signal=TERM --kill-after=15s 780s \
+            python -m mechinterp.bpd.experiments.inkling_reader_v0.native_trm_pilot \
+            --model gaoxin492 --roots 24 --holes 40 --outer-steps 2 \
+            --relative-dose 0.5 --patch-h-cycle 1 \
+            --out runs/inkling_native_trm_hard_depth2_20261121.json
       - name: Retain native model evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: bpd-native-trm-cpu-pilot
-          path: runs/inkling_native_trm_pilot_20261121.json
+          path: runs/inkling_native_trm_*.json
           if-no-files-found: warn
           retention-days: 7
