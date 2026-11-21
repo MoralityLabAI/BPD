@@ -75,6 +75,8 @@ def _policy_details(
             "controller_support_max_holes": ALLOWED_HOLES,
             "first_pass_verified": row["first_pass_verified"],
             "second_pass_verified": row["second_pass_verified"],
+            "first_pass_candidate": row["first_candidate"],
+            "second_pass_candidate": row["second_candidate"],
             "frozen_controller_score": float(_logit_model(
                 np.array(row["features"], dtype=np.float64), params,
             )),
