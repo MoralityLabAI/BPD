@@ -124,6 +124,12 @@ def run(
         if len(seen) != len(rows):
             raise ValueError("unguarded policy matrix incomplete")
         guarded_rows, guard = _policy_details(model, rows, frozen, holes=holes)
+        for index, receipt in enumerate(guarded_rows):
+            reference = seen[index]
+            if receipt["root_id"] != reference["root_id"]:
+                raise ValueError("guard and policy comparison source roots differ")
+            receipt["reference_policies"] = reference["policies"]
+            receipt["reference_learned_score"] = reference["learned_score"]
         scores = unguarded["scores"]
         report_rows[holes] = guarded_rows
         panel_summaries.append({
