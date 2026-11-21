@@ -36,6 +36,70 @@ def _digest(value: Any) -> str:
     ).hexdigest()
 
 
+def count_solutions(question: str, *, limit: int = 2) -> int:
+    """Independent Sudoku constraint solver; stop after limit valid completions."""
+    if len(question) != 81 or any(ch not in "123456789." for ch in question):
+        raise ValueError("invalid Sudoku question")
+    if type(limit) is not int or not 1 <= limit <= 10:
+        raise ValueError("invalid solution count limit")
+    board = [0 if ch == "." else int(ch) for ch in question]
+    row_masks, col_masks, box_masks = [0] * 9, [0] * 9, [0] * 9
+    blank = []
+    for index, value in enumerate(board):
+        r, col = divmod(index, 9)
+        box = (r // 3) * 3 + col // 3
+        if not value:
+            blank.append(index)
+            continue
+        bit = 1 << (value - 1)
+        if row_masks[r] & bit or col_masks[col] & bit or box_masks[box] & bit:
+            return 0
+        row_masks[r] |= bit
+        col_masks[col] |= bit
+        box_masks[box] |= bit
+
+    solutions = 0
+
+    def search() -> None:
+        nonlocal solutions
+        if solutions >= limit:
+            return
+        target, options, fewest = -1, 0, 10
+        for index in blank:
+            if board[index]:
+                continue
+            r, col = divmod(index, 9)
+            box = (r // 3) * 3 + col // 3
+            mask = 0x1FF & ~(row_masks[r] | col_masks[col] | box_masks[box])
+            n = mask.bit_count()
+            if n < fewest:
+                target, options, fewest = index, mask, n
+            if n == 0:
+                return
+            if n == 1:
+                break
+        if target < 0:
+            solutions += 1
+            return
+        r, col = divmod(target, 9)
+        box = (r // 3) * 3 + col // 3
+        while options and solutions < limit:
+            bit = options & -options
+            options -= bit
+            board[target] = bit.bit_length()
+            row_masks[r] |= bit
+            col_masks[col] |= bit
+            box_masks[box] |= bit
+            search()
+            row_masks[r] ^= bit
+            col_masks[col] ^= bit
+            box_masks[box] ^= bit
+            board[target] = 0
+
+    search()
+    return solutions
+
+
 def _permute_sudoku(seed: int, holes: int = 22) -> tuple[str, str]:
     """Produce reproducible clue/target pairs from a Sudoku-valid solved board."""
     if type(seed) is not int or type(holes) is not int or not 0 <= holes <= 40:
@@ -61,12 +125,21 @@ def _permute_sudoku(seed: int, holes: int = 22) -> tuple[str, str]:
         digits[((rows[r] * 3 + rows[r] // 3 + cols[c]) % 9)]
         for r in range(9) for c in range(9)
     )
-    positions = rng.sample(range(81), holes)
     question = list(solution)
-    for p in positions:
-        question[p] = "."
+    removed = 0
+    # Each removal retains a uniquely solvable puzzle independent of the model.
+    for position in rng.sample(range(81), 81):
+        if removed >= holes:
+            break
+        question[position] = "."
+        if count_solutions("".join(question)) == 1:
+            removed += 1
+        else:
+            question[position] = solution[position]
+    if removed != holes:
+        raise ValueError("could not construct uniquely solvable puzzle at requested clue count")
     q = "".join(question)
-    assert verify_sudoku(q, solution)
+    assert verify_sudoku(q, solution) and count_solutions(q) == 1
     return q, solution
 
 
@@ -212,6 +285,8 @@ def run_campaign(
     roots: int = 2,
     outer_steps: int = 1,
     relative_dose: float = 0.2,
+    holes: int = 22,
+    patch_h_cycle: int = 1,
 ) -> dict[str, Any]:
     if type(roots) is not int or not 1 <= roots <= 8:
         raise ValueError("roots must be in 1..8")
@@ -223,7 +298,7 @@ def run_campaign(
     started = time.monotonic()
     for i in range(roots):
         root_seed = seed + 101 * i
-        question, target = _permute_sudoku(root_seed)
+        question, target = _permute_sudoku(root_seed, holes=holes)
         if parity is None:
             parity = verify_clean_parity(model, question)
         baseline = None
@@ -232,7 +307,7 @@ def run_campaign(
             logits, row = run_one(
                 model, question, outer_steps=outer_steps,
                 arm=arm, root_seed=root_seed + 11,
-                relative_dose=relative_dose,
+                relative_dose=relative_dose, patch_h_cycle=patch_h_cycle,
             )
             if arm == "clean":
                 baseline = logits
@@ -267,7 +342,8 @@ def run_campaign(
         "model": model_id, "model_sha256": model_sha, "pretrained": pretrained,
         "roots": roots, "arms": list(ARMS), "outer_steps": outer_steps,
         "actual_model_h_cycles": model.h_cycles, "actual_model_l_cycles": model.l_cycles,
-        "relative_dose": relative_dose, "max_clean_parity_difference": parity,
+        "relative_dose": relative_dose, "holes": holes, "patch_h_cycle": patch_h_cycle,
+        "max_clean_parity_difference": parity,
         "all_sudoku_targets_verified": all(row["target_matches_verified_sudoku"] for row in measurements),
         "rows": measurements, "elapsed_seconds": round(time.monotonic() - started, 3),
         "claim_boundary": (
@@ -285,6 +361,8 @@ def main() -> int:
     parser.add_argument("--roots", type=int, default=2)
     parser.add_argument("--outer-steps", type=int, default=1)
     parser.add_argument("--relative-dose", type=float, default=0.2)
+    parser.add_argument("--holes", type=int, default=22)
+    parser.add_argument("--patch-h-cycle", type=int, default=1)
     parser.add_argument("--seed", type=int, default=DEFAULT_SEED)
     args = parser.parse_args()
     if args.out.exists():
@@ -310,7 +388,7 @@ def main() -> int:
     result = run_campaign(
         model, pretrained=trained, model_id=args.model, model_sha=model_sha,
         roots=args.roots, seed=args.seed, outer_steps=args.outer_steps,
-        relative_dose=args.relative_dose,
+        relative_dose=args.relative_dose, holes=args.holes, patch_h_cycle=args.patch_h_cycle,
     )
     result["code_sha256"] = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
     args.out.parent.mkdir(parents=True, exist_ok=True)
