@@ -55,11 +55,19 @@ jobs:
             --model gaoxin492 --roots 24 --seed 20261123 --holes 50 \
             --wall-limit 600 \
             --out runs/trm_online_adaptive_50blank_20261123.json
+      - name: Independent offline receipt audit and adversarial test fixtures
+        run: |
+          python -m unittest mechinterp.bpd.experiments.inkling_reader_v0.test_native_trm_exit_audit -v
+          if [ -f runs/trm_online_adaptive_50blank_20261123.json ]; then
+            python -m mechinterp.bpd.experiments.inkling_reader_v0.audit_native_trm_exit \
+              --input runs/trm_online_adaptive_50blank_20261123.json \
+              --out runs/trm_online_adaptive_50blank_20261123.audit.json
+          fi
       - name: Retain signed source-level development evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: bpd-trm-native-verifier-exit
-          path: runs/trm_online_adaptive_50blank_20261123.json
+          path: runs/trm_online_adaptive_50blank_20261123*.json
           if-no-files-found: warn
           retention-days: 7
