@@ -11,3 +11,10 @@ The audit contains two-block routing gap/coordinate contributions, signed projec
 ## Native PyTorch engineering pilot
 
 INK-BPD-02 runs a small learned, shared-weight recurrent router with a **real writer-tensor hook** and native full continuation. [The frozen development protocol](INK_BPD02_NATIVE_PROTOCOL.md) specifies source-only coordinate selection, an orthogonal equal-dose disjoint sham and 12 synthetic task roots. [The native runner](run_native_dev.py) records all assigned cases, joint sham admission, final task outcomes, selector-only/content-only interventions and the checkpoint tensor digest. It is separate from pretrained Inkling evidence and leaves previous cohorts intact.
+
+## Executed INK-BPD-02/03 native development results
+
+- [Matched physical writer-patch results](RESULTS_INKBPD02_DEV_20261121.md): 384/384 joint controls admitted; selected and sham both 384/384 final correct; original CPU model SHA and artifact hashes.
+- [Direct gate-inversion results](RESULTS_INKBPD03_GATE_DEV_20261121.md): on 384 new development inputs, the single-pass control creates 92 wrong intermediate answers that are recovered by the final recurrent pass; all-pass inversion leaves 197 final errors. Source-trained checkpoint and full CI-artifact provenance are recorded.
+
+Both tests are backed by actual PyTorch native forward calls; they retain distinct physical-dose and direct-gate treatment definitions. Neither is a pretrained Inkling experiment or confirmation evidence.
