@@ -78,3 +78,36 @@ as an upper-quality source of labels, avoid exposing held-out outcomes
 to controller selection, and test the stopping logic across other
 reasoning task families. Native Inkling cross-loop readers still require
 a separate instrumented checkpoint and memory-suitable runner.
+
+
+## Independent replay and timing replication
+
+An unchanged-root **development replication** reran the online policy
+from the same pinned pretrained checkpoint, with a new source-level
+independent receipt audit and adversarial audit unit tests:
+[Actions #44903755773](https://github.com/MoralityLabAI/BPD/actions/runs/44903755773),
+[artifact #14707545104](https://github.com/MoralityLabAI/BPD/actions/runs/44903755773/artifacts/14707545104).
+
+The retried 24 roots again produced 15 first-step valid puzzles,
+23/24 final correct, 48 fixed versus 33 adaptive recurrent steps,
+and no first-valid answer regressions. This time the native model
+used **6.621843 seconds fixed versus 4.590264 seconds adaptive**,
+a 30.67996% measured reduction. The policy wall totals were
+6.636706 versus 4.600248 seconds, a 30.68477% reduction. The
+runtime difference between the original and replication reflects
+hosted-run timing variability; the checker and recurrence counts
+agree exactly.
+
+The companion independent audit independently rechecked every
+saved candidate's full Sudoku legality, first-step prefix identity,
+stop correctness and step/time totals. Its replay verdict is PASS,
+with input receipt SHA-256
+8945a80beb3ed3736a76b201cc42428c4463b61a32e0fbec4013b32b4eab1443.
+This independent audit rechecks outputs and receipts without
+reexecuting pretrained weights. Preserve the first and second run
+as separate source-labeled development evidence.
+
+A DataGoblin adapter on branch research/inkling-varloop-distill-20261121
+can import this source/audit pair to emit train-INELIGIBLE
+controller task-format traces for RLT gym prototyping, preserving
+all 24 development roots outside the training corpus.
