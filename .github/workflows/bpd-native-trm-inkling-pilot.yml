@@ -70,6 +70,15 @@ jobs:
             --model gaoxin492 --roots 24 --holes 40 --outer-steps 2 \
             --relative-dose 0.5 --patch-h-cycle 1 \
             --out runs/inkling_native_trm_hard_depth2_20261121.json
+      - name: Independently replay Sudoku outcomes and raw dose receipts
+        if: github.event_name == 'push'
+        run: |
+          python -m mechinterp.bpd.experiments.inkling_reader_v0.native_receipt_audit \
+            runs/inkling_native_trm_pilot_20261121.json \
+            runs/inkling_native_trm_hard_early_20261121.json \
+            runs/inkling_native_trm_hard_late_20261121.json \
+            runs/inkling_native_trm_hard_depth2_20261121.json \
+            --out runs/inkling_native_trm_receipt_audit.json
       - name: Retain native model evidence
         if: always()
         uses: actions/upload-artifact@v4
