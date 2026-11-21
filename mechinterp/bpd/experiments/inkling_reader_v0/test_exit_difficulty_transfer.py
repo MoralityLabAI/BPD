@@ -82,7 +82,7 @@ class FrozenTransferTest(unittest.TestCase):
                 self.model, sha256=MODEL_SHA256, holes=25,
                 seed=20261311, roots=2, prohibited=set(),
             )
-        with self.assertRaisesRegex(ValueError, "controller"):
+        with self.assertRaisesRegex(ValueError, "threshold"):
             run_transfer(
                 self.model, {"model_sha256": MODEL_SHA256,
                              "calibration": {"threshold": -1.0}}, set(),
