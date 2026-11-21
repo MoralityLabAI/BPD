@@ -107,3 +107,39 @@ Development root-level depth audits belong in the EvalMath companion
 branch, research/inkling-loop-monitorability-20261121.
 A future native adapter and a fresh preregistered sample are prerequisites
 for quantitative BPD mechanism claims.
+
+
+## 2026-11-21: constructed learned-gate positive control checked
+
+[LoopedTransformers Actions #44900273337](https://github.com/MoralityLabAI/LoopedTransformers/actions/runs/44900273337)
+provides a complete source-only CPU evidence bundle for RMP-INK-PC01,
+including saved raw states before/after loop-boundary perturbations.
+The model has an explicit supplied permutation graph operator and a
+single trained state-update gate. It demonstrates the plumbing of
+a real recurrent state intervention; it does **not** instantiate an
+Inkling cross-loop Q/K/V/MoE reader.
+
+The new audit_positive_control.py independently checks SHA-bound source
+artifacts, recomputes all graph targets, repeats the recurrent forward
+from the trained scalar, checks state displacements and final outcomes,
+and fails on incomplete/mutated arm matrices. The GitHub Action pinned
+this auditor to commit 5cbd5de63e95b6c70c3e351f68be6676cd830268.
+The cross-replay reported 64 development roots, 512 task instances,
+3,072 depth records and 1,600 arm records, all consistent with
+the saved receipts. The selected active-coordinate direction
+corrupted 320/320 cases at L2 dose 0.85; Gaussian random directions
+preserved 320/320 and random-coordinate controls preserved 297/320.
+Dose selection used an earlier development pilot.
+
+To replay an extracted artifact directory:
+
+    python mechinterp/bpd/experiments/inkling_reader_v0/audit_positive_control.py \
+      --input PATH_TO_EXTRACTED_ARTIFACT \
+      --out PATH_TO_NEW_AUDIT.json
+
+This is a **synthetic positive-control replay**. The original native
+Inkling reader-causality hypotheses in this protocol remain untested.
+Fresh independent native-model roots, trained competence, reader
+instrumentation and EvalMath mechanism-resolution gates remain
+prerequisites for causal attribution. NC09/AMM sealed source roots
+and their historical verdicts are unaffected.
