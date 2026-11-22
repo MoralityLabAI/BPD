@@ -14,7 +14,10 @@ from __future__ import annotations
 import math
 from collections.abc import Mapping, Sequence
 
-from mechinterp.bpd.experiments.inkling_routing.routing_math import route_gap
+try:
+    from .routing_math import route_gap
+except ImportError:  # Standalone pure-stdlib unittest discovery skips bpd/__init__ (torch).
+    from routing_math import route_gap
 
 
 def _vector(values: Sequence[float], name: str) -> tuple[float, ...]:
