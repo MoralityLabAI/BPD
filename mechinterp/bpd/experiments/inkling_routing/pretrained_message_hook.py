@@ -158,7 +158,6 @@ def probe_coordinate_attribution(
         raise ValueError("invalid cross-loop block-state shape")
     d = b.numel()
     eps = float(module.norm.eps)
-    r2 = (a.square().sum() + d * eps).sqrt()
     r3 = (b.square().sum() + d * eps).sqrt()
     an, bn = module.norm(a).float(), module.norm(b).float()
     gaps = u @ (bn - an) / math.sqrt(d)
