@@ -5,11 +5,8 @@ import unittest
 
 import torch
 
-from mechinterp.bpd.experiments.inkling_routing.native_model import (
-    TinyCrossLoopRouter,
-    make_batch,
-)
-from mechinterp.bpd.experiments.inkling_routing.reader_tangent import (
+from native_model import TinyCrossLoopRouter, make_batch
+from reader_tangent import (
     physical_patch_audit,
     reader_tangent,
     writer_scan,
