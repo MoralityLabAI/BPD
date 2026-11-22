@@ -45,16 +45,24 @@ def synthetic_forward(module, base2, base3, spec=None, *, wrong_sequence=False):
     state = base3.clone()
     if spec is None:
         for _pass in (1, 2):
-            for layer in range(12):
-                message = module(base2, state, layer)
-                state = state + 0.001 * message[:, :, 3]
+            previous_block3 = state
+            contributions = [
+                module(base2, previous_block3, layer)[:, :, 3]
+                for layer in range(12)
+            ]
+            state = state + 0.001 * torch.stack(contributions).sum(0)
         return state, None
     with InklingMessageHook(module, spec) as hook:
         for p in (1, 2):
+            # In actual Inkling, all 12 readers of a pass receive the same
+            # immutable final block-3 output from the *previous* pass.
+            previous_block3 = state
+            contributions = []
             for layer in range(12):
                 index = layer if not (wrong_sequence and p == 1 and layer == 3) else 4
-                message = module(base2, state, index)
-                state = state + 0.001 * message[:, :, 3]
+                message = module(base2, previous_block3, index)
+                contributions.append(message[:, :, 3])
+            state = state + 0.001 * torch.stack(contributions).sum(0)
     return state, hook.finish()
 
 
