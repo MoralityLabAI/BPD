@@ -143,8 +143,9 @@ these internal raw block tensors. The published checkpoint is
 approximately 20 GB; official guidance recommends 32 GB+ VRAM
 for inference. Source code loads no weights during CI.
 
-Install the pinned Transformers source and dependencies in a
-dedicated environment, and independently provision the licensed
+Install the pinned Transformers source with **PyTorch >=2.6** and
+the checkpoint-compatible precision dependencies in a dedicated
+environment, and independently provision the licensed
 checkpoint files into `/path/to/Inkling-2-Mini`. Check that the
 installed modeling file matches the registered Git blob. The
 following command reads only local files and hashes every local
