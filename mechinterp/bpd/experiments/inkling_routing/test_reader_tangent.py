@@ -4,7 +4,7 @@ from __future__ import annotations
 import math
 import unittest
 
-from mechinterp.bpd.experiments.inkling_routing.reader_tangent import (
+from reader_tangent import (
     physical_patch_audit,
     reader_tangent,
     writer_scan,
