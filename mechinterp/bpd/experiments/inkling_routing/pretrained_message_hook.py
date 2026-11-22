@@ -140,6 +140,58 @@ def recompute_message(module, block2: Tensor, block3: Tensor, loop_layer_idx: in
     return weights[1], weights.T @ normalized
 
 
+def probe_coordinate_attribution(
+    module, block2: Tensor, block3: Tensor, patched3: Tensor,
+    loop_layer_idx: int, coordinate: int,
+) -> dict:
+    """Exact score-gap coordinate term and epsilon-aware local gate Jacobian.
+
+    This is a local *reader* instrument. The full model continuation must
+    independently establish task effects. The unweighted RMSNorm epsilon
+    makes a radial derivative small but nonzero in principle; report it.
+    """
+    if not 0 <= coordinate < block3.numel():
+        raise ValueError("outlier coordinate exceeds reader dimension")
+    u = module.query[loop_layer_idx].float()  # [4, d]
+    a, b, c = block2.float(), block3.float(), patched3.float()
+    if a.ndim != 1 or a.shape != b.shape or b.shape != c.shape:
+        raise ValueError("invalid cross-loop block-state shape")
+    d = b.numel()
+    eps = float(module.norm.eps)
+    r2 = (a.square().sum() + d * eps).sqrt()
+    r3 = (b.square().sum() + d * eps).sqrt()
+    an, bn = module.norm(a).float(), module.norm(b).float()
+    gaps = u @ (bn - an) / math.sqrt(d)
+    coordinate_gaps = u[:, coordinate] * (bn[coordinate] - an[coordinate]) / math.sqrt(d)
+    beta_before, _ = recompute_message(module, a, b, loop_layer_idx)
+    beta_after, _ = recompute_message(module, a, c, loop_layer_idx)
+    dv = c - b
+    scores3 = (u @ b) / r3
+    grad = u / r3 - scores3[:, None] * b[None, :] / r3.square()
+    predicted_score_shift = grad @ dv
+    predicted_gate_shift = beta_before * (1 - beta_before) * predicted_score_shift
+    actual_gate_shift = beta_after - beta_before
+    return {
+        "coordinate": coordinate,
+        "block3_coordinate_raw": b[coordinate].item(),
+        "block3_coordinate_rms_normalized": bn[coordinate].item(),
+        "block3_coordinate_energy_share": (b[coordinate].square() / b.square().sum()).item(),
+        "score_gap": gaps.detach().cpu().tolist(),
+        "coordinate_score_gap_contribution": coordinate_gaps.detach().cpu().tolist(),
+        "coordinate_gap_abs_share": [
+            (coordinate_gaps[i].abs() / gaps[i].abs()).item()
+            if gaps[i].abs().item() > 1e-8 else None for i in range(4)
+        ],
+        "tangent_jacobian_predicted_gate_shift": predicted_gate_shift.detach().cpu().tolist(),
+        "physical_recomputed_gate_shift": actual_gate_shift.detach().cpu().tolist(),
+        "reader_nonlinearity_residual": (
+            actual_gate_shift - predicted_gate_shift
+        ).detach().cpu().tolist(),
+        "epsilon_aware_radial_score_jacobian": (grad @ b).detach().cpu().tolist(),
+        "rmsnorm_eps": eps,
+    }
+
+
 class InklingMessageHook:
     """Native input intervention + independent module-output parity audit."""
 
@@ -201,11 +253,15 @@ class InklingMessageHook:
             b3 = changed[0, self.spec.token_index]
             beta_clean, _ = recompute_message(module, b2, old, layer)
             beta_after, expected = recompute_message(module, b2, b3, layer)
+            diag = probe_coordinate_attribution(
+                module, b2, old, b3, layer, self.spec.coordinate
+            )
             self.readers.append({
                 "pass": pass_idx,
                 "beta3_clean": beta_clean.detach().cpu().tolist(),
                 "beta3_patched": beta_after.detach().cpu().tolist(),
                 "beta3_change": (beta_after - beta_clean).detach().cpu().tolist(),
+                "outlier_attribution": diag,
             })
             self._pending = (self.calls, expected.detach())
         return (blocks, changed, loop_layer_idx)
