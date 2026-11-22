@@ -13,11 +13,13 @@ from torch import nn
 
 from pretrained_message_hook import (
     InklingMessageHook, PatchSpec, direction_for_arm, fixed_chord_rotation,
-    recompute_message,
+    recompute_message, probe_coordinate_attribution,
 )
 
 
 class FakeUnweightedRMSNorm(nn.Module):
+    eps = 1e-6
+
     def forward(self, tensor):
         return tensor.float() * torch.rsqrt(tensor.float().square().mean(-1, keepdim=True) + 1e-6)
 
@@ -117,6 +119,33 @@ class PretrainedHookContractTests(unittest.TestCase):
             self.assertTrue(all(
                 len(rec["beta3_patched"]) == 4 for rec in arm["readers"]
             ))
+
+    def test_outlier_attribution_score_gap_and_tangent_prediction(self):
+        b2 = self.block2[0, -1, 0]
+        b3 = self.block3[0, -1]
+        direction = direction_for_arm(b3, self.spec("candidate"))
+        with torch.no_grad():
+            patched, _ = fixed_chord_rotation(b3, direction, .002)
+            scores = [
+                probe_coordinate_attribution(self.module, b2, b3, patched, 11, j)
+                for j in range(12)
+            ]
+        base = scores[0]
+        self.assertEqual(len(base["score_gap"]), 4)
+        for channel in range(4):
+            self.assertAlmostEqual(
+                sum(row["coordinate_score_gap_contribution"][channel] for row in scores),
+                base["score_gap"][channel], places=5,
+            )
+        self.assertAlmostEqual(
+            sum(row["block3_coordinate_energy_share"] for row in scores), 1, places=5,
+        )
+        self.assertTrue(all(
+            abs(value) < 1e-5
+            for value in base["reader_nonlinearity_residual"]
+        ))
+        with self.assertRaises(ValueError):
+            probe_coordinate_attribution(self.module, b2, b3, patched, 11, 9999)
 
     def test_transient_and_sustained_interventions_have_separate_dose_ledgers(self):
         with torch.no_grad():
