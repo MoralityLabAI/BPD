@@ -1,0 +1,40 @@
+name: BPD Inkling pretrained read-edge contract
+
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/experiments/inkling_routing/pretrained_message_hook.py'
+      - 'mechinterp/bpd/experiments/inkling_routing/run_pretrained_dev.py'
+      - 'mechinterp/bpd/experiments/inkling_routing/test_pretrained_*.py'
+      - 'mechinterp/bpd/experiments/inkling_routing/INK_BPD05_PRETRAINED_PROTOCOL.md'
+      - '.github/workflows/bpd-inkling-pretrained-hook.yml'
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/inkling_routing/**'
+      - '.github/workflows/bpd-inkling-pretrained-hook.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  source-only-native-reader-contract:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    env:
+      OMP_NUM_THREADS: '2'
+      MKL_NUM_THREADS: '2'
+      HF_HUB_OFFLINE: '1'
+      TRANSFORMERS_OFFLINE: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned CPU-only torch
+        run: python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Verify true two-block read-edge semantics and fail-closed provenance
+        run: python -m unittest discover -s mechinterp/bpd/experiments/inkling_routing -p 'test_pretrained_*.py' -v
+      - name: Static compile of pretrained hook and offline runner
+        run: |
+          python -m py_compile mechinterp/bpd/experiments/inkling_routing/pretrained_message_hook.py
+          python -m py_compile mechinterp/bpd/experiments/inkling_routing/run_pretrained_dev.py
