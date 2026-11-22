@@ -24,6 +24,8 @@ jobs:
           python-version: '3.12'
       - name: Validate pure-stdlib attribution, L2 dose and physical-null contracts
         run: python -m unittest discover -s mechinterp/bpd/experiments/inkling_routing -p 'test_routing_math.py' -v
+      - name: Validate raw writer-to-reader tangent and radial null
+        run: python -m unittest discover -s mechinterp/bpd/experiments/inkling_routing -p 'test_reader_tangent.py' -v
 
   native-development:
     runs-on: ubuntu-24.04
@@ -41,6 +43,8 @@ jobs:
         run: python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
       - name: Native recurrent tensor hook and continuation unit tests
         run: python -m unittest discover -s mechinterp/bpd/experiments/inkling_routing -p 'test_native_model.py' -v
+      - name: Verify tangent prediction against actual native reader and physical patch
+        run: python -m unittest discover -s mechinterp/bpd/experiments/inkling_routing -p 'test_reader_tangent_native.py' -v
       - name: Train source model and run new synthetic development roots
         run: python mechinterp/bpd/experiments/inkling_routing/run_native_dev.py --out "$RUNNER_TEMP/inkbpd02_native_development.json"
       - name: Byte-identical deterministic CPU replay
