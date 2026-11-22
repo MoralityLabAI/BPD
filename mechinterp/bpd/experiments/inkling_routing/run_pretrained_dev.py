@@ -168,7 +168,7 @@ def evaluate_root(model, tokenizer, core, task: dict, *,
     encoded = tokenizer(task["prompt"], add_special_tokens=False, return_tensors="pt")
     if encoded.input_ids.shape[-1] < 2 or encoded.input_ids.shape[-1] > 192:
         raise ValueError("input token length outside registered [2,192] range")
-    device = model.get_input_embeddings().weight.device
+    # Use the verified text core directly; multimodal wrappers may not expose\n    # a simple get_input_embeddings() forwarding method.\n    device = core.embed_tokens.weight.device
     if device.type == "meta":
         raise RuntimeError("unmaterialized embedding device, cannot run hook")
     inputs = {k: v.to(device) for k, v in encoded.items()}
