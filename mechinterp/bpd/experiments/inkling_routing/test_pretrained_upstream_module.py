@@ -7,6 +7,7 @@ Run only in the CI job that installs the pinned Transformers source.
 from __future__ import annotations
 
 import unittest
+import importlib.util
 import torch
 
 from pretrained_message_hook import InklingMessageHook, PatchSpec
@@ -15,6 +16,8 @@ from run_pretrained_dev import verify_transformers_source
 
 class RealHfMessageOperatorTests(unittest.TestCase):
     def test_pinned_hf_source_and_real_module_read_edge(self):
+        if importlib.util.find_spec("transformers") is None:
+            self.skipTest("actual upstream module is verified in the pinned Transformers CI job")
         # Deliberately import here so basic CPU fixture tests need no HF.
         from transformers.models.inkling2_loop.configuration_inkling2_loop import (
             Inkling2LoopTextConfig,
