@@ -52,8 +52,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Install CPU torch
-        run: python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Install upstream-required PyTorch 2.6 CPU
+        run: python -m pip install --disable-pip-version-check torch==2.6.0 --index-url https://download.pytorch.org/whl/cpu
       - name: Install exact upstream Transformers source without model weights
         run: python -m pip install --disable-pip-version-check 'git+https://github.com/huggingface/transformers.git@046bdb8cc2cee29d233964bb77fe6fd37cfe4aa3'
       - name: Verify upstream Git blob and real two-block QKVMoE operator
