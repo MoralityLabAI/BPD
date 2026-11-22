@@ -18,3 +18,7 @@ INK-BPD-02 runs a small learned, shared-weight recurrent router with a **real wr
 - [Direct gate-inversion results](RESULTS_INKBPD03_GATE_DEV_20261121.md): on 384 new development inputs, the single-pass control creates 92 wrong intermediate answers that are recovered by the final recurrent pass; all-pass inversion leaves 197 final errors. Source-trained checkpoint and full CI-artifact provenance are recorded.
 
 Both tests are backed by actual PyTorch native forward calls; they retain distinct physical-dose and direct-gate treatment definitions. Neither is a pretrained Inkling experiment or confirmation evidence.
+
+## INK-BPD-04: Goodfire reader-tangent geometry
+
+[The INK-BPD-04 mathematical protocol](INK_BPD04_TANGENT_PROTOCOL.md) and [reader-tangent instrument](reader_tangent.py) distinguish raw writer-reader cosine/coordinate score attribution from the physical pre-RMSNorm Jacobian. A writer parallel to the raw block state can align strongly with the reader while producing zero first-order routing movement. Pure-Python finite-difference and radial-null tests run in source CI; a native PyTorch parity test compares the exact recomputed reader gap with a true synthetic writer patch at pass index 1. These are source-only and synthetic interface tests, with no new task roots or pretrained Inkling outcomes.
