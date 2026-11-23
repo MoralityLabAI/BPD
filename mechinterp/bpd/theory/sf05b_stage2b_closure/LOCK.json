@@ -1,0 +1,74 @@
+{
+  "experiment": "BPD-SF05B_STAGE2_B_CURRENT_AND_PUBLIC_SOURCE_CLOSURE",
+  "status": "CODE_HASHES_FROZEN_BEFORE_EXCLUDED_ROOT_4_ARM_HELDOUT_EVALUATION",
+  "date": "2026-11-18",
+  "files": {
+    "PROTOCOL.md": "5e6044196a90805935b607790533e0f9fa770103",
+    "experiment.py": "67debf386c37c4e24405a91ee89b35ef151824d4",
+    "tests/test_closure.py": "820305d15ab98470b69ac181954c32076e23fdd4"
+  },
+  "upstream_source_blobs": {
+    "mechinterp/bpd/theory/sf05b_source_families/source_families.py": "525cfb28d40cc5f58c0e8141489a8e744d1778f4",
+    "mechinterp/bpd/theory/sf05b_stage2_donors/donor_cohorts.py": "6c08787a2a08daf3c601265decbba6d8cfc7f930",
+    "mechinterp/bpd/theory/sf05b_stage1/teacher.py": "277f3b98aa600827022e077329f0c9ca0689918f",
+    "mechinterp/bpd/theory/sf05b_stage1/policy.py": "d02f1bc491188f6e54ba4282708bd9adcbbc59ec",
+    "mechinterp/bpd/theory/sf05b_stage2_admission/evaluate.py": "2c038a32a643291305f9e0658c8f056dd016711f",
+    "mechinterp/bpd/theory/sf05_public_safe/finite_correct.py": "a7dc0de7ca606615979fa6926e7c503baeccc81e"
+  },
+  "excluded_roots": [
+    901,
+    902
+  ],
+  "new_calibration_roots": 0,
+  "new_confirmation_roots": 0,
+  "reserved_calibration_roots": "6101..6159",
+  "reserved_confirmation_roots": "7101..7132",
+  "arms": {
+    "baseline": [
+      0,
+      0
+    ],
+    "current_only": [
+      1,
+      0
+    ],
+    "public_only": [
+      0,
+      1
+    ],
+    "joint": [
+      1,
+      1
+    ]
+  },
+  "training_family": "train",
+  "source_history_lengths_train": [
+    2,
+    3,
+    4
+  ],
+  "test_family": "heldout",
+  "source_history_lengths_heldout": [
+    5,
+    6
+  ],
+  "teacher_updates": 2600,
+  "teacher_batch": 128,
+  "teacher_lr": 0.012,
+  "factor_updates": 450,
+  "policy_updates": 240,
+  "retained_records_per_cohort": 512,
+  "high_contrast_candidate_records": 2048,
+  "correction_shams_per_kind_per_authorized_cohort": 16,
+  "sampling_study_design": "same fixed seeds, histories and source strata across four arms within excluded root",
+  "independent_public_U_unfiltered": true,
+  "engineering_targets": {
+    "heldout_overall_mae_max": 0.12,
+    "public_U_target_mae_max": 0.05,
+    "clean_and_current_close_min": 100,
+    "public_clean_tag_swap_abs_mean_max": 0.02,
+    "learned_public_delta_mean_max": 0.02
+  },
+  "scope": "two pre-exposed teacher roots, development-only model-training objective ablation; no new root/statistical inference, no LM privacy claim",
+  "arg03_sealed": true
+}
