@@ -3,7 +3,7 @@ import unittest
 
 import numpy as np
 
-from mechinterp.bpd.theory.rtbpd02.weighted_rank import (
+from weighted_rank import (
     optimal_weighted_rank, paired_contrast_moment,
     truncated_svd, uncentered_second_moment, weighted_error,
 )
