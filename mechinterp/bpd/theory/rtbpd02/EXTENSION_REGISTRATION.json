@@ -157,7 +157,17 @@
       "runs/nan_fit16_io18/audits/bf16.json": "539a74689a1942173fbad6ce55f53cac08133149167ba48f8a4af222e63ff93e",
       "runs/nan_fit16_io18/audits/nf4.json": "d9885205c28fe5fa1ecf6b727ef8ca8580f963ee0b8a909c7eeb4f0f92d17536"
     },
-    "bf16_affine_coordinates": "float64 affine product, then float32-to-BF16 round-to-nearest ties-to-even. Report elemental equality and numerical residual, without extending the archived all-one parity label"
+    "bf16_affine_coordinates": "float64 affine product, then float32-to-BF16 round-to-nearest ties-to-even. Report elemental equality and numerical residual, without extending the archived all-one parity label",
+    "support_relative_cutoff": 1e-12,
+    "archive_random_seed": 37035,
+    "archive_direction_dose_fraction": 0.25,
+    "direction_zero_atol": 1e-11,
+    "archive_direction_planner": {
+      "scope": "BF16 pass 1, rank 2, exposed CAL only",
+      "paired": "half of fixed-reader cosine minus ordinary-SVD cosine",
+      "sham": "half of seeded random cosine minus ordinary-SVD cosine",
+      "independent_confirmation_units": false
+    }
   },
   "evalmath": {
     "commit": "accf4d9040bee8daeabc6b07003bb484708996c0",
