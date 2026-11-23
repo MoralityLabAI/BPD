@@ -20,7 +20,7 @@ The source-only reference additionally covers a singular PSD input moment, rank-
 Local isolated CPU run:
 
 ```text
-PYTHONPATH=/mnt/data/rtbpd02 python -m unittest mechinterp.bpd.theory.rtbpd02.test_weighted_rank -v
+cd /mnt/data/rtbpd02 && python -m unittest discover -s mechinterp/bpd/theory/rtbpd02 -p test_weighted_rank.py -v
 Ran 8 tests in 0.014s
 OK
 ```
