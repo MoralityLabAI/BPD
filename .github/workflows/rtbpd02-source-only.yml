@@ -1,0 +1,25 @@
+name: RT-BPD-02 source-only CPU mathematics
+
+on:
+  pull_request:
+    paths:
+      - "mechinterp/bpd/theory/rtbpd02/**"
+      - ".github/workflows/rtbpd02-source-only.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  weighted-rank-cpu:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install source-only numerical dependency
+        run: python -m pip install --disable-pip-version-check "numpy==1.26.4"
+      - name: Verify weighted low-rank theorems and locked fixtures
+        run: python -m unittest mechinterp.bpd.theory.rtbpd02.test_weighted_rank -v
