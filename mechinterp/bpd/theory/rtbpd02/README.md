@@ -30,7 +30,7 @@ For a nonlinear continuation, an input-dependent Jacobian `A(h)` changes the obj
 From the BPD repository root, with NumPy installed:
 
 ```bash
-python -m unittest mechinterp.bpd.theory.rtbpd02.test_weighted_rank -v
+python -m unittest discover -s mechinterp/bpd/theory/rtbpd02 -p 'test_weighted_rank.py' -v
 ```
 
 The pre-registered three-dimensional fixture has `W=diag(4,3,2)`, `Sigma=diag(0.01,1,10)`. For rank 2, conventional SVD drops the third coordinate and suffers weighted squared error **40**, whereas reached-state SVD drops the first and attains **0.16**. With rank 1 and reader `[0,1,0]`, reader-weighted fitting gets zero reader error whereas input-only fitting gets **9**. These are predetermined synthetic identities. The tests also check singular moments, rank-deficient readers, input-coordinate rotations, the `Sigma=I, A=I` reduction, paired contrasts and rejection of malformed inputs.
