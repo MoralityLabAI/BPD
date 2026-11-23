@@ -1,0 +1,466 @@
+{
+  "alpha": "0.05",
+  "confirm_units_planned": 64,
+  "experiment_id": "RT-BPD-02 synthetic matched-dose direction",
+  "heldout_sealed": false,
+  "independent_unit": "paired development source root",
+  "measurement_resolution": "0.000001",
+  "pilot": [
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.492076113112"
+      ],
+      "unit_id": "dev-000"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.401148181528"
+      ],
+      "unit_id": "dev-001"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.282741287623"
+      ],
+      "unit_id": "dev-002"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.498020722587"
+      ],
+      "unit_id": "dev-003"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.438797836991"
+      ],
+      "unit_id": "dev-004"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.418362629135"
+      ],
+      "unit_id": "dev-005"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.259046936022"
+      ],
+      "unit_id": "dev-006"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.360945536843"
+      ],
+      "unit_id": "dev-007"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.416719611715"
+      ],
+      "unit_id": "dev-008"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.493876973869"
+      ],
+      "unit_id": "dev-009"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.413400643953"
+      ],
+      "unit_id": "dev-010"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.491518589957"
+      ],
+      "unit_id": "dev-011"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.491792274070"
+      ],
+      "unit_id": "dev-012"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.483229207029"
+      ],
+      "unit_id": "dev-013"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.463932047520"
+      ],
+      "unit_id": "dev-014"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.303117141272"
+      ],
+      "unit_id": "dev-015"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.305138007957"
+      ],
+      "unit_id": "dev-016"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.457301302391"
+      ],
+      "unit_id": "dev-017"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.387919253457"
+      ],
+      "unit_id": "dev-018"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.465483988308"
+      ],
+      "unit_id": "dev-019"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.497755259155"
+      ],
+      "unit_id": "dev-020"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.285963633995"
+      ],
+      "unit_id": "dev-021"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.426377503619"
+      ],
+      "unit_id": "dev-022"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.256630436158"
+      ],
+      "unit_id": "dev-023"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "-0.421676847732"
+      ],
+      "unit_id": "dev-024"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.348589239129"
+      ],
+      "unit_id": "dev-025"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.380036576861"
+      ],
+      "unit_id": "dev-026"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.467206072209"
+      ],
+      "unit_id": "dev-027"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.257721858273"
+      ],
+      "unit_id": "dev-028"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "-0.408071091099"
+      ],
+      "unit_id": "dev-029"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.362559286029"
+      ],
+      "unit_id": "dev-030"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.245110956310"
+      ],
+      "unit_id": "dev-031"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.098464971216"
+      ],
+      "unit_id": "dev-032"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.455930444904"
+      ],
+      "unit_id": "dev-033"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.421971489987"
+      ],
+      "unit_id": "dev-034"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.374739333095"
+      ],
+      "unit_id": "dev-035"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.499583493961"
+      ],
+      "unit_id": "dev-036"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.485269554713"
+      ],
+      "unit_id": "dev-037"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.381744106512"
+      ],
+      "unit_id": "dev-038"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.491017400397"
+      ],
+      "unit_id": "dev-039"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.455628280650"
+      ],
+      "unit_id": "dev-040"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.326606929608"
+      ],
+      "unit_id": "dev-041"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.441937386458"
+      ],
+      "unit_id": "dev-042"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.493588841200"
+      ],
+      "unit_id": "dev-043"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.283059277339"
+      ],
+      "unit_id": "dev-044"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.495388721044"
+      ],
+      "unit_id": "dev-045"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.052709142040"
+      ],
+      "unit_id": "dev-046"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.372342090801"
+      ],
+      "unit_id": "dev-047"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.420057695480"
+      ],
+      "unit_id": "dev-048"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.259817372081"
+      ],
+      "unit_id": "dev-049"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.480542961971"
+      ],
+      "unit_id": "dev-050"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.445874136200"
+      ],
+      "unit_id": "dev-051"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.318417129452"
+      ],
+      "unit_id": "dev-052"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.426815171546"
+      ],
+      "unit_id": "dev-053"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.332904979021"
+      ],
+      "unit_id": "dev-054"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.365730194313"
+      ],
+      "unit_id": "dev-055"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.404567764579"
+      ],
+      "unit_id": "dev-056"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.389147931535"
+      ],
+      "unit_id": "dev-057"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.462286502209"
+      ],
+      "unit_id": "dev-058"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.415929832040"
+      ],
+      "unit_id": "dev-059"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.283107979599"
+      ],
+      "unit_id": "dev-060"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.389073662229"
+      ],
+      "unit_id": "dev-061"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.324340527122"
+      ],
+      "unit_id": "dev-062"
+    },
+    {
+      "paired_effect": "0.500000000000",
+      "sham_effects": [
+        "0.371235460418"
+      ],
+      "unit_id": "dev-063"
+    }
+  ],
+  "pilot_from_development_only": true,
+  "planned_comparisons": 1,
+  "schema_version": 1,
+  "scientific_min_effect": "0.10",
+  "sham_confidence": "0.95",
+  "sham_quantile": "0.95",
+  "target_effect": "0.25",
+  "units_independent": true
+}
