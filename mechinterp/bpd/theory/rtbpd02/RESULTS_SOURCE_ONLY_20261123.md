@@ -4,13 +4,13 @@
 
 ## Locked numerical check
 
-For \`W=diag(4,3,2)\`, \`Sigma=diag(0.01,1,10)\`:
+For `W=diag(4,3,2)`, `Sigma=diag(0.01,1,10)`:
 
 | Arm | Rank | Measured squared weighted error | Algebraic oracle |
 | --- | ---: | ---: | ---: |
 | Euclidean rank-truncated SVD | 2 | 40 | 40 from dropped third coordinate |
 | Reached-state-weighted SVD | 2 | 0.16 | 0.16 tail squared singular value |
-| Reached-state rank-1 with reader \`[0,1,0]\` | 1 | 9 downstream | 9 under that reader |
+| Reached-state rank-1 with reader `[0,1,0]` | 1 | 9 downstream | 9 under that reader |
 | Fixed-reader-weighted rank-1 | 1 | 0 downstream | 0 tail squared singular value |
 
 The source-only reference additionally covers a singular PSD input moment, rank-deficient reader, zero moment/reader, identity reduction, orthogonal input-coordinate covariance, paired counterfactual moments and invalid inputs.
@@ -19,11 +19,11 @@ The source-only reference additionally covers a singular PSD input moment, rank-
 
 Local isolated CPU run:
 
-\`\`\`text
+```text
 PYTHONPATH=/mnt/data/rtbpd02 python -m unittest mechinterp.bpd.theory.rtbpd02.test_weighted_rank -v
 Ran 8 tests in 0.014s
 OK
-\`\`\`
+```
 
 NumPy version 2.3.5 in the local verification runtime. The repository's GitHub Actions workflow is pinned to NumPy 1.26.4 for an independent CPU replay; its outcome is recorded by GitHub rather than assumed here.
 
