@@ -1,0 +1,532 @@
+{
+  "actual_inferential_comparisons": 2,
+  "all_roots_retained": true,
+  "arms": {
+    "A_task": {
+      "causal": {
+        "all": {
+          "correct": 159,
+          "macro_accuracy": 0.310546875,
+          "n_cases": 512,
+          "n_units": 2,
+          "n_units_with_cases": 2,
+          "per_root": [
+            {
+              "accuracy": 0.32421875,
+              "correct": 83,
+              "n_cases": 256,
+              "root": 26000
+            },
+            {
+              "accuracy": 0.296875,
+              "correct": 76,
+              "n_cases": 256,
+              "root": 26001
+            }
+          ],
+          "pooled_accuracy": 0.310546875,
+          "scope": "descriptive; repeated cases remain clustered by model root"
+        },
+        "targeted": {
+          "correct": 36,
+          "macro_accuracy": 0.140625,
+          "n_cases": 256,
+          "n_units": 2,
+          "n_units_with_cases": 2,
+          "per_root": [
+            {
+              "accuracy": 0.1171875,
+              "correct": 15,
+              "n_cases": 128,
+              "root": 26000
+            },
+            {
+              "accuracy": 0.1640625,
+              "correct": 21,
+              "n_cases": 128,
+              "root": 26001
+            }
+          ],
+          "pooled_accuracy": 0.140625,
+          "scope": "descriptive; repeated cases remain clustered by model root"
+        },
+        "untargeted": {
+          "correct": 123,
+          "macro_accuracy": 0.48046875,
+          "n_cases": 256,
+          "n_units": 2,
+          "n_units_with_cases": 2,
+          "per_root": [
+            {
+              "accuracy": 0.53125,
+              "correct": 68,
+              "n_cases": 128,
+              "root": 26000
+            },
+            {
+              "accuracy": 0.4296875,
+              "correct": 55,
+              "n_cases": 128,
+              "root": 26001
+            }
+          ],
+          "pooled_accuracy": 0.48046875,
+          "scope": "descriptive; repeated cases remain clustered by model root"
+        }
+      },
+      "iid": {
+        "correct": 555,
+        "macro_accuracy": 0.5419921875,
+        "n_cases": 1024,
+        "n_units": 2,
+        "n_units_with_cases": 2,
+        "per_root": [
+          {
+            "accuracy": 0.556640625,
+            "correct": 285,
+            "n_cases": 512,
+            "root": 26000
+          },
+          {
+            "accuracy": 0.52734375,
+            "correct": 270,
+            "n_cases": 512,
+            "root": 26001
+          }
+        ],
+        "pooled_accuracy": 0.5419921875,
+        "scope": "descriptive; repeated cases remain clustered by model root"
+      },
+      "long": {
+        "correct": 531,
+        "macro_accuracy": 0.5185546875,
+        "n_cases": 1024,
+        "n_units": 2,
+        "n_units_with_cases": 2,
+        "per_root": [
+          {
+            "accuracy": 0.501953125,
+            "correct": 257,
+            "n_cases": 512,
+            "root": 26000
+          },
+          {
+            "accuracy": 0.53515625,
+            "correct": 274,
+            "n_cases": 512,
+            "root": 26001
+          }
+        ],
+        "pooled_accuracy": 0.5185546875,
+        "scope": "descriptive; repeated cases remain clustered by model root"
+      }
+    },
+    "B_causal": {
+      "causal": {
+        "all": {
+          "correct": 161,
+          "macro_accuracy": 0.314453125,
+          "n_cases": 512,
+          "n_units": 2,
+          "n_units_with_cases": 2,
+          "per_root": [
+            {
+              "accuracy": 0.3203125,
+              "correct": 82,
+              "n_cases": 256,
+              "root": 26000
+            },
+            {
+              "accuracy": 0.30859375,
+              "correct": 79,
+              "n_cases": 256,
+              "root": 26001
+            }
+          ],
+          "pooled_accuracy": 0.314453125,
+          "scope": "descriptive; repeated cases remain clustered by model root"
+        },
+        "targeted": {
+          "correct": 36,
+          "macro_accuracy": 0.140625,
+          "n_cases": 256,
+          "n_units": 2,
+          "n_units_with_cases": 2,
+          "per_root": [
+            {
+              "accuracy": 0.1171875,
+              "correct": 15,
+              "n_cases": 128,
+              "root": 26000
+            },
+            {
+              "accuracy": 0.1640625,
+              "correct": 21,
+              "n_cases": 128,
+              "root": 26001
+            }
+          ],
+          "pooled_accuracy": 0.140625,
+          "scope": "descriptive; repeated cases remain clustered by model root"
+        },
+        "untargeted": {
+          "correct": 125,
+          "macro_accuracy": 0.48828125,
+          "n_cases": 256,
+          "n_units": 2,
+          "n_units_with_cases": 2,
+          "per_root": [
+            {
+              "accuracy": 0.5234375,
+              "correct": 67,
+              "n_cases": 128,
+              "root": 26000
+            },
+            {
+              "accuracy": 0.453125,
+              "correct": 58,
+              "n_cases": 128,
+              "root": 26001
+            }
+          ],
+          "pooled_accuracy": 0.48828125,
+          "scope": "descriptive; repeated cases remain clustered by model root"
+        }
+      },
+      "iid": {
+        "correct": 556,
+        "macro_accuracy": 0.54296875,
+        "n_cases": 1024,
+        "n_units": 2,
+        "n_units_with_cases": 2,
+        "per_root": [
+          {
+            "accuracy": 0.552734375,
+            "correct": 283,
+            "n_cases": 512,
+            "root": 26000
+          },
+          {
+            "accuracy": 0.533203125,
+            "correct": 273,
+            "n_cases": 512,
+            "root": 26001
+          }
+        ],
+        "pooled_accuracy": 0.54296875,
+        "scope": "descriptive; repeated cases remain clustered by model root"
+      },
+      "long": {
+        "correct": 532,
+        "macro_accuracy": 0.51953125,
+        "n_cases": 1024,
+        "n_units": 2,
+        "n_units_with_cases": 2,
+        "per_root": [
+          {
+            "accuracy": 0.509765625,
+            "correct": 261,
+            "n_cases": 512,
+            "root": 26000
+          },
+          {
+            "accuracy": 0.529296875,
+            "correct": 271,
+            "n_cases": 512,
+            "root": 26001
+          }
+        ],
+        "pooled_accuracy": 0.51953125,
+        "scope": "descriptive; repeated cases remain clustered by model root"
+      }
+    },
+    "C_rotated": {
+      "causal": {
+        "all": {
+          "correct": 160,
+          "macro_accuracy": 0.3125,
+          "n_cases": 512,
+          "n_units": 2,
+          "n_units_with_cases": 2,
+          "per_root": [
+            {
+              "accuracy": 0.3125,
+              "correct": 80,
+              "n_cases": 256,
+              "root": 26000
+            },
+            {
+              "accuracy": 0.3125,
+              "correct": 80,
+              "n_cases": 256,
+              "root": 26001
+            }
+          ],
+          "pooled_accuracy": 0.3125,
+          "scope": "descriptive; repeated cases remain clustered by model root"
+        },
+        "targeted": {
+          "correct": 35,
+          "macro_accuracy": 0.13671875,
+          "n_cases": 256,
+          "n_units": 2,
+          "n_units_with_cases": 2,
+          "per_root": [
+            {
+              "accuracy": 0.109375,
+              "correct": 14,
+              "n_cases": 128,
+              "root": 26000
+            },
+            {
+              "accuracy": 0.1640625,
+              "correct": 21,
+              "n_cases": 128,
+              "root": 26001
+            }
+          ],
+          "pooled_accuracy": 0.13671875,
+          "scope": "descriptive; repeated cases remain clustered by model root"
+        },
+        "untargeted": {
+          "correct": 125,
+          "macro_accuracy": 0.48828125,
+          "n_cases": 256,
+          "n_units": 2,
+          "n_units_with_cases": 2,
+          "per_root": [
+            {
+              "accuracy": 0.515625,
+              "correct": 66,
+              "n_cases": 128,
+              "root": 26000
+            },
+            {
+              "accuracy": 0.4609375,
+              "correct": 59,
+              "n_cases": 128,
+              "root": 26001
+            }
+          ],
+          "pooled_accuracy": 0.48828125,
+          "scope": "descriptive; repeated cases remain clustered by model root"
+        }
+      },
+      "iid": {
+        "correct": 553,
+        "macro_accuracy": 0.5400390625,
+        "n_cases": 1024,
+        "n_units": 2,
+        "n_units_with_cases": 2,
+        "per_root": [
+          {
+            "accuracy": 0.55078125,
+            "correct": 282,
+            "n_cases": 512,
+            "root": 26000
+          },
+          {
+            "accuracy": 0.529296875,
+            "correct": 271,
+            "n_cases": 512,
+            "root": 26001
+          }
+        ],
+        "pooled_accuracy": 0.5400390625,
+        "scope": "descriptive; repeated cases remain clustered by model root"
+      },
+      "long": {
+        "correct": 533,
+        "macro_accuracy": 0.5205078125,
+        "n_cases": 1024,
+        "n_units": 2,
+        "n_units_with_cases": 2,
+        "per_root": [
+          {
+            "accuracy": 0.51171875,
+            "correct": 262,
+            "n_cases": 512,
+            "root": 26000
+          },
+          {
+            "accuracy": 0.529296875,
+            "correct": 271,
+            "n_cases": 512,
+            "root": 26001
+          }
+        ],
+        "pooled_accuracy": 0.5205078125,
+        "scope": "descriptive; repeated cases remain clustered by model root"
+      }
+    }
+  },
+  "case_count_scope": "common paired observations per arm, clustered within roots",
+  "confirmation_claim": false,
+  "contrasts": [
+    {
+      "baseline": "A_task",
+      "bootstrap_95": {
+        "approximate": true,
+        "confidence_level": 0.95,
+        "draws": 10000,
+        "familywise_adjusted": false,
+        "lower": -0.005859375,
+        "method": "seeded_percentile_bootstrap_of_model_roots",
+        "scope": "descriptive development interval; small-root coverage is unestablished",
+        "seed": 20261126,
+        "upper": 0.0078125
+      },
+      "candidate": "B_causal",
+      "confirmation_claim": false,
+      "corruption": 33,
+      "descriptive_flags": {
+        "descriptive_bootstrap_lower_above_zero": false,
+        "holm_p_at_most_0_05": false,
+        "mean_exceeds_meaningful_floor": false,
+        "positive_mean": true
+      },
+      "endpoint": "ordinary long-delay answer accuracy with steering disabled",
+      "evidence_class": "DEVELOPMENT_ONLY",
+      "holm_adjusted_p": 1.0,
+      "holm_adjusted_p_fraction": "1",
+      "id": "B_causal_minus_A_task_long",
+      "macro_effect": 0.0009765625,
+      "macro_effect_fraction": "1/1024",
+      "n_cases": 1024,
+      "n_units": 2,
+      "net_recovery": 1,
+      "per_root": [
+        {
+          "baseline_correct": 257,
+          "candidate_correct": 261,
+          "corruption": 15,
+          "delta": 0.0078125,
+          "delta_fraction": "1/128",
+          "n_cases": 512,
+          "recovery": 19,
+          "root": 26000
+        },
+        {
+          "baseline_correct": 274,
+          "candidate_correct": 271,
+          "corruption": 18,
+          "delta": -0.005859375,
+          "delta_fraction": "-3/512",
+          "n_cases": 512,
+          "recovery": 15,
+          "root": 26001
+        }
+      ],
+      "pooled_effect": 0.0009765625,
+      "positive_development_signal": false,
+      "recovery": 34,
+      "role": "primary",
+      "scientific_variation_floor": 0.05,
+      "scientific_verdict": "DEVELOPMENT_ONLY",
+      "sign_flip": {
+        "assumptions": "independent roots and joint null invariant to independently reversing each root effect",
+        "method": "exact_two_sided_root_sign_flip_mean",
+        "n_units": 2,
+        "n_zero_effect_units": 0,
+        "p_fraction": "1",
+        "p_value": 1.0,
+        "tail_assignments": 4,
+        "total_assignments": 4
+      }
+    },
+    {
+      "baseline": "C_rotated",
+      "bootstrap_95": {
+        "approximate": true,
+        "confidence_level": 0.95,
+        "draws": 10000,
+        "familywise_adjusted": false,
+        "lower": -0.001953125,
+        "method": "seeded_percentile_bootstrap_of_model_roots",
+        "scope": "descriptive development interval; small-root coverage is unestablished",
+        "seed": 20261126,
+        "upper": 0.0
+      },
+      "candidate": "B_causal",
+      "confirmation_claim": false,
+      "corruption": 5,
+      "descriptive_flags": {
+        "descriptive_bootstrap_lower_above_zero": false,
+        "holm_p_at_most_0_05": false,
+        "mean_exceeds_meaningful_floor": false,
+        "positive_mean": false
+      },
+      "endpoint": "ordinary long-delay answer accuracy with steering disabled",
+      "evidence_class": "DEVELOPMENT_ONLY",
+      "holm_adjusted_p": 1.0,
+      "holm_adjusted_p_fraction": "1",
+      "id": "B_causal_minus_C_rotated_long",
+      "macro_effect": -0.0009765625,
+      "macro_effect_fraction": "-1/1024",
+      "n_cases": 1024,
+      "n_units": 2,
+      "net_recovery": -1,
+      "per_root": [
+        {
+          "baseline_correct": 262,
+          "candidate_correct": 261,
+          "corruption": 1,
+          "delta": -0.001953125,
+          "delta_fraction": "-1/512",
+          "n_cases": 512,
+          "recovery": 0,
+          "root": 26000
+        },
+        {
+          "baseline_correct": 271,
+          "candidate_correct": 271,
+          "corruption": 4,
+          "delta": 0.0,
+          "delta_fraction": "0",
+          "n_cases": 512,
+          "recovery": 4,
+          "root": 26001
+        }
+      ],
+      "pooled_effect": -0.0009765625,
+      "positive_development_signal": false,
+      "recovery": 4,
+      "role": "secondary",
+      "scientific_variation_floor": 0.05,
+      "scientific_verdict": "DEVELOPMENT_ONLY",
+      "sign_flip": {
+        "assumptions": "independent roots and joint null invariant to independently reversing each root effect",
+        "method": "exact_two_sided_root_sign_flip_mean",
+        "n_units": 2,
+        "n_zero_effect_units": 1,
+        "p_fraction": "1",
+        "p_value": 1.0,
+        "tail_assignments": 4,
+        "total_assignments": 4
+      }
+    }
+  ],
+  "evidence_class": "DEVELOPMENT_ONLY",
+  "experiment": "BPD-RP-02 training steering",
+  "family_alpha": 0.05,
+  "multiplicity": "Holm adjustment across both ordinary long-delay contrasts",
+  "n_cases": {
+    "causal": 512,
+    "iid": 1024,
+    "long": 1024
+  },
+  "n_units": 2,
+  "planned_comparisons": 2,
+  "protocol_expected_roots": 8,
+  "protocol_root_count_complete": false,
+  "readout_scope": "development evaluation; all inference is descriptive",
+  "roots": [
+    26000,
+    26001
+  ],
+  "schema_version": 1,
+  "scientific_variation_floor": 0.05,
+  "scientific_verdict": "DEVELOPMENT_ONLY",
+  "subgroup_scope": "IID and causal subgroups have descriptive accuracies only; undefined root subgroups yield null macro accuracy",
+  "unit": "independently initialized model root, paired across training arms"
+}

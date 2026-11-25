@@ -1,0 +1,433 @@
+"""BPD-RP-02: paired training with causal component interventions.
+
+All scored cohorts are synthetic development cohorts. The frozen RP-01
+experiment and every historical confirmation population remain separate.
+"""
+from __future__ import annotations
+
+import argparse
+import copy
+from dataclasses import asdict, dataclass
+import hashlib
+import importlib.util
+import json
+import math
+from pathlib import Path
+import platform
+import subprocess
+import time
+
+import torch
+from torch import Tensor
+import torch.nn.functional as F
+
+from .data import PairBatch, make_pairs
+from .model import ComponentMemory, component_patch
+from .stats import summarize
+
+HERE = Path(__file__).resolve().parent
+REPO = HERE.parents[3]
+ARMS = ("A_task", "B_causal", "C_rotated")
+SMOKE_ROOTS = (26000, 26001)
+DEVELOPMENT_ROOTS = tuple(range(26101, 26109))
+
+
+@dataclass(frozen=True)
+class Recipe:
+    width: int = 32
+    components: int = 32
+    slots: int = 4
+    values: int = 4
+    warmup_steps: int = 200
+    training_steps: int = 240
+    batch_size: int = 48
+    learning_rate: float = 0.003
+    weight_decay: float = 0.0001
+    auxiliary_gradient_ratio: float = 0.25
+    gradient_clip: float = 1.0
+    intervention_l2: float = 0.75
+    calibration_n: int = 128
+    group_size: int = 4
+    train_delays: tuple[int, ...] = (1, 2, 3)
+    iid_delay: int = 2
+    long_delay: int = 7
+    evaluation_n: int = 512
+    causal_n: int = 256
+    noise: float = 0.03
+    threads: int = 1
+
+
+def dump(path: Path, obj) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(obj, indent=2, sort_keys=True, allow_nan=False) + "\n")
+
+
+def seed_for(root: int, domain: str, index: int = 0) -> int:
+    raw = f"BPD-RP-02:{root}:{domain}:{index}".encode()
+    return int.from_bytes(hashlib.sha256(raw).digest()[:8], "little") % (2**63 - 1)
+
+
+def tensor_hash(t: Tensor) -> str:
+    return hashlib.sha256(t.detach().cpu().contiguous().numpy().tobytes()).hexdigest()
+
+
+def state_hash(model: ComponentMemory) -> str:
+    h = hashlib.sha256()
+    for name, value in sorted(model.state_dict().items()):
+        h.update(name.encode())
+        h.update(str(tuple(value.shape)).encode())
+        h.update(value.detach().cpu().contiguous().numpy().tobytes())
+    return h.hexdigest()
+
+
+def batch_hash(batch: PairBatch) -> str:
+    h = hashlib.sha256()
+    for name in ("receiver", "donor", "hybrid", "labels_r", "labels_d", "labels_h", "edit_slot", "query"):
+        h.update(name.encode())
+        h.update(getattr(batch, name).contiguous().numpy().tobytes())
+    return h.hexdigest()
+
+
+def make_batch(root: int, domain: str, index: int, n: int, delay: int,
+               split: str, recipe: Recipe) -> PairBatch:
+    return make_pairs(seed_for(root, domain, index), n, root_seed=root,
+                      delay=delay, split=split, slots=recipe.slots,
+                      values=recipe.values, noise=recipe.noise)
+
+
+def new_model(recipe: Recipe) -> ComponentMemory:
+    return ComponentMemory(width=recipe.width, components=recipe.components,
+                           input_dim=3 + recipe.slots + recipe.values,
+                           values=recipe.values)
+
+
+def full_task_batch(batch: PairBatch) -> tuple[Tensor, Tensor]:
+    return (torch.cat((batch.receiver, batch.donor, batch.hybrid)),
+            torch.cat((batch.labels_r, batch.labels_d, batch.labels_h)))
+
+
+def rotation_for(root: int, dimension: int) -> tuple[Tensor, Tensor]:
+    g = torch.Generator().manual_seed(seed_for(root, "physical_sham"))
+    permutation = torch.randperm(dimension, generator=g)
+    signs = 2 * torch.randint(0, 2, (dimension,), generator=g).float() - 1
+    return permutation, signs
+
+
+def rotate(delta: Tensor, rotation: tuple[Tensor, Tensor]) -> Tensor:
+    permutation, signs = rotation
+    return delta[:, permutation] * signs
+
+
+@torch.no_grad()
+def discover_groups(model: ComponentMemory, root: int, recipe: Recipe) -> tuple[Tensor, dict]:
+    """Choose among fixed groups using actual training-only interventions."""
+    batch = make_batch(root, "attribution_train", 0, recipe.calibration_n,
+                       recipe.iid_delay, "train", recipe)
+    n = len(batch.labels_r)
+    full = model.rollout(torch.cat((batch.receiver, batch.donor)))
+    rs = full["states"][:n, batch.prefix_steps - 1]
+    ds = full["states"][n:, batch.prefix_steps - 1]
+    base_losses = F.cross_entropy(full["logits"][:n], batch.labels_h, reduction="none")
+    candidates = torch.arange(recipe.components).reshape(-1, recipe.group_size)
+    losses, dose_errors = [], []
+    for group in candidates:
+        groups = group.expand(recipe.slots, -1)
+        delta, info = component_patch(model, rs, ds, groups, batch.edit_slot,
+                                      dose=recipe.intervention_l2)
+        pred = model.rollout(batch.receiver, patch=delta, patch_step=batch.prefix_steps)["logits"]
+        ce = F.cross_entropy(pred, batch.labels_h, reduction="none")
+        losses.append([float(ce[batch.edit_slot == slot].mean())
+                       for slot in range(recipe.slots)])
+        dose_errors.append(float((info["delivered_norm"][info["valid"]] - recipe.intervention_l2).abs().max()))
+    scores = torch.tensor(losses)
+    chosen = scores.argmin(dim=0)
+    groups = candidates[chosen].clone()
+    return groups, {
+        "data_scope": "training tuples and dedicated training attribution seed",
+        "batch_sha256": batch_hash(batch), "candidate_groups": candidates.tolist(),
+        "candidate_ce_by_slot": losses, "selected_candidate": chosen.tolist(),
+        "groups": groups.tolist(), "maximum_dose_error": max(dose_errors),
+        "base_counterfactual_ce_by_slot": [float(base_losses[batch.edit_slot == s].mean()) for s in range(recipe.slots)],
+        "cases_by_slot": [int((batch.edit_slot == s).sum()) for s in range(recipe.slots)],
+        "clean_training_calibration_accuracy": float((full["logits"][:n].argmax(-1) == batch.labels_r).float().mean()),
+    }
+
+
+def gradient_norm(grads: tuple[Tensor, ...]) -> Tensor:
+    return torch.stack([g.double().square().sum() for g in grads]).sum().sqrt()
+
+
+def combine_gradients(task: tuple[Tensor, ...], auxiliary: tuple[Tensor, ...],
+                      ratio: float, enabled: bool) -> tuple[tuple[Tensor, ...], dict]:
+    task_norm, aux_norm = gradient_norm(task), gradient_norm(auxiliary)
+    scale = float(ratio * task_norm / aux_norm) if enabled and float(aux_norm) > 1e-12 else 0.0
+    combined = tuple(t + scale * a for t, a in zip(task, auxiliary, strict=True))
+    dot = sum(float((t.double() * a.double()).sum()) for t, a in zip(task, auxiliary, strict=True))
+    return combined, {
+        "task_gradient_l2": float(task_norm), "raw_auxiliary_gradient_l2": float(aux_norm),
+        "auxiliary_scale": scale, "applied_auxiliary_gradient_l2": scale * float(aux_norm),
+        "realized_auxiliary_ratio": scale * float(aux_norm) / max(float(task_norm), 1e-30),
+        "task_auxiliary_cosine": dot / max(float(task_norm * aux_norm), 1e-30),
+        "auxiliary_degenerate": bool(float(aux_norm) <= 1e-12),
+    }
+
+
+def training_step(model: ComponentMemory, optimizer, batch: PairBatch, groups: Tensor,
+                  rotation: tuple[Tensor, Tensor], recipe: Recipe, arm: str) -> dict:
+    if arm not in ARMS:
+        raise ValueError("unknown treatment arm")
+    model.train()
+    n = len(batch.labels_r)
+    x, labels = full_task_batch(batch)
+    clean = model.rollout(x)
+    loss_task = F.cross_entropy(clean["logits"], labels)
+    rs = clean["states"][:n, batch.prefix_steps - 1]
+    ds = clean["states"][n:2*n, batch.prefix_steps - 1]
+    delta, physical = component_patch(model, rs, ds, groups, batch.edit_slot,
+                                       dose=recipe.intervention_l2)
+    sham = rotate(delta, rotation)
+    true_logits = model.rollout(batch.receiver, patch=delta, patch_step=batch.prefix_steps)["logits"]
+    sham_logits = model.rollout(batch.receiver, patch=sham, patch_step=batch.prefix_steps)["logits"]
+    loss_true = F.cross_entropy(true_logits, batch.labels_h)
+    loss_sham = F.cross_entropy(sham_logits, batch.labels_h)
+    params = tuple(p for p in model.parameters() if p.requires_grad)
+    task_grads = torch.autograd.grad(loss_task, params, retain_graph=True)
+    true_grads = torch.autograd.grad(loss_true, params, retain_graph=True)
+    sham_grads = torch.autograd.grad(loss_sham, params)
+    selected = sham_grads if arm == "C_rotated" else true_grads
+    combined, dose = combine_gradients(task_grads, selected,
+                                      recipe.auxiliary_gradient_ratio, arm != "A_task")
+    before = [p.detach().clone() for p in params]
+    optimizer.zero_grad(set_to_none=True)
+    for p, g in zip(params, combined, strict=True):
+        if not torch.isfinite(g).all():
+            raise ValueError("non-finite training gradient")
+        p.grad = g.detach().clone()
+    preclip_norm = float(torch.nn.utils.clip_grad_norm_(params, recipe.gradient_clip))
+    optimizer.step()
+    update_l2 = math.sqrt(sum(float((p.detach().double() - old.double()).square().sum())
+                              for p, old in zip(params, before, strict=True)))
+    return {
+        "task_ce": float(loss_task.detach()), "causal_ce": float(loss_true.detach()),
+        "rotated_ce": float(loss_sham.detach()), **dose,
+        "preclip_combined_gradient_l2": preclip_norm, "parameter_update_l2": update_l2,
+        "physical_l2_min": float(physical["delivered_norm"].detach().min()),
+        "physical_l2_max": float(physical["delivered_norm"].detach().max()),
+        "physical_sham_l2_max_error": float((delta.detach().norm(dim=-1) - sham.detach().norm(dim=-1)).abs().max()),
+        "invalid_interventions": int((~physical["valid"]).sum()),
+        "trajectories": 5*n, "gradient_evaluations": 3,
+        "ordinary_examples": 3*n, "auxiliary_examples": 2*n,
+    }
+
+
+def correctness(logits: Tensor, labels: Tensor) -> dict:
+    predictions = logits.argmax(-1)
+    return {"predictions": predictions.tolist(), "labels": labels.tolist(),
+            "correct": (predictions == labels).int().tolist(),
+            "accuracy": float((predictions == labels).float().mean()),
+            "cross_entropy": float(F.cross_entropy(logits, labels))}
+
+
+@torch.no_grad()
+def evaluate(model: ComponentMemory, batches: dict[str, PairBatch], groups: Tensor,
+             rotation, recipe: Recipe) -> dict:
+    model.eval()
+    result = {"eval": {}}
+    for name in ("iid", "long"):
+        batch = batches[name]
+        result["eval"][name] = correctness(model(batch.receiver), batch.labels_r)
+        result["eval"][name]["batch_sha256"] = batch_hash(batch)
+        result["eval"][name]["steering_enabled"] = False
+    batch = batches["causal"]
+    n = len(batch.labels_r)
+    clean = model.rollout(torch.cat((batch.receiver, batch.donor)))
+    rs = clean["states"][:n, batch.prefix_steps - 1]
+    ds = clean["states"][n:, batch.prefix_steps - 1]
+    delta, physical = component_patch(model, rs, ds, groups, batch.edit_slot,
+                                       dose=recipe.intervention_l2)
+    patched = model.rollout(batch.receiver, patch=delta, patch_step=batch.prefix_steps)
+    sham = rotate(delta, rotation)
+    sham_run = model.rollout(batch.receiver, patch=sham, patch_step=batch.prefix_steps)
+    targeted = (batch.query == batch.edit_slot).tolist()
+    for name, run in (("causal", patched), ("causal_sham", sham_run)):
+        result[name] = {**correctness(run["logits"], batch.labels_h),
+                        "targeted": targeted, "batch_sha256": batch_hash(batch)}
+    clean_logits = clean["logits"][:n]
+    clean_correct = clean_logits.argmax(-1) == batch.labels_r
+    patched_correct_original = patched["logits"].argmax(-1) == batch.labels_r
+    write_delta = patched["recurrent_writes"][:, batch.prefix_steps] - clean["recurrent_writes"][:n, batch.prefix_steps]
+    untouched = batch.query != batch.edit_slot
+    result["physical_audit"] = {
+        "invalid_interventions": int((~physical["valid"]).sum()),
+        "delivered_l2_min": float(delta.norm(dim=-1).min()),
+        "delivered_l2_max": float(delta.norm(dim=-1).max()),
+        "sham_norm_max_error": float((delta.norm(dim=-1) - sham.norm(dim=-1)).abs().max()),
+        "native_write_max_error": float((write_delta - delta).abs().max()),
+        "prefix_state_max_error": float((patched["states"][:, :batch.prefix_steps] - clean["states"][:n, :batch.prefix_steps]).abs().max()),
+        "recipient_state_rms": float(rs.square().mean().sqrt()),
+        "patched_state_rms": float(patched["states"].square().mean().sqrt()),
+        "all_head_max_change": float((model.output(patched["states"]) - model.output(clean["states"][:n])).abs().max()),
+        "terminal_state_distance_mean": float((patched["states"][:, -1] - clean["states"][:n, -1]).norm(dim=-1).mean()),
+        "untargeted_original_answer_corruptions": int((untouched & clean_correct & ~patched_correct_original).sum()),
+        "untargeted_original_answer_recoveries": int((untouched & ~clean_correct & patched_correct_original).sum()),
+    }
+    return result
+
+
+def run_root(root: int, out: Path, recipe: Recipe) -> dict:
+    torch.set_num_threads(recipe.threads)
+    torch.use_deterministic_algorithms(True)
+    torch.manual_seed(seed_for(root, "initialization"))
+    out.mkdir(parents=True, exist_ok=False)
+    start = time.time()
+    warm = new_model(recipe)
+    optimizer = torch.optim.AdamW(warm.parameters(), lr=recipe.learning_rate,
+                                  weight_decay=recipe.weight_decay)
+    warm_trace = []
+    for step in range(recipe.warmup_steps):
+        delay = recipe.train_delays[step % len(recipe.train_delays)]
+        batch = make_batch(root, "warmup", step, recipe.batch_size, delay, "train", recipe)
+        x, labels = full_task_batch(batch)
+        logits = warm(x)
+        loss = F.cross_entropy(logits, labels)
+        optimizer.zero_grad(set_to_none=True)
+        loss.backward()
+        torch.nn.utils.clip_grad_norm_(warm.parameters(), recipe.gradient_clip)
+        optimizer.step()
+        if step % 20 == 0 or step == recipe.warmup_steps-1:
+            warm_trace.append({"step": step, "task_ce": float(loss.detach())})
+    groups, attribution = discover_groups(warm, root, recipe)
+    rotation = rotation_for(root, 3*recipe.width)
+    shared_state = state_hash(warm)
+    torch.save(warm.state_dict(), out / "shared_warmup.pt")
+    models = {arm: copy.deepcopy(warm) for arm in ARMS}
+    optimizers = {arm: torch.optim.AdamW(model.parameters(), lr=recipe.learning_rate,
+                                       weight_decay=recipe.weight_decay)
+                  for arm, model in models.items()}
+    initial_hashes = {arm: state_hash(model) for arm, model in models.items()}
+    assert all(value == shared_state for value in initial_hashes.values())
+    traces = {arm: [] for arm in ARMS}
+    stream = hashlib.sha256()
+    for step in range(recipe.training_steps):
+        delay = recipe.train_delays[step % len(recipe.train_delays)]
+        batch = make_batch(root, "paired_train", step, recipe.batch_size, delay, "train", recipe)
+        digest = batch_hash(batch)
+        stream.update(digest.encode())
+        for arm in ARMS:
+            row = training_step(models[arm], optimizers[arm], batch, groups,
+                                rotation, recipe, arm)
+            traces[arm].append({"step": step, "batch_sha256": digest, **row})
+        if (step + 1) % 60 == 0:
+            print(json.dumps({"root": root, "paired_step": step + 1,
+                              "task_ce": {a: traces[a][-1]["task_ce"] for a in ARMS}}), flush=True)
+    # Generate every scored example only after all model updates are complete.
+    batches = {name: make_batch(root, "evaluation_"+name, 0, n, delay, "eval", recipe)
+               for name, n, delay in (("iid", recipe.evaluation_n, recipe.iid_delay),
+                                      ("long", recipe.evaluation_n, recipe.long_delay),
+                                      ("causal", recipe.causal_n, recipe.long_delay))}
+    result = {
+        "root": root, "evidence_class": "DEVELOPMENT_ONLY",
+        "recipe": asdict(recipe), "shared_initial_state_sha256": shared_state,
+        "arm_initial_state_sha256": initial_hashes, "training_stream_sha256": stream.hexdigest(),
+        "attribution": attribution, "warmup_trace": warm_trace,
+        "sham_permutation": rotation[0].tolist(), "sham_signs": rotation[1].tolist(),
+        "parameter_count": sum(p.numel() for p in warm.parameters()),
+        "arms": {},
+    }
+    for arm, model in models.items():
+        torch.save(model.state_dict(), out / f"{arm}.pt")
+        result["arms"][arm] = {**evaluate(model, batches, groups, rotation, recipe),
+                                "final_state_sha256": state_hash(model),
+                                "training": traces[arm]}
+    result["elapsed_seconds"] = time.time() - start
+    dump(out / "result.json", result)
+    dump(out / "artifact_hashes.json", {p.name: hashlib.sha256(p.read_bytes()).hexdigest()
+                                        for p in sorted(out.iterdir()) if p.is_file()})
+    print(json.dumps({"root": root, "complete": True,
+                      "long_accuracy": {a: result["arms"][a]["eval"]["long"]["accuracy"] for a in ARMS}}), flush=True)
+    return result
+
+
+def source_hashes() -> dict[str, str]:
+    paths = [HERE / name for name in ("__init__.py", "data.py", "model.py", "experiment.py", "stats.py", "audit.py",
+              "test_model.py", "test_stats.py", "test_training.py", "PROTOCOL.md", "requirements.txt")]
+    paths += [HERE.parents[1] / name for name in ("__init__.py", "components.py", "config.py")]
+    paths += [HERE.parent / "repair_portfolio/evidence/preflight.py"]
+    return {str(p.relative_to(REPO)): hashlib.sha256(p.read_bytes()).hexdigest() for p in paths}
+
+
+def validate_lock(path: Path, recipe: Recipe) -> dict:
+    lock = json.loads(path.read_text())
+    if lock.get("source_hashes") != source_hashes():
+        raise ValueError("source freeze mismatch")
+    if lock.get("recipe") != json.loads(json.dumps(asdict(recipe))):
+        raise ValueError("recipe differs from source freeze")
+    if lock.get("development_roots") != list(DEVELOPMENT_ROOTS):
+        raise ValueError("development roster mismatch")
+    commit = lock.get("remote_commit", "")
+    if len(commit) != 40 or any(c not in "0123456789abcdef" for c in commit):
+        raise ValueError("source lock needs a published commit")
+    return lock
+
+
+def preflight_from_results(results: list[dict], out: Path) -> dict:
+    rows = []
+    for result in results:
+        vals = {a: sum(result["arms"][a]["eval"]["long"]["correct"]) for a in ARMS}
+        n = len(result["arms"]["A_task"]["eval"]["long"]["correct"])
+        rows.append({"unit_id": str(result["root"]),
+                     "paired_effect": f"{vals['B_causal']-vals['A_task']}/{n}",
+                     "sham_effects": [f"{vals['C_rotated']-vals['A_task']}/{n}"]})
+    spec = {"schema_version": 1, "experiment_id": "BPD-RP-02-training-steering-development",
+            "independent_unit": "paired trained model root with its input encoding and common warmup",
+            "alpha": "0.05", "scientific_min_effect": "0.05", "target_effect": "0.10",
+            "measurement_resolution": f"1/{results[0]['recipe']['evaluation_n']}",
+            "sham_quantile": "0.95", "sham_confidence": "0.95", "planned_comparisons": 2,
+            "confirm_units_planned": len(DEVELOPMENT_ROOTS), "pilot": rows,
+            "pilot_from_development_only": True, "heldout_sealed": True,
+            "units_independent": True,
+            "planning_scope": "Eight fresh development roots; confirmation is outside this protocol",
+            "sham_scope": "Fixed signed-permutation physical write rotation; same raw L2, auxiliary/task gradient ratio matched before AdamW. Population sham tail uncalibrated at small n."}
+    dump(out / "preflight_input.json", spec)
+    path = HERE.parent / "repair_portfolio/evidence/preflight.py"
+    loader = importlib.util.spec_from_file_location("rp02_pinned_preflight", path)
+    module = importlib.util.module_from_spec(loader)
+    loader.loader.exec_module(module)
+    result = module.preflight(spec)
+    dump(out / "preflight_result.json", result)
+    return result
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--phase", choices=("smoke", "development"), required=True)
+    parser.add_argument("--out", type=Path, required=True)
+    parser.add_argument("--source-lock", type=Path)
+    parser.add_argument("--roots", nargs="+", type=int)
+    args = parser.parse_args()
+    recipe = Recipe()
+    roster = SMOKE_ROOTS if args.phase == "smoke" else DEVELOPMENT_ROOTS
+    roots = tuple(args.roots) if args.roots else roster
+    if len(set(roots)) != len(roots) or any(root not in roster for root in roots):
+        parser.error("roots must be unique members of this phase's frozen roster")
+    if args.phase == "development":
+        if args.source_lock is None:
+            parser.error("development requires --source-lock")
+        validate_lock(args.source_lock, recipe)
+    args.out.mkdir(parents=True, exist_ok=False)
+    start = time.time()
+    dump(args.out / "run_manifest.json", {"phase": args.phase, "roots": list(roots),
+         "evidence_class": "DEVELOPMENT_ONLY", "recipe": asdict(recipe),
+         "source_hashes": source_hashes(), "started_unix": start,
+         "python": platform.python_version(), "torch": torch.__version__,
+         "source_lock": json.loads(args.source_lock.read_text()) if args.source_lock else None})
+    results = [run_root(root, args.out / f"root_{root}", recipe) for root in roots]
+    dump(args.out / "summary.json", summarize(results))
+    preflight_from_results(results, args.out)
+    dump(args.out / "completion.json", {"roots": list(roots), "completed": True,
+         "elapsed_seconds": time.time() - start,
+         "result_sha256": {str(r): hashlib.sha256((args.out / f"root_{r}" / "result.json").read_bytes()).hexdigest() for r in roots}})
+
+
+if __name__ == "__main__":
+    main()

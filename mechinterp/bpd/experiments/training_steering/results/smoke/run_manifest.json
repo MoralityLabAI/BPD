@@ -1,0 +1,55 @@
+{
+  "evidence_class": "DEVELOPMENT_ONLY",
+  "phase": "smoke",
+  "python": "3.12.14",
+  "recipe": {
+    "auxiliary_gradient_ratio": 0.25,
+    "batch_size": 48,
+    "calibration_n": 128,
+    "causal_n": 256,
+    "components": 32,
+    "evaluation_n": 512,
+    "gradient_clip": 1.0,
+    "group_size": 4,
+    "iid_delay": 2,
+    "intervention_l2": 0.75,
+    "learning_rate": 0.003,
+    "long_delay": 7,
+    "noise": 0.03,
+    "slots": 4,
+    "threads": 1,
+    "train_delays": [
+      1,
+      2,
+      3
+    ],
+    "training_steps": 240,
+    "values": 4,
+    "warmup_steps": 200,
+    "weight_decay": 0.0001,
+    "width": 32
+  },
+  "roots": [
+    26000,
+    26001
+  ],
+  "source_hashes": {
+    "mechinterp/bpd/__init__.py": "80949cdc96b90698b679815776f3da8de73c304dd20fd422adbdeeaffb0ce40a",
+    "mechinterp/bpd/components.py": "388cb539cccb87ae65d56e5fbae175d6aee138df24d1bab43cde755156b748a5",
+    "mechinterp/bpd/config.py": "d5773cdac66f55b8a8c152030d679324f0270954dd3a081176a454d5dc6f1621",
+    "mechinterp/bpd/experiments/repair_portfolio/evidence/preflight.py": "c2621a7900930f81ed53799ce439ee1c8f2d7006918a04ef57b5381630d15494",
+    "mechinterp/bpd/experiments/training_steering/PROTOCOL.md": "d2d2025c64de9f1660f99cbd3a3d8bc04d82236e50e09ec7bbcf161700f130eb",
+    "mechinterp/bpd/experiments/training_steering/__init__.py": "6a4a9035e847a9639186b42a9d8d00ac601dc81652f6f672ab24f33a8972948d",
+    "mechinterp/bpd/experiments/training_steering/data.py": "cc5e855b8fde4f672d6051669a88fa32a84d77d5e4afe200c88c431f65330318",
+    "mechinterp/bpd/experiments/training_steering/experiment.py": "47e876dff633fc7240517a776cb2c22fb85ee02948fb639e7ebb147fa7294069",
+    "mechinterp/bpd/experiments/training_steering/model.py": "1581e2b272d9d0e5b65b9547f5826b7fcb8502be290821fa68416b6662422784",
+    "mechinterp/bpd/experiments/training_steering/requirements.txt": "3b1d77c72fd53425320f6626819eebaf863d3e941bdba30e5228bf6421a30139",
+    "mechinterp/bpd/experiments/training_steering/stats.py": "db1aa3e9a36c49536327db06e8f039207f3179f4d7469caa9cb9d753e3ea336d",
+    "mechinterp/bpd/experiments/training_steering/test_model.py": "c897a5cf7519e4619116a9fd673893f7df7d7b90594fe7f2d7e16c4c7727d4a4",
+    "mechinterp/bpd/experiments/training_steering/test_stats.py": "be0c328855a5a0f63aa16728bef013bdda265ce28ad4f4147e89412a4c8db3e0",
+    "mechinterp/bpd/experiments/training_steering/test_training.py": "0de9c176feafcbcfda3a0ee15354723f3567b54037b622da4473cd480caf21dc"
+  },
+  "source_lock": null,
+  "started_unix": 1795649342.166433,
+  "torch": "2.9.1+cpu"
+}
