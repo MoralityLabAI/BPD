@@ -107,7 +107,7 @@ class Native:
         a=E.step(self.t,self.f,s,u,m,backend="native",native=self.model,tau=tau)
         b=E.independent_step(self.t,self.f,s,u,m)
         finite(a,b)
-        err=float((a-b).abs().max())
+        err=max(float((a-b).abs().max()),float((E.logits(self.t,a)-E.logits(self.t,b)).abs().max()))
         self.max_error=max(err,self.max_error)
         if err>TOL:
             raise ArithmeticError(f"native parity {err}")
@@ -153,6 +153,7 @@ def task(seed,t,f,gate,native):
         if not torch.equal(m[::2],m[1::2]): raise ArithmeticError("future cue leakage")
         logits,_=native.pair(u0,u1,m1=m)
         first[name]=packed(m,logits,risk(v,m),risk(w,m))
+    first_signature={"physical":w.tolist(),"current":current.tolist(),"delayed":v.tolist()}
     masks,v,w=second_masks(t,f,gate,s,u1,random_mask(seed+923001,len(y)))
     second={}
     for name,m in masks.items():
@@ -162,7 +163,8 @@ def task(seed,t,f,gate,native):
         second[name]=packed(m,logits,risk(v,m),risk(w,m))
     check_oracle(second,full[:,1])
     return {"targets":y.tolist(),"full":full.tolist(),"teacher":teacher.tolist(),
-            "first":first,"second":second,"probes":probes.tolist()}
+            "first":first,"second":second,"probes":probes.tolist(),
+            "first_signature":first_signature,"second_signature":{"physical":w.tolist(),"observable":v.tolist()}}
 
 def check_oracle(arms,full):
     oracle=(torch.tensor(arms["finite_oracle"]["logits"])[:,-1]-full).square()
@@ -220,7 +222,7 @@ def donor(seed,t,f,gate,native):
         results[name]={"full":full.tolist(),"current":current.tolist(),
                        "dose":norm.tolist(),"dark_error":darkerr.tolist(),
                        "valid":ok.tolist(),"outside":(reached.abs()>1.00001).any(1).tolist(),
-                       "arms":out}
+                       "signature":{"physical":w.tolist(),"observable":v.tolist()},"arms":out}
     return {"recipient_targets":yr.tolist(),"donor_targets":yd.tolist(),
             "clean_current":native.logit(sr).tolist(),"raw_dose":dose.tolist(),
             "patches":results}
