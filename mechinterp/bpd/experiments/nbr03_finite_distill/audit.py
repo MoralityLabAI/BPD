@@ -7,7 +7,7 @@ import json
 import math
 from pathlib import Path
 
-ROOTS=tuple(range(202611250301,202611250309))
+ROOTS=tuple(202631250301+2000000*i for i in range(8))
 PATTERNS=[m for m in itertools.product((0,1),repeat=4) if sum(m)==2]
 FIRST=("physical","local_joint","path_joint","finite_probe","distilled","random")
 SECOND=("physical","local_joint","path_joint","finite_oracle","distilled","learned","random")
