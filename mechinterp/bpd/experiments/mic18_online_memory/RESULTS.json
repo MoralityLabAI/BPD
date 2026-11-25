@@ -1,0 +1,743 @@
+{
+  "admitted_pairs": 2808,
+  "arm_query_scores": 78240,
+  "arms": {
+    "clean": {
+      "donor_agreement": 10032,
+      "donor_effect_recovered": 0,
+      "effect_eligible_queries": 5616,
+      "nuisance_donor_effect_recovered": 0,
+      "nuisance_queries": 2808,
+      "nuisance_recipient_correct": 2808,
+      "primary_donor_effect_recovered": 0,
+      "primary_queries": 2808,
+      "primary_recipient_correct": 2808,
+      "queries": 15648,
+      "recipient_correct": 15648
+    },
+    "nuisance_patch": {
+      "donor_agreement": 12840,
+      "donor_effect_recovered": 2808,
+      "effect_eligible_queries": 5616,
+      "nuisance_donor_effect_recovered": 2808,
+      "nuisance_queries": 2808,
+      "nuisance_recipient_correct": 0,
+      "primary_donor_effect_recovered": 0,
+      "primary_queries": 2808,
+      "primary_recipient_correct": 2808,
+      "queries": 15648,
+      "recipient_correct": 12840
+    },
+    "self_sham": {
+      "donor_agreement": 10032,
+      "donor_effect_recovered": 0,
+      "effect_eligible_queries": 5616,
+      "nuisance_donor_effect_recovered": 0,
+      "nuisance_queries": 2808,
+      "nuisance_recipient_correct": 2808,
+      "primary_donor_effect_recovered": 0,
+      "primary_queries": 2808,
+      "primary_recipient_correct": 2808,
+      "queries": 15648,
+      "recipient_correct": 15648
+    },
+    "target_patch": {
+      "donor_agreement": 12840,
+      "donor_effect_recovered": 2808,
+      "effect_eligible_queries": 5616,
+      "nuisance_donor_effect_recovered": 0,
+      "nuisance_queries": 2808,
+      "nuisance_recipient_correct": 2808,
+      "primary_donor_effect_recovered": 2808,
+      "primary_queries": 2808,
+      "primary_recipient_correct": 0,
+      "queries": 15648,
+      "recipient_correct": 12840
+    },
+    "whole_donor": {
+      "donor_agreement": 15648,
+      "donor_effect_recovered": 5616,
+      "effect_eligible_queries": 5616,
+      "nuisance_donor_effect_recovered": 2808,
+      "nuisance_queries": 2808,
+      "nuisance_recipient_correct": 0,
+      "primary_donor_effect_recovered": 2808,
+      "primary_queries": 2808,
+      "primary_recipient_correct": 0,
+      "queries": 15648,
+      "recipient_correct": 10032
+    }
+  },
+  "by_width": [
+    {
+      "aliases": {
+        "current_observer_classes": 1,
+        "equal_observer_pairs_with_future_conflict": 6,
+        "future_answer_signatures": 4,
+        "pair_query_disagreements": 8,
+        "witness": {
+          "current_observer_pair": [
+            0,
+            0
+          ],
+          "donor_word": 1,
+          "future_answer_pair": [
+            0,
+            1
+          ],
+          "query": 1,
+          "recipient_word": 0
+        }
+      },
+      "arms": {
+        "clean": {
+          "donor_agreement": 0,
+          "donor_effect_recovered": 0,
+          "effect_eligible_queries": 16,
+          "nuisance_donor_effect_recovered": 0,
+          "nuisance_queries": 8,
+          "nuisance_recipient_correct": 8,
+          "primary_donor_effect_recovered": 0,
+          "primary_queries": 8,
+          "primary_recipient_correct": 8,
+          "queries": 16,
+          "recipient_correct": 16
+        },
+        "nuisance_patch": {
+          "donor_agreement": 8,
+          "donor_effect_recovered": 8,
+          "effect_eligible_queries": 16,
+          "nuisance_donor_effect_recovered": 8,
+          "nuisance_queries": 8,
+          "nuisance_recipient_correct": 0,
+          "primary_donor_effect_recovered": 0,
+          "primary_queries": 8,
+          "primary_recipient_correct": 8,
+          "queries": 16,
+          "recipient_correct": 8
+        },
+        "self_sham": {
+          "donor_agreement": 0,
+          "donor_effect_recovered": 0,
+          "effect_eligible_queries": 16,
+          "nuisance_donor_effect_recovered": 0,
+          "nuisance_queries": 8,
+          "nuisance_recipient_correct": 8,
+          "primary_donor_effect_recovered": 0,
+          "primary_queries": 8,
+          "primary_recipient_correct": 8,
+          "queries": 16,
+          "recipient_correct": 16
+        },
+        "target_patch": {
+          "donor_agreement": 8,
+          "donor_effect_recovered": 8,
+          "effect_eligible_queries": 16,
+          "nuisance_donor_effect_recovered": 0,
+          "nuisance_queries": 8,
+          "nuisance_recipient_correct": 8,
+          "primary_donor_effect_recovered": 8,
+          "primary_queries": 8,
+          "primary_recipient_correct": 0,
+          "queries": 16,
+          "recipient_correct": 8
+        },
+        "whole_donor": {
+          "donor_agreement": 16,
+          "donor_effect_recovered": 16,
+          "effect_eligible_queries": 16,
+          "nuisance_donor_effect_recovered": 8,
+          "nuisance_queries": 8,
+          "nuisance_recipient_correct": 0,
+          "primary_donor_effect_recovered": 8,
+          "primary_queries": 8,
+          "primary_recipient_correct": 0,
+          "queries": 16,
+          "recipient_correct": 0
+        }
+      },
+      "cross_query_cases": 16,
+      "pairs": 8,
+      "patch_coordinate_copies": {
+        "clean": 0,
+        "nuisance_patch": 1,
+        "self_sham": 1,
+        "target_patch": 1,
+        "whole_donor": 2
+      },
+      "physical_resources": {
+        "allocated_binary_state_bits": 2,
+        "codebook_lookup_entries": 0,
+        "episode_dense_products": 66,
+        "episode_relu_evaluations": 10,
+        "one_query": {
+          "dense_coefficient_slots": 13,
+          "dense_products": 10,
+          "max_abs_coefficient": 1,
+          "nonzero_coefficients": 8,
+          "relu_evaluations": 2
+        },
+        "public_phase_bits_if_stored": 2,
+        "public_phase_categories": 3,
+        "public_query_gate_coordinates": 2,
+        "public_write_gate_coordinates": 2,
+        "state_storage_unit": "logical binary coordinates; Python object overhead unmeasured",
+        "terminal_reachable_states": 4,
+        "update": {
+          "dense_coefficient_slots": 34,
+          "dense_products": 28,
+          "max_abs_coefficient": 1,
+          "nonzero_coefficients": 14,
+          "relu_evaluations": 4
+        },
+        "updates_per_word": 2
+      },
+      "unique_ordered_physical_pairs": 4,
+      "width": 2
+    },
+    {
+      "aliases": {
+        "current_observer_classes": 1,
+        "equal_observer_pairs_with_future_conflict": 28,
+        "future_answer_signatures": 8,
+        "pair_query_disagreements": 48,
+        "witness": {
+          "current_observer_pair": [
+            0,
+            0
+          ],
+          "donor_word": 1,
+          "future_answer_pair": [
+            0,
+            1
+          ],
+          "query": 2,
+          "recipient_word": 0
+        }
+      },
+      "arms": {
+        "clean": {
+          "donor_agreement": 48,
+          "donor_effect_recovered": 0,
+          "effect_eligible_queries": 96,
+          "nuisance_donor_effect_recovered": 0,
+          "nuisance_queries": 48,
+          "nuisance_recipient_correct": 48,
+          "primary_donor_effect_recovered": 0,
+          "primary_queries": 48,
+          "primary_recipient_correct": 48,
+          "queries": 144,
+          "recipient_correct": 144
+        },
+        "nuisance_patch": {
+          "donor_agreement": 96,
+          "donor_effect_recovered": 48,
+          "effect_eligible_queries": 96,
+          "nuisance_donor_effect_recovered": 48,
+          "nuisance_queries": 48,
+          "nuisance_recipient_correct": 0,
+          "primary_donor_effect_recovered": 0,
+          "primary_queries": 48,
+          "primary_recipient_correct": 48,
+          "queries": 144,
+          "recipient_correct": 96
+        },
+        "self_sham": {
+          "donor_agreement": 48,
+          "donor_effect_recovered": 0,
+          "effect_eligible_queries": 96,
+          "nuisance_donor_effect_recovered": 0,
+          "nuisance_queries": 48,
+          "nuisance_recipient_correct": 48,
+          "primary_donor_effect_recovered": 0,
+          "primary_queries": 48,
+          "primary_recipient_correct": 48,
+          "queries": 144,
+          "recipient_correct": 144
+        },
+        "target_patch": {
+          "donor_agreement": 96,
+          "donor_effect_recovered": 48,
+          "effect_eligible_queries": 96,
+          "nuisance_donor_effect_recovered": 0,
+          "nuisance_queries": 48,
+          "nuisance_recipient_correct": 48,
+          "primary_donor_effect_recovered": 48,
+          "primary_queries": 48,
+          "primary_recipient_correct": 0,
+          "queries": 144,
+          "recipient_correct": 96
+        },
+        "whole_donor": {
+          "donor_agreement": 144,
+          "donor_effect_recovered": 96,
+          "effect_eligible_queries": 96,
+          "nuisance_donor_effect_recovered": 48,
+          "nuisance_queries": 48,
+          "nuisance_recipient_correct": 0,
+          "primary_donor_effect_recovered": 48,
+          "primary_queries": 48,
+          "primary_recipient_correct": 0,
+          "queries": 144,
+          "recipient_correct": 48
+        }
+      },
+      "cross_query_cases": 144,
+      "pairs": 48,
+      "patch_coordinate_copies": {
+        "clean": 0,
+        "nuisance_patch": 1,
+        "self_sham": 1,
+        "target_patch": 1,
+        "whole_donor": 3
+      },
+      "physical_resources": {
+        "allocated_binary_state_bits": 3,
+        "codebook_lookup_entries": 0,
+        "episode_dense_products": 201,
+        "episode_relu_evaluations": 21,
+        "one_query": {
+          "dense_coefficient_slots": 25,
+          "dense_products": 21,
+          "max_abs_coefficient": 1,
+          "nonzero_coefficients": 12,
+          "relu_evaluations": 3
+        },
+        "public_phase_bits_if_stored": 2,
+        "public_phase_categories": 4,
+        "public_query_gate_coordinates": 3,
+        "public_write_gate_coordinates": 3,
+        "state_storage_unit": "logical binary coordinates; Python object overhead unmeasured",
+        "terminal_reachable_states": 8,
+        "update": {
+          "dense_coefficient_slots": 69,
+          "dense_products": 60,
+          "max_abs_coefficient": 1,
+          "nonzero_coefficients": 21,
+          "relu_evaluations": 6
+        },
+        "updates_per_word": 3
+      },
+      "unique_ordered_physical_pairs": 24,
+      "width": 3
+    },
+    {
+      "aliases": {
+        "current_observer_classes": 1,
+        "equal_observer_pairs_with_future_conflict": 120,
+        "future_answer_signatures": 16,
+        "pair_query_disagreements": 256,
+        "witness": {
+          "current_observer_pair": [
+            0,
+            0
+          ],
+          "donor_word": 1,
+          "future_answer_pair": [
+            0,
+            1
+          ],
+          "query": 3,
+          "recipient_word": 0
+        }
+      },
+      "arms": {
+        "clean": {
+          "donor_agreement": 384,
+          "donor_effect_recovered": 0,
+          "effect_eligible_queries": 384,
+          "nuisance_donor_effect_recovered": 0,
+          "nuisance_queries": 192,
+          "nuisance_recipient_correct": 192,
+          "primary_donor_effect_recovered": 0,
+          "primary_queries": 192,
+          "primary_recipient_correct": 192,
+          "queries": 768,
+          "recipient_correct": 768
+        },
+        "nuisance_patch": {
+          "donor_agreement": 576,
+          "donor_effect_recovered": 192,
+          "effect_eligible_queries": 384,
+          "nuisance_donor_effect_recovered": 192,
+          "nuisance_queries": 192,
+          "nuisance_recipient_correct": 0,
+          "primary_donor_effect_recovered": 0,
+          "primary_queries": 192,
+          "primary_recipient_correct": 192,
+          "queries": 768,
+          "recipient_correct": 576
+        },
+        "self_sham": {
+          "donor_agreement": 384,
+          "donor_effect_recovered": 0,
+          "effect_eligible_queries": 384,
+          "nuisance_donor_effect_recovered": 0,
+          "nuisance_queries": 192,
+          "nuisance_recipient_correct": 192,
+          "primary_donor_effect_recovered": 0,
+          "primary_queries": 192,
+          "primary_recipient_correct": 192,
+          "queries": 768,
+          "recipient_correct": 768
+        },
+        "target_patch": {
+          "donor_agreement": 576,
+          "donor_effect_recovered": 192,
+          "effect_eligible_queries": 384,
+          "nuisance_donor_effect_recovered": 0,
+          "nuisance_queries": 192,
+          "nuisance_recipient_correct": 192,
+          "primary_donor_effect_recovered": 192,
+          "primary_queries": 192,
+          "primary_recipient_correct": 0,
+          "queries": 768,
+          "recipient_correct": 576
+        },
+        "whole_donor": {
+          "donor_agreement": 768,
+          "donor_effect_recovered": 384,
+          "effect_eligible_queries": 384,
+          "nuisance_donor_effect_recovered": 192,
+          "nuisance_queries": 192,
+          "nuisance_recipient_correct": 0,
+          "primary_donor_effect_recovered": 192,
+          "primary_queries": 192,
+          "primary_recipient_correct": 0,
+          "queries": 768,
+          "recipient_correct": 384
+        }
+      },
+      "cross_query_cases": 768,
+      "pairs": 192,
+      "patch_coordinate_copies": {
+        "clean": 0,
+        "nuisance_patch": 1,
+        "self_sham": 1,
+        "target_patch": 1,
+        "whole_donor": 4
+      },
+      "physical_resources": {
+        "allocated_binary_state_bits": 4,
+        "codebook_lookup_entries": 0,
+        "episode_dense_products": 452,
+        "episode_relu_evaluations": 36,
+        "one_query": {
+          "dense_coefficient_slots": 41,
+          "dense_products": 36,
+          "max_abs_coefficient": 1,
+          "nonzero_coefficients": 16,
+          "relu_evaluations": 4
+        },
+        "public_phase_bits_if_stored": 3,
+        "public_phase_categories": 5,
+        "public_query_gate_coordinates": 4,
+        "public_write_gate_coordinates": 4,
+        "state_storage_unit": "logical binary coordinates; Python object overhead unmeasured",
+        "terminal_reachable_states": 16,
+        "update": {
+          "dense_coefficient_slots": 116,
+          "dense_products": 104,
+          "max_abs_coefficient": 1,
+          "nonzero_coefficients": 28,
+          "relu_evaluations": 8
+        },
+        "updates_per_word": 4
+      },
+      "unique_ordered_physical_pairs": 96,
+      "width": 4
+    },
+    {
+      "aliases": {
+        "current_observer_classes": 1,
+        "equal_observer_pairs_with_future_conflict": 496,
+        "future_answer_signatures": 32,
+        "pair_query_disagreements": 1280,
+        "witness": {
+          "current_observer_pair": [
+            0,
+            0
+          ],
+          "donor_word": 1,
+          "future_answer_pair": [
+            0,
+            1
+          ],
+          "query": 4,
+          "recipient_word": 0
+        }
+      },
+      "arms": {
+        "clean": {
+          "donor_agreement": 1920,
+          "donor_effect_recovered": 0,
+          "effect_eligible_queries": 1280,
+          "nuisance_donor_effect_recovered": 0,
+          "nuisance_queries": 640,
+          "nuisance_recipient_correct": 640,
+          "primary_donor_effect_recovered": 0,
+          "primary_queries": 640,
+          "primary_recipient_correct": 640,
+          "queries": 3200,
+          "recipient_correct": 3200
+        },
+        "nuisance_patch": {
+          "donor_agreement": 2560,
+          "donor_effect_recovered": 640,
+          "effect_eligible_queries": 1280,
+          "nuisance_donor_effect_recovered": 640,
+          "nuisance_queries": 640,
+          "nuisance_recipient_correct": 0,
+          "primary_donor_effect_recovered": 0,
+          "primary_queries": 640,
+          "primary_recipient_correct": 640,
+          "queries": 3200,
+          "recipient_correct": 2560
+        },
+        "self_sham": {
+          "donor_agreement": 1920,
+          "donor_effect_recovered": 0,
+          "effect_eligible_queries": 1280,
+          "nuisance_donor_effect_recovered": 0,
+          "nuisance_queries": 640,
+          "nuisance_recipient_correct": 640,
+          "primary_donor_effect_recovered": 0,
+          "primary_queries": 640,
+          "primary_recipient_correct": 640,
+          "queries": 3200,
+          "recipient_correct": 3200
+        },
+        "target_patch": {
+          "donor_agreement": 2560,
+          "donor_effect_recovered": 640,
+          "effect_eligible_queries": 1280,
+          "nuisance_donor_effect_recovered": 0,
+          "nuisance_queries": 640,
+          "nuisance_recipient_correct": 640,
+          "primary_donor_effect_recovered": 640,
+          "primary_queries": 640,
+          "primary_recipient_correct": 0,
+          "queries": 3200,
+          "recipient_correct": 2560
+        },
+        "whole_donor": {
+          "donor_agreement": 3200,
+          "donor_effect_recovered": 1280,
+          "effect_eligible_queries": 1280,
+          "nuisance_donor_effect_recovered": 640,
+          "nuisance_queries": 640,
+          "nuisance_recipient_correct": 0,
+          "primary_donor_effect_recovered": 640,
+          "primary_queries": 640,
+          "primary_recipient_correct": 0,
+          "queries": 3200,
+          "recipient_correct": 1920
+        }
+      },
+      "cross_query_cases": 3200,
+      "pairs": 640,
+      "patch_coordinate_copies": {
+        "clean": 0,
+        "nuisance_patch": 1,
+        "self_sham": 1,
+        "target_patch": 1,
+        "whole_donor": 5
+      },
+      "physical_resources": {
+        "allocated_binary_state_bits": 5,
+        "codebook_lookup_entries": 0,
+        "episode_dense_products": 855,
+        "episode_relu_evaluations": 55,
+        "one_query": {
+          "dense_coefficient_slots": 61,
+          "dense_products": 55,
+          "max_abs_coefficient": 1,
+          "nonzero_coefficients": 20,
+          "relu_evaluations": 5
+        },
+        "public_phase_bits_if_stored": 3,
+        "public_phase_categories": 6,
+        "public_query_gate_coordinates": 5,
+        "public_write_gate_coordinates": 5,
+        "state_storage_unit": "logical binary coordinates; Python object overhead unmeasured",
+        "terminal_reachable_states": 32,
+        "update": {
+          "dense_coefficient_slots": 175,
+          "dense_products": 160,
+          "max_abs_coefficient": 1,
+          "nonzero_coefficients": 35,
+          "relu_evaluations": 10
+        },
+        "updates_per_word": 5
+      },
+      "unique_ordered_physical_pairs": 320,
+      "width": 5
+    },
+    {
+      "aliases": {
+        "current_observer_classes": 1,
+        "equal_observer_pairs_with_future_conflict": 2016,
+        "future_answer_signatures": 64,
+        "pair_query_disagreements": 6144,
+        "witness": {
+          "current_observer_pair": [
+            0,
+            0
+          ],
+          "donor_word": 1,
+          "future_answer_pair": [
+            0,
+            1
+          ],
+          "query": 5,
+          "recipient_word": 0
+        }
+      },
+      "arms": {
+        "clean": {
+          "donor_agreement": 7680,
+          "donor_effect_recovered": 0,
+          "effect_eligible_queries": 3840,
+          "nuisance_donor_effect_recovered": 0,
+          "nuisance_queries": 1920,
+          "nuisance_recipient_correct": 1920,
+          "primary_donor_effect_recovered": 0,
+          "primary_queries": 1920,
+          "primary_recipient_correct": 1920,
+          "queries": 11520,
+          "recipient_correct": 11520
+        },
+        "nuisance_patch": {
+          "donor_agreement": 9600,
+          "donor_effect_recovered": 1920,
+          "effect_eligible_queries": 3840,
+          "nuisance_donor_effect_recovered": 1920,
+          "nuisance_queries": 1920,
+          "nuisance_recipient_correct": 0,
+          "primary_donor_effect_recovered": 0,
+          "primary_queries": 1920,
+          "primary_recipient_correct": 1920,
+          "queries": 11520,
+          "recipient_correct": 9600
+        },
+        "self_sham": {
+          "donor_agreement": 7680,
+          "donor_effect_recovered": 0,
+          "effect_eligible_queries": 3840,
+          "nuisance_donor_effect_recovered": 0,
+          "nuisance_queries": 1920,
+          "nuisance_recipient_correct": 1920,
+          "primary_donor_effect_recovered": 0,
+          "primary_queries": 1920,
+          "primary_recipient_correct": 1920,
+          "queries": 11520,
+          "recipient_correct": 11520
+        },
+        "target_patch": {
+          "donor_agreement": 9600,
+          "donor_effect_recovered": 1920,
+          "effect_eligible_queries": 3840,
+          "nuisance_donor_effect_recovered": 0,
+          "nuisance_queries": 1920,
+          "nuisance_recipient_correct": 1920,
+          "primary_donor_effect_recovered": 1920,
+          "primary_queries": 1920,
+          "primary_recipient_correct": 0,
+          "queries": 11520,
+          "recipient_correct": 9600
+        },
+        "whole_donor": {
+          "donor_agreement": 11520,
+          "donor_effect_recovered": 3840,
+          "effect_eligible_queries": 3840,
+          "nuisance_donor_effect_recovered": 1920,
+          "nuisance_queries": 1920,
+          "nuisance_recipient_correct": 0,
+          "primary_donor_effect_recovered": 1920,
+          "primary_queries": 1920,
+          "primary_recipient_correct": 0,
+          "queries": 11520,
+          "recipient_correct": 7680
+        }
+      },
+      "cross_query_cases": 11520,
+      "pairs": 1920,
+      "patch_coordinate_copies": {
+        "clean": 0,
+        "nuisance_patch": 1,
+        "self_sham": 1,
+        "target_patch": 1,
+        "whole_donor": 6
+      },
+      "physical_resources": {
+        "allocated_binary_state_bits": 6,
+        "codebook_lookup_entries": 0,
+        "episode_dense_products": 1446,
+        "episode_relu_evaluations": 78,
+        "one_query": {
+          "dense_coefficient_slots": 85,
+          "dense_products": 78,
+          "max_abs_coefficient": 1,
+          "nonzero_coefficients": 24,
+          "relu_evaluations": 6
+        },
+        "public_phase_bits_if_stored": 3,
+        "public_phase_categories": 7,
+        "public_query_gate_coordinates": 6,
+        "public_write_gate_coordinates": 6,
+        "state_storage_unit": "logical binary coordinates; Python object overhead unmeasured",
+        "terminal_reachable_states": 64,
+        "update": {
+          "dense_coefficient_slots": 246,
+          "dense_products": 228,
+          "max_abs_coefficient": 1,
+          "nonzero_coefficients": 42,
+          "relu_evaluations": 12
+        },
+        "updates_per_word": 6
+      },
+      "unique_ordered_physical_pairs": 960,
+      "width": 6
+    }
+  ],
+  "cross_query_cases": 15648,
+  "evidence_class": "exact finite domain",
+  "generated_pairs": 2808,
+  "independent_trained_roots": 0,
+  "optimizer_updates": 0,
+  "pair_count_unit": "recipient word with ordered target and nuisance roles",
+  "population_gate": "NO_TRAINED_ROOTS_OR_SHAM_CALIBRATION",
+  "prequery_observer": "engineered constant zero",
+  "provenance": {
+    "COL01_commit": "0b4d66822978590f1150ae2a152ea54f882ec238",
+    "CQ08_commit": "6d3ca23a817095f38789751004594777f54cf7d8",
+    "LS12_commit": "75aeb9ae914636a4d70b576e331fbfb72c0daf7d",
+    "base_commit": "6d3ca23a817095f38789751004594777f54cf7d8",
+    "register_origin": "original code authored for the MIC-18 LoopedTransformers and BPD ports",
+    "register_sha256": "c46273e1d49e14dbd8f81e881be08f2c5220f597efaae817a5bf4fec3772609f",
+    "repository": "MoralityLabAI/BPD",
+    "shared_core_commit": "cbab90625887153f57af5f1211d4307e053232b7",
+    "shared_core_license": "Apache-2.0",
+    "shared_core_path": "gyms/MIC18/finite_memory.py",
+    "shared_core_repository": "MoralityLabAI/EvalMath",
+    "shared_core_sha256": "9fa386bd52c6925e41e7151e163b34df01f553eb6a214fe4737960dfd2109abc",
+    "shared_core_url": "https://github.com/MoralityLabAI/EvalMath/blob/cbab90625887153f57af5f1211d4307e053232b7/gyms/MIC18/finite_memory.py",
+    "shared_protocol_commit": "9bf11c5e55b0fd5bc14390a3cfacfd11fd73070d"
+  },
+  "raw_cases_sha256": "690339d4ad630c74835b11a9bf88b9a2638b948dbf1b38264c4498ea2d4c4486",
+  "rejected_pairs": 0,
+  "schema": "MIC-18/BPD-register-calibration-results/v1",
+  "source_files": {
+    "../../../../.github/workflows/mic18-online-memory.yml": "a539df5f351e0b2b1d90cdb8e90badd87aae4d1ebbd4b911799493bea4080a42",
+    "CORE_LICENSE.txt": "50e6751797c50dedd75ef1b8a0d9e42f5f8472e9fbce91f34718e9f97b0c780a",
+    "PROTOCOL.json": "21942c78ba3429091cad950f07dd5b5038a0ea974526040118fc8f4bb634b157",
+    "README.md": "2bc3ec4418c402eb0e726662bfde709c26b709b41f92560d3de9de96d609a58e",
+    "calibration.py": "2af237e33e4b0af50ac5940fe354f6f2a97b5c6195865b4d5128d58d9f761c09",
+    "finite_memory.py": "9fa386bd52c6925e41e7151e163b34df01f553eb6a214fe4737960dfd2109abc",
+    "register.py": "c46273e1d49e14dbd8f81e881be08f2c5220f597efaae817a5bf4fec3772609f",
+    "tests/test_calibration.py": "31efd796b2d1189eca51fc1ff734b2b47e4f3c6cc4fa245595358246735c252d"
+  },
+  "status": "PASS_EXACT_CONSTRUCTED_CALIBRATION",
+  "trained_models": 0,
+  "unique_ordered_physical_pairs": 1404
+}

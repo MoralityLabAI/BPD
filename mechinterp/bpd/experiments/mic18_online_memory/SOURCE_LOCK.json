@@ -1,0 +1,29 @@
+{
+  "files": {
+    "../../../../.github/workflows/mic18-online-memory.yml": "a539df5f351e0b2b1d90cdb8e90badd87aae4d1ebbd4b911799493bea4080a42",
+    "CORE_LICENSE.txt": "50e6751797c50dedd75ef1b8a0d9e42f5f8472e9fbce91f34718e9f97b0c780a",
+    "PROTOCOL.json": "21942c78ba3429091cad950f07dd5b5038a0ea974526040118fc8f4bb634b157",
+    "README.md": "2bc3ec4418c402eb0e726662bfde709c26b709b41f92560d3de9de96d609a58e",
+    "calibration.py": "2af237e33e4b0af50ac5940fe354f6f2a97b5c6195865b4d5128d58d9f761c09",
+    "finite_memory.py": "9fa386bd52c6925e41e7151e163b34df01f553eb6a214fe4737960dfd2109abc",
+    "register.py": "c46273e1d49e14dbd8f81e881be08f2c5220f597efaae817a5bf4fec3772609f",
+    "tests/test_calibration.py": "31efd796b2d1189eca51fc1ff734b2b47e4f3c6cc4fa245595358246735c252d"
+  },
+  "provenance": {
+    "COL01_commit": "0b4d66822978590f1150ae2a152ea54f882ec238",
+    "CQ08_commit": "6d3ca23a817095f38789751004594777f54cf7d8",
+    "LS12_commit": "75aeb9ae914636a4d70b576e331fbfb72c0daf7d",
+    "base_commit": "6d3ca23a817095f38789751004594777f54cf7d8",
+    "register_origin": "original code authored for the MIC-18 LoopedTransformers and BPD ports",
+    "register_sha256": "c46273e1d49e14dbd8f81e881be08f2c5220f597efaae817a5bf4fec3772609f",
+    "repository": "MoralityLabAI/BPD",
+    "shared_core_commit": "cbab90625887153f57af5f1211d4307e053232b7",
+    "shared_core_license": "Apache-2.0",
+    "shared_core_path": "gyms/MIC18/finite_memory.py",
+    "shared_core_repository": "MoralityLabAI/EvalMath",
+    "shared_core_sha256": "9fa386bd52c6925e41e7151e163b34df01f553eb6a214fe4737960dfd2109abc",
+    "shared_core_url": "https://github.com/MoralityLabAI/EvalMath/blob/cbab90625887153f57af5f1211d4307e053232b7/gyms/MIC18/finite_memory.py",
+    "shared_protocol_commit": "9bf11c5e55b0fd5bc14390a3cfacfd11fd73070d"
+  },
+  "schema": "MIC-18/physical-port-source-lock/v1"
+}

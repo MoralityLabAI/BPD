@@ -1,0 +1,46 @@
+{
+  "schema": "MIC-18/BPD-register-calibration-protocol/v1",
+  "evidence_class": "exact finite domain",
+  "frozen_before_main_execution": true,
+  "widths": [2, 3, 4, 5, 6],
+  "physical_cell": "fixed integer ReLU recurrent register from the companion LoopedTransformers port",
+  "state_coordinates": "J binary coordinates, one retained coordinate per streamed fact",
+  "query_timing": "query index supplied after J observations and memory commitment",
+  "prequery_observer": "engineered constant zero for every committed state",
+  "donor_generator": "enumerate every word and every ordered target/nuisance coordinate pair; donor flips exactly those two bits",
+  "pair_scope": "reachable recipient and donor at identical final observation phase J",
+  "arms": {
+    "clean": "recipient state",
+    "whole_donor": "replace every coordinate by donor; squared L2 displacement 2",
+    "target_patch": "replace target coordinate by donor; one coordinate and squared L2 displacement 1",
+    "nuisance_patch": "replace nuisance coordinate by same donor; one coordinate and squared L2 displacement 1",
+    "self_sham": "replace target coordinate from recipient; one selected coordinate, squared L2 displacement 0"
+  },
+  "matched_control": "target and nuisance singleton patches use the same donor, equal cardinality, equal squared physical displacement, and identical query execution",
+  "query_census": "every coordinate query for every pair and every arm",
+  "primary_query": "the declared target coordinate",
+  "cross_query_check": "the nuisance patch becomes task relevant when its own coordinate is queried",
+  "endpoints": {
+    "recipient_task_correctness": "answer equals the recipient's true queried bit",
+    "donor_agreement": "answer equals the donor's queried bit",
+    "donor_effect_recovery": "donor agreement restricted to queries where clean recipient and donor disagree",
+    "current_observer_parity": "constant observer equality before query",
+    "reachability": "each intervention state equals a complete legal observation-stream replay"
+  },
+  "admission": "all generated pairs retained; every failure counted and causes the calibration command to fail",
+  "pair_count": 2808,
+  "pair_count_unit": "recipient word with ordered target and nuisance roles",
+  "unique_ordered_physical_pairs": 1404,
+  "cross_query_count": 15648,
+  "learned_component_selection": null,
+  "optimizer_updates": 0,
+  "trained_models": 0,
+  "independent_trained_roots": 0,
+  "statistical_population": null,
+  "population_inference": "blocked: exact calibration has zero independent trained development roots and zero sampled sham roots",
+  "source_contracts": {
+    "COL01": "0b4d66822978590f1150ae2a152ea54f882ec238",
+    "CQ08": "6d3ca23a817095f38789751004594777f54cf7d8"
+  },
+  "scope": "explicit coordinate patches in a constructed recurrent cell; native trained BPD factor mediation is outside this receipt"
+}
