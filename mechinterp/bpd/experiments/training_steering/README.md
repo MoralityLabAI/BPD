@@ -8,6 +8,19 @@ Every arm receives the receiver, donor and counterfactual hybrid as ordinary
 supervised examples. The main readout measures ordinary answers with steering
 disabled. This keeps counterfactual label availability equal across treatments.
 
+## Measured development result
+
+Across eight paired model roots, ordinary long-delay accuracy is 2,069/4,096
+for A, 2,070/4,096 for B and 2,068/4,096 for C. The B-A change is +0.0244
+percentage points, with 134 recoveries and 133 corruptions. Both registered
+contrasts have Holm-adjusted p = 1. The five-point scientific reference floor
+remains unmet, and the official preflight returns REDESIGN_OR_PILOT_ONLY.
+
+[RESULTS.md](RESULTS.md) contains every root and the causal diagnostics. All
+saved predictions pass the independent recurrence replay. The source freeze
+is [a832c911](https://github.com/MoralityLabAI/BPD/commit/a832c9119685d691ffc942b3e9cb29a00005f1a3),
+published before any of the eight development roots executed.
+
 ## How the signal enters training
 
 The model reads four memory writes, processes distractors, then answers a late
