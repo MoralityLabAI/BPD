@@ -15,10 +15,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - run: python -m mechinterp.bpd.theory.nbr01_transported_mask_risk.risk --self-test
-      - run: python -m mechinterp.bpd.theory.nbr01_transported_mask_risk.risk --out result/worlds.json
+      - run: python mechinterp/bpd/theory/nbr01_transported_mask_risk/risk.py --self-test
+      - run: python mechinterp/bpd/theory/nbr01_transported_mask_risk/risk.py --out result/worlds.json
       - run: |
-          python -m mechinterp.bpd.theory.nbr01_transported_mask_risk.risk --out result/replay.json
+          python mechinterp/bpd/theory/nbr01_transported_mask_risk/risk.py --out result/replay.json
           cmp result/worlds.json result/replay.json
           sha256sum result/worlds.json
           rm result/replay.json
