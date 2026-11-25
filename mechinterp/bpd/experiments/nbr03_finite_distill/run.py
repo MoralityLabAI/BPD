@@ -11,8 +11,8 @@ from torch.nn import functional as F
 from mechinterp.bpd.experiments.nbr02_cq06 import run as R
 
 E=R.E
-ROOTS=tuple(range(202611250301,202611250309))
-EXCLUDED=202611250300
+ROOTS=tuple(202631250301+2000000*i for i in range(8))
+EXCLUDED=202629250300
 PAT=R.PATTERNS
 TOL=1e-5
 FIRST=("physical","local_joint","path_joint","finite_probe","distilled","random")
