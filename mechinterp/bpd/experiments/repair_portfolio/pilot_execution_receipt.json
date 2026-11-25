@@ -1,0 +1,25 @@
+{
+  "assigned_roots": [
+    17001,
+    17002,
+    17003,
+    17004
+  ],
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-m",
+    "mechinterp.bpd.experiments.repair_portfolio.experiment",
+    "--phase",
+    "pilot",
+    "--source-lock",
+    "mechinterp/bpd/experiments/repair_portfolio/source_lock.json",
+    "--output",
+    "mechinterp/bpd/experiments/repair_portfolio/pilot_results"
+  ],
+  "ended_utc": "2026-11-25T15:20:56.750259+00:00",
+  "evidence_class": "PILOT_ONLY_ENGINEERING",
+  "exit_code": 0,
+  "remote_source_commit": "1f2a87fd16b70ba78098c5060988a3124232e613",
+  "source_lock_sha256": "994fb0b952cfc69fcae4c850cf8bcb4149166e2e29e7d3d0606917437e6d749d",
+  "started_utc": "2026-11-25T15:20:14.551493+00:00"
+}

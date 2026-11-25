@@ -1,0 +1,25 @@
+{
+  "remote_commit": "1f2a87fd16b70ba78098c5060988a3124232e613",
+  "tree_sha": "44486d945367f6e2b3a4e1e292560ed6e4c4188f",
+  "repository": "MoralityLabAI/BPD",
+  "branch": "research/bpd-rp01-quantized-repair-20261125",
+  "evidence_class": "PILOT_ONLY_ENGINEERING",
+  "lock_sha256": "846523b58693c40ac06fe97ed77b817c392953daa83a9a780482c8975c7b40da",
+  "source_hashes": {
+    "mechinterp/bpd/__init__.py": "80949cdc96b90698b679815776f3da8de73c304dd20fd422adbdeeaffb0ce40a",
+    "mechinterp/bpd/adversary.py": "adc258718d22409b99b33f0e459742e8d4b980c7d8b7fba6d0ef3b904d724786",
+    "mechinterp/bpd/analysis.py": "ec53d455db433007c5db0a4d837ae3e4a431c7bf24c80a7e5da05e1e586b4f53",
+    "mechinterp/bpd/ci.py": "d13b2494f53a52eccef2c9bbaba59415d89e35695b9ffabf529918d445369353",
+    "mechinterp/bpd/components.py": "388cb539cccb87ae65d56e5fbae175d6aee138df24d1bab43cde755156b748a5",
+    "mechinterp/bpd/config.py": "d5773cdac66f55b8a8c152030d679324f0270954dd3a081176a454d5dc6f1621",
+    "mechinterp/bpd/experiments/inkling_routing/native_model.py": "a1e5767dee61e09c019f4710bab039358ba91683d762dfc8bd74f7b9e5f0be33",
+    "mechinterp/bpd/experiments/repair_portfolio/PROTOCOL.md": "0dfeb46b24f19a023c73487610042f2c490f5bca3232ed73116c758ba9387e78",
+    "mechinterp/bpd/experiments/repair_portfolio/experiment.py": "b403b1b633841d83c0bbfeb301b862ecd828d4249c233fbcd83e4aa83f9314bb",
+    "mechinterp/bpd/experiments/repair_portfolio/test_experiment.py": "192226ef2b7e4ad359854f1675d12bfbee210486f530f44e18c3346208877405",
+    "mechinterp/bpd/losses.py": "12f40cf8906f99e16f5416a5768e9cab3b67ff865f2f5a60a0bc3df25b68ab1d",
+    "mechinterp/bpd/nulls.py": "aa7f9f2ddd6ea42c36f63429c6f5e9569537dd373bc73fd79a937da6b2fa202e",
+    "mechinterp/bpd/trainer.py": "f2c50e86beee5a33ecd35b90065512c3b956501ad9cd64c619c3a3f9a6c6231a"
+  },
+  "publication_before_pilot": true,
+  "created_utc": "2026-11-25T15:19:52.135853+00:00"
+}
