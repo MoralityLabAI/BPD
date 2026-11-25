@@ -1,0 +1,30 @@
+name: BPD NBR01 exact transported mask risk
+on:
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/theory/nbr01_transported_mask_risk/**'
+      - '.github/workflows/bpd-nbr01-mask-risk.yml'
+permissions:
+  contents: read
+jobs:
+  exact:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m mechinterp.bpd.theory.nbr01_transported_mask_risk.risk --self-test
+      - run: python -m mechinterp.bpd.theory.nbr01_transported_mask_risk.risk --out result/worlds.json
+      - run: |
+          python -m mechinterp.bpd.theory.nbr01_transported_mask_risk.risk --out result/replay.json
+          cmp result/worlds.json result/replay.json
+          sha256sum result/worlds.json
+          rm result/replay.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bpd-nbr01-exact-risk
+          path: result/
+          if-no-files-found: warn
