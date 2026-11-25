@@ -6,11 +6,13 @@ on:
       - 'mechinterp/bpd/experiments/collatz_3050/**'
       - 'mechinterp/bpd/experiments/collatz_observability/collatz_core.py'
       - '.github/workflows/bpd-collatz-3050.yml'
+      - '.gitattributes'
   pull_request:
     paths:
       - 'mechinterp/bpd/experiments/collatz_3050/**'
       - 'mechinterp/bpd/experiments/collatz_observability/collatz_core.py'
       - '.github/workflows/bpd-collatz-3050.yml'
+      - '.gitattributes'
   workflow_dispatch:
 
 permissions:

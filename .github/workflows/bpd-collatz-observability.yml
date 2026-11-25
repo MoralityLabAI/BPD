@@ -5,10 +5,12 @@ on:
     paths:
       - 'mechinterp/bpd/experiments/collatz_observability/**'
       - '.github/workflows/bpd-collatz-observability.yml'
+      - '.gitattributes'
   pull_request:
     paths:
       - 'mechinterp/bpd/experiments/collatz_observability/**'
       - '.github/workflows/bpd-collatz-observability.yml'
+      - '.gitattributes'
 
 permissions:
   contents: read

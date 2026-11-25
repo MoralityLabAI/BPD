@@ -102,7 +102,7 @@
     ]
   },
   "device": "cpu",
-  "elapsed_seconds": 7.796,
+  "elapsed_seconds": 9.744,
   "errors": 0,
   "failures": 0,
   "hardware_memory_and_latency_status": "awaiting local RTX 3050 run",
@@ -116,8 +116,8 @@
   "model_id": "Nanbeige/Nanbeige4.2-3B",
   "native_bf16_complete_head_parity": "exact on the tiny CPU fixture",
   "native_runner_forwards_per_case": 8,
-  "observed_utc": "2026-11-25T15:50:57.748225+00:00",
-  "powershell_launcher_status": "static review; Windows execution awaits local run",
+  "observed_utc": "2026-11-25T16:00:56.768368+00:00",
+  "powershell_launcher_status": "separate Windows PowerShell CI checks parsing and preparation; native CUDA execution awaits local run",
   "pretrained_model_forwards": 0,
   "protected_first_query_equality": "exact on the tiny CPU fixture",
   "python": "3.12.14",
@@ -153,7 +153,7 @@
     "test_interventions.py": "ad8d69c9c73223586b0b6147439090a178ea7a6eecbe261ac2616842bf35ce11",
     "test_runner.py": "5ec2dcf3e4c6336f1b90a6087cf5397a78cfd97b8cd4f57a8046743af0f22bd6",
     "test_scoring.py": "4ec8d0723de223d7a9afec7887e5efc2d928c1859d261cb2a4c86368b0918b64",
-    "test_streaming.py": "4883cf2a9e8b6cf681ebd55b53055962705a92ba47c18abace5b8be27d09d185"
+    "test_streaming.py": "74c7eb508ab5c5900d5ef6230b437e90db2aaf6209579e3da23ce5886816a02d"
   },
   "tests_run": 31,
   "verdict": "SOURCE_VALIDATED_PILOT_READY"

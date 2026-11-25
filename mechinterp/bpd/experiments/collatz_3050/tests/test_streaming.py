@@ -105,11 +105,17 @@ class StreamingNativeTests(unittest.TestCase):
 
             edited = backend.run(self.ids, intervention=patch)
             self.assertTrue(torch.equal(recipient.boundary_last_cpu[0], edited.boundary_last_cpu[0]))
-            current_logits = backend.score_hidden(torch.stack((recipient.boundary_last_cpu[0],
-                                                               edited.boundary_last_cpu[0])))
+            # Match production's one-vector scoring shape for every readout;
+            # GEMM row tiles in a batch can round identical vectors differently.
+            current_logits = torch.stack([
+                backend.score_hidden(vector)[0]
+                for vector in (recipient.boundary_last_cpu[0], edited.boundary_last_cpu[0])
+            ])
             self.assertTrue(torch.equal(current_logits[0], current_logits[1]))
-            future_logits = backend.score_hidden(torch.stack((recipient.final_hidden_cpu,
-                                                              edited.final_hidden_cpu)))
+            future_logits = torch.stack([
+                backend.score_hidden(vector)[0]
+                for vector in (recipient.final_hidden_cpu, edited.final_hidden_cpu)
+            ])
             self.assertGreater((future_logits[0] - future_logits[1]).abs().max().item(), 1e-7)
             self.assertEqual(edited.receipt["protected_last_token_equal_each_boundary"], [True, True])
             self.assertTrue(backend.layers_released())
