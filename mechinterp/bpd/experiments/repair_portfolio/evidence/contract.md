@@ -1,0 +1,21 @@
+# BPD-RP-01 evidence contract
+
+The independent engineering unit is a newly trained source router and its learned BPD decomposition, identified by the training root. The four planned roots are 17001 through 17004. Root 17000 supplies an exposed engineering smoke check. All roots share one synthetic generator with eight bit/query patterns. Each scored input, recurrent pass and candidate codebook is a repeated observation within its training root.
+
+The two descriptive search contrasts are beam minus independent multistart and beam minus greedy, measured as paired held-out final-answer accuracy within each root. The scientific reference floor is 0.05 absolute accuracy. Every assigned root remains in the report, including a root with poor source competence, poor BPD fidelity or zero quantization damage. Any future confirmatory study needs a new evidence contract and independently calibrated controls.
+
+The physical intervention is symmetric 3-bit quantization of learned V and U for the shared mix matrix, using fixed per-tensor scales. The searched repair consists of four global integer gate offsets, each in [-2,2], at a 0.25 step. Deployment recomputes CI on the input reached at each pass. The target residual is disabled with zero ablation and no sphere rescaling. Parameter distortion and realized state/output displacement must be recorded. These dose measures describe each intervention; they do not establish dose equality across controls.
+
+The calibration set contains 64 labeled examples per root. Those labels are explicitly available to the cross-entropy selector. A nine-slot bootstrap retains three distinct codebooks. Each policy receives another 18 expansions of nine slots, for 172 logical calibration rollout calls per arm including the shared initial and bootstrap work. The complete search executes 496 calibration rollout calls per root because common work executes once. Diagnostic calls are accounted for separately. Invalid edits consume a padded no-op slot. Ties follow frozen candidate order.
+
+All policy choices must be committed before generating or reading the 256 held-out examples for that root. The fixture's semantic rules are already known. This separation measures performance on new draws from the same tiny generator and carries no task-family generalization claim. Search and decomposition hyperparameters are frozen before the four-root run; smoke outcomes may inform plumbing fixes only, which must be disclosed before freeze.
+
+Algebraic all-open-plus-residual parity checks wrapper plumbing. Full-precision learned-CI deployment with the residual disabled measures learned reconstruction fidelity. Quantized unrepaired deployment establishes available headroom. Raw correctness for every final answer supports wrong-to-right recovery and right-to-wrong corruption counts. Full-head intermediate outputs and reached-state norms/displacements preserve the recurrence audit.
+
+Simultaneously permuting factors and corresponding CI coordinates checks gauge invariance. A CI-assignment-only permutation is an unmatched routing control. Its delivered dose must be reported. Neither control supplies a calibrated mechanistic sham distribution across independent roots, and this experiment has no representation control for learned BPD factors against a simpler basis.
+
+Before smoke there are zero measured development roots, so the official planner cannot accept an empirical pilot. The retained pre-smoke attempt records that missing input. After smoke, its measured allocation effect can enter a planning-only invocation. An observed gauge identity check is labelled as an identity check, and a universal support bound of one can conservatively bound absolute accuracy contrasts. Neither quantity estimates a population sham quantile.
+
+Verdict is ENGINEERING_PILOT_ONLY. There are no confirmatory hypothesis tests or population power claims. Root means may be reported descriptively alongside every root result. The four roots cannot establish a 95/95 nonparametric sham envelope. Exact LS recurrence certificates do not apply to this multidimensional trained router.
+
+Protected BPD and ARG confirmation partitions remain outside this experiment. The unchanged BPD engine and native fixture are pinned to commit 6d3ca23a817095f38789751004594777f54cf7d8 in upstream_sources.json.

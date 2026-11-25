@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "experiment_id": "BPD-RP-01-pre-smoke-availability",
+  "independent_unit": "independently trained tiny router and its learned BPD factors/CI",
+  "alpha": "0.05",
+  "scientific_min_effect": "0.05",
+  "target_effect": "0.05",
+  "measurement_resolution": "1/256",
+  "sham_quantile": "0.95",
+  "sham_confidence": "0.95",
+  "planned_comparisons": 2,
+  "confirm_units_planned": 4,
+  "pilot": [],
+  "pilot_from_development_only": true,
+  "heldout_sealed": true,
+  "units_independent": true
+}

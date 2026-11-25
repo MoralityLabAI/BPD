@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "experiment_id": "BPD-RP-01-beam-vs-multistart-engineering-planning",
+  "independent_unit": "independently trained source router and its learned BPD decomposition",
+  "alpha": "0.05",
+  "scientific_min_effect": "0.05",
+  "target_effect": "0.05",
+  "measurement_resolution": "1/256",
+  "sham_quantile": "0.95",
+  "sham_confidence": "0.95",
+  "planned_comparisons": 2,
+  "confirm_units_planned": 4,
+  "pilot": [
+    {
+      "unit_id": "smoke-17000",
+      "paired_effect": "0",
+      "sham_effects": [
+        "0"
+      ]
+    }
+  ],
+  "pilot_from_development_only": true,
+  "heldout_sealed": true,
+  "units_independent": true,
+  "external_sham_floor": "1",
+  "external_sham_source": "Universal support bound on absolute paired accuracy differences. The measured simultaneous factor/CI permutation is a gauge identity check, with no empirical mechanistic-sham interpretation. No independent matched-sham distribution has been calibrated.",
+  "planning_scope": "Four prospective engineering roots; no confirmation cohort or power claim",
+  "smoke_result_sha256": "f62759272076f239abe796535360f1d62330aba784081a441288766cbe04d944"
+}
