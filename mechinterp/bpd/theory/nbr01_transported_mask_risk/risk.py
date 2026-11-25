@@ -197,7 +197,7 @@ def self_test():
     assert [risk_for(m,v) for m in [(),(0,),(1,),(0,1)]]==[0,1,1,0]
     assert risk_for((),v)-risk_for((0,),v)<risk_for((1,),v)-risk_for((0,1),v)
     Q=rotation(8)
-    assert gram(Q)==I(8)
+    assert gram(Q)==[list(row) for row in I(8)]
     a,U,T,C=make_world(random.Random(101))
     b,V=rotate(a,U,Q)
     assert apply(U,a)==apply(V,b)
