@@ -1,0 +1,35 @@
+name: COG-04 ledger communication
+on:
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/cog04_ledger_communication/**'
+      - 'mechinterp/bpd/components.py'
+      - '.github/workflows/cog04-ledger-communication.yml'
+  push:
+    paths:
+      - 'mechinterp/bpd/experiments/cog04_ledger_communication/**'
+      - '.github/workflows/cog04-ledger-communication.yml'
+  workflow_dispatch:
+jobs:
+  receipts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Independently replay source-bound decisions
+        run: python mechinterp/bpd/experiments/cog04_ledger_communication/audit_results.py
+  protocol:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install CPU test dependencies
+        run: |
+          python -m pip install numpy==2.3.5
+          python -m pip install torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Test transport, input boundaries and native BPD factors
+        run: python -m unittest mechinterp.bpd.experiments.cog04_ledger_communication.test_experiment -v

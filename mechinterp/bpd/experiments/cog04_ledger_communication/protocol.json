@@ -1,0 +1,52 @@
+{
+  "action_support": "All policies exclude rules whose conclusions are known and rejected actions until a new proved fact changes the state. Receiver replies with available-subset position; sender maps to original public rule.",
+  "bits_grid": [
+    2,
+    4,
+    8,
+    32
+  ],
+  "communication": "Sender has public candidate features. Receiver has shared model U, bias and scoring head. Header stores candidate count, rank and bit depth. Activations are packed into bytes; each chosen action reply uses uint16. Model, normalization and quantization scales are charged once as setup bytes.",
+  "controls": [
+    "full_rank_float32",
+    "shuffled_rank4_float32",
+    "dose_matched_sham_0",
+    "dose_matched_sham_1",
+    "dose_matched_sham_2",
+    "uniform_random",
+    "public_structural_heuristic"
+  ],
+  "experiment": "COG-04",
+  "historical_protected_cohorts_accessed": false,
+  "independent_unit": "generated source proof DAG root, conditional on one trained checkpoint",
+  "mechanistic_confirmation": false,
+  "primary_contrast": "rank4_4bit root solve fraction against full_rank_float32 at equal verifier budget",
+  "rank_grid": [
+    1,
+    2,
+    4,
+    "full"
+  ],
+  "registered_before_readout": true,
+  "scientific_min_effect": "0.05",
+  "scope": "Synthetic finite Horn proof routing; trained small public-feature scorer; observational engineering pilot",
+  "selection": "All rank/bit arms are fixed and reported. Test metrics select no arm or hyperparameter.",
+  "source": "DataGoblin COG-02 cogentic_ledger.py",
+  "split_roles": {
+    "calibration": "preflight and matched shams only",
+    "ood_test": "single fixed deeper-family engineering readout",
+    "ordinary_test": "single fixed engineering readout",
+    "train": "fit weights, input normalization and message scales"
+  },
+  "target_effect_for_power_planning": "0.10",
+  "training": {
+    "epochs": 180,
+    "hidden_width": 16,
+    "learning_rate": 0.02,
+    "weight_decay": 0.0001
+  },
+  "training_seed": 1701,
+  "training_weights_downloaded": false,
+  "verifier_budget": 24,
+  "version": 1
+}
