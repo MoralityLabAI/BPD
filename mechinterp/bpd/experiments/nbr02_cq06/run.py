@@ -119,17 +119,18 @@ class Native:
         s2=self.step(s1,u1,m2,1)
         return torch.stack((self.logit(s1),self.logit(s2)),1),s1
 
-def second_masks(t,f,gate,s,cue,rand,finite_oracle=True):
+def second_masks(t,f,gate,s,cue,rand,native,finite_oracle=True):
     w,pre,full,v=local(t,f,s,cue)
     v=v[:,:,None]
     masks={"physical":diagonal(w),"observable_diagonal":diagonal(v),
            "observable_greedy":greedy(v),"observable_joint":joint(v),
            "learned":topk(gate.scores(s,cue)),"random":rand}
     if finite_oracle:
-        a=torch.cat((s,cue),1)@f.V
-        candidates=torch.tanh((a[:,None,:]*PATTERNS[None,:,:])@f.U+t.bias)
-        ls=(candidates@t.head.weight.T).squeeze(-1)
-        full_l=E.logits(t,full)
+        # Exhaustive finite-output oracle pays six actual native masked
+        # continuations and a full reference; no label or future truth.
+        ls=torch.stack([native.logit(native.step(s,cue,m.expand(len(s),-1),1))
+                        for m in PATTERNS],1)
+        full_l=native.logit(native.step(s,cue,tau=1))
         masks["finite_oracle"]=PATTERNS[(ls-full_l[:,None]).square().argmin(1)]
     return masks,v,w
 
@@ -154,7 +155,7 @@ def task(seed,t,f,gate,native):
         logits,_=native.pair(u0,u1,m1=m)
         first[name]=packed(m,logits,risk(v,m),risk(w,m))
     first_signature={"physical":w.tolist(),"current":current.tolist(),"delayed":v.tolist()}
-    masks,v,w=second_masks(t,f,gate,s,u1,random_mask(seed+923001,len(y)))
+    masks,v,w=second_masks(t,f,gate,s,u1,random_mask(seed+923001,len(y)),native)
     second={}
     for name,m in masks.items():
         check_mask(m,len(y))
@@ -194,14 +195,14 @@ def donor(seed,t,f,gate,native):
     random=torch.randn(sr.shape,generator=torch.Generator().manual_seed(seed+923002))
     q,qvalid=match(random)
     rand=random_mask(seed+923003,len(ur))
-    frozen,_,_=second_masks(t,f,gate,sr,u1,rand)
+    frozen,_,_=second_masks(t,f,gate,sr,u1,rand,native)
     results={}
     for name,reached,ok in (("partial_dark",sr+p,valid),("random_dark",sr+q,qvalid),
                             ("sham",sr,torch.ones_like(valid)),("full_donor",sd,torch.ones_like(valid))):
         delta=reached-sr
         full=native.logit(native.step(reached,u1,tau=1))
         current=native.logit(reached)
-        dyn,v,w=second_masks(t,f,gate,reached,u1,rand)
+        dyn,v,w=second_masks(t,f,gate,reached,u1,rand,native)
         out={}
         for policy in SECOND_ARMS:
             entry={}
