@@ -1,0 +1,160 @@
+{
+  "default_tokenizer_cases": {
+    "arithmetic": [
+      {
+        "answer_token_ids": {
+          "A": 323,
+          "B": 367
+        },
+        "case_id": "COL3050-d000013-h1-arithmetic",
+        "tokens": {
+          "effect_donor": 121,
+          "recipient": 121,
+          "sham_donor": 121
+        }
+      },
+      {
+        "answer_token_ids": {
+          "A": 323,
+          "B": 367
+        },
+        "case_id": "COL3050-d000073-h1-arithmetic",
+        "tokens": {
+          "effect_donor": 121,
+          "recipient": 121,
+          "sham_donor": 121
+        }
+      },
+      {
+        "answer_token_ids": {
+          "A": 323,
+          "B": 367
+        },
+        "case_id": "COL3050-d000017-h1-arithmetic",
+        "tokens": {
+          "effect_donor": 121,
+          "recipient": 121,
+          "sham_donor": 121
+        }
+      },
+      {
+        "answer_token_ids": {
+          "A": 323,
+          "B": 367
+        },
+        "case_id": "COL3050-d000025-h1-arithmetic",
+        "tokens": {
+          "effect_donor": 121,
+          "recipient": 121,
+          "sham_donor": 121
+        }
+      }
+    ],
+    "trace": [
+      {
+        "answer_token_ids": {
+          "A": 323,
+          "B": 367
+        },
+        "case_id": "COL3050-d000013-h1-trace",
+        "tokens": {
+          "effect_donor": 96,
+          "recipient": 96,
+          "sham_donor": 96
+        }
+      },
+      {
+        "answer_token_ids": {
+          "A": 323,
+          "B": 367
+        },
+        "case_id": "COL3050-d000073-h1-trace",
+        "tokens": {
+          "effect_donor": 96,
+          "recipient": 96,
+          "sham_donor": 96
+        }
+      },
+      {
+        "answer_token_ids": {
+          "A": 323,
+          "B": 367
+        },
+        "case_id": "COL3050-d000017-h1-trace",
+        "tokens": {
+          "effect_donor": 96,
+          "recipient": 96,
+          "sham_donor": 96
+        }
+      },
+      {
+        "answer_token_ids": {
+          "A": 323,
+          "B": 367
+        },
+        "case_id": "COL3050-d000025-h1-trace",
+        "tokens": {
+          "effect_donor": 96,
+          "recipient": 96,
+          "sham_donor": 96
+        }
+      }
+    ]
+  },
+  "device": "cpu",
+  "elapsed_seconds": 7.796,
+  "errors": 0,
+  "failures": 0,
+  "hardware_memory_and_latency_status": "awaiting local RTX 3050 run",
+  "intervention_arms": [
+    "identity",
+    "effect",
+    "sham",
+    "random",
+    "full_donor_prefix"
+  ],
+  "model_id": "Nanbeige/Nanbeige4.2-3B",
+  "native_bf16_complete_head_parity": "exact on the tiny CPU fixture",
+  "native_runner_forwards_per_case": 8,
+  "observed_utc": "2026-11-25T15:50:57.748225+00:00",
+  "powershell_launcher_status": "static review; Windows execution awaits local run",
+  "pretrained_model_forwards": 0,
+  "protected_first_query_equality": "exact on the tiny CPU fixture",
+  "python": "3.12.14",
+  "revision": "451ed48c3273ecef7ea8faaa43c31ce529763bb1",
+  "rtx_3050_forwards": 0,
+  "runtime_versions": {
+    "accelerate": "1.1.1",
+    "huggingface_hub": "0.36.2",
+    "numpy": "2.3.5",
+    "protobuf": "5.29.3",
+    "psutil": "6.1.0",
+    "safetensors": "0.5.3",
+    "sentencepiece": "0.2.0",
+    "tokenizers": "0.20.3",
+    "torch": "2.6.0+cpu",
+    "transformers": "4.46.3"
+  },
+  "saved_activation_tensors_per_completed_case": 11,
+  "schema": "BPD-COL-02/source-validation/v1",
+  "scope": "official architecture and real tokenizer; tiny random CPU model weights",
+  "skipped": 0,
+  "source_sha256": {
+    "__init__.py": "1f364d1bd62eae0f6538110fbfd77294c7a2692fc09a0ff07daa6959e5fb31a6",
+    "cases.py": "353cc6a227669e04ec59095cbe59a0cd79ed5c34c591750244b1a2ef788f6a60",
+    "interventions.py": "4eb6faacdf922c5e4458799b9cfbaa5f0a0339fd083cc15a23c61161c77f612f",
+    "run_gym.py": "d7cc5d617a25c17c06c4e16e9b2faca7a579f77a566147255b47472e416fee0f",
+    "scoring.py": "2b235065d5bc01c69df176e5578e3c4b9837a82dc89f462d11fbda7527c21be1",
+    "streaming.py": "273d6193288be6a2e3f1b895875cca2379e6acc18631abede1831c3e8f3b639d"
+  },
+  "test_command": "BPD_COL3050_SOURCE_DIR=<verified-source> OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 TOKENIZERS_PARALLELISM=false python -m unittest discover -s mechinterp/bpd/experiments/collatz_3050/tests -v",
+  "test_source_sha256": {
+    "test_cases.py": "b8526411db0bc12e155d97fa259159c903b8e45e32beafd7386fcaabfd2786bf",
+    "test_interventions.py": "ad8d69c9c73223586b0b6147439090a178ea7a6eecbe261ac2616842bf35ce11",
+    "test_runner.py": "5ec2dcf3e4c6336f1b90a6087cf5397a78cfd97b8cd4f57a8046743af0f22bd6",
+    "test_scoring.py": "4ec8d0723de223d7a9afec7887e5efc2d928c1859d261cb2a4c86368b0918b64",
+    "test_streaming.py": "4883cf2a9e8b6cf681ebd55b53055962705a92ba47c18abace5b8be27d09d185"
+  },
+  "tests_run": 31,
+  "verdict": "SOURCE_VALIDATED_PILOT_READY"
+}
