@@ -57,11 +57,7 @@ def run():
     summary={}
     for name in rows[0]['arms']:
         rr=[r['arms'][name] for r in rows]
-        summary[name]=dict(hits=np.sum([r['hits'] for r in rr],axis=0).tolist(),
-                           coverage=np.sum([r['coverage'] for r in rr],axis=0).tolist(),
-                           nll=np.mean([r['nll'] for r in rr],axis=0).tolist(),
-                           payload=rr[0]['payload'],dense_payload=rr[0]['dense_payload'],
-                           median_posterior_ms={m:float(np.median([r['posterior_ms'][m] for r in rr])) for m in ('dense','sparse')})
+        summary[name]=dict(hits=np.sum([r['hits'] for r in rr],axis=0).tolist(),coverage=np.sum([r['coverage'] for r in rr],axis=0).tolist(),nll=np.mean([r['nll'] for r in rr],axis=0).tolist(),payload=rr[0]['payload'],dense_payload=rr[0]['dense_payload'],median_posterior_ms={m:float(np.median([r['posterior_ms'][m] for r in rr])) for m in ('dense','sparse')})
     return dict(roots=rows,summary=summary,exact_query_checks=checks)
 
 if __name__=='__main__': print(json.dumps(run(),indent=2))
