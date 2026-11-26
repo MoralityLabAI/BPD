@@ -4,6 +4,8 @@
 
 Parameter-space (**Behavioral Parameter Decomposition, BPD**) and state-space (**Causal Observable Quotients, `LOOPSCOPE-01..04` & `ARG-03-N`**) mechanistic interpretability for weight-tied, recurrent-depth transformers, companion to [`MoralityLabAI/VPD`](https://github.com/MoralityLabAI/VPD).
 
+**Goodfire review, 26 November 2026:** [Current looped-transformer findings and the RP03/RP04 implications](mechinterp/bpd/docs/GOODFIRE_LOOPED_MECHINTERP_20261126.md). [INK-BPD-06](mechinterp/bpd/experiments/inkling_component_flow/README.md) connects native BPD component writes to named loop readers, checks observed-state reconstruction, and measures finite boundary edits. Evidence: source instrumentation with constructed CPU fixtures; pretrained outcomes and the proposed training comparison remain pending.
+
 > **Held-Out Test Seal (`ARG-03-N`):** The 168-case `ARG-03-N` held-out split (`test.jsonl`, SHA-256 `ddd580212da5a5ea4f5fea740b515dd191b39e7a501d3e31b45944a666e7c8b5`) remains **strictly sealed (`0` model runs, excluded from this repository)** pending prospective completion of the fresh `final-R` development calibration gates in [`ARG03_FABLE_PREUNSEAL_AMENDMENT.md`](papers/shared_weights_dark_fibers/ARG03_FABLE_PREUNSEAL_AMENDMENT.md) and explicit human authorization.
 
 ---
