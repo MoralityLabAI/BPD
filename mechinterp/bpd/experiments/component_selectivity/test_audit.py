@@ -51,6 +51,11 @@ class IndependentReplayTests(unittest.TestCase):
                     self.groups, self.batch.edit_slot, route)
                 for key in ("logits", "states", "incoming_states", "recurrent_writes"):
                     torch.testing.assert_close(actual[key], expected[key], atol=2e-6, rtol=0)
+                # The patched write must replay the actual native output-hook
+                # operation order, even when algebraic rewrites differ by ULPs.
+                self.assertTrue(torch.equal(
+                    actual["recurrent_writes"][:, self.batch.prefix_steps],
+                    expected["recurrent_writes"][:, self.batch.prefix_steps]))
                 self.assertTrue(torch.equal(actual["logits"].argmax(-1), expected["logits"].argmax(-1)))
 
     def test_full_hybrid_state_has_native_hybrid_continuation(self):
