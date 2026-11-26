@@ -1,0 +1,21 @@
+name: BPD TRM curation checks
+on:
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/trm_curation/**'
+      - '.github/workflows/bpd-trm-curation.yml'
+  workflow_dispatch:
+jobs:
+  trm-curation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      OMP_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r mechinterp/bpd/experiments/training_steering_stability/requirements.txt
+      - run: python -m unittest discover -s mechinterp/bpd/experiments/trm_curation -t . -p 'test_*.py' -v
