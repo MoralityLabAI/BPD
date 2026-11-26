@@ -1,8 +1,17 @@
 # BPD-RP-04: component-local memory steering
 
-Development results are pending. RP04 deepens the RP03 memory-edit diagnostic through the native BPD read/write factors and the GRU carry path. It uses frozen checkpoints from eight exposed model roots and fresh development input draws. All results remain DEVELOPMENT_ONLY.
+The amended eight-root replacement development run completed with
+**1,064,960 / 1,064,960 prediction bits independently replayed**
+and **5,713,396 checks passed**. On final B, the true single-slot hybrid
+fixed-span edit exceeded the ordinary donor fixed-span edit by
+**8.691 percentage points** at the matched 0.75 state L2 dose.
+Evidence remains **DEVELOPMENT_ONLY** and the EvalMath decision remains
+**REDESIGN_OR_PILOT_ONLY**.
 
-The [protocol](PROTOCOL.md) fixes six state directions at L2 dose 0.75, matched rotations, and carry/write route controls. [THEORY.md](THEORY.md) explains why projecting into selected V columns can affect other component reads, how a dual edit isolates those reads, and why isolation can cost state norm. The selected U rows supply a separate limit on writable gate directions.
+See [RESULTS.md](RESULTS.md) for full root-level effects, geometries,
+audit and raw GitHub Actions artifact custody. The previous arithmetic
+failure and new independent seed domain are documented in
+[Amendment 01](AMENDMENT_01_AUDIT_ARITHMETIC.md).
 
 From the BPD repository root:
 
