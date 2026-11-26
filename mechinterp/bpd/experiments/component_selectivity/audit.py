@@ -108,14 +108,24 @@ def manual_rollout(state: dict[str, Tensor], x: Tensor, delta: Tensor | None = N
             if route == "full":
                 write = (carry @ V) @ U
             else:
-                write = (baseline @ V) @ U
+                # Reproduce the native output-hook arithmetic in float32:
+                # the recurrent write is evaluated at the actual carry, then
+                # a route-specific correction is applied with the same order.
+                write = (carry @ V) @ U
                 dreads = delta @ V
-                if route == "all_write_only":
-                    write = write + dreads @ U
-                elif route in ("selected_write_only", "carry_selected"):
+                total = dreads @ U
+                if route == "carry_only":
+                    write = write - total
+                elif route == "all_write_only":
+                    write = write + total
+                elif route == "selected_write_only":
                     write = write + (dreads * mask) @ U
-                elif route in ("outside_write_only", "carry_outside"):
+                elif route == "outside_write_only":
                     write = write + (dreads * (1 - mask)) @ U
+                elif route == "carry_selected":
+                    write = write - (dreads * (1 - mask)) @ U
+                elif route == "carry_outside":
+                    write = write - (dreads * mask) @ U
         else:
             write = (h @ V) @ U
         incoming.append(carry)
