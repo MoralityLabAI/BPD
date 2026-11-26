@@ -1,0 +1,93 @@
+{
+  "rows": [
+    {
+      "address_binding_accuracy": 0.794921875,
+      "address_binding_modal_accuracy": 0.25,
+      "causal_targeted_accuracy": 0.0625,
+      "causal_unaffected_accuracy": 0.7734375,
+      "delay": 2,
+      "modal_accuracy": 0.548828125,
+      "ordinary_accuracy": 0.791015625,
+      "root": 27000,
+      "updates": 3000
+    },
+    {
+      "address_binding_accuracy": 0.666015625,
+      "address_binding_modal_accuracy": 0.25,
+      "causal_targeted_accuracy": 0.08984375,
+      "causal_unaffected_accuracy": 0.7265625,
+      "delay": 7,
+      "modal_accuracy": 0.517578125,
+      "ordinary_accuracy": 0.7265625,
+      "root": 27000,
+      "updates": 3000
+    },
+    {
+      "address_binding_accuracy": 1.0,
+      "address_binding_modal_accuracy": 0.25,
+      "causal_targeted_accuracy": 0.0,
+      "causal_unaffected_accuracy": 1.0,
+      "delay": 2,
+      "modal_accuracy": 0.521484375,
+      "ordinary_accuracy": 1.0,
+      "root": 27000,
+      "updates": 6000
+    },
+    {
+      "address_binding_accuracy": 1.0,
+      "address_binding_modal_accuracy": 0.25,
+      "causal_targeted_accuracy": 0.0,
+      "causal_unaffected_accuracy": 0.9921875,
+      "delay": 7,
+      "modal_accuracy": 0.556640625,
+      "ordinary_accuracy": 0.99609375,
+      "root": 27000,
+      "updates": 6000
+    },
+    {
+      "address_binding_accuracy": 0.796875,
+      "address_binding_modal_accuracy": 0.25,
+      "causal_targeted_accuracy": 0.0390625,
+      "causal_unaffected_accuracy": 0.90625,
+      "delay": 2,
+      "modal_accuracy": 0.484375,
+      "ordinary_accuracy": 0.890625,
+      "root": 27001,
+      "updates": 3000
+    },
+    {
+      "address_binding_accuracy": 0.7578125,
+      "address_binding_modal_accuracy": 0.25,
+      "causal_targeted_accuracy": 0.03125,
+      "causal_unaffected_accuracy": 0.83984375,
+      "delay": 7,
+      "modal_accuracy": 0.55078125,
+      "ordinary_accuracy": 0.869140625,
+      "root": 27001,
+      "updates": 3000
+    },
+    {
+      "address_binding_accuracy": 1.0,
+      "address_binding_modal_accuracy": 0.25,
+      "causal_targeted_accuracy": 0.0,
+      "causal_unaffected_accuracy": 1.0,
+      "delay": 2,
+      "modal_accuracy": 0.521484375,
+      "ordinary_accuracy": 1.0,
+      "root": 27001,
+      "updates": 6000
+    },
+    {
+      "address_binding_accuracy": 0.99609375,
+      "address_binding_modal_accuracy": 0.25,
+      "causal_targeted_accuracy": 0.0,
+      "causal_unaffected_accuracy": 0.99609375,
+      "delay": 7,
+      "modal_accuracy": 0.55859375,
+      "ordinary_accuracy": 0.99609375,
+      "root": 27001,
+      "updates": 6000
+    }
+  ],
+  "scope": "EXPOSED_TRAIN_ONLY_ENGINEERING_EXTENSION"
+}

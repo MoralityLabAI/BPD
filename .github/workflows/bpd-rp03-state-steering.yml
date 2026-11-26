@@ -1,0 +1,44 @@
+name: BPD RP03 state steering replay
+
+on:
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/training_steering_stability/**'
+      - 'mechinterp/bpd/experiments/training_steering/**'
+      - 'mechinterp/bpd/components.py'
+      - 'mechinterp/bpd/config.py'
+      - '.github/workflows/bpd-rp03-state-steering.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  state-training-contract-and-replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      OMP_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+      OPENBLAS_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned CPU dependencies
+        run: python -m pip install -r mechinterp/bpd/experiments/training_steering_stability/requirements.txt
+      - name: Check state intervention and paired training contracts
+        run: python -m unittest discover -s mechinterp/bpd/experiments/training_steering_stability -t . -p 'test_*.py' -v
+      - name: Replay engineering training comparisons
+        if: hashFiles('mechinterp/bpd/experiments/training_steering_stability/results/smoke/summary.json') != ''
+        run: >-
+          python -m mechinterp.bpd.experiments.training_steering_stability.audit
+          mechinterp/bpd/experiments/training_steering_stability/results/smoke
+          --out /tmp/rp03_smoke_audit.json
+      - name: Replay published development checkpoints
+        if: hashFiles('mechinterp/bpd/experiments/training_steering_stability/results/development/summary.json') != ''
+        run: >-
+          python -m mechinterp.bpd.experiments.training_steering_stability.audit
+          mechinterp/bpd/experiments/training_steering_stability/results/development
+          --out /tmp/rp03_development_audit.json

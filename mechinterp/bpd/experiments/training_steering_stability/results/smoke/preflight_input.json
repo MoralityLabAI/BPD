@@ -1,0 +1,35 @@
+{
+  "alpha": ".05",
+  "confirm_units_planned": 8,
+  "experiment_id": "BPD-RP-03-hidden-state-steering-development",
+  "heldout_scope": "Eight assigned development roots remain unopened",
+  "heldout_sealed": true,
+  "independent_unit": "independently trained model root with four paired descendants",
+  "measurement_resolution": "1/512",
+  "pilot": [
+    {
+      "paired_effect": "-28/512",
+      "sham_effects": [
+        "26/512"
+      ],
+      "unit_id": "27010"
+    },
+    {
+      "paired_effect": "-4/512",
+      "sham_effects": [
+        "12/512"
+      ],
+      "unit_id": "27011"
+    }
+  ],
+  "pilot_from_development_only": true,
+  "planned_comparisons": 3,
+  "planning_scope": "Eight bounded development roots only; confirmation outside this protocol",
+  "schema_version": 1,
+  "scientific_min_effect": ".05",
+  "sham_confidence": ".95",
+  "sham_quantile": ".95",
+  "sham_scope": "same-site physical norm and auxiliary gradient ratio matched; small-n population sham tail uncalibrated",
+  "target_effect": ".10",
+  "units_independent": true
+}

@@ -1,0 +1,186 @@
+{
+  "confirmation_authorized": false,
+  "delay_selection": {
+    "flags": [],
+    "grid": [
+      {
+        "delay": 31,
+        "ordinary_accuracy_by_root": {
+          "27000": 0.7578125,
+          "27001": 0.828125
+        },
+        "passes": true
+      },
+      {
+        "delay": 63,
+        "ordinary_accuracy_by_root": {
+          "27000": 0.58203125,
+          "27001": 0.6875
+        },
+        "passes": true
+      },
+      {
+        "delay": 127,
+        "ordinary_accuracy_by_root": {
+          "27000": 0.53515625,
+          "27001": 0.59375
+        },
+        "passes": false
+      }
+    ],
+    "headroom_gate_passed": true,
+    "selected_delay": 31
+  },
+  "dose_selection": {
+    "flags": [
+      "TRANSPORT_GATE_FAILED"
+    ],
+    "grid": [
+      {
+        "arms": {
+          "fixed": {
+            "passes": false,
+            "targeted_accuracy": 0.1796875,
+            "targeted_correct": 46,
+            "targeted_minus_corruption": -0.06288675742574257,
+            "targeted_n": 256,
+            "unaffected_accuracy": 0.66015625,
+            "unaffected_correct": 169,
+            "unaffected_n": 256,
+            "unaffected_original_corruption_rate": 0.24257425742574257,
+            "unaffected_original_corruptions": 49,
+            "unaffected_original_recoveries": 16,
+            "unaffected_originally_correct": 202
+          },
+          "hybrid_state_oracle": {
+            "targeted_accuracy": 0.80078125,
+            "targeted_correct": 205,
+            "targeted_minus_corruption": 0.6374149133663366,
+            "targeted_n": 256,
+            "unaffected_accuracy": 0.765625,
+            "unaffected_correct": 196,
+            "unaffected_n": 256,
+            "unaffected_original_corruption_rate": 0.16336633663366337,
+            "unaffected_original_corruptions": 33,
+            "unaffected_original_recoveries": 27,
+            "unaffected_originally_correct": 202
+          },
+          "matched_rotated": {
+            "targeted_accuracy": 0.0625,
+            "targeted_correct": 16,
+            "targeted_minus_corruption": -0.09096534653465346,
+            "targeted_n": 256,
+            "unaffected_accuracy": 0.7265625,
+            "unaffected_correct": 186,
+            "unaffected_n": 256,
+            "unaffected_original_corruption_rate": 0.15346534653465346,
+            "unaffected_original_corruptions": 31,
+            "unaffected_original_recoveries": 15,
+            "unaffected_originally_correct": 202
+          }
+        },
+        "dose": 0.75
+      },
+      {
+        "arms": {
+          "fixed": {
+            "passes": false,
+            "targeted_accuracy": 0.2578125,
+            "targeted_correct": 66,
+            "targeted_minus_corruption": -0.14317759900990099,
+            "targeted_n": 256,
+            "unaffected_accuracy": 0.53125,
+            "unaffected_correct": 136,
+            "unaffected_n": 256,
+            "unaffected_original_corruption_rate": 0.400990099009901,
+            "unaffected_original_corruptions": 81,
+            "unaffected_original_recoveries": 15,
+            "unaffected_originally_correct": 202
+          },
+          "hybrid_state_oracle": {
+            "targeted_accuracy": 0.80078125,
+            "targeted_correct": 205,
+            "targeted_minus_corruption": 0.6374149133663366,
+            "targeted_n": 256,
+            "unaffected_accuracy": 0.765625,
+            "unaffected_correct": 196,
+            "unaffected_n": 256,
+            "unaffected_original_corruption_rate": 0.16336633663366337,
+            "unaffected_original_corruptions": 33,
+            "unaffected_original_recoveries": 27,
+            "unaffected_originally_correct": 202
+          },
+          "matched_rotated": {
+            "targeted_accuracy": 0.078125,
+            "targeted_correct": 20,
+            "targeted_minus_corruption": -0.11989480198019802,
+            "targeted_n": 256,
+            "unaffected_accuracy": 0.70703125,
+            "unaffected_correct": 181,
+            "unaffected_n": 256,
+            "unaffected_original_corruption_rate": 0.19801980198019803,
+            "unaffected_original_corruptions": 40,
+            "unaffected_original_recoveries": 19,
+            "unaffected_originally_correct": 202
+          }
+        },
+        "dose": 1.5
+      },
+      {
+        "arms": {
+          "fixed": {
+            "passes": false,
+            "targeted_accuracy": 0.41015625,
+            "targeted_correct": 105,
+            "targeted_minus_corruption": -0.22350711633663367,
+            "targeted_n": 256,
+            "unaffected_accuracy": 0.3359375,
+            "unaffected_correct": 86,
+            "unaffected_n": 256,
+            "unaffected_original_corruption_rate": 0.6336633663366337,
+            "unaffected_original_corruptions": 128,
+            "unaffected_original_recoveries": 12,
+            "unaffected_originally_correct": 202
+          },
+          "hybrid_state_oracle": {
+            "targeted_accuracy": 0.80078125,
+            "targeted_correct": 205,
+            "targeted_minus_corruption": 0.6374149133663366,
+            "targeted_n": 256,
+            "unaffected_accuracy": 0.765625,
+            "unaffected_correct": 196,
+            "unaffected_n": 256,
+            "unaffected_original_corruption_rate": 0.16336633663366337,
+            "unaffected_original_corruptions": 33,
+            "unaffected_original_recoveries": 27,
+            "unaffected_originally_correct": 202
+          },
+          "matched_rotated": {
+            "targeted_accuracy": 0.12890625,
+            "targeted_correct": 33,
+            "targeted_minus_corruption": -0.20277691831683167,
+            "targeted_n": 256,
+            "unaffected_accuracy": 0.6171875,
+            "unaffected_correct": 158,
+            "unaffected_n": 256,
+            "unaffected_original_corruption_rate": 0.3316831683168317,
+            "unaffected_original_corruptions": 67,
+            "unaffected_original_recoveries": 23,
+            "unaffected_originally_correct": 202
+          }
+        },
+        "dose": 3.0
+      }
+    ],
+    "selected_dose": 0.75,
+    "transport_gate_passed": false
+  },
+  "flags": [
+    "TRANSPORT_GATE_FAILED"
+  ],
+  "headroom_gate_passed": true,
+  "scope": "TRAIN-only selection on exposed engineering roots 27000 and 27001",
+  "selected_delay": 31,
+  "selected_dose": 0.75,
+  "transport_gate_passed": false
+}
