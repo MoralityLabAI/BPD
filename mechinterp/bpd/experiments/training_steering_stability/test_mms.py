@@ -61,7 +61,7 @@ def test_resume_next_gradient():
     assert torch.equal(a.weight.grad, b.weight.grad)
 
 def test_native_factors_capture():
-    from mechinterp.bpd.experiments.training_steering_stability.experiment import Recipe, new_model, make_batch, full_task_batch
+    from mechinterp.bpd.experiments.training_steering_stability.mms_run import Recipe, new_model, make_batch, full_task_batch
     from mechinterp.bpd.experiments.training_steering_stability.mms_run import input_keys
     from torch.nn import functional as F
     torch.manual_seed(19)

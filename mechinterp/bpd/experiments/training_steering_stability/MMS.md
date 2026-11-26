@@ -23,3 +23,8 @@ occupancy, cache hits, drift and time must justify any larger budget. A
 positive result requires the EvalMath mechanistic-resolution preflight and
 new sealed confirmation protocol. The rotated-coordinate sham is a weak
 engineering control. Never use the historical sealed cohorts.
+
+The native runner imports the original RP03 model and data generator directly,
+with the necessary recipe subset and unchanged batch/hash helpers locally,
+so it does not require the frozen POSIX-only experiment runner on Windows.
+The smoke workflow uses RP03's existing pinned torch/NumPy requirements.

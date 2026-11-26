@@ -8,12 +8,52 @@ import hashlib
 import json
 from pathlib import Path
 import time
-from dataclasses import replace
+from dataclasses import dataclass, replace
 
 import torch
 from torch.nn import functional as F
 
-from .experiment import Recipe, new_model, make_batch, seed_for, full_task_batch, state_hash
+from .data import make_batch, seed_for
+from .model import ComponentStateMemory
+
+
+@dataclass(frozen=True)
+class Recipe:
+    # RP03 subset, intentionally independent of its POSIX-only experiment runner.
+    width: int = 32
+    components: int = 32
+    slots: int = 4
+    values: int = 4
+    warmup_steps: int = 6000
+    training_steps: int = 240
+    batch_size: int = 48
+    learning_rate: float = .003
+    weight_decay: float = .0001
+    gradient_clip: float = 1.
+    evaluation_n: int = 512
+    noise: float = .03
+    threads: int = 1
+
+
+def new_model(recipe):
+    return ComponentStateMemory(width=recipe.width, components=recipe.components,
+                                input_dim=3 + recipe.slots + recipe.values,
+                                values=recipe.values)
+
+
+def full_task_batch(batch):
+    return (torch.cat((batch.receiver, batch.donor, batch.hybrid)),
+            torch.cat((batch.labels_r, batch.labels_d, batch.labels_h)))
+
+
+def state_hash(model):
+    h = hashlib.sha256()
+    for name, value in sorted(model.state_dict().items()):
+        h.update(name.encode())
+        h.update(str(tuple(value.shape)).encode())
+        h.update(value.detach().cpu().contiguous().numpy().tobytes())
+    return h.hexdigest()
+
 from .mms import MechanisticMemory
 
 
