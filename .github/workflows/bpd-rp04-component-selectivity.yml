@@ -27,9 +27,22 @@ jobs:
         run: python -m pip install -r mechinterp/bpd/experiments/component_selectivity/requirements.txt
       - name: Check component, gauge, pathway and data contracts
         run: python -m unittest discover -s mechinterp/bpd/experiments/component_selectivity -t . -p 'test_*.py' -v
-      - name: Replay engineering checkpoints
-        if: hashFiles('mechinterp/bpd/experiments/component_selectivity/results/smoke/summary.json') != ''
-        run: python -m mechinterp.bpd.experiments.component_selectivity.audit mechinterp/bpd/experiments/component_selectivity/results/smoke --out /tmp/rp04_smoke_audit.json
-      - name: Replay all exposed-root development checkpoints
-        if: hashFiles('mechinterp/bpd/experiments/component_selectivity/results/development/summary.json') != ''
-        run: python -m mechinterp.bpd.experiments.component_selectivity.audit mechinterp/bpd/experiments/component_selectivity/results/development --out /tmp/rp04_development_audit.json
+      - name: Generate and independently replay amended engineering draw
+        run: |
+          python -m mechinterp.bpd.experiments.component_selectivity.experiment --phase smoke --out /tmp/rp04_amended_smoke
+          python -m mechinterp.bpd.experiments.component_selectivity.audit /tmp/rp04_amended_smoke --out /tmp/rp04_amended_smoke/independent_audit.json
+      - name: Generate and independently replay replacement eight-root development draw
+        if: hashFiles('mechinterp/bpd/experiments/component_selectivity/SOURCE_FREEZE.json') != ''
+        run: |
+          python -m mechinterp.bpd.experiments.component_selectivity.experiment --phase development --source-lock mechinterp/bpd/experiments/component_selectivity/SOURCE_FREEZE.json --out /tmp/rp04_development_v2
+          python -m mechinterp.bpd.experiments.component_selectivity.audit /tmp/rp04_development_v2 --out /tmp/rp04_development_v2/independent_audit.json
+      - name: Retain all available amended and replacement receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bpd-rp04-development-${{ github.sha }}
+          path: |
+            /tmp/rp04_amended_smoke
+            /tmp/rp04_development_v2
+          if-no-files-found: warn
+          retention-days: 90
