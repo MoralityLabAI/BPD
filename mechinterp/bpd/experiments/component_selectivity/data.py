@@ -10,7 +10,9 @@ from .common import Recipe
 def seed_for(root, phase):
     if phase not in ('smoke', 'development'):
         raise ValueError('Unknown phase')
-    raw = f'BPD-RP-04:{root}:{phase}:slot-selectivity-v1'.encode()
+    # Retain the archived smoke seed; amended development must use a fresh domain.
+    domain = 'slot-selectivity-v2-audit-arithmetic' if phase == 'development' else 'slot-selectivity-v1'
+    raw = f'BPD-RP-04:{root}:{phase}:{domain}'.encode()
     return int.from_bytes(hashlib.sha256(raw).digest()[:8], 'little') % (2**63-1)
 
 
