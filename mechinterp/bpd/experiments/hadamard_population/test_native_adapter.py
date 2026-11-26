@@ -224,6 +224,41 @@ def test_legacy_boundary_detects_stale_context_and_survives_independent_forward(
         native.finish(first_last, first_hidden)
 
 
+@pytest.mark.parametrize("use_native", [False, True])
+def test_common_output_bias_preserves_softmax_loss_choices_and_gradients(use_native):
+    """A scalar added to every population logit is an exact softmax gauge."""
+    source = Recurrent(w=8)
+    model = native_from_recurrent(source) if use_native else source
+    x, y = torch.randn(3, 4, 4, F), torch.randn(3, 4)
+    original_logits = model(x)
+    original_loss = loss(original_logits, y)
+    original_loss.backward()
+    original_gradients = {
+        name: parameter.grad.detach().clone()
+        for name, parameter in model.named_parameters()
+    }
+    # The exact derivative is zero; a float32 reduction can leave roundoff.
+    gauge_atol = 4 * torch.finfo(torch.float32).eps
+    assert float(original_gradients["out.bias"].abs().max()) <= gauge_atol
+    model.zero_grad(set_to_none=True)
+    shift = 0.75
+    with torch.no_grad():
+        model.out.bias.add_(shift)
+    shifted_logits = model(x)
+    shifted_loss = loss(shifted_logits, y)
+    assert_close(shifted_logits, original_logits.detach() + shift)
+    assert_close(
+        torch.softmax(shifted_logits, dim=-1),
+        torch.softmax(original_logits.detach(), dim=-1),
+    )
+    assert torch.equal(shifted_logits.argmax(-1), original_logits.argmax(-1))
+    assert_close(shifted_loss, original_loss.detach())
+    shifted_loss.backward()
+    assert float(model.out.bias.grad.abs().max()) <= gauge_atol
+    for name, parameter in model.named_parameters():
+        assert_close(parameter.grad, original_gradients[name])
+
+
 @pytest.mark.parametrize("arm", [0, 1, 2, 3])
 def test_historical_gradient_update_helper_accepts_native_factors(arm):
     source = Recurrent(w=8)
@@ -233,13 +268,27 @@ def test_historical_gradient_update_helper_accepts_native_factors(arm):
     projection = proj(source, group)
     assert_close(proj(native, group), projection)
     rotation = torch.eye(8).roll(1, dims=1)
-    source_optimizer = torch.optim.AdamW(source.parameters(), lr=0.003)
-    native_optimizer = torch.optim.AdamW(native.parameters(), lr=0.003)
+    # Remote run 45815767566 at 93da07e failed on the arm-2 out.bias comparison
+    # (absolute difference 7.6136e-4).  That shared bias has zero mathematical
+    # softmax-loss gradient.  AdamW's 1e-8 epsilon can amplify its float32
+    # cancellation residue into a visible update.  This synthetic optimizer
+    # check fixes the gauge by excluding out.bias from the optimizer.  The
+    # helper still differentiates it, and ordinary forward/gradient parity
+    # plus the explicit invariance test above continue to cover that parameter.
+    fixed_bias = source.out.bias.detach().clone()
+    source_optimizer = torch.optim.AdamW(
+        [p for name, p in source.named_parameters() if name != "out.bias"], lr=0.003
+    )
+    native_optimizer = torch.optim.AdamW(
+        [p for name, p in native.named_parameters() if name != "out.bias"], lr=0.003
+    )
     source_receipt = update(source, source_optimizer, x, y, arm, projection, group, rotation)
     native_receipt = update(native, native_optimizer, x, y, arm, projection, group, rotation)
     assert_close(torch.tensor(native_receipt), torch.tensor(source_receipt))
     for _, original, converted, transposed in parameter_pairs(source, native):
         assert_close(converted.T if transposed else converted, original)
+    assert torch.equal(source.out.bias, fixed_bias)
+    assert torch.equal(native.out.bias, fixed_bias)
     assert_close(native(x), source(x))
 
 

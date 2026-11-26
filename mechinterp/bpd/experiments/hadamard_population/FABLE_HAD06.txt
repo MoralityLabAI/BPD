@@ -45,6 +45,11 @@ checkpoint round trip. Its scope is the factored recurrent write. The context
 term is a separate path for state information. Native TRM attention and the
 full BPDTrainer remain separate integration work.
 
+The first remote optimizer parity test exposed numerical drift in the common
+action-logit bias. That scalar has zero mathematical effect on softmax choices
+and loss. Keep the next policy's score head free of that redundant bias, and
+preserve the failed test receipt and the engineering rationale in CI_NUMERICS.md.
+
 Mathematical contract
 
 Represent a candidate by four binary sequences of odd length m. Let r_t be the

@@ -1,7 +1,7 @@
 # HAD-05: population repair, LDT constraint joins and recurrent compute allocation
 
 The [2026-11-26 follow-up](REVISION_20261126.md) adds native BPD component
-execution, a completed-start budget fix, 77 focused tests and source-locked
+execution, a completed-start budget fix, 79 focused tests and source-locked
 development replay receipts. The next study is specified in
 [FABLE_HAD06.txt](FABLE_HAD06.txt). The historical report below retains the
 original source versions and experimental scope.
