@@ -55,5 +55,4 @@ def run():
         summary[count]['median_paired_ratio_eager_over_lazy']=float(np.median([g['eager']['wall_ms']/g['lazy']['wall_ms'] for g in groups]))
     return dict(roots=rows,summary=summary,scope='full 48-probe prediction rows retained; timings exclude training and environment generation, include bounds and decisions')
 
-
 if __name__=='__main__': print(json.dumps(run(),indent=2))
