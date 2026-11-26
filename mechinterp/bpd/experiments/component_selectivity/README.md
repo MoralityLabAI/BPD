@@ -15,3 +15,16 @@ python -m mechinterp.bpd.experiments.component_selectivity.audit mechinterp/bpd/
 ```
 
 Each output directory must be fresh. The development command requires the published source lock. Existing RP03 models and their original experiment receipts retain their hashes.
+
+## Audit amendment and replacement development
+
+[Amendment 01](AMENDMENT_01_AUDIT_ARITHMETIC.md) records the failed original
+eight-root audit, the float32 operation-order repair, and a new development
+input-seed domain. The first-attempt original local raw receipts are unavailable
+in the current workspace and have not been uploaded to this branch.
+
+The PR workflow runs a fresh engineering check of the amended auditor.
+Following publication of `SOURCE_FREEZE.json`, it executes the full replacement
+eight-root development diagnostic, independently replays it, and uploads all
+receipts as a named GitHub Actions artifact. The development study remains
+`DEVELOPMENT_ONLY`; source, checkpoint, and result hashes are retained.
