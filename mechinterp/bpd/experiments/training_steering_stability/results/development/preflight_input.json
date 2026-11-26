@@ -1,0 +1,77 @@
+{
+  "alpha": ".05",
+  "confirm_units_planned": 8,
+  "experiment_id": "BPD-RP-03-hidden-state-steering-development",
+  "heldout_scope": "Declared development readout has been consumed; no confirmation cohort allocated",
+  "heldout_sealed": false,
+  "independent_unit": "independently trained model root with four paired descendants",
+  "measurement_resolution": "1/512",
+  "pilot": [
+    {
+      "paired_effect": "19/512",
+      "sham_effects": [
+        "15/512"
+      ],
+      "unit_id": "27101"
+    },
+    {
+      "paired_effect": "-22/512",
+      "sham_effects": [
+        "-7/512"
+      ],
+      "unit_id": "27102"
+    },
+    {
+      "paired_effect": "11/512",
+      "sham_effects": [
+        "-4/512"
+      ],
+      "unit_id": "27103"
+    },
+    {
+      "paired_effect": "0/512",
+      "sham_effects": [
+        "4/512"
+      ],
+      "unit_id": "27104"
+    },
+    {
+      "paired_effect": "1/512",
+      "sham_effects": [
+        "-6/512"
+      ],
+      "unit_id": "27105"
+    },
+    {
+      "paired_effect": "14/512",
+      "sham_effects": [
+        "27/512"
+      ],
+      "unit_id": "27106"
+    },
+    {
+      "paired_effect": "0/512",
+      "sham_effects": [
+        "-8/512"
+      ],
+      "unit_id": "27107"
+    },
+    {
+      "paired_effect": "-18/512",
+      "sham_effects": [
+        "-1/512"
+      ],
+      "unit_id": "27108"
+    }
+  ],
+  "pilot_from_development_only": true,
+  "planned_comparisons": 3,
+  "planning_scope": "Eight bounded development roots only; confirmation outside this protocol",
+  "schema_version": 1,
+  "scientific_min_effect": ".05",
+  "sham_confidence": ".95",
+  "sham_quantile": ".95",
+  "sham_scope": "same-site physical norm and auxiliary gradient ratio matched; small-n population sham tail uncalibrated",
+  "target_effect": ".10",
+  "units_independent": true
+}

@@ -1,9 +1,23 @@
 # BPD-RP-03: fixed and live steering subspaces during training
 
-**Development results are pending.** RP03 tests whether keeping a physical
-intervention subspace fixed helps a causal training signal. Its four paired
-arms share 6,000 warmup updates, task examples and training budget. The selected
-long delay is 31 distractor steps and the state-edit L2 dose is 0.75.
+**All eight development roots are complete.** Fixed causal steering scores
+3,248/4,096 ordinary delay-31 answers (79.30%); task training scores 3,243/4,096
+(79.17%), the rotated control 3,263/4,096 (79.66%), and tracked geometry
+3,243/4,096 (79.17%). B minus A is +0.1221 percentage points, with 239 recoveries
+and 234 corruptions. All three Holm-adjusted p-values are 1. The evidence remains
+**DEVELOPMENT_ONLY**, and EvalMath returns **REDESIGN_OR_PILOT_ONLY**.
+
+The [complete report](RESULTS.md) includes every root and the targeted-transport
+readouts. B's fixed edit gives 202/1,024 requested values while corrupting
+192/810 previously correct unaffected answers. Its final fixed/current edit
+cosine averages 0.99609. The next design question concerns slot selectivity and
+contamination from the donor's other memory slots.
+
+All 34 focused tests pass. Independent replay passes 1,856,350 checks across
+26 frozen source hashes, reproducing the recovered audit byte for byte.
+The four paired arms share 6,000 warmup updates, task examples and training
+budget. The selected long delay is 31 distractor steps and the state-edit
+L2 dose is 0.75.
 
 **Engineering transport admission failed.** The fixed dose rule selected 0.75
 as its fallback, with 17.97% targeted transport and 24.26% corruption among
@@ -42,7 +56,7 @@ their difference and normalizing it produces a hidden-state edit of L2 norm
 0.75. The edit enters before the first distractor, so it affects the GRU carry
 and recurrent operator together. Its continuation is trained toward the known
 counterfactual-hybrid answer. The donor state is detached. C applies a fixed,
-root-seeded signed permutation to B's physical edit.
+root-seeded signed permutation to its own fixed-projector edit.
 
 Every arm receives receiver, donor and hybrid as ordinary supervised examples.
 All also execute the same diagnostic forward and gradient evaluations. Applied
@@ -104,3 +118,10 @@ The report must retain every assigned root. Ordinary IID and long-delay cases
 remain clustered within those models. Causal transport, the address-binding
 diagnostic and the full-hybrid-state positive control receive their own
 descriptive readouts.
+
+The additive descriptive aggregation has its own source and input hashes and can
+be checked against the original receipts with:
+
+```bash
+python mechinterp/bpd/experiments/training_steering_stability/summarize_diagnostics.py --check
+```

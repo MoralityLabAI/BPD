@@ -42,3 +42,6 @@ jobs:
           python -m mechinterp.bpd.experiments.training_steering_stability.audit
           mechinterp/bpd/experiments/training_steering_stability/results/development
           --out /tmp/rp03_development_audit.json
+      - name: Check descriptive diagnostic aggregation
+        if: hashFiles('mechinterp/bpd/experiments/training_steering_stability/results/development/diagnostic_summary.json') != ''
+        run: python mechinterp/bpd/experiments/training_steering_stability/summarize_diagnostics.py --check
