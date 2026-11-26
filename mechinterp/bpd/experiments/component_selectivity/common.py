@@ -59,7 +59,7 @@ def source_hashes():
         if actual != expected:
             raise ValueError('RP03 source changed: '+relative)
         result[relative] = actual
-    paths = sorted(HERE.glob('*.py')) + [HERE/'PROTOCOL.md', HERE/'THEORY.md', HERE/'requirements.txt', REPO/'.github/workflows/bpd-rp04-component-selectivity.yml']
+    paths = sorted(HERE.glob('*.py')) + [HERE/'PROTOCOL.md', HERE/'THEORY.md', HERE/'AMENDMENT_01_AUDIT_ARITHMETIC.md', HERE/'requirements.txt', REPO/'.github/workflows/bpd-rp04-component-selectivity.yml']
     for path in paths:
         result[str(path.relative_to(REPO))] = sha(path)
     return result
