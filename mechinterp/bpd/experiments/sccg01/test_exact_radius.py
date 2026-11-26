@@ -32,6 +32,27 @@ class ExactRadiusTests(unittest.TestCase):
         self.assertGreaterEqual(s.Rational(r["lower"]),s.Rational(799,1000))
         self.assertLessEqual(s.Rational(r["width"]),s.Rational(6,4096))
 
+    def test_independent_quartic_optimum(self):
+        # For x=(1,1), C=(0,1), a=(-1,0), e=m=1,
+        # protected states obey y2=tau, y1^2=2*tau^2-1.
+        # The dose condition requires y1 >= tau*(3*tau-2)/2 > 0.
+        # The objective 1-y1/tau decreases with tau.
+        # Thus the smallest feasible tau is the first positive root
+        # of 9*tau^4-12*tau^3-4*tau^2+4.
+        quartic=s.Poly(9*t**4-12*t**3-4*t**2+4,t)
+        l=s.Rational(5161852,7293017)
+        h=s.Rational(5403205,7634017)
+        self.assertGreater(l*l,s.Rational(1,2))
+        self.assertLess(h,s.Rational(3,4))
+        self.assertGreater(quartic.eval(l),0)
+        self.assertLess(quartic.eval(h),0)
+        self.assertEqual(quartic.count_roots(0,l),0)
+        self.assertEqual(quartic.count_roots(l,h),1)
+        lo,hi=2-3*h/2,2-3*l/2
+        p=ReaderProblem([1,1],[[1,0],[0,1]],[[0,1]],[-1,0],1,1)
+        self.assertTrue(p.decide(lo)["feasible"])
+        self.assertFalse(p.decide(hi)["feasible"])
+
     def test_zero_dim_and_fixed_isolated(self):
         p=ReaderProblem([1,1],[[1],[0]],[[0,1]],[-1,0],1,1)
         self.assertTrue(p.fixed)
