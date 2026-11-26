@@ -1,0 +1,19 @@
+name: MMS native BPD CPU
+on:
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/training_steering_stability/mms*.py'
+      - 'mechinterp/bpd/experiments/training_steering_stability/test_mms.py'
+      - '.github/workflows/mms-native-cpu.yml'
+  workflow_dispatch:
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install pytest && pip install torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - run: python -m pytest -q mechinterp/bpd/experiments/training_steering_stability/test_mms.py
+      - run: python -m mechinterp.bpd.experiments.training_steering_stability.mms_run --root 28101 --warmup 2 --steps 4 --mms-mib 1 --out /tmp/mms-smoke
