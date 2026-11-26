@@ -1,0 +1,10 @@
+{
+  "archive": "attempt_01.tar.gz",
+  "bytes": 1733658,
+  "development_inputs_generated_before_repair": false,
+  "failure": "Auditor incorrectly required groups to be disjoint across slots",
+  "repair": "Mix factors only within shared slot-membership classes; require uniqueness within each group",
+  "retained": "Both engineering roots, all ten snapshots, aggregate receipts, the audit failure and all executed source bytes",
+  "sha256": "df4b3035822f5da93870c44b2d283d182c60578904a61cc64f468801e94f2c56",
+  "source_files": 42
+}

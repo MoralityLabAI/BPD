@@ -1,0 +1,63 @@
+{
+  "aggregate_diagnostics_match": true,
+  "aggregate_statistics_match": true,
+  "artifact_hashes_checked": 19,
+  "checks": 510512,
+  "elapsed_seconds": 1.9023525714874268,
+  "experiment": "BPD-RP-04",
+  "input_hashes_checked": 14,
+  "maximum_scalar_comparison_error": 1.6689300537109375e-05,
+  "maximum_tensor_comparison_error": 5.75091689825058e-08,
+  "metric_fields_replayed": [
+    "condition predictions/correct bits/cross-entropies/logit maxima/all physical scalars",
+    "all direction and rotated diagnostics",
+    "all pathway diagnostics",
+    "all root and per-slot counts",
+    "diagnostic aggregate via shared helper after independent raw replay",
+    "exact root sign flips and Holm adjustment",
+    "preflight effects, family and scope; pinned planner output"
+  ],
+  "n_checkpoints": 10,
+  "n_conditions": 26,
+  "n_roots": 2,
+  "phase": "smoke",
+  "prediction_bits_match": true,
+  "prediction_bits_replayed": 16640,
+  "preflight_decision": "REDESIGN_OR_PILOT_ONLY",
+  "preflight_input_verified": true,
+  "preflight_output_matches": true,
+  "roots": [
+    {
+      "base_pairs": 16,
+      "checkpoints_replayed": 5,
+      "checks": 47624,
+      "conditions_per_checkpoint": 26,
+      "prediction_bits_replayed": 8320,
+      "query_cases": 64,
+      "root": 27010
+    },
+    {
+      "base_pairs": 16,
+      "checkpoints_replayed": 5,
+      "checks": 47624,
+      "conditions_per_checkpoint": 26,
+      "prediction_bits_replayed": 8320,
+      "query_cases": 64,
+      "root": 27011
+    }
+  ],
+  "scalar_tolerance": 2e-05,
+  "schema_version": 1,
+  "scope": "Independent saved-tensor recurrence, all 26 intervention conditions, factor geometry, gate/carry identities, labels and root-level count/sign-flip replay",
+  "scope_limits": [
+    "RP03 optimizer trajectories are inherited inputs and are outside this inference-only replay.",
+    "The deterministic input sampler is shared; raw encodings, semantic labels, partition membership, query expansion and fingerprints are checked independently.",
+    "The statistics-only module is reused for bootstrap receipts; integer endpoints, exact root sign flips and Holm correction are also computed independently.",
+    "The diagnostic aggregation helper is reused after every underlying numeric array is independently replayed.",
+    "Source custody is verified through local file hashes and the recorded published commit; this audit does not contact the remote repository.",
+    "Runtime and peak-memory fields are hash-bound receipts; their original measurements are not independently replayed.",
+    "Preflight effects and scope are reconstructed independently; its pinned planning algorithm is reused."
+  ],
+  "source_hashes_checked": 42,
+  "verdict": "PASS"
+}
