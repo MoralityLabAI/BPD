@@ -115,7 +115,7 @@ def float_scores(w):
             gain[j]=cross[j]*H[j]/P[j]+math_sqrt(
                 max(0.,(B[j]-cross[j]**2/P[j])*(R[j]-H[j]**2/P[j])))
     finite=(np.sum(l*center,axis=1)+gain)/4-w["a0"]
-    tangent=a[S]-(np.linalg.pinv(A,rcond=1e-12)@A@a[S,:,None])[:,:,0]
+    tangent=a[S]-(np.linalg.pinv(A,rcond=1e-12)@A@a[S][:,:,None])[:,:,0]
     return np.linalg.norm(a[S],axis=1),3*np.linalg.norm(tangent,axis=1),finite
 
 
