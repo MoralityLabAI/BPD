@@ -1,0 +1,368 @@
+{
+  "allocation": {
+    "arms": {
+      "best": {
+        "aggregate_matches_report": true,
+        "cases": 72,
+        "injected_descendant_solves": 0,
+        "injections": 0,
+        "reported_original_solves": 36,
+        "root_solves": {
+          "85101": 7,
+          "85102": 7,
+          "85103": 9,
+          "85104": 13
+        },
+        "solved": 36,
+        "summed_search_seconds": 1.22291771500295
+      },
+      "fixed": {
+        "aggregate_matches_report": true,
+        "cases": 72,
+        "injected_descendant_solves": 0,
+        "injections": 0,
+        "reported_original_solves": 18,
+        "root_solves": {
+          "85101": 5,
+          "85102": 5,
+          "85103": 4,
+          "85104": 4
+        },
+        "solved": 18,
+        "summed_search_seconds": 2.235971217001861
+      },
+      "ldt_best": {
+        "aggregate_matches_report": true,
+        "cases": 72,
+        "injected_descendant_solves": 0,
+        "injections": 0,
+        "reported_original_solves": 36,
+        "root_solves": {
+          "85101": 7,
+          "85102": 7,
+          "85103": 9,
+          "85104": 13
+        },
+        "solved": 36,
+        "summed_search_seconds": 1.2118927419978718
+      },
+      "live": {
+        "aggregate_matches_report": true,
+        "cases": 72,
+        "injected_descendant_solves": 0,
+        "injections": 0,
+        "reported_original_solves": 19,
+        "root_solves": {
+          "85101": 5,
+          "85102": 5,
+          "85103": 4,
+          "85104": 5
+        },
+        "solved": 19,
+        "summed_search_seconds": 2.2287271430022884
+      },
+      "mlp": {
+        "aggregate_matches_report": true,
+        "cases": 72,
+        "injected_descendant_solves": 0,
+        "injections": 0,
+        "reported_original_solves": 24,
+        "root_solves": {
+          "85101": 6,
+          "85102": 6,
+          "85103": 7,
+          "85104": 5
+        },
+        "solved": 24,
+        "summed_search_seconds": 1.9324028860055478
+      },
+      "no_ldt": {
+        "aggregate_matches_report": true,
+        "cases": 72,
+        "injected_descendant_solves": 0,
+        "injections": 0,
+        "reported_original_solves": 19,
+        "root_solves": {
+          "85101": 5,
+          "85102": 5,
+          "85103": 5,
+          "85104": 4
+        },
+        "solved": 19,
+        "summed_search_seconds": 2.2543276139977024
+      },
+      "round_robin": {
+        "aggregate_matches_report": true,
+        "cases": 72,
+        "injected_descendant_solves": 0,
+        "injections": 0,
+        "reported_original_solves": 19,
+        "root_solves": {
+          "85101": 5,
+          "85102": 4,
+          "85103": 6,
+          "85104": 4
+        },
+        "solved": 19,
+        "summed_search_seconds": 1.4445818390004206
+      },
+      "serial": {
+        "aggregate_matches_report": true,
+        "cases": 72,
+        "injected_descendant_solves": 0,
+        "injections": 0,
+        "reported_original_solves": 22,
+        "root_solves": {
+          "85101": 6,
+          "85102": 6,
+          "85103": 6,
+          "85104": 4
+        },
+        "solved": 22,
+        "summed_search_seconds": 1.3878944070002035
+      },
+      "sham": {
+        "aggregate_matches_report": true,
+        "cases": 72,
+        "injected_descendant_solves": 0,
+        "injections": 0,
+        "reported_original_solves": 22,
+        "root_solves": {
+          "85101": 5,
+          "85102": 5,
+          "85103": 8,
+          "85104": 4
+        },
+        "solved": 22,
+        "summed_search_seconds": 2.2210872409950753
+      },
+      "trm": {
+        "aggregate_matches_report": true,
+        "cases": 72,
+        "injected_descendant_solves": 0,
+        "injections": 0,
+        "reported_original_solves": 19,
+        "root_solves": {
+          "85101": 5,
+          "85102": 3,
+          "85103": 7,
+          "85104": 4
+        },
+        "solved": 19,
+        "summed_search_seconds": 2.232355217996883
+      },
+      "trm_transfer": {
+        "aggregate_matches_report": true,
+        "cases": 72,
+        "injected_descendant_solves": 0,
+        "injections": 0,
+        "reported_original_solves": 18,
+        "root_solves": {
+          "85101": 5,
+          "85102": 2,
+          "85103": 7,
+          "85104": 4
+        },
+        "solved": 18,
+        "summed_search_seconds": 2.567440048997014
+      },
+      "ucb": {
+        "aggregate_matches_report": true,
+        "cases": 72,
+        "injected_descendant_solves": 0,
+        "injections": 0,
+        "reported_original_solves": 36,
+        "root_solves": {
+          "85101": 7,
+          "85102": 7,
+          "85103": 9,
+          "85104": 13
+        },
+        "solved": 36,
+        "summed_search_seconds": 1.2532989359997373
+      },
+      "ucb_transfer": {
+        "aggregate_matches_report": true,
+        "cases": 72,
+        "injected_descendant_solves": 0,
+        "injections": 0,
+        "reported_original_solves": 33,
+        "root_solves": {
+          "85101": 6,
+          "85102": 7,
+          "85103": 7,
+          "85104": 13
+        },
+        "solved": 33,
+        "summed_search_seconds": 1.6268046240029435
+      }
+    },
+    "comparison_limit": "Only totals reported in the old README are available. Matching totals do not establish casewise or numeric replay parity.",
+    "rows": 936,
+    "scope": "DEVELOPMENT_REPLAY"
+  },
+  "exact": {
+    "arms": {
+      "archive128": {
+        "aggregate_matches_report": true,
+        "cases": 96,
+        "injected_descendant_solves": 0,
+        "injections": 0,
+        "reported_original_solves": 34,
+        "root_solves": {
+          "85201": 7,
+          "85202": 7,
+          "85203": 9,
+          "85204": 11
+        },
+        "solved": 34,
+        "summed_search_seconds": 5.948272972995255
+      },
+      "archive16": {
+        "aggregate_matches_report": true,
+        "cases": 96,
+        "injected_descendant_solves": 0,
+        "injections": 0,
+        "reported_original_solves": 39,
+        "root_solves": {
+          "85201": 9,
+          "85202": 9,
+          "85203": 9,
+          "85204": 12
+        },
+        "solved": 39,
+        "summed_search_seconds": 2.23935262699797
+      },
+      "archive64": {
+        "aggregate_matches_report": true,
+        "cases": 96,
+        "injected_descendant_solves": 0,
+        "injections": 0,
+        "reported_original_solves": 36,
+        "root_solves": {
+          "85201": 7,
+          "85202": 9,
+          "85203": 9,
+          "85204": 11
+        },
+        "solved": 36,
+        "summed_search_seconds": 4.084619395999653
+      },
+      "best": {
+        "aggregate_matches_report": true,
+        "cases": 96,
+        "injected_descendant_solves": 0,
+        "injections": 0,
+        "reported_original_solves": 39,
+        "root_solves": {
+          "85201": 9,
+          "85202": 9,
+          "85203": 9,
+          "85204": 12
+        },
+        "solved": 39,
+        "summed_search_seconds": 2.03412202900563
+      },
+      "random64": {
+        "aggregate_matches_report": true,
+        "cases": 96,
+        "injected_descendant_solves": 0,
+        "injections": 0,
+        "reported_original_solves": 36,
+        "root_solves": {
+          "85201": 7,
+          "85202": 9,
+          "85203": 9,
+          "85204": 11
+        },
+        "solved": 36,
+        "summed_search_seconds": 4.141505709006196
+      }
+    },
+    "comparison_limit": "Only totals reported in the old README are available. Matching totals do not establish casewise or numeric replay parity.",
+    "rows": 480,
+    "scope": "DEVELOPMENT_REPLAY"
+  },
+  "near": {
+    "arms": {
+      "best": {
+        "aggregate_matches_report": true,
+        "cases": 72,
+        "injected_descendant_solves": 0,
+        "injections": 0,
+        "reported_original_solves": 24,
+        "root_solves": {
+          "85401": 5,
+          "85402": 6,
+          "85403": 7,
+          "85404": 6
+        },
+        "solved": 24,
+        "summed_search_seconds": 1.6227445790054844
+      },
+      "exact64": {
+        "aggregate_matches_report": true,
+        "cases": 72,
+        "injected_descendant_solves": 0,
+        "injections": 0,
+        "reported_original_solves": 23,
+        "root_solves": {
+          "85401": 5,
+          "85402": 6,
+          "85403": 7,
+          "85404": 5
+        },
+        "solved": 23,
+        "summed_search_seconds": 2.9625252360028753
+      },
+      "near64": {
+        "aggregate_matches_report": true,
+        "cases": 72,
+        "injected_descendant_solves": 25,
+        "injections": 133,
+        "reported_original_solves": 28,
+        "root_solves": {
+          "85401": 8,
+          "85402": 8,
+          "85403": 6,
+          "85404": 6
+        },
+        "solved": 28,
+        "summed_search_seconds": 3.89254278300632
+      },
+      "near64_noinject": {
+        "aggregate_matches_report": true,
+        "cases": 72,
+        "injected_descendant_solves": 0,
+        "injections": 0,
+        "reported_original_solves": 22,
+        "root_solves": {
+          "85401": 5,
+          "85402": 6,
+          "85403": 6,
+          "85404": 5
+        },
+        "solved": 22,
+        "summed_search_seconds": 4.032890404002501
+      },
+      "random_near64": {
+        "aggregate_matches_report": true,
+        "cases": 72,
+        "injected_descendant_solves": 25,
+        "injections": 145,
+        "reported_original_solves": 28,
+        "root_solves": {
+          "85401": 6,
+          "85402": 11,
+          "85403": 7,
+          "85404": 4
+        },
+        "solved": 28,
+        "summed_search_seconds": 4.063739300002453
+      }
+    },
+    "comparison_limit": "Only totals reported in the old README are available. Matching totals do not establish casewise or numeric replay parity.",
+    "rows": 360,
+    "scope": "DEVELOPMENT_REPLAY"
+  }
+}

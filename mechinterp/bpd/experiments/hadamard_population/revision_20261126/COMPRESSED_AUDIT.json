@@ -1,0 +1,102 @@
+{
+  "disjoint_source_positive_control": {
+    "disjoint_source_fixture": true,
+    "gram_checks": 66
+  },
+  "families": {
+    "allocation": {
+      "exact_certificate_audit": {
+        "paired_populations": 72,
+        "receipt_checks": 1553124,
+        "verified_certificates": 321
+      },
+      "integrity": {
+        "certificates": 321,
+        "family": "allocation",
+        "genesis_source_rows_verified": 0,
+        "injections": 0,
+        "injections_per_arm": {
+          "best": 0,
+          "fixed": 0,
+          "ldt_best": 0,
+          "live": 0,
+          "mlp": 0,
+          "no_ldt": 0,
+          "round_robin": 0,
+          "serial": 0,
+          "sham": 0,
+          "trm": 0,
+          "trm_transfer": 0,
+          "ucb": 0,
+          "ucb_transfer": 0
+        },
+        "lineage_limit": "Generation and slot references are checked. Block-zero source rows can be reconstructed. Later source rows need archived snapshots or flip logs, which these receipts omit; full source-row provenance and independent ancestry remain unverified.",
+        "maximum_injections_per_row": 0,
+        "paired_populations": 72,
+        "rows": 936,
+        "rows_with_injections": 0,
+        "status": "finite_integrity_pass"
+      },
+      "sha256": "c8651409c7c4e6fa8513da728a3cf0a675f478740ad046e2dbbcf8c9da98140b"
+    },
+    "exact": {
+      "exact_certificate_audit": {
+        "certificates": 184,
+        "checks": 877028,
+        "injected_children": 0,
+        "paired_populations": 96,
+        "solutions_from_injected_children": 0
+      },
+      "integrity": {
+        "certificates": 184,
+        "family": "exact",
+        "genesis_source_rows_verified": 0,
+        "injections": 0,
+        "injections_per_arm": {
+          "archive128": 0,
+          "archive16": 0,
+          "archive64": 0,
+          "best": 0,
+          "random64": 0
+        },
+        "lineage_limit": "Generation and slot references are checked. Block-zero source rows can be reconstructed. Later source rows need archived snapshots or flip logs, which these receipts omit; full source-row provenance and independent ancestry remain unverified.",
+        "maximum_injections_per_row": 0,
+        "paired_populations": 96,
+        "rows": 480,
+        "rows_with_injections": 0,
+        "status": "finite_integrity_pass"
+      },
+      "sha256": "3c26629e5f4217a699a2458cc1ba6d34f8bc2e4f503b3d7d0fda05f2cd156a9a"
+    },
+    "near": {
+      "exact_certificate_audit": {
+        "certificates": 125,
+        "checks": 585842,
+        "injected_children": 278,
+        "paired_populations": 72,
+        "solutions_from_injected_children": 50
+      },
+      "integrity": {
+        "certificates": 125,
+        "family": "near",
+        "genesis_source_rows_verified": 481,
+        "injections": 278,
+        "injections_per_arm": {
+          "best": 0,
+          "exact64": 0,
+          "near64": 133,
+          "near64_noinject": 0,
+          "random_near64": 145
+        },
+        "lineage_limit": "Generation and slot references are checked. Block-zero source rows can be reconstructed. Later source rows need archived snapshots or flip logs, which these receipts omit; full source-row provenance and independent ancestry remain unverified.",
+        "maximum_injections_per_row": 6,
+        "paired_populations": 72,
+        "rows": 360,
+        "rows_with_injections": 122,
+        "status": "finite_integrity_pass"
+      },
+      "sha256": "a51fa51fe310ecb4942b06a2326e2b018ad5cdc3f1708d9bb7d0e3145cbb63e8"
+    }
+  },
+  "scope": "SAVED_DEVELOPMENT_RECEIPT_AUDIT"
+}

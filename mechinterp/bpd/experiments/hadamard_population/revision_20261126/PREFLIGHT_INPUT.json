@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "experiment_id": "HAD05_RETROSPECTIVE_REPLAY_PLANNING",
+  "independent_unit": "One independently initialized and trained scheduler root, with root-generated search populations; 18 cases are repeated measurements.",
+  "alpha": "0.05",
+  "scientific_min_effect": "0.10",
+  "target_effect": "0.20",
+  "measurement_resolution": "1/18",
+  "sham_quantile": "0.95",
+  "sham_confidence": "0.95",
+  "planned_comparisons": 4,
+  "confirm_units_planned": 64,
+  "pilot": [
+    {
+      "unit_id": "85101",
+      "paired_effect": "0/18",
+      "sham_effects": [
+        "0/18"
+      ]
+    },
+    {
+      "unit_id": "85102",
+      "paired_effect": "0/18",
+      "sham_effects": [
+        "2/18"
+      ]
+    },
+    {
+      "unit_id": "85103",
+      "paired_effect": "-4/18",
+      "sham_effects": [
+        "1/18"
+      ]
+    },
+    {
+      "unit_id": "85104",
+      "paired_effect": "1/18",
+      "sham_effects": [
+        "0/18"
+      ]
+    }
+  ],
+  "pilot_from_development_only": true,
+  "heldout_sealed": false,
+  "units_independent": true,
+  "provenance": {
+    "source_commit": "3b7ee1775b1e7a709c536641105ee4fc3195a5a8",
+    "source": "Previously recorded HAD05A per-root development counts in conversation; original raw receipts were unavailable at this recovery.",
+    "primary_contrast": "Live projector training minus signed-permutation sham, root-mean solve fraction.",
+    "sham_contrast": "Signed-permutation sham minus ordinary recurrent training, same root and population seeds.",
+    "dose": "0.75 Euclidean hidden displacement per batch example; auxiliary gradient rescaled to 0.25 of task norm.",
+    "case_count_per_root_per_arm": 18,
+    "selection_exposure": "All four roots and arm outcomes already exposed. This input records retrospective planning assumptions, not a prospective registration.",
+    "family": "Prospective planning for live/sham, fixed/sham, recurrent/best, recurrent/no_ldt; prior pilot explored 13 allocation arms.",
+    "planned_minimum_effect_pp": 10,
+    "target_effect_pp": 20,
+    "heldout_status": "No prospective HAD05 confirmation cohort registered; execute development replay and engineering tests only."
+  }
+}
