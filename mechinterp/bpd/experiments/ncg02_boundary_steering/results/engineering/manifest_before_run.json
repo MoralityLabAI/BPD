@@ -1,0 +1,43 @@
+{
+  "config": {
+    "width": 16,
+    "components": 16,
+    "input_dim": 8,
+    "edges": 6,
+    "warmup": 400,
+    "updates": 80,
+    "batch": 32,
+    "source_pairs": 96,
+    "eval_cases": 512,
+    "train_delay": 2,
+    "long_delay": 8,
+    "dose": 0.75,
+    "gradient_ratio": 0.25,
+    "lr": 0.005
+  },
+  "roots": [
+    962600,
+    962601
+  ],
+  "source_sha256": {
+    "pilot.py": "f2c19064d4aa991857646d0e72ad75f707ac3f0e97f920213e9f60551efcb070",
+    "test_pilot.py": "eace7e9a11999ee762c5a39b80f6ce956e1ae9026eb4c10004d5a20198867562",
+    "vendor/evalmath_preflight.py": "34fafe934679bc5f085e885e8382f17a752907e2014b9a3d1dffd34585d81426",
+    "vendor/mechinterp/bpd/components.py": "a2f2edc3fa3bda488e15fd83ac0ad67e396558bbda168381b1aea08709f77c5a",
+    "vendor/mechinterp/bpd/config.py": "1a3771aca4ba9b310ebf34fb573984f0f23707acf67d553f22cfce7f5954f508",
+    "vendor/mechinterp/bpd/experiments/training_steering/model.py": "53b2ce7344c3d369bce0bed9977b28f428a9f045d3cb0343e9e6b41d81e92e98",
+    "vendor/mechinterp/bpd/experiments/training_steering_stability/model.py": "ae7ab69013ff1e71465475e2d48d00cda58a50c23bfbfe5a2351b04ff1b48472"
+  },
+  "source_commit": "402ef7764e11bc7736873d66357b8dc24b996e94",
+  "torch": "2.5.1+cpu",
+  "python": "3.12.14",
+  "selection_exposure": "one fixed recipe, development only; no confirmation population generated",
+  "primary_contrast": "ordinary long-delay full-edge exact accuracy B minus A",
+  "comparisons": [
+    "B-A",
+    "B-C"
+  ],
+  "scientific_min_effect": 0.05,
+  "sham_quantile": 0.95,
+  "sham_confidence": 0.95
+}

@@ -1,0 +1,43 @@
+name: NCG-02 boundary steering replay
+
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/experiments/ncg02_boundary_steering/**'
+      - '.github/workflows/ncg02-boundary-steering.yml'
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/ncg02_boundary_steering/**'
+      - '.github/workflows/ncg02-boundary-steering.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  native-checkpoint-replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      OMP_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+    defaults:
+      run:
+        working-directory: mechinterp/bpd/experiments/ncg02_boundary_steering
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install the recorded CPU runtime
+        run: |
+          python -m pip install numpy==2.3.5
+          python -m pip install torch==2.5.1+cpu --index-url https://download.pytorch.org/whl/cpu
+      - name: Verify exact task labels, gradients and matched updates
+        run: python -m unittest -v test_pilot
+      - name: Replay saved checkpoints with independent GRU equations
+        run: python audit.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ncg02-independent-replay
+          path: mechinterp/bpd/experiments/ncg02_boundary_steering/results/independent_audit.json

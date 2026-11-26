@@ -1,0 +1,73 @@
+NCG-02 independent review
+
+The saved primary comparison is internally consistent. All seven Python source
+hashes match the development manifest. Every arm begins from its root's common
+warmup hash. Receiver data hashes match across all 80 branch updates per root;
+the same batch object also supplies donor examples and edit slots. Each model
+has 1,558 trainable parameters. The training traces contain zero zero-length
+patches. The auxiliary gradient ratio in B and C stays within floating-point
+rounding of 0.25.
+
+The binary graph mapping is correct. Each triangle's edges are
+(c, c XOR b1, c XOR b1 XOR b2). The omitted vertex charge is b1 XOR b2, so the
+total charge vanishes. Flipping c changes all three edges and preserves the
+charges. The constraint metric checks both independent vertex equations.
+
+The native model runs the RP03 hidden-state patch through the recurrent write
+and GRU carry before the first NOOP. Donor states and projectors are detached;
+recipient states remain differentiable. Primary evaluations use clean model
+calls. Each arm computes the same task and auxiliary gradients, then chooses
+which auxiliary gradient enters the update. The code uses 16 components at
+width 16 and executes all components. This provides a full-rank recurrent
+operator for the steering experiment. Parameter compression requires a separate
+comparison.
+
+Scope details for reporting:
+
+* The graph consists of disjoint triangles. This pilot measures charge and
+  cycle-bit memory. Shared-boundary gluing belongs to NCG-01.
+* The finite physical basis has four labels when the two triangle syndromes
+  are fixed. Across this experiment the syndromes vary too, so the network
+  receives six independent semantic bits and must retain their information.
+* Training and evaluation use fresh sensor/noise samples on the same 64
+  semantic assignments. The independent experimental unit is the root.
+* Adam moments restart at the branch split. The restart is shared by all arms.
+* Realized Adam displacement is a separate measured quantity. The traces retain
+  it alongside equal parameter counts, update counts and forward/backward work.
+* The stored per-update data hash covers receiver x and y. The pinned source
+  supplies the donor pairing and slots. Future receipts can hash the full batch.
+
+Post hoc projector diagnostic
+
+ncg_bpd_review.json records checkpoint hashes and every root-level value. Its
+source pairs are the 96 examples per slot used during source selection, at
+delay two. Reusing these pairs makes the diagnostic descriptive and selection
+dependent. Every model is loaded from a saved checkpoint; training stays fixed.
+
+For each selected group, the span overlap is trace(P_warmup P_final)/4, equal to
+the mean squared principal cosine. Mean overlap is 0.9979643 for A, 0.9977160
+for B, and 0.9977002 for C. The smallest squared principal cosine over every
+final group is 0.9890523. Those measurements show that the factor spans stayed
+close to their warmup spans over the 80 updates.
+
+Roots 962612 and 962614 select exactly the same four components for both cycle
+slots. Across roots, frozen cross-slot projector overlap ranges from 0.2086672
+to 1.0, with mean 0.4420661. Candidate groups have distinct component indices,
+while their spans can overlap after warmup.
+
+The frozen own-slot projector captures more donor-difference energy than the
+other-slot projector by 0.0674249 at warmup and 0.0626682 after B. Its donor
+target BCE advantage is 0.1180929 at warmup and 0.2034581 after B. Behavioral
+editing remains weak at dose 0.75: B's donor-exact rate on these reused source
+pairs is 3.1901% with the own-slot projector and 1.7578% with the other-slot
+projector. The corresponding warmup own-slot rate is 1.4974%.
+
+Selection chooses the lowest donor-target BCE on these source pairs, so its
+warmup own-slot BCE advantage over another candidate follows from that choice.
+An independent set of pairs would be needed to measure its predictive value.
+
+These results give little support to factor-span drift as an explanation for
+the primary outcome. A subsequent protocol can test whether a reliable cycle
+edit exists at a chosen dose before evaluating its effect on ordinary delayed
+answers. The current checkpoints and primary endpoint remain the completed
+development pilot.

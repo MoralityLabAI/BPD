@@ -1,0 +1,180 @@
+{
+  "scope": "DEVELOPMENT_ONLY",
+  "replay_dtype": "NumPy float64 independent dense GRU equations",
+  "source_hash_checks": 14,
+  "initialization_checks": 30,
+  "matched_update_data_checks": 800,
+  "prediction_bits_checked": 184320,
+  "prediction_bit_disagreements": 0,
+  "labels_checked": 184320,
+  "label_disagreements": 0,
+  "phases": {
+    "engineering": {
+      "root_analysis": {
+        "B_minus_A": {
+          "mean": -0.0390625,
+          "root_sample_sd": 0.030383494504109463,
+          "bootstrap_95pct_interval": [
+            -0.060546875,
+            -0.017578125
+          ],
+          "positive_roots": 0,
+          "zero_roots": 0,
+          "negative_roots": 2,
+          "two_sided_sign_flip_p": 0.5,
+          "holm_adjusted_p": 1.0
+        },
+        "B_minus_C": {
+          "mean": -0.009765625,
+          "root_sample_sd": 0.02485922277608956,
+          "bootstrap_95pct_interval": [
+            -0.02734375,
+            0.0078125
+          ],
+          "positive_roots": 1,
+          "zero_roots": 0,
+          "negative_roots": 1,
+          "two_sided_sign_flip_p": 1.0,
+          "holm_adjusted_p": 1.0
+        }
+      },
+      "ordinary_B_vs_A": {
+        "edge_bits_recovered": 145,
+        "edge_bits_corrupted": 227,
+        "complete_cases_recovered": 50,
+        "complete_cases_corrupted": 90
+      },
+      "training_diagnostics": {
+        "A_task": {
+          "minimum_patch_norm": 0.7499998211860657,
+          "maximum_patch_norm": 0.7500001788139343,
+          "zero_patches": 0,
+          "minimum_aux_gradient_ratio": 0.0,
+          "maximum_aux_gradient_ratio": 0.0,
+          "mean_parameter_displacement": 0.06042618223000318,
+          "mean_state_radius": 2.873873133957386
+        },
+        "B_causal": {
+          "minimum_patch_norm": 0.7499998211860657,
+          "maximum_patch_norm": 0.7500001788139343,
+          "zero_patches": 0,
+          "minimum_aux_gradient_ratio": 0.2499999701976776,
+          "maximum_aux_gradient_ratio": 0.2500000298023224,
+          "mean_parameter_displacement": 0.06163438239600509,
+          "mean_state_radius": 2.8498912423849108
+        },
+        "C_rotated": {
+          "minimum_patch_norm": 0.7499998211860657,
+          "maximum_patch_norm": 0.7500001788139343,
+          "zero_patches": 0,
+          "minimum_aux_gradient_ratio": 0.2499999850988388,
+          "maximum_aux_gradient_ratio": 0.2500000298023224,
+          "mean_parameter_displacement": 0.05714344580192119,
+          "mean_state_radius": 2.859391447901726
+        }
+      },
+      "source_group_overlap_roots": 2,
+      "causal_patch": {
+        "A_task": {
+          "desired_exact_accuracy": 0.02734375,
+          "edited_bit_accuracy": 0.26953125,
+          "unaffected_bit_accuracy": 0.8639322916666667
+        },
+        "B_causal": {
+          "desired_exact_accuracy": 0.0546875,
+          "edited_bit_accuracy": 0.3548177083333333,
+          "unaffected_bit_accuracy": 0.8502604166666666
+        },
+        "C_rotated": {
+          "desired_exact_accuracy": 0.025390625,
+          "edited_bit_accuracy": 0.29166666666666663,
+          "unaffected_bit_accuracy": 0.8600260416666666
+        }
+      }
+    },
+    "development": {
+      "root_analysis": {
+        "B_minus_A": {
+          "mean": -0.013671875,
+          "root_sample_sd": 0.025551089784471175,
+          "bootstrap_95pct_interval": [
+            -0.0302734375,
+            0.0029296875
+          ],
+          "positive_roots": 3,
+          "zero_roots": 0,
+          "negative_roots": 5,
+          "two_sided_sign_flip_p": 0.1875,
+          "holm_adjusted_p": 0.375
+        },
+        "B_minus_C": {
+          "mean": 0.002685546875,
+          "root_sample_sd": 0.05070540244823249,
+          "bootstrap_95pct_interval": [
+            -0.027587890625,
+            0.03759765625
+          ],
+          "positive_roots": 3,
+          "zero_roots": 1,
+          "negative_roots": 4,
+          "two_sided_sign_flip_p": 0.921875,
+          "holm_adjusted_p": 0.921875
+        }
+      },
+      "ordinary_B_vs_A": {
+        "edge_bits_recovered": 868,
+        "edge_bits_corrupted": 866,
+        "complete_cases_recovered": 142,
+        "complete_cases_corrupted": 198
+      },
+      "training_diagnostics": {
+        "A_task": {
+          "minimum_patch_norm": 0.7499998211860657,
+          "maximum_patch_norm": 0.7500001788139343,
+          "zero_patches": 0,
+          "minimum_aux_gradient_ratio": 0.0,
+          "maximum_aux_gradient_ratio": 0.0,
+          "mean_parameter_displacement": 0.057155196968233214,
+          "mean_state_radius": 2.940078345686197
+        },
+        "B_causal": {
+          "minimum_patch_norm": 0.7499998211860657,
+          "maximum_patch_norm": 0.7500001788139343,
+          "zero_patches": 0,
+          "minimum_aux_gradient_ratio": 0.2499999701976776,
+          "maximum_aux_gradient_ratio": 0.2500000298023224,
+          "mean_parameter_displacement": 0.055944056052248926,
+          "mean_state_radius": 2.9110054466873407
+        },
+        "C_rotated": {
+          "minimum_patch_norm": 0.7499998211860657,
+          "maximum_patch_norm": 0.7500001788139343,
+          "zero_patches": 0,
+          "minimum_aux_gradient_ratio": 0.2499999850988388,
+          "maximum_aux_gradient_ratio": 0.2500000298023224,
+          "mean_parameter_displacement": 0.05438163521466777,
+          "mean_state_radius": 2.926954631507397
+        }
+      },
+      "source_group_overlap_roots": 2,
+      "causal_patch": {
+        "A_task": {
+          "desired_exact_accuracy": 0.02099609375,
+          "edited_bit_accuracy": 0.31998697916666663,
+          "unaffected_bit_accuracy": 0.7843424479166666
+        },
+        "B_causal": {
+          "desired_exact_accuracy": 0.03271484375,
+          "edited_bit_accuracy": 0.36897786458333337,
+          "unaffected_bit_accuracy": 0.7900390625
+        },
+        "C_rotated": {
+          "desired_exact_accuracy": 0.02099609375,
+          "edited_bit_accuracy": 0.32796223958333337,
+          "unaffected_bit_accuracy": 0.7848307291666666
+        }
+      }
+    }
+  },
+  "passed": true
+}
