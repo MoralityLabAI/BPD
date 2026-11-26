@@ -1,0 +1,108 @@
+{
+  "evalmath_preflight_source": {
+    "bytes": 6779,
+    "git_blob": "0ff062f76f5534d9f18425f986ae3e750397f50c",
+    "sha256": "c2621a7900930f81ed53799ce439ee1c8f2d7006918a04ef57b5381630d15494"
+  },
+  "files": {
+    ".github/workflows/bpd-had05.yml": {
+      "bytes": 1930,
+      "git_blob": "320ab660f36aad6d23d1c87911be0c22813b4837",
+      "sha256": "c6e5cdf5d707d2c6350b65515287da7f2946918d025bfa20d12e96286f5f9a42"
+    },
+    "mechinterp/bpd/__init__.py": {
+      "bytes": 3384,
+      "git_blob": "7562ee9fb60b5663290fa2fc651e69168015746b",
+      "sha256": "80949cdc96b90698b679815776f3da8de73c304dd20fd422adbdeeaffb0ce40a"
+    },
+    "mechinterp/bpd/components.py": {
+      "bytes": 28001,
+      "git_blob": "c0906e73a993738871812572e267e2ef5f9595d3",
+      "sha256": "388cb539cccb87ae65d56e5fbae175d6aee138df24d1bab43cde755156b748a5"
+    },
+    "mechinterp/bpd/config.py": {
+      "bytes": 4937,
+      "git_blob": "2df19dfbe1ff4949f7ad516c8f715f2e4263cf71",
+      "sha256": "d5773cdac66f55b8a8c152030d679324f0270954dd3a081176a454d5dc6f1621"
+    },
+    "mechinterp/bpd/experiments/hadamard_population/archive.py": {
+      "bytes": 7989,
+      "git_blob": "3e9410398f4b329312bdb44f72307b23ba4fe0f6",
+      "sha256": "b5f411688d7da4559c0e6c0659a47458fb26571ae3eca04309f08c04f5e14dd8"
+    },
+    "mechinterp/bpd/experiments/hadamard_population/archive_audit.py": {
+      "bytes": 2980,
+      "git_blob": "5aa264f8b61350668582562204d7af867681f2e5",
+      "sha256": "8c7edf1ae3a362c673cfc4cead59fb49876b07d9838de9c53c00e3009851bdc0"
+    },
+    "mechinterp/bpd/experiments/hadamard_population/audit.py": {
+      "bytes": 6187,
+      "git_blob": "e726e437cf6dc917878c54761abbd504dd235564",
+      "sha256": "cb42b62e4bfb6e0b3f5703c882f42011aae2eb3a82b9710ccb89aba7c5354f7e"
+    },
+    "mechinterp/bpd/experiments/hadamard_population/had05.py": {
+      "bytes": 19877,
+      "git_blob": "3a06be89b3a502b1de02a4a34d8182c97377be6f",
+      "sha256": "7462d2099e241330d862d72fb6aeaa72e027ebd833e78d89c0ba3760d051c988"
+    },
+    "mechinterp/bpd/experiments/hadamard_population/native_adapter.py": {
+      "bytes": 12268,
+      "git_blob": "d1f06c7582709d6ecb602a46b0c4bcb19c709108",
+      "sha256": "db9a04e17cb5eda016145e287ba5f490f1c905f6326d43d8651d57fb30682b06"
+    },
+    "mechinterp/bpd/experiments/hadamard_population/near.py": {
+      "bytes": 8849,
+      "git_blob": "1605dd6728079f93f026729b1eec955648ee5089",
+      "sha256": "a63a0202f867ab2d0ea65a71abc5f01e6ee367b4c0c36b027f1f940f8c842808"
+    },
+    "mechinterp/bpd/experiments/hadamard_population/receipt_checks.py": {
+      "bytes": 13880,
+      "git_blob": "49f5fab5ec0292a47010c3603dd17b22a0bac0ec",
+      "sha256": "fe8e71ad3728a3ed35d05ecd4a6fe2fdfd4a25f46d468aebb358630cc2d467b9"
+    },
+    "mechinterp/bpd/experiments/hadamard_population/replay_frozen.py": {
+      "bytes": 6021,
+      "git_blob": "87bf50ce77d3216ffc993f2a9968f39f991db1ca",
+      "sha256": "2eddcd3577b71dd3ccf4a741088e006e2459b68958bad0b0198ef82e14a0888a"
+    },
+    "mechinterp/bpd/experiments/hadamard_population/test_budget_edges.py": {
+      "bytes": 2778,
+      "git_blob": "55cf14fa27c03d7417cf86377669fa9071a69d91",
+      "sha256": "a3fb2ae27cbcb461eae2778139385938c0f7e55398361f81af28b5d7beb07279"
+    },
+    "mechinterp/bpd/experiments/hadamard_population/test_math_bounds.py": {
+      "bytes": 4856,
+      "git_blob": "e36e8d040a2bd144fbdd931591d3b19eebad5d39",
+      "sha256": "905064a1e36a4dc0e665c8a02d961d8447f6a17ff50a97b1daf0ee8f7f0dcb23"
+    },
+    "mechinterp/bpd/experiments/hadamard_population/test_native_adapter.py": {
+      "bytes": 13281,
+      "git_blob": "40ed280946c2cb5da6013194c594591f226e9208",
+      "sha256": "79ef35715ce6bc2eb7dc7c05dbae0254658324afced1d6d10f41ecf78a4a1eca"
+    },
+    "mechinterp/bpd/experiments/hadamard_population/test_receipt_checks.py": {
+      "bytes": 4773,
+      "git_blob": "1fb74a55d46d66277715b3aef68a62f80637a16c",
+      "sha256": "9c6c5c829b13634097d51d3d1142010b48d72216bc0fc8cf5c6966c13bb353f1"
+    },
+    "mechinterp/bpd/experiments/hadamard_population/verify_replay.py": {
+      "bytes": 2855,
+      "git_blob": "3415d3a02cd82112b5ed7a7818c62e1ca83bf29f",
+      "sha256": "7b875c0208fbe281f5f55421f59c7b3b6cd03aa07123377ad21ab2b514d25508"
+    }
+  },
+  "parent_commit": "3b7ee1775b1e7a709c536641105ee4fc3195a5a8",
+  "scope": "DEVELOPMENT_ENGINEERING_REVISION",
+  "sources_note": "The replay sources are separately pinned in replay/MANIFEST.json; revised archive.py and near.py contain the boundary fix.",
+  "verification": {
+    "compressed_receipt_audit": "passed",
+    "native_adapter_cases": 27,
+    "numpy": "2.3.5",
+    "pytest": 77,
+    "pytest_version": "9.2.0",
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "real_package_initializer_loaded": true,
+    "subtests": 8,
+    "torch": "2.15.0+cpu"
+  }
+}

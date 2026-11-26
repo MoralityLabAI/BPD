@@ -54,14 +54,17 @@ class Archive:
 
 def evaluate(seed,m,p,chunk,rounds,arm,row_cap,archive_mib,cache_mib):
     preflight(m,p,cache_mib); xs,ss,h=starts(seed,m,p); ts=[Trajectory(x,z,chunk) for x,z in zip(xs,ss)]; budget=rounds*chunk*4*m; n=4*m; work=aw=0; trace=[]; begin=time.perf_counter(); rng=np.random.default_rng(seed+9876543); arch=None if arm=='best' else Archive(m,row_cap,archive_mib); cert=None; kind=None
-    if arch is not None:
+    solved=next((t for t in ts if t.state.energy==0),None)
+    if solved is not None: cert=solved.state.matrix().tolist(); kind='native'
+    if arch is not None and cert is None:
         for i,t in enumerate(ts):
             w=arch.observe(t,i,budget-work,rng if arm=='random64' else None); aw+=w; work+=w
             if arch.cert is not None: cert=arch.cert; kind='archive'; break
     for j in range(rounds):
-        if cert is not None or work+n>budget: break
+        if cert is not None: break
         solved=next((t for t in ts if t.state.energy==0),None)
-        if solved: cert=solved.state.matrix().tolist(); kind='native'; break
+        if solved is not None: cert=solved.state.matrix().tolist(); kind='native'; break
+        if work+n>budget: break
         i=min(range(p),key=lambda i:(ts[i].best,ts[i].blocks,i)); t=ts[i]; old=t.chunk; t.chunk=min(chunk,(budget-work)//n); w=t.advance(); t.chunk=old; work+=w
         if t.state.energy==0: cert=t.state.matrix().tolist(); kind='native'
         elif arch is not None:

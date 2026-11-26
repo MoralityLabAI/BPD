@@ -1,0 +1,163 @@
+HAD-06: persistent recurrent control of a Hadamard search population
+
+Work in MoralityLabAI/BPD. Continue the Hadamard gym under
+mechinterp/bpd/experiments/hadamard_population. Read AGENTS.md, README.md,
+REVISION_20261126.md, the frozen replay receipts, and native_adapter.py before
+changing the experiment. Preserve the HAD-05 sources and receipts through git
+history. Put the next study in a separate hadamard_persistent directory.
+
+Objective
+
+Build a controller that learns when continued repair deserves compute and when
+another trajectory or an archived child deserves a turn. Train its decisions on
+returns that extend across several repair chunks. Retain latent state across the
+whole search episode. Use exact LDT calculations to describe feasibility and to
+check proposed constructions. Study how the controller uses its remembered
+history through native BPD component interventions.
+
+Evidence available at entry
+
+HAD-05A used four exposed development roots and 72 populations per arm. Its
+classical best-incumbent allocator solved 36, the tied recurrent allocator 19,
+fixed-projector steering 18, signed-permutation sham 22, and live-projector
+steering 19. The four-observation recurrence restarted its hidden state at every
+allocation. Its teacher supplied one-chunk returns. The exact LDT lower bounds
+excluded zero sectors at the 16-flip allocation horizon used in that pilot.
+
+HAD-05C's corrected development run solved 24/72 with best-incumbent allocation,
+28/72 with admitted partial joins, and 28/72 with randomized-row joins. It saved
+133 ordinary and 145 randomized children. Both transfer arms had 25 solved
+descendants. Cross-slot source labels can share ancestry. The row and selected
+spectral equalities hold when a child is admitted; ordinary repair can leave
+those equalities on its next flip.
+
+The frozen replay reproduced these aggregate totals under a different Torch
+version. Original casewise receipts were unavailable during recovery. The new
+receipts carry their own runtime and source hashes. An integer audit accepted
+630 complete constructions and 278 saved partial children. These counts include
+repeated constructions and repeated cases across arms.
+
+The native adapter executes the existing recurrence through BPD's
+TiedComponentLinear. It copies V directly and transposes the old U. Default
+component gates are open and the residual gate is zero. Its parity checks cover
+outputs, gradients, pass boundaries, masked schedules, a search trace, and a
+checkpoint round trip. Its scope is the factored recurrent write. The context
+term is a separate path for state information. Native TRM attention and the
+full BPDTrainer remain separate integration work.
+
+Mathematical contract
+
+Represent a candidate by four binary sequences of odd length m. Let r_t be the
+sum of their periodic autocorrelations at each nonzero shift. Success requires
+every r_t=0. Build the resulting order-4m Goethals-Seidel array and independently
+check its integer Gram matrix before reporting a construction.
+
+Enumerate row-sum magnitudes a with sum(a_i^2)=4m and odd 1<=a_i<=m. A row with
+current signed sum u_i needs at least abs(abs(u_i)-a_i)/2 flips to reach that
+magnitude. When 3 divides m, compute each row's cube-root power from its residue
+sums A,B,C: Q=A^2+B^2+C^2-AB-BC-CA. Use the existing exact integer bound for the
+fewest k with Q<=(2*sqrt(m)+2*k)^2. Combine overlapping requirements with a
+maximum within each row before summing. Preserve the independent finite tests.
+
+The remaining FFT features are floating diagnostics. Any new exact rejection
+rule needs a proof and an independent finite check. A lower bound above one
+allocation's chunk length still permits useful progress over later allocations.
+Whole-trajectory rejection must account for the entire remaining search budget
+and every permitted transfer or restart action. A search failure says only that
+this run found no construction inside its chosen family and resource budget.
+
+Implementation
+
+Give every trajectory an immutable id, a birth event, a parent list, a local RNG
+stream, and a persistent recurrent state. A slot can hold successive ids. Log
+the immutable source id and the exact row bytes whenever an archive observation
+is admitted. Record every child proposal, rejection reason, injected state,
+replacement, and consumed work. Track ancestry through multiple generations.
+Use separate RNG streams for initial populations, repair tie breaks, randomized
+rows, and injected-trajectory seeds so an extra shuffle leaves other streams
+unchanged.
+
+Expose actions for continuing a selected trajectory, allocating another slot,
+admitting a proposed child, and restarting an eligible slot. Include an explicit
+fallback action that invokes the tuned classical policy. Preserve the best
+incumbent matrix, its energy and its source id as one checkpoint. Validate an
+initial solution before spending archive or repair budget, including a zero
+budget entry. Charge child construction before admitting it.
+
+At each decision, update memory for active and waiting trajectories using past
+observations and elapsed budget. Reset a trajectory's memory only at its birth
+or a declared intervention. Separate the controller state from the environment
+state so a saved environment, RNG state and controller checkpoint can be forked
+and replayed exactly. Check that a resumed episode produces the same decisions
+and certificate as an uninterrupted one.
+
+Use the existing native BPD component primitive for the recurrent write. Carry
+global pass offsets through the episode, reset the primitive's local invocation
+counter for a replayed branch, and retain the intended component schedule.
+Verify open-gate forward and gradient parity. Test zero residual gating after
+factor training changes the reconstructed weight. Save every trained checkpoint
+alongside its hyperparameters, optimizer state, seed schedule and source hashes.
+
+Learning target
+
+From development trajectories, fork complete environment and RNG snapshots for
+a fixed, declared menu of actions. Measure their incremental solve outcomes and
+best-energy improvement over several future chunks, including all forked work
+in the training-cost report. Freeze the continuation policy used to define each
+target. These targets estimate returns under that continuation policy.
+
+Train a small persistent model on those multi-chunk returns. Compare it with a
+current-observation MLP using the same examples and with the tuned classical
+fallback. Add a history-reset control and a history-shuffle control whose current
+observation and resource budget stay fixed. Split complete trajectory families
+and all their descendants together. Keep training, calibration and evaluation
+seeds separate. Do feature selection and model selection on development only.
+
+Mechanistic study
+
+Choose a causal outcome before scoring: the root-mean change in certified solve
+fraction at a fixed resource budget. Track correct and harmful allocation
+changes separately. Logit movement alone cannot establish useful memory.
+Form development pairs with matched current observations and different prior
+histories; assess whether those histories predict different future returns.
+Control for the information carried by the context term when testing the
+factored recurrent write.
+
+Discover component sets on training/calibration data. Compare fixed and live
+sets using interventions whose measured hidden displacement is matched to
+signed-permutation or rotation shams. Log the state radius before and after
+each edit, actual displacement, component schedule and pass index. Include
+effects on the intended action and on unrelated actions. Ordinary scored
+inference must use the frozen controller without teacher labels or steering.
+
+Resource and statistical contract
+
+Start with engineering fixtures and a small CPU development study at the
+existing lengths. Run the repository's pinned EvalMath preflight before a
+benchmark. State the independent unit, causal contrast, smallest useful effect,
+physical dose, sham construction, comparison family and selection exposure.
+Count one independently trained controller and its generated dataset as a root.
+Cases and repeated seeds within a root remain repeated observations.
+
+Report candidate-score accounting, actual elapsed search time, controller time,
+training work, archived-row work, peak RSS, and persistent encoded payload. A
+candidate-score cap mixes operations of different cost. A claim about efficiency
+needs a separate matched-wall-time comparison with repeated timing runs.
+
+Treat this work as development until an independent sham calibration and a
+prospectively sealed evaluation protocol justify another label. The present
+four-root planner returns REDESIGN_OR_PILOT_ONLY. Preserve every failed arm and
+every engineering repair. Protect all unrelated sealed cohorts in AGENTS.md.
+Publish the results for the whole declared arm roster, including zero gains.
+
+Completion criteria
+
+Deliver executable source, a reproducible development configuration, saved
+checkpoints, source-locked raw receipts, exact construction checks, immutable
+lineage records, and the EvalMath planning receipt. Provide a report that answers
+whether persistent history improves the solve outcome beyond the classical
+fallback, whether archived children improve outcomes beyond the matched random
+control, and which measured intervention effects support a causal role for the
+controller's memory. State every unresolved result at the level supported by
+the experiment. Limit all mathematical claims to the verified constructions
+and the proved bounds.

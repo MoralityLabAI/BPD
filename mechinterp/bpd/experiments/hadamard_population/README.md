@@ -1,5 +1,11 @@
 # HAD-05: population repair, LDT constraint joins and recurrent compute allocation
 
+The [2026-11-26 follow-up](REVISION_20261126.md) adds native BPD component
+execution, a completed-start budget fix, 77 focused tests and source-locked
+development replay receipts. The next study is specified in
+[FABLE_HAD06.txt](FABLE_HAD06.txt). The historical report below retains the
+original source versions and experimental scope.
+
 **DEVELOPMENT_ONLY**, 2026-11-26. Standalone NumPy/PyTorch CPU gym for odd-length Goethals–Seidel complementary systems. All completed orders are previously known. The recurrent model is a directly trained tied-factor proxy, without native TRM attention, native LDT runtime or native BPDTrainer. Four history observations are replayed rather than retaining latent state across all macro decisions.
 
 ## Exact LDT state and memory

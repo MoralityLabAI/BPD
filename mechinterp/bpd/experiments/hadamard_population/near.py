@@ -71,14 +71,17 @@ def evaluate(seed,m,p,chunk,rounds,arm,cap,mib,cache_mib):
                 from had05 import power3
                 q=power3(child); assert q is None or int(q.sum())==4*m; assert tr.state.r[0]==tr.state.r[-1]==0
                 tr.generation=len(injections)+1; ts[worst]=tr; arch.used.add(ids); work+=n; aw+=n; injections.append(dict(energy=e,replaced_best=old,slot=worst,generation=tr.generation,sources=sources,work=work,sequences=child.tolist()))
-    if arch is not None:
+    solved=next((t for t in ts if t.state.energy==0),None)
+    if solved is not None: cert=solved.state.matrix().tolist(); kind='native'; solution_injection=getattr(solved,'generation',0)
+    if arch is not None and cert is None:
         for i in range(p):
             observe(ts[i],i)
             if cert is not None: break
     for j in range(rounds):
-        if cert is not None or work+n>budget: break
+        if cert is not None: break
         solved=next((t for t in ts if t.state.energy==0),None)
-        if solved: cert=solved.state.matrix().tolist(); kind='native'; solution_injection=getattr(solved,'generation',0); break
+        if solved is not None: cert=solved.state.matrix().tolist(); kind='native'; solution_injection=getattr(solved,'generation',0); break
+        if work+n>budget: break
         i=min(range(p),key=lambda i:(ts[i].best,ts[i].blocks,i)); t=ts[i]; old=t.chunk; t.chunk=min(chunk,(budget-work)//n); w=t.advance(); t.chunk=old; work+=w
         if t.state.energy==0: cert=t.state.matrix().tolist(); kind='native'; solution_injection=getattr(t,'generation',0)
         else: observe(t,i)
