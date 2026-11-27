@@ -1,4 +1,4 @@
-name: BPD FUSE-06 native trainer gate
+name: BPD FUSE-09 native trainer and capacity gate
 on:
   pull_request:
     paths:
@@ -34,6 +34,10 @@ jobs:
         run: python -m mechinterp.bpd.experiments.fused_residual.validate_fuse08_pool --output "$RUNNER_TEMP/fuse08_pool.json"
       - name: FUSE-08 binding-cap native trainer gate
         run: python -m mechinterp.bpd.experiments.fused_residual.validate_fuse08_native --output "$RUNNER_TEMP/fuse08_native.json"
+      - name: FUSE-09 mask-only primal stress
+        run: python -m mechinterp.bpd.experiments.fused_residual.validate_fuse09_pool --output "$RUNNER_TEMP/fuse09_pool.json"
+      - name: FUSE-09 small native PGD gradient gate
+        run: python -m mechinterp.bpd.experiments.fused_residual.validate_fuse09_native --stage small --output "$RUNNER_TEMP/fuse09_small.json"
       - name: Replay pinned INK06 source receipt
         run: |
           python -m mechinterp.bpd.experiments.inkling_component_flow.run_source_audit \
@@ -49,6 +53,83 @@ jobs:
             ${{ runner.temp }}/fuse07_oracle.json
             ${{ runner.temp }}/fuse08_pool.json
             ${{ runner.temp }}/fuse08_native.json
+            ${{ runner.temp }}/fuse09_pool.json
+            ${{ runner.temp }}/fuse09_small.json
             ${{ runner.temp }}/ink06_source_replay.json
+          if-no-files-found: warn
+          retention-days: 90
+
+  wide-cpu:
+    needs: native-cpu
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - width: 512
+            passes: 6
+            cap: binding
+            regime: closed_loop
+          - width: 512
+            passes: 6
+            cap: full
+            regime: closed_loop
+          - width: 512
+            passes: 12
+            cap: binding
+            regime: closed_loop
+          - width: 512
+            passes: 12
+            cap: full
+            regime: closed_loop
+          - width: 1024
+            passes: 6
+            cap: binding
+            regime: closed_loop
+          - width: 1024
+            passes: 6
+            cap: full
+            regime: closed_loop
+          - width: 1024
+            passes: 12
+            cap: binding
+            regime: closed_loop
+          - width: 1024
+            passes: 12
+            cap: full
+            regime: closed_loop
+          - width: 512
+            passes: 12
+            cap: binding
+            regime: clean_window
+          - width: 1024
+            passes: 12
+            cap: binding
+            regime: clean_window
+    env:
+      OMP_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+      OPENBLAS_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned CPU dependencies
+        run: |
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check numpy==2.3.5
+      - name: FUSE-09 wide matched trainer
+        run: |
+          python -m mechinterp.bpd.experiments.fused_residual.validate_fuse09_native \
+            --stage wide --width ${{ matrix.width }} --passes ${{ matrix.passes }} \
+            --cap ${{ matrix.cap }} --regime ${{ matrix.regime }} --output "$RUNNER_TEMP/fuse09_wide.json"
+      - name: Retain wide receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fuse09-wide-${{ matrix.width }}-${{ matrix.passes }}-${{ matrix.cap }}-${{ matrix.regime }}
+          path: ${{ runner.temp }}/fuse09_wide.json
           if-no-files-found: warn
           retention-days: 90
