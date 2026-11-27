@@ -30,6 +30,10 @@ jobs:
         run: python -m mechinterp.bpd.experiments.fused_residual.validate_fuse06_native --output "$RUNNER_TEMP/fuse06_native.json"
       - name: Check exact admission oracle
         run: python -m mechinterp.bpd.experiments.fused_residual.validate_fuse07 --output "$RUNNER_TEMP/fuse07_oracle.json"
+      - name: FUSE-08 cross-scope primal lifecycle and stress
+        run: python -m mechinterp.bpd.experiments.fused_residual.validate_fuse08_pool --output "$RUNNER_TEMP/fuse08_pool.json"
+      - name: FUSE-08 binding-cap native trainer gate
+        run: python -m mechinterp.bpd.experiments.fused_residual.validate_fuse08_native --output "$RUNNER_TEMP/fuse08_native.json"
       - name: Replay pinned INK06 source receipt
         run: |
           python -m mechinterp.bpd.experiments.inkling_component_flow.run_source_audit \
@@ -43,6 +47,8 @@ jobs:
           path: |
             ${{ runner.temp }}/fuse06_native.json
             ${{ runner.temp }}/fuse07_oracle.json
+            ${{ runner.temp }}/fuse08_pool.json
+            ${{ runner.temp }}/fuse08_native.json
             ${{ runner.temp }}/ink06_source_replay.json
           if-no-files-found: warn
           retention-days: 90
