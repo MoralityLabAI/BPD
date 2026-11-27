@@ -1,0 +1,316 @@
+{
+  "schema": "BPD-GYM-02-E31-exact-split-v1",
+  "scope": "finite enumeration of intended generator support (uniform maps conditional on modulus split, uniform queries), not learned model or actual sampled cohort audit",
+  "source": "e625db94ee7e78f03c83840c8bd3f834c2b86fa9:mechinterp/bpd/experiments/trm_curation/eval_suite_36.py",
+  "splits": {
+    "train": {
+      "maps": 153,
+      "queries": 612,
+      "labels": [
+        154,
+        152,
+        152,
+        154
+      ],
+      "queryLabels": [
+        [
+          68,
+          28,
+          28,
+          29
+        ],
+        [
+          28,
+          67,
+          29,
+          29
+        ],
+        [
+          29,
+          29,
+          67,
+          28
+        ],
+        [
+          29,
+          28,
+          28,
+          68
+        ]
+      ],
+      "fixedTwoHop": 270,
+      "fixedOneHop": 154,
+      "twoCycle": 116,
+      "bijectiveMaps": 12
+    },
+    "eval": {
+      "maps": 103,
+      "queries": 412,
+      "labels": [
+        102,
+        104,
+        104,
+        102
+      ],
+      "queryLabels": [
+        [
+          44,
+          20,
+          20,
+          19
+        ],
+        [
+          20,
+          45,
+          19,
+          19
+        ],
+        [
+          19,
+          19,
+          45,
+          20
+        ],
+        [
+          19,
+          20,
+          20,
+          44
+        ]
+      ],
+      "fixedTwoHop": 178,
+      "fixedOneHop": 102,
+      "twoCycle": 76,
+      "bijectiveMaps": 12
+    }
+  },
+  "orbits": [
+    {
+      "representativeCode": 0,
+      "representative": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "train": 0,
+      "eval": 4
+    },
+    {
+      "representativeCode": 1,
+      "representative": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "train": 8,
+      "eval": 4
+    },
+    {
+      "representativeCode": 4,
+      "representative": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "train": 10,
+      "eval": 2
+    },
+    {
+      "representativeCode": 5,
+      "representative": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "train": 2,
+      "eval": 10
+    },
+    {
+      "representativeCode": 6,
+      "representative": [
+        2,
+        1,
+        0,
+        0
+      ],
+      "train": 20,
+      "eval": 4
+    },
+    {
+      "representativeCode": 8,
+      "representative": [
+        0,
+        2,
+        0,
+        0
+      ],
+      "train": 18,
+      "eval": 6
+    },
+    {
+      "representativeCode": 9,
+      "representative": [
+        1,
+        2,
+        0,
+        0
+      ],
+      "train": 18,
+      "eval": 6
+    },
+    {
+      "representativeCode": 10,
+      "representative": [
+        2,
+        2,
+        0,
+        0
+      ],
+      "train": 3,
+      "eval": 9
+    },
+    {
+      "representativeCode": 11,
+      "representative": [
+        3,
+        2,
+        0,
+        0
+      ],
+      "train": 14,
+      "eval": 10
+    },
+    {
+      "representativeCode": 20,
+      "representative": [
+        0,
+        1,
+        1,
+        0
+      ],
+      "train": 4,
+      "eval": 8
+    },
+    {
+      "representativeCode": 22,
+      "representative": [
+        2,
+        1,
+        1,
+        0
+      ],
+      "train": 16,
+      "eval": 8
+    },
+    {
+      "representativeCode": 23,
+      "representative": [
+        3,
+        1,
+        1,
+        0
+      ],
+      "train": 4,
+      "eval": 8
+    },
+    {
+      "representativeCode": 27,
+      "representative": [
+        3,
+        2,
+        1,
+        0
+      ],
+      "train": 3,
+      "eval": 0
+    },
+    {
+      "representativeCode": 30,
+      "representative": [
+        2,
+        3,
+        1,
+        0
+      ],
+      "train": 3,
+      "eval": 3
+    },
+    {
+      "representativeCode": 36,
+      "representative": [
+        0,
+        1,
+        2,
+        0
+      ],
+      "train": 6,
+      "eval": 6
+    },
+    {
+      "representativeCode": 37,
+      "representative": [
+        1,
+        1,
+        2,
+        0
+      ],
+      "train": 18,
+      "eval": 6
+    },
+    {
+      "representativeCode": 39,
+      "representative": [
+        3,
+        1,
+        2,
+        0
+      ],
+      "train": 3,
+      "eval": 3
+    },
+    {
+      "representativeCode": 45,
+      "representative": [
+        1,
+        3,
+        2,
+        0
+      ],
+      "train": 2,
+      "eval": 6
+    },
+    {
+      "representativeCode": 228,
+      "representative": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "train": 1,
+      "eval": 0
+    }
+  ],
+  "mixedOrbits": 16,
+  "mixedTrainMaps": 149,
+  "mixedEvalMaps": 99,
+  "trainOnlyOrbits": 2,
+  "evalOnlyOrbits": 1,
+  "labelTV": 0.008122342788247972,
+  "queryConditionalTV": [
+    0.022336442667681963,
+    0.011168221333840989,
+    0.011168221333840989,
+    0.022336442667681963
+  ],
+  "equivarianceChecks": 24576,
+  "expectedUniqueIn128IIDFeedback": {
+    "registerMaps": 86.90516190262959,
+    "registerQueryPairs": 115.58568283901357
+  },
+  "warning": "Conjugation can cross the frozen train/eval split. Never augment across it. Entire-orbit holdout is a different benchmark, requires a separate preregistration."
+}
