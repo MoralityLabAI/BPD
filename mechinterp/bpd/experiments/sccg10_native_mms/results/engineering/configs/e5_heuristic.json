@@ -1,0 +1,26 @@
+{
+ "mode": "fixed_cpu",
+ "cpu_cap": 100.0,
+ "eval": "tune",
+ "defaults": {
+  "block": 8,
+  "explore_every": 5,
+  "atlas_mib": 16.0,
+  "cache_mib": 16.0
+ },
+ "arms": {
+  "D_exact": {
+   "kind": "D"
+  },
+  "D_heuristic": {
+   "kind": "D",
+   "ladder": {
+    "mode": "heuristic",
+    "kappa_a": 22.194339876658255,
+    "kappa_c": 112.27147074163693,
+    "remainder": 0.049220054940572966
+   }
+  }
+ },
+ "calibration_source": "root 29201 drift, state_k8, median over checkpoints 1..64 of exact operator-norm drift per unit parameter displacement"
+}
