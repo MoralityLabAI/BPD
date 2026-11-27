@@ -52,6 +52,9 @@ def stage_rows(w, *, task, root, arm):
         outcome = None
         preference = None
         if terminal:
+            state['cpu_to_proposal'] = float(w['cpu_to_proposal'])
+            if not math.isfinite(state['cpu_to_proposal']) or state['cpu_to_proposal'] < costs[j]:
+                raise ValueError('invalid proposal cost')
             if action == 'SELECT_BATCH':
                 state['selected_indices'] = w['selected_indices']
                 if not state['selected_indices'] or any(i < 0 or i >= k for i in state['selected_indices']):
