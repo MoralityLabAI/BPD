@@ -1,0 +1,178 @@
+{
+  "status": "HOLD",
+  "source_blob": "c021d8bf946c47fc72accacb8aa7b723c513144a",
+  "source_sha256": "10d48ceec0a636c8686e46d24e78197b67070dc033cdc7cd92932bab69a6fe17",
+  "validator_blob": "50ac78b8ef98c3a2527b244072ac249d00256dd1",
+  "local_full_receipt_sha256": "c233dded5b588222dda681925b37494950e2c5b8411bb05b431915bbc31b61f4",
+  "native_excerpt_sha256": "662dfddc6b4155a95fe7f00674dacc768eddd412ebeda5da6f1a6739d617307b",
+  "trm_excerpt_sha256": "553d4d1d8e769f735edac8cc35176182939ae88068294005175a92745c6ffaeb",
+  "torch": "2.10.0+cpu",
+  "threads": 1,
+  "scope": "Local extracted native source; aggregate receipt transcribed from executed JSON",
+  "stress": {
+    "cases": 1152,
+    "totals": {
+      "unguarded": {
+        "admitted": 1152,
+        "forward_fail": 116,
+        "gradient_fail": 442,
+        "admitted_fail": 452,
+        "rejected_pass": 0,
+        "fallback_nonidentical": 0
+      },
+      "heuristic": {
+        "admitted": 472,
+        "forward_fail": 0,
+        "gradient_fail": 17,
+        "admitted_fail": 17,
+        "rejected_pass": 245,
+        "fallback_nonidentical": 0
+      },
+      "envelope": {
+        "admitted": 0,
+        "forward_fail": 0,
+        "gradient_fail": 0,
+        "admitted_fail": 0,
+        "rejected_pass": 700,
+        "fallback_nonidentical": 0
+      }
+    },
+    "bound_audit": {
+      "checks": 576,
+      "violations": 0,
+      "max_ratio": 0.0012655369186908771
+    },
+    "by_scale": [
+      [
+        0.1,
+        192,
+        192,
+        0,
+        0,
+        0,
+        186,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        192,
+        192,
+        0,
+        0,
+        0,
+        176,
+        0,
+        0,
+        0
+      ],
+      [
+        3,
+        192,
+        192,
+        0,
+        27,
+        27,
+        110,
+        0,
+        17,
+        17
+      ],
+      [
+        10,
+        192,
+        192,
+        21,
+        97,
+        97,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        100,
+        192,
+        192,
+        49,
+        145,
+        153,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        10000,
+        192,
+        192,
+        46,
+        173,
+        175,
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "by_scale_fields": [
+      "scale",
+      "cases",
+      "unguarded_admitted",
+      "unguarded_forward_fail",
+      "unguarded_gradient_fail",
+      "unguarded_union_fail",
+      "heuristic_admitted",
+      "heuristic_forward_fail",
+      "heuristic_gradient_fail",
+      "heuristic_union_fail"
+    ],
+    "first_failure": {
+      "mode": "heuristic",
+      "seed": 3500001,
+      "scale": 3,
+      "target": "exact",
+      "mask": "zero",
+      "cal": true,
+      "output_error": 0.000027179718017578125,
+      "gradient_error": 0.000091552734375
+    }
+  },
+  "recurrent": {
+    "ordinary_checks": 2800,
+    "wrapper_hits": 128,
+    "wrapper_fallbacks": 128,
+    "explicit_fallbacks": 2,
+    "training_updates": 24,
+    "rows": [
+      {
+        "width": 64,
+        "forward_ref_ms": 7.37982100008594,
+        "forward_guarded_ms": 10.401411000202643,
+        "backward_ref_ms": 18.971234999753506,
+        "backward_guarded_ms": 20.516556999609747,
+        "fused_calls": 888,
+        "fallbacks": 0
+      },
+      {
+        "width": 128,
+        "forward_ref_ms": 11.16891800029407,
+        "forward_guarded_ms": 13.14740099996925,
+        "backward_ref_ms": 27.029171000322094,
+        "backward_guarded_ms": 25.566102000084356,
+        "fused_calls": 888,
+        "fallbacks": 0
+      },
+      {
+        "width": 256,
+        "forward_ref_ms": 27.967391999936808,
+        "forward_guarded_ms": 24.135543000284088,
+        "backward_ref_ms": 71.70066099979522,
+        "backward_guarded_ms": 53.17874899992603,
+        "fused_calls": 888,
+        "fallbacks": 0
+      }
+    ]
+  }
+}
