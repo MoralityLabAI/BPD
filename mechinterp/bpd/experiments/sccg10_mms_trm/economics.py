@@ -52,7 +52,8 @@ from mechinterp.bpd.experiments.trm_curation.transaction import _restore_native_
 
 from . import geometry as geo
 from .atlas import AtlasKey, MechanismAtlas, Policy, decide
-from .common import (ENGINEERING_ROOTS, PANEL_DELAYS, accounting_dict, dump_json, load_checkpoint,
+from .batched_preview import batched_previews
+from .common import (DEVELOPMENT_ROOTS, ENGINEERING_ROOTS, PANEL_DELAYS, accounting_dict, dump_json, load_checkpoint,
                      model_state_sha256, recipe, sccg_seed, source_hashes)
 from .drift import drift_panel
 from mechinterp.bpd.experiments.trm_curation.data import edge_batch
@@ -155,7 +156,10 @@ def fresh_cal_grad(model, setup, mode):
 
 
 def run_arm(arm: str, setup: Setup, *, budget: str, limit: float, mms_mib: float = 16.0,
-            policy: Policy = Policy(), decisions: list | None = None) -> tuple[dict, torch.nn.Module]:
+            policy: Policy = Policy(), decisions: list | None = None,
+            preview_mode: str = 'transactional') -> tuple[dict, torch.nn.Module]:
+    if preview_mode not in ('transactional', 'batched'):
+        raise ValueError('preview_mode must be transactional or batched')
     rc, root = setup.rc, setup.root
     torch.set_num_threads(rc.threads)
     torch.use_deterministic_algorithms(True)
@@ -241,7 +245,15 @@ def run_arm(arm: str, setup: Setup, *, budget: str, limit: float, mms_mib: float
                 log['observer'] = 'fresh_exact'
             # ---- candidate previews
             rows, meta = [], {}
-            for e in props:
+            if preview_mode == 'batched' and arm != 'C_probe':
+                bp = batched_previews(model, opt, [batches[e] for e in props], g, clip=rc.gradient_clip)
+                per = bp['cpu_seconds'] / len(props)
+                for e, pg, un in zip(props, bp['predicted_gain'], bp['update_norm']):
+                    pr = dict(predicted_gain=pg, update_norm=un, cpu_seconds=per, train_loss=0.0)
+                    rows.append(Candidate(e, 0.0, pg, det_cost, epoch))
+                    meta[e] = pr
+                    counters['previews'] += 1
+            for e in (props if not rows else ()):
                 b = batches[e]
 
                 def tr(b=b):
@@ -348,7 +360,7 @@ def run_arm(arm: str, setup: Setup, *, budget: str, limit: float, mms_mib: float
     total = elapsed()
     if budget == 'cpu' and total > limit:
         overrun = total - limit
-    res = dict(arm=arm, budget=budget, limit=limit, windows=w, cpu_seconds=total, charged_setup_cpu=charged_setup,
+    res = dict(arm=arm, budget=budget, limit=limit, preview_mode=preview_mode, windows=w, cpu_seconds=total, charged_setup_cpu=charged_setup,
                overrun_cpu=overrun, counters=dict(counters), final_state_sha256=model_state_sha256(model),
                cache=cache.stats(), atlas=atlas.stats() if atlas else None, logs=logs)
     return res, model
@@ -383,11 +395,12 @@ def evaluate(model, setup: Setup) -> dict:
 
 
 def run_root(root: int, warm: Path, out: Path, *, arms=ARMS, cpu_limit=100.0, windows=80,
-             atlas_tiers=(0.0, 4.0, 16.0, 64.0)) -> dict:
+             atlas_tiers=(0.0, 4.0, 16.0, 64.0), preview_mode: str = 'transactional') -> dict:
     setup = Setup(root, warm)
     out.mkdir(parents=True, exist_ok=True)
     rep = dict(root=root, warm_state_sha256=setup.warm_sha, mech_setup_cpu=setup.mech_setup_cpu,
-               cpu_limit=cpu_limit, windows=windows, results={}, source_hashes=source_hashes())
+               cpu_limit=cpu_limit, windows=windows, preview_mode=preview_mode, results={},
+               source_hashes=source_hashes())
     decisions: list = []
     jobs = [('updates', windows, a, 16.0) for a in arms]
     jobs += [('cpu', cpu_limit, a, 16.0) for a in arms if a != 'C_probe']
@@ -395,7 +408,8 @@ def run_root(root: int, warm: Path, out: Path, *, arms=ARMS, cpu_limit=100.0, wi
     for budget, limit, arm, mib in jobs:
         tag = f'{budget}_{arm}' + (f'_mms{int(mib)}' if arm in ATLAS_ARMS else '')
         res, model = run_arm(arm, setup, budget=budget, limit=limit, mms_mib=mib,
-                             decisions=decisions if budget == 'cpu' and mib == 16.0 else None)
+                             decisions=decisions if budget == 'cpu' and mib == 16.0 else None,
+                             preview_mode=preview_mode)
         res['eval'] = evaluate(model, setup)
         res['mms_mib'] = mib
         torch.save(model.state_dict(), out / f'{tag}.pt')
@@ -419,12 +433,29 @@ def main() -> int:
     p.add_argument('--cpu-limit', type=float, default=100.0)
     p.add_argument('--windows', type=int, default=80)
     p.add_argument('--arms', type=str, default=','.join(ARMS))
+    p.add_argument('--source-lock', type=Path, help='frozen DEV lock; required for development roots')
+    p.add_argument('--preview-mode', choices=('transactional', 'batched'), default='transactional')
     a = p.parse_args()
-    if a.root not in ENGINEERING_ROOTS:
-        raise SystemExit('economics runs before the freeze are restricted to engineering roots')
+    tiers = (0.0, 4.0, 16.0, 64.0)
+    if a.root in DEVELOPMENT_ROOTS:
+        if a.source_lock is None:
+            raise SystemExit('development roots require the frozen source lock')
+        lock = json.loads(a.source_lock.read_text(encoding='utf-8'))
+        now = source_hashes()
+        drift = {k: (v, now.get(k)) for k, v in lock['source_hashes'].items() if now.get(k) != v}
+        if drift:
+            raise SystemExit(f'source differs from frozen lock: {sorted(drift)}')
+        fr = lock['frozen']
+        if ((a.cpu_limit, a.windows, tuple(a.arms.split(',')), a.preview_mode)
+                != (fr['cpu_limit'], fr['windows'], tuple(fr['arms']), fr['preview_mode'])):
+            raise SystemExit('budget or arm roster differs from frozen lock')
+        tiers = tuple(fr['atlas_tiers'])
+    elif a.root not in ENGINEERING_ROOTS:
+        raise SystemExit('root not allocated to SCCG-10 economics')
     cap = ProcessTreeMemoryCap(DEFAULT_CAP_BYTES)
     with cap:
-        rep = run_root(a.root, a.warm, a.out, arms=tuple(a.arms.split(',')), cpu_limit=a.cpu_limit, windows=a.windows)
+        rep = run_root(a.root, a.warm, a.out, arms=tuple(a.arms.split(',')), cpu_limit=a.cpu_limit, windows=a.windows,
+                       atlas_tiers=tiers, preview_mode=a.preview_mode)
         rep['memory'] = accounting_dict(cap)
         dump_json(a.out / 'economics.json', rep)
     return 0

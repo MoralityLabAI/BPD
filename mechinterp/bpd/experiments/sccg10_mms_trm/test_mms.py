@@ -218,5 +218,31 @@ class PreviewTests(unittest.TestCase):
         self.assertEqual(model_state_sha256(m), sha)
 
 
+class BatchedPreviewTests(unittest.TestCase):
+    def test_batched_matches_transactional_ranking(self):
+        from .batched_preview import batched_previews
+        torch.set_num_threads(2)
+        m = _model(5)
+        opt = torch.optim.AdamW(m.parameters(), lr=1e-3, weight_decay=1e-4)
+        bs = [_batch(PANEL[i], delay=2, seed=10 + i) for i in range(8)]
+        fb = _batch(PANEL[20], delay=7)
+        x0 = torch.cat((bs[0].receiver, bs[0].hybrid)); y0 = torch.cat((bs[0].labels_r, bs[0].labels_h))
+        opt.zero_grad(); F.cross_entropy(m(x0), y0).backward(); opt.step()
+        m.eval()
+        xf = torch.cat((fb.receiver, fb.hybrid)); yf = torch.cat((fb.labels_r, fb.labels_h))
+        g = tuple(x.detach().clone() for x in torch.autograd.grad(F.cross_entropy(m(xf), yf), tuple(m.parameters())))
+        sha = model_state_sha256(m)
+        seq = []
+        for b in bs:
+            def tr(b=b):
+                return F.cross_entropy(m(torch.cat((b.receiver, b.hybrid))), torch.cat((b.labels_r, b.labels_h)))
+            seq.append(preview_update(m, opt, tr, g)['predicted_gain'])
+        bp = batched_previews(m, opt, bs, g)
+        self.assertEqual(model_state_sha256(m), sha)
+        a, c = np.array(seq), np.array(bp['predicted_gain'])
+        self.assertLess(float(np.abs(a - c).max()), 1e-4 * max(1.0, float(np.abs(a).max())))
+        self.assertEqual(list(np.argsort(-a)), list(np.argsort(-c)))
+
+
 if __name__ == '__main__':
     unittest.main()
