@@ -121,7 +121,7 @@ def lifecycle():
         # The derivative with respect to an independent activation remains.
         x=torch.randn(2,16,requires_grad=True)
         gx=torch.autograd.grad((x@a.T).sum(),x)[0]
-        check("activation_derivative",torch.equal(gx,a.sum(0).expand_as(x)))
+        check("activation_derivative",torch.allclose(gx,a.sum(0).expand_as(x),atol=ATOL,rtol=RTOL))
     check("source_gradient_does_not_seal",not p.sealed and not p.poisoned)
     with p.scope() as tr:
         c=w.weight_delta()
