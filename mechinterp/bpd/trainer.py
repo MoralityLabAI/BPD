@@ -85,6 +85,7 @@ class BPDTrainer:
         residual_cache_max_bytes: int = 16 * 1024**2,
         residual_cache_policy: str = "first_fit",
         cache_pgd_mask_residuals: bool = False,
+        cache_calibration_residuals: bool = False,
     ) -> None:
         if type(cache_single_backward_residuals) is not bool:
             raise TypeError("cache_single_backward_residuals must be bool")
@@ -101,6 +102,10 @@ class BPDTrainer:
         if cache_pgd_mask_residuals and not (cache_single_backward_residuals and residual_cache_policy == "step_exact"):
             raise ValueError("mask-only PGD cache requires enabled step_exact cache")
         self.cache_pgd_mask_residuals = cache_pgd_mask_residuals
+        if type(cache_calibration_residuals) is not bool:
+            raise TypeError("cache_calibration_residuals must be bool")
+        self.cache_calibration_residuals = cache_calibration_residuals
+        self.residual_calibration_stats: list[dict[str, Any]] = []
         self.residual_pgd_cache_stats: list[Any] = []
         self.residual_cache_stats: list[Any] = []
         self.residual_cache_plans: list[dict[str, Any]] = []
@@ -237,9 +242,25 @@ class BPDTrainer:
             with self.bpd_model.target_capture(
                 pass_offset=pass_offset, update_means=update_means, detach_inputs=True
             ):
-                readouts, boundaries, vis, prompt = self.rollout_adapter(
-                    batch, passes, pass_offset, init_state
-                )
+                scope = nullcontext(None)
+                if (self.cache_calibration_residuals and update_means
+                        and self._step_residual_pool is None):
+                    from mechinterp.bpd.experiments.fused_residual.calibration_cache import (
+                        calibration_residuals,
+                    )
+                    scope = calibration_residuals(
+                        [(name, self.bpd_model.wrappers[name])
+                         for name in self.bpd_model.module_order],
+                        calls=passes, max_bytes=self.residual_cache_max_bytes,
+                    )
+                if not self._residual_step_active:
+                    self.residual_calibration_stats = []
+                with scope as calibration_stats:
+                    readouts, boundaries, vis, prompt = self.rollout_adapter(
+                        batch, passes, pass_offset, init_state
+                    )
+                if calibration_stats is not None:
+                    self.residual_calibration_stats.append(calibration_stats)
             mod_inputs = self.bpd_model.collect_recorded_inputs(expected_passes=passes)
         return RolloutTrajectory(
             readouts=readouts,
@@ -364,6 +385,7 @@ class BPDTrainer:
         self._residual_step_active = True
         self.residual_cache_stats = []
         self.residual_pgd_cache_stats = []
+        self.residual_calibration_stats = []
         self.residual_cache_plans = []
         self.residual_step_receipt = None
         self._residual_step_disabled = False
