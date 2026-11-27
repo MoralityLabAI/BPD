@@ -1,0 +1,34 @@
+# BPD-FUSE-01 | Residual-action fusion pilot
+2026-11-27. Parent ab93e4da986beef87897f8d1244c7fe7564b5bde; source mechinterp/bpd/components.py blob c0906e73a993738871812572e267e2ef5f9595d3. Registered at 8462b38ff6889170b23ae656c2679ffc0117db72. Pilot code commit 9ef3951786981ea82839116c8975499a5264757c, Git blob a933077baf391c81322a36d9a9602bf536a3a971, SHA256 9de46d71b9e37d7acba9619d33a727fded55e8e2e3106b9be2e56b9207701608. Executed local CPU copy has identical git blob hash to committed source. No production path changed.
+
+## Identity and scope
+TiedComponentLinear.forward in component mode computes A=XV, masked A then U, reconstructs dense residual weight W-(VU)^T and applies F.linear to X. Let Y=XW^T, m component mask, d residual mask (1 when absent). Calibrated pass means mu_c, mu_d are constant buffers for this call; set them to zero for zero ablation. Then the pre-bias, pre-norm write is
+    m*A U + (1-m)*mu_c U + d*(Y-AU) + (1-d)*mu_d
+    = d*Y + [(m-d)*A+(1-m)*mu_c]U + (1-d)*mu_d.
+Here * is broadcast elementwise multiplication and adjacent U means matrix multiplication. This removes the dense VU reconstruction and keeps one component read, one component write, one target multiply. With routing, reuse Y for the clean target branch (add bias); with sphere rescaling, preserve the original calibrated means, mask clamp, RMS formula and degeneracy threshold. With no residual mask d=1 and residual mean term absent. In exact arithmetic this identity also preserves gradients for x, V, U, component mask and residual mask wherever the same downstream differentiable branch is taken. At a floating point degeneracy boundary, reassociation can change the branch or introduce cancellation; parity is numerical, not bitwise or formal. Preserve the caller's counters, input recording, means update order, dtype cast, and actual buffer lifecycle. The pilot helper implements only the output algebra and never changes the native module.
+
+For N tokens, input/output widths D_i,D_o and C components, no routing target recomputation or norm/elementwise counted, forward multiply-accumulate counts:
+    original N*(D_i*C+C*D_o+D_i*D_o)+D_i*C*D_o;
+    fused N*(D_i*C+C*D_o+D_i*D_o).
+Thus savings D_i*C*D_o per recurrent call. The original may do another target GEMM under routing, which fusion can reuse. At N64, D_i=D_o=1024, C128, forward MAC count 218,103,808 -> 83,886,080, a 61.54% reduction, 2.6x arithmetic ratio. Actual timing depends on shapes, memory movement, kernel efficiency and autograd. In evaluation with fixed masks, exactly zero effective component coefficients may permit narrower projections, but training with learnable masks must preserve gradients through zero coefficients. Dense clean W still needs multiplication, except if there is an exactly zero residual mask and routing/no-gradient contract allows skipping it; not implemented here. Target-mode intervention already uses selected components and is outside this speedup claim.
+
+## CPU pilot
+PyTorch 2.10.0+cpu, Linux x86_64, one torch thread, float64 and float32 output/gradient checks across 256 combinations (128 per dtype; soft/binary/zero/one masks, means, delta mask, bias, sphere, routing). 1,408 tensor comparisons passed. Max absolute f64 output/gradient 2.44e-15/2.66e-15; f32 1.43e-6/1.19e-6. Independent reference reconstructs the dense residual and uses ordinary masked component calculation matching the native component-mode equations. This is not native wrapper execution. Native test is included via --native, not yet run.
+
+Isolated timing, 64 tokens, float32, soft masks, calibrated means, residual mask and bias, no routing or sphere in timing, no optimizer, three warmups and eleven alternating timed trials per arm. Median milliseconds:
+| D_i x D_o, C | Original fwd | Fused fwd | Ratio | Original fwd+bwd | Fused fwd+bwd | Ratio |
+|---|---:|---:|---:|---:|---:|---:|
+| 128x128,32 | .095 | .069 | 1.37 | .556 | .324 | 1.72 |
+| 256x256,64 | .367 | .210 | 1.75 | 1.233 | .630 | 1.96 |
+| 512x512,64 | 1.480 | .528 | 2.81 | 3.646 | 1.432 | 2.55 |
+| 1024x1024,128 | 13.291 | 2.215 | 6.00 | 29.782 | 5.665 | 5.26 |
+| 1024x256,64 | 1.504 | .699 | 2.15 | 3.580 | 1.581 | 2.26 |
+No GPU or end-to-end model speed measured. Host was the available CPU execution sandbox, not the user's RTX 3050/5080. Timing includes Python call/autograd overhead, no process isolation or repeat-day confidence intervals, no RSS peak measurement. Full model speedup depends on time fraction p in the affected operations, 1/[(1-p)+p/s], and the exact native workload. Do not extrapolate the isolated 6x result to tokens/sec or BPD training throughput.
+
+## Follow-up gym
+Run:
+    python -m mechinterp.bpd.experiments.fused_residual.fused_residual --native
+Then create opt-in wrapper path (no default switch) and compare fixed native mini-TRM rollout, gradients and optimizer steps, pass counts, mask schedules, donor/override target interventions unchanged, mean calibration order, soft/binary mask, large cancellation/near-eps threshold tests, CPU float32 and GPU bf16/float16/autocast separately. Train matched roots and seeds with identical optimizer and fixed environment steps; report wall time, peak allocated/reserved GPU memory, CPU RSS, native accuracy, KL, gradient agreement and intervention rank stability. No GPU needed for smoke. Gate promotion on correctness and real measured end-to-end benefit, not merely MAC estimates. Retain baseline path and fail closed for unsupported dtype or numerical instability. For observe_clean_pass, a separate candidate is mean delta=(mean Y)-(mean A)U, avoiding residual reconstruction there while still computing clean per-token RMS, preserving order of running mean updates. Do not combine until independently tested.
+
+## LLM transfer
+CRD-28 in MathCan PR291 showed boundary elimination more economical than demand-analysis overhead. Direct implications: use requested terminal readout only (ordinary prefill/generation can project last requested token to LM head, but full-token training losses need all corresponding logits); exact prefix/KV reuse for identical model/checkpoint/position/causal histories; reuse frozen component read projections and writes across same-input intervention sweeps with bounded chunking. In tied recurrence, weights repeat but activations generally change; no cross-depth activation cache without exact equality or a justified dependency rule. Attention and nonlinear layers can propagate intervention differences across downstream tokens. For certified greedy token decisions, if intervals [l_j,u_j] are valid for each final logit and l_k>max_{j!=k}u_j then argmax k is preserved; this does not preserve sampling or full softmax. Such enclosures require rigorous propagation and numeric guards; no actual Inky Mini token throughput or model quality evidence in this pilot. Verifier-guided TRM stopping can be safe for verifier-backed tasks; not a generic early-exit guarantee.
