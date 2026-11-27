@@ -1,0 +1,29 @@
+name: SCCG08 exact multiplier oracle
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/experiments/sccg01/exact_multiplier.py'
+      - 'mechinterp/bpd/experiments/sccg01/multiplier_benchmark.py'
+      - '.github/workflows/sccg08.yml'
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/sccg01/exact_multiplier.py'
+      - 'mechinterp/bpd/experiments/sccg01/multiplier_benchmark.py'
+      - '.github/workflows/sccg08.yml'
+permissions:
+  contents: read
+jobs:
+  exact:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: python -m pip install sympy==1.14.0
+      - run: python mechinterp/bpd/experiments/sccg01/multiplier_benchmark.py --output sccg08_receipt.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sccg08-multiplier-receipt
+          path: sccg08_receipt.json

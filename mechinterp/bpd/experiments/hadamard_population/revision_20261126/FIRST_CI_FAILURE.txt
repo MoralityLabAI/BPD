@@ -1,0 +1,54 @@
+First remote HAD-05 engineering run
+Commit: 93da07ef9683d517f3d2c322678cdb5c96186bbb
+Workflow: https://github.com/MoralityLabAI/BPD/actions/runs/45815767566
+Job: 139894974764
+Runtime: Python 3.12.16, NumPy 2.3.5, Torch 2.15.0+cpu, pytest 9.2.0
+Result: 1 failed, 76 passed, 8 subtests passed. Exact-receipt step skipped after test failure.
+
+2026-11-26T12:01:51.9058372Z =================================== FAILURES ===================================
+2026-11-26T12:01:51.9058918Z _______ test_historical_gradient_update_helper_accepts_native_factors[2] _______
+2026-11-26T12:01:51.9059291Z 
+2026-11-26T12:01:51.9059396Z arm = 2
+2026-11-26T12:01:51.9059554Z 
+2026-11-26T12:01:51.9059720Z     @pytest.mark.parametrize("arm", [0, 1, 2, 3])
+2026-11-26T12:01:51.9060214Z     def test_historical_gradient_update_helper_accepts_native_factors(arm):
+2026-11-26T12:01:51.9060672Z         source = Recurrent(w=8)
+2026-11-26T12:01:51.9060983Z         native = native_from_recurrent(source)
+2026-11-26T12:01:51.9061362Z         x, y = torch.randn(3, 4, 4, F), torch.randn(3, 4)
+2026-11-26T12:01:51.9061663Z         group = [0, 1, 2, 3]
+2026-11-26T12:01:51.9061935Z         projection = proj(source, group)
+2026-11-26T12:01:51.9062276Z         assert_close(proj(native, group), projection)
+2026-11-26T12:01:51.9062624Z         rotation = torch.eye(8).roll(1, dims=1)
+2026-11-26T12:01:51.9063105Z         source_optimizer = torch.optim.AdamW(source.parameters(), lr=0.003)
+2026-11-26T12:01:51.9063647Z         native_optimizer = torch.optim.AdamW(native.parameters(), lr=0.003)
+2026-11-26T12:01:51.9064255Z         source_receipt = update(source, source_optimizer, x, y, arm, projection, group, rotation)
+2026-11-26T12:01:51.9064936Z         native_receipt = update(native, native_optimizer, x, y, arm, projection, group, rotation)
+2026-11-26T12:01:51.9066000Z         assert_close(torch.tensor(native_receipt), torch.tensor(source_receipt))
+2026-11-26T12:01:51.9066587Z         for _, original, converted, transposed in parameter_pairs(source, native):
+2026-11-26T12:01:51.9067634Z >           assert_close(converted.T if transposed else converted, original)
+2026-11-26T12:01:51.9067981Z 
+2026-11-26T12:01:51.9071582Z mechinterp/bpd/experiments/hadamard_population/test_native_adapter.py:242: 
+2026-11-26T12:01:51.9074050Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-11-26T12:01:51.9074367Z 
+2026-11-26T12:01:51.9074490Z actual = Parameter containing:
+2026-11-26T12:01:51.9074767Z tensor([0.0151], requires_grad=True)
+2026-11-26T12:01:51.9075064Z expected = Parameter containing:
+2026-11-26T12:01:51.9075370Z tensor([0.0144], requires_grad=True)
+2026-11-26T12:01:51.9075889Z 
+2026-11-26T12:01:51.9076037Z     def assert_close(actual, expected):
+2026-11-26T12:01:51.9076447Z >       torch.testing.assert_close(actual, expected, rtol=2e-5, atol=2e-6)
+2026-11-26T12:01:51.9077100Z E       AssertionError: Tensor-likes are not close!
+2026-11-26T12:01:51.9077403Z E       
+2026-11-26T12:01:51.9077616Z E       Mismatched elements: 1 / 1 (100.0%)
+2026-11-26T12:01:51.9078072Z E       Greatest absolute difference: 0.0007613571360707283 at index (0,) (up to 2e-06 allowed)
+2026-11-26T12:01:51.9078678Z E       Greatest relative difference: 0.053028929978609085 at index (0,) (up to 2e-05 allowed)
+2026-11-26T12:01:51.9079030Z 
+2026-11-26T12:01:51.9079312Z mechinterp/bpd/experiments/hadamard_population/test_native_adapter.py:33: AssertionError
+2026-11-26T12:01:51.9079836Z =========================== short test summary info ============================
+2026-11-26T12:01:51.9080884Z FAILED mechinterp/bpd/experiments/hadamard_population/test_native_adapter.py::test_historical_gradient_update_helper_accepts_native_factors[2] - AssertionError: Tensor-likes are not close!
+2026-11-26T12:01:51.9081613Z 
+2026-11-26T12:01:51.9081714Z Mismatched elements: 1 / 1 (100.0%)
+2026-11-26T12:01:51.9082143Z Greatest absolute difference: 0.0007613571360707283 at index (0,) (up to 2e-06 allowed)
+2026-11-26T12:01:51.9082722Z Greatest relative difference: 0.053028929978609085 at index (0,) (up to 2e-05 allowed)
+2026-11-26T12:01:51.9083193Z 1 failed, 76 passed, 8 subtests passed in 3.24s
+2026-11-26T12:01:52.4613280Z ##[error]Process completed with exit code 1.

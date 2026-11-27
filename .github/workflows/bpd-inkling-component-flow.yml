@@ -1,0 +1,56 @@
+name: BPD INK06 component reader accounting
+
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/experiments/inkling_component_flow/**'
+      - 'mechinterp/bpd/docs/GOODFIRE_LOOPED_MECHINTERP_20261126.md'
+      - 'mechinterp/bpd/components.py'
+      - 'mechinterp/bpd/config.py'
+      - '.github/workflows/bpd-inkling-component-flow.yml'
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/inkling_component_flow/**'
+      - 'mechinterp/bpd/docs/GOODFIRE_LOOPED_MECHINTERP_20261126.md'
+      - 'mechinterp/bpd/components.py'
+      - 'mechinterp/bpd/config.py'
+      - '.github/workflows/bpd-inkling-component-flow.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  source-instrument:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      OMP_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+      OPENBLAS_NUM_THREADS: '1'
+      PYTEST_DISABLE_PLUGIN_AUTOLOAD: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install CPU test dependencies
+        run: |
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check numpy==2.3.5 pytest==8.4.2
+      - name: Check native writes, reader gradients and finite edits
+        run: python -m unittest discover -s mechinterp/bpd/experiments/inkling_component_flow -p 'test_*.py' -v
+      - name: Check existing BPD core behavior
+        run: python -m pytest mechinterp/bpd/tests/test_bpd_core.py -q
+      - name: Replay constructed source receipt
+        run: |
+          python -m mechinterp.bpd.experiments.inkling_component_flow.run_source_audit \
+            --check mechinterp/bpd/experiments/inkling_component_flow/evidence/source_fixture.json \
+            --out "$RUNNER_TEMP/inkbpd06_source_fixture.json"
+      - name: Retain source verification receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: inkbpd06-source-instrument
+          path: ${{ runner.temp }}/inkbpd06_source_fixture.json
+          if-no-files-found: warn
+          retention-days: 90

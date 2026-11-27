@@ -1,0 +1,113 @@
+{
+  "complete": true,
+  "historical_runtime": {
+    "numpy": "2.3.5",
+    "torch": "2.10.0+cpu"
+  },
+  "jobs": [
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "/workspace/scratch/b946040666b4/frozen_had05/had05.py",
+        "--out",
+        "/workspace/scratch/b946040666b4/BPD/mechinterp/bpd/experiments/hadamard_population/revision_20261126/replay/results.json"
+      ],
+      "name": "allocation",
+      "returncode": 0,
+      "seconds": 41.58915596999941
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "/workspace/scratch/b946040666b4/frozen_had05/archive.py",
+        "--out",
+        "/workspace/scratch/b946040666b4/BPD/mechinterp/bpd/experiments/hadamard_population/revision_20261126/replay/archive_results.json"
+      ],
+      "name": "exact",
+      "returncode": 0,
+      "seconds": 22.670133281000744
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "/workspace/scratch/b946040666b4/frozen_had05/near.py",
+        "--out",
+        "/workspace/scratch/b946040666b4/BPD/mechinterp/bpd/experiments/hadamard_population/revision_20261126/replay/near_results.json"
+      ],
+      "name": "near",
+      "returncode": 0,
+      "seconds": 21.209285560999888
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "/workspace/scratch/b946040666b4/frozen_had05/audit.py",
+        "--results",
+        "/workspace/scratch/b946040666b4/BPD/mechinterp/bpd/experiments/hadamard_population/revision_20261126/replay/results.json",
+        "--out",
+        "/workspace/scratch/b946040666b4/BPD/mechinterp/bpd/experiments/hadamard_population/revision_20261126/replay/audit.json"
+      ],
+      "name": "audit",
+      "returncode": 0,
+      "seconds": 4.7449757280000995
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "/workspace/scratch/b946040666b4/frozen_had05/archive_audit.py",
+        "--dir",
+        "/workspace/scratch/b946040666b4/BPD/mechinterp/bpd/experiments/hadamard_population/revision_20261126/replay"
+      ],
+      "name": "archive_audit",
+      "returncode": 0,
+      "seconds": 2.377997623999363
+    }
+  ],
+  "original_raw_receipts_available": false,
+  "output_sha256": {
+    "SUMMARY.json": "7b8d50e3685f14d3a4724c95aa6121265ac33b6112d16e7ed6b9a8cf1b86ae0c",
+    "allocation.log": "8ff11fc2f27830799f33370d24bcad99189705f58923943dc48c4c0c12af8218",
+    "archive_audit.json": "cf02ef150c77d2a8993ca76b3200fa5f288a06a89e6721e8738327ee34690247",
+    "archive_audit.log": "4318dd7aecc03044556974e455f70f77f196f4a0f5e15f73707fdc2227afd4d1",
+    "archive_results.json": "3c26629e5f4217a699a2458cc1ba6d34f8bc2e4f503b3d7d0fda05f2cd156a9a",
+    "audit.json": "75d9820cc4781f56a8bc67491c932825eda509feaea1d794d7e46ae00973f4c1",
+    "audit.log": "7e4b59359d8331785a501f25aae8b5b7aa6e3fc0722c9fa0282e89610aed4ee1",
+    "exact.log": "3d66f7359febdafd6d3e08931564a7fd4ccf0159fcbfe1db8b53d821534789e3",
+    "near.log": "f7916c6890801c32d415ea7339427c3b6224af1ffa2548d7ecda700325e82106",
+    "near_results.json": "a51fa51fe310ecb4942b06a2326e2b018ad5cdc3f1708d9bb7d0e3145cbb63e8",
+    "results.json": "c8651409c7c4e6fa8513da728a3cf0a675f478740ad046e2dbbcf8c9da98140b"
+  },
+  "runtime": {
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "numpy": "2.3.5",
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "torch": "2.15.0+cpu"
+  },
+  "scope": "DEVELOPMENT_REPLAY",
+  "selection_exposure": "All roots and choices repeat exposed development pilots.",
+  "source_commit": "3b7ee1775b1e7a709c536641105ee4fc3195a5a8",
+  "source_files": {
+    "archive.py": {
+      "git_blob": "563cdb30ffcc4f0facd341c72bc413d36baf8632",
+      "sha256": "45df1f7c7ed515573640b97f1c68625570a5c452c6025e359669a89ab5c1d2c7"
+    },
+    "archive_audit.py": {
+      "git_blob": "5aa264f8b61350668582562204d7af867681f2e5",
+      "sha256": "8c7edf1ae3a362c673cfc4cead59fb49876b07d9838de9c53c00e3009851bdc0"
+    },
+    "audit.py": {
+      "git_blob": "e726e437cf6dc917878c54761abbd504dd235564",
+      "sha256": "cb42b62e4bfb6e0b3f5703c882f42011aae2eb3a82b9710ccb89aba7c5354f7e"
+    },
+    "had05.py": {
+      "git_blob": "3a06be89b3a502b1de02a4a34d8182c97377be6f",
+      "sha256": "7462d2099e241330d862d72fb6aeaa72e027ebd833e78d89c0ba3760d051c988"
+    },
+    "near.py": {
+      "git_blob": "b74568f2a18f4cdcc13c3e3bb167d46842156d27",
+      "sha256": "3adf781f6fdbbced274c5ae142e0a8a3273db1533291cc58b840aa728396d0bc"
+    }
+  }
+}

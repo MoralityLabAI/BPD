@@ -1,0 +1,33 @@
+name: SCCG Monte Carlo secondary backend
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/experiments/sccg01/monte_carlo_atlas.py'
+      - 'mechinterp/bpd/experiments/sccg01/dynamic_atlas.py'
+      - '.github/workflows/sccg-monte-carlo.yml'
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/sccg01/monte_carlo_atlas.py'
+      - 'mechinterp/bpd/experiments/sccg01/dynamic_atlas.py'
+      - '.github/workflows/sccg-monte-carlo.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  paired:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: python mechinterp/bpd/experiments/sccg01/monte_carlo_atlas.py --roots 1 --draws 5
+      - run: python mechinterp/bpd/experiments/sccg01/monte_carlo_atlas.py --mode paired --output mc_fixed.json
+      - run: python mechinterp/bpd/experiments/sccg01/monte_carlo_atlas.py --mode paired --quotient-drift --output mc_drift.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sccg-monte-carlo-receipts
+          path: |
+            mc_fixed.json
+            mc_drift.json
