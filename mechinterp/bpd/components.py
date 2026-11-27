@@ -165,6 +165,10 @@ class TiedComponentLinear(nn.Module):
 
         # Execution state reset on every rollout
         self.mode: Literal["target", "component"] = "target"
+        # Experimental FUSE-02 opt-in; deliberately not serialized.
+        self.use_fused_residual: bool = False
+        self.fused_residual_calls: int = 0
+        self.fused_residual_fallbacks: int = 0
         self.schedule: PassMaskSchedule | None = None
         self.intervention: ComponentIntervention | None = None
         self.pass_offset: int = 0
@@ -339,27 +343,75 @@ class TiedComponentLinear(nn.Module):
             and tau < self.mean_comp_acts.shape[0]
             and bool(self.calibrated_passes[tau].item())
         )
-        if is_cal:
-            mu_c = self.mean_comp_acts[tau]  # [C]
-            masked_acts = mask_tau * comp_acts + (1.0 - mask_tau) * mu_c
-        else:
-            masked_acts = mask_tau * comp_acts
+        fused_clean = None
+        write_nobias = None
+        d_mask = (
+            self.schedule.delta_mask[:, local_call].unsqueeze(-1)
+            if self.schedule.delta_mask is not None
+            else None
+        )
+        # This experiment deliberately supports only CPU float32 without
+        # autocast. Mixed precision and accelerator kernels need separate tests.
+        if self.use_fused_residual:
+            supported = (
+                x.device.type == "cpu"
+                and x.dtype == torch.float32
+                and self.V.dtype == torch.float32
+                and self.U.dtype == torch.float32
+                and self.W_target.dtype == torch.float32
+                and mask_tau.dtype == torch.float32
+                and (d_mask is None or d_mask.dtype == torch.float32)
+                and not torch.is_autocast_enabled("cpu")
+                and torch.get_float32_matmul_precision() == "highest"
+            )
+            if supported:
+                fused_clean = F.linear(xf, self.W_target.float())
+                d = 1.0 if d_mask is None else d_mask
+                z = (mask_tau - d) * comp_acts
+                if is_cal:
+                    z = z + (1.0 - mask_tau) * self.mean_comp_acts[tau]
+                candidate = d * fused_clean + z @ self.U
+                if is_cal and d_mask is not None:
+                    candidate = candidate + (1.0 - d_mask) * self.mean_delta_out[tau]
+                near_threshold = False
+                if self.ablation.sphere_rescale and is_cal:
+                    ms = candidate.detach().square().mean(dim=-1, keepdim=True)
+                    eps = self.ablation.eps
+                    # Empirical guard, not a certified rounding-error bound.
+                    near_threshold = bool(
+                        ((ms - eps).abs() <= 0.05 * eps).any().item()
+                        or not torch.isfinite(ms).all().item()
+                    )
+                if not near_threshold:
+                    write_nobias = candidate
+                    self.fused_residual_calls += 1
+                else:
+                    fused_clean = None
+            if write_nobias is None:
+                self.fused_residual_fallbacks += 1
 
-        comp_nobias = masked_acts @ self.U  # [B, P, d_out]
-
-        delta_w = self.weight_delta()
-        delta_raw = F.linear(xf, delta_w)
-        if self.schedule.delta_mask is not None:
-            d_mask = self.schedule.delta_mask[:, local_call].unsqueeze(-1)  # [B, P, 1]
+        if write_nobias is None:
             if is_cal:
-                mu_d = self.mean_delta_out[tau]
-                delta_contrib = d_mask * delta_raw + (1.0 - d_mask) * mu_d
+                mu_c = self.mean_comp_acts[tau]  # [C]
+                masked_acts = mask_tau * comp_acts + (1.0 - mask_tau) * mu_c
             else:
-                delta_contrib = d_mask * delta_raw
-        else:
-            delta_contrib = delta_raw
+                masked_acts = mask_tau * comp_acts
 
-        write_nobias = comp_nobias + delta_contrib
+            comp_nobias = masked_acts @ self.U  # [B, P, d_out]
+
+            delta_w = self.weight_delta()
+            delta_raw = F.linear(xf, delta_w)
+            if self.schedule.delta_mask is not None:
+                d_mask = self.schedule.delta_mask[:, local_call].unsqueeze(-1)  # [B, P, 1]
+                if is_cal:
+                    mu_d = self.mean_delta_out[tau]
+                    delta_contrib = d_mask * delta_raw + (1.0 - d_mask) * mu_d
+                else:
+                    delta_contrib = d_mask * delta_raw
+            else:
+                delta_contrib = delta_raw
+
+            write_nobias = comp_nobias + delta_contrib
 
         if self.ablation.sphere_rescale and is_cal:
             eps = self.ablation.eps
@@ -376,7 +428,10 @@ class TiedComponentLinear(nn.Module):
 
         if self.schedule.routing_mask is not None:
             r_mask = self.schedule.routing_mask[:, local_call].unsqueeze(-1)
-            target_out = F.linear(xf, self.W_target.float(), self.bias.float() if self.bias is not None else None)
+            if fused_clean is None:
+                target_out = F.linear(xf, self.W_target.float(), self.bias.float() if self.bias is not None else None)
+            else:
+                target_out = fused_clean + self.bias.float() if self.bias is not None else fused_clean
             comp_out = torch.where(r_mask, comp_out, target_out)
 
         return comp_out.to(x.dtype)
