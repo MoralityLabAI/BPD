@@ -1122,6 +1122,15 @@ def main() -> None:
             if cell["tier"] == "frontier":
                 frontier_aborted = True
             rec = {"cell_id": cid, "status": "oom_skipped", "error": str(exc), **cell}
+        except RuntimeError as exc:
+            if cell["tier"] == "mixed_precision" and "expected dtype" in str(exc):
+                if device.type == "cuda":
+                    torch.cuda.empty_cache()
+                gc.collect()
+                rec = {"cell_id": cid, "status": "native_autocast_error", "error": str(exc), **cell}
+                print(f"  -> native_autocast_error: {exc}", flush=True)
+            else:
+                raise
 
         with args.output.open("a", encoding="utf-8") as f:
             f.write(json.dumps(rec, allow_nan=False) + "\n")

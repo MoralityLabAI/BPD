@@ -243,7 +243,10 @@ class StepResidualPool:
                     value = p
                     stats.mask_only_calls += 1
                 else:
-                    value = _Primal.apply(self_w.V, self_w.U, p, "residual", stats)
+                    dev_type = self_w.V.device.type
+                    ac_enabled = bool(torch.is_autocast_enabled(dev_type))
+                    ac_dtype = torch.get_autocast_dtype(dev_type) if ac_enabled else None
+                    value = _Primal.apply(self_w.V, self_w.U, p, "residual", stats, ac_enabled, ac_dtype)
                     stats.independent_calls += 1
                 if value.untyped_storage().data_ptr() != p.untyped_storage().data_ptr():
                     self.poisoned = True

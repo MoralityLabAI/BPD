@@ -31,13 +31,12 @@ class Stats:
 
 class _Primal(torch.autograd.Function):
     @staticmethod
-    def forward(ctx, v, u, primal, mode, stats):
+    def forward(ctx, v, u, primal, mode, stats, ac_enabled=False, ac_dtype=None):
         ctx.save_for_backward(v, u)
         ctx.mode, ctx.stats = mode, stats
-        dev_type = v.device.type
-        ctx.dev_type = dev_type
-        ctx.ac_enabled = bool(torch.is_autocast_enabled(dev_type))
-        ctx.ac_dtype = torch.get_autocast_dtype(dev_type) if ctx.ac_enabled else None
+        ctx.dev_type = v.device.type
+        ctx.ac_enabled = bool(ac_enabled)
+        ctx.ac_dtype = ac_dtype
         return primal
 
     @staticmethod
@@ -69,7 +68,7 @@ class _Primal(torch.autograd.Function):
             gv = gv.to(v.dtype)
         if gu is not None and gu.dtype != u.dtype:
             gu = gu.to(u.dtype)
-        return gv, gu, None, None, None
+        return gv, gu, None, None, None, None, None
 
 
 _MISSING = object()
@@ -155,7 +154,10 @@ def independent_residuals(
                 stats.misses+=1;stats.reconstructions+=1;stats.resident_bytes+=expected_n;stats.peak_bytes=max(stats.peak_bytes,stats.resident_bytes)
             else:
                 stats.hits+=1;p=old[1]
-            value=_Primal.apply(self.V,self.U,p,variant,stats)
+            dev_type = self.V.device.type
+            ac_enabled = bool(torch.is_autocast_enabled(dev_type))
+            ac_dtype = torch.get_autocast_dtype(dev_type) if ac_enabled else None
+            value=_Primal.apply(self.V,self.U,p,variant,stats,ac_enabled,ac_dtype)
             if value.requires_grad:value.register_hook(consumed)
             return value if variant=='residual' else self.W_target.float()-value.T
         return MethodType(get,w)
