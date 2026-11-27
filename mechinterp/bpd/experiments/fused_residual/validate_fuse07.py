@@ -64,7 +64,7 @@ def unit():
     return dict(cases=len(cases),random_cases=256,checks=checks,exact_mismatches=0,frontier_abort=abort,peak_frontier=peak,transitions=transitions,greedy_suboptimal_cases=misses,pooled_value_shortfall=gaps,elapsed_seconds=time.perf_counter()-t)
 
 
-def campaign(Base,Schedule,Config,builder,profile,passes):
+def campaign(Base,Schedule,Config,builder,profile,passes,only=None):
     width=1024;seed=3901001+width+passes+(10000 if profile=='heterogeneous' else 0);torch.manual_seed(seed)
     a=builder(hidden_size=width,num_heads=4,l_layers=2,h_cycles=1,l_cycles=2,puzzle_emb_len=4,seq_len=16,seed=seed)
     for p in a.parameters():p.requires_grad_(False)
@@ -93,6 +93,7 @@ def campaign(Base,Schedule,Config,builder,profile,passes):
             if mode=='exact':assert (p.value,p.size,p.indices)==oracle(sites,m*MIB)
             plans.append(dict(cap_mib=m,mode=mode,plan=asdict(p),planner_ns=ns,reconstruction_macs=full_work-p.value))
             subsets.setdefault(p.indices,m*MIB)
+    if only is not None:assert only.issubset(subsets), (only,subsets)
     def roll(model,chosen,cap,back):
         ws=wrappers(model)
         for w in ws:w.reset_pass_state()
@@ -117,6 +118,7 @@ def campaign(Base,Schedule,Config,builder,profile,passes):
     r=[]
     ref,_=roll(a,(),0,True)
     for chosen,cap in subsets.items():
+        if only is not None and chosen not in only:continue
         pred,stats=roll(b,chosen,cap,True)
         failures=sum(not close(u,v) for u,v in zip(ref,pred));equal=sum(torch.equal(u,v) for u,v in zip(ref,pred));max_abs=max(err(u,v) for u,v in zip(ref,pred))
         greedy_indices=list(range(2,passes,3));greedy_failures=sum(not torch.equal(ref[i].argmax(-1),pred[i].argmax(-1)) for i in greedy_indices)
@@ -134,11 +136,11 @@ def campaign(Base,Schedule,Config,builder,profile,passes):
 
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--excerpt-dir');p.add_argument('--output',required=True);p.add_argument('--profile',choices=('uniform','heterogeneous'));p.add_argument('--passes',type=int,choices=(6,12),default=6);a=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('--excerpt-dir');p.add_argument('--output',required=True);p.add_argument('--profile',choices=('uniform','heterogeneous'));p.add_argument('--passes',type=int,choices=(6,12),default=6);p.add_argument('--only',action='append',help='repeat comma-separated subset to time');a=p.parse_args()
     torch.set_num_threads(1);torch.set_float32_matmul_precision('highest');t=time.perf_counter()
     if a.profile is None:result=unit();source={'scope':'pure integer allocation oracle'}
     else:
-        Base,Schedule,Config,builder,source=load_native(a.excerpt_dir);result=campaign(Base,Schedule,Config,builder,a.profile,a.passes)
+        Base,Schedule,Config,builder,source=load_native(a.excerpt_dir);result=campaign(Base,Schedule,Config,builder,a.profile,a.passes,None if a.only is None else {tuple(map(int,x.split(','))) for x in a.only})
     out=dict(source=source,torch=torch.__version__,platform=platform.platform(),threads=torch.get_num_threads(),elapsed_seconds=time.perf_counter()-t,result=result,hashes={p:hashlib.sha256(Path(__file__).with_name(p).read_bytes()).hexdigest() for p in ('admission.py','validate_fuse07.py','adjoint_cache.py','residual_cache.py','validate_fuse04.py')})
     Path(a.output).write_text(json.dumps(out,indent=2,allow_nan=False)+'\n');print(json.dumps({'output':a.output,'elapsed_seconds':out['elapsed_seconds']}),flush=True)
     if a.profile is not None:assert not any(s['failures'] or s['greedy_failures'] for s in result['subsets'])
