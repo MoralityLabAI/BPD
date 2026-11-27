@@ -1,6 +1,65 @@
 {
   "evidence_class": "ENGINEERING_SPENT_ROOTS",
   "experiment": "BPD-TRM-CURATE-03B-MMS",
+  "per_edge_gradient_reuse_potential": {
+    "B_transactional": {
+      "cacheable_fraction_of_all_candidates": 0.0215630472854641,
+      "cacheable_per_edge_gradients": 197,
+      "candidate_inputs_at_reused_checkpoint": 6704,
+      "windows": 571,
+      "windows_reusing_parent_checkpoint": 419
+    },
+    "C_analytic_ord": {
+      "cacheable_fraction_of_all_candidates": 0.03398617511520737,
+      "cacheable_per_edge_gradients": 708,
+      "candidate_inputs_at_reused_checkpoint": 15984,
+      "windows": 1302,
+      "windows_reusing_parent_checkpoint": 999
+    },
+    "D_analytic_mech": {
+      "cacheable_fraction_of_all_candidates": 0.062303149606299214,
+      "cacheable_per_edge_gradients": 1266,
+      "candidate_inputs_at_reused_checkpoint": 16720,
+      "windows": 1270,
+      "windows_reusing_parent_checkpoint": 1045
+    },
+    "E_full16_gate": {
+      "cacheable_fraction_of_all_candidates": 0.07287985865724382,
+      "cacheable_per_edge_gradients": 1650,
+      "candidate_inputs_at_reused_checkpoint": 18816,
+      "windows": 1415,
+      "windows_reusing_parent_checkpoint": 1176
+    },
+    "F_early12_gate": {
+      "cacheable_fraction_of_all_candidates": 0.10158141646489104,
+      "cacheable_per_edge_gradients": 2685,
+      "candidate_inputs_at_reused_checkpoint": 23216,
+      "windows": 1652,
+      "windows_reusing_parent_checkpoint": 1451
+    },
+    "G_joint_full16": {
+      "cacheable_fraction_of_all_candidates": 0.04182330827067669,
+      "cacheable_per_edge_gradients": 801,
+      "candidate_inputs_at_reused_checkpoint": 15792,
+      "windows": 1197,
+      "windows_reusing_parent_checkpoint": 987
+    },
+    "H_joint_early12": {
+      "cacheable_fraction_of_all_candidates": 0.04405349013657056,
+      "cacheable_per_edge_gradients": 929,
+      "candidate_inputs_at_reused_checkpoint": 17616,
+      "windows": 1318,
+      "windows_reusing_parent_checkpoint": 1101
+    },
+    "I_shuffled": {
+      "cacheable_fraction_of_all_candidates": 0.030688105117565697,
+      "cacheable_per_edge_gradients": 710,
+      "candidate_inputs_at_reused_checkpoint": 19360,
+      "windows": 1446,
+      "windows_reusing_parent_checkpoint": 1210
+    }
+  },
+  "per_edge_gradient_reuse_source": "pilot development windows, roots 28301-28308",
   "root": 28000,
   "source_sha256": {
     "adamw_screen.py": "123d8c860d2c34225d4f314cb4c8c6f2752a1c03bbe7b5505191bc9ac9963e96",

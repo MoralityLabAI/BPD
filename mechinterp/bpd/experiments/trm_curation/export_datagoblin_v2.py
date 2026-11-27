@@ -27,7 +27,8 @@ ACTIONS = ('ACQUIRE_4', 'ACQUIRE_8', 'ACQUIRE_12', 'ACQUIRE_16', 'ABSTAIN', 'SEL
 
 
 def _jsonl(path: Path):
-    return [json.loads(x) for x in path.read_text(encoding='utf-8').splitlines() if x]
+    from .summarize_03b import read_jsonl
+    return read_jsonl(path)
 
 
 def _actions(w: dict, arm_spec: dict) -> list[str]:

@@ -63,11 +63,11 @@ def reuse_potential(dev_dir: Path, roots, arms) -> dict:
         same_ckpt = total = repeat_inputs = candidates_at_repeat = 0
         for r in roots:
             p = dev_dir / f'root_{r}' / f'{arm}_windows.jsonl'
-            if not p.is_file():
+            if not p.is_file() and not p.with_name(p.name + '.gz').is_file():
                 continue
+            from .summarize_03b import read_jsonl
             seen: dict[str, set] = {}
-            for line in p.read_text(encoding='utf-8').splitlines():
-                w = json.loads(line)
+            for w in read_jsonl(p):
                 ck = w.get('checkpoint_sha256')
                 if ck is None:
                     continue

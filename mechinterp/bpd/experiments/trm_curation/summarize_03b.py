@@ -26,7 +26,20 @@ FLOOR = 0.05
 
 
 def _jsonl(path: Path):
-    return [json.loads(line) for line in path.read_text(encoding='utf-8').splitlines() if line]
+    return read_jsonl(path)
+
+def read_jsonl(path):
+    """Rows of a JSONL file, falling back to its deterministic ``.gz`` (gzip -n) twin."""
+    import gzip
+    from pathlib import Path
+    path = Path(path)
+    if path.is_file():
+        text = path.read_text(encoding='utf-8')
+    else:
+        with gzip.open(str(path) + '.gz', 'rt', encoding='utf-8') as f:
+            text = f.read()
+    return [json.loads(x) for x in text.splitlines() if x]
+
 
 
 def combine_engineering(run_dirs, out: Path, *, tests_passed: bool, tests_summary: str) -> dict:
