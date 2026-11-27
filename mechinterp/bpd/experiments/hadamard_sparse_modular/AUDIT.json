@@ -1,0 +1,28 @@
+{
+  "scope": "ZERO_SLACK_NECESSARY_RELAXATIONS",
+  "initial_pairs": 2327973,
+  "zero_slack": 667751,
+  "local_excluded": 134901,
+  "after_local": 532850,
+  "classes": 42789,
+  "cross": {
+    "POS": 369443,
+    "NEG": 41206,
+    "CAP": 122201,
+    "ops": 335326368
+  },
+  "joint": {
+    "POS": 35727,
+    "NEG": 287390,
+    "CAP": 168527,
+    "ops": 1236961213
+  },
+  "remaining_zero_slack": 204254,
+  "remaining_total": 1864476,
+  "untouched_positive_slack": 1660222,
+  "histogram_cells": 912384,
+  "transport_pairs": 17391,
+  "transport_permutations": 14795991,
+  "independent_scalar_cases": 256,
+  "scalar_normalization_checks": 10000
+}
