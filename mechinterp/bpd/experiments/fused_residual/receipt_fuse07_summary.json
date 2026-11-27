@@ -1,0 +1,311 @@
+{
+  "status": "PASS exact selector, local recurrent parity, full native FUSE06 trainer gate; HOLD production",
+  "protocol": "663509f9d39b374a48194bf706315eb8b20c93f4",
+  "source": {
+    "admission": "ece08080405b6006e6de63c3b253e174bfd98461",
+    "initial_validator": "6ab8f3cef8eb203378f9e2b7e039892c5a725667",
+    "resumed_validator": "de97d19b292ddcfa4626fd76c53aef7e3d6c1193",
+    "restored_components": "c0906e73a993738871812572e267e2ef5f9595d3",
+    "frozen_adjoint": "b44b1702bc235790adf7d20f4abf022da049ef67"
+  },
+  "native": {
+    "checks": 3696,
+    "exact": 3696,
+    "scalars": 1628,
+    "paired_steps": 16,
+    "greedy": 32,
+    "failures": 0,
+    "run": 46000974799,
+    "artifact": 15198595779,
+    "post_restore_run": 46001528764,
+    "post_restore_artifact": 15198746409,
+    "post_restore_artifact_sha256": "167327543a9a2b512629b501762df1bf4057c020b7e8b258bdb7caafdf8377bc",
+    "torch": "2.5.1 CPU"
+  },
+  "unit": {
+    "cases": 263,
+    "checks": 1052,
+    "exact_mismatches": 0,
+    "frontier_abort": true,
+    "peak_frontier": 72,
+    "transitions": 12228,
+    "suboptimal": {
+      "first": 117,
+      "smallest": 107,
+      "density": 57,
+      "exact": 0
+    },
+    "pooled_shortfall": {
+      "first": 5707,
+      "smallest": 4047,
+      "density": 696,
+      "exact": 0
+    }
+  },
+  "local": {
+    "torch": "2.10.0+cpu",
+    "threads": 1,
+    "scope": "verified original native excerpts",
+    "profiles": 4,
+    "plans": 40,
+    "distinct_subsets": 15,
+    "exact_tensor_checks": 270,
+    "greedy_checks": 40,
+    "failures": 0,
+    "max_planner_us": 35.954,
+    "timing": "one warmup, two alternating timed samples per arm; no confidence intervals",
+    "rows": [
+      [
+        "uniform",
+        6,
+        4,
+        [
+          0
+        ],
+        671088640,
+        4,
+        518.6548995,
+        487.0255115,
+        1048.8362145,
+        953.5529635
+      ],
+      [
+        "uniform",
+        6,
+        8,
+        [
+          0,
+          2
+        ],
+        1342177280,
+        8,
+        533.657042,
+        438.7633315,
+        1056.7712045,
+        912.7306155
+      ],
+      [
+        "uniform",
+        6,
+        16,
+        [
+          0,
+          1
+        ],
+        2516582400,
+        15,
+        580.776795,
+        433.4242455,
+        992.9289895,
+        821.4076615
+      ],
+      [
+        "uniform",
+        6,
+        32,
+        [
+          0,
+          1,
+          2,
+          3
+        ],
+        5033164800,
+        30,
+        537.53513,
+        230.336328,
+        1150.5133705,
+        692.1993275
+      ],
+      [
+        "heterogeneous",
+        6,
+        4,
+        [
+          0
+        ],
+        167772160,
+        4,
+        562.070874,
+        512.8038935,
+        975.5673135,
+        925.702439
+      ],
+      [
+        "heterogeneous",
+        6,
+        4,
+        [
+          2
+        ],
+        503316480,
+        4,
+        562.021076,
+        493.8799215,
+        1024.568921,
+        972.332668
+      ],
+      [
+        "heterogeneous",
+        6,
+        8,
+        [
+          0,
+          2
+        ],
+        671088640,
+        8,
+        531.823557,
+        462.880051,
+        1362.294887,
+        1230.7033175
+      ],
+      [
+        "heterogeneous",
+        6,
+        16,
+        [
+          0,
+          1
+        ],
+        1090519040,
+        15,
+        485.484745,
+        349.0840425,
+        916.7347575,
+        768.0021175
+      ],
+      [
+        "heterogeneous",
+        6,
+        16,
+        [
+          2,
+          3
+        ],
+        2348810240,
+        15,
+        486.322975,
+        355.063668,
+        911.4676205,
+        726.1356545
+      ],
+      [
+        "heterogeneous",
+        6,
+        32,
+        [
+          0,
+          1,
+          2,
+          3
+        ],
+        3439329280,
+        30,
+        519.0747745,
+        238.303094,
+        1018.8047365,
+        606.7718425
+      ],
+      [
+        "uniform",
+        12,
+        16,
+        [
+          0,
+          1
+        ],
+        5536481280,
+        15,
+        1095.194213,
+        857.855957,
+        2129.112272,
+        1679.2098985
+      ],
+      [
+        "uniform",
+        12,
+        16,
+        [
+          0,
+          2
+        ],
+        2952790016,
+        8,
+        1101.0084855,
+        919.8292585,
+        2121.6856165,
+        1937.0625325
+      ],
+      [
+        "heterogeneous",
+        12,
+        16,
+        [
+          0,
+          1
+        ],
+        2399141888,
+        15,
+        1005.6306125,
+        776.223262,
+        1894.3263825,
+        1565.256896
+      ],
+      [
+        "heterogeneous",
+        12,
+        16,
+        [
+          0,
+          2
+        ],
+        1476395008,
+        8,
+        966.009292,
+        825.1842855,
+        1870.7519535,
+        1641.382738
+      ],
+      [
+        "heterogeneous",
+        12,
+        16,
+        [
+          2,
+          3
+        ],
+        5167382528,
+        15,
+        1002.7670085,
+        664.9237185,
+        1800.2846055,
+        1443.097524
+      ]
+    ],
+    "row_fields": [
+      "profile",
+      "passes",
+      "smallest_measured_cap_mib",
+      "indices",
+      "saved_macs",
+      "payload_mib",
+      "ref_forward_ms",
+      "cache_forward_ms",
+      "ref_train_ms",
+      "cache_train_ms"
+    ],
+    "density_matches_exact_all_model_plans": true
+  },
+  "raw_sha256": {
+    "consolidated": "bf1320e95bf7081bc45ef0f43065891dd7eb38ad0ff0f4ce3dcc6f1747706c6b",
+    "unit": "86dfce9e109446bc2a096cf34df01c1dc1b5c495491cab8f9bc2c810a54f25a1",
+    "hetero6_cap16": "a91c6ba64e7c0848a836ec75e8ccefc634f8339cfb0c5351b4645cfdaa58ae97",
+    "uniform6_remaining": "359207818f689f61104a850f07070867b89944a81b90c3f413b25dbcbd273283",
+    "hetero6_remaining": "441efaebe572a5fc5f20aff1922d16bfcc7f72fc6f86db0f90811eb29fd1221e",
+    "hetero12": "241d5cfd0ab235498af5aa597c2247008652ede40c096c18eedfe294e2c9faf0",
+    "uniform12": "fa77fa7b08e9a67c88ceab2993f0ba74435c3d0fafca76ada7dba1b09ba787bf",
+    "uniform6_log": "ce8d4faea5089102f346af3ca352b5f7de17bccaac38c3bf01153fe79221bf1e"
+  },
+  "archive_sha256": "0f1439f23d0f7b82b1eb766a3171fccd9ed6061b98d6520a8b190b8a9edfee31",
+  "deviations": "Initial uniform6 timeout after three completed subset records; resumed remaining subset with exact same fixture and plans. Raw log retained, no incomplete samples. Unit ran initial source; subset filter-only revision used subsequently. Original FUSE02 native rewrite removed after source-hash replay failure; historical experiments available at their pinned commits. Latest expanded CI pending when summary assembled."
+}

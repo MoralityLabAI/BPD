@@ -1,0 +1,273 @@
+{
+  "source": {
+    "scope": "verified original native baseline excerpts ab93e4da; target intervention method omitted and not exercised",
+    "fnv1a": {
+      "wrapper": "4b49f9ab",
+      "forward": "08fbc12f",
+      "config": "a31fa61e",
+      "trm": "4a80eb7d",
+      "builder": "9943d0bb"
+    },
+    "sha256": {
+      "native_excerpt.py": "b6c0c2420641c526542cac9a545e1e3dcfb587123f93448bd9cdc63025a7985d",
+      "trm_excerpt.py": "b82f3a088d5f69449608242b2229e57952e2c89cf855c05b0560627efdd2750b"
+    }
+  },
+  "torch": "2.10.0+cpu",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "threads": 1,
+  "precision": "highest",
+  "lifecycle": {
+    "eval_hit_identity": true,
+    "eval_version_invalidation": true,
+    "eval_identity_invalidation": true,
+    "scope_restored": true,
+    "no_grad_bypass": true,
+    "backward_after_exit": true,
+    "early_backward_detected": true,
+    "train_mutation_raises": true,
+    "train_identity_raises": true,
+    "nested_rejected": true,
+    "exception_restored": true,
+    "aggregate_cap": true,
+    "autocast_bypass": true,
+    "inference_bypass": true,
+    "precision_bypass": true,
+    "fresh_after_update": true,
+    "target_no_residual": true,
+    "calibration_eval_reuse": true,
+    "calibration_buffers": true
+  },
+  "elapsed_seconds": 24.17857535799999,
+  "script_sha256": {
+    "validate_fuse04.py": "d76e4763a16ef4bae2dd4d7c26c618522844dad8589a85cd875130b592c6f625",
+    "residual_cache.py": "77f144f4052802f11814084a6e550ad789caf6f6b25b1a6d5b64b46b65c4c46c"
+  },
+  "stress": {
+    "counts": {
+      "cases": 1152,
+      "eval_output_fail": 0,
+      "train_output_fail": 0,
+      "train_gradient_fail": 231,
+      "gradient_checks": 5184,
+      "forward_checks": 6912,
+      "nonfinite": 0
+    },
+    "gradient_failures": {
+      "x": 0,
+      "V": 169,
+      "U": 164,
+      "m": 0,
+      "d": 0
+    },
+    "max_abs": {
+      "output": 0,
+      "x": 0,
+      "V": 0.1875,
+      "U": 0.1875,
+      "m": 0,
+      "d": 0
+    },
+    "cache": {
+      "eval_hits": 2304,
+      "eval_misses": 1152,
+      "train_hits": 2304,
+      "train_misses": 1152,
+      "reconstructions_saved": 4608
+    },
+    "by_scale": [
+      {
+        "scale": 0.1,
+        "cases": 192,
+        "gradient_fail": 0
+      },
+      {
+        "scale": 1,
+        "cases": 192,
+        "gradient_fail": 0
+      },
+      {
+        "scale": 3,
+        "cases": 192,
+        "gradient_fail": 0
+      },
+      {
+        "scale": 10,
+        "cases": 192,
+        "gradient_fail": 24
+      },
+      {
+        "scale": 100,
+        "cases": 192,
+        "gradient_fail": 85
+      },
+      {
+        "scale": 10000,
+        "cases": 192,
+        "gradient_fail": 122
+      }
+    ],
+    "first_failure": {
+      "scale": 10,
+      "target": "ordinary",
+      "mask": "one",
+      "cal": false,
+      "seed": 3600001,
+      "failed_gradients": [
+        "V",
+        "U"
+      ],
+      "max_gradient_abs": 0.00011444091796875
+    }
+  },
+  "recurrent": [
+    {
+      "width": 64,
+      "checks": {
+        "forward_equal_checks": 12,
+        "output_checks": 63,
+        "gradient_checks": 81,
+        "parameter_checks": 64,
+        "greedy_checks": 18,
+        "greedy_failures": 0,
+        "tolerance_failures": 0
+      },
+      "max_abs": {
+        "states": 0.000001430511474609375,
+        "loss": 2.9802322387695312e-8,
+        "input_grad": 1.6880221664905548e-9,
+        "factor_grad": 9.185168892145157e-8,
+        "parameters": 4.246830940246582e-7
+      },
+      "initial_loss": [
+        0.3305799067020416,
+        0.3305799067020416
+      ],
+      "cache_stats": {
+        "calls": 24,
+        "hits": 20,
+        "misses": 4,
+        "bypasses": 0,
+        "reconstructions": 4,
+        "invalidations": 0,
+        "cap_rejections": 0,
+        "resident_bytes": 0,
+        "peak_bytes": 131072,
+        "consumed": false
+      },
+      "reconstruction_macs_reference": 3145728,
+      "reconstruction_macs_cache": 524288,
+      "timing": {
+        "forward": {
+          "reference_ms": 13.252404,
+          "cached_ms": 17.301927,
+          "speedup": 0.765949596250175
+        },
+        "fwd_bwd": {
+          "reference_ms": 42.561543,
+          "cached_ms": 40.029625,
+          "speedup": 1.0632511046506181
+        }
+      }
+    },
+    {
+      "width": 128,
+      "checks": {
+        "forward_equal_checks": 12,
+        "output_checks": 63,
+        "gradient_checks": 81,
+        "parameter_checks": 64,
+        "greedy_checks": 18,
+        "greedy_failures": 0,
+        "tolerance_failures": 0
+      },
+      "max_abs": {
+        "states": 0.000002384185791015625,
+        "loss": 1.1920928955078125e-7,
+        "input_grad": 4.307366907596588e-9,
+        "factor_grad": 6.780028343200684e-7,
+        "parameters": 3.3155083656311035e-7
+      },
+      "initial_loss": [
+        1.4538973569869995,
+        1.4538973569869995
+      ],
+      "cache_stats": {
+        "calls": 24,
+        "hits": 20,
+        "misses": 4,
+        "bypasses": 0,
+        "reconstructions": 4,
+        "invalidations": 0,
+        "cap_rejections": 0,
+        "resident_bytes": 0,
+        "peak_bytes": 524288,
+        "consumed": false
+      },
+      "reconstruction_macs_reference": 25165824,
+      "reconstruction_macs_cache": 4194304,
+      "timing": {
+        "forward": {
+          "reference_ms": 27.774034,
+          "cached_ms": 24.713677,
+          "speedup": 1.123832523990663
+        },
+        "fwd_bwd": {
+          "reference_ms": 51.075645,
+          "cached_ms": 45.411007,
+          "speedup": 1.1247415191651664
+        }
+      }
+    },
+    {
+      "width": 256,
+      "checks": {
+        "forward_equal_checks": 12,
+        "output_checks": 63,
+        "gradient_checks": 81,
+        "parameter_checks": 64,
+        "greedy_checks": 18,
+        "greedy_failures": 0,
+        "tolerance_failures": 0
+      },
+      "max_abs": {
+        "states": 0.00000476837158203125,
+        "loss": 2.384185791015625e-7,
+        "input_grad": 2.468004822731018e-8,
+        "factor_grad": 8.046627044677734e-7,
+        "parameters": 0.000008046627044677734
+      },
+      "initial_loss": [
+        2.962430000305176,
+        2.962430000305176
+      ],
+      "cache_stats": {
+        "calls": 24,
+        "hits": 20,
+        "misses": 4,
+        "bypasses": 0,
+        "reconstructions": 4,
+        "invalidations": 0,
+        "cap_rejections": 0,
+        "resident_bytes": 0,
+        "peak_bytes": 2097152,
+        "consumed": false
+      },
+      "reconstruction_macs_reference": 201326592,
+      "reconstruction_macs_cache": 33554432,
+      "timing": {
+        "forward": {
+          "reference_ms": 33.994408,
+          "cached_ms": 34.592943,
+          "speedup": 0.9826977716235361
+        },
+        "fwd_bwd": {
+          "reference_ms": 90.575247,
+          "cached_ms": 68.846454,
+          "speedup": 1.3156123770731898
+        }
+      }
+    }
+  ],
+  "raw_receipt_sha256": "ce61bbc398cee92d76e878ca132531c1fde4b29757535db435231edef294e9a7"
+}

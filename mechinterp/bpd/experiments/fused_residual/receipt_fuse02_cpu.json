@@ -1,0 +1,215 @@
+{
+  "torch": "2.10.0+cpu",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "threads": 1,
+  "scope": "pinned source excerpts, not full package imports; synthetic recurrent fixture",
+  "validator_blob": "50ac78b8ef98c3a2527b244072ac249d00256dd1",
+  "source_commit": "5b9dece736741f98ce8935cb79f9896fd5ef39bd",
+  "source_fingerprints": {
+    "algorithm": "FNV-1a 32-bit, trimmed UTF-8 excerpts",
+    "wrapper_constructor_and_calibration": "5b00b50a",
+    "wrapper_forward": "9bf0416f",
+    "ablation_config": "a31fa61e",
+    "trm_classes": "4a80eb7d",
+    "mini_builder": "9943d0bb"
+  },
+  "checks": {
+    "wrapper_output": 256,
+    "wrapper_gradient": 1152,
+    "calibration": 768,
+    "trm_state": 162,
+    "loss": 27,
+    "input_gradient": 27,
+    "factor_gradient": 216,
+    "updated_parameter": 192
+  },
+  "max_abs": {
+    "wrapper_output": 0.000001430511474609375,
+    "wrapper_gradient": 0.00000762939453125,
+    "calibration": 0,
+    "trm_state": 0.0000040531158447265625,
+    "loss": 0.000001430511474609375,
+    "input_gradient": 2.7008354663848877e-8,
+    "factor_gradient": 5.913898348808289e-7,
+    "updated_parameter": 0.0000097714364528656
+  },
+  "wrapper_hits": 256,
+  "wrapper_fallbacks": 0,
+  "explicit_fallbacks": 2,
+  "stress": [
+    {
+      "factor_scale": 1,
+      "max_abs": 9.5367431640625e-7,
+      "close": true,
+      "fallbacks": 0
+    },
+    {
+      "factor_scale": 100,
+      "max_abs": 0.009765625,
+      "close": false,
+      "fallbacks": 0
+    },
+    {
+      "factor_scale": 10000,
+      "max_abs": 80,
+      "close": false,
+      "fallbacks": 0
+    }
+  ],
+  "trm": [
+    {
+      "width": 64,
+      "timing": {
+        "fwd": {
+          "reference_ms": 7.484101000045484,
+          "fused_ms": 8.463783000024705,
+          "speedup": 0.8842501042410514
+        },
+        "fwd_bwd": {
+          "reference_ms": 16.811926000173116,
+          "fused_ms": 16.73318900020604,
+          "speedup": 1.0047054389911036
+        }
+      },
+      "losses": [
+        [
+          0.5572820901870728,
+          0.557282030582428
+        ],
+        [
+          0.5521338582038879,
+          0.5521338582038879
+        ],
+        [
+          0.5470169186592102,
+          0.5470168590545654
+        ],
+        [
+          0.541932225227356,
+          0.5419321656227112
+        ],
+        [
+          0.536880373954773,
+          0.536880373954773
+        ],
+        [
+          0.5318621397018433,
+          0.5318621397018433
+        ],
+        [
+          0.5268781185150146,
+          0.5268781185150146
+        ],
+        [
+          0.5219287872314453,
+          0.5219287872314453
+        ]
+      ],
+      "fused_calls": 888,
+      "fallbacks": 0
+    },
+    {
+      "width": 128,
+      "timing": {
+        "fwd": {
+          "reference_ms": 11.20180199995957,
+          "fused_ms": 10.840406000170333,
+          "speedup": 1.0333378657389363
+        },
+        "fwd_bwd": {
+          "reference_ms": 26.568476000193186,
+          "fused_ms": 23.59506799984956,
+          "speedup": 1.1260182000900605
+        }
+      },
+      "losses": [
+        [
+          1.8316059112548828,
+          1.831606149673462
+        ],
+        [
+          1.790924072265625,
+          1.790924072265625
+        ],
+        [
+          1.750819206237793,
+          1.750819206237793
+        ],
+        [
+          1.7113089561462402,
+          1.7113089561462402
+        ],
+        [
+          1.6724086999893188,
+          1.6724085807800293
+        ],
+        [
+          1.634131908416748,
+          1.6341317892074585
+        ],
+        [
+          1.5964903831481934,
+          1.5964903831481934
+        ],
+        [
+          1.5594935417175293,
+          1.5594936609268188
+        ]
+      ],
+      "fused_calls": 888,
+      "fallbacks": 0
+    },
+    {
+      "width": 256,
+      "timing": {
+        "fwd": {
+          "reference_ms": 29.38568999979907,
+          "fused_ms": 21.590287999970315,
+          "speedup": 1.3610605842700882
+        },
+        "fwd_bwd": {
+          "reference_ms": 72.38366499996118,
+          "fused_ms": 47.699161999844364,
+          "speedup": 1.5175039133852575
+        }
+      },
+      "losses": [
+        [
+          5.6076202392578125,
+          5.607618808746338
+        ],
+        [
+          5.350963592529297,
+          5.3509626388549805
+        ],
+        [
+          5.099967956542969,
+          5.099967956542969
+        ],
+        [
+          4.854896545410156,
+          4.854897499084473
+        ],
+        [
+          4.615981101989746,
+          4.615981101989746
+        ],
+        [
+          4.383415222167969,
+          4.383415222167969
+        ],
+        [
+          4.15736198425293,
+          4.1573615074157715
+        ],
+        [
+          3.9379539489746094,
+          3.937953472137451
+        ]
+      ],
+      "fused_calls": 888,
+      "fallbacks": 0
+    }
+  ],
+  "promotion": "HOLD: cancellation stress fails"
+}
