@@ -1,0 +1,5 @@
+{"mode": "fixed_cpu", "cpu_cap": 100.0, "eval": "tune",
+ "defaults": {"block": 8, "explore_every": 5, "atlas_mib": 16.0, "cache_mib": 16.0},
+ "arms": {"A": "A", "B": "B", "C": "C", "D": "D", "E": "E", "F": "F",
+          "B_always": {"kind": "B", "controller": "always"},
+          "D_always": {"kind": "D", "controller": "always"}}}

@@ -1,0 +1,3 @@
+{"mode": "fixed_cpu", "cpu_cap": 100.0, "eval": "tune",
+ "defaults": {"block": 8, "explore_every": 5, "atlas_mib": 16.0, "cache_mib": 16.0},
+ "arms": {"G": "G", "D_cap3": {"kind": "D", "refresh_cap": 3}, "E_cap3": {"kind": "E", "refresh_cap": 3}}}

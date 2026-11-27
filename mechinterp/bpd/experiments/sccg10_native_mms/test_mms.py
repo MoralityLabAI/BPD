@@ -149,5 +149,18 @@ class MechanismTests(unittest.TestCase):
                 self.assertTrue(torch.equal(v, snap[1]['state'][j][k]))
 
 
+
+class ReplayTests(unittest.TestCase):
+    def test_manual_recurrence_matches_native_model(self):
+        from .replay import manual_logits
+        m = make_trm(Recipe())
+        if HIST.is_file():
+            m.load_state_dict(torch.load(HIST, weights_only=True))
+        b = edge_batch(views(Recipe())['tune'][:6], root=28101, seed=3, delay=31, split='train')
+        x = torch.cat((b.receiver, b.hybrid))
+        with torch.no_grad():
+            torch.testing.assert_close(manual_logits(m.state_dict(), x), m(x), rtol=0, atol=0)
+
+
 if __name__ == '__main__':
     unittest.main()

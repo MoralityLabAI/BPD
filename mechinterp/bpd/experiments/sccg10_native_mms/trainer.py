@@ -42,7 +42,7 @@ from .economics import RateController, ResourceLedger
 from .ladder import LadderConfig, certificate, screen, verify
 from . import mechanism, native
 
-KINDS = {'A': 'ordinary', 'B': 'ord_curation', 'C': 'mech_fresh', 'D': 'mech_atlas',
+KINDS = {'A': 'ordinary', 'G': 'ordinary_guarded', 'B': 'ord_curation', 'C': 'mech_fresh', 'D': 'mech_atlas',
          'E': 'mech_shuffled', 'F': 'obs_only'}
 
 
@@ -99,7 +99,7 @@ class Arm:
         self.ledger = ResourceLedger()
         self.cache = MechanisticCache(mms_mib=float(cfg.get('cache_mib', 16.0)))
         self.atlas = MMSAtlas(float(cfg.get('atlas_mib', 16.0))) if kind in ('mech_atlas', 'mech_shuffled', 'obs_only') else None
-        mode = 'never' if kind == 'ordinary' else ('always' if kind == 'obs_only' else cfg.get('controller', 'rate'))
+        mode = 'never' if kind in ('ordinary', 'ordinary_guarded') else ('always' if kind == 'obs_only' else cfg.get('controller', 'rate'))
         self.controller = RateController(block=int(cfg.get('block', 8)), explore_every=int(cfg.get('explore_every', 5)),
                                          mode=mode)
         self.ladder = LadderConfig(**cfg.get('ladder', {}))
@@ -326,7 +326,44 @@ class Arm:
         with self.ledger.charge('data'):
             batches = {e: ctx.cand_batch(e, w, delay) for e in props}
         log = {'window': w, 'action': action, 'delay': delay}
-        if action == 'ordinary':
+        if action == 'ordinary' and self.kind == 'ordinary_guarded':
+            # strongest cheap ordinary competitor: uniform proposals, transactional
+            # acceptance on ordinary TRAIN-feedback CE (no candidate scoring).
+            sha = self.sha()
+            with self.ledger.charge('cache_ops'):
+                key = CacheKey('ce_ord', sha, 'ComponentTRM', 'ordinary', ctx.fb_fp, 'ce_ordinary', 'n/a')
+                hit = self.cache.get(key)
+            if hit is None:
+                with self.ledger.charge('acceptance'):
+                    ce0 = self.ce_ordinary()
+            else:
+                ce0 = float(hit[0])
+            sel, used = self._select(props, {}, f'{self.name}:w{w}', 'uniform', delay)
+            self.exposures = Counter(used)
+            with self.ledger.charge('transaction'):
+                snap = (copy.deepcopy(self.model.state_dict()), copy.deepcopy(self.opt.state_dict()),
+                        _snapshot_native_state(self.model))
+            with self.ledger.charge('train_step'):
+                log['train_loss'] = self._minibatch_step([batches[e] for e, _ in sel])
+            with self.ledger.charge('acceptance'):
+                ce1 = self.ce_ordinary()
+            accepted = ce1 <= ce0 + 1e-6
+            if accepted:
+                self.accepted += 1
+                new_sha = self.sha()
+                with self.ledger.charge('cache_ops'):
+                    self.cache.put(CacheKey('ce_ord', new_sha, 'ComponentTRM', 'ordinary', ctx.fb_fp, 'ce_ordinary', 'n/a'),
+                                   (torch.tensor(ce1),))
+            else:
+                with self.ledger.charge('transaction'):
+                    self.model.load_state_dict(snap[0])
+                    self.opt.load_state_dict(snap[1])
+                    _restore_native_state(snap[2])
+                self.rejected += 1
+                with self.ledger.charge('cache_ops'):
+                    self.cache.put(key, (torch.tensor(ce0),))
+            log.update({'accepted': accepted, 'audited': True, 'ce_before': ce0, 'ce_after': ce1})
+        elif action == 'ordinary':
             sel, used = self._select(props, {}, f'{self.name}:w{w}', 'uniform', delay)
             self.exposures = Counter(used)
             with self.ledger.charge('train_step'):
@@ -446,7 +483,7 @@ class Arm:
             return
         cpu = self.cpu_used - self.block_cpu0
         if self.block_action == 'ordinary':
-            if self.kind == 'ordinary':
+            if self.kind in ('ordinary', 'ordinary_guarded'):
                 return
             t0 = time.process_time()
             with self.ledger.charge('controller'):

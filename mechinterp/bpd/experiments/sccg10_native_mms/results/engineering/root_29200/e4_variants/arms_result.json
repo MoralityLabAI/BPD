@@ -1,0 +1,486 @@
+{
+ "arms": {
+  "D_cap3": {
+   "accepted": 35,
+   "arm": "D_cap3",
+   "atlas": {
+    "entries": 12,
+    "evictions": 0,
+    "hits": 261,
+    "inserts": 57,
+    "invalidations": 0,
+    "lookups": 300,
+    "max_age_at_hit": 28,
+    "mean_age_at_hit": 5.452107279693487,
+    "meta_bytes": 8144,
+    "mib": 16.0,
+    "misses": 39,
+    "oversize": 0,
+    "payload_bytes": 272928,
+    "peak_bytes": 290352,
+    "total_bytes": 281072
+   },
+   "audits": 6,
+   "cache": {
+    "entries": 21,
+    "evictions": 0,
+    "hit_rate": 0.16,
+    "hits": 4,
+    "insert_cpu_seconds": 0.0,
+    "lookup_cpu_seconds": 0.0,
+    "max_bytes": 16777216,
+    "metadata_bytes": 28686,
+    "misses": 21,
+    "mms_mib": 16.0,
+    "occupancy_fraction": 0.028646349906921387,
+    "overhead_cpu_seconds": 0.0,
+    "oversize_rejections": 0,
+    "payload_bytes": 451920,
+    "peak_total_bytes": 480606,
+    "recomputations_avoided": 4,
+    "saved_cpu_seconds_est": 0.0,
+    "stale_rejections": 0,
+    "total_bytes": 480606
+   },
+   "checkpoint_file": "D_cap3.pt",
+   "controller_history": [
+    {
+     "action": "ordinary",
+     "block": 0,
+     "ce_drop": -0.4611605405807495,
+     "cpu": 0.546875,
+     "ema_curated": null,
+     "ema_ordinary": -0.8432649884905133,
+     "rate": -0.8432649884905133
+    },
+    {
+     "action": "curated",
+     "block": 1,
+     "ce_drop": 0.7455238103866577,
+     "cpu": 42.734375,
+     "ema_curated": 0.017445529749450125,
+     "ema_ordinary": -0.8432649884905133,
+     "rate": 0.017445529749450125
+    },
+    {
+     "action": "curated",
+     "block": 2,
+     "ce_drop": -0.05792236328125,
+     "cpu": 23.3125,
+     "ema_curated": 0.007480462177003882,
+     "ema_ordinary": -0.8432649884905133,
+     "rate": -0.0024846053954423594
+    },
+    {
+     "action": "curated",
+     "block": 3,
+     "ce_drop": 0.17541736364364624,
+     "cpu": 28.640625,
+     "ema_curated": 0.006802618233399203,
+     "ema_ordinary": -0.8432649884905133,
+     "rate": 0.006124774289794522
+    },
+    {
+     "action": "ordinary",
+     "block": 4,
+     "ce_drop": -0.2500165104866028,
+     "cpu": 0.5,
+     "ema_curated": 0.006802618233399203,
+     "ema_ordinary": -0.6716490047318595,
+     "rate": -0.5000330209732056
+    },
+    {
+     "action": "curated",
+     "block": 5,
+     "ce_drop": 0.0,
+     "cpu": 5.609375,
+     "ema_curated": 0.0034013091166996013,
+     "ema_ordinary": -0.6716490047318595,
+     "rate": 0.0
+    }
+   ],
+   "controller_rates": {
+    "curated": 0.0034013091166996013,
+    "ordinary": -0.6716490047318595
+   },
+   "cpu_used": 101.4375,
+   "curated_windows": 25,
+   "eval_tune": {
+    "2": {
+     "accuracy": 0.9947916865348816,
+     "correct": 1146,
+     "cross_entropy": 0.013864205218851566,
+     "n": 1152
+    },
+    "31": {
+     "accuracy": 0.5460069179534912,
+     "correct": 629,
+     "cross_entropy": 3.928821563720703,
+     "n": 1152
+    },
+    "7": {
+     "accuracy": 0.9548611044883728,
+     "correct": 1100,
+     "cross_entropy": 0.14518742263317108,
+     "n": 1152
+    }
+   },
+   "final_state_sha256": "a4ddb83465e0cdea4dd47fa8ab505e9fae5d2cc4244f4d733e038da972dccfd4",
+   "kind": "mech_atlas",
+   "ladder_outcomes": {
+    "L3_AUDIT_RESOLVED": 5,
+    "ORDINARY_FALLBACK_REFRESH_CAP": 36,
+    "REFRESH": 52,
+    "REUSE_VERIFIED": 207
+   },
+   "ledger": {
+    "counts": {
+     "backward_passes": 208,
+     "candidate_backward": 400,
+     "solver_calls": 89128
+    },
+    "cpu": {
+     "acceptance": 0.828125,
+     "atlas_ops": 0.0,
+     "cache_ops": 0.0625,
+     "cal_grad": 2.53125,
+     "candidate_preview": 7.734375,
+     "certificate": 0.015625,
+     "controller": 0.15625,
+     "data": 0.921875,
+     "mechanism_observe": 5.515625,
+     "selection": 0.65625,
+     "support_search": 80.0,
+     "train_step": 0.875,
+     "transaction": 0.09375,
+     "verification": 1.765625
+    },
+    "total_cpu": 101.15625,
+    "wall": {
+     "acceptance": 0.5103381999069825,
+     "atlas_ops": 0.011394700006349012,
+     "cache_ops": 0.0224976998870261,
+     "cal_grad": 1.4319491000205744,
+     "candidate_preview": 4.277109899994684,
+     "certificate": 0.007378100446658209,
+     "controller": 0.07126250001601875,
+     "data": 0.5237440998898819,
+     "mechanism_observe": 3.0561744998849463,
+     "selection": 0.36088459988241084,
+     "support_search": 72.48825039999792,
+     "train_step": 0.502102600003127,
+     "transaction": 0.041482399974484,
+     "verification": 1.1039904001227114
+    }
+   },
+   "no_audit_windows": 2,
+   "ordinary_windows": 16,
+   "overruns": [
+    {
+     "cpu_after": 101.4375,
+     "cpu_before": 95.796875,
+     "window": 40
+    }
+   ],
+   "refreshes": 52,
+   "rejected": 6,
+   "uncategorized_cpu": 0.28125,
+   "windows": 41
+  },
+  "E_cap3": {
+   "accepted": 40,
+   "arm": "E_cap3",
+   "atlas": {
+    "entries": 12,
+    "evictions": 0,
+    "hits": 288,
+    "inserts": 56,
+    "invalidations": 0,
+    "lookups": 324,
+    "max_age_at_hit": 33,
+    "mean_age_at_hit": 6.059027777777778,
+    "meta_bytes": 8528,
+    "mib": 16.0,
+    "misses": 36,
+    "oversize": 0,
+    "payload_bytes": 272928,
+    "peak_bytes": 289840,
+    "total_bytes": 281456
+   },
+   "audits": 9,
+   "cache": {
+    "entries": 25,
+    "evictions": 0,
+    "hit_rate": 0.07407407407407407,
+    "hits": 2,
+    "insert_cpu_seconds": 0.0,
+    "lookup_cpu_seconds": 0.0,
+    "max_bytes": 16777216,
+    "metadata_bytes": 34150,
+    "misses": 25,
+    "mms_mib": 16.0,
+    "occupancy_fraction": 0.034102797508239746,
+    "overhead_cpu_seconds": 0.0,
+    "oversize_rejections": 0,
+    "payload_bytes": 538000,
+    "peak_total_bytes": 572150,
+    "recomputations_avoided": 2,
+    "saved_cpu_seconds_est": 0.0,
+    "stale_rejections": 0,
+    "total_bytes": 572150
+   },
+   "checkpoint_file": "E_cap3.pt",
+   "controller_history": [
+    {
+     "action": "ordinary",
+     "block": 0,
+     "ce_drop": -0.4611605405807495,
+     "cpu": 0.484375,
+     "ema_curated": null,
+     "ema_ordinary": -0.9520733741021925,
+     "rate": -0.9520733741021925
+    },
+    {
+     "action": "curated",
+     "block": 1,
+     "ce_drop": 0.6441478729248047,
+     "cpu": 45.0625,
+     "ema_curated": 0.014294543643268898,
+     "ema_ordinary": -0.9520733741021925,
+     "rate": 0.014294543643268898
+    },
+    {
+     "action": "curated",
+     "block": 2,
+     "ce_drop": 0.37876367568969727,
+     "cpu": 24.171875,
+     "ema_curated": 0.014982073128725796,
+     "ema_ordinary": -0.9520733741021925,
+     "rate": 0.015669602614182692
+    },
+    {
+     "action": "curated",
+     "block": 3,
+     "ce_drop": 0.11107063293457031,
+     "cpu": 15.0625,
+     "ema_curated": 0.011178028528995937,
+     "ema_ordinary": -0.9520733741021925,
+     "rate": 0.007373983929266079
+    },
+    {
+     "action": "ordinary",
+     "block": 4,
+     "ce_drop": -0.07244253158569336,
+     "cpu": 0.53125,
+     "ema_curated": 0.011178028528995937,
+     "ema_ordinary": -0.5442178932493958,
+     "rate": -0.13636241239659927
+    },
+    {
+     "action": "curated",
+     "block": 5,
+     "ce_drop": 0.0,
+     "cpu": 11.75,
+     "ema_curated": 0.0055890142644979685,
+     "ema_ordinary": -0.5442178932493958,
+     "rate": 0.0
+    }
+   ],
+   "controller_rates": {
+    "curated": 0.0055890142644979685,
+    "ordinary": -0.5442178932493958
+   },
+   "cpu_used": 97.078125,
+   "curated_windows": 27,
+   "eval_tune": {
+    "2": {
+     "accuracy": 0.9973958134651184,
+     "correct": 1149,
+     "cross_entropy": 0.00814408902078867,
+     "n": 1152
+    },
+    "31": {
+     "accuracy": 0.546875,
+     "correct": 630,
+     "cross_entropy": 3.4676053524017334,
+     "n": 1152
+    },
+    "7": {
+     "accuracy": 0.9756944179534912,
+     "correct": 1124,
+     "cross_entropy": 0.060651857405900955,
+     "n": 1152
+    }
+   },
+   "final_state_sha256": "eb167959e4f68a672efa83824bacda3144bd15426a9414b1bf6fc5b848ab11b4",
+   "kind": "mech_shuffled",
+   "ladder_outcomes": {
+    "L3_AUDIT_RESOLVED": 9,
+    "ORDINARY_FALLBACK_REFRESH_CAP": 26,
+    "REFRESH": 47,
+    "REUSE_VERIFIED": 242
+   },
+   "ledger": {
+    "counts": {
+     "backward_passes": 188,
+     "candidate_backward": 432,
+     "solver_calls": 80556
+    },
+    "cpu": {
+     "acceptance": 0.9375,
+     "atlas_ops": 0.03125,
+     "cache_ops": 0.015625,
+     "cal_grad": 2.9375,
+     "candidate_preview": 8.5625,
+     "certificate": 0.0,
+     "controller": 0.046875,
+     "data": 0.96875,
+     "mechanism_observe": 5.203125,
+     "selection": 0.546875,
+     "support_search": 73.8125,
+     "train_step": 1.0,
+     "transaction": 0.078125,
+     "verification": 2.6875
+    },
+    "total_cpu": 96.828125,
+    "wall": {
+     "acceptance": 0.5402696000528522,
+     "atlas_ops": 0.011628199863480404,
+     "cache_ops": 0.025113499956205487,
+     "cal_grad": 1.6208058999909554,
+     "candidate_preview": 4.648853400023654,
+     "certificate": 0.010225300182355568,
+     "controller": 0.04507639998337254,
+     "data": 0.5071252001216635,
+     "mechanism_observe": 3.022741499939002,
+     "selection": 0.38127810013247654,
+     "support_search": 66.94097200004035,
+     "train_step": 0.5331065999052953,
+     "transaction": 0.04128489998402074,
+     "verification": 1.4939305999141652
+    }
+   },
+   "no_audit_windows": 3,
+   "ordinary_windows": 16,
+   "overruns": [],
+   "refreshes": 47,
+   "rejected": 3,
+   "uncategorized_cpu": 0.25,
+   "windows": 43
+  },
+  "G": {
+   "accepted": 60,
+   "arm": "G",
+   "atlas": null,
+   "audits": 0,
+   "cache": {
+    "entries": 60,
+    "evictions": 0,
+    "hit_rate": 0.9991416309012876,
+    "hits": 1164,
+    "insert_cpu_seconds": 0.0625,
+    "lookup_cpu_seconds": 0.03125,
+    "max_bytes": 16777216,
+    "metadata_bytes": 37380,
+    "misses": 1,
+    "mms_mib": 16.0,
+    "occupancy_fraction": 0.0022423267364501953,
+    "overhead_cpu_seconds": 0.09375,
+    "oversize_rejections": 0,
+    "payload_bytes": 240,
+    "peak_total_bytes": 37620,
+    "recomputations_avoided": 1164,
+    "saved_cpu_seconds_est": 0.0,
+    "stale_rejections": 0,
+    "total_bytes": 37620
+   },
+   "checkpoint_file": "G.pt",
+   "controller_history": [],
+   "controller_rates": {
+    "curated": null,
+    "ordinary": null
+   },
+   "cpu_used": 99.9375,
+   "curated_windows": 0,
+   "eval_tune": {
+    "2": {
+     "accuracy": 0.9947916865348816,
+     "correct": 1146,
+     "cross_entropy": 0.018468990921974182,
+     "n": 1152
+    },
+    "31": {
+     "accuracy": 0.6423611044883728,
+     "correct": 740,
+     "cross_entropy": 2.418588161468506,
+     "n": 1152
+    },
+    "7": {
+     "accuracy": 0.9748263955116272,
+     "correct": 1123,
+     "cross_entropy": 0.06213158369064331,
+     "n": 1152
+    }
+   },
+   "final_state_sha256": "4f554ebfe1d784987a2e91aa5445361ddad1c34bc2093fd6159c5a2b6a4a35d5",
+   "kind": "ordinary_guarded",
+   "ladder_outcomes": {},
+   "ledger": {
+    "counts": {},
+    "cpu": {
+     "acceptance": 21.8125,
+     "cache_ops": 1.046875,
+     "controller": 2.734375,
+     "data": 26.03125,
+     "selection": 17.171875,
+     "train_step": 25.15625,
+     "transaction": 5.03125
+    },
+    "total_cpu": 98.984375,
+    "wall": {
+     "acceptance": 12.115651700587478,
+     "cache_ops": 0.6112623008957598,
+     "controller": 1.5267559001222253,
+     "data": 13.97356299936655,
+     "selection": 9.37209720100509,
+     "train_step": 13.995091399672674,
+     "transaction": 2.4650234995933715
+    }
+   },
+   "no_audit_windows": 0,
+   "ordinary_windows": 1165,
+   "overruns": [],
+   "refreshes": 0,
+   "rejected": 1105,
+   "uncategorized_cpu": 0.953125,
+   "windows": 1165
+  }
+ },
+ "config": {
+  "arms": {
+   "D_cap3": {
+    "kind": "D",
+    "refresh_cap": 3
+   },
+   "E_cap3": {
+    "kind": "E",
+    "refresh_cap": 3
+   },
+   "G": "G"
+  },
+  "cpu_cap": 100.0,
+  "defaults": {
+   "atlas_mib": 16.0,
+   "block": 8,
+   "cache_mib": 16.0,
+   "explore_every": 5
+  },
+  "eval": "tune",
+  "mode": "fixed_cpu"
+ },
+ "feedback_fingerprint": "ef5babe6c1473b9573062a14f9995376e9c4933579b55329f44002a57498dc86",
+ "mode": "fixed_cpu",
+ "process_cpu_total": 298.34375,
+ "root": 29200,
+ "warm_sha256": "8d7232da87ea91707f2f60dac529bc4bc63b28b2adb54ff19058be9642860b7b"
+}

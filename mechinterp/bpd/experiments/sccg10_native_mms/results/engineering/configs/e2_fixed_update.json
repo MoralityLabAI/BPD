@@ -1,0 +1,3 @@
+{"mode": "fixed_update", "n_windows": 80, "safety_cpu": 900.0, "eval": "tune",
+ "defaults": {"block": 8, "explore_every": 5, "atlas_mib": 16.0, "cache_mib": 16.0},
+ "arms": {"A": "A", "G": "G", "B": "B", "C": "C", "D": "D", "E": "E", "F": "F"}}
