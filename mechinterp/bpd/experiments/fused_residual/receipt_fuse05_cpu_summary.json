@@ -1,0 +1,334 @@
+{
+  "status": "HOLD production; three independent first-order variants pass the registered finite CPU suite",
+  "protocol": "048c6b69815617d32b80ee49f5d95872fb6b1179",
+  "source": {
+    "adjoint_cache_blob": "b44b1702bc235790adf7d20f4abf022da049ef67",
+    "validator_blob": "7164e54aa21b57125e9b4bdf53437ca2d0a55fed",
+    "baseline": "ab93e4da986beef87897f8d1244c7fe7564b5bde",
+    "scope": "FUSE04 verified original baseline extracts; target intervention omitted; full native imports not exercised"
+  },
+  "torch": "2.10.0+cpu",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "threads": 1,
+  "precision": "highest",
+  "arms": [
+    {
+      "arm": "shared",
+      "raw_receipt_sha256": "bab670848d3fe204dd6ef6671254e709cca7e60e8526cc159571ba3cedbec91e",
+      "stress": {
+        "fixtures": 1152,
+        "forward_tensor_checks": 3456,
+        "forward_failures": 0,
+        "gradient_tensor_checks": 5184,
+        "gradient_fixture_failures": 253,
+        "equal_gradient_tensors": 2880,
+        "nonfinite": 0,
+        "hit": 2304,
+        "reconstructions": 1152,
+        "custom_backward_nodes": 0,
+        "backward_replays": 0,
+        "fail_types": {
+          "x": 0,
+          "V": 188,
+          "U": 170,
+          "m": 0,
+          "d": 0
+        },
+        "max_abs": {
+          "output": 0,
+          "x": 0,
+          "V": 0.21875,
+          "U": 0.15625,
+          "m": 0,
+          "d": 0
+        },
+        "failures_by_scale": [
+          0,
+          0,
+          0,
+          24,
+          90,
+          139
+        ]
+      },
+      "lifecycle_checks": 19,
+      "recurrent": {
+        "tensor_checks": 624,
+        "equal_tensors": 56,
+        "failures": 0,
+        "greedy_checks": 54,
+        "greedy_failures": 0,
+        "paired_updates": 24,
+        "rows": [
+          {
+            "width": 64,
+            "reference_forward_ms": 6.908037,
+            "cached_eval_forward_ms": 7.233908,
+            "reference_fwd_bwd_ms": 17.762629,
+            "cached_fwd_bwd_ms": 17.206732,
+            "forward_speedup": 0.954952288583156,
+            "training_speedup": 1.032306948233982
+          },
+          {
+            "width": 128,
+            "reference_forward_ms": 11.392522,
+            "cached_eval_forward_ms": 10.410404,
+            "reference_fwd_bwd_ms": 26.88341,
+            "cached_fwd_bwd_ms": 25.101776,
+            "forward_speedup": 1.0943400467455442,
+            "training_speedup": 1.0709764121869305
+          },
+          {
+            "width": 256,
+            "reference_forward_ms": 29.535296,
+            "cached_eval_forward_ms": 22.864125,
+            "reference_fwd_bwd_ms": 66.585422,
+            "cached_fwd_bwd_ms": 51.29029,
+            "forward_speedup": 1.2917746032266704,
+            "training_speedup": 1.298207165527822
+          }
+        ]
+      }
+    },
+    {
+      "arm": "residual",
+      "raw_receipt_sha256": "885576b1dd6f639426aa0c0fd291b3400553f1930a549942094d9103b7fe1813",
+      "stress": {
+        "fixtures": 1152,
+        "forward_tensor_checks": 3456,
+        "forward_failures": 0,
+        "gradient_tensor_checks": 5184,
+        "gradient_fixture_failures": 0,
+        "equal_gradient_tensors": 5184,
+        "nonfinite": 0,
+        "hit": 2304,
+        "reconstructions": 1152,
+        "custom_backward_nodes": 3456,
+        "backward_replays": 0,
+        "fail_types": {
+          "x": 0,
+          "V": 0,
+          "U": 0,
+          "m": 0,
+          "d": 0
+        },
+        "max_abs": {
+          "output": 0,
+          "x": 0,
+          "V": 0,
+          "U": 0,
+          "m": 0,
+          "d": 0
+        },
+        "failures_by_scale": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "lifecycle_checks": 15,
+      "recurrent": {
+        "tensor_checks": 624,
+        "equal_tensors": 624,
+        "failures": 0,
+        "greedy_checks": 54,
+        "greedy_failures": 0,
+        "paired_updates": 24,
+        "rows": [
+          {
+            "width": 64,
+            "reference_forward_ms": 6.69448,
+            "cached_eval_forward_ms": 7.235254,
+            "reference_fwd_bwd_ms": 16.462066,
+            "cached_fwd_bwd_ms": 18.083769,
+            "forward_speedup": 0.9252584636282293,
+            "training_speedup": 0.9103227319481907
+          },
+          {
+            "width": 128,
+            "reference_forward_ms": 10.32093,
+            "cached_eval_forward_ms": 9.939085,
+            "reference_fwd_bwd_ms": 25.384211,
+            "cached_fwd_bwd_ms": 26.474061,
+            "forward_speedup": 1.0384185264538939,
+            "training_speedup": 0.9588332896868373
+          },
+          {
+            "width": 256,
+            "reference_forward_ms": 26.08768,
+            "cached_eval_forward_ms": 20.716956,
+            "reference_fwd_bwd_ms": 66.296475,
+            "cached_fwd_bwd_ms": 59.198597,
+            "forward_speedup": 1.2592429119413102,
+            "training_speedup": 1.119899429373301
+          }
+        ]
+      }
+    },
+    {
+      "arm": "product",
+      "raw_receipt_sha256": "23b70b160387e6138714cd6ec5afd4b3f870eae3b5313be0ceaeb199ff4c78d6",
+      "stress": {
+        "fixtures": 1152,
+        "forward_tensor_checks": 3456,
+        "forward_failures": 0,
+        "gradient_tensor_checks": 5184,
+        "gradient_fixture_failures": 0,
+        "equal_gradient_tensors": 5184,
+        "nonfinite": 0,
+        "hit": 2304,
+        "reconstructions": 1152,
+        "custom_backward_nodes": 3456,
+        "backward_replays": 0,
+        "fail_types": {
+          "x": 0,
+          "V": 0,
+          "U": 0,
+          "m": 0,
+          "d": 0
+        },
+        "max_abs": {
+          "output": 0,
+          "x": 0,
+          "V": 0,
+          "U": 0,
+          "m": 0,
+          "d": 0
+        },
+        "failures_by_scale": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "lifecycle_checks": 15,
+      "recurrent": {
+        "tensor_checks": 624,
+        "equal_tensors": 624,
+        "failures": 0,
+        "greedy_checks": 54,
+        "greedy_failures": 0,
+        "paired_updates": 24,
+        "rows": [
+          {
+            "width": 64,
+            "reference_forward_ms": 6.688099,
+            "cached_eval_forward_ms": 6.950754,
+            "reference_fwd_bwd_ms": 16.389284,
+            "cached_fwd_bwd_ms": 18.759762,
+            "forward_speedup": 0.9622120132578423,
+            "training_speedup": 0.8736402945836946
+          },
+          {
+            "width": 128,
+            "reference_forward_ms": 10.371415,
+            "cached_eval_forward_ms": 9.739602,
+            "reference_fwd_bwd_ms": 25.834273,
+            "cached_fwd_bwd_ms": 27.980504,
+            "forward_speedup": 1.0648705152428202,
+            "training_speedup": 0.9232954845988478
+          },
+          {
+            "width": 256,
+            "reference_forward_ms": 26.564198,
+            "cached_eval_forward_ms": 20.583351,
+            "reference_fwd_bwd_ms": 66.267564,
+            "cached_fwd_bwd_ms": 65.815022,
+            "forward_speedup": 1.2905672161933206,
+            "training_speedup": 1.0068759682250048
+          }
+        ]
+      }
+    },
+    {
+      "arm": "replay",
+      "raw_receipt_sha256": "bffee0f37d2c97990c40f38e4b76f18fb2f74d6a0bf9ac4d97c983e76b964aa2",
+      "stress": {
+        "fixtures": 1152,
+        "forward_tensor_checks": 3456,
+        "forward_failures": 0,
+        "gradient_tensor_checks": 5184,
+        "gradient_fixture_failures": 0,
+        "equal_gradient_tensors": 5184,
+        "nonfinite": 0,
+        "hit": 2304,
+        "reconstructions": 1152,
+        "custom_backward_nodes": 3456,
+        "backward_replays": 3456,
+        "fail_types": {
+          "x": 0,
+          "V": 0,
+          "U": 0,
+          "m": 0,
+          "d": 0
+        },
+        "max_abs": {
+          "output": 0,
+          "x": 0,
+          "V": 0,
+          "U": 0,
+          "m": 0,
+          "d": 0
+        },
+        "failures_by_scale": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "lifecycle_checks": 15,
+      "recurrent": {
+        "tensor_checks": 624,
+        "equal_tensors": 624,
+        "failures": 0,
+        "greedy_checks": 54,
+        "greedy_failures": 0,
+        "paired_updates": 24,
+        "rows": [
+          {
+            "width": 64,
+            "reference_forward_ms": 8.867159,
+            "cached_eval_forward_ms": 8.566956,
+            "reference_fwd_bwd_ms": 17.33051,
+            "cached_fwd_bwd_ms": 22.023119,
+            "forward_speedup": 1.035041968232357,
+            "training_speedup": 0.7869235052491883
+          },
+          {
+            "width": 128,
+            "reference_forward_ms": 11.276809,
+            "cached_eval_forward_ms": 11.266985,
+            "reference_fwd_bwd_ms": 28.52252,
+            "cached_fwd_bwd_ms": 34.004901,
+            "forward_speedup": 1.0008719280268856,
+            "training_speedup": 0.8387767398587633
+          },
+          {
+            "width": 256,
+            "reference_forward_ms": 31.573029,
+            "cached_eval_forward_ms": 24.484812,
+            "reference_fwd_bwd_ms": 73.743478,
+            "cached_fwd_bwd_ms": 77.820815,
+            "forward_speedup": 1.2894944425139958,
+            "training_speedup": 0.9476060871374837
+          }
+        ]
+      }
+    }
+  ],
+  "eval_stress": {
+    "checks": 3456,
+    "failures": 0
+  },
+  "archive_sha256": "aee2c91b2c484906c7f4855f825aeefbf48fed21eddd449bb6794a0139b71dd8",
+  "notes": "Summary transcribed from four executed raw receipts; full raw receipts and exact files in reproduction bundle. torch.equal is exact elementwise equality for finite tensors; signed-zero encodings not audited. All forward-only timing arms use the same FUSE04 eval cache, not custom adjoints. Numeric payload only, no total memory claim."
+}
