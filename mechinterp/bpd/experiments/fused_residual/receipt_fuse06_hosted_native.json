@@ -1,0 +1,121 @@
+{
+  "status": "PASS",
+  "workflow_run": 46000974799,
+  "job_id": 140512222027,
+  "artifact_id": 15198595779,
+  "artifact_sha256": "9f4b2762eba5b3dc61278cffaeca0dd1b512346ba313d5e8a314b1df88fb99ae",
+  "head": "624cc39d31f0d32cfad9c5c30f31b08f8893fb97",
+  "scope": "native full-package trainer gate; summary parsed from hosted job log; raw artifact retained on GitHub",
+  "totals": {
+    "tensors": 3696,
+    "exact": 3696,
+    "scalars": 1628,
+    "failures": 0,
+    "greedy": 32,
+    "greedy_failures": 0
+  },
+  "rows": [
+    {
+      "width": 64,
+      "regime": "closed_loop",
+      "checks": {
+        "tensors": 948,
+        "exact": 948,
+        "scalars": 407,
+        "failures": 0,
+        "greedy": 8,
+        "greedy_failures": 0
+      },
+      "maxima": {
+        "bpd_state": 0,
+        "ci_state": 0,
+        "component_grad": 0,
+        "clean_cache": 0,
+        "optimizer": 0,
+        "ci_grad": 0,
+        "pgd": 0,
+        "eval_ci": 0,
+        "clean_readout": 0,
+        "masked_readout": 0,
+        "masked_boundary": 0
+      },
+      "failures": []
+    },
+    {
+      "width": 64,
+      "regime": "clean_window",
+      "checks": {
+        "tensors": 900,
+        "exact": 900,
+        "scalars": 407,
+        "failures": 0,
+        "greedy": 8,
+        "greedy_failures": 0
+      },
+      "maxima": {
+        "bpd_state": 0,
+        "ci_state": 0,
+        "component_grad": 0,
+        "clean_cache": 0,
+        "optimizer": 0,
+        "ci_grad": 0,
+        "eval_ci": 0,
+        "clean_readout": 0,
+        "masked_readout": 0,
+        "masked_boundary": 0
+      },
+      "failures": []
+    },
+    {
+      "width": 128,
+      "regime": "closed_loop",
+      "checks": {
+        "tensors": 948,
+        "exact": 948,
+        "scalars": 407,
+        "failures": 0,
+        "greedy": 8,
+        "greedy_failures": 0
+      },
+      "maxima": {
+        "bpd_state": 0,
+        "ci_state": 0,
+        "component_grad": 0,
+        "clean_cache": 0,
+        "optimizer": 0,
+        "ci_grad": 0,
+        "pgd": 0,
+        "eval_ci": 0,
+        "clean_readout": 0,
+        "masked_readout": 0,
+        "masked_boundary": 0
+      },
+      "failures": []
+    },
+    {
+      "width": 128,
+      "regime": "clean_window",
+      "checks": {
+        "tensors": 900,
+        "exact": 900,
+        "scalars": 407,
+        "failures": 0,
+        "greedy": 8,
+        "greedy_failures": 0
+      },
+      "maxima": {
+        "bpd_state": 0,
+        "ci_state": 0,
+        "component_grad": 0,
+        "clean_cache": 0,
+        "optimizer": 0,
+        "ci_grad": 0,
+        "eval_ci": 0,
+        "clean_readout": 0,
+        "masked_readout": 0,
+        "masked_boundary": 0
+      },
+      "failures": []
+    }
+  ]
+}
