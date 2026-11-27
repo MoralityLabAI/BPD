@@ -23,3 +23,22 @@ Mini-TRM: B=2, seq=16, puzzle=4, two layers, H1/L2, two outer steps, four wrappe
 Set W_target to the materialized reconstructed weight and use zero component mask, implicit residual mask one. Baseline residual is exactly zero. Reassociation exposes cancellation between XW^T and (XV)U. Absolute max differences at factor scale 1,100,10000 were 9.5367e-7,0.009765625,80 respectively. Last two fail the predeclared tolerance. All three used fusion; the current RMS proximity guard cannot detect this failure (sphere disabled). This is a counterexample to unconditional floating-point equivalence, not to the real-arithmetic identity. Keep opt-in experimental; do not enable in production or merge as a promoted fast path.
 
 Next: compare a low-overhead scale/cancellation screen against a numerically conservative forward-error enclosure, with an exact fallback to original evaluation. Include extreme magnitude, near-zero residuals, nonfinite inputs, near-epsilon sphere cases, matched backward errors, and guard cost; forward certification alone cannot certify gradients. A heuristic screen must be described as such. GPU/autocast fusion stays unsupported pending separate validation. Full package validator invocation from repository root: python -m mechinterp.bpd.experiments.fused_residual.validate_fuse02. No GPU, pretrained checkpoint accuracy, full trainer throughput, peak RSS or LLM tokens/sec measured.
+
+
+## FUSE-02B | Fresh cancellation admission diagnostic
+
+Registered separately after FUSE-02's negative stress results, before fresh seeds, at 3d58b2344e9d94c80d6dcf45506fe868fc10f7ee. Guard code 44aca1aa5b6555f2b69b30d8933458aae1f4d0e4 and receipt 7236afb12c301d89b67d649bee4be3671072c0cf. Seed range2902001..2902032; 512 CPU forward fixtures at width64, C32, eight tokens, both factor scales1/10/100/10000, independently drawn target vs target set to reconstructed (VU)^T, zero/soft masks. Zero ablation, implicit residual mask one, no sphere. With y=XW^T and z=((m-1)*(XV))U, reject fusion if candidate y+z nonfinite, per-token max(abs(y)+abs(z))>64*(max(abs(candidate))+1e-3), or max(abs(V)) or max(abs(U))>2. Rejected diagnostic evaluates original path. The support threshold is an empirical choice, not a certified rounding-error bound. Same native source-extract environment as FUSE-02.
+
+| Outcome | Count |
+|---|---:|
+| Total fixtures | 512 |
+| Unguarded numerical failures | 141 |
+| Guard rejections | 416 |
+| Otherwise passing cases rejected | 275 |
+| Admitted | 96 |
+| Admitted failures | 0 |
+| Guarded forward failures | 0 |
+
+Worst unguarded absolute discrepancy160. All admitted cases were at factor scale1; guard also rejects all32 scale1 cancellation/zero-mask cases, despite their passing tolerance. This is a deliberately stress-enriched set; the 18.75% admission rate is not deployment coverage. Guard was tested only for forward parity and is NOT integrated into the native opt-in path or timed. The earlier recurrent timings exclude it. No claim that it protects gradients, hidden intermediate cancellation or arbitrary inputs. Original opt-in remains experimental/default off. Full package/CI integration outstanding. Additional native_receipt.json preserves transcribed local timing and source-extract digests; native_validation.py is an equivalent-purpose transcription, not a byte-verified replacement for validate_fuse02.py. Prefer the original validator named above.
+
+Next FUSE-03: test an inexpensive guard with matched backward errors, near-epsilon sphere branch stability and measured overhead on ordinary recurrent fixtures; compare with a conservative forward-error model and eval-only frozen dense-residual caching. Independently test calibration fusion mean_delta = mean(Y) - mean(A)U with unchanged clean per-token RMS, since current calibration still reconstructs the residual. No promotion until native trainer integration and numeric gates pass.
