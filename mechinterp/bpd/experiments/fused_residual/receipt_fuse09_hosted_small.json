@@ -1,0 +1,382 @@
+{
+  "status": "PASS",
+  "scope": "native hosted CPU PyTorch 2.5.1 source-only PGD and full small trainer; summary parsed from job logs, raw receipt retained by GitHub",
+  "head": "3aaafa37dc754883d006fc53e8f9e4de44620e31",
+  "run_id": 46006681126,
+  "job_id": 140531479367,
+  "artifact": {
+    "id": 15201612683,
+    "digest": "sha256:a78ac6618a63901ce218a8b6d8cd59ce57b97131368f7dce4945c54be711a429",
+    "size": 21456
+  },
+  "source": {
+    "trainer": "78e1a6adcab933dc8e1d020ad5c0c307010abad0",
+    "step_cache": "682b20300d51833c8adf4f2f9e576780e71d367e",
+    "native_validator": "6777b1cd8bb2d8c708ea644691544d27f90e0ffb",
+    "pool_validator": "e2c2894e07f9c025d00121a1f6e15848b9557784",
+    "workflow": "444fa7ae2bad9371639637bef0721794b6bc68ff",
+    "components": "c0906e73a993738871812572e267e2ef5f9595d3",
+    "adversary": "342cfbf5578698db84ed07ef16023c44ada1de3d",
+    "adjoint": "b44b1702bc235790adf7d20f4abf022da049ef67"
+  },
+  "job_steps": [
+    [
+      "Set up job",
+      "success"
+    ],
+    [
+      "Run actions/checkout@v4",
+      "success"
+    ],
+    [
+      "Run actions/setup-python@v5",
+      "success"
+    ],
+    [
+      "Install pinned CPU dependencies",
+      "success"
+    ],
+    [
+      "Native trainer parity gate",
+      "success"
+    ],
+    [
+      "Check exact admission oracle",
+      "success"
+    ],
+    [
+      "FUSE-08 cross-scope primal lifecycle and stress",
+      "success"
+    ],
+    [
+      "FUSE-08 binding-cap native trainer gate",
+      "success"
+    ],
+    [
+      "FUSE-09 mask-only primal stress",
+      "success"
+    ],
+    [
+      "FUSE-09 small native PGD gradient gate",
+      "success"
+    ],
+    [
+      "Replay pinned INK06 source receipt",
+      "success"
+    ],
+    [
+      "Retain native gate receipt",
+      "success"
+    ],
+    [
+      "Post Run actions/setup-python@v5",
+      "success"
+    ],
+    [
+      "Post Run actions/checkout@v4",
+      "success"
+    ],
+    [
+      "Complete job",
+      "success"
+    ]
+  ],
+  "pool": {
+    "lifecycle": {
+      "detached_value": true,
+      "mask_scope_counts": true,
+      "nested_mask_scope_rejected": true,
+      "close_during_scope_rejected": true,
+      "activation_derivative": true,
+      "source_gradient_does_not_seal": true,
+      "joint_has_independent_adjoint": true,
+      "same_storage_after_mask": true,
+      "joint_backward_seals": true,
+      "closed_restored": true,
+      "zero_cap_reference": true,
+      "unsupported_bypass": true,
+      "mutation_poison": true,
+      "exception_cleanup": true
+    },
+    "stress": {
+      "cases": 96,
+      "checks": 1152,
+      "exact": 1152,
+      "failures": 0,
+      "failed_cases": 0,
+      "nonfinite": 0,
+      "max_abs": 0,
+      "storage_checks": 864,
+      "mask_only_calls": 576,
+      "backward_nodes": 288,
+      "cross_scope_hits": 576,
+      "examples": []
+    }
+  },
+  "trainer": {
+    "totals": {
+      "tensors": 3000,
+      "exact": 3000,
+      "scalars": 1221,
+      "failures": 0,
+      "greedy": 24,
+      "greedy_failures": 0
+    },
+    "rows": [
+      {
+        "width": 64,
+        "regime": "closed_loop",
+        "n_passes": 6,
+        "cap_mode": "binding",
+        "root": 0,
+        "policy": "pgd_step",
+        "checks": {
+          "tensors": 1000,
+          "exact": 1000,
+          "scalars": 407,
+          "failures": 0,
+          "greedy": 8,
+          "greedy_failures": 0
+        },
+        "maxima": {
+          "bpd_state": 0,
+          "ci_state": 0,
+          "component_grad": 0,
+          "clean_cache": 0,
+          "pgd_ascent_gradients": 0,
+          "optimizer": 0,
+          "ci_grad": 0,
+          "pgd": 0,
+          "eval_ci": 0,
+          "clean_readout": 0,
+          "masked_readout": 0,
+          "masked_boundary": 0
+        },
+        "failures": [],
+        "selected_names": [
+          "layers.1.down_proj",
+          "layers.1.o_proj"
+        ],
+        "cap_bytes": 65536,
+        "optimal_value": 2088960,
+        "first_fit_value": 974848,
+        "selected_bytes": 65536,
+        "process_peak_rss_kib": 405612,
+        "reconstruction_count": [
+          38,
+          38,
+          38,
+          38
+        ],
+        "cross_scope_hits": [
+          24,
+          24,
+          24,
+          24
+        ],
+        "mask_only_calls": [
+          24,
+          24,
+          24,
+          24
+        ],
+        "pgd_ascent_calls": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "reference_ms": 85.49917749999736,
+        "cached_ms": 87.37603100000513,
+        "raw_ms": [
+          [
+            90.5820970000093,
+            87.26245200000449
+          ],
+          [
+            83.9922090000016,
+            87.58721599998864
+          ],
+          [
+            86.67848300000003,
+            87.04211699999576
+          ],
+          [
+            84.31987199999469,
+            87.48961000000577
+          ]
+        ]
+      },
+      {
+        "width": 128,
+        "regime": "closed_loop",
+        "n_passes": 6,
+        "cap_mode": "binding",
+        "root": 0,
+        "policy": "pgd_step",
+        "checks": {
+          "tensors": 1000,
+          "exact": 1000,
+          "scalars": 407,
+          "failures": 0,
+          "greedy": 8,
+          "greedy_failures": 0
+        },
+        "maxima": {
+          "bpd_state": 0,
+          "ci_state": 0,
+          "component_grad": 0,
+          "clean_cache": 0,
+          "pgd_ascent_gradients": 0,
+          "optimizer": 0,
+          "ci_grad": 0,
+          "pgd": 0,
+          "eval_ci": 0,
+          "clean_readout": 0,
+          "masked_readout": 0,
+          "masked_boundary": 0
+        },
+        "failures": [],
+        "selected_names": [
+          "layers.1.down_proj",
+          "layers.1.o_proj"
+        ],
+        "cap_bytes": 262144,
+        "optimal_value": 16711680,
+        "first_fit_value": 7798784,
+        "selected_bytes": 262144,
+        "process_peak_rss_kib": 429012,
+        "reconstruction_count": [
+          38,
+          38,
+          38,
+          38
+        ],
+        "cross_scope_hits": [
+          24,
+          24,
+          24,
+          24
+        ],
+        "mask_only_calls": [
+          24,
+          24,
+          24,
+          24
+        ],
+        "pgd_ascent_calls": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "reference_ms": 122.59137550000787,
+        "cached_ms": 120.68566450000162,
+        "raw_ms": [
+          [
+            122.9493570000102,
+            120.26538699998923
+          ],
+          [
+            119.20395600000688,
+            122.41270399999848
+          ],
+          [
+            123.55504900000369,
+            121.06521799999825
+          ],
+          [
+            122.23339400000555,
+            120.30611100000499
+          ]
+        ]
+      },
+      {
+        "width": 256,
+        "regime": "closed_loop",
+        "n_passes": 6,
+        "cap_mode": "binding",
+        "root": 0,
+        "policy": "pgd_step",
+        "checks": {
+          "tensors": 1000,
+          "exact": 1000,
+          "scalars": 407,
+          "failures": 0,
+          "greedy": 8,
+          "greedy_failures": 0
+        },
+        "maxima": {
+          "bpd_state": 0,
+          "ci_state": 0,
+          "component_grad": 0,
+          "clean_cache": 0,
+          "pgd_ascent_gradients": 0,
+          "optimizer": 0,
+          "ci_grad": 0,
+          "pgd": 0,
+          "eval_ci": 0,
+          "clean_readout": 0,
+          "masked_readout": 0,
+          "masked_boundary": 0
+        },
+        "failures": [],
+        "selected_names": [
+          "layers.1.down_proj",
+          "layers.1.o_proj"
+        ],
+        "cap_bytes": 1048576,
+        "optimal_value": 133693440,
+        "first_fit_value": 62390272,
+        "selected_bytes": 1048576,
+        "process_peak_rss_kib": 498572,
+        "reconstruction_count": [
+          38,
+          38,
+          38,
+          38
+        ],
+        "cross_scope_hits": [
+          24,
+          24,
+          24,
+          24
+        ],
+        "mask_only_calls": [
+          24,
+          24,
+          24,
+          24
+        ],
+        "pgd_ascent_calls": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "reference_ms": 228.82794600000267,
+        "cached_ms": 219.53353650000196,
+        "raw_ms": [
+          [
+            236.53040300000328,
+            227.61240900000246
+          ],
+          [
+            228.60522999999944,
+            221.31418899999744
+          ],
+          [
+            226.76084900000149,
+            217.75288400000647
+          ],
+          [
+            229.0506620000059,
+            215.78357900000356
+          ]
+        ]
+      }
+    ],
+    "paired_steps": 12,
+    "note": "Small trainer seed matches FUSE08 closed-loop regression roots; new mask-only branch; stress and wide seeds fresh. Four paired measurements per campaign, instrumentation on both arms, no general timing claim."
+  }
+}
