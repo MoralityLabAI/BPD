@@ -1,0 +1,448 @@
+{
+ "all_match": true,
+ "drift": {
+  "drift_29200": {
+   "0": true,
+   "1": true,
+   "16": true,
+   "2": true,
+   "32": true,
+   "4": true,
+   "64": true,
+   "8": true
+  },
+  "drift_29201": {
+   "0": true,
+   "1": true,
+   "16": true,
+   "2": true,
+   "32": true,
+   "4": true,
+   "64": true,
+   "8": true
+  },
+  "drift_historical_28000": {
+   "0": true,
+   "1": true,
+   "16": true,
+   "2": true,
+   "32": true,
+   "4": true,
+   "64": true,
+   "8": true
+  },
+  "drift_historical_28001": {
+   "0": true,
+   "1": true,
+   "16": true,
+   "2": true,
+   "32": true,
+   "4": true,
+   "64": true,
+   "8": true
+  }
+ },
+ "economics": {
+  "economics_29200": {
+   "checkpoints": {
+    "cpu_A_ordinary": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "cpu_B_ord_grad": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "cpu_C_mech_fresh": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "cpu_D_atlas_mms0": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "cpu_D_atlas_mms16": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "cpu_D_atlas_mms4": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "cpu_D_atlas_mms64": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "cpu_E_shuffled_mms16": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "cpu_F_obs_only_mms16": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "updates_A_ordinary": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "updates_B_ord_grad": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "updates_C_mech_fresh": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "updates_C_probe": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "updates_D_atlas_mms16": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "updates_E_shuffled_mms16": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "updates_F_obs_only_mms16": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    }
+   },
+   "reruns": {
+    "A_ordinary": {
+     "match": true,
+     "receipt_sha": "008865886e22ce81c3bf377adc4a1fd540d77c9e47fcf1660273450408e3a681",
+     "rerun_sha": "008865886e22ce81c3bf377adc4a1fd540d77c9e47fcf1660273450408e3a681"
+    },
+    "C_mech_fresh": {
+     "match": true,
+     "receipt_sha": "c2dff9910dd64ba32e93a9df733a79a985ab6d881e2108d42e4abafa0a4ab7a6",
+     "rerun_sha": "c2dff9910dd64ba32e93a9df733a79a985ab6d881e2108d42e4abafa0a4ab7a6"
+    }
+   },
+   "root": 29200
+  },
+  "economics_29201": {
+   "checkpoints": {
+    "cpu_A_ordinary": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "cpu_B_ord_grad": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "cpu_C_mech_fresh": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "cpu_D_atlas_mms0": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "cpu_D_atlas_mms16": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "cpu_D_atlas_mms4": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "cpu_D_atlas_mms64": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "cpu_E_shuffled_mms16": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "cpu_F_obs_only_mms16": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "updates_A_ordinary": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "updates_B_ord_grad": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "updates_C_mech_fresh": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "updates_C_probe": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "updates_D_atlas_mms16": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "updates_E_shuffled_mms16": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "updates_F_obs_only_mms16": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    }
+   },
+   "reruns": {
+    "A_ordinary": {
+     "match": true,
+     "receipt_sha": "2388385dfa01adad65220fbb474fd3f02f06de8f4511191499b9a2fc082e6f83",
+     "rerun_sha": "2388385dfa01adad65220fbb474fd3f02f06de8f4511191499b9a2fc082e6f83"
+    },
+    "C_mech_fresh": {
+     "match": true,
+     "receipt_sha": "c656f6753ee2df7bd2728990303a026335bc7a1254a11ddc2044ecddbe043076",
+     "rerun_sha": "c656f6753ee2df7bd2728990303a026335bc7a1254a11ddc2044ecddbe043076"
+    }
+   },
+   "root": 29201
+  },
+  "economics_batched_29200": {
+   "checkpoints": {
+    "cpu_A_ordinary": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "cpu_B_ord_grad": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "cpu_C_mech_fresh": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "cpu_D_atlas_mms0": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "cpu_D_atlas_mms16": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "cpu_D_atlas_mms4": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "cpu_D_atlas_mms64": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "cpu_E_shuffled_mms16": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "cpu_F_obs_only_mms16": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "updates_A_ordinary": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "updates_B_ord_grad": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "updates_C_mech_fresh": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "updates_C_probe": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "updates_D_atlas_mms16": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "updates_E_shuffled_mms16": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "updates_F_obs_only_mms16": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    }
+   },
+   "reruns": {
+    "A_ordinary": {
+     "match": true,
+     "receipt_sha": "008865886e22ce81c3bf377adc4a1fd540d77c9e47fcf1660273450408e3a681",
+     "rerun_sha": "008865886e22ce81c3bf377adc4a1fd540d77c9e47fcf1660273450408e3a681"
+    },
+    "C_mech_fresh": {
+     "match": true,
+     "receipt_sha": "c2dff9910dd64ba32e93a9df733a79a985ab6d881e2108d42e4abafa0a4ab7a6",
+     "rerun_sha": "c2dff9910dd64ba32e93a9df733a79a985ab6d881e2108d42e4abafa0a4ab7a6"
+    }
+   },
+   "root": 29200
+  },
+  "economics_batched_29201": {
+   "checkpoints": {
+    "cpu_A_ordinary": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "cpu_B_ord_grad": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "cpu_C_mech_fresh": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "cpu_D_atlas_mms0": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "cpu_D_atlas_mms16": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "cpu_D_atlas_mms4": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "cpu_D_atlas_mms64": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "cpu_E_shuffled_mms16": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "cpu_F_obs_only_mms16": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "updates_A_ordinary": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "updates_B_ord_grad": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "updates_C_mech_fresh": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "updates_C_probe": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "updates_D_atlas_mms16": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "updates_E_shuffled_mms16": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    },
+    "updates_F_obs_only_mms16": {
+     "binding_counts_match": true,
+     "delay_counts_match": true,
+     "state_sha_match": true
+    }
+   },
+   "reruns": {
+    "A_ordinary": {
+     "match": true,
+     "receipt_sha": "2388385dfa01adad65220fbb474fd3f02f06de8f4511191499b9a2fc082e6f83",
+     "rerun_sha": "2388385dfa01adad65220fbb474fd3f02f06de8f4511191499b9a2fc082e6f83"
+    },
+    "C_mech_fresh": {
+     "match": true,
+     "receipt_sha": "c656f6753ee2df7bd2728990303a026335bc7a1254a11ddc2044ecddbe043076",
+     "rerun_sha": "c656f6753ee2df7bd2728990303a026335bc7a1254a11ddc2044ecddbe043076"
+    }
+   },
+   "root": 29201
+  }
+ },
+ "memory": {
+  "cap_bytes": 6442450944,
+  "current_tree_rss_bytes": 401522688,
+  "enforced": true,
+  "enforcement_mechanism": "windows_job_object",
+  "host_available_bytes_min": 13821132800,
+  "peak_job_commit_bytes": 1816109056,
+  "peak_tree_rss_bytes": 401522688,
+  "platform": "Windows 11",
+  "process_cpu_seconds": 215.40625,
+  "semantics": "Win32 Job Object hard commit-memory cap (JOB_OBJECT_LIMIT_JOB_MEMORY) across current process and all descendants, paired with psutil tree RSS and host available-RAM monitoring",
+  "wall_seconds": 112.2769879999978
+ }
+}
