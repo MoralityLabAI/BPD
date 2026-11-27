@@ -1,0 +1,268 @@
+{
+ "arch": "TRM_w32_r29",
+ "carried_coordinates": 64,
+ "checkpoint_state_sha256": "cfba5e21256b41b285512081b07534ae08221ac7d7e7d433aec7e15afd66fcb1",
+ "competence_gate_passed": true,
+ "cpu_seconds": 208.078125,
+ "cpu_snaps": {},
+ "curve": [
+  {
+   "block_visits": 12,
+   "cpu_seconds": 0.15625,
+   "step": 1,
+   "train_bind_d7_acc": 0.2421875,
+   "train_ce": 1.510189414024353,
+   "train_d2_acc": 0.23828125,
+   "train_d31_acc": 0.2421875,
+   "train_d7_acc": 0.27734375,
+   "wall_seconds": 0.30823439999949187
+  },
+  {
+   "block_visits": 13998,
+   "cpu_seconds": 35.078125,
+   "step": 1000,
+   "train_bind_d7_acc": 0.234375,
+   "train_ce": 1.032533884048462,
+   "train_d2_acc": 0.5234375,
+   "train_d31_acc": 0.27734375,
+   "train_d7_acc": 0.4765625,
+   "wall_seconds": 19.208009900001343
+  },
+  {
+   "block_visits": 27998,
+   "cpu_seconds": 69.28125,
+   "step": 2000,
+   "train_bind_d7_acc": 0.2890625,
+   "train_ce": 0.8706738352775574,
+   "train_d2_acc": 0.5546875,
+   "train_d31_acc": 0.32421875,
+   "train_d7_acc": 0.4609375,
+   "wall_seconds": 37.25452940000105
+  },
+  {
+   "block_visits": 42000,
+   "cpu_seconds": 104.734375,
+   "step": 3000,
+   "train_bind_d7_acc": 0.75,
+   "train_ce": 0.35791847109794617,
+   "train_d2_acc": 0.76953125,
+   "train_d31_acc": 0.25,
+   "train_d7_acc": 0.74609375,
+   "wall_seconds": 56.11513749998994
+  },
+  {
+   "block_visits": 55998,
+   "cpu_seconds": 138.171875,
+   "step": 4000,
+   "train_bind_d7_acc": 0.7734375,
+   "train_ce": 0.0875808522105217,
+   "train_d2_acc": 0.984375,
+   "train_d31_acc": 0.359375,
+   "train_d7_acc": 0.79296875,
+   "wall_seconds": 74.42143210000359
+  },
+  {
+   "block_visits": 69998,
+   "cpu_seconds": 173.0625,
+   "step": 5000,
+   "train_bind_d7_acc": 0.8828125,
+   "train_ce": 0.002902705455198884,
+   "train_d2_acc": 0.98828125,
+   "train_d31_acc": 0.3203125,
+   "train_d7_acc": 0.90625,
+   "wall_seconds": 93.13852229999611
+  },
+  {
+   "block_visits": 84000,
+   "cpu_seconds": 207.78125,
+   "step": 6000,
+   "train_bind_d7_acc": 0.921875,
+   "train_ce": 0.002139664487913251,
+   "train_d2_acc": 0.9921875,
+   "train_d31_acc": 0.4296875,
+   "train_d7_acc": 0.97265625,
+   "wall_seconds": 111.70377960000769
+  }
+ ],
+ "held_eval": {
+  "binding": {
+   "2": {
+    "accuracy": 0.984375,
+    "batch_sha256": "1c3d8d9129cd3ca46d4a5094e50cc3bcd19d29a6e7ed4dfc8f83a69b4b8866f4",
+    "correct_count": 252,
+    "cross_entropy": 0.11706361174583435,
+    "delay": 2,
+    "n": 256
+   },
+   "31": {
+    "accuracy": 0.3359375,
+    "batch_sha256": "b028cd00173ed3736a8a48630548cb8c226557f7868f3d237cd38e8ddd8724ae",
+    "correct_count": 86,
+    "cross_entropy": 6.264960289001465,
+    "delay": 31,
+    "n": 256
+   },
+   "7": {
+    "accuracy": 0.9453125,
+    "batch_sha256": "941cce82ce8cb72378f56084cfdf66fd2a6bf28695f5c343922e6c2c83961573",
+    "correct_count": 242,
+    "cross_entropy": 0.2193433940410614,
+    "delay": 7,
+    "n": 256
+   }
+  },
+  "delays": {
+   "127": {
+    "accuracy": 0.333984375,
+    "batch_sha256": "e82bb1db1375555e9b2471606417c9d1503d458fb187bc88e3e7f22c494e8964",
+    "correct_count": 171,
+    "cross_entropy": 7.15755033493042,
+    "delay": 127,
+    "n": 512
+   },
+   "2": {
+    "accuracy": 0.984375,
+    "batch_sha256": "717873cf442c64b49f7010f575f1b27f2344fcbc6021531d8ab86f879e043861",
+    "correct_count": 504,
+    "cross_entropy": 0.03228190913796425,
+    "delay": 2,
+    "n": 512
+   },
+   "31": {
+    "accuracy": 0.408203125,
+    "batch_sha256": "2aba8157c5d05e78def16231efe9a3d06ec6e65f2e6f0721a5747784e6b406ef",
+    "correct_count": 209,
+    "cross_entropy": 5.395583152770996,
+    "delay": 31,
+    "n": 512
+   },
+   "63": {
+    "accuracy": 0.34375,
+    "batch_sha256": "8a44f405a6d8969e9d438fe03c2bbff5832075a9b51bf6cd4abff11c364e89f4",
+    "correct_count": 176,
+    "cross_entropy": 6.4822564125061035,
+    "delay": 63,
+    "n": 512
+   },
+   "7": {
+    "accuracy": 0.93359375,
+    "batch_sha256": "ad93a15d52b59cbcd144540883c298443f2e6119d7e770adc74e71cd77b74023",
+    "correct_count": 478,
+    "cross_entropy": 0.30276989936828613,
+    "delay": 7,
+    "n": 512
+   }
+  }
+ },
+ "memory": {
+  "cap_bytes": 6442450944,
+  "current_tree_rss_bytes": 387067904,
+  "enforced": true,
+  "enforcement_mechanism": "windows_job_object",
+  "host_available_bytes_min": 5758742528,
+  "peak_job_commit_bytes": 1728794624,
+  "peak_tree_rss_bytes": 387067904,
+  "platform": "Windows 11",
+  "process_cpu_seconds": 215.78125,
+  "semantics": "Win32 Job Object hard commit-memory cap (JOB_OBJECT_LIMIT_JOB_MEMORY) across current process and all descendants, paired with psutil tree RSS and host available-RAM monitoring",
+  "wall_seconds": 119.1705541999836
+ },
+ "parameter_count": 5380,
+ "root": 29201,
+ "source_hashes": {
+  "mechinterp/bpd/components.py": "388cb539cccb87ae65d56e5fbae175d6aee138df24d1bab43cde755156b748a5",
+  "mechinterp/bpd/config.py": "d5773cdac66f55b8a8c152030d679324f0270954dd3a081176a454d5dc6f1621",
+  "mechinterp/bpd/experiments/sccg10_mms_trm/__init__.py": "0fc6bdee427688ad87d0c0dc06e9bc370268b3a3a149a59d8db50f148b7d2432",
+  "mechinterp/bpd/experiments/sccg10_mms_trm/common.py": "9903108f39cecc6236bc84cc476f1a91b5b7fef2a6c7eacf49245b11e4b66bca",
+  "mechinterp/bpd/experiments/sccg10_mms_trm/warmup_fresh.py": "98969fd0b55ac70d7afb94a70fd3927250b92e6957a41efd5a2e92b21f4eba7c",
+  "mechinterp/bpd/experiments/sccg10_native_mms/PROTOCOL.md": "11552e15d7dc204c07492a28a2808ed0acd1fbcdedad35873a935d3e8e929334",
+  "mechinterp/bpd/experiments/sccg10_native_mms/THEORY.md": "732be75096a5f5e5c1e8b4b710281e70eb8cf70bf468485812233b5b2527d26d",
+  "mechinterp/bpd/experiments/sccg10_native_mms/admission.py": "e807271514e4b4afca5ab1d146e9f7b606ea31bc0653c7bb9c8bdbccf25d0041",
+  "mechinterp/bpd/experiments/trm_curation/cache.py": "48c74cadbedc6abeb037f9ce5c24c22a623e68668cd92bb864567599395d8af9",
+  "mechinterp/bpd/experiments/trm_curation/campaign.py": "e0668b7aed904cd79d57eb48ba082f81c9906b2e33fa68fa3b9be43126380651",
+  "mechinterp/bpd/experiments/trm_curation/data.py": "794a19b505317a6b97e9df2636c0d1188343d6aa2f7646c7423e9b55ea9a0954",
+  "mechinterp/bpd/experiments/trm_curation/memory_cap.py": "7c176d56b42b82d7f0a6a8b0b14154b524581c105bcb9a5e99daff334d052ebc",
+  "mechinterp/bpd/experiments/trm_curation/model.py": "c001ffc270f6b585d6ceaf2d65f3b90b76ed6f2992585c6ab85df8f251dc850e",
+  "mechinterp/bpd/experiments/trm_curation/observer.py": "62ff37375e9122eb3db9d08386d01ee5755f34a0a948e056e5037ac5ca5b4e42",
+  "mechinterp/bpd/experiments/trm_curation/reference.py": "58440d66445528404999770c20adef3a573d2ae673c64fbd56885ea02396a983",
+  "mechinterp/bpd/experiments/trm_curation/scheduler.py": "76f033faaa2c81d3b40ec41dc0b478ed33be7dd6dc345d5356b63c869cedb652",
+  "mechinterp/bpd/experiments/trm_curation/signal_bank.py": "bba394838a1a97dd08231874298233ffc99252c3b4116e0b63e085f92c453267",
+  "mechinterp/bpd/experiments/trm_curation/transaction.py": "6f8a472b898e989c37bb4702c797af38bdeff6b162e7adf27ecdd4f3665857eb"
+ },
+ "state_sha256": "cfba5e21256b41b285512081b07534ae08221ac7d7e7d433aec7e15afd66fcb1",
+ "total_block_visits": 84000,
+ "total_examples": 576000,
+ "train_eval": {
+  "binding": {
+   "2": {
+    "accuracy": 0.99609375,
+    "batch_sha256": "420dbd81b9b153cbf7c9f58dcb1bdebd9bbfd3040de443cdb12bae584e9cd12d",
+    "correct_count": 255,
+    "cross_entropy": 0.007741652894765139,
+    "delay": 2,
+    "n": 256
+   },
+   "31": {
+    "accuracy": 0.4296875,
+    "batch_sha256": "29c1b529e3e6bfdf3b80679be288016653e21d8415586f4bae9dbf22e8e2261d",
+    "correct_count": 110,
+    "cross_entropy": 4.694433212280273,
+    "delay": 31,
+    "n": 256
+   },
+   "7": {
+    "accuracy": 0.94921875,
+    "batch_sha256": "006318ab196215e5ebe904ac6cd9173949dfa387d8d72d52338a6405e65cee19",
+    "correct_count": 243,
+    "cross_entropy": 0.1986190676689148,
+    "delay": 7,
+    "n": 256
+   }
+  },
+  "delays": {
+   "127": {
+    "accuracy": 0.28515625,
+    "batch_sha256": "0a0df060016ac5514faf68bd980a7e4d8317c1120ebb0e5c5fe08f68e797cd83",
+    "correct_count": 146,
+    "cross_entropy": 7.724701881408691,
+    "delay": 127,
+    "n": 512
+   },
+   "2": {
+    "accuracy": 0.99609375,
+    "batch_sha256": "a7b0a34d3271f55e0ca88091d3d20b8b6143dafc72c33fd69d7b3f4acd67eb78",
+    "correct_count": 510,
+    "cross_entropy": 0.017334720119833946,
+    "delay": 2,
+    "n": 512
+   },
+   "31": {
+    "accuracy": 0.388671875,
+    "batch_sha256": "88ec326487ea9899f755da6c453206d0112e4cafa2827c4817c8dfb78ccd0a90",
+    "correct_count": 199,
+    "cross_entropy": 5.688887596130371,
+    "delay": 31,
+    "n": 512
+   },
+   "63": {
+    "accuracy": 0.326171875,
+    "batch_sha256": "b6f5beba109a4f1b6121aa09d35656a9ad00d59e07cd1637bdd94d537f759e1a",
+    "correct_count": 167,
+    "cross_entropy": 6.985445022583008,
+    "delay": 63,
+    "n": 512
+   },
+   "7": {
+    "accuracy": 0.96484375,
+    "batch_sha256": "e0b008ef6ce9ff772104f30e4d6111cf8ab1ddd7d29acd74da072f7d5dd8dedf",
+    "correct_count": 494,
+    "cross_entropy": 0.14274701476097107,
+    "delay": 7,
+    "n": 512
+   }
+  }
+ },
+ "updates": 6000,
+ "visits_per_token": 2,
+ "wall_seconds": 111.70388600000297
+}
