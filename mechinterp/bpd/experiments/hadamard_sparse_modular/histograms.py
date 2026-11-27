@@ -15,6 +15,7 @@ def key(v):
     k=0
     for x in v:assert -11<=x<=11 and x%2;k=k*12+(x+11)//2
     return k
+
 def main():
     expected=[list(map(int,l.split())) for l in open(prior/'compressed_counts.txt')]; assert len(expected)==12**4
     rows=defaultdict(Counter)
