@@ -83,6 +83,7 @@ class BPDTrainer:
         device: torch.device | str = "cpu",
         cache_single_backward_residuals: bool = False,
         residual_cache_max_bytes: int = 16 * 1024**2,
+        residual_cache_policy: str = "first_fit",
     ) -> None:
         if type(cache_single_backward_residuals) is not bool:
             raise TypeError("cache_single_backward_residuals must be bool")
@@ -91,7 +92,16 @@ class BPDTrainer:
         # Experimental FUSE-06: explicit opt-in, sequential first-order adapters only.
         self.cache_single_backward_residuals = cache_single_backward_residuals
         self.residual_cache_max_bytes = residual_cache_max_bytes
+        if residual_cache_policy not in ("first_fit", "exact", "step_exact"):
+            raise ValueError("unknown residual cache policy")
+        self.residual_cache_policy = residual_cache_policy
         self.residual_cache_stats: list[Any] = []
+        self.residual_cache_plans: list[dict[str, Any]] = []
+        self.residual_step_receipt: dict[str, Any] | None = None
+        self._step_residual_pool = None
+        self._residual_step_active = False
+        self._residual_step_disabled = False
+        self._residual_planned_calls = 0
         self.device = torch.device(device)
         self.bpd_model = bpd_model.to(self.device)
         self.cfg = cfg
@@ -124,21 +134,74 @@ class BPDTrainer:
             weight_decay=0.0,
         )
 
-    def _single_backward_residual_scope(self):
-        """Only for branches whose graph is consumed once by the joint backward.
+    def _single_backward_residual_scope(self, n_passes: int):
+        """Experimental: only graphs consumed once by the joint backward.
 
-        The caller opting in guarantees a sequential fixed-weight adapter, no
-        activation checkpointing/reentry or external parameter/storage mutation.
-        Do not wrap the retained-graph PGD branch or calibration.
+        Fixed weights and a sequential first-order non-checkpointed adapter are
+        required. Closed-loop PGD, calibration and evaluation remain native.
         """
         if not self.cache_single_backward_residuals:
             return nullcontext(None)
         from mechinterp.bpd.experiments.fused_residual.adjoint_cache import independent_residuals
 
-        return independent_residuals(
-            self.bpd_model.wrappers.values(), variant="residual",
-            max_bytes=self.residual_cache_max_bytes,
+        if self.residual_cache_policy == "first_fit":
+            return independent_residuals(
+                self.bpd_model.wrappers.values(), variant="residual",
+                max_bytes=self.residual_cache_max_bytes,
+            )
+        from dataclasses import asdict
+        from mechinterp.bpd.experiments.fused_residual.step_cache import (
+            StepResidualPool, planned_sites,
         )
+
+        step = self.residual_cache_policy == "step_exact"
+        if step and self._residual_step_disabled:
+            return nullcontext(None)
+        if step and self._step_residual_pool is not None:
+            return self._step_residual_pool.scope()
+        calls = self._residual_planned_calls if step else n_passes
+        names = self.bpd_model.module_order
+        try:
+            selected, plan = planned_sites(
+                [self.bpd_model.wrappers[n] for n in names],
+                calls, self.residual_cache_max_bytes,
+            )
+        except RuntimeError as exc:
+            # Exact planner overflow is a fail-closed reference fallback.
+            if str(exc) != "frontier limit exceeded":
+                raise
+            self.residual_cache_plans.append({"status": "frontier_limit", "calls": calls})
+            if step:
+                self._residual_step_disabled = True
+            return nullcontext(None)
+        self.residual_cache_plans.append({
+            "status": "selected" if selected else "empty",
+            "calls": calls, "names": [names[i] for i in plan.indices],
+            **asdict(plan),
+        })
+        if not selected:
+            if step:
+                self._residual_step_disabled = True
+            return nullcontext(None)
+        if step:
+            self._step_residual_pool = StepResidualPool(
+                selected, max_bytes=self.residual_cache_max_bytes,
+            )
+            return self._step_residual_pool.scope()
+        return independent_residuals(
+            selected, variant="residual", max_bytes=self.residual_cache_max_bytes,
+        )
+
+    def _finish_residual_step(self):
+        pool = self._step_residual_pool
+        if pool is not None:
+            pool.close()
+            self.residual_step_receipt = {
+                "peak_bytes": pool.peak_bytes, "resident_bytes": pool.resident_bytes,
+                "scopes": pool.scope_count, "sealed": pool.sealed,
+                "poisoned": pool.poisoned, "closed": pool.closed,
+            }
+            self._step_residual_pool = None
 
     def _set_lr(self, step: int) -> float:
         if self.cfg.n_steps <= 1:
@@ -286,7 +349,23 @@ class BPDTrainer:
 
     def train_step(self, batch: Any, step: int) -> StepMetrics:
         """Execute one joint BPD optimization step."""
+        if self._residual_step_active:
+            raise RuntimeError("reentrant trainer step")
+        self._residual_step_active = True
         self.residual_cache_stats = []
+        self.residual_cache_plans = []
+        self.residual_step_receipt = None
+        self._residual_step_disabled = False
+        self._residual_planned_calls = 0
+        try:
+            return self._train_step_impl(batch, step)
+        finally:
+            try:
+                self._finish_residual_step()
+            finally:
+                self._residual_step_active = False
+
+    def _train_step_impl(self, batch: Any, step: int) -> StepMetrics:
         self._set_lr(step)
         if (
             self.cfg.null_calibration.use_tolerance_weights
@@ -303,6 +382,10 @@ class BPDTrainer:
             self.calibrate_baselines(batch)
 
         exec_mode, n_passes, pass_offset, init_state = self._select_rollout_regime(batch)
+        self._residual_planned_calls = n_passes * (
+            int(self.cfg.coeff_stoch > 0.0)
+            + int(self.cfg.coeff_adv > 0.0 and exec_mode == "clean_window")
+        )
 
         clean_traj = self.run_clean_rollout(
             batch,
@@ -335,7 +418,7 @@ class BPDTrainer:
                 share_noise_across_passes=share_noise,
                 generator=self.rng,
             )
-            with self._single_backward_residual_scope() as cache_stats:
+            with self._single_backward_residual_scope(n_passes) as cache_stats:
                 stoch_traj = self.run_masked_rollout(
                     batch,
                     stoch_sched,
@@ -409,7 +492,7 @@ class BPDTrainer:
                 share_noise_across_passes=True,
                 generator=self.rng,
             )
-            with self._single_backward_residual_scope() as cache_stats:
+            with self._single_backward_residual_scope(n_passes) as cache_stats:
                 adv_traj = self.run_masked_rollout(
                     batch, stoch_adv, n_passes=n_passes, pass_offset=pass_offset, init_state=init_state
                 )
@@ -426,6 +509,8 @@ class BPDTrainer:
             loss_adv_val = float(loss_adv.detach().item())
 
         total_loss.backward()
+        # Release the owning detached primal pool before any optimizer mutation.
+        self._finish_residual_step()
         if self.cfg.grad_clip_components > 0.0:
             nn.utils.clip_grad_norm_(
                 self.bpd_model.component_parameters(), max_norm=self.cfg.grad_clip_components
