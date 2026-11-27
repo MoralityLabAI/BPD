@@ -11,7 +11,7 @@ def fixture():
             'stages':[{'stage':k,'cpu_to_stage':k/10} for k in (4,8,12,16)],
             'decision':'ACQUIRE_16','selected_indices':[0,1,2,3],'outcome_status':'committed',
             'actual_gain':.25,'cal_before':2.,'cal_after':1.75,'predicted_joint_native':.2,
-            'committed':True,'window_cpu_seconds':2.}
+            'committed':True,'cpu_to_proposal':1.7,'window_cpu_seconds':2.}
 
 
 class TestGym02Export(unittest.TestCase):
