@@ -33,7 +33,8 @@ def main() -> int:
         roots=list(DEVELOPMENT_ROOTS),
         frozen=dict(cpu_limit=100.0, windows=80, arms=list(ARMS), atlas_tiers=[16.0], preview_mode=a.preview_mode,
                     preview_mode_rationale=a.rationale,
-                    policy=asdict(Policy()), no_audit_windows=NO_AUDIT_WINDOWS,
+                    policy={k: (v if not (isinstance(v, float) and v != v or v in (float('inf'), float('-inf'))) else str(v))
+                            for k, v in asdict(Policy()).items()}, no_audit_windows=NO_AUDIT_WINDOWS,
                     warmup_updates=6000, threads=2, memory_cap_bytes=6442450944),
         endpoints=dict(
             primary='fixed-CPU ordinary steering-disabled delay-31 accuracy, D_atlas_mms16 minus A_ordinary, per root',
