@@ -1,0 +1,41 @@
+{
+ "output_dir": "mechinterp/bpd/experiments/sccg10_native_mms/results/development",
+ "arm_configs": {
+  "fixed_cpu": {"mode": "fixed_cpu", "cpu_cap": 100.0,
+                "defaults": {"block": 8, "explore_every": 5, "atlas_mib": 16.0, "cache_mib": 16.0},
+                "arms": {"U": "A", "A": "G", "B": "B", "C": "C", "D": "D", "E": "E", "F": "F"}},
+  "fixed_update": {"mode": "fixed_update", "n_windows": 80, "safety_cpu": 900.0,
+                   "defaults": {"block": 8, "explore_every": 5, "atlas_mib": 16.0, "cache_mib": 16.0},
+                   "arms": {"U": "A", "A": "G", "B": "B", "C": "C", "D": "D", "E": "E", "F": "F"}}
+ },
+ "arm_roles": {
+  "U": "uniform ordinary training, full reinvestment (reported, not primary)",
+  "A": "strongest ordinary training with full reinvestment, selected on engineering TRAIN tune: guarded ordinary = uniform proposals + transactional acceptance on ordinary TRAIN-feedback CE (trainer kind ordinary_guarded)",
+  "B": "ordinary TRAIN-feedback gradient curation, analytic AdamW previews, transactional acceptance, rate controller",
+  "C": "fresh mechanism (observation + k=8 beam support search) at every curated window, exact same-checkpoint memoization only",
+  "D": "MMS atlas (16 MiB) + exact-mode admission ladder (L1 screen, L2 not applicable, L3 support re-solve audit, L4 native verification, L5 refresh), rate controller",
+  "E": "D with mechanism directions deranged across feedback edges of different slots; same atlas, ladder, verification, controller",
+  "F": "D's mechanism maintenance and scoring work, uniform decisions, always commit"
+ },
+ "statistics": {"family": ["D-A", "D-C", "D-B", "D-E"], "alpha": 0.05, "practical_floor": 0.05, "sham_arm": "E",
+                "test": "exact two-sided root sign-flip on per-root d31 correct-count differences / 512, Holm over the family",
+                "bootstrap": "20000 seeded root resamples, descriptive"},
+ "engineering_basis": {
+  "roots": [29200, 29201],
+  "metric": "TRAIN tune view d31 accuracy (1152 sequences per root)",
+  "fixed_cpu_100s_d31": {"uniform": [0.5547, 0.4913], "guarded_ordinary": [0.6424, 0.5894], "B": [0.6484, 0.5174],
+                         "C": [0.5938, 0.4922], "D": [0.6311, 0.4922], "E": [0.5443, 0.5148], "F": [0.5720, 0.4601],
+                         "B_always": [0.6102, 0.4957], "D_always": [0.5877, 0.5148], "D_refresh_cap3": [0.5460, 0.5156],
+                         "E_refresh_cap3": [0.5469, 0.4861]},
+  "warmup_tune_d31": [0.6241, 0.5113],
+  "choices": {"A_role": "guarded ordinary (mean 0.616 vs uniform 0.523, B 0.583)",
+              "controller": "rate (B: +3.8/+2.1 pp over always-curated; D mixed)",
+              "atlas_mib": "16 (peak occupancy 291 KB; tiers 4/16/64/256 identical, tier 0 = 13 vs 41 windows)",
+              "refresh_cap": "unlimited (cap 3 lower on both roots)",
+              "ladder": "exact mode, planning thresholds unchanged (gain ratio 0.7, protection slack 0.25, rel. displacement 0.05, age 64)",
+              "cpu_cap": "100 CPU-s (planning value retained)",
+              "fixed_update_windows": "80 (CURATE-02), safety stop 900 CPU-s"},
+  "behavioral_gate": "FAIL (root 29200: 1/22 targeted flips)",
+  "note": "Fixed-CPU policies are timing dependent on a shared host; the same D configuration gave 0.631 and 0.601 on root 29200 in two interleaved runs. E2 fixed-update engineering runs completed after this freeze and inform no frozen value."
+ }
+}

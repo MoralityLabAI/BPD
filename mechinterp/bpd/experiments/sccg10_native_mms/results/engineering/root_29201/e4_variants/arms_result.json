@@ -1,0 +1,495 @@
+{
+ "arms": {
+  "D_cap3": {
+   "accepted": 40,
+   "arm": "D_cap3",
+   "atlas": {
+    "entries": 12,
+    "evictions": 0,
+    "hits": 280,
+    "inserts": 55,
+    "invalidations": 0,
+    "lookups": 312,
+    "max_age_at_hit": 29,
+    "mean_age_at_hit": 6.189285714285714,
+    "meta_bytes": 7312,
+    "mib": 16.0,
+    "misses": 32,
+    "oversize": 0,
+    "payload_bytes": 272928,
+    "peak_bytes": 290032,
+    "total_bytes": 280240
+   },
+   "audits": 3,
+   "cache": {
+    "entries": 25,
+    "evictions": 0,
+    "hit_rate": 0.038461538461538464,
+    "hits": 1,
+    "insert_cpu_seconds": 0.0,
+    "lookup_cpu_seconds": 0.0,
+    "max_bytes": 16777216,
+    "metadata_bytes": 34150,
+    "misses": 25,
+    "mms_mib": 16.0,
+    "occupancy_fraction": 0.034102797508239746,
+    "overhead_cpu_seconds": 0.0,
+    "oversize_rejections": 0,
+    "payload_bytes": 538000,
+    "peak_total_bytes": 572150,
+    "recomputations_avoided": 1,
+    "saved_cpu_seconds_est": 0.0,
+    "stale_rejections": 0,
+    "total_bytes": 572150
+   },
+   "checkpoint_file": "D_cap3.pt",
+   "controller_history": [
+    {
+     "action": "ordinary",
+     "block": 0,
+     "ce_drop": -0.7085412740707397,
+     "cpu": 0.515625,
+     "ema_curated": null,
+     "ema_ordinary": -1.374140652743253,
+     "rate": -1.374140652743253
+    },
+    {
+     "action": "curated",
+     "block": 1,
+     "ce_drop": 0.4266941547393799,
+     "cpu": 38.125,
+     "ema_curated": 0.011191977829229637,
+     "ema_ordinary": -1.374140652743253,
+     "rate": 0.011191977829229637
+    },
+    {
+     "action": "curated",
+     "block": 2,
+     "ce_drop": -0.11275351047515869,
+     "cpu": 25.671875,
+     "ema_curated": 0.0033999375846056413,
+     "ema_ordinary": -1.374140652743253,
+     "rate": -0.004392102660018354
+    },
+    {
+     "action": "curated",
+     "block": 3,
+     "ce_drop": 0.48752713203430176,
+     "cpu": 21.921875,
+     "ema_curated": 0.012819618275622604,
+     "ema_ordinary": -1.374140652743253,
+     "rate": 0.022239298966639568
+    },
+    {
+     "action": "ordinary",
+     "block": 4,
+     "ce_drop": 0.08062267303466797,
+     "cpu": 0.53125,
+     "ema_curated": 0.012819618275622604,
+     "ema_ordinary": -0.6111901635154684,
+     "rate": 0.15176032571231618
+    },
+    {
+     "action": "curated",
+     "block": 5,
+     "ce_drop": 0.0,
+     "cpu": 11.171875,
+     "ema_curated": 0.006409809137811302,
+     "ema_ordinary": -0.6111901635154684,
+     "rate": 0.0
+    }
+   ],
+   "controller_rates": {
+    "curated": 0.006409809137811302,
+    "ordinary": -0.6111901635154684
+   },
+   "cpu_used": 97.953125,
+   "curated_windows": 26,
+   "eval_tune": {
+    "2": {
+     "accuracy": 0.9982638955116272,
+     "correct": 1150,
+     "cross_entropy": 0.009078191593289375,
+     "n": 1152
+    },
+    "31": {
+     "accuracy": 0.515625,
+     "correct": 594,
+     "cross_entropy": 3.546844482421875,
+     "n": 1152
+    },
+    "7": {
+     "accuracy": 0.9487847089767456,
+     "correct": 1093,
+     "cross_entropy": 0.1961193084716797,
+     "n": 1152
+    }
+   },
+   "final_state_sha256": "a163666432e8e20fb0f5d9251d125a156b82516cb81e6218a319bdc1956e0888",
+   "kind": "mech_atlas",
+   "ladder_outcomes": {
+    "L3_AUDIT_RESOLVED": 3,
+    "ORDINARY_FALLBACK_REFRESH_CAP": 27,
+    "REFRESH": 52,
+    "REUSE_VERIFIED": 230
+   },
+   "ledger": {
+    "counts": {
+     "backward_passes": 208,
+     "candidate_backward": 416,
+     "solver_calls": 89083
+    },
+    "cpu": {
+     "acceptance": 0.96875,
+     "atlas_ops": 0.03125,
+     "cache_ops": 0.0625,
+     "cal_grad": 2.90625,
+     "candidate_preview": 8.265625,
+     "certificate": 0.0,
+     "controller": 0.078125,
+     "data": 0.953125,
+     "mechanism_observe": 5.21875,
+     "selection": 0.703125,
+     "support_search": 75.828125,
+     "train_step": 0.96875,
+     "transaction": 0.109375,
+     "verification": 1.75
+    },
+    "total_cpu": 97.84375,
+    "wall": {
+     "acceptance": 0.5529608000069857,
+     "atlas_ops": 0.011717199988197535,
+     "cache_ops": 0.023448499880032614,
+     "cal_grad": 1.6214895999873988,
+     "candidate_preview": 4.610750099847792,
+     "certificate": 0.004045700217830017,
+     "controller": 0.04761840004357509,
+     "data": 0.505257799901301,
+     "mechanism_observe": 2.9232829999527894,
+     "selection": 0.3513205999042839,
+     "support_search": 68.55176740020397,
+     "train_step": 0.5198419999505859,
+     "transaction": 0.039182000036817044,
+     "verification": 0.9886875998345204
+    }
+   },
+   "no_audit_windows": 2,
+   "ordinary_windows": 16,
+   "overruns": [],
+   "refreshes": 52,
+   "rejected": 2,
+   "uncategorized_cpu": 0.109375,
+   "windows": 42
+  },
+  "E_cap3": {
+   "accepted": 49,
+   "arm": "E_cap3",
+   "atlas": {
+    "entries": 12,
+    "evictions": 0,
+    "hits": 401,
+    "inserts": 65,
+    "invalidations": 0,
+    "lookups": 432,
+    "max_age_at_hit": 41,
+    "mean_age_at_hit": 7.610972568578553,
+    "meta_bytes": -432,
+    "mib": 16.0,
+    "misses": 31,
+    "oversize": 0,
+    "payload_bytes": 272928,
+    "peak_bytes": 290416,
+    "total_bytes": 272496
+   },
+   "audits": 15,
+   "cache": {
+    "entries": 33,
+    "evictions": 0,
+    "hit_rate": 0.08333333333333333,
+    "hits": 3,
+    "insert_cpu_seconds": 0.0,
+    "lookup_cpu_seconds": 0.0,
+    "max_bytes": 16777216,
+    "metadata_bytes": 45078,
+    "misses": 33,
+    "mms_mib": 16.0,
+    "occupancy_fraction": 0.045015692710876465,
+    "overhead_cpu_seconds": 0.0,
+    "oversize_rejections": 0,
+    "payload_bytes": 710160,
+    "peak_total_bytes": 755238,
+    "recomputations_avoided": 3,
+    "saved_cpu_seconds_est": 0.0,
+    "stale_rejections": 0,
+    "total_bytes": 755238
+   },
+   "checkpoint_file": "E_cap3.pt",
+   "controller_history": [
+    {
+     "action": "ordinary",
+     "block": 0,
+     "ce_drop": -0.7085412740707397,
+     "cpu": 0.53125,
+     "ema_curated": null,
+     "ema_ordinary": -1.3337247511919808,
+     "rate": -1.3337247511919808
+    },
+    {
+     "action": "curated",
+     "block": 1,
+     "ce_drop": 0.35732805728912354,
+     "cpu": 38.046875,
+     "ema_curated": 0.00939178466796875,
+     "ema_ordinary": -1.3337247511919808,
+     "rate": 0.00939178466796875
+    },
+    {
+     "action": "curated",
+     "block": 2,
+     "ce_drop": 0.07665300369262695,
+     "cpu": 11.484375,
+     "ema_curated": 0.008033165964139562,
+     "ema_ordinary": -1.3337247511919808,
+     "rate": 0.006674547260310374
+    },
+    {
+     "action": "curated",
+     "block": 3,
+     "ce_drop": 0.1523287296295166,
+     "cpu": 14.21875,
+     "ema_curated": 0.009373197650360474,
+     "ema_ordinary": -1.3337247511919808,
+     "rate": 0.010713229336581387
+    },
+    {
+     "action": "ordinary",
+     "block": 4,
+     "ce_drop": -0.2933160066604614,
+     "cpu": 0.484375,
+     "ema_curated": 0.009373197650360474,
+     "ema_ordinary": -0.9696401889229183,
+     "rate": -0.6055556266538559
+    },
+    {
+     "action": "curated",
+     "block": 5,
+     "ce_drop": 0.0,
+     "cpu": 28.34375,
+     "ema_curated": 0.004686598825180237,
+     "ema_ordinary": -0.9696401889229183,
+     "rate": 0.0
+    },
+    {
+     "action": "curated",
+     "block": 6,
+     "ce_drop": 0.0,
+     "cpu": 8.71875,
+     "ema_curated": 0.0023432994125901184,
+     "ema_ordinary": -0.9696401889229183,
+     "rate": 0.0
+    }
+   ],
+   "controller_rates": {
+    "curated": 0.0023432994125901184,
+    "ordinary": -0.9696401889229183
+   },
+   "cpu_used": 101.875,
+   "curated_windows": 36,
+   "eval_tune": {
+    "2": {
+     "accuracy": 0.9947916865348816,
+     "correct": 1146,
+     "cross_entropy": 0.01782054454088211,
+     "n": 1152
+    },
+    "31": {
+     "accuracy": 0.4861111044883728,
+     "correct": 560,
+     "cross_entropy": 4.232202529907227,
+     "n": 1152
+    },
+    "7": {
+     "accuracy": 0.9401041865348816,
+     "correct": 1083,
+     "cross_entropy": 0.20881304144859314,
+     "n": 1152
+    }
+   },
+   "final_state_sha256": "143a67b17484f214855a528973e760de60831c6e06c801b90211e544483eb642",
+   "kind": "mech_shuffled",
+   "ladder_outcomes": {
+    "L3_AUDIT_RESOLVED": 15,
+    "ORDINARY_FALLBACK_REFRESH_CAP": 27,
+    "REFRESH": 50,
+    "REUSE_VERIFIED": 340
+   },
+   "ledger": {
+    "counts": {
+     "backward_passes": 200,
+     "candidate_backward": 576,
+     "solver_calls": 85713
+    },
+    "cpu": {
+     "acceptance": 0.9375,
+     "atlas_ops": 0.03125,
+     "cache_ops": 0.0625,
+     "cal_grad": 3.703125,
+     "candidate_preview": 11.5,
+     "certificate": 0.046875,
+     "controller": 0.0625,
+     "data": 1.1875,
+     "mechanism_observe": 6.171875,
+     "selection": 0.9375,
+     "support_search": 72.359375,
+     "train_step": 1.0625,
+     "transaction": 0.0625,
+     "verification": 3.5
+    },
+    "total_cpu": 101.625,
+    "wall": {
+     "acceptance": 0.5245462998864241,
+     "atlas_ops": 0.016189599846256897,
+     "cache_ops": 0.028315800067503005,
+     "cal_grad": 2.0385547999176197,
+     "candidate_preview": 6.303143800003454,
+     "certificate": 0.018343200266826898,
+     "controller": 0.044112600007792935,
+     "data": 0.6717037001508288,
+     "mechanism_observe": 3.4748404999554623,
+     "selection": 0.481331099930685,
+     "support_search": 65.1382825000037,
+     "train_step": 0.665218600013759,
+     "transaction": 0.042414900031872094,
+     "verification": 1.874421200103825
+    }
+   },
+   "no_audit_windows": 12,
+   "ordinary_windows": 16,
+   "overruns": [
+    {
+     "cpu_after": 101.875,
+     "cpu_before": 96.671875,
+     "window": 51
+    }
+   ],
+   "refreshes": 50,
+   "rejected": 3,
+   "uncategorized_cpu": 0.25,
+   "windows": 52
+  },
+  "G": {
+   "accepted": 129,
+   "arm": "G",
+   "atlas": null,
+   "audits": 0,
+   "cache": {
+    "entries": 130,
+    "evictions": 0,
+    "hit_rate": 0.9991326973113617,
+    "hits": 1152,
+    "insert_cpu_seconds": 0.046875,
+    "lookup_cpu_seconds": 0.046875,
+    "max_bytes": 16777216,
+    "metadata_bytes": 80990,
+    "misses": 1,
+    "mms_mib": 16.0,
+    "occupancy_fraction": 0.00485837459564209,
+    "overhead_cpu_seconds": 0.09375,
+    "oversize_rejections": 0,
+    "payload_bytes": 520,
+    "peak_total_bytes": 81510,
+    "recomputations_avoided": 1152,
+    "saved_cpu_seconds_est": 0.0,
+    "stale_rejections": 0,
+    "total_bytes": 81510
+   },
+   "checkpoint_file": "G.pt",
+   "controller_history": [],
+   "controller_rates": {
+    "curated": null,
+    "ordinary": null
+   },
+   "cpu_used": 99.90625,
+   "curated_windows": 0,
+   "eval_tune": {
+    "2": {
+     "accuracy": 1.0,
+     "correct": 1152,
+     "cross_entropy": 0.0021991056855767965,
+     "n": 1152
+    },
+    "31": {
+     "accuracy": 0.5894097089767456,
+     "correct": 679,
+     "cross_entropy": 2.9423084259033203,
+     "n": 1152
+    },
+    "7": {
+     "accuracy": 0.984375,
+     "correct": 1134,
+     "cross_entropy": 0.04130713269114494,
+     "n": 1152
+    }
+   },
+   "final_state_sha256": "34a07faeb9646f81a1568dc6f62f445ba3909139dd72cce7f8bf9a3cc5f9083d",
+   "kind": "ordinary_guarded",
+   "ladder_outcomes": {},
+   "ledger": {
+    "counts": {},
+    "cpu": {
+     "acceptance": 21.4375,
+     "cache_ops": 1.1875,
+     "controller": 2.765625,
+     "data": 26.328125,
+     "selection": 16.75,
+     "train_step": 25.796875,
+     "transaction": 4.40625
+    },
+    "total_cpu": 98.671875,
+    "wall": {
+     "acceptance": 12.20703800022602,
+     "cache_ops": 0.6355793995026033,
+     "controller": 1.5156568998936564,
+     "data": 13.824243000213755,
+     "selection": 9.343221799470484,
+     "train_step": 13.999163899337873,
+     "transaction": 2.4221119007270318
+    }
+   },
+   "no_audit_windows": 0,
+   "ordinary_windows": 1153,
+   "overruns": [],
+   "refreshes": 0,
+   "rejected": 1024,
+   "uncategorized_cpu": 1.234375,
+   "windows": 1153
+  }
+ },
+ "config": {
+  "arms": {
+   "D_cap3": {
+    "kind": "D",
+    "refresh_cap": 3
+   },
+   "E_cap3": {
+    "kind": "E",
+    "refresh_cap": 3
+   },
+   "G": "G"
+  },
+  "cpu_cap": 100.0,
+  "defaults": {
+   "atlas_mib": 16.0,
+   "block": 8,
+   "cache_mib": 16.0,
+   "explore_every": 5
+  },
+  "eval": "tune",
+  "mode": "fixed_cpu"
+ },
+ "feedback_fingerprint": "c923a405d83ea989f0dae6a4bb471c9a84cc4eed0092e9381fb91af8f9f5e0ba",
+ "mode": "fixed_cpu",
+ "process_cpu_total": 299.6875,
+ "root": 29201,
+ "warm_sha256": "d97b9e813a6b97d9adb25b5413d82a0a944529d187e26fd168d7a099aa5e4497"
+}

@@ -1,0 +1,181 @@
+{
+ "cpu_seconds": 152.09375,
+ "curve": [
+  {
+   "cpu_seconds": 0.03125,
+   "step": 1,
+   "train_ce": 1.4367362260818481,
+   "tune_d2": 0.2612847089767456,
+   "tune_d31": 0.2690972089767456,
+   "tune_d7": 0.2439236044883728,
+   "wall_seconds": 0.11621619999641553
+  },
+  {
+   "cpu_seconds": 12.5625,
+   "step": 500,
+   "train_ce": 1.0606380701065063,
+   "tune_d2": 0.5243055820465088,
+   "tune_d31": 0.2274305522441864,
+   "tune_d7": 0.4375,
+   "wall_seconds": 6.508559000008972
+  },
+  {
+   "cpu_seconds": 25.375,
+   "step": 1000,
+   "train_ce": 0.949474573135376,
+   "tune_d2": 0.5399305820465088,
+   "tune_d31": 0.2907986044883728,
+   "tune_d7": 0.4782986044883728,
+   "wall_seconds": 13.073940500005847
+  },
+  {
+   "cpu_seconds": 37.84375,
+   "step": 1500,
+   "train_ce": 0.9450051784515381,
+   "tune_d2": 0.5425347089767456,
+   "tune_d31": 0.2829861044883728,
+   "tune_d7": 0.5199652910232544,
+   "wall_seconds": 19.51413210001192
+  },
+  {
+   "cpu_seconds": 50.546875,
+   "step": 2000,
+   "train_ce": 0.9577091336250305,
+   "tune_d2": 0.5416666865348816,
+   "tune_d31": 0.2413194477558136,
+   "tune_d7": 0.4861111044883728,
+   "wall_seconds": 26.031120700004976
+  },
+  {
+   "cpu_seconds": 63.671875,
+   "step": 2500,
+   "train_ce": 0.6306486129760742,
+   "tune_d2": 0.6180555820465088,
+   "tune_d31": 0.2717013955116272,
+   "tune_d7": 0.5833333134651184,
+   "wall_seconds": 32.75374079999165
+  },
+  {
+   "cpu_seconds": 76.65625,
+   "step": 3000,
+   "train_ce": 0.41297590732574463,
+   "tune_d2": 0.7664930820465088,
+   "tune_d31": 0.3090277910232544,
+   "tune_d7": 0.6857638955116272,
+   "wall_seconds": 39.40812529998948
+  },
+  {
+   "cpu_seconds": 89.0,
+   "step": 3500,
+   "train_ce": 0.1188647449016571,
+   "tune_d2": 0.9782986044883728,
+   "tune_d31": 0.4210069477558136,
+   "tune_d7": 0.8793402910232544,
+   "wall_seconds": 45.74845240000286
+  },
+  {
+   "cpu_seconds": 101.46875,
+   "step": 4000,
+   "train_ce": 0.012794033624231815,
+   "tune_d2": 0.9791666865348816,
+   "tune_d31": 0.3072916567325592,
+   "tune_d7": 0.8211805820465088,
+   "wall_seconds": 52.318898500001524
+  },
+  {
+   "cpu_seconds": 114.171875,
+   "step": 4500,
+   "train_ce": 0.044964078813791275,
+   "tune_d2": 0.9939236044883728,
+   "tune_d31": 0.4722222089767456,
+   "tune_d7": 0.9401041865348816,
+   "wall_seconds": 58.89087490001111
+  },
+  {
+   "cpu_seconds": 126.5625,
+   "step": 5000,
+   "train_ce": 0.0025200776290148497,
+   "tune_d2": 0.9913194179534912,
+   "tune_d31": 0.4010416567325592,
+   "tune_d7": 0.8975694179534912,
+   "wall_seconds": 65.24870190001093
+  },
+  {
+   "cpu_seconds": 139.203125,
+   "step": 5500,
+   "train_ce": 0.0008093370124697685,
+   "tune_d2": 0.9982638955116272,
+   "tune_d31": 0.3897569477558136,
+   "tune_d7": 0.921875,
+   "wall_seconds": 71.77672510000411
+  },
+  {
+   "cpu_seconds": 151.875,
+   "step": 6000,
+   "train_ce": 0.014279934577643871,
+   "tune_d2": 0.9939236044883728,
+   "tune_d31": 0.5234375,
+   "tune_d7": 0.9539930820465088,
+   "wall_seconds": 78.32277259998955
+  }
+ ],
+ "init_state_sha256": "00aa152e87652ddb748394b531e8a5a9bbaac6b520802730ef2ba6c80ed68c0a",
+ "optimizer": "AdamW",
+ "parameter_count": 5380,
+ "recipe": {
+  "binding_n": 256,
+  "collateral_budget": 0.25,
+  "components": 29,
+  "curation_learning_rate": 0.001,
+  "dose": 0.75,
+  "eval_delays": [
+   2,
+   7,
+   31,
+   63,
+   127
+  ],
+  "eval_n": 512,
+  "exploration": 0.2,
+  "feedback_batch_edges": 12,
+  "feedback_delay": 15,
+  "gradient_clip": 1.0,
+  "learning_rate": 0.003,
+  "low_cycles": 1,
+  "noise": 0.03,
+  "pair_exposure_cap": 4,
+  "panel_delays": [
+   2,
+   7,
+   31
+  ],
+  "panel_edges": 24,
+  "primary_delay": 31,
+  "proposals_per_window": 16,
+  "selected_per_window": 4,
+  "slots": 4,
+  "split_seed": 20261127,
+  "support_beam": 4,
+  "support_k": 8,
+  "threads": 2,
+  "train_delays": [
+   1,
+   2,
+   3
+  ],
+  "tune_eval_edges": 144,
+  "values": 4,
+  "w_ordinary": 1.0,
+  "w_preserve": 0.5,
+  "w_target": 0.5,
+  "warmup_batch_edges": 12,
+  "warmup_updates": 6000,
+  "weight_decay": 0.0001,
+  "width": 32
+ },
+ "root": 29305,
+ "source_lock_sha256": "0c4426bd935d99b97648f3c8fc0bebb66ab6b2ea9c1b209bb8a5d5df21fbf012",
+ "state_sha256": "ec45e0bbe45a73a419f957fd1f8c4ed125a67867ba11698d6d8b81a8aca40eb1",
+ "updates": 6000,
+ "wall_seconds": 78.32348089999869
+}

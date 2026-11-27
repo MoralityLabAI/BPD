@@ -1,0 +1,463 @@
+{
+  "arms": {
+    "A_uniform": {
+      "correct": 529,
+      "macro_accuracy": 0.5166015625,
+      "mean_cpu_seconds": 4.625,
+      "n": 1024,
+      "per_root": [
+        {
+          "accuracy": 0.544921875,
+          "correct": 279,
+          "cpu_seconds": 4.515625,
+          "n": 512,
+          "root": 28000
+        },
+        {
+          "accuracy": 0.48828125,
+          "correct": 250,
+          "cpu_seconds": 4.734375,
+          "n": 512,
+          "root": 28001
+        }
+      ],
+      "pooled_accuracy": 0.5166015625
+    },
+    "B_loss_mined": {
+      "correct": 566,
+      "macro_accuracy": 0.552734375,
+      "mean_cpu_seconds": 10.65625,
+      "n": 1024,
+      "per_root": [
+        {
+          "accuracy": 0.61328125,
+          "correct": 314,
+          "cpu_seconds": 10.6875,
+          "n": 512,
+          "root": 28000
+        },
+        {
+          "accuracy": 0.4921875,
+          "correct": 252,
+          "cpu_seconds": 10.625,
+          "n": 512,
+          "root": 28001
+        }
+      ],
+      "pooled_accuracy": 0.552734375
+    },
+    "C_ord_grad": {
+      "correct": 541,
+      "macro_accuracy": 0.5283203125,
+      "mean_cpu_seconds": 68.03125,
+      "n": 1024,
+      "per_root": [
+        {
+          "accuracy": 0.556640625,
+          "correct": 285,
+          "cpu_seconds": 65.546875,
+          "n": 512,
+          "root": 28000
+        },
+        {
+          "accuracy": 0.5,
+          "correct": 256,
+          "cpu_seconds": 70.515625,
+          "n": 512,
+          "root": 28001
+        }
+      ],
+      "pooled_accuracy": 0.5283203125
+    },
+    "D_mech_grad": {
+      "correct": 525,
+      "macro_accuracy": 0.5126953125,
+      "mean_cpu_seconds": 83.5078125,
+      "n": 1024,
+      "per_root": [
+        {
+          "accuracy": 0.583984375,
+          "correct": 299,
+          "cpu_seconds": 80.6875,
+          "n": 512,
+          "root": 28000
+        },
+        {
+          "accuracy": 0.44140625,
+          "correct": 226,
+          "cpu_seconds": 86.328125,
+          "n": 512,
+          "root": 28001
+        }
+      ],
+      "pooled_accuracy": 0.5126953125
+    },
+    "E_shuffled": {
+      "correct": 505,
+      "macro_accuracy": 0.4931640625,
+      "mean_cpu_seconds": 93.8359375,
+      "n": 1024,
+      "per_root": [
+        {
+          "accuracy": 0.544921875,
+          "correct": 279,
+          "cpu_seconds": 82.34375,
+          "n": 512,
+          "root": 28000
+        },
+        {
+          "accuracy": 0.44140625,
+          "correct": 226,
+          "cpu_seconds": 105.328125,
+          "n": 512,
+          "root": 28001
+        }
+      ],
+      "pooled_accuracy": 0.4931640625
+    },
+    "F_obs_only": {
+      "correct": 529,
+      "macro_accuracy": 0.5166015625,
+      "mean_cpu_seconds": 91.15625,
+      "n": 1024,
+      "per_root": [
+        {
+          "accuracy": 0.544921875,
+          "correct": 279,
+          "cpu_seconds": 72.796875,
+          "n": 512,
+          "root": 28000
+        },
+        {
+          "accuracy": 0.48828125,
+          "correct": 250,
+          "cpu_seconds": 109.515625,
+          "n": 512,
+          "root": 28001
+        }
+      ],
+      "pooled_accuracy": 0.5166015625
+    },
+    "G_cpu_reinvest": {
+      "correct": 504,
+      "macro_accuracy": 0.4921875,
+      "mean_cpu_seconds": 83.5234375,
+      "n": 1024,
+      "per_root": [
+        {
+          "accuracy": 0.5390625,
+          "correct": 276,
+          "cpu_seconds": 80.71875,
+          "n": 512,
+          "root": 28000
+        },
+        {
+          "accuracy": 0.4453125,
+          "correct": 228,
+          "cpu_seconds": 86.328125,
+          "n": 512,
+          "root": 28001
+        }
+      ],
+      "pooled_accuracy": 0.4921875
+    }
+  },
+  "contrasts": [
+    {
+      "baseline": "A_uniform",
+      "bootstrap_95": {
+        "approximate": true,
+        "confidence_level": 0.95,
+        "draws": 10000,
+        "familywise_adjusted": false,
+        "lower": -0.046875,
+        "method": "seeded_percentile_bootstrap_of_model_roots",
+        "scope": "descriptive development interval; small-root coverage is unestablished",
+        "seed": 20261126,
+        "upper": 0.0390625
+      },
+      "candidate": "D_mech_grad",
+      "corruption": 80,
+      "exceeds_5pp_floor": false,
+      "holm_adjusted_p": 1.0,
+      "holm_adjusted_p_fraction": "1",
+      "id": "D_mech_grad_minus_A_uniform_d31",
+      "macro_effect": -0.00390625,
+      "macro_effect_fraction": "-1/256",
+      "macro_effect_pp": -0.390625,
+      "net_recovery": -4,
+      "per_root": [
+        {
+          "corruption": 35,
+          "delta": 0.0390625,
+          "delta_fraction": "5/128",
+          "recovery": 55,
+          "root": 28000
+        },
+        {
+          "corruption": 45,
+          "delta": -0.046875,
+          "delta_fraction": "-3/64",
+          "recovery": 21,
+          "root": 28001
+        }
+      ],
+      "recovery": 76,
+      "role": "primary_fixed_update",
+      "sign_flip": {
+        "assumptions": "independent roots and joint null invariant to independently reversing each root effect",
+        "method": "exact_two_sided_root_sign_flip_mean",
+        "n_units": 2,
+        "n_zero_effect_units": 0,
+        "p_fraction": "1",
+        "p_value": 1.0,
+        "tail_assignments": 4,
+        "total_assignments": 4
+      }
+    },
+    {
+      "baseline": "B_loss_mined",
+      "bootstrap_95": {
+        "approximate": true,
+        "confidence_level": 0.95,
+        "draws": 10000,
+        "familywise_adjusted": false,
+        "lower": -0.05078125,
+        "method": "seeded_percentile_bootstrap_of_model_roots",
+        "scope": "descriptive development interval; small-root coverage is unestablished",
+        "seed": 20261126,
+        "upper": -0.029296875
+      },
+      "candidate": "D_mech_grad",
+      "corruption": 121,
+      "exceeds_5pp_floor": false,
+      "holm_adjusted_p": 1.0,
+      "holm_adjusted_p_fraction": "1",
+      "id": "D_mech_grad_minus_B_loss_mined_d31",
+      "macro_effect": -0.0400390625,
+      "macro_effect_fraction": "-41/1024",
+      "macro_effect_pp": -4.00390625,
+      "net_recovery": -41,
+      "per_root": [
+        {
+          "corruption": 53,
+          "delta": -0.029296875,
+          "delta_fraction": "-15/512",
+          "recovery": 38,
+          "root": 28000
+        },
+        {
+          "corruption": 68,
+          "delta": -0.05078125,
+          "delta_fraction": "-13/256",
+          "recovery": 42,
+          "root": 28001
+        }
+      ],
+      "recovery": 80,
+      "role": "vs_loss_mining",
+      "sign_flip": {
+        "assumptions": "independent roots and joint null invariant to independently reversing each root effect",
+        "method": "exact_two_sided_root_sign_flip_mean",
+        "n_units": 2,
+        "n_zero_effect_units": 0,
+        "p_fraction": "1/2",
+        "p_value": 0.5,
+        "tail_assignments": 2,
+        "total_assignments": 4
+      }
+    },
+    {
+      "baseline": "E_shuffled",
+      "bootstrap_95": {
+        "approximate": true,
+        "confidence_level": 0.95,
+        "draws": 10000,
+        "familywise_adjusted": false,
+        "lower": 0.0,
+        "method": "seeded_percentile_bootstrap_of_model_roots",
+        "scope": "descriptive development interval; small-root coverage is unestablished",
+        "seed": 20261126,
+        "upper": 0.0390625
+      },
+      "candidate": "D_mech_grad",
+      "corruption": 112,
+      "exceeds_5pp_floor": false,
+      "holm_adjusted_p": 1.0,
+      "holm_adjusted_p_fraction": "1",
+      "id": "D_mech_grad_minus_E_shuffled_d31",
+      "macro_effect": 0.01953125,
+      "macro_effect_fraction": "5/256",
+      "macro_effect_pp": 1.953125,
+      "net_recovery": 20,
+      "per_root": [
+        {
+          "corruption": 44,
+          "delta": 0.0390625,
+          "delta_fraction": "5/128",
+          "recovery": 64,
+          "root": 28000
+        },
+        {
+          "corruption": 68,
+          "delta": 0.0,
+          "delta_fraction": "0",
+          "recovery": 68,
+          "root": 28001
+        }
+      ],
+      "recovery": 132,
+      "role": "vs_shuffled_sham",
+      "sign_flip": {
+        "assumptions": "independent roots and joint null invariant to independently reversing each root effect",
+        "method": "exact_two_sided_root_sign_flip_mean",
+        "n_units": 2,
+        "n_zero_effect_units": 1,
+        "p_fraction": "1",
+        "p_value": 1.0,
+        "tail_assignments": 4,
+        "total_assignments": 4
+      }
+    },
+    {
+      "baseline": "G_cpu_reinvest",
+      "bootstrap_95": {
+        "approximate": true,
+        "confidence_level": 0.95,
+        "draws": 10000,
+        "familywise_adjusted": false,
+        "lower": -0.00390625,
+        "method": "seeded_percentile_bootstrap_of_model_roots",
+        "scope": "descriptive development interval; small-root coverage is unestablished",
+        "seed": 20261126,
+        "upper": 0.044921875
+      },
+      "candidate": "D_mech_grad",
+      "corruption": 168,
+      "exceeds_5pp_floor": false,
+      "holm_adjusted_p": 1.0,
+      "holm_adjusted_p_fraction": "1",
+      "id": "D_mech_grad_minus_G_cpu_reinvest_d31",
+      "macro_effect": 0.0205078125,
+      "macro_effect_fraction": "21/1024",
+      "macro_effect_pp": 2.05078125,
+      "net_recovery": 21,
+      "per_root": [
+        {
+          "corruption": 89,
+          "delta": 0.044921875,
+          "delta_fraction": "23/512",
+          "recovery": 112,
+          "root": 28000
+        },
+        {
+          "corruption": 79,
+          "delta": -0.00390625,
+          "delta_fraction": "-1/256",
+          "recovery": 77,
+          "root": 28001
+        }
+      ],
+      "recovery": 189,
+      "role": "primary_fixed_cpu",
+      "sign_flip": {
+        "assumptions": "independent roots and joint null invariant to independently reversing each root effect",
+        "method": "exact_two_sided_root_sign_flip_mean",
+        "n_units": 2,
+        "n_zero_effect_units": 0,
+        "p_fraction": "1",
+        "p_value": 1.0,
+        "tail_assignments": 4,
+        "total_assignments": 4
+      }
+    },
+    {
+      "baseline": "A_uniform",
+      "bootstrap_95": {
+        "approximate": true,
+        "confidence_level": 0.95,
+        "draws": 10000,
+        "familywise_adjusted": false,
+        "lower": 0.01171875,
+        "method": "seeded_percentile_bootstrap_of_model_roots",
+        "scope": "descriptive development interval; small-root coverage is unestablished",
+        "seed": 20261126,
+        "upper": 0.01171875
+      },
+      "candidate": "C_ord_grad",
+      "corruption": 89,
+      "exceeds_5pp_floor": false,
+      "holm_adjusted_p": 1.0,
+      "holm_adjusted_p_fraction": "1",
+      "id": "C_ord_grad_minus_A_uniform_d31",
+      "macro_effect": 0.01171875,
+      "macro_effect_fraction": "3/256",
+      "macro_effect_pp": 1.171875,
+      "net_recovery": 12,
+      "per_root": [
+        {
+          "corruption": 51,
+          "delta": 0.01171875,
+          "delta_fraction": "3/256",
+          "recovery": 57,
+          "root": 28000
+        },
+        {
+          "corruption": 38,
+          "delta": 0.01171875,
+          "delta_fraction": "3/256",
+          "recovery": 44,
+          "root": 28001
+        }
+      ],
+      "recovery": 101,
+      "role": "ordinary_grad_vs_uniform",
+      "sign_flip": {
+        "assumptions": "independent roots and joint null invariant to independently reversing each root effect",
+        "method": "exact_two_sided_root_sign_flip_mean",
+        "n_units": 2,
+        "n_zero_effect_units": 0,
+        "p_fraction": "1/2",
+        "p_value": 0.5,
+        "tail_assignments": 2,
+        "total_assignments": 4
+      }
+    }
+  ],
+  "evalmath_preflight": {
+    "approx_resolvable_effect": 0.12342178888347646,
+    "approx_worlds_for_80pct_power": 18,
+    "decision": "REDESIGN_OR_PILOT_ONLY",
+    "experiment_id": "BPD-TRM-CURATE-02-development",
+    "independent_unit": "independently initialized TRM model root with paired curation descendants",
+    "limits": "Normal-based power is planning only. A zero-effect zero-variance pilot cannot support extrapolating a hypothetical positive effect. Root and sham independence, symmetry, readout sealing, and the scientific effect floor require independent audits. Repeated outcomes within a root are never additional worlds.",
+    "mean_pilot_effect": -0.00390625,
+    "mechanistic_variation_floor": 0.05,
+    "minimum_exact_sign_test_roots": 7,
+    "observed_worst_sham": 0.046875,
+    "order_statistic_rank": null,
+    "pilot_world_sigma": 0.060766989008218926,
+    "pilot_worlds": 2,
+    "planned_comparisons": 5,
+    "planned_confirmation_worlds": 8,
+    "reasons": [
+      "heldout_unsealed",
+      "sham_quantile_uncalibrated",
+      "too_few_pilot_worlds",
+      "pilot_effect_not_above_mechanistic_variation_floor",
+      "confirmation_underpowered"
+    ],
+    "schema": "EvalMath/mechinterp-power-preflight/v1",
+    "target_effect": 0.1,
+    "upper_sham_quantile": null
+  },
+  "evidence_class": "DEVELOPMENT_ONLY",
+  "experiment": "BPD-TRM-CURATE-02",
+  "n_roots": 2,
+  "primary_delay": 31,
+  "roots": [
+    28000,
+    28001
+  ],
+  "schema_version": 1
+}

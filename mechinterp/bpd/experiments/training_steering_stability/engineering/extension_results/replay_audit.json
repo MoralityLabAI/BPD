@@ -1,0 +1,33 @@
+{
+  "artifact_hashes_match": true,
+  "checkpoints": [
+    {
+      "checkpoint": 3000,
+      "optimizer_step_counters_match": true,
+      "root": 27000,
+      "saved_model_and_diagnostics_replay": "PASS"
+    },
+    {
+      "checkpoint": 6000,
+      "optimizer_step_counters_match": true,
+      "root": 27000,
+      "saved_model_and_diagnostics_replay": "PASS"
+    },
+    {
+      "checkpoint": 3000,
+      "optimizer_step_counters_match": true,
+      "root": 27001,
+      "saved_model_and_diagnostics_replay": "PASS"
+    },
+    {
+      "checkpoint": 6000,
+      "optimizer_step_counters_match": true,
+      "root": 27001,
+      "saved_model_and_diagnostics_replay": "PASS"
+    }
+  ],
+  "diagnostic_prediction_bits_checked": 12288,
+  "selection_recomputed": true,
+  "source_hashes_match": true,
+  "verdict": "PASS"
+}

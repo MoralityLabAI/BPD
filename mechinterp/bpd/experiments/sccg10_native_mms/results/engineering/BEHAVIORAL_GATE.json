@@ -1,0 +1,13 @@
+{
+ "gate": "SCCG10 fresh behavioral selective-control admission",
+ "frozen_before": "reading results/engineering/root_29200/drift (completed on disk, not opened). Root 29201 drift was inspected before this freeze and is descriptive only.",
+ "evaluated_on": "root 29200, warmup checkpoint (committed update 0), 24-edge TRAIN-fit panel, delays (2,7,31)",
+ "family": "state_k8 (SCCG-01 budgeted direction on k=8 beam support, dose 0.75, collateral budget 0.25)",
+ "criteria": {
+  "G1_targeted_flips": "fraction of eligible edges (target not already the new value at d31) whose d31 slot prediction becomes the new value >= 0.25",
+  "G2_collateral": "corrupted unaffected answers / initially-correct unaffected answers (all delays) <= 0.02",
+  "G3_specificity": "G1 rate minus the rank- and dose-matched random-direction flip rate >= 0.10 (evaluated only if G1 and G2 pass; requires a separate matched-random run)"
+ },
+ "consequence": "PASS on all of G1-G3 reopens the causal auxiliary cross under a new written plan. Any failure keeps CURATE-02's SELECTIVE_CONTROL_ADMISSION_FAILED in force for SCCG-10.",
+ "privileged_diagnostics_not_gating": ["hybrid_natural", "hybrid_matched"]
+}

@@ -1,0 +1,99 @@
+{
+  "aggregate_statistics_match": true,
+  "causal_case_conditions_replayed": 12288,
+  "checks": 181773,
+  "current_source_check_skipped": false,
+  "experiment": "BPD-RP-02",
+  "generator_scope": "shared deterministic input generator with independent raw-input label and semantic-partition checks",
+  "maximum_scalar_comparison_error": 2.0528021837940003e-07,
+  "n_roots": 8,
+  "ordinary_case_conditions_replayed": 24576,
+  "prediction_bits_match": true,
+  "roots": [
+    {
+      "artifact_hashes_verified": 5,
+      "attribution_candidates_replayed": 8,
+      "causal_case_conditions_replayed": 1536,
+      "checkpoint_hashes_verified": 4,
+      "ordinary_case_conditions_replayed": 3072,
+      "root": 26101,
+      "training_rows_checked": 720,
+      "verdict": "PASS"
+    },
+    {
+      "artifact_hashes_verified": 5,
+      "attribution_candidates_replayed": 8,
+      "causal_case_conditions_replayed": 1536,
+      "checkpoint_hashes_verified": 4,
+      "ordinary_case_conditions_replayed": 3072,
+      "root": 26102,
+      "training_rows_checked": 720,
+      "verdict": "PASS"
+    },
+    {
+      "artifact_hashes_verified": 5,
+      "attribution_candidates_replayed": 8,
+      "causal_case_conditions_replayed": 1536,
+      "checkpoint_hashes_verified": 4,
+      "ordinary_case_conditions_replayed": 3072,
+      "root": 26103,
+      "training_rows_checked": 720,
+      "verdict": "PASS"
+    },
+    {
+      "artifact_hashes_verified": 5,
+      "attribution_candidates_replayed": 8,
+      "causal_case_conditions_replayed": 1536,
+      "checkpoint_hashes_verified": 4,
+      "ordinary_case_conditions_replayed": 3072,
+      "root": 26104,
+      "training_rows_checked": 720,
+      "verdict": "PASS"
+    },
+    {
+      "artifact_hashes_verified": 5,
+      "attribution_candidates_replayed": 8,
+      "causal_case_conditions_replayed": 1536,
+      "checkpoint_hashes_verified": 4,
+      "ordinary_case_conditions_replayed": 3072,
+      "root": 26105,
+      "training_rows_checked": 720,
+      "verdict": "PASS"
+    },
+    {
+      "artifact_hashes_verified": 5,
+      "attribution_candidates_replayed": 8,
+      "causal_case_conditions_replayed": 1536,
+      "checkpoint_hashes_verified": 4,
+      "ordinary_case_conditions_replayed": 3072,
+      "root": 26106,
+      "training_rows_checked": 720,
+      "verdict": "PASS"
+    },
+    {
+      "artifact_hashes_verified": 5,
+      "attribution_candidates_replayed": 8,
+      "causal_case_conditions_replayed": 1536,
+      "checkpoint_hashes_verified": 4,
+      "ordinary_case_conditions_replayed": 3072,
+      "root": 26107,
+      "training_rows_checked": 720,
+      "verdict": "PASS"
+    },
+    {
+      "artifact_hashes_verified": 5,
+      "attribution_candidates_replayed": 8,
+      "causal_case_conditions_replayed": 1536,
+      "checkpoint_hashes_verified": 4,
+      "ordinary_case_conditions_replayed": 3072,
+      "root": 26108,
+      "training_rows_checked": 720,
+      "verdict": "PASS"
+    }
+  ],
+  "scalar_tolerance": 1e-05,
+  "schema_version": 1,
+  "scope": "independent saved-checkpoint recurrence replay and training-receipt audit; optimizer trajectories are not replayed",
+  "source_hashes_checked": 15,
+  "verdict": "PASS"
+}

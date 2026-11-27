@@ -1,0 +1,200 @@
+{
+  "aggregate": "PASS",
+  "auditor_sha256": "b49de11fb60678f00579b8587c7460318c79ba5896624b7bb78ce19f47a4159e",
+  "independent_of_experiment_imports": true,
+  "new_roots_generated": 0,
+  "note": "CI outputs are checked against archived reached inputs and used gates; the CI transformer is not independently reimplemented.",
+  "roots": [
+    {
+      "artifact_hashes_verified": 7,
+      "calibration_max_pre_input_error": 0.0,
+      "calibration_rollouts_replayed": 496,
+      "gauge_max": 4.76837158203125e-07,
+      "headroom": 0,
+      "logical_calls_per_arm": 172,
+      "outcomes": {
+        "all_open_delta_one": {
+          "accuracy": 1.0,
+          "correct": 256,
+          "corruption": 0,
+          "net_repair": 0,
+          "recovery": 0
+        },
+        "beam": {
+          "accuracy": 1.0,
+          "correct": 256,
+          "corruption": 0,
+          "net_repair": 0,
+          "recovery": 0
+        },
+        "ci_permutation_unmatched": {
+          "accuracy": 1.0,
+          "correct": 256,
+          "corruption": 0,
+          "net_repair": 0,
+          "recovery": 0
+        },
+        "clean": {
+          "accuracy": 1.0,
+          "correct": 256,
+          "corruption": 0,
+          "net_repair": 0,
+          "recovery": 0
+        },
+        "fp_all_open": {
+          "accuracy": 1.0,
+          "correct": 256,
+          "corruption": 0,
+          "net_repair": 0,
+          "recovery": 0
+        },
+        "full_precision_bpd": {
+          "accuracy": 1.0,
+          "correct": 256,
+          "corruption": 0,
+          "net_repair": 0,
+          "recovery": 0
+        },
+        "gauge": {
+          "accuracy": 1.0,
+          "correct": 256,
+          "corruption": 0,
+          "net_repair": 0,
+          "recovery": 0
+        },
+        "greedy": {
+          "accuracy": 1.0,
+          "correct": 256,
+          "corruption": 0,
+          "net_repair": 0,
+          "recovery": 0
+        },
+        "multistart": {
+          "accuracy": 1.0,
+          "correct": 256,
+          "corruption": 0,
+          "net_repair": 0,
+          "recovery": 0
+        },
+        "quantized": {
+          "accuracy": 1.0,
+          "correct": 256,
+          "corruption": 0,
+          "net_repair": 0,
+          "recovery": 0
+        },
+        "quantized_all_open": {
+          "accuracy": 1.0,
+          "correct": 256,
+          "corruption": 0,
+          "net_repair": 0,
+          "recovery": 0
+        }
+      },
+      "parity_max": 9.5367431640625e-07,
+      "physical_calls": 496,
+      "reached_input_gap": 0.02974250167608261,
+      "result_sha256": "f62759272076f239abe796535360f1d62330aba784081a441288766cbe04d944",
+      "retentions_rebuilt": 44,
+      "root": 17000,
+      "selected_codes": {
+        "beam": [
+          0,
+          -2,
+          -2,
+          0
+        ],
+        "greedy": [
+          0,
+          -2,
+          -2,
+          0
+        ],
+        "multistart": [
+          0,
+          -2,
+          -2,
+          0
+        ]
+      },
+      "status": "PASS",
+      "terminal_replay_errors": {
+        "all_open_delta_one": {
+          "beta3": 1.1920928955078125e-07,
+          "intermediate_logits": 9.5367431640625e-07,
+          "logits": 4.76837158203125e-07,
+          "states": 2.5331974029541016e-07
+        },
+        "beam": {
+          "beta3": 0.0,
+          "intermediate_logits": 0.0,
+          "logits": 0.0,
+          "pre_input": 0.0,
+          "states": 0.0
+        },
+        "ci_permutation_unmatched": {
+          "beta3": 0.0,
+          "intermediate_logits": 0.0,
+          "logits": 0.0,
+          "pre_input": 0.0,
+          "states": 0.0
+        },
+        "clean": {
+          "beta3": 0.0,
+          "intermediate_logits": 0.0,
+          "logits": 0.0,
+          "states": 0.0
+        },
+        "fp_all_open": {
+          "beta3": 0.0,
+          "intermediate_logits": 0.0,
+          "logits": 0.0,
+          "states": 0.0
+        },
+        "full_precision_bpd": {
+          "beta3": 0.0,
+          "intermediate_logits": 0.0,
+          "logits": 0.0,
+          "pre_input": 0.0,
+          "states": 0.0
+        },
+        "gauge": {
+          "beta3": 0.0,
+          "intermediate_logits": 0.0,
+          "logits": 0.0,
+          "pre_input": 0.0,
+          "states": 0.0
+        },
+        "greedy": {
+          "beta3": 0.0,
+          "intermediate_logits": 0.0,
+          "logits": 0.0,
+          "pre_input": 0.0,
+          "states": 0.0
+        },
+        "multistart": {
+          "beta3": 0.0,
+          "intermediate_logits": 0.0,
+          "logits": 0.0,
+          "pre_input": 0.0,
+          "states": 0.0
+        },
+        "quantized": {
+          "beta3": 0.0,
+          "intermediate_logits": 0.0,
+          "logits": 0.0,
+          "pre_input": 0.0,
+          "states": 0.0
+        },
+        "quantized_all_open": {
+          "beta3": 0.0,
+          "intermediate_logits": 0.0,
+          "logits": 0.0,
+          "states": 0.0
+        }
+      },
+      "terminal_rollouts_replayed": 11
+    }
+  ],
+  "status": "PASS"
+}

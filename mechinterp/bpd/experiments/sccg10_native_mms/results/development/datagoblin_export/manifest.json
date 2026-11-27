@@ -1,0 +1,20 @@
+{
+ "candidate_rows": 70410,
+ "compression": "candidate_decisions and mechanism_admissions stored as gzip -9 -n JSONL",
+ "excluded": [
+  "train/tune",
+  "eval (final development)",
+  "ARG-03-N and reserved cohorts"
+ ],
+ "files": {
+  "candidate_decisions.jsonl.gz": "7f3eb82fd97f7f8c31b8052e930c3645ebf9af5802fa6c9977b5133bc2659fec",
+  "mechanism_admissions.jsonl.gz": "481e98dbc06332be8a3f19185a7a569529c0f86ce881a19b7e3244cee41cce89",
+  "resource_ledger.json": "907841149fee89795d05a1ab3da84c9abfab1e28f1187c4d8f2d0743a4e191c6"
+ },
+ "mechanism_rows": 22200,
+ "note": "Rows are TRAIN training/scoring decisions from development runs; they carry no final-development outcomes.",
+ "splits_read": [
+  "train/fit",
+  "train/feedback"
+ ]
+}

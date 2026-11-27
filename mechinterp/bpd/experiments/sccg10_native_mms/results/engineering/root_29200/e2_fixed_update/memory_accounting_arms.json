@@ -1,0 +1,13 @@
+{
+ "cap_bytes": 6442450944,
+ "current_tree_rss_bytes": 423305216,
+ "enforced": true,
+ "enforcement_mechanism": "windows_job_object",
+ "host_available_bytes_min": 13804896256,
+ "peak_job_commit_bytes": 1708474368,
+ "peak_tree_rss_bytes": 423305216,
+ "platform": "Windows 11",
+ "process_cpu_seconds": 1683.171875,
+ "semantics": "Win32 Job Object hard commit-memory cap (JOB_OBJECT_LIMIT_JOB_MEMORY) across current process and all descendants, paired with psutil tree RSS and host available-RAM monitoring",
+ "wall_seconds": 1387.7557938999962
+}

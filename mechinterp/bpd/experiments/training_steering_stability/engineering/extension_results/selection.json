@@ -1,0 +1,76 @@
+{
+  "address_binding_floor": 0.75,
+  "candidate_checks": {
+    "3000": {
+      "pass": false,
+      "rows": [
+        {
+          "address_binding_accuracy": 0.794921875,
+          "delay": 2,
+          "ordinary_accuracy": 0.791015625,
+          "pass": false,
+          "root": 27000
+        },
+        {
+          "address_binding_accuracy": 0.666015625,
+          "delay": 7,
+          "ordinary_accuracy": 0.7265625,
+          "pass": false,
+          "root": 27000
+        },
+        {
+          "address_binding_accuracy": 0.796875,
+          "delay": 2,
+          "ordinary_accuracy": 0.890625,
+          "pass": true,
+          "root": 27001
+        },
+        {
+          "address_binding_accuracy": 0.7578125,
+          "delay": 7,
+          "ordinary_accuracy": 0.869140625,
+          "pass": true,
+          "root": 27001
+        }
+      ]
+    },
+    "6000": {
+      "pass": true,
+      "rows": [
+        {
+          "address_binding_accuracy": 1.0,
+          "delay": 2,
+          "ordinary_accuracy": 1.0,
+          "pass": true,
+          "root": 27000
+        },
+        {
+          "address_binding_accuracy": 1.0,
+          "delay": 7,
+          "ordinary_accuracy": 0.99609375,
+          "pass": true,
+          "root": 27000
+        },
+        {
+          "address_binding_accuracy": 1.0,
+          "delay": 2,
+          "ordinary_accuracy": 1.0,
+          "pass": true,
+          "root": 27001
+        },
+        {
+          "address_binding_accuracy": 0.99609375,
+          "delay": 7,
+          "ordinary_accuracy": 0.99609375,
+          "pass": true,
+          "root": 27001
+        }
+      ]
+    }
+  },
+  "ordinary_floor": 0.8,
+  "selected_total_updates": 6000,
+  "selection_exposure": "Two engineering roots exposed before this extension; thresholds fixed in EXTENSION_PLAN.md",
+  "verdict": "ENGINEERING_COMPETENCE_GATE_PASSED",
+  "weak_competence": false
+}

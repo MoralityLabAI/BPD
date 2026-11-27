@@ -1,0 +1,34 @@
+{
+  "alpha": "0.05",
+  "confirm_units_planned": 8,
+  "experiment_id": "BPD-RP-02-training-steering-development",
+  "heldout_sealed": true,
+  "independent_unit": "paired trained model root with its input encoding and common warmup",
+  "measurement_resolution": "1/512",
+  "pilot": [
+    {
+      "paired_effect": "4/512",
+      "sham_effects": [
+        "5/512"
+      ],
+      "unit_id": "26000"
+    },
+    {
+      "paired_effect": "-3/512",
+      "sham_effects": [
+        "-3/512"
+      ],
+      "unit_id": "26001"
+    }
+  ],
+  "pilot_from_development_only": true,
+  "planned_comparisons": 2,
+  "planning_scope": "Eight fresh development roots; confirmation is outside this protocol",
+  "schema_version": 1,
+  "scientific_min_effect": "0.05",
+  "sham_confidence": "0.95",
+  "sham_quantile": "0.95",
+  "sham_scope": "Fixed signed-permutation physical write rotation; same raw L2, auxiliary/task gradient ratio matched before AdamW. Population sham tail uncalibrated at small n.",
+  "target_effect": "0.10",
+  "units_independent": true
+}

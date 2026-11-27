@@ -1,0 +1,262 @@
+{
+ "analysis_tool_hashes_at_freeze": {
+  "mechinterp/bpd/experiments/sccg10_native_mms/DEV_PROTOCOL.md": "509390d8537469855597ed72d30f86ac01d8f26b86cb35d2aa9250771205c52a",
+  "mechinterp/bpd/experiments/sccg10_native_mms/analyze.py": "0678df3ed4d83509ed76a8f4e33c27960c4117252934f7bc310670349e544e8d",
+  "mechinterp/bpd/experiments/sccg10_native_mms/export_datagoblin.py": "dcdd6a2d993e54234201c0acf658f49e8bdceeed98988277c2e5898abf1b1841",
+  "mechinterp/bpd/experiments/sccg10_native_mms/freeze.py": "7783ca6ac3f5dbd00ec1d1fd2f68fe5bec05ea41b232d180a3e3d0142b797a55"
+ },
+ "arm_configs": {
+  "fixed_cpu": {
+   "arms": {
+    "A": "G",
+    "B": "B",
+    "C": "C",
+    "D": "D",
+    "E": "E",
+    "F": "F",
+    "U": "A"
+   },
+   "cpu_cap": 100.0,
+   "defaults": {
+    "atlas_mib": 16.0,
+    "block": 8,
+    "cache_mib": 16.0,
+    "explore_every": 5
+   },
+   "mode": "fixed_cpu"
+  },
+  "fixed_update": {
+   "arms": {
+    "A": "G",
+    "B": "B",
+    "C": "C",
+    "D": "D",
+    "E": "E",
+    "F": "F",
+    "U": "A"
+   },
+   "defaults": {
+    "atlas_mib": 16.0,
+    "block": 8,
+    "cache_mib": 16.0,
+    "explore_every": 5
+   },
+   "mode": "fixed_update",
+   "n_windows": 80,
+   "safety_cpu": 900.0
+  }
+ },
+ "arm_roles": {
+  "A": "strongest ordinary training with full reinvestment, selected on engineering TRAIN tune: guarded ordinary = uniform proposals + transactional acceptance on ordinary TRAIN-feedback CE (trainer kind ordinary_guarded)",
+  "B": "ordinary TRAIN-feedback gradient curation, analytic AdamW previews, transactional acceptance, rate controller",
+  "C": "fresh mechanism (observation + k=8 beam support search) at every curated window, exact same-checkpoint memoization only",
+  "D": "MMS atlas (16 MiB) + exact-mode admission ladder (L1 screen, L2 not applicable, L3 support re-solve audit, L4 native verification, L5 refresh), rate controller",
+  "E": "D with mechanism directions deranged across feedback edges of different slots; same atlas, ladder, verification, controller",
+  "F": "D's mechanism maintenance and scoring work, uniform decisions, always commit",
+  "U": "uniform ordinary training, full reinvestment (reported, not primary)"
+ },
+ "behavioral_gate": "FAIL on root 29200 (results/engineering/BEHAVIORAL_GATE_RESULT.json): causal auxiliary cross closed",
+ "custody": {
+  "historical_roots_replay_only": [
+   28000,
+   28001,
+   28101,
+   28102,
+   28103,
+   28104,
+   28105,
+   28106,
+   28107,
+   28108
+  ],
+  "never": [
+   "TRAIN tune view for development decisions",
+   "ARG-03-N",
+   "any reserved cohort"
+  ],
+  "reads": [
+   "TRAIN fit/feedback views (training, scoring, acceptance)",
+   "historical EVAL tuple partition with fresh SCCG10 seeds (final development only)"
+  ]
+ },
+ "development_roots": [
+  29301,
+  29302,
+  29303,
+  29304,
+  29305,
+  29306,
+  29307,
+  29308
+ ],
+ "engineering_basis": {
+  "behavioral_gate": "FAIL (root 29200: 1/22 targeted flips)",
+  "choices": {
+   "A_role": "guarded ordinary (mean 0.616 vs uniform 0.523, B 0.583)",
+   "atlas_mib": "16 (peak occupancy 291 KB; tiers 4/16/64/256 identical, tier 0 = 13 vs 41 windows)",
+   "controller": "rate (B: +3.8/+2.1 pp over always-curated; D mixed)",
+   "cpu_cap": "100 CPU-s (planning value retained)",
+   "fixed_update_windows": "80 (CURATE-02), safety stop 900 CPU-s",
+   "ladder": "exact mode, planning thresholds unchanged (gain ratio 0.7, protection slack 0.25, rel. displacement 0.05, age 64)",
+   "refresh_cap": "unlimited (cap 3 lower on both roots)"
+  },
+  "fixed_cpu_100s_d31": {
+   "B": [
+    0.6484,
+    0.5174
+   ],
+   "B_always": [
+    0.6102,
+    0.4957
+   ],
+   "C": [
+    0.5938,
+    0.4922
+   ],
+   "D": [
+    0.6311,
+    0.4922
+   ],
+   "D_always": [
+    0.5877,
+    0.5148
+   ],
+   "D_refresh_cap3": [
+    0.546,
+    0.5156
+   ],
+   "E": [
+    0.5443,
+    0.5148
+   ],
+   "E_refresh_cap3": [
+    0.5469,
+    0.4861
+   ],
+   "F": [
+    0.572,
+    0.4601
+   ],
+   "guarded_ordinary": [
+    0.6424,
+    0.5894
+   ],
+   "uniform": [
+    0.5547,
+    0.4913
+   ]
+  },
+  "metric": "TRAIN tune view d31 accuracy (1152 sequences per root)",
+  "note": "Fixed-CPU policies are timing dependent on a shared host; the same D configuration gave 0.631 and 0.601 on root 29200 in two interleaved runs. E2 fixed-update engineering runs completed after this freeze and inform no frozen value.",
+  "roots": [
+   29200,
+   29201
+  ],
+  "warmup_tune_d31": [
+   0.6241,
+   0.5113
+  ]
+ },
+ "evidence_class": "DEVELOPMENT_ONLY",
+ "hash_normalization": "sha256 of file bytes with CRLF replaced by LF",
+ "output_dir": "mechinterp/bpd/experiments/sccg10_native_mms/results/development",
+ "primary_endpoint": "ordinary steering-disabled final-development delay-31 accuracy (512 cases/root), D minus A at fixed total CPU, paired by independent model root",
+ "recipe": {
+  "binding_n": 256,
+  "collateral_budget": 0.25,
+  "components": 29,
+  "curation_learning_rate": 0.001,
+  "dose": 0.75,
+  "eval_delays": [
+   2,
+   7,
+   31,
+   63,
+   127
+  ],
+  "eval_n": 512,
+  "exploration": 0.2,
+  "feedback_batch_edges": 12,
+  "feedback_delay": 15,
+  "gradient_clip": 1.0,
+  "learning_rate": 0.003,
+  "low_cycles": 1,
+  "noise": 0.03,
+  "pair_exposure_cap": 4,
+  "panel_delays": [
+   2,
+   7,
+   31
+  ],
+  "panel_edges": 24,
+  "primary_delay": 31,
+  "proposals_per_window": 16,
+  "selected_per_window": 4,
+  "slots": 4,
+  "split_seed": 20261127,
+  "support_beam": 4,
+  "support_k": 8,
+  "threads": 2,
+  "train_delays": [
+   1,
+   2,
+   3
+  ],
+  "tune_eval_edges": 144,
+  "values": 4,
+  "w_ordinary": 1.0,
+  "w_preserve": 0.5,
+  "w_target": 0.5,
+  "warmup_batch_edges": 12,
+  "warmup_updates": 6000,
+  "weight_decay": 0.0001,
+  "width": 32
+ },
+ "schema": "SCCG10-MMS-TRM/dev-freeze/v1",
+ "source_hashes": {
+  "mechinterp/bpd/__init__.py": "80949cdc96b90698b679815776f3da8de73c304dd20fd422adbdeeaffb0ce40a",
+  "mechinterp/bpd/components.py": "388cb539cccb87ae65d56e5fbae175d6aee138df24d1bab43cde755156b748a5",
+  "mechinterp/bpd/config.py": "d5773cdac66f55b8a8c152030d679324f0270954dd3a081176a454d5dc6f1621",
+  "mechinterp/bpd/experiments/repair_portfolio/evidence/preflight.py": "c2621a7900930f81ed53799ce439ee1c8f2d7006918a04ef57b5381630d15494",
+  "mechinterp/bpd/experiments/sccg10_native_mms/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "mechinterp/bpd/experiments/sccg10_native_mms/admission.py": "e807271514e4b4afca5ab1d146e9f7b606ea31bc0653c7bb9c8bdbccf25d0041",
+  "mechinterp/bpd/experiments/sccg10_native_mms/atlas.py": "91017882bbff4b12cefc93ed4ae0caa3e38b0dbdd7355ffb8a690488a6f34d26",
+  "mechinterp/bpd/experiments/sccg10_native_mms/common.py": "eecff98076d419282f4583fe00f1571c655122d8248f4e08338f12dd8e036fb5",
+  "mechinterp/bpd/experiments/sccg10_native_mms/devrun.py": "1d1424331aa02ebb85e5f87ed79d98ffb948ea7f134246c83f598869bec3707b",
+  "mechinterp/bpd/experiments/sccg10_native_mms/economics.py": "ffdce17065329d241068cacff20d93403c4533aa197bf31b8c6fdea044f328ac",
+  "mechinterp/bpd/experiments/sccg10_native_mms/ladder.py": "933e8863fa37fe71b27cbeaba8bff4ac4ef077f9c0b8a7c14cbf945ae270f943",
+  "mechinterp/bpd/experiments/sccg10_native_mms/mechanism.py": "8bfc4892f2481c497bffd03b6d14b8eb53bc823762dc25efc73054dceeae962a",
+  "mechinterp/bpd/experiments/sccg10_native_mms/native.py": "e53171fa1fd46b1797903a194cc9d54dae6d9426c24a5536c1c4a16ba3c20c66",
+  "mechinterp/bpd/experiments/sccg10_native_mms/replay.py": "7668c9fc97043094d336dc021efb4e65981cad49999548c12211e08a80e2ef8a",
+  "mechinterp/bpd/experiments/sccg10_native_mms/support.py": "94b2d32f03c8257cd1580a3f9d4618a924725bcb840997d8e8a8807e26d2408e",
+  "mechinterp/bpd/experiments/sccg10_native_mms/trainer.py": "4a73b77ef8e841b585413b843fd70788d66bdc9be6086ddd3b64ba930933c6c4",
+  "mechinterp/bpd/experiments/training_steering/data.py": "cc5e855b8fde4f672d6051669a88fa32a84d77d5e4afe200c88c431f65330318",
+  "mechinterp/bpd/experiments/training_steering_stability/data.py": "4402148bea3a856864e233951b9586fa2d7e96a34fb6afbc9a9041e977477930",
+  "mechinterp/bpd/experiments/training_steering_stability/stats.py": "4f0a10e48790395cef3252cf7e4f11b87a4af5f4dc888ef8f072a79c730dc678",
+  "mechinterp/bpd/experiments/trm_curation/__init__.py": "b35056b41812d599f0e7a7ec0ff6349b7f4efa98be8bfefa68b461c0a9b94a21",
+  "mechinterp/bpd/experiments/trm_curation/cache.py": "48c74cadbedc6abeb037f9ce5c24c22a623e68668cd92bb864567599395d8af9",
+  "mechinterp/bpd/experiments/trm_curation/data.py": "794a19b505317a6b97e9df2636c0d1188343d6aa2f7646c7423e9b55ea9a0954",
+  "mechinterp/bpd/experiments/trm_curation/memory_cap.py": "7c176d56b42b82d7f0a6a8b0b14154b524581c105bcb9a5e99daff334d052ebc",
+  "mechinterp/bpd/experiments/trm_curation/model.py": "c001ffc270f6b585d6ceaf2d65f3b90b76ed6f2992585c6ab85df8f251dc850e",
+  "mechinterp/bpd/experiments/trm_curation/observer.py": "62ff37375e9122eb3db9d08386d01ee5755f34a0a948e056e5037ac5ca5b4e42",
+  "mechinterp/bpd/experiments/trm_curation/reference.py": "58440d66445528404999770c20adef3a573d2ae673c64fbd56885ea02396a983",
+  "mechinterp/bpd/experiments/trm_curation/scheduler.py": "76f033faaa2c81d3b40ec41dc0b478ed33be7dd6dc345d5356b63c869cedb652",
+  "mechinterp/bpd/experiments/trm_curation/signal_bank.py": "bba394838a1a97dd08231874298233ffc99252c3b4116e0b63e085f92c453267",
+  "mechinterp/bpd/experiments/trm_curation/transaction.py": "6f8a472b898e989c37bb4702c797af38bdeff6b162e7adf27ecdd4f3665857eb"
+ },
+ "source_lock_sha256": "0c4426bd935d99b97648f3c8fc0bebb66ab6b2ea9c1b209bb8a5d5df21fbf012",
+ "statistics": {
+  "alpha": 0.05,
+  "bootstrap": "20000 seeded root resamples, descriptive",
+  "family": [
+   "D-A",
+   "D-C",
+   "D-B",
+   "D-E"
+  ],
+  "practical_floor": 0.05,
+  "sham_arm": "E",
+  "test": "exact two-sided root sign-flip on per-root d31 correct-count differences / 512, Holm over the family"
+ },
+ "stop_rules": "Report every root including failures; no reselection of primary; no promotion."
+}

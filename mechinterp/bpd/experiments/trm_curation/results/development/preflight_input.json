@@ -1,0 +1,74 @@
+{
+  "alpha": "0.05",
+  "confirm_units_planned": 8,
+  "experiment_id": "BPD-TRM-CURATE-02-development",
+  "heldout_sealed": false,
+  "independent_unit": "independently initialized TRM model root with paired curation descendants",
+  "measurement_resolution": "1/512",
+  "pilot": [
+    {
+      "paired_effect": "32/512",
+      "sham_effects": [
+        "-19/512"
+      ],
+      "unit_id": "28101"
+    },
+    {
+      "paired_effect": "-25/512",
+      "sham_effects": [
+        "5/512"
+      ],
+      "unit_id": "28102"
+    },
+    {
+      "paired_effect": "67/512",
+      "sham_effects": [
+        "-8/512"
+      ],
+      "unit_id": "28103"
+    },
+    {
+      "paired_effect": "0/512",
+      "sham_effects": [
+        "-12/512"
+      ],
+      "unit_id": "28104"
+    },
+    {
+      "paired_effect": "11/512",
+      "sham_effects": [
+        "30/512"
+      ],
+      "unit_id": "28105"
+    },
+    {
+      "paired_effect": "2/512",
+      "sham_effects": [
+        "15/512"
+      ],
+      "unit_id": "28106"
+    },
+    {
+      "paired_effect": "2/512",
+      "sham_effects": [
+        "2/512"
+      ],
+      "unit_id": "28107"
+    },
+    {
+      "paired_effect": "3/512",
+      "sham_effects": [
+        "2/512"
+      ],
+      "unit_id": "28108"
+    }
+  ],
+  "pilot_from_development_only": true,
+  "planned_comparisons": 5,
+  "schema_version": 1,
+  "scientific_min_effect": "0.05",
+  "sham_confidence": "0.95",
+  "sham_quantile": "0.95",
+  "target_effect": "0.10",
+  "units_independent": true
+}

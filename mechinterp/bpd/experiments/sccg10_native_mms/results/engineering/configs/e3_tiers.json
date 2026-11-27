@@ -1,0 +1,5 @@
+{"mode": "fixed_cpu", "cpu_cap": 100.0, "eval": "tune",
+ "defaults": {"block": 8, "explore_every": 5, "cache_mib": 16.0},
+ "arms": {"D_mms0": {"kind": "D", "atlas_mib": 0.0}, "D_mms4": {"kind": "D", "atlas_mib": 4.0},
+          "D_mms16": {"kind": "D", "atlas_mib": 16.0}, "D_mms64": {"kind": "D", "atlas_mib": 64.0},
+          "D_mms256": {"kind": "D", "atlas_mib": 256.0}}}

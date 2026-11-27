@@ -1,0 +1,78 @@
+{
+  "alpha": "0.05",
+  "confirm_units_planned": 8,
+  "experiment_id": "BPD-RP-03-redesign-planning-from-exposed-RP02",
+  "heldout_sealed": true,
+  "independent_unit": "paired trained model root with its input encoding and common warmup",
+  "measurement_resolution": "1/512",
+  "pilot": [
+    {
+      "paired_effect": "-3/512",
+      "sham_effects": [
+        "-1/512"
+      ],
+      "unit_id": "26101"
+    },
+    {
+      "paired_effect": "2/512",
+      "sham_effects": [
+        "4/512"
+      ],
+      "unit_id": "26102"
+    },
+    {
+      "paired_effect": "3/512",
+      "sham_effects": [
+        "2/512"
+      ],
+      "unit_id": "26103"
+    },
+    {
+      "paired_effect": "-1/512",
+      "sham_effects": [
+        "-3/512"
+      ],
+      "unit_id": "26104"
+    },
+    {
+      "paired_effect": "4/512",
+      "sham_effects": [
+        "3/512"
+      ],
+      "unit_id": "26105"
+    },
+    {
+      "paired_effect": "-13/512",
+      "sham_effects": [
+        "-12/512"
+      ],
+      "unit_id": "26106"
+    },
+    {
+      "paired_effect": "7/512",
+      "sham_effects": [
+        "6/512"
+      ],
+      "unit_id": "26107"
+    },
+    {
+      "paired_effect": "2/512",
+      "sham_effects": [
+        "0/512"
+      ],
+      "unit_id": "26108"
+    }
+  ],
+  "pilot_from_development_only": true,
+  "planned_comparisons": 2,
+  "planning_scope": "RP02 exposed development evidence motivates a bounded new engineering redesign. RP03 recipe and fresh development roster must be frozen before its scored run; this input is not RP03 evidence.",
+  "schema_version": 1,
+  "scientific_min_effect": "0.05",
+  "sham_confidence": "0.95",
+  "sham_quantile": "0.95",
+  "sham_scope": "Fixed signed-permutation physical write rotation; same raw L2, auxiliary/task gradient ratio matched before AdamW. Population sham tail uncalibrated at small n.",
+  "source_commit": "0f1a9e2068df361225b3c7864c81755133a44e39",
+  "source_experiment": "BPD-RP-02",
+  "target_effect": "0.10",
+  "units_independent": true
+}

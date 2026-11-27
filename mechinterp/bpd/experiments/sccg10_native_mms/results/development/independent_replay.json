@@ -1,0 +1,122 @@
+{
+ "cases": 372736,
+ "checks": 2960,
+ "dirs": [
+  {
+   "cases": 23296,
+   "checks": 185,
+   "dir": "mechinterp/bpd/experiments/sccg10_native_mms/results/development/root_29301/fixed_cpu",
+   "max_ce_error": 0.0,
+   "verdict": "PASS"
+  },
+  {
+   "cases": 23296,
+   "checks": 185,
+   "dir": "mechinterp/bpd/experiments/sccg10_native_mms/results/development/root_29301/fixed_update",
+   "max_ce_error": 0.0,
+   "verdict": "PASS"
+  },
+  {
+   "cases": 23296,
+   "checks": 185,
+   "dir": "mechinterp/bpd/experiments/sccg10_native_mms/results/development/root_29302/fixed_cpu",
+   "max_ce_error": 0.0,
+   "verdict": "PASS"
+  },
+  {
+   "cases": 23296,
+   "checks": 185,
+   "dir": "mechinterp/bpd/experiments/sccg10_native_mms/results/development/root_29302/fixed_update",
+   "max_ce_error": 0.0,
+   "verdict": "PASS"
+  },
+  {
+   "cases": 23296,
+   "checks": 185,
+   "dir": "mechinterp/bpd/experiments/sccg10_native_mms/results/development/root_29303/fixed_cpu",
+   "max_ce_error": 0.0,
+   "verdict": "PASS"
+  },
+  {
+   "cases": 23296,
+   "checks": 185,
+   "dir": "mechinterp/bpd/experiments/sccg10_native_mms/results/development/root_29303/fixed_update",
+   "max_ce_error": 0.0,
+   "verdict": "PASS"
+  },
+  {
+   "cases": 23296,
+   "checks": 185,
+   "dir": "mechinterp/bpd/experiments/sccg10_native_mms/results/development/root_29304/fixed_cpu",
+   "max_ce_error": 0.0,
+   "verdict": "PASS"
+  },
+  {
+   "cases": 23296,
+   "checks": 185,
+   "dir": "mechinterp/bpd/experiments/sccg10_native_mms/results/development/root_29304/fixed_update",
+   "max_ce_error": 0.0,
+   "verdict": "PASS"
+  },
+  {
+   "cases": 23296,
+   "checks": 185,
+   "dir": "mechinterp/bpd/experiments/sccg10_native_mms/results/development/root_29305/fixed_cpu",
+   "max_ce_error": 0.0,
+   "verdict": "PASS"
+  },
+  {
+   "cases": 23296,
+   "checks": 185,
+   "dir": "mechinterp/bpd/experiments/sccg10_native_mms/results/development/root_29305/fixed_update",
+   "max_ce_error": 0.0,
+   "verdict": "PASS"
+  },
+  {
+   "cases": 23296,
+   "checks": 185,
+   "dir": "mechinterp/bpd/experiments/sccg10_native_mms/results/development/root_29306/fixed_cpu",
+   "max_ce_error": 0.0,
+   "verdict": "PASS"
+  },
+  {
+   "cases": 23296,
+   "checks": 185,
+   "dir": "mechinterp/bpd/experiments/sccg10_native_mms/results/development/root_29306/fixed_update",
+   "max_ce_error": 0.0,
+   "verdict": "PASS"
+  },
+  {
+   "cases": 23296,
+   "checks": 185,
+   "dir": "mechinterp/bpd/experiments/sccg10_native_mms/results/development/root_29307/fixed_cpu",
+   "max_ce_error": 0.0,
+   "verdict": "PASS"
+  },
+  {
+   "cases": 23296,
+   "checks": 185,
+   "dir": "mechinterp/bpd/experiments/sccg10_native_mms/results/development/root_29307/fixed_update",
+   "max_ce_error": 0.0,
+   "verdict": "PASS"
+  },
+  {
+   "cases": 23296,
+   "checks": 185,
+   "dir": "mechinterp/bpd/experiments/sccg10_native_mms/results/development/root_29308/fixed_cpu",
+   "max_ce_error": 0.0,
+   "verdict": "PASS"
+  },
+  {
+   "cases": 23296,
+   "checks": 185,
+   "dir": "mechinterp/bpd/experiments/sccg10_native_mms/results/development/root_29308/fixed_update",
+   "max_ce_error": 0.0,
+   "verdict": "PASS"
+  }
+ ],
+ "independence": "manual recurrence from raw tensors; no import of model.py, native.py or trainer.py",
+ "max_ce_error": 0.0,
+ "schema": "SCCG10-replay/v1",
+ "verdict": "PASS"
+}
