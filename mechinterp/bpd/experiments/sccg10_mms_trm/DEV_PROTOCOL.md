@@ -20,6 +20,9 @@ differ from the lock (`economics.py --source-lock`).
   exposed, not sealed. No ARG-03-N or other protected cohort is read.
 
 ## Arms and budgets (frozen from engineering)
+Candidate previews use the batched analytic AdamW preview (`--preview-mode batched`),
+chosen on engineering because it reproduced transactional selections exactly at
+2.2–3.0× lower CPU.
 A_ordinary, B_ord_grad, C_mech_fresh, C_probe (fixed-update only, exact replay
 of C), D_atlas, E_shuffled, F_obs_only. Fixed-update: 80 windows. Fixed-CPU:
 100 process CPU-seconds per arm after warmup, charging the mechanistic setup
