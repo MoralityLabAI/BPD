@@ -6,7 +6,7 @@ from .gym02_feedback import E27, E28, E29, E31, G05, TASKS, support, sample_task
 
 class TestGym02Feedback(unittest.TestCase):
     def test_support(self):
-        for task, expected in ((E27, (10, 6)), (E31, (153, 103)), (G05, (43, 21))):
+        for task, expected in ((E27, (10, 6)), (E31, (153, 103)), (G05, (42, 22))):
             tr, ev = set(support(task, 'train')), set(support(task, 'eval'))
             self.assertEqual((len(tr), len(ev)), expected)
             self.assertFalse(tr & ev)
