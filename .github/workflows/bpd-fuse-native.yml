@@ -28,11 +28,21 @@ jobs:
           python -m pip install --disable-pip-version-check numpy==2.3.5 pytest==8.4.2
       - name: Native trainer parity gate
         run: python -m mechinterp.bpd.experiments.fused_residual.validate_fuse06_native --output "$RUNNER_TEMP/fuse06_native.json"
+      - name: Check exact admission oracle
+        run: python -m mechinterp.bpd.experiments.fused_residual.validate_fuse07 --output "$RUNNER_TEMP/fuse07_oracle.json"
+      - name: Replay pinned INK06 source receipt
+        run: |
+          python -m mechinterp.bpd.experiments.inkling_component_flow.run_source_audit \
+            --check mechinterp/bpd/experiments/inkling_component_flow/evidence/source_fixture.json \
+            --out "$RUNNER_TEMP/ink06_source_replay.json"
       - name: Retain native gate receipt
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: fuse06-native-trainer
-          path: ${{ runner.temp }}/fuse06_native.json
+          path: |
+            ${{ runner.temp }}/fuse06_native.json
+            ${{ runner.temp }}/fuse07_oracle.json
+            ${{ runner.temp }}/ink06_source_replay.json
           if-no-files-found: warn
           retention-days: 90
