@@ -1,0 +1,59 @@
+{
+ "cases": 141696,
+ "checks": 479,
+ "dirs": [
+  {
+   "cases": 27648,
+   "checks": 92,
+   "dir": "mechinterp/bpd/experiments/sccg10_native_mms/results/engineering/root_29200/e1_fixed_cpu",
+   "max_ce_error": 0.0,
+   "verdict": "PASS"
+  },
+  {
+   "cases": 24192,
+   "checks": 81,
+   "dir": "mechinterp/bpd/experiments/sccg10_native_mms/results/engineering/root_29200/e2_fixed_update",
+   "max_ce_error": 0.0,
+   "verdict": "PASS"
+  },
+  {
+   "cases": 17280,
+   "checks": 59,
+   "dir": "mechinterp/bpd/experiments/sccg10_native_mms/results/engineering/root_29200/e3_tiers",
+   "max_ce_error": 0.0,
+   "verdict": "PASS"
+  },
+  {
+   "cases": 10368,
+   "checks": 37,
+   "dir": "mechinterp/bpd/experiments/sccg10_native_mms/results/engineering/root_29200/e4_variants",
+   "max_ce_error": 0.0,
+   "verdict": "PASS"
+  },
+  {
+   "cases": 27648,
+   "checks": 92,
+   "dir": "mechinterp/bpd/experiments/sccg10_native_mms/results/engineering/root_29201/e1_fixed_cpu",
+   "max_ce_error": 0.0,
+   "verdict": "PASS"
+  },
+  {
+   "cases": 24192,
+   "checks": 81,
+   "dir": "mechinterp/bpd/experiments/sccg10_native_mms/results/engineering/root_29201/e2_fixed_update",
+   "max_ce_error": 0.0,
+   "verdict": "PASS"
+  },
+  {
+   "cases": 10368,
+   "checks": 37,
+   "dir": "mechinterp/bpd/experiments/sccg10_native_mms/results/engineering/root_29201/e4_variants",
+   "max_ce_error": 0.0,
+   "verdict": "PASS"
+  }
+ ],
+ "independence": "manual recurrence from raw tensors; no import of model.py, native.py or trainer.py",
+ "max_ce_error": 0.0,
+ "schema": "SCCG10-replay/v1",
+ "verdict": "PASS"
+}
