@@ -1,0 +1,471 @@
+{
+  "causal_auxiliary_intervention": "not activated (CURATE-02 selective-control admission failed)",
+  "evidence_class": "EXPLORATORY_DEVELOPMENT",
+  "experiment": "BPD-TRM-CURATE-03B-gym",
+  "frozen_rule": "competent: TRAIN acc >= 0.40; headroom: 0.35 <= EVAL acc <= 0.95; hill climbing only when both pass on every root",
+  "roots": [
+    29100,
+    29101
+  ],
+  "signal_validity": {
+    "E27_copy_retrieve_2slot": {
+      "mean_finite_dose_error": 0.02280306904226404,
+      "mean_within_checkpoint_spearman": {
+        "grad_cosine": 0.6107843137254901,
+        "gradient_norm": -0.09460784313725489,
+        "observer_signed": 0.04950980392156863,
+        "predicted_gain": 0.5740196078431372,
+        "protected_interference": 0.6269607843137255,
+        "state_norm": null,
+        "state_pr": null,
+        "target_transport": 0.40931372549019607,
+        "update_norm": -0.44803921568627453
+      },
+      "pooled_spearman_with_realized_gain": {
+        "grad_cosine": 0.28027672273467175,
+        "gradient_norm": -0.046839392295170916,
+        "observer_signed": 0.3883613673358654,
+        "predicted_gain": 0.8188415626695605,
+        "protected_interference": 0.3591562669560499,
+        "state_norm": 0.09662574185802254,
+        "state_pr": -0.02179031536205975,
+        "target_transport": 0.7845225176342919,
+        "update_norm": 0.1700488334237656
+      },
+      "sign_accuracy_predicted_gain": 0.7395833333333334
+    },
+    "E28_dynamic_overwrite_register": {
+      "mean_finite_dose_error": 0.005800750098907335,
+      "mean_within_checkpoint_spearman": {
+        "grad_cosine": 0.905392156862745,
+        "gradient_norm": -0.02794117647058824,
+        "observer_signed": 0.7602941176470588,
+        "predicted_gain": 0.9191176470588235,
+        "protected_interference": 0.41127450980392155,
+        "state_norm": null,
+        "state_pr": null,
+        "target_transport": 0.3946078431372549,
+        "update_norm": -0.5098039215686274
+      },
+      "pooled_spearman_with_realized_gain": {
+        "grad_cosine": 0.7622490504612046,
+        "gradient_norm": 0.2286353771025502,
+        "observer_signed": 0.9011801410743352,
+        "predicted_gain": 0.9589392295170917,
+        "protected_interference": 0.6834644601193706,
+        "state_norm": 0.10917168100587513,
+        "state_pr": 0.5724910126941153,
+        "target_transport": 0.32893380358111773,
+        "update_norm": -0.22014378730330983
+      },
+      "sign_accuracy_predicted_gain": 0.8333333333333334
+    },
+    "E29_dyck1_bounded_depth": {
+      "mean_finite_dose_error": 0.06283013082974587,
+      "mean_within_checkpoint_spearman": {
+        "grad_cosine": 0.2338235294117647,
+        "gradient_norm": -0.12549019607843137,
+        "observer_signed": 0.6044117647058823,
+        "predicted_gain": 0.3700980392156863,
+        "protected_interference": 0.4372549019607843,
+        "state_norm": null,
+        "state_pr": null,
+        "target_transport": 0.6036764705882353,
+        "update_norm": -0.11470588235294119
+      },
+      "pooled_spearman_with_realized_gain": {
+        "grad_cosine": -0.20379815518176886,
+        "gradient_norm": -0.23171459576776993,
+        "observer_signed": 0.6705507325013564,
+        "predicted_gain": 0.8424850786760716,
+        "protected_interference": 0.7755561584373304,
+        "state_norm": 0.744172285243677,
+        "state_pr": 0.5022777743052561,
+        "target_transport": 0.795299985028662,
+        "update_norm": -0.47505425935973955
+      },
+      "sign_accuracy_predicted_gain": 0.5520833333333334
+    },
+    "E31_2hop_pointer_chase": {
+      "mean_finite_dose_error": 0.013854564992287077,
+      "mean_within_checkpoint_spearman": {
+        "grad_cosine": 0.8799019607843137,
+        "gradient_norm": 0.3333333333333333,
+        "observer_signed": 0.7872549019607843,
+        "predicted_gain": 0.9049019607843138,
+        "protected_interference": 0.20392156862745098,
+        "state_norm": null,
+        "state_pr": null,
+        "target_transport": 0.7990196078431373,
+        "update_norm": -0.3730392156862745
+      },
+      "pooled_spearman_with_realized_gain": {
+        "grad_cosine": 0.8214460119370591,
+        "gradient_norm": 0.4254612045577862,
+        "observer_signed": 0.9183667932718393,
+        "predicted_gain": 0.9716630493760173,
+        "protected_interference": 0.5929055887140532,
+        "state_norm": -0.18334679491510883,
+        "state_pr": -0.3942066142772627,
+        "target_transport": 0.8548155181768855,
+        "update_norm": -0.6773738469886055
+      },
+      "sign_accuracy_predicted_gain": 0.75
+    }
+  },
+  "tasks": {
+    "E27_copy_retrieve_2slot": {
+      "admitted_for_hill_climbing": true,
+      "competence": [
+        {
+          "competent": true,
+          "curve": [
+            {
+              "eval_acc": 0.443359375,
+              "step": 150,
+              "train_acc": 0.5390625
+            },
+            {
+              "eval_acc": 0.2734375,
+              "step": 300,
+              "train_acc": 0.5703125
+            },
+            {
+              "eval_acc": 0.515625,
+              "step": 450,
+              "train_acc": 0.546875
+            }
+          ],
+          "eval_acc": 0.515625,
+          "headroom": true,
+          "root": 29100,
+          "task": "E27_copy_retrieve_2slot",
+          "train_acc": 0.546875,
+          "warm_cpu_seconds": 24.953125
+        },
+        {
+          "competent": true,
+          "curve": [
+            {
+              "eval_acc": 0.353515625,
+              "step": 150,
+              "train_acc": 0.58984375
+            },
+            {
+              "eval_acc": 0.583984375,
+              "step": 300,
+              "train_acc": 0.5625
+            },
+            {
+              "eval_acc": 0.515625,
+              "step": 450,
+              "train_acc": 0.59765625
+            }
+          ],
+          "eval_acc": 0.515625,
+          "headroom": true,
+          "root": 29101,
+          "task": "E27_copy_retrieve_2slot",
+          "train_acc": 0.59765625,
+          "warm_cpu_seconds": 24.421875
+        }
+      ],
+      "hill_climbing": {
+        "29100": {
+          "screen": {
+            "abstained": 0,
+            "committed": 25,
+            "cpu_seconds": 30.421875,
+            "eval_acc": 0.298828125,
+            "mean_committed_gain": 0.0037776327133178713,
+            "windows": 26
+          },
+          "screen_minus_uniform_pp": 1.3671875,
+          "uniform": {
+            "abstained": 0,
+            "committed": 654,
+            "cpu_seconds": 30.03125,
+            "eval_acc": 0.28515625,
+            "mean_committed_gain": null,
+            "windows": 654
+          }
+        },
+        "29101": {
+          "screen": {
+            "abstained": 0,
+            "committed": 21,
+            "cpu_seconds": 30.453125,
+            "eval_acc": 0.59375,
+            "mean_committed_gain": 0.004323851494562058,
+            "windows": 31
+          },
+          "screen_minus_uniform_pp": 31.4453125,
+          "uniform": {
+            "abstained": 0,
+            "committed": 590,
+            "cpu_seconds": 30.0,
+            "eval_acc": 0.279296875,
+            "mean_committed_gain": null,
+            "windows": 590
+          }
+        }
+      },
+      "role": "curriculum failure control"
+    },
+    "E28_dynamic_overwrite_register": {
+      "admitted_for_hill_climbing": true,
+      "competence": [
+        {
+          "competent": true,
+          "curve": [
+            {
+              "eval_acc": 0.302734375,
+              "step": 150,
+              "train_acc": 0.4375
+            },
+            {
+              "eval_acc": 0.35546875,
+              "step": 300,
+              "train_acc": 0.47265625
+            },
+            {
+              "eval_acc": 0.375,
+              "step": 450,
+              "train_acc": 0.51171875
+            }
+          ],
+          "eval_acc": 0.375,
+          "headroom": true,
+          "root": 29100,
+          "task": "E28_dynamic_overwrite_register",
+          "train_acc": 0.51171875,
+          "warm_cpu_seconds": 18.890625
+        },
+        {
+          "competent": true,
+          "curve": [
+            {
+              "eval_acc": 0.359375,
+              "step": 150,
+              "train_acc": 0.42578125
+            },
+            {
+              "eval_acc": 0.375,
+              "step": 300,
+              "train_acc": 0.51953125
+            },
+            {
+              "eval_acc": 0.359375,
+              "step": 450,
+              "train_acc": 0.49609375
+            }
+          ],
+          "eval_acc": 0.359375,
+          "headroom": true,
+          "root": 29101,
+          "task": "E28_dynamic_overwrite_register",
+          "train_acc": 0.49609375,
+          "warm_cpu_seconds": 19.109375
+        }
+      ],
+      "hill_climbing": {
+        "29100": {
+          "screen": {
+            "abstained": 0,
+            "committed": 33,
+            "cpu_seconds": 30.625,
+            "eval_acc": 0.400390625,
+            "mean_committed_gain": 0.0010813944267504144,
+            "windows": 38
+          },
+          "screen_minus_uniform_pp": 0.0,
+          "uniform": {
+            "abstained": 0,
+            "committed": 820,
+            "cpu_seconds": 30.0,
+            "eval_acc": 0.400390625,
+            "mean_committed_gain": null,
+            "windows": 820
+          }
+        },
+        "29101": {
+          "screen": {
+            "abstained": 0,
+            "committed": 38,
+            "cpu_seconds": 30.828125,
+            "eval_acc": 0.30859375,
+            "mean_committed_gain": 0.0018392675801327354,
+            "windows": 38
+          },
+          "screen_minus_uniform_pp": -12.6953125,
+          "uniform": {
+            "abstained": 0,
+            "committed": 933,
+            "cpu_seconds": 30.015625,
+            "eval_acc": 0.435546875,
+            "mean_committed_gain": null,
+            "windows": 933
+          }
+        }
+      },
+      "role": "distribution-shift control"
+    },
+    "E29_dyck1_bounded_depth": {
+      "admitted_for_hill_climbing": false,
+      "competence": [
+        {
+          "competent": true,
+          "curve": [
+            {
+              "eval_acc": 0.658203125,
+              "step": 150,
+              "train_acc": 0.73828125
+            },
+            {
+              "eval_acc": 0.333984375,
+              "step": 300,
+              "train_acc": 1.0
+            },
+            {
+              "eval_acc": 0.337890625,
+              "step": 450,
+              "train_acc": 1.0
+            }
+          ],
+          "eval_acc": 0.337890625,
+          "headroom": false,
+          "root": 29100,
+          "task": "E29_dyck1_bounded_depth",
+          "train_acc": 1.0,
+          "warm_cpu_seconds": 21.03125
+        },
+        {
+          "competent": true,
+          "curve": [
+            {
+              "eval_acc": 0.376953125,
+              "step": 150,
+              "train_acc": 0.33984375
+            },
+            {
+              "eval_acc": 0.40625,
+              "step": 300,
+              "train_acc": 0.85546875
+            },
+            {
+              "eval_acc": 0.48046875,
+              "step": 450,
+              "train_acc": 0.921875
+            }
+          ],
+          "eval_acc": 0.48046875,
+          "headroom": true,
+          "root": 29101,
+          "task": "E29_dyck1_bounded_depth",
+          "train_acc": 0.921875,
+          "warm_cpu_seconds": 21.453125
+        }
+      ],
+      "hill_climbing": null,
+      "role": "length-extrapolation target"
+    },
+    "E31_2hop_pointer_chase": {
+      "admitted_for_hill_climbing": true,
+      "competence": [
+        {
+          "competent": true,
+          "curve": [
+            {
+              "eval_acc": 0.572265625,
+              "step": 150,
+              "train_acc": 0.5
+            },
+            {
+              "eval_acc": 0.587890625,
+              "step": 300,
+              "train_acc": 0.50390625
+            },
+            {
+              "eval_acc": 0.595703125,
+              "step": 450,
+              "train_acc": 0.5859375
+            }
+          ],
+          "eval_acc": 0.595703125,
+          "headroom": true,
+          "root": 29100,
+          "task": "E31_2hop_pointer_chase",
+          "train_acc": 0.5859375,
+          "warm_cpu_seconds": 19.796875
+        },
+        {
+          "competent": true,
+          "curve": [
+            {
+              "eval_acc": 0.501953125,
+              "step": 150,
+              "train_acc": 0.515625
+            },
+            {
+              "eval_acc": 0.578125,
+              "step": 300,
+              "train_acc": 0.61328125
+            },
+            {
+              "eval_acc": 0.716796875,
+              "step": 450,
+              "train_acc": 0.6796875
+            }
+          ],
+          "eval_acc": 0.716796875,
+          "headroom": true,
+          "root": 29101,
+          "task": "E31_2hop_pointer_chase",
+          "train_acc": 0.6796875,
+          "warm_cpu_seconds": 20.140625
+        }
+      ],
+      "hill_climbing": {
+        "29100": {
+          "screen": {
+            "abstained": 1,
+            "committed": 24,
+            "cpu_seconds": 30.03125,
+            "eval_acc": 0.630859375,
+            "mean_committed_gain": 0.00841127336025238,
+            "windows": 32
+          },
+          "screen_minus_uniform_pp": -0.390625,
+          "uniform": {
+            "abstained": 0,
+            "committed": 824,
+            "cpu_seconds": 30.0625,
+            "eval_acc": 0.634765625,
+            "mean_committed_gain": null,
+            "windows": 824
+          }
+        },
+        "29101": {
+          "screen": {
+            "abstained": 2,
+            "committed": 37,
+            "cpu_seconds": 30.6875,
+            "eval_acc": 0.7109375,
+            "mean_committed_gain": 0.004077382989831873,
+            "windows": 39
+          },
+          "screen_minus_uniform_pp": -5.859375,
+          "uniform": {
+            "abstained": 0,
+            "committed": 837,
+            "cpu_seconds": 30.015625,
+            "eval_acc": 0.76953125,
+            "mean_committed_gain": null,
+            "windows": 837
+          }
+        }
+      },
+      "role": "iterative target"
+    }
+  }
+}
