@@ -86,6 +86,7 @@ class BPDTrainer:
         residual_cache_policy: str = "first_fit",
         cache_pgd_mask_residuals: bool = False,
         cache_calibration_residuals: bool = False,
+        cache_pgd_final_residuals: bool = False,
     ) -> None:
         if type(cache_single_backward_residuals) is not bool:
             raise TypeError("cache_single_backward_residuals must be bool")
@@ -105,6 +106,14 @@ class BPDTrainer:
         if type(cache_calibration_residuals) is not bool:
             raise TypeError("cache_calibration_residuals must be bool")
         self.cache_calibration_residuals = cache_calibration_residuals
+        if type(cache_pgd_final_residuals) is not bool:
+            raise TypeError("cache_pgd_final_residuals must be bool")
+        if cache_pgd_final_residuals and not (cache_single_backward_residuals
+                                              and residual_cache_policy == "step_exact"):
+            raise ValueError("retained PGD cache requires enabled step_exact cache")
+        self.cache_pgd_final_residuals = cache_pgd_final_residuals
+        self.residual_final_pgd_stats: list[Any] = []
+        self.residual_final_pgd_query: dict[str, Any] | None = None
         self.residual_calibration_stats: list[dict[str, Any]] = []
         self.residual_pgd_cache_stats: list[Any] = []
         self.residual_cache_stats: list[Any] = []
@@ -151,7 +160,8 @@ class BPDTrainer:
 
         Fixed weights and a sequential first-order non-checkpointed adapter are
         required. Mask-only scopes are private to the discarded native inner
-        PGD source-gradient evaluations; the final PGD graph stays native.
+        PGD source-gradient evaluations. FUSE-11 additionally admits the final
+        retained graph with independent adjoints and a sealed forward pool.
         """
         if mask_only and not self.cache_pgd_mask_residuals:
             return nullcontext(None)
@@ -386,6 +396,8 @@ class BPDTrainer:
         self.residual_cache_stats = []
         self.residual_pgd_cache_stats = []
         self.residual_calibration_stats = []
+        self.residual_final_pgd_stats = []
+        self.residual_final_pgd_query = None
         self.residual_cache_plans = []
         self.residual_step_receipt = None
         self._residual_step_disabled = False
@@ -417,7 +429,9 @@ class BPDTrainer:
         exec_mode, n_passes, pass_offset, init_state = self._select_rollout_regime(batch)
         self._residual_planned_calls = n_passes * (
             int(self.cfg.coeff_stoch > 0.0)
-            + int(self.cfg.coeff_adv > 0.0 and exec_mode == "clean_window")
+            + int(self.cfg.coeff_adv > 0.0 and (
+                exec_mode == "clean_window" or (
+                    exec_mode == "closed_loop" and self.cache_pgd_final_residuals)))
             + (max(0, self.cfg.adversary.inner_steps) if self.cache_pgd_mask_residuals
                and self.cfg.coeff_adv > 0.0 and exec_mode == "closed_loop" else 0)
         )
@@ -502,9 +516,14 @@ class BPDTrainer:
             adv_sched, leaf_sources = self.pgd.build_schedules(
                 ci_out.lower_leaky, requires_grad_sources=True
             )
-            adv_traj = self.run_masked_rollout(
-                batch, adv_sched, n_passes=n_passes, pass_offset=pass_offset, init_state=init_state
-            )
+            final_scope = (self._single_backward_residual_scope(n_passes)
+                           if self.cache_pgd_final_residuals else nullcontext(None))
+            with final_scope as final_stats:
+                adv_traj = self.run_masked_rollout(
+                    batch, adv_sched, n_passes=n_passes, pass_offset=pass_offset, init_state=init_state
+                )
+            if final_stats is not None:
+                self.residual_final_pgd_stats.append(final_stats)
             loss_adv, _ = trajectory_recon_loss(
                 adv_traj,
                 clean_traj,
@@ -513,9 +532,27 @@ class BPDTrainer:
                 readout_policy=self.cfg.readout_policy,
             )
             leaf_list = [leaf_sources[name] for name in self.bpd_model.module_order]
+            # All cached forwards have finished. Source leaves are independent
+            # of V/U, so this retained query must not execute their adjoints.
+            pool = self._step_residual_pool if final_stats is not None else None
+            if pool is not None:
+                pool.seal_forward()
+                adjoints = self.residual_cache_stats + self.residual_final_pgd_stats
+                before = sum(st.backward_nodes for st in adjoints)
+                if before:
+                    raise RuntimeError("factor adjoint ran before retained PGD query")
             grads_tuple = torch.autograd.grad(
                 loss_adv, leaf_list, retain_graph=True, allow_unused=False
             )
+            if pool is not None:
+                after = sum(st.backward_nodes for st in adjoints)
+                self.residual_final_pgd_query = {
+                    "factor_nodes_before": before, "factor_nodes_after": after,
+                    "forward_sealed": pool.sealed, "resident_bytes": pool.resident_bytes,
+                }
+                if after != before:
+                    pool.poisoned = True
+                    raise RuntimeError("retained PGD source query executed factor adjoint")
             adv_source_grads = {
                 name: g.detach() for name, g in zip(self.bpd_model.module_order, grads_tuple)
             }
