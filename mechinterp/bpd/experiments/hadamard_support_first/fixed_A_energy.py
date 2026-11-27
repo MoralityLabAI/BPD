@@ -72,6 +72,7 @@ def histkey(w):
         s=(2 if m&1 else 0)+(0 if (b if m&1 else a)&1 else 1)
         h.append((s,(a>>1).bit_count(),((4095^m^a)>>1).bit_count(),(b>>1).bit_count(),((m^b)>>1).bit_count()))
     return tuple(h)
+
 def main():
     t=time.perf_counter();checks=small_checks();print('small checks',checks,flush=True)
     q=json.loads((P/'prior/joint_receipt.json').read_text())['quotient']['systems'];pr=json.loads((P/'prior/roster.json').read_text())['profiles'];h=defaultdict(Counter)
