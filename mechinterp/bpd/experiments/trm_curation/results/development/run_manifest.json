@@ -1,0 +1,71 @@
+{
+  "evidence_class": "DEVELOPMENT_ONLY",
+  "include_crossed": false,
+  "phase": "development",
+  "python": "3.12.10",
+  "recipe": {
+    "auxiliary_gradient_ratio": 0.25,
+    "binding_n": 256,
+    "components": 29,
+    "ctrl_components": 16,
+    "ctrl_width": 16,
+    "curation_learning_rate": 0.001,
+    "curation_windows": 80,
+    "dose": 0.75,
+    "dose_grid": [
+      0.25,
+      0.75,
+      1.5,
+      3.0
+    ],
+    "eval_delays": [
+      2,
+      7,
+      31,
+      63,
+      127
+    ],
+    "eval_n": 512,
+    "exploration": 0.2,
+    "feedback_batch_edges": 12,
+    "feedback_delay": 15,
+    "gradient_clip": 1.0,
+    "learning_rate": 0.003,
+    "low_cycles": 1,
+    "mms_mib": 16.0,
+    "noise": 0.03,
+    "pair_exposure_cap": 4,
+    "primary_delay": 31,
+    "proposals_per_window": 16,
+    "selected_per_window": 4,
+    "slots": 4,
+    "split_seed": 20261127,
+    "threads": 2,
+    "train_delays": [
+      1,
+      2,
+      3
+    ],
+    "values": 4,
+    "w_ordinary": 1.0,
+    "w_preserve": 0.5,
+    "w_target": 0.5,
+    "warmup_batch_edges": 12,
+    "warmup_updates": 6000,
+    "weight_decay": 0.0001,
+    "width": 32
+  },
+  "roots": [
+    28101,
+    28102,
+    28103,
+    28104,
+    28105,
+    28106,
+    28107,
+    28108
+  ],
+  "source_lock_sha256": "6abb8f06d5b1819801869619b61a3e2fab4f88264096c78a665de215df40d4e6",
+  "started_unix": 1795736008.9567502,
+  "torch": "2.15.0+cpu"
+}

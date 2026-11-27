@@ -1,0 +1,113 @@
+{
+  "development_roots": [
+    28101,
+    28102,
+    28103,
+    28104,
+    28105,
+    28106,
+    28107,
+    28108
+  ],
+  "engineering_roots": [
+    28000,
+    28001
+  ],
+  "experiment": "BPD-TRM-CURATE-02",
+  "feedback_objective": {
+    "dose": 0.75,
+    "name": "mechanistic_feedback_loss_v1",
+    "preserve_terms": "0.5 * KL(p_clean || p_edit) + 0.5 * CE(edit, labels_r) on unaffected slots",
+    "w_ordinary": 1.0,
+    "w_preserve": 0.5,
+    "w_target": 0.5
+  },
+  "frozen_unix": 1795736001.2497697,
+  "parent_commit": "154a3a1bde93a84015c687dd9464077df6631015",
+  "recipe": {
+    "auxiliary_gradient_ratio": 0.25,
+    "binding_n": 256,
+    "components": 29,
+    "ctrl_components": 16,
+    "ctrl_width": 16,
+    "curation_learning_rate": 0.001,
+    "curation_windows": 80,
+    "dose": 0.75,
+    "dose_grid": [
+      0.25,
+      0.75,
+      1.5,
+      3.0
+    ],
+    "eval_delays": [
+      2,
+      7,
+      31,
+      63,
+      127
+    ],
+    "eval_n": 512,
+    "exploration": 0.2,
+    "feedback_batch_edges": 12,
+    "feedback_delay": 15,
+    "gradient_clip": 1.0,
+    "learning_rate": 0.003,
+    "low_cycles": 1,
+    "mms_mib": 16.0,
+    "noise": 0.03,
+    "pair_exposure_cap": 4,
+    "primary_delay": 31,
+    "proposals_per_window": 16,
+    "selected_per_window": 4,
+    "slots": 4,
+    "split_seed": 20261127,
+    "threads": 2,
+    "train_delays": [
+      1,
+      2,
+      3
+    ],
+    "values": 4,
+    "w_ordinary": 1.0,
+    "w_preserve": 0.5,
+    "w_target": 0.5,
+    "warmup_batch_edges": 12,
+    "warmup_updates": 6000,
+    "weight_decay": 0.0001,
+    "width": 32
+  },
+  "schema_version": 1,
+  "selective_control_admitted": false,
+  "source_hashes": {
+    "mechinterp/bpd/__init__.py": "80949cdc96b90698b679815776f3da8de73c304dd20fd422adbdeeaffb0ce40a",
+    "mechinterp/bpd/components.py": "388cb539cccb87ae65d56e5fbae175d6aee138df24d1bab43cde755156b748a5",
+    "mechinterp/bpd/config.py": "d5773cdac66f55b8a8c152030d679324f0270954dd3a081176a454d5dc6f1621",
+    "mechinterp/bpd/experiments/repair_portfolio/evidence/preflight.py": "c2621a7900930f81ed53799ce439ee1c8f2d7006918a04ef57b5381630d15494",
+    "mechinterp/bpd/experiments/trm_curation/PROTOCOL.md": "21dd3d4127a311c83e302e01aea725b345cd8b2317947fa12e5988ac9a1993e7",
+    "mechinterp/bpd/experiments/trm_curation/V2_RUNBOOK.md": "7f62893879bc3a52fbb4b2b620b9d5b8fb5f06a8b44f63abfbc587fd9b3e6e84",
+    "mechinterp/bpd/experiments/trm_curation/__init__.py": "b35056b41812d599f0e7a7ec0ff6349b7f4efa98be8bfefa68b461c0a9b94a21",
+    "mechinterp/bpd/experiments/trm_curation/audit.py": "34597b421bbacdb99206517d99b9b4e4695d2c53efb065f2d3815a63f020eba6",
+    "mechinterp/bpd/experiments/trm_curation/cache.py": "48c74cadbedc6abeb037f9ce5c24c22a623e68668cd92bb864567599395d8af9",
+    "mechinterp/bpd/experiments/trm_curation/campaign.py": "98f210aa53a78f6ea16e908d35a0f5ab47befa5c241cfdf89fba101311f10944",
+    "mechinterp/bpd/experiments/trm_curation/data.py": "794a19b505317a6b97e9df2636c0d1188343d6aa2f7646c7423e9b55ea9a0954",
+    "mechinterp/bpd/experiments/trm_curation/eval_suite_36.py": "607e09fa68214c000d7a3332f2a40405b69d1fc0ac8d665754389629056d3e19",
+    "mechinterp/bpd/experiments/trm_curation/export_datagoblin.py": "f295c6c56b3dbf6a542bc45784c88981e10d9c2cb09b96b5be51c67b01c5c4c4",
+    "mechinterp/bpd/experiments/trm_curation/memory_cap.py": "7c176d56b42b82d7f0a6a8b0b14154b524581c105bcb9a5e99daff334d052ebc",
+    "mechinterp/bpd/experiments/trm_curation/model.py": "c001ffc270f6b585d6ceaf2d65f3b90b76ed6f2992585c6ab85df8f251dc850e",
+    "mechinterp/bpd/experiments/trm_curation/observer.py": "62ff37375e9122eb3db9d08386d01ee5755f34a0a948e056e5037ac5ca5b4e42",
+    "mechinterp/bpd/experiments/trm_curation/reference.py": "58440d66445528404999770c20adef3a573d2ae673c64fbd56885ea02396a983",
+    "mechinterp/bpd/experiments/trm_curation/scheduler.py": "76f033faaa2c81d3b40ec41dc0b478ed33be7dd6dc345d5356b63c869cedb652",
+    "mechinterp/bpd/experiments/trm_curation/signal_bank.py": "bba394838a1a97dd08231874298233ffc99252c3b4116e0b63e085f92c453267",
+    "mechinterp/bpd/experiments/trm_curation/transaction.py": "6f8a472b898e989c37bb4702c797af38bdeff6b162e7adf27ecdd4f3665857eb"
+  },
+  "split_counts": {
+    "feedback": 144,
+    "fit": 624,
+    "tune": 144
+  },
+  "split_hashes": {
+    "feedback": "4ede60f8e74fa27a24a22d71404c58effc72ab97c7c7620a08679898604387d2",
+    "fit": "d9696aa2940062150da51d192ea5d88a127ca3a2525c278cf1206a161bff4582",
+    "tune": "e8bfedfb77b2b69ad2d4fdf2a1152ae19caf25aa4346378b1d8fb09d42015ce2"
+  }
+}
