@@ -1,0 +1,141 @@
+{
+  "status": "PASS",
+  "scope": "Independent local CPU diagnostic using original verified native wrapper excerpt, not full package trainer",
+  "torch": "2.10.0+cpu",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "threads": 1,
+  "cases": 96,
+  "checks": 1152,
+  "exact": 1152,
+  "failures": 0,
+  "max_abs": 0,
+  "mask_only_calls": 576,
+  "backward_nodes": 288,
+  "cross_scope_hits": 576,
+  "rows": [
+    {
+      "scale": 1,
+      "target": "ordinary",
+      "cases": 8,
+      "checks": 96,
+      "exact": 96,
+      "failures": 0,
+      "max_error": 0
+    },
+    {
+      "scale": 1,
+      "target": "exact",
+      "cases": 8,
+      "checks": 96,
+      "exact": 96,
+      "failures": 0,
+      "max_error": 0
+    },
+    {
+      "scale": 1,
+      "target": "near",
+      "cases": 8,
+      "checks": 96,
+      "exact": 96,
+      "failures": 0,
+      "max_error": 0
+    },
+    {
+      "scale": 10,
+      "target": "ordinary",
+      "cases": 8,
+      "checks": 96,
+      "exact": 96,
+      "failures": 0,
+      "max_error": 0
+    },
+    {
+      "scale": 10,
+      "target": "exact",
+      "cases": 8,
+      "checks": 96,
+      "exact": 96,
+      "failures": 0,
+      "max_error": 0
+    },
+    {
+      "scale": 10,
+      "target": "near",
+      "cases": 8,
+      "checks": 96,
+      "exact": 96,
+      "failures": 0,
+      "max_error": 0
+    },
+    {
+      "scale": 100,
+      "target": "ordinary",
+      "cases": 8,
+      "checks": 96,
+      "exact": 96,
+      "failures": 0,
+      "max_error": 0
+    },
+    {
+      "scale": 100,
+      "target": "exact",
+      "cases": 8,
+      "checks": 96,
+      "exact": 96,
+      "failures": 0,
+      "max_error": 0
+    },
+    {
+      "scale": 100,
+      "target": "near",
+      "cases": 8,
+      "checks": 96,
+      "exact": 96,
+      "failures": 0,
+      "max_error": 0
+    },
+    {
+      "scale": 10000,
+      "target": "ordinary",
+      "cases": 8,
+      "checks": 96,
+      "exact": 96,
+      "failures": 0,
+      "max_error": 0
+    },
+    {
+      "scale": 10000,
+      "target": "exact",
+      "cases": 8,
+      "checks": 96,
+      "exact": 96,
+      "failures": 0,
+      "max_error": 0
+    },
+    {
+      "scale": 10000,
+      "target": "near",
+      "cases": 8,
+      "checks": 96,
+      "exact": 96,
+      "failures": 0,
+      "max_error": 0
+    }
+  ],
+  "elapsed_seconds": 1.5016594759999862,
+  "sha256": {
+    "check_local_py": "c3fda5055b13a0c06f31222dbd2abdeedca7e92fad7e4863f09503eaa0e31fe7",
+    "step_cache_py": "a053a3c73e7e14b038f1397a8ffd6a79a0f132626e81f184e1af1b1dadc8bbee",
+    "adjoint_cache_py": "10e9e787d5858e6c63933c48ded1884204c35cdaacdf1a42f3b84e21ed2310f8",
+    "admission_py": "914e1c40ba4fec1fc7f04522befa1bc4c0156ea6bc0dc454bf9c597ef1a090b7",
+    "native_excerpt_py": "b6c0c2420641c526542cac9a545e1e3dcfb587123f93448bd9cdc63025a7985d",
+    "raw_receipt": "7bb691c31378bffd04ca72225509b56c280cb1ed82734d603dd1c8b41fd81422",
+    "archive": "2547581228234eafc75ccfd7ec339da4f72eb02b3864640b5f565a89327d7633"
+  },
+  "git_blobs": {
+    "check_local": "52fea184ef740e0112f270939322650b24238977",
+    "step_cache": "682b20300d51833c8adf4f2f9e576780e71d367e",
+    "adjoint": "b44b1702bc235790adf7d20f4abf022da049ef67",
+    "admission": "ece08080405b6006e6de63c3b253e174bfd98461"
+  }
+}
