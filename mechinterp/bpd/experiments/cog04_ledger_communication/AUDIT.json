@@ -1,0 +1,21 @@
+{
+  "artifact_hashes_verified": 10,
+  "decision_rows_replayed": 46923,
+  "passed": true,
+  "root_arm_rollouts_replayed": 2944,
+  "setup_streams_verified": 42,
+  "totals": {
+    "accepted": 39595,
+    "argmax_certified": 4977,
+    "correct_to_wrong": 7596,
+    "forward_bits": 99033896,
+    "full_useful": 32604,
+    "new_lemmas": 39595,
+    "offline_audit_verifier_calls": 42431,
+    "reply_bits": 678896,
+    "useful": 28243,
+    "verifier_calls": 46923,
+    "wrong_to_correct": 1436
+  },
+  "unique_readout_roots": 128
+}
