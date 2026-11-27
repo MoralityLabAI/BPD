@@ -91,6 +91,20 @@ class StepResidualPool:
             self.poisoned = True
             raise RuntimeError("step residual parameter or cached primal mutated")
 
+    def seal_forward(self):
+        """End admission before a retained source-only query and joint backward.
+
+        No new cached forward scopes are permitted. Existing independent
+        adjoints and their saved tensors remain live until joint backward.
+        """
+        if self.active or self.closed or self.sealed or self.poisoned:
+            raise RuntimeError("cannot seal residual forward pool")
+        for w in self.ws:
+            entry = self.entries.get(id(w))
+            if entry is not None:
+                self._verify(w, entry)
+        self.sealed = True
+
     def close(self):
         if self.active:
             raise RuntimeError("cannot close active residual scope")
