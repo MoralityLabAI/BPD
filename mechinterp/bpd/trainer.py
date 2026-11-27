@@ -4,6 +4,7 @@ and unrolled single-site-per-pass VPD baseline trainer for Gate B1.
 
 from __future__ import annotations
 
+from contextlib import nullcontext
 from dataclasses import dataclass, replace
 from typing import Any, Callable, Mapping
 
@@ -80,7 +81,17 @@ class BPDTrainer:
         prompt_dim: int | None = None,
         is_causal_ci: bool = False,
         device: torch.device | str = "cpu",
+        cache_single_backward_residuals: bool = False,
+        residual_cache_max_bytes: int = 16 * 1024**2,
     ) -> None:
+        if type(cache_single_backward_residuals) is not bool:
+            raise TypeError("cache_single_backward_residuals must be bool")
+        if type(residual_cache_max_bytes) is not int or residual_cache_max_bytes < 0:
+            raise ValueError("residual_cache_max_bytes must be a nonnegative integer")
+        # Experimental FUSE-06: explicit opt-in, sequential first-order adapters only.
+        self.cache_single_backward_residuals = cache_single_backward_residuals
+        self.residual_cache_max_bytes = residual_cache_max_bytes
+        self.residual_cache_stats: list[Any] = []
         self.device = torch.device(device)
         self.bpd_model = bpd_model.to(self.device)
         self.cfg = cfg
@@ -111,6 +122,22 @@ class BPDTrainer:
             lr=cfg.main_lr,
             betas=(0.9, 0.999),
             weight_decay=0.0,
+        )
+
+    def _single_backward_residual_scope(self):
+        """Only for branches whose graph is consumed once by the joint backward.
+
+        The caller opting in guarantees a sequential fixed-weight adapter, no
+        activation checkpointing/reentry or external parameter/storage mutation.
+        Do not wrap the retained-graph PGD branch or calibration.
+        """
+        if not self.cache_single_backward_residuals:
+            return nullcontext(None)
+        from mechinterp.bpd.experiments.fused_residual.adjoint_cache import independent_residuals
+
+        return independent_residuals(
+            self.bpd_model.wrappers.values(), variant="residual",
+            max_bytes=self.residual_cache_max_bytes,
         )
 
     def _set_lr(self, step: int) -> float:
@@ -259,6 +286,7 @@ class BPDTrainer:
 
     def train_step(self, batch: Any, step: int) -> StepMetrics:
         """Execute one joint BPD optimization step."""
+        self.residual_cache_stats = []
         self._set_lr(step)
         if (
             self.cfg.null_calibration.use_tolerance_weights
@@ -307,13 +335,16 @@ class BPDTrainer:
                 share_noise_across_passes=share_noise,
                 generator=self.rng,
             )
-            stoch_traj = self.run_masked_rollout(
-                batch,
-                stoch_sched,
-                n_passes=n_passes,
-                pass_offset=pass_offset,
-                init_state=init_state,
-            )
+            with self._single_backward_residual_scope() as cache_stats:
+                stoch_traj = self.run_masked_rollout(
+                    batch,
+                    stoch_sched,
+                    n_passes=n_passes,
+                    pass_offset=pass_offset,
+                    init_state=init_state,
+                )
+            if cache_stats is not None:
+                self.residual_cache_stats.append(cache_stats)
             loss_stoch, _ = trajectory_recon_loss(
                 stoch_traj,
                 clean_traj,
@@ -378,9 +409,12 @@ class BPDTrainer:
                 share_noise_across_passes=True,
                 generator=self.rng,
             )
-            adv_traj = self.run_masked_rollout(
-                batch, stoch_adv, n_passes=n_passes, pass_offset=pass_offset, init_state=init_state
-            )
+            with self._single_backward_residual_scope() as cache_stats:
+                adv_traj = self.run_masked_rollout(
+                    batch, stoch_adv, n_passes=n_passes, pass_offset=pass_offset, init_state=init_state
+                )
+            if cache_stats is not None:
+                self.residual_cache_stats.append(cache_stats)
             loss_adv, _ = trajectory_recon_loss(
                 adv_traj,
                 clean_traj,
