@@ -1,0 +1,18 @@
+{
+  "scope": "48 synthetic additive dense CPU float64 fixtures and one missing-gradient fixture, not native ComponentTRM or training campaign",
+  "torch": "2.10.0+cpu",
+  "git_blob_sha1": {
+    "adamw_screen.py": "8de9edb39af6545001a6c1371edbe5276bbbdfcf",
+    "batch_screen.py": "735614898d2d677e268d40f69d1a0587c148f5b8",
+    "test_batch_screen.py": "0f2b9d2bdd2ab7953b886b1399ddf818512d163c"
+  },
+  "tests_passed": 2,
+  "optimizer_fixtures": 48,
+  "max_mean_gradient_error": 1.11e-16,
+  "max_linear_score_error": 5.2e-18,
+  "live_adamw_displacement_exact_for_recomputed_joint_gradient": true,
+  "model_optimizer_grad_rng_unchanged_by_search": true,
+  "exploration_pin_and_legality_checks": true,
+  "source_parity": "all three local Git blob hashes match files fetched after commits",
+  "limitations": "No native callback, wall-clock gain, budget matching, actual nonlinear improvement or hosted CI claim. Source tested in standalone package containing exact pinned AdamW helper."
+}
