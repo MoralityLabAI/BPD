@@ -1,0 +1,37 @@
+{
+  "schema": "lean-setmm-port-v1",
+  "source_commit": "ab93e4da986beef87897f8d1244c7fe7564b5bde",
+  "setmm_commit": "806509385370b29fe8b1723804777ac21b1ce194",
+  "ports": [
+    {
+      "metamath_label": "ml-bpd-mask-commute",
+      "source": "mechinterp/bpd/theory/OptimalBasis.lean",
+      "source_blob": "7a9ea4844808858ec79e222319cb7e7a488797d5",
+      "lean_declaration": "BPD.OptimalBasis.conjugate_mask_iff_commute",
+      "scope": "pointwise equational translation",
+      "mapping": "F=r and G=rInv; A=d(r(s)), B=d(s). Specialize the inverse laws at B and A. Pointwise iff generalizes over s under the Lean hypotheses; outer binder translation remains separate.",
+      "hypotheses": [
+        "|- ( G ` ( F ` B ) ) = B",
+        "|- ( F ` ( G ` A ) ) = A"
+      ],
+      "statement": "|- ( ( G ` A ) = B <-> A = ( F ` B ) )",
+      "proof_steps": 85
+    },
+    {
+      "metamath_label": "ml-bpd-block-zero",
+      "source": "mechinterp/bpd/theory/OptimalBasis.lean",
+      "source_blob": "7a9ea4844808858ec79e222319cb7e7a488797d5",
+      "lean_declaration": "BPD.OptimalBasis.block_activity_zero_iff_of_commute",
+      "scope": "pointwise equational translation",
+      "mapping": "F=r, G=rInv, A=d(r(s)), B=d(s), C=zero. Specialize inverse and commutation premises. The four equations imply the zero-activity equivalence; no new vector-space or empirical claim.",
+      "hypotheses": [
+        "|- A = ( F ` B )",
+        "|- ( G ` ( F ` B ) ) = B",
+        "|- ( F ` C ) = C",
+        "|- ( G ` C ) = C"
+      ],
+      "statement": "|- ( A = C <-> B = C )",
+      "proof_steps": 189
+    }
+  ]
+}
