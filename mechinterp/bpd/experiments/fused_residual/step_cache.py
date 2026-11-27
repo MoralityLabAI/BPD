@@ -49,6 +49,8 @@ def planned_sites(wrappers, passes, cap, *, max_frontier=65536):
 @dataclass
 class StepScopeStats(Stats):
     cross_scope_hits: int = 0
+    mask_only_calls: int = 0
+    independent_calls: int = 0
     storage_checks: int = 0
     pool_bytes_after_scope: int = 0
     # Stable pool-local slot IDs, not process addresses.
@@ -97,7 +99,16 @@ class StepResidualPool:
         self.resident_bytes = 0
 
     @contextmanager
-    def scope(self):
+    def scope(self, *, mask_only: bool = False):
+        """Private trainer contract: mask_only only for discarded source-gradient graphs.
+
+        Detached residuals preserve derivatives with respect to activations and
+        masks, but deliberately omit residual factor derivatives. Never admit
+        such a graph to the joint training loss. No backward-seal hook exists
+        for detached outputs; the native PGD source-only caller owns this scope.
+        """
+        if type(mask_only) is not bool:
+            raise TypeError("mask_only must be bool")
         if self.closed or self.active or self.sealed or self.poisoned:
             raise RuntimeError("unavailable step residual pool")
         if any(getattr(w, "_residual_cache_active", False) for w in self.ws):
@@ -164,7 +175,14 @@ class StepResidualPool:
                     stats.hits += 1
                     stats.cross_scope_hits += int(old[4] != ordinal)
                 stats.peak_bytes = max(stats.peak_bytes, self.resident_bytes)
-                value = _Primal.apply(self_w.V, self_w.U, p, "residual", stats)
+                if mask_only:
+                    # Only the native inner PGD loss requests source-leaf grads.
+                    # Keep all input/mask dependencies in the native F.linear.
+                    value = p
+                    stats.mask_only_calls += 1
+                else:
+                    value = _Primal.apply(self_w.V, self_w.U, p, "residual", stats)
+                    stats.independent_calls += 1
                 if value.untyped_storage().data_ptr() != p.untyped_storage().data_ptr():
                     self.poisoned = True
                     raise RuntimeError("custom adjoint did not retain cached storage")
