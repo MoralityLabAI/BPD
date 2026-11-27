@@ -19,4 +19,14 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.13'
-      - run: python -m unittest discover -s mechinterp/bpd/experiments/sccg10_native_mms -p 'test_*.py' -v
+      - run: python -m unittest discover -s mechinterp/bpd/experiments/sccg10_native_mms -p 'test_admission.py' -v
+  native:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy scipy psutil && pip install torch --index-url https://download.pytorch.org/whl/cpu
+      - run: python -m unittest mechinterp.bpd.experiments.sccg10_native_mms.test_native mechinterp.bpd.experiments.sccg10_native_mms.test_mms -v
