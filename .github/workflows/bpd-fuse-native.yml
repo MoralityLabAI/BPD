@@ -1,5 +1,6 @@
 name: BPD FUSE-09 native trainer and capacity gate
 on:
+  workflow_dispatch:
   pull_request:
     paths:
       - 'mechinterp/bpd/experiments/fused_residual/**'
@@ -60,6 +61,9 @@ jobs:
           retention-days: 90
 
   wide-cpu:
+    # Expensive experiment matrix is opt-in after this registered campaign.
+    # The full numerical native gate still runs on each PR revision.
+    if: github.event_name == 'workflow_dispatch'
     needs: native-cpu
     runs-on: ubuntu-24.04
     timeout-minutes: 15
