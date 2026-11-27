@@ -56,14 +56,14 @@ class NativeParity(unittest.TestCase):
             np.testing.assert_allclose(obs.C, ref['protected'].double().numpy(), rtol=1e-5, atol=1e-6)
 
     def test_write_jacobian_matches_finite_difference(self):
-        # The native factors compute in float32; use a 4-point stencil at eps=1e-2
-        # (rounding ~1e-5, truncation O(eps^4)).
+        # The native factors compute in float32; use a 4-point stencil at eps=5e-2
+        # (rounding ~1e-4, truncation O(eps^4)).
         p = native.make_panel(_panel(1))
         J = native.write_jacobian(self.model, p, DELAYS).double()
         g = torch.Generator().manual_seed(5)
         u = torch.randn(2 * self.model.width, generator=g)
         u = u / u.norm()
-        e = 1e-2
+        e = 5e-2
         f = lambda t: native.margins(self.model, p, DELAYS, write_delta=t * u).double()
         fd = (8 * (f(e) - f(-e)) - (f(2 * e) - f(-2 * e))) / (12 * e)
         torch.testing.assert_close(J @ u.double(), fd, rtol=1e-2, atol=1e-3)
