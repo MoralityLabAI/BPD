@@ -494,38 +494,53 @@ def cuda_lifecycle_tests(device: torch.device) -> dict[str, Any]:
     check("cuda_independent_adjoints", st_ind.backward_nodes == 2)
     del d0, d1
 
-    # 10. Allocator lifetime & zero leak audit after close + backward
-    w = make(width=256, rank=32)
-    n_big = w.W_target.numel() * 4
-    torch.cuda.synchronize(device)
-    gc.collect()
-    base_alloc = torch.cuda.memory_allocated(device)
-    p = StepResidualPool([w], max_bytes=n_big, allow_cuda=True, precision_mode="fp32")
-    with p.scope():
-        d0 = w.weight_delta()
-        d1 = w.weight_delta()
-    peak_in_scope = torch.cuda.memory_allocated(device)
-    loss = (d0 + d1).square().sum()
-    loss.backward()
-    p.close()
-    del d0, d1, loss, p
-    w.V.grad = None
-    w.U.grad = None
-    torch.cuda.synchronize(device)
-    gc.collect()
-    after_alloc = torch.cuda.memory_allocated(device)
-    check("cuda_allocator_allocated_during_scope", peak_in_scope >= base_alloc + n_big)
-    check("cuda_allocator_zero_leak_after_close", after_alloc == base_alloc)
-
-    return {
-        "status": "pass",
-        "checks": checks,
-        "allocator_audit": {
+    # 10. Allocator lifetime & zero leak audit after close + backward (isolated frame)
+    def _allocator_audit() -> dict[str, int]:
+        w_big = make(width=256, rank=32)
+        n_big = w_big.W_target.numel() * 4
+        # Warm up cuBLAS / kernel lazy state before measuring steady-state baseline
+        with torch.no_grad():
+            _ = w_big.weight_delta()
+        p_big = StepResidualPool([w_big], max_bytes=n_big, allow_cuda=True, precision_mode="fp32")
+        torch.cuda.synchronize(device)
+        gc.collect()
+        base_alloc = torch.cuda.memory_allocated(device)
+        with p_big.scope():
+            d0_b = w_big.weight_delta()
+            d1_b = w_big.weight_delta()
+        peak_in_scope = torch.cuda.memory_allocated(device)
+        loss_b = (d0_b + d1_b).square().sum()
+        loss_b.backward()
+        p_big.close()
+        del d0_b, d1_b, loss_b
+        w_big.V.grad = None
+        w_big.U.grad = None
+        torch.cuda.synchronize(device)
+        gc.collect()
+        after_alloc = torch.cuda.memory_allocated(device)
+        return {
             "base_bytes": base_alloc,
             "peak_in_scope_bytes": peak_in_scope,
             "after_close_bytes": after_alloc,
             "expected_payload_bytes": n_big,
-        },
+        }
+
+    del w, p
+    gc.collect()
+    alloc_audit = _allocator_audit()
+    check(
+        "cuda_allocator_allocated_during_scope",
+        alloc_audit["peak_in_scope_bytes"] >= alloc_audit["base_bytes"] + alloc_audit["expected_payload_bytes"],
+    )
+    check(
+        "cuda_allocator_zero_leak_after_close",
+        alloc_audit["after_close_bytes"] == alloc_audit["base_bytes"],
+    )
+
+    return {
+        "status": "pass",
+        "checks": checks,
+        "allocator_audit": alloc_audit,
     }
 
 
@@ -612,10 +627,13 @@ def cuda_stress_suite(device: torch.device, precision_mode: str = "fp32") -> dic
                             q.reset_pass_state()
                             q.schedule = PassMaskSchedule(mm.sigmoid(), dd.sigmoid())
                             with (p.scope(mask_only=(j == 1)) if fast else nullcontext(None)) as st:
-                                # Also record direct weight_delta residual value parity on first pass
-                                if j == 0:
-                                    vals.append(q.weight_delta().detach().clone())
                                 yy = torch.stack([q(xx[i]) for i in range(3)])
+                            if j == 0:
+                                if fast:
+                                    vals.append(p.entries[id(q)][1].detach().clone())
+                                else:
+                                    with torch.no_grad():
+                                        vals.append(q.weight_delta().detach().clone())
                             loss = (yy * cot[j]).sum()
                             vals.append(yy.detach())
                             stats.append(st)
@@ -644,9 +662,8 @@ def cuda_stress_suite(device: torch.device, precision_mode: str = "fp32") -> dic
                     total.backward()
                     vals.extend(t.grad.detach().clone() for t in (q.V, q.U, *leaves))
                     if fast:
-                        # 4 calls in scope 0 (1 direct residual + 3 forward), 3 in scope 1, 3 in scope 2
-                        assert [s.backward_nodes for s in stats] == [4, 0, 3], [s.backward_nodes for s in stats]
-                        assert [s.hits for s in stats] == [3, 3, 3], [s.hits for s in stats]
+                        assert [s.backward_nodes for s in stats] == [3, 0, 3], [s.backward_nodes for s in stats]
+                        assert [s.hits for s in stats] == [2, 3, 3], [s.hits for s in stats]
                         assert p.sealed and not p.poisoned
                         assert p.peak_bytes == q.W_target.numel() * 4
                         assert p.stream_checks > 0
