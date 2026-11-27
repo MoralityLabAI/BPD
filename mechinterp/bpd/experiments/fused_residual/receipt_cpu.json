@@ -1,0 +1,163 @@
+{
+  "status": "PASS",
+  "torch": "2.10.0+cpu",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "threads": 1,
+  "scope": "isolated CPU kernels; no native model or GPU",
+  "parity": {
+    "checks": 1408,
+    "max_abs_error": {
+      "torch.float64": {
+        "output": 2.4424906541753444e-15,
+        "gradient": 2.6645352591003757e-15
+      },
+      "torch.float32": {
+        "output": 0.000001430511474609375,
+        "gradient": 0.0000011920928955078125
+      }
+    }
+  },
+  "benchmark": [
+    {
+      "tokens": 64,
+      "din": 128,
+      "dout": 128,
+      "components": 32,
+      "backward": false,
+      "reference_ms": 0.09505,
+      "fused_ms": 0.069323,
+      "reference_min_ms": 0.092617,
+      "fused_min_ms": 0.06749,
+      "speedup": 1.3711178108275752,
+      "forward_reference_macs": 2097152,
+      "forward_fused_macs": 1572864
+    },
+    {
+      "tokens": 64,
+      "din": 128,
+      "dout": 128,
+      "components": 32,
+      "backward": true,
+      "reference_ms": 0.556234,
+      "fused_ms": 0.32352,
+      "reference_min_ms": 0.379172,
+      "fused_min_ms": 0.272824,
+      "speedup": 1.7193187438180022,
+      "forward_reference_macs": 2097152,
+      "forward_fused_macs": 1572864
+    },
+    {
+      "tokens": 64,
+      "din": 256,
+      "dout": 256,
+      "components": 64,
+      "backward": false,
+      "reference_ms": 0.367435,
+      "fused_ms": 0.209921,
+      "reference_min_ms": 0.326984,
+      "fused_min_ms": 0.178244,
+      "speedup": 1.7503489407920123,
+      "forward_reference_macs": 10485760,
+      "forward_fused_macs": 6291456
+    },
+    {
+      "tokens": 64,
+      "din": 256,
+      "dout": 256,
+      "components": 64,
+      "backward": true,
+      "reference_ms": 1.232748,
+      "fused_ms": 0.630154,
+      "reference_min_ms": 1.043957,
+      "fused_min_ms": 0.542564,
+      "speedup": 1.9562646591150734,
+      "forward_reference_macs": 10485760,
+      "forward_fused_macs": 6291456
+    },
+    {
+      "tokens": 64,
+      "din": 512,
+      "dout": 512,
+      "components": 64,
+      "backward": false,
+      "reference_ms": 1.480185,
+      "fused_ms": 0.527522,
+      "reference_min_ms": 1.456379,
+      "fused_min_ms": 0.49231,
+      "speedup": 2.805920890503145,
+      "forward_reference_macs": 37748736,
+      "forward_fused_macs": 20971520
+    },
+    {
+      "tokens": 64,
+      "din": 512,
+      "dout": 512,
+      "components": 64,
+      "backward": true,
+      "reference_ms": 3.646336,
+      "fused_ms": 1.431992,
+      "reference_min_ms": 3.462083,
+      "fused_min_ms": 1.274139,
+      "speedup": 2.546338247699708,
+      "forward_reference_macs": 37748736,
+      "forward_fused_macs": 20971520
+    },
+    {
+      "tokens": 64,
+      "din": 1024,
+      "dout": 1024,
+      "components": 128,
+      "backward": false,
+      "reference_ms": 13.290603,
+      "fused_ms": 2.2149,
+      "reference_min_ms": 12.914538,
+      "fused_min_ms": 2.001132,
+      "speedup": 6.0005431396451305,
+      "forward_reference_macs": 218103808,
+      "forward_fused_macs": 83886080
+    },
+    {
+      "tokens": 64,
+      "din": 1024,
+      "dout": 1024,
+      "components": 128,
+      "backward": true,
+      "reference_ms": 29.781509,
+      "fused_ms": 5.664596,
+      "reference_min_ms": 25.104795,
+      "fused_min_ms": 4.996126,
+      "speedup": 5.257481557378496,
+      "forward_reference_macs": 218103808,
+      "forward_fused_macs": 83886080
+    },
+    {
+      "tokens": 64,
+      "din": 1024,
+      "dout": 256,
+      "components": 64,
+      "backward": false,
+      "reference_ms": 1.503866,
+      "fused_ms": 0.698674,
+      "reference_min_ms": 1.279855,
+      "fused_min_ms": 0.546059,
+      "speedup": 2.15245736924517,
+      "forward_reference_macs": 38797312,
+      "forward_fused_macs": 22020096
+    },
+    {
+      "tokens": 64,
+      "din": 1024,
+      "dout": 256,
+      "components": 64,
+      "backward": true,
+      "reference_ms": 3.58012,
+      "fused_ms": 1.580931,
+      "reference_min_ms": 3.366995,
+      "fused_min_ms": 1.382587,
+      "speedup": 2.26456436112645,
+      "forward_reference_macs": 38797312,
+      "forward_fused_macs": 22020096
+    }
+  ],
+  "native_checks": null
+}
