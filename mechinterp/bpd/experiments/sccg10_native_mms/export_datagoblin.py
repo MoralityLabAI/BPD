@@ -27,7 +27,11 @@ from pathlib import Path
 CERT_SCOPES = {'NATIVE_FINITE_VERIFIED_ON_PANEL_AT_CHECKPOINT', 'NATIVE_FINITE_VERIFIED_AT_SOURCE'}
 
 
-def export(results: Path, out: Path) -> dict:
+def export(results: Path, out: Path, source_commit: str = 'unknown') -> dict:
+    def repo_rel(p: Path) -> str:
+        parts = Path(p).resolve().parts
+        i = max(k for k, part in enumerate(parts) if part == 'mechinterp')
+        return '/'.join(parts[i:])
     out.mkdir(parents=True, exist_ok=True)
     n_c = n_m = 0
     ledger = {}
@@ -46,6 +50,8 @@ def export(results: Path, out: Path) -> dict:
                         if r.get('split') != 'train' or r.get('view') != 'fit':
                             raise ValueError(f'custody violation in {dp}')
                         r['source_run'] = f'{run.parent.name}/{run.name}'
+                        r['intended_split'] = 'train'
+                        r['provenance_refs'] = [f'https://github.com/MoralityLabAI/BPD/blob/{source_commit}/{repo_rel(dp)}']
                         r['certificate_kind'] = 'NONE_HEURISTIC_PROPOSAL'
                         r['verifier_outcome'] = ('ACCEPTED' if r['window_accepted'] else 'REJECTED_ROLLED_BACK') if r['window_audited'] else 'UNAUDITED'
                         fc.write(json.dumps(r, sort_keys=True) + '\n')
@@ -55,7 +61,8 @@ def export(results: Path, out: Path) -> dict:
                     for line in mp.open(encoding='utf-8'):
                         r = json.loads(line)
                         r.update({'root': data['root'], 'arm': arm, 'source_run': f'{run.parent.name}/{run.name}',
-                                  'split': 'train', 'view': 'feedback',
+                                  'split': 'train', 'view': 'feedback', 'intended_split': 'train',
+                                  'provenance_refs': [f'https://github.com/MoralityLabAI/BPD/blob/{source_commit}/{repo_rel(mp)}'],
                                   'certificate_kind': 'NATIVE_FINITE_VERIFICATION_ON_FIXED_PANEL' if r.get('scope') in CERT_SCOPES else 'NONE',
                                   'uniform_certificate': False, 'training_eligible': True})
                         fm.write(json.dumps(r, sort_keys=True, default=str) + '\n')
@@ -73,8 +80,9 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('results', type=Path)
     ap.add_argument('--out', type=Path, required=True)
+    ap.add_argument('--source-commit', default='unknown')
     a = ap.parse_args()
-    print(json.dumps(export(a.results, a.out), indent=1))
+    print(json.dumps(export(a.results, a.out, a.source_commit), indent=1))
     return 0
 
 

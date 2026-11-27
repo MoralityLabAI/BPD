@@ -4,7 +4,9 @@ Machine-readable lock: `DEV_FREEZE.json` (source SHA-256 of every executed
 file, recipe, arm configurations, roots, statistics). `devrun.py` refuses to
 start if any locked file differs. Engineering receipts that set the frozen
 values are under `results/engineering/` and are summarized in RESULTS.md §2.
-This plan was committed before any development root was trained.
+This plan and its lock were committed (96906a6) before any development
+root was trained. The fixed-update engineering runs (E2) finished after the
+freeze and inform no frozen value.
 
 ## Units, custody, roots
 * Units: independently initialized ComponentTRM roots 29301–29308 (fresh;
@@ -15,7 +17,9 @@ This plan was committed before any development root was trained.
   view (12 edges, delay 15) for calibration, acceptance and controller value;
   final development = historical EVAL tuple partition with fresh SCCG10 seed
   domains (`final_dev_d*`, `sccg10_final_bind_d*`). The TRAIN tune view is
-  not read in development. ARG-03-N and reserved cohorts are never read.
+  used by no development decision. The warmup learning-curve log reports
+  tune accuracy every 500 updates, as in engineering, and nothing reads it.
+  ARG-03-N and reserved cohorts are never read.
   Historical roots 28000/28001/28101–28108 are replay and diagnostics only.
 * Architecture and warmup: CURATE-02 TRM_w32_r29 (5,380 parameters, width 32,
   rank 29, one low visit per token, 64 carried coordinates), 6,000 AdamW
