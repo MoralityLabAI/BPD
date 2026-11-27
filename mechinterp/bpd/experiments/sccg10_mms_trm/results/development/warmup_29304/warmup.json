@@ -1,0 +1,208 @@
+{
+ "arch": "TRM_w32_r29",
+ "carried_coordinates": 64,
+ "checkpoint_state_sha256": "95be0f58281ee88e9ac3958d97a705915b9b7d5e6edf747f39b676148b2fedf4",
+ "competence_gate_passed": true,
+ "cpu_seconds": 203.59375,
+ "cpu_snaps": {},
+ "curve": [
+  {
+   "block_visits": 12,
+   "cpu_seconds": 0.03125,
+   "step": 1,
+   "train_bind_d7_acc": 0.25,
+   "train_ce": 1.6378064155578613,
+   "train_d2_acc": 0.26953125,
+   "train_d31_acc": 0.2265625,
+   "train_d7_acc": 0.296875,
+   "wall_seconds": 0.2439983999938704
+  },
+  {
+   "block_visits": 13998,
+   "cpu_seconds": 33.921875,
+   "step": 1000,
+   "train_bind_d7_acc": 0.2421875,
+   "train_ce": 0.8796009421348572,
+   "train_d2_acc": 0.578125,
+   "train_d31_acc": 0.28515625,
+   "train_d7_acc": 0.45703125,
+   "wall_seconds": 31.641999099985696
+  },
+  {
+   "block_visits": 27998,
+   "cpu_seconds": 65.15625,
+   "step": 2000,
+   "train_bind_d7_acc": 0.3203125,
+   "train_ce": 0.9231749176979065,
+   "train_d2_acc": 0.609375,
+   "train_d31_acc": 0.328125,
+   "train_d7_acc": 0.4296875,
+   "wall_seconds": 59.54539169999771
+  },
+  {
+   "block_visits": 42000,
+   "cpu_seconds": 100.71875,
+   "step": 3000,
+   "train_bind_d7_acc": 0.734375,
+   "train_ce": 0.3413647711277008,
+   "train_d2_acc": 0.83984375,
+   "train_d31_acc": 0.3515625,
+   "train_d7_acc": 0.796875,
+   "wall_seconds": 95.59001789998729
+  },
+  {
+   "block_visits": 55998,
+   "cpu_seconds": 135.84375,
+   "step": 4000,
+   "train_bind_d7_acc": 0.9296875,
+   "train_ce": 0.01411446277052164,
+   "train_d2_acc": 1.0,
+   "train_d31_acc": 0.35546875,
+   "train_d7_acc": 0.92578125,
+   "wall_seconds": 131.55021109999507
+  },
+  {
+   "block_visits": 69998,
+   "cpu_seconds": 169.671875,
+   "step": 5000,
+   "train_bind_d7_acc": 0.9453125,
+   "train_ce": 0.0033308237325400114,
+   "train_d2_acc": 0.98828125,
+   "train_d31_acc": 0.43359375,
+   "train_d7_acc": 0.91796875,
+   "wall_seconds": 160.03559019998647
+  },
+  {
+   "block_visits": 84000,
+   "cpu_seconds": 203.265625,
+   "step": 6000,
+   "train_bind_d7_acc": 0.9609375,
+   "train_ce": 0.026022188365459442,
+   "train_d2_acc": 0.9921875,
+   "train_d31_acc": 0.30859375,
+   "train_d7_acc": 0.93359375,
+   "wall_seconds": 188.7226360999921
+  }
+ ],
+ "memory": {
+  "cap_bytes": 6442450944,
+  "current_tree_rss_bytes": 449425408,
+  "enforced": true,
+  "enforcement_mechanism": "windows_job_object",
+  "host_available_bytes_min": 10163118080,
+  "peak_job_commit_bytes": 1730191360,
+  "peak_tree_rss_bytes": 449425408,
+  "platform": "Windows 11",
+  "process_cpu_seconds": 208.828125,
+  "semantics": "Win32 Job Object hard commit-memory cap (JOB_OBJECT_LIMIT_JOB_MEMORY) across current process and all descendants, paired with psutil tree RSS and host available-RAM monitoring",
+  "wall_seconds": 194.9736362999829
+ },
+ "parameter_count": 5380,
+ "root": 29304,
+ "source_hashes": {
+  "mechinterp/bpd/components.py": "388cb539cccb87ae65d56e5fbae175d6aee138df24d1bab43cde755156b748a5",
+  "mechinterp/bpd/config.py": "d5773cdac66f55b8a8c152030d679324f0270954dd3a081176a454d5dc6f1621",
+  "mechinterp/bpd/experiments/sccg10_mms_trm/__init__.py": "0fc6bdee427688ad87d0c0dc06e9bc370268b3a3a149a59d8db50f148b7d2432",
+  "mechinterp/bpd/experiments/sccg10_mms_trm/analysis.py": "5b61b8660dff244e87d42d0748309983e1ae82e640f94d489769b218f4d2e217",
+  "mechinterp/bpd/experiments/sccg10_mms_trm/atlas.py": "231eaf975f87c03ab48f2f1814800bbe57232243a9514b988e2d921f36106c9d",
+  "mechinterp/bpd/experiments/sccg10_mms_trm/batched_preview.py": "a716dbc55557964048b74152ff7b106a5c987269727c9da0f5132ae2125430c4",
+  "mechinterp/bpd/experiments/sccg10_mms_trm/common.py": "9903108f39cecc6236bc84cc476f1a91b5b7fef2a6c7eacf49245b11e4b66bca",
+  "mechinterp/bpd/experiments/sccg10_mms_trm/drift.py": "b28d3f87ac3ec1f2d4b14a8829eec7f244fa7aec6db178b3e955ec80a4e053a4",
+  "mechinterp/bpd/experiments/sccg10_mms_trm/economics.py": "f474ff063b19e1d9e6c341f2f53156288e5b1d59231bb921ae9584e804a856a9",
+  "mechinterp/bpd/experiments/sccg10_mms_trm/export_datagoblin.py": "bbff259e142124ed63af9b46c96d509c1fe3bb311fbf25ed018784239a622c5c",
+  "mechinterp/bpd/experiments/sccg10_mms_trm/freeze.py": "017ce440a4d6935051d5bf685d78bf9870190965436c46b071846c4fbbcdda96",
+  "mechinterp/bpd/experiments/sccg10_mms_trm/geometry.py": "74662f3aca1eaf94d7138a8327d463f7d49a779b31ef2d870348eb994420ab8b",
+  "mechinterp/bpd/experiments/sccg10_mms_trm/replay.py": "780151bc5e53b497eb21b7829fedaef3cbb017d2d75705302ddfadb76f903dda",
+  "mechinterp/bpd/experiments/sccg10_mms_trm/test_mms.py": "d8a55ab9f37822fd663009bd5b4428498b945fa874c651a8683c0a15066a6e15",
+  "mechinterp/bpd/experiments/sccg10_mms_trm/warmup_fresh.py": "98969fd0b55ac70d7afb94a70fd3927250b92e6957a41efd5a2e92b21f4eba7c",
+  "mechinterp/bpd/experiments/sccg10_native_mms/PROTOCOL.md": "11552e15d7dc204c07492a28a2808ed0acd1fbcdedad35873a935d3e8e929334",
+  "mechinterp/bpd/experiments/sccg10_native_mms/THEORY.md": "732be75096a5f5e5c1e8b4b710281e70eb8cf70bf468485812233b5b2527d26d",
+  "mechinterp/bpd/experiments/sccg10_native_mms/admission.py": "e807271514e4b4afca5ab1d146e9f7b606ea31bc0653c7bb9c8bdbccf25d0041",
+  "mechinterp/bpd/experiments/trm_curation/cache.py": "48c74cadbedc6abeb037f9ce5c24c22a623e68668cd92bb864567599395d8af9",
+  "mechinterp/bpd/experiments/trm_curation/campaign.py": "e0668b7aed904cd79d57eb48ba082f81c9906b2e33fa68fa3b9be43126380651",
+  "mechinterp/bpd/experiments/trm_curation/data.py": "794a19b505317a6b97e9df2636c0d1188343d6aa2f7646c7423e9b55ea9a0954",
+  "mechinterp/bpd/experiments/trm_curation/memory_cap.py": "7c176d56b42b82d7f0a6a8b0b14154b524581c105bcb9a5e99daff334d052ebc",
+  "mechinterp/bpd/experiments/trm_curation/model.py": "c001ffc270f6b585d6ceaf2d65f3b90b76ed6f2992585c6ab85df8f251dc850e",
+  "mechinterp/bpd/experiments/trm_curation/observer.py": "62ff37375e9122eb3db9d08386d01ee5755f34a0a948e056e5037ac5ca5b4e42",
+  "mechinterp/bpd/experiments/trm_curation/reference.py": "58440d66445528404999770c20adef3a573d2ae673c64fbd56885ea02396a983",
+  "mechinterp/bpd/experiments/trm_curation/scheduler.py": "76f033faaa2c81d3b40ec41dc0b478ed33be7dd6dc345d5356b63c869cedb652",
+  "mechinterp/bpd/experiments/trm_curation/signal_bank.py": "bba394838a1a97dd08231874298233ffc99252c3b4116e0b63e085f92c453267",
+  "mechinterp/bpd/experiments/trm_curation/transaction.py": "6f8a472b898e989c37bb4702c797af38bdeff6b162e7adf27ecdd4f3665857eb"
+ },
+ "state_sha256": "95be0f58281ee88e9ac3958d97a705915b9b7d5e6edf747f39b676148b2fedf4",
+ "total_block_visits": 84000,
+ "total_examples": 576000,
+ "train_eval": {
+  "binding": {
+   "2": {
+    "accuracy": 1.0,
+    "batch_sha256": "a12f63a87784e102d4c3567d05323da7518150c092f46ba7c8f196e76a72e824",
+    "correct_count": 256,
+    "cross_entropy": 0.0006331524928100407,
+    "delay": 2,
+    "n": 256
+   },
+   "31": {
+    "accuracy": 0.37109375,
+    "batch_sha256": "6cde2ede2ad696287e3c4b4535051d880a7d89868bf914102c74373a5ecbffc7",
+    "correct_count": 95,
+    "cross_entropy": 4.48040246963501,
+    "delay": 31,
+    "n": 256
+   },
+   "7": {
+    "accuracy": 0.9765625,
+    "batch_sha256": "014ecd08eeec6f59a904a02492d6a1cb76ee64125673ceec2fa2ef7232f6961f",
+    "correct_count": 250,
+    "cross_entropy": 0.07833431661128998,
+    "delay": 7,
+    "n": 256
+   }
+  },
+  "delays": {
+   "127": {
+    "accuracy": 0.2421875,
+    "batch_sha256": "ed539a9ab142ef83927f36d5c7ef61cc3e17a38d3bb8325fb0bc115921767360",
+    "correct_count": 124,
+    "cross_entropy": 6.495187282562256,
+    "delay": 127,
+    "n": 512
+   },
+   "2": {
+    "accuracy": 0.994140625,
+    "batch_sha256": "b813fd2a4540c09d2b8e3660702cd622865ad6b36eab65daf36a170e1ad0201d",
+    "correct_count": 509,
+    "cross_entropy": 0.027891673147678375,
+    "delay": 2,
+    "n": 512
+   },
+   "31": {
+    "accuracy": 0.400390625,
+    "batch_sha256": "e1a548cab84fc85678bc75b9da8bd0bd6b17f8f98bd399eed98f5396be9a4996",
+    "correct_count": 205,
+    "cross_entropy": 4.307811260223389,
+    "delay": 31,
+    "n": 512
+   },
+   "63": {
+    "accuracy": 0.259765625,
+    "batch_sha256": "8efd879912797e2fdbc1b70e9edb86731b052110195d762aa1d60508d38a2943",
+    "correct_count": 133,
+    "cross_entropy": 6.068941116333008,
+    "delay": 63,
+    "n": 512
+   },
+   "7": {
+    "accuracy": 0.931640625,
+    "batch_sha256": "8d1ee9ff9342f7b5025db2653452e6479a9e376d13591cc004a1a9bc10638cb1",
+    "correct_count": 477,
+    "cross_entropy": 0.2422061264514923,
+    "delay": 7,
+    "n": 512
+   }
+  }
+ },
+ "updates": 6000,
+ "visits_per_token": 2,
+ "wall_seconds": 188.72273109998787
+}

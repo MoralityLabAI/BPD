@@ -1,11 +1,64 @@
-# SCCG-10 / MMS-TRM engineering results
+# SCCG-10 / MMS-TRM results
 
-Evidence class: `ENGINEERING_ONLY` (fresh roots 29200/29201; historical
-CURATE-02 roots 28000/28001 used only for replay-style drift description).
-No development root had been warmed or scored when these results were written.
-The development protocol is frozen in `DEV_PROTOCOL.md` / `DEV_LOCK.json`;
-development outcomes, if present, are in `results/development` and reported
-separately below.
+Evidence classes: `ENGINEERING_ONLY` for fresh roots 29200/29201 (historical
+CURATE-02 roots 28000/28001 were used only to describe drift), and
+`DEVELOPMENT_ONLY` for roots 29301..29308. The development cohort ran after
+`DEV_LOCK.json` was committed and pushed (`75a0a98`), under the lock check in
+`economics.py`. The EvalMath preflight is `REDESIGN_OR_PILOT_ONLY` for both,
+and no confirmatory claim is made.
+
+## Development cohort (frozen protocol, 8 roots)
+
+**The strongest ordinary baseline wins at equal CPU.** Primary contrast, fixed
+CPU, delay 31, D_atlas minus A_ordinary: **−3.20 pp** (3 roots positive, 5
+negative; exact sign-flip p = 0.375; Holm p = 1.0; root bootstrap 95% CI
+[−8.89, +1.88] pp).
+
+| Contrast (fixed CPU, d31) | mean | +/− roots | sign-flip p | Holm p | bootstrap 95% CI |
+|---|---:|---:|---:|---:|---|
+| D − A (primary) | −3.20 pp | 3 / 5 | 0.375 | 1.000 | [−8.89, +1.88] |
+| D − C | +0.56 pp | 5 / 2 | 0.625 | 1.000 | [−1.39, +2.27] |
+| D − B | −3.22 pp | 2 / 6 | 0.086 | 0.344 | [−6.25, −0.29] |
+| D − E | +0.95 pp | 5 / 3 | 0.367 | 1.000 | [−0.54, +2.64] |
+
+8-root means (ordinary, steering disabled, 512 cases per delay per root):
+
+| Arm | budget | d2 | d7 | d31 | d63 | d127 | bind d31 | windows | accepted |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| A_ordinary | updates | 99.02 | 95.26 | 39.99 | 32.69 | 28.86 | 45.75 | 80 | 80 |
+| B_ord_grad | updates | 98.97 | 95.48 | 44.14 | 31.47 | 28.39 | 52.10 | 80 | 29 |
+| C_mech_fresh | updates | 98.90 | 95.48 | 42.36 | 31.57 | 28.08 | 48.49 | 80 | 30 |
+| D_atlas | updates | 99.12 | 95.70 | 40.14 | 30.27 | 27.51 | 43.80 | 80 | 50 |
+| E_shuffled | updates | 98.75 | 94.34 | 41.19 | 30.42 | 27.83 | 46.00 | 80 | 30 |
+| F_obs_only | updates | 99.02 | 95.26 | 39.99 | 32.69 | 28.86 | 45.75 | 80 | 80 |
+| A_ordinary | cpu | 98.68 | 95.39 | 45.17 | 28.96 | 25.68 | 49.95 | 1374 | 1374 |
+| B_ord_grad | cpu | 99.05 | 95.85 | 45.19 | 32.54 | 28.39 | 50.05 | 321 | 52 |
+| C_mech_fresh | cpu | 99.05 | 95.87 | 41.41 | 30.74 | 26.49 | 48.44 | 299 | 53 |
+| D_atlas | cpu | 98.63 | 95.21 | 41.97 | 30.62 | 27.73 | 41.26 | 380 | 92 |
+| E_shuffled | cpu | 98.68 | 94.26 | 41.02 | 29.35 | 27.66 | 48.29 | 280 | 64 |
+| F_obs_only | cpu | 99.15 | 94.68 | 45.19 | 32.79 | 28.93 | 48.39 | 260 | 260 |
+
+Per-root fixed-CPU d31 (%): 29301 A 40.8 / D 44.5; 29302 38.3 / 44.1;
+29303 43.0 / 39.6; 29304 51.8 / 37.1; 29305 43.9 / 40.8; 29306 49.0 / 32.2;
+29307 37.7 / 41.0; 29308 56.8 / 56.2.
+
+* At fixed updates, ordinary gradient curation (+4.15 pp) and fresh
+  mechanistic curation (+2.37 pp) beat uniform, the CURATE-02 pattern. At
+  equal CPU, B ties A (45.19% vs 45.17%) and C falls 3.76 pp behind A. Per-update
+  efficiency does not survive the audit cost, even with batched previews.
+* The atlas did not help the mechanistic policy (D − C +0.56 pp, CI spans 0).
+  It did not beat its shuffled-mechanism sham (D − E +0.95 pp, CI spans 0).
+* Exact parity held on all 8 roots: batched C reproduced the transactional
+  C_probe SHA (21.6–27.7 vs 120.9–142.4 CPU-s), and F_obs_only reproduced A
+  bitwise at 80 windows.
+* All 8 warmups passed the competence gate (191.6–203.6 CPU-s).
+* EvalMath preflight: `REDESIGN_OR_PILOT_ONLY` (heldout unsealed, sham
+  quantile uncalibrated, pilot effect not above the variation floor,
+  confirmation underpowered). It estimates about 32 roots for 80% power;
+  the approximate resolvable effect with 8 roots is 14.9 pp.
+* Limiting cost: an audited window still costs several plain windows, and the
+  audit buys mostly gating against misaligned short-delay updates. Ordinary
+  reinvestment captures the same d31 on average with no mechanism.
 
 Source: branch `research/sccg10-mms-drift-20261127`, base CURATE-02
 `af43e48` merged with BPD main `ab93e4d` (SCCG-01..09) and PR 175 `41a06e8`
@@ -34,15 +87,16 @@ Mathematics: `MATH_REVIEW.md`. Lean: MathCan `f0e6154`.
    share with selection-identical results (same fixed-update SHAs as
    CURATE-02's transactional probe on both roots, at 2.2–3.0× lower total arm
    CPU, and 4.4–5.1× against the full `probe_update`).
-5. **The primary engineering contrast (D atlas vs A ordinary at equal CPU) has
-   mixed signs on two roots in both passes.** Transactional: −1.8 and −6.6 pp.
-   Batched: −0.8 and +2.5 pp. Holm p = 1.0. EvalMath returns
-   `REDESIGN_OR_PILOT_ONLY`. No advantage is claimed.
+5. **Primary result: ordinary reinvestment wins.** D atlas vs A ordinary at
+   equal CPU is −3.20 pp on the frozen 8-root development cohort (3/5 roots,
+   Holm p = 1.0). Engineering had mixed signs on two roots. No advantage is claimed.
 6. **The limiting factor is alignment, not compute.** After warmup, training-delay
-   (1–3) updates rarely improve the delay-15 feedback objective. Curated arms
-   act mostly as a gate that rejects updates harmful to long-delay memory, and
-   reinvesting compute in ordinary training *lowers* d31 on both roots
-   (A: 80 updates 32.0% / 45.7% → about 1,780 updates 27.9–28.5% / 43.0–43.2%).
+   (1–3) updates rarely improve the delay-15 feedback objective, and curated arms
+   act mostly as a gate that rejects updates harmful to long-delay memory. Whether
+   extra ordinary updates help d31 is root-dependent. On the two engineering
+   roots reinvestment lowered d31 (80 updates 32.0% / 45.7% → about 1,780 updates
+   27.9–28.5% / 43.0–43.2%). On the 8 development roots it raised the mean
+   (39.99% → 45.17%), which is why ordinary reinvestment won the primary contrast.
 
 ## Verification
 
