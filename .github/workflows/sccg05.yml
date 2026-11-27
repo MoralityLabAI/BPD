@@ -1,0 +1,26 @@
+name: SCCG05 rare circuit search
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/experiments/sccg01/circuit_search.py'
+      - '.github/workflows/sccg05.yml'
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/sccg01/circuit_search.py'
+      - '.github/workflows/sccg05.yml'
+permissions:
+  contents: read
+jobs:
+  exact:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: python mechinterp/bpd/experiments/sccg01/circuit_search.py --output sccg05_receipt.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sccg05-receipt
+          path: sccg05_receipt.json
