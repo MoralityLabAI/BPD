@@ -1,0 +1,63 @@
+{
+  "scope": "SELECTED_ZERO_SLACK_SECOND_QUOTIENT_EXCLUSIONS",
+  "new_classes": 128,
+  "new_labeled": 262,
+  "total_classes": 416,
+  "total_labeled": 1235,
+  "remaining": 1860348,
+  "normalized_witnesses": 212,
+  "raw_pair_ops": 3582447,
+  "independent_raw_witnesses": 2332,
+  "independent_raw_pair_ops": 14956689,
+  "arms": {
+    "baseline": {
+      "central": 338278886,
+      "integer": 365943,
+      "user_cpu_seconds": 45.16,
+      "peak_rss_kib": 132884
+    },
+    "mod27": {
+      "central": 326909124,
+      "integer": 356512,
+      "user_cpu_seconds": 59.04,
+      "peak_rss_kib": 132888,
+      "tests": 268822,
+      "rejections": 19677,
+      "avoided": 11369762
+    },
+    "index": {
+      "central": 338278886,
+      "integer": 365943,
+      "user_cpu_seconds": 44.91,
+      "peak_rss_kib": 214804,
+      "indexed_visits": 83176610,
+      "scan_visits": 1779253248
+    },
+    "dot": {
+      "central": 338278886,
+      "integer": 365943,
+      "user_cpu_seconds": 48.3,
+      "peak_rss_kib": 132888,
+      "tests": 268822,
+      "empty": 0,
+      "avoided": 0,
+      "dot_bin_ops": 537644
+    }
+  },
+  "all_arms_hits": 0,
+  "all_arms_skips": 0,
+  "direct_vector_replay": {
+    "witnesses": 8,
+    "pair_ops": 38669266,
+    "hits": 0
+  },
+  "synthetic_test": {
+    "tests": 3000,
+    "positives": 2427,
+    "negatives": 573,
+    "stronger_than_mod9": 217,
+    "brute_controls": 512,
+    "assertions": 196014
+  },
+  "archive_sha256": "fa5c9486fc336050120e8f1ca8d9214f7c1b88fb78bbb636c0c7c227ec6c3bfe"
+}
