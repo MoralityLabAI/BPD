@@ -1,0 +1,27 @@
+name: SCCG07 robust atlas certificate
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/experiments/sccg01/robust_atlas.py'
+      - '.github/workflows/sccg07.yml'
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/sccg01/robust_atlas.py'
+      - '.github/workflows/sccg07.yml'
+permissions:
+  contents: read
+jobs:
+  exact:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: python mechinterp/bpd/experiments/sccg01/robust_atlas.py --output robust_receipt.json
+      - run: sha256sum robust_receipt.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sccg07-robust-receipt
+          path: robust_receipt.json
