@@ -1,0 +1,29 @@
+# HAD-08: modular support theorem and sparse CRT constraints
+
+2026-11-27. Continues HAD-07. Exact mathematics and development computation only. No neural training, external model consultation, Lean compilation, new Hadamard order, or whole-family UNSAT claim.
+
+For the remaining order-12 invariant width-four core at order 2396, use Z2 x Z299 and the ternary channels U,V. They have complementary support, H6(Z13) x inversion(Z23) symmetry, and PAF targets 599 delta - 2J and 599 delta. Inversion makes autocorrelation a group-ring square.
+
+## Modulo four and eight
+
+Write V_i=P_i-2N_i, with P_i the support and N_i the negative-entry indicator. Modulo 2, sum P_i=1 (delta) by injectivity of Frobenius. Modulo 4, sum P_i^2=599 delta. The integral sum P_i is delta mod2, hence its square is delta mod4. Expanding gives sum_{i<j} P_i P_j=1 mod2. Set s=P1+P2,w=P1+P3. All ordered supports are (t,t+s,t+w,t+s+w+1), with t=1+s+w+s^2+w^2+sw in F2[Z299]. Expanding the pair sum proves both directions. There are 36 orbit bits per s,w, hence 2^72 support tuples before mass. Inversion gives t(0)=1+s(0)w(0), enforcing three V rows at zero. With V mass 599, complementary U obeys its mod4 condition too.
+
+For fixed support the mod8 sign equation is sum(N_i^2+P_i N_i)=(target-sum P_i^2)/4 mod2. This is linear in active orbit sign bits. Exact small controls (q=3,5,7,9) match the support parameterization and brute-force sign counts. All 12 historical local-lift masks fail mod4. A 50,000-mask sample yields 1555 mass-compatible masks, 1120 both-channel mod8-solvable, 39 matching prior quotient margins, and 19 joint signed witnesses from 78 bounded syndrome joins. All fail the second quotient's exact energy constraint. No failed mask excludes its entire quotient sector.
+
+## Second CRT quotient
+
+For each q23 position and row, a,b,c are signed coordinate unit vectors in two channels, with p13 orbit weights 1,6,6. S=a+6(b+c), D=b+c. Norm identity: |S|^2=1+12(3|D|^2+a·D). Sum over 92 row positions gives 1172, or scaled excess 90, because the second quotient norms are 573 and 599. When b,c occupy different channels the energy is at least 61, hence 92+60M<=1172 or M<=18. More generally M+2C<=18, with C the equal-sign same-channel positions. An exact bitset DP of scaled excess and row sums of (a_U,a_V,D_U,D_V) retains 5071/10067 normalized first-quotient pairs; intersecting with HAD07 local feasibility gives 2517/2571, all 12 U sectors. This is a necessary relaxation, not a joint witness.
+
+## Exact sparse support count
+
+Let tau exchange the two nonzero p13 classes R,N. Their group-ring products are R^2=6I+2R+3N, N^2=6I+3R+2N, RN=3(R+N). In char2, e=R+N is idempotent. Differences d_s=s+tau(s), etc., are identified with symmetric F2[Z23] elements by extracting the R coefficient. At each q23 position with (d_s,d_w) nonzero exactly two rows disagree; otherwise four disagree iff d_t=1. M=2W+4L where W is the weighted union size and L is weighted outside-union support of d_t.
+
+Fix d_s,d_w. There are 48 remaining binary degrees of freedom in s,w. The affine variation of d_t is x*d_w+y*d_s with x,y arbitrary in the symmetric Z23 ring K, since multiplication by aI+b e on the e ideal acts as (a+b). The standalone finite audit checks all 4096 K elements: ranks 0:1, 1:1, 11:2047, 12:2047. Nonzero non-J elements have rank 12 for singleton bit 1, rank 11 (augmentation-zero image) otherwise. W<=9 precludes J for nonzero d_s,d_w. If union singleton a=1, d_t varies over K; if a=0 and W>0, over the augmentation-zero space (affine constant also has zero singleton). Zero union gives d_t=0 and 2^48 choices.
+
+For a in {0,1}, k active inversion pairs, W=a+2k<=9, nonempty union has binom(11,k)*3^(a+k) ordered difference pairs. Allowed d_t count is 2^(a+k)*sum_{j=0}^{floor((18-2W)/8)} binom(11-k,j). Each has 2^36 preimages if a=1 and 2^37 otherwise. Adding the zero union gives 266306251732811776 = 2^57.8858639103 labeled supports before imposing mass. The closed count and direct count over 1123 union masks agree. This is an upper bound on valid supports at least 44.1376 bits below HAD07's mass/parity count. See sparse_count_standalone.py, whose executed local Git blob is 5053f5c26df2f9aad0c3b244032f6870626d65e9.
+
+## Targeted search and remaining work
+
+Sparse-difference affine sampling at seed 87201, 30000 draws, produced 920 distinct mass-compatible masks; 18 matched the first compatible row permutation and catalogue/standalone mod8 feasibility, giving 571 fixed labeled mask-and-margin pairs. Complete per-row sign banks and integer second-quotient/syndrome joins exclude all on U alone: 333 by minimum norm and 238 by exact matching. Caching requires 26 distinct U searches; no caps hit. This is not exhaustive over all supports or row permutations. Initial targeted sampler failed a bound assertion from applying a difference operator twice; corrected by extracting the R coefficient. 24 synthetic positive matcher controls, 24 cap controls, 19 direct mod8 witness checks and full roster audit passed (807 counted assertions). The full local archive HAD08_modular_lifting.zip contains the complete sources and raw receipts, including failures and hashes; only the standalone count and this report are published here.
+
+The next search should construct the low-energy Z23 quotient first, then lift to Z13 and the mixed CRT equations. For row orbit columns A,B,C in the symmetric ring put S=A+6(B+C), T=2A-B-C, E=B-C. Exact equivalent targets are sum S_U^2=599 delta-26J, sum S_V^2=599 delta, and for both channels sum TE=0 and sum(T^2+13E^2)=2396 delta. Integer checks against full convolution passed (17664 scalar identities). Further exact filters should use these mixed constraints. DataGoblin can use the modular theorem as a certified operation, with no learned mechanism claim until controlled development and EvalMath preflight. All unrelated sealed cohorts preserved.
