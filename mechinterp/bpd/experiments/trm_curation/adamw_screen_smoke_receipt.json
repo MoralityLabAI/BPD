@@ -1,0 +1,12 @@
+{
+  "scope": "synthetic dense CPU AdamW parity, not ComponentTRM training",
+  "torch_version": "2.10.0+cpu",
+  "cases": 96,
+  "max_abs_displacement_error": 0,
+  "max_abs_linear_score_error": 0,
+  "parameter_optimizer_grad_rng_restoration": "PASS",
+  "tested_git_blobs": {
+    "screen": "8de9edb39af6545001a6c1371edbe5276bbbdfcf",
+    "smoke": "c041b12ea7a8ab3665663cf041b6ace3ae103adc"
+  }
+}

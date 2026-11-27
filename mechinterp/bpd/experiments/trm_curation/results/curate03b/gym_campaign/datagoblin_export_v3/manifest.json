@@ -1,0 +1,74 @@
+{
+  "action_counts": {
+    "ABSTAIN": 93,
+    "ACQUIRE_12": 2895,
+    "ACQUIRE_16": 2802,
+    "ACQUIRE_4": 13329,
+    "ACQUIRE_8": 2895,
+    "FAST_SCREEN_K4": 10434,
+    "LOSS_POOL_2X": 19720,
+    "REINVEST_CPU": 27237,
+    "SELECT_BATCH": 32956,
+    "SWAP_EDGE": 959,
+    "VERIFY_BATCH": 2802
+  },
+  "action_vocabulary": [
+    "ACQUIRE_4",
+    "ACQUIRE_8",
+    "ACQUIRE_12",
+    "ACQUIRE_16",
+    "ABSTAIN",
+    "SELECT_BATCH",
+    "SWAP_EDGE",
+    "VERIFY_BATCH",
+    "LOSS_POOL_2X",
+    "FAST_SCREEN_K4",
+    "REINVEST_CPU"
+  ],
+  "counts": {
+    "audited_abstentions": 18,
+    "exported_decision_rows": 13329,
+    "unaudited_abstentions": 75,
+    "windows": 60286
+  },
+  "evidence_class": "DEVELOPMENT_ONLY",
+  "experiment": "BPD-TRM-GYM-01",
+  "files": {
+    "horizon_outcomes_gym_v3.jsonl": {
+      "bytes": 90906,
+      "sha256": "665b241f110036dfc52d30896b8385ba6e7dee824e8bf13f28ce2497488cd71c",
+      "stored_as": "horizon_outcomes_gym_v3.jsonl"
+    },
+    "trajectories_gym_v3.jsonl": {
+      "bytes": 16601382,
+      "gz_sha256": "703053bd70d394278a10f1701357709efbc9e63bab6dfda54f81f70873209eb4",
+      "sha256": "2664e1d3d6c186db059d43958a621e3ee5ab3ae135e3e88f99cb6c742d5287b6",
+      "stored_as": "trajectories_gym_v3.jsonl.gz"
+    },
+    "unit_costs_gym_v3.json": {
+      "bytes": 810,
+      "sha256": "032d60615107f5313a7affa95ca2409102e83c7e0f7ff3cb563505cac467e8bf",
+      "stored_as": "unit_costs_gym_v3.json"
+    }
+  },
+  "missingness": "null + status; unaudited abstentions stay missing_unaudited, never zero",
+  "roots": [
+    29201,
+    29202,
+    29203,
+    29204,
+    29205,
+    29206,
+    29207,
+    29208
+  ],
+  "schema": "bpd-trm-gym01-datagoblin-v3",
+  "split": "train",
+  "tasks": [
+    "E29_dyck1_bounded_depth",
+    "E31_2hop_pointer_chase",
+    "E28_dynamic_overwrite_register",
+    "E27_copy_retrieve_2slot",
+    "G05_3slot_copy_retrieve"
+  ]
+}

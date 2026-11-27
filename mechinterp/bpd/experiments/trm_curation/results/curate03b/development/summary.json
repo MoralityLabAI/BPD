@@ -1,0 +1,2183 @@
+{
+  "arm_means": {
+    "A_uniform_reinvest": {
+      "abstained_windows": 0,
+      "audit_cpu_inclusive": 0.0,
+      "bind31": 0.48681640625,
+      "candidates_acquired": 0,
+      "committed_updates": 1857.25,
+      "cpu_by_category": {
+        "acceptance_step": 54.947265625,
+        "batch_materialization": 9.814453125,
+        "controller": 17.142578125,
+        "proposal": 7.546875
+      },
+      "cpu_seconds": 100.015625,
+      "d127": 0.28466796875,
+      "d2": 0.99072265625,
+      "d31": 0.472412109375,
+      "d63": 0.347900390625,
+      "exposure_resets": 5.625,
+      "max_overshoot_cpu_seconds": 0.03125,
+      "peak_tree_rss_mib": 394.140625,
+      "protected_corruption": 0.28979591802696875,
+      "rejected_windows": 0,
+      "transport": 0.4583333333333333,
+      "windows": 1857.25
+    },
+    "B_transactional": {
+      "abstained_windows": 0,
+      "audit_cpu_inclusive": 0.0,
+      "bind31": 0.4833984375,
+      "candidates_acquired": 1142,
+      "committed_updates": 18.125,
+      "cpu_by_category": {
+        "acceptance_step": 1.923828125,
+        "batch_materialization": 1.77734375,
+        "controller": 0.654296875,
+        "feedback_eval": 3.443359375,
+        "feedback_gradient": 3.458984375,
+        "proposal": 0.376953125,
+        "provenance": 0.177734375,
+        "transactional_probe": 87.95703125,
+        "verification": 0.298828125
+      },
+      "cpu_seconds": 100.923828125,
+      "d127": 0.27294921875,
+      "d2": 0.979736328125,
+      "d31": 0.44384765625,
+      "d63": 0.325927734375,
+      "exposure_resets": 0,
+      "max_overshoot_cpu_seconds": 1.8125,
+      "peak_tree_rss_mib": 381.35546875,
+      "protected_corruption": 0.24539331003354764,
+      "rejected_windows": 53.25,
+      "transport": 0.4192708333333333,
+      "windows": 71.375
+    },
+    "C_analytic_ord": {
+      "abstained_windows": 0,
+      "audit_cpu_inclusive": 0.0,
+      "bind31": 0.484375,
+      "candidates_acquired": 2604,
+      "committed_updates": 37,
+      "cpu_by_category": {
+        "acceptance_step": 4.29296875,
+        "analytic_scoring": 10.71875,
+        "batch_materialization": 3.625,
+        "candidate_gradient": 65.23046875,
+        "controller": 1.744140625,
+        "feedback_eval": 4.638671875,
+        "feedback_gradient": 4.03125,
+        "proposal": 0.818359375,
+        "provenance": 0.41796875,
+        "verification": 1.591796875
+      },
+      "cpu_seconds": 100.177734375,
+      "d127": 0.2802734375,
+      "d2": 0.98681640625,
+      "d31": 0.46484375,
+      "d63": 0.34033203125,
+      "exposure_resets": 0,
+      "max_overshoot_cpu_seconds": 0.609375,
+      "peak_tree_rss_mib": 397.69921875,
+      "protected_corruption": 0.2912655072908687,
+      "rejected_windows": 125.75,
+      "transport": 0.4479166666666667,
+      "windows": 162.75
+    },
+    "D_analytic_mech": {
+      "abstained_windows": 0,
+      "audit_cpu_inclusive": 0.0,
+      "bind31": 0.47021484375,
+      "candidates_acquired": 2540,
+      "committed_updates": 27.375,
+      "cpu_by_category": {
+        "acceptance_step": 4.173828125,
+        "analytic_scoring": 10.310546875,
+        "batch_materialization": 3.42578125,
+        "candidate_gradient": 62.626953125,
+        "controller": 1.4921875,
+        "feedback_eval": 7.412109375,
+        "feedback_gradient": 5.04296875,
+        "proposal": 0.732421875,
+        "provenance": 0.47265625,
+        "verification": 1.603515625
+      },
+      "cpu_seconds": 100.392578125,
+      "d127": 0.2841796875,
+      "d2": 0.979248046875,
+      "d31": 0.43603515625,
+      "d63": 0.337158203125,
+      "exposure_resets": 0,
+      "max_overshoot_cpu_seconds": 0.65625,
+      "peak_tree_rss_mib": 395.05078125,
+      "protected_corruption": 0.23410492073447575,
+      "rejected_windows": 131.375,
+      "transport": 0.4348958333333333,
+      "windows": 158.75
+    },
+    "E_full16_gate": {
+      "abstained_windows": 96.5,
+      "audit_cpu_inclusive": 1.86328125,
+      "bind31": 0.46826171875,
+      "candidates_acquired": 2830,
+      "committed_updates": 28.875,
+      "cpu_by_category": {
+        "acceptance_step": 2.67578125,
+        "analytic_scoring": 11.419921875,
+        "audit": 0.072265625,
+        "batch_materialization": 3.880859375,
+        "candidate_gradient": 66.1171875,
+        "controller": 1.025390625,
+        "feedback_eval": 4.755859375,
+        "feedback_gradient": 5.302734375,
+        "proposal": 0.837890625,
+        "provenance": 0.45703125,
+        "verification": 0.880859375
+      },
+      "cpu_seconds": 100.259765625,
+      "d127": 0.28564453125,
+      "d2": 0.97998046875,
+      "d31": 0.436279296875,
+      "d63": 0.337158203125,
+      "exposure_resets": 0,
+      "max_overshoot_cpu_seconds": 0.5,
+      "peak_tree_rss_mib": 397.73828125,
+      "protected_corruption": 0.21843539734006528,
+      "rejected_windows": 51.5,
+      "transport": 0.44270833333333337,
+      "windows": 176.875
+    },
+    "F_early12_gate": {
+      "abstained_windows": 136.5,
+      "audit_cpu_inclusive": 6.095703125,
+      "bind31": 0.47705078125,
+      "candidates_acquired": 2758,
+      "committed_updates": 24.125,
+      "cpu_by_category": {
+        "acceptance_step": 2.5625,
+        "analytic_scoring": 11.548828125,
+        "audit": 0.205078125,
+        "batch_materialization": 4.3359375,
+        "candidate_gradient": 65.89453125,
+        "controller": 1.087890625,
+        "feedback_eval": 4.55078125,
+        "feedback_gradient": 4.572265625,
+        "proposal": 1.0546875,
+        "provenance": 0.5703125,
+        "verification": 0.91015625
+      },
+      "cpu_seconds": 100.3046875,
+      "d127": 0.281494140625,
+      "d2": 0.978515625,
+      "d31": 0.439453125,
+      "d63": 0.3330078125,
+      "exposure_resets": 0,
+      "max_overshoot_cpu_seconds": 0.8125,
+      "peak_tree_rss_mib": 400.13671875,
+      "protected_corruption": 0.22708080258400032,
+      "rejected_windows": 45.875,
+      "transport": 0.4375,
+      "windows": 206.5
+    },
+    "G_joint_full16": {
+      "abstained_windows": 59,
+      "audit_cpu_inclusive": 3.544921875,
+      "bind31": 0.443359375,
+      "candidates_acquired": 2394,
+      "committed_updates": 25.25,
+      "cpu_by_category": {
+        "acceptance_step": 2.5546875,
+        "analytic_scoring": 9.8203125,
+        "audit": 0.04296875,
+        "batch_materialization": 3.33203125,
+        "candidate_gradient": 53.943359375,
+        "controller": 0.9921875,
+        "feedback_eval": 4.349609375,
+        "feedback_gradient": 4.15234375,
+        "joint_search": 16.263671875,
+        "proposal": 0.8046875,
+        "provenance": 0.375,
+        "verification": 1.01953125
+      },
+      "cpu_seconds": 100.314453125,
+      "d127": 0.265625,
+      "d2": 0.98046875,
+      "d31": 0.432861328125,
+      "d63": 0.326416015625,
+      "exposure_resets": 0,
+      "max_overshoot_cpu_seconds": 0.578125,
+      "peak_tree_rss_mib": 391.69140625,
+      "protected_corruption": 0.24333160722778582,
+      "rejected_windows": 65.375,
+      "transport": 0.3932291666666667,
+      "windows": 149.625
+    },
+    "H_joint_early12": {
+      "abstained_windows": 74.875,
+      "audit_cpu_inclusive": 6.779296875,
+      "bind31": 0.439453125,
+      "candidates_acquired": 2336.5,
+      "committed_updates": 26.25,
+      "cpu_by_category": {
+        "acceptance_step": 2.484375,
+        "analytic_scoring": 9.697265625,
+        "audit": 0.154296875,
+        "batch_materialization": 3.673828125,
+        "candidate_gradient": 52.56640625,
+        "controller": 1.140625,
+        "feedback_eval": 4.388671875,
+        "feedback_gradient": 4.21484375,
+        "joint_search": 16.8515625,
+        "proposal": 0.884765625,
+        "provenance": 0.453125,
+        "verification": 1.1484375
+      },
+      "cpu_seconds": 100.423828125,
+      "d127": 0.270751953125,
+      "d2": 0.980224609375,
+      "d31": 0.42529296875,
+      "d63": 0.32568359375,
+      "exposure_resets": 0,
+      "max_overshoot_cpu_seconds": 0.90625,
+      "peak_tree_rss_mib": 394.80859375,
+      "protected_corruption": 0.25336314623300593,
+      "rejected_windows": 63.625,
+      "transport": 0.4010416666666667,
+      "windows": 164.75
+    },
+    "I_shuffled": {
+      "abstained_windows": 0,
+      "audit_cpu_inclusive": 0.0,
+      "bind31": 0.45751953125,
+      "candidates_acquired": 2892,
+      "committed_updates": 28.625,
+      "cpu_by_category": {
+        "acceptance_step": 3.984375,
+        "analytic_scoring": 11.6015625,
+        "batch_materialization": 3.916015625,
+        "candidate_gradient": 61.22265625,
+        "controller": 1.97265625,
+        "feedback_eval": 6.96875,
+        "feedback_gradient": 4.341796875,
+        "proposal": 0.84375,
+        "provenance": 0.474609375,
+        "verification": 1.66796875
+      },
+      "cpu_seconds": 100.4140625,
+      "d127": 0.27001953125,
+      "d2": 0.983642578125,
+      "d31": 0.43310546875,
+      "d63": 0.3154296875,
+      "exposure_resets": 0,
+      "max_overshoot_cpu_seconds": 0.640625,
+      "peak_tree_rss_mib": 395.640625,
+      "protected_corruption": 0.25038749501713486,
+      "rejected_windows": 152.125,
+      "transport": 0.44010416666666663,
+      "windows": 180.75
+    },
+    "J_observer_only": {
+      "abstained_windows": 0,
+      "audit_cpu_inclusive": 0.0,
+      "bind31": 0.47119140625,
+      "candidates_acquired": 2598,
+      "committed_updates": 162.375,
+      "cpu_by_category": {
+        "acceptance_step": 3.66796875,
+        "analytic_scoring": 10.201171875,
+        "batch_materialization": 3.423828125,
+        "candidate_gradient": 55.34375,
+        "controller": 1.529296875,
+        "feedback_gradient": 20.373046875,
+        "proposal": 0.845703125,
+        "provenance": 0.466796875,
+        "verification": 1.47265625
+      },
+      "cpu_seconds": 100.392578125,
+      "d127": 0.282958984375,
+      "d2": 0.987060546875,
+      "d31": 0.43505859375,
+      "d63": 0.31787109375,
+      "exposure_resets": 0,
+      "max_overshoot_cpu_seconds": 0.671875,
+      "peak_tree_rss_mib": 399.84765625,
+      "protected_corruption": 0.27534074832524175,
+      "rejected_windows": 0,
+      "transport": 0.44270833333333337,
+      "windows": 162.375
+    }
+  },
+  "budget_cpu_seconds": 100.0,
+  "decision": "REDESIGN_OR_PILOT_ONLY (preserved)",
+  "evalmath_preflight": {
+    "input": {
+      "alpha": "0.05",
+      "confirm_units_planned": 8,
+      "experiment_id": "BPD-TRM-CURATE-03B-development",
+      "heldout_sealed": false,
+      "independent_unit": "independently initialized TRM model root with paired curation descendants",
+      "measurement_resolution": "1/512",
+      "pilot": [
+        {
+          "paired_effect": "-24/512",
+          "sham_effects": [
+            "-3/512"
+          ],
+          "unit_id": "28301"
+        },
+        {
+          "paired_effect": "-2/512",
+          "sham_effects": [
+            "23/512"
+          ],
+          "unit_id": "28302"
+        },
+        {
+          "paired_effect": "-6/512",
+          "sham_effects": [
+            "-33/512"
+          ],
+          "unit_id": "28303"
+        },
+        {
+          "paired_effect": "6/512",
+          "sham_effects": [
+            "-19/512"
+          ],
+          "unit_id": "28304"
+        },
+        {
+          "paired_effect": "-4/512",
+          "sham_effects": [
+            "10/512"
+          ],
+          "unit_id": "28305"
+        },
+        {
+          "paired_effect": "-62/512",
+          "sham_effects": [
+            "-57/512"
+          ],
+          "unit_id": "28306"
+        },
+        {
+          "paired_effect": "-37/512",
+          "sham_effects": [
+            "-45/512"
+          ],
+          "unit_id": "28307"
+        },
+        {
+          "paired_effect": "-33/512",
+          "sham_effects": [
+            "-37/512"
+          ],
+          "unit_id": "28308"
+        }
+      ],
+      "pilot_from_development_only": true,
+      "planned_comparisons": 5,
+      "schema_version": 1,
+      "scientific_min_effect": "0.05",
+      "sham_confidence": "0.95",
+      "sham_quantile": "0.95",
+      "target_effect": "0.10",
+      "units_independent": true
+    },
+    "preflight_sha256": "50e96f3e4725b13a14ca5fcd7675f23931bebf83f3da96122927a84ea8e09aeb",
+    "result": {
+      "approx_resolvable_effect": 0.10417788167214966,
+      "approx_worlds_for_80pct_power": 10,
+      "decision": "REDESIGN_OR_PILOT_ONLY",
+      "experiment_id": "BPD-TRM-CURATE-03B-development",
+      "independent_unit": "independently initialized TRM model root with paired curation descendants",
+      "limits": "Normal-based power is planning only. A zero-effect zero-variance pilot cannot support extrapolating a hypothetical positive effect. Root and sham independence, symmetry, readout sealing, and the scientific effect floor require independent audits. Repeated outcomes within a root are never additional worlds.",
+      "mean_pilot_effect": -0.03955078125,
+      "mechanistic_variation_floor": 0.05,
+      "minimum_exact_sign_test_roots": 7,
+      "observed_worst_sham": 0.111328125,
+      "order_statistic_rank": null,
+      "pilot_world_sigma": 0.04483991455567786,
+      "pilot_worlds": 8,
+      "planned_comparisons": 5,
+      "planned_confirmation_worlds": 8,
+      "reasons": [
+        "heldout_unsealed",
+        "sham_quantile_uncalibrated",
+        "pilot_effect_not_above_mechanistic_variation_floor",
+        "confirmation_underpowered"
+      ],
+      "schema": "EvalMath/mechinterp-power-preflight/v1",
+      "target_effect": 0.1,
+      "upper_sham_quantile": null
+    }
+  },
+  "evidence_class": "DEVELOPMENT_ONLY",
+  "experiment": "BPD-TRM-CURATE-03B",
+  "gates": {
+    "A_uniform_reinvest": {
+      "abstained": 0,
+      "acquired_count_histogram": {
+        "0": 14858
+      },
+      "audited": 0,
+      "audited_would_accept": 0,
+      "ht_estimate_missed_accepts": 0.0,
+      "ht_estimate_missed_positive_gain": 0.0,
+      "unaudited_abstentions_missing": 0,
+      "windows": 14858
+    },
+    "B_transactional": {
+      "abstained": 0,
+      "acquired_count_histogram": {
+        "16": 571
+      },
+      "audited": 0,
+      "audited_would_accept": 0,
+      "ht_estimate_missed_accepts": 0.0,
+      "ht_estimate_missed_positive_gain": 0.0,
+      "unaudited_abstentions_missing": 0,
+      "windows": 571
+    },
+    "C_analytic_ord": {
+      "abstained": 0,
+      "acquired_count_histogram": {
+        "16": 1302
+      },
+      "audited": 0,
+      "audited_would_accept": 0,
+      "ht_estimate_missed_accepts": 0.0,
+      "ht_estimate_missed_positive_gain": 0.0,
+      "unaudited_abstentions_missing": 0,
+      "windows": 1302
+    },
+    "D_analytic_mech": {
+      "abstained": 0,
+      "acquired_count_histogram": {
+        "16": 1270
+      },
+      "audited": 0,
+      "audited_would_accept": 0,
+      "ht_estimate_missed_accepts": 0.0,
+      "ht_estimate_missed_positive_gain": 0.0,
+      "unaudited_abstentions_missing": 0,
+      "windows": 1270
+    },
+    "E_full16_gate": {
+      "abstained": 772,
+      "acquired_count_histogram": {
+        "16": 1415
+      },
+      "audited": 171,
+      "audited_would_accept": 0,
+      "ht_estimate_missed_accepts": 0.0,
+      "ht_estimate_missed_positive_gain": 0.0,
+      "unaudited_abstentions_missing": 601,
+      "windows": 1415
+    },
+    "F_early12_gate": {
+      "abstained": 1092,
+      "acquired_count_histogram": {
+        "12": 1092,
+        "16": 560
+      },
+      "audited": 257,
+      "audited_would_accept": 2,
+      "ht_estimate_missed_accepts": 8.0,
+      "ht_estimate_missed_positive_gain": 0.03438091278076172,
+      "unaudited_abstentions_missing": 835,
+      "windows": 1652
+    },
+    "G_joint_full16": {
+      "abstained": 472,
+      "acquired_count_histogram": {
+        "16": 1197
+      },
+      "audited": 115,
+      "audited_would_accept": 0,
+      "ht_estimate_missed_accepts": 0.0,
+      "ht_estimate_missed_positive_gain": 0.0,
+      "unaudited_abstentions_missing": 357,
+      "windows": 1197
+    },
+    "H_joint_early12": {
+      "abstained": 599,
+      "acquired_count_histogram": {
+        "12": 599,
+        "16": 719
+      },
+      "audited": 154,
+      "audited_would_accept": 3,
+      "ht_estimate_missed_accepts": 12.0,
+      "ht_estimate_missed_positive_gain": 0.2632589340209961,
+      "unaudited_abstentions_missing": 445,
+      "windows": 1318
+    },
+    "I_shuffled": {
+      "abstained": 0,
+      "acquired_count_histogram": {
+        "16": 1446
+      },
+      "audited": 0,
+      "audited_would_accept": 0,
+      "ht_estimate_missed_accepts": 0.0,
+      "ht_estimate_missed_positive_gain": 0.0,
+      "unaudited_abstentions_missing": 0,
+      "windows": 1446
+    },
+    "J_observer_only": {
+      "abstained": 0,
+      "acquired_count_histogram": {
+        "16": 1299
+      },
+      "audited": 0,
+      "audited_would_accept": 0,
+      "ht_estimate_missed_accepts": 0.0,
+      "ht_estimate_missed_positive_gain": 0.0,
+      "unaudited_abstentions_missing": 0,
+      "windows": 1299
+    }
+  },
+  "joint": {
+    "C_analytic_ord": {
+      "accepted_fraction": 0.22734254992319508,
+      "max_rel_l2": 2.212908687242927e-07,
+      "mean_actual_gain": -0.011037647266358641,
+      "mean_predicted_joint_gain": -0.00042362841890577466,
+      "parity_ok_fraction": 1.0,
+      "spearman_predicted_actual": 0.8931546731103193,
+      "verified_windows": 1302
+    },
+    "D_analytic_mech": {
+      "accepted_fraction": 0.17244094488188977,
+      "max_rel_l2": 2.1587960985297574e-07,
+      "mean_actual_gain": -0.07813633520772138,
+      "mean_predicted_joint_gain": -0.038707502619811554,
+      "parity_ok_fraction": 1.0,
+      "spearman_predicted_actual": 0.9176145666490041,
+      "verified_windows": 1270
+    },
+    "E_full16_gate": {
+      "accepted_fraction": 0.359253499222395,
+      "max_rel_l2": 2.1587960985297574e-07,
+      "mean_actual_gain": -0.011238145605772501,
+      "mean_predicted_joint_gain": 0.014998712457738553,
+      "parity_ok_fraction": 1.0,
+      "spearman_predicted_actual": 0.8135160764481801,
+      "verified_windows": 643
+    },
+    "F_early12_gate": {
+      "accepted_fraction": 0.34464285714285714,
+      "max_rel_l2": 2.1805040101647378e-07,
+      "mean_actual_gain": -0.009079750520842415,
+      "mean_predicted_joint_gain": 0.019686853137585975,
+      "parity_ok_fraction": 1.0,
+      "spearman_predicted_actual": 0.8193329242576849,
+      "verified_windows": 560
+    },
+    "G_joint_full16": {
+      "accepted_fraction": 0.2786206896551724,
+      "max_rel_l2": 2.3627188620941441e-07,
+      "mean_actual_gain": -0.01887550090921336,
+      "mean_predicted_improvement": 0.007219980045461644,
+      "mean_predicted_joint_gain": 0.026984293246652868,
+      "parity_ok_fraction": 1.0,
+      "spearman_predicted_actual": 0.6095557280489474,
+      "swap_windows_fraction": 0.496551724137931,
+      "verified_windows": 725
+    },
+    "H_joint_early12": {
+      "accepted_fraction": 0.29207232267037553,
+      "max_rel_l2": 2.3627188620941441e-07,
+      "mean_actual_gain": -0.01752046318478644,
+      "mean_predicted_improvement": 0.00711246197025357,
+      "mean_predicted_joint_gain": 0.028266269374955345,
+      "parity_ok_fraction": 1.0,
+      "spearman_predicted_actual": 0.6175370917773706,
+      "swap_windows_fraction": 0.48956884561891517,
+      "verified_windows": 719
+    },
+    "I_shuffled": {
+      "accepted_fraction": 0.15836791147994467,
+      "max_rel_l2": 2.63044201217014e-07,
+      "mean_actual_gain": -0.045608978878248115,
+      "mean_predicted_joint_gain": -0.015521957130728278,
+      "parity_ok_fraction": 1.0,
+      "spearman_predicted_actual": 0.8086811798493255,
+      "verified_windows": 1446
+    },
+    "J_observer_only": {
+      "max_rel_l2": 2.1928804021696676e-07,
+      "parity_ok_fraction": 1.0,
+      "verified_windows": 1299
+    }
+  },
+  "joint_rounds": 1,
+  "observer_fixed_update_parity": {
+    "28301": {
+      "arms": [
+        "A_uniform_reinvest",
+        "J_observer_only"
+      ],
+      "cpu_seconds": {
+        "A_uniform_reinvest": 2.390625,
+        "J_observer_only": 26.15625
+      },
+      "custody_identical": true,
+      "final_state_sha256": {
+        "A_uniform_reinvest": "9e63f287e74661a95877058683c60bf5d34830a91923ec42532c77a7df892915",
+        "J_observer_only": "9e63f287e74661a95877058683c60bf5d34830a91923ec42532c77a7df892915"
+      },
+      "selections_identical": true,
+      "state_identical": true,
+      "windows": 40
+    },
+    "28302": {
+      "arms": [
+        "A_uniform_reinvest",
+        "J_observer_only"
+      ],
+      "cpu_seconds": {
+        "A_uniform_reinvest": 2.078125,
+        "J_observer_only": 22.609375
+      },
+      "custody_identical": true,
+      "final_state_sha256": {
+        "A_uniform_reinvest": "5c0531674d186d7b9f305aa6bda4c3c29f3e4de449708707c3edd7a5863b6249",
+        "J_observer_only": "5c0531674d186d7b9f305aa6bda4c3c29f3e4de449708707c3edd7a5863b6249"
+      },
+      "selections_identical": true,
+      "state_identical": true,
+      "windows": 40
+    },
+    "28303": {
+      "arms": [
+        "A_uniform_reinvest",
+        "J_observer_only"
+      ],
+      "cpu_seconds": {
+        "A_uniform_reinvest": 2.046875,
+        "J_observer_only": 24.703125
+      },
+      "custody_identical": true,
+      "final_state_sha256": {
+        "A_uniform_reinvest": "cbf966c3923afb1cbf79c079b71f22bd36123a2926f0301ebfb103ce0c61f9fb",
+        "J_observer_only": "cbf966c3923afb1cbf79c079b71f22bd36123a2926f0301ebfb103ce0c61f9fb"
+      },
+      "selections_identical": true,
+      "state_identical": true,
+      "windows": 40
+    },
+    "28304": {
+      "arms": [
+        "A_uniform_reinvest",
+        "J_observer_only"
+      ],
+      "cpu_seconds": {
+        "A_uniform_reinvest": 2.046875,
+        "J_observer_only": 22.640625
+      },
+      "custody_identical": true,
+      "final_state_sha256": {
+        "A_uniform_reinvest": "1079e4572bb327bc5be9c0dd90cc7633cae6a83806cc241235f5bd50cf9b7d95",
+        "J_observer_only": "1079e4572bb327bc5be9c0dd90cc7633cae6a83806cc241235f5bd50cf9b7d95"
+      },
+      "selections_identical": true,
+      "state_identical": true,
+      "windows": 40
+    },
+    "28305": {
+      "arms": [
+        "A_uniform_reinvest",
+        "J_observer_only"
+      ],
+      "cpu_seconds": {
+        "A_uniform_reinvest": 2.0625,
+        "J_observer_only": 26.859375
+      },
+      "custody_identical": true,
+      "final_state_sha256": {
+        "A_uniform_reinvest": "e714fe5fae56f085e0daa5df00ce07f4e5bfb94db1e8e31afcaacae14e02e3f9",
+        "J_observer_only": "e714fe5fae56f085e0daa5df00ce07f4e5bfb94db1e8e31afcaacae14e02e3f9"
+      },
+      "selections_identical": true,
+      "state_identical": true,
+      "windows": 40
+    },
+    "28306": {
+      "arms": [
+        "A_uniform_reinvest",
+        "J_observer_only"
+      ],
+      "cpu_seconds": {
+        "A_uniform_reinvest": 2.015625,
+        "J_observer_only": 25.140625
+      },
+      "custody_identical": true,
+      "final_state_sha256": {
+        "A_uniform_reinvest": "cb9977602e8030541bf190bb166f2b9eaff06bcd637695288397c3bfb9495f64",
+        "J_observer_only": "cb9977602e8030541bf190bb166f2b9eaff06bcd637695288397c3bfb9495f64"
+      },
+      "selections_identical": true,
+      "state_identical": true,
+      "windows": 40
+    },
+    "28307": {
+      "arms": [
+        "A_uniform_reinvest",
+        "J_observer_only"
+      ],
+      "cpu_seconds": {
+        "A_uniform_reinvest": 2.046875,
+        "J_observer_only": 26.125
+      },
+      "custody_identical": true,
+      "final_state_sha256": {
+        "A_uniform_reinvest": "815073274fba060d988d141747dc7f1d0d7cb2aaf893239e5c0f39c41ccd9404",
+        "J_observer_only": "815073274fba060d988d141747dc7f1d0d7cb2aaf893239e5c0f39c41ccd9404"
+      },
+      "selections_identical": true,
+      "state_identical": true,
+      "windows": 40
+    },
+    "28308": {
+      "arms": [
+        "A_uniform_reinvest",
+        "J_observer_only"
+      ],
+      "cpu_seconds": {
+        "A_uniform_reinvest": 2.078125,
+        "J_observer_only": 22.78125
+      },
+      "custody_identical": true,
+      "final_state_sha256": {
+        "A_uniform_reinvest": "8c2c3229408a5a95097275724886106590233ca87ae6a7f1de70b02b25615f31",
+        "J_observer_only": "8c2c3229408a5a95097275724886106590233ca87ae6a7f1de70b02b25615f31"
+      },
+      "selections_identical": true,
+      "state_identical": true,
+      "windows": 40
+    }
+  },
+  "observer_parity_all_identical": true,
+  "primary_contrasts_d31_vs_A_holm": [
+    {
+      "arm": "D_analytic_mech",
+      "baseline": "A_uniform_reinvest",
+      "bootstrap_95": {
+        "approximate": true,
+        "confidence_level": 0.95,
+        "draws": 10000,
+        "familywise_adjusted": false,
+        "lower": -0.058349609375,
+        "method": "seeded_percentile_bootstrap_of_model_roots",
+        "scope": "descriptive development interval; small-root coverage is unestablished",
+        "seed": 20261127,
+        "upper": -0.013427734375
+      },
+      "endpoint": "d31",
+      "exceeds_5pp_floor": false,
+      "holm_p": 0.15625,
+      "mean_effect": -0.036376953125,
+      "negative_roots": 7,
+      "per_root_effect": [
+        -0.005859375,
+        -0.0390625,
+        -0.05859375,
+        0.021484375,
+        -0.017578125,
+        -0.05078125,
+        -0.05078125,
+        -0.08984375
+      ],
+      "positive_roots": 1,
+      "sign_flip": {
+        "assumptions": "independent roots and joint null invariant to independently reversing each root effect",
+        "method": "exact_two_sided_root_sign_flip_mean",
+        "n_units": 8,
+        "n_zero_effect_units": 0,
+        "p_fraction": "1/32",
+        "p_value": 0.03125,
+        "tail_assignments": 8,
+        "total_assignments": 256
+      },
+      "zero_roots": 0
+    },
+    {
+      "arm": "E_full16_gate",
+      "baseline": "A_uniform_reinvest",
+      "bootstrap_95": {
+        "approximate": true,
+        "confidence_level": 0.95,
+        "draws": 10000,
+        "familywise_adjusted": false,
+        "lower": -0.058349609375,
+        "method": "seeded_percentile_bootstrap_of_model_roots",
+        "scope": "descriptive development interval; small-root coverage is unestablished",
+        "seed": 20261127,
+        "upper": -0.013427734375
+      },
+      "endpoint": "d31",
+      "exceeds_5pp_floor": false,
+      "holm_p": 0.15625,
+      "mean_effect": -0.0361328125,
+      "negative_roots": 7,
+      "per_root_effect": [
+        -0.013671875,
+        -0.0546875,
+        -0.05859375,
+        0.021484375,
+        -0.021484375,
+        -0.046875,
+        -0.025390625,
+        -0.08984375
+      ],
+      "positive_roots": 1,
+      "sign_flip": {
+        "assumptions": "independent roots and joint null invariant to independently reversing each root effect",
+        "method": "exact_two_sided_root_sign_flip_mean",
+        "n_units": 8,
+        "n_zero_effect_units": 0,
+        "p_fraction": "1/32",
+        "p_value": 0.03125,
+        "tail_assignments": 8,
+        "total_assignments": 256
+      },
+      "zero_roots": 0
+    },
+    {
+      "arm": "F_early12_gate",
+      "baseline": "A_uniform_reinvest",
+      "bootstrap_95": {
+        "approximate": true,
+        "confidence_level": 0.95,
+        "draws": 10000,
+        "familywise_adjusted": false,
+        "lower": -0.057373046875,
+        "method": "seeded_percentile_bootstrap_of_model_roots",
+        "scope": "descriptive development interval; small-root coverage is unestablished",
+        "seed": 20261127,
+        "upper": -0.009033203125
+      },
+      "endpoint": "d31",
+      "exceeds_5pp_floor": false,
+      "holm_p": 0.15625,
+      "mean_effect": -0.032958984375,
+      "negative_roots": 6,
+      "per_root_effect": [
+        -0.0234375,
+        -0.005859375,
+        -0.05859375,
+        0.021484375,
+        0.0,
+        -0.05859375,
+        -0.048828125,
+        -0.08984375
+      ],
+      "positive_roots": 1,
+      "sign_flip": {
+        "assumptions": "independent roots and joint null invariant to independently reversing each root effect",
+        "method": "exact_two_sided_root_sign_flip_mean",
+        "n_units": 8,
+        "n_zero_effect_units": 1,
+        "p_fraction": "3/64",
+        "p_value": 0.046875,
+        "tail_assignments": 12,
+        "total_assignments": 256
+      },
+      "zero_roots": 1
+    },
+    {
+      "arm": "G_joint_full16",
+      "baseline": "A_uniform_reinvest",
+      "bootstrap_95": {
+        "approximate": true,
+        "confidence_level": 0.95,
+        "draws": 10000,
+        "familywise_adjusted": false,
+        "lower": -0.0703125,
+        "method": "seeded_percentile_bootstrap_of_model_roots",
+        "scope": "descriptive development interval; small-root coverage is unestablished",
+        "seed": 20261127,
+        "upper": -0.012939453125
+      },
+      "endpoint": "d31",
+      "exceeds_5pp_floor": false,
+      "holm_p": 0.15625,
+      "mean_effect": -0.03955078125,
+      "negative_roots": 7,
+      "per_root_effect": [
+        -0.046875,
+        -0.00390625,
+        -0.01171875,
+        0.01171875,
+        -0.0078125,
+        -0.12109375,
+        -0.072265625,
+        -0.064453125
+      ],
+      "positive_roots": 1,
+      "sign_flip": {
+        "assumptions": "independent roots and joint null invariant to independently reversing each root effect",
+        "method": "exact_two_sided_root_sign_flip_mean",
+        "n_units": 8,
+        "n_zero_effect_units": 0,
+        "p_fraction": "3/64",
+        "p_value": 0.046875,
+        "tail_assignments": 12,
+        "total_assignments": 256
+      },
+      "zero_roots": 0
+    },
+    {
+      "arm": "H_joint_early12",
+      "baseline": "A_uniform_reinvest",
+      "bootstrap_95": {
+        "approximate": true,
+        "confidence_level": 0.95,
+        "draws": 10000,
+        "familywise_adjusted": false,
+        "lower": -0.080810546875,
+        "method": "seeded_percentile_bootstrap_of_model_roots",
+        "scope": "descriptive development interval; small-root coverage is unestablished",
+        "seed": 20261127,
+        "upper": -0.01611328125
+      },
+      "endpoint": "d31",
+      "exceeds_5pp_floor": false,
+      "holm_p": 0.15625,
+      "mean_effect": -0.047119140625,
+      "negative_roots": 7,
+      "per_root_effect": [
+        -0.046875,
+        -0.009765625,
+        -0.01171875,
+        0.01171875,
+        -0.0078125,
+        -0.12109375,
+        -0.1015625,
+        -0.08984375
+      ],
+      "positive_roots": 1,
+      "sign_flip": {
+        "assumptions": "independent roots and joint null invariant to independently reversing each root effect",
+        "method": "exact_two_sided_root_sign_flip_mean",
+        "n_units": 8,
+        "n_zero_effect_units": 0,
+        "p_fraction": "5/128",
+        "p_value": 0.0390625,
+        "tail_assignments": 10,
+        "total_assignments": 256
+      },
+      "zero_roots": 0
+    }
+  ],
+  "result_sha256": {
+    "28301": "95a8ab20d82d76215b41f33361870c3d96492162ba1118b0a5a1030475051024",
+    "28302": "6002515a7c0f1d4e4bd53abf3d2e3905a1aa8b40834e9e1651c1df6d6b07ead9",
+    "28303": "5240d42ca9d39e12550361ab0331cbb70974663d4f2a508094b23bd6e13bae66",
+    "28304": "ec7ed9a5d6b41d6efbe8e864644373b6bf054097c5bf296a4aa4a7cc65c45451",
+    "28305": "c659b287fcb6bc4d0619086a09655988a5ed0ed81408e3d379bdf68ab100b9d8",
+    "28306": "b7c9f603214215b8ce4755b6cab346217bae48a04a86f35ae6fd9cb15a77ae6e",
+    "28307": "5a162b5ac24110dd1da614315ada39f7e6cdfe252fa5b5e9e275e46c3cf3b4f2",
+    "28308": "0d57e075f9589a1b21ecf56f6278ef14a41af91b99daaa18082759879f948a29"
+  },
+  "roots": [
+    28301,
+    28302,
+    28303,
+    28304,
+    28305,
+    28306,
+    28307,
+    28308
+  ],
+  "secondary_contrasts_d31": [
+    {
+      "arm": "D_analytic_mech",
+      "baseline": "B_transactional",
+      "bootstrap_95": {
+        "approximate": true,
+        "confidence_level": 0.95,
+        "draws": 10000,
+        "familywise_adjusted": false,
+        "lower": -0.025396728515624994,
+        "method": "seeded_percentile_bootstrap_of_model_roots",
+        "scope": "descriptive development interval; small-root coverage is unestablished",
+        "seed": 20261127,
+        "upper": 0.0087890625
+      },
+      "endpoint": "d31",
+      "exceeds_5pp_floor": false,
+      "mean_effect": -0.0078125,
+      "negative_roots": 3,
+      "per_root_effect": [
+        0.02734375,
+        -0.052734375,
+        0.0,
+        0.0,
+        -0.03515625,
+        0.01953125,
+        -0.021484375,
+        0.0
+      ],
+      "positive_roots": 2,
+      "sign_flip": {
+        "assumptions": "independent roots and joint null invariant to independently reversing each root effect",
+        "method": "exact_two_sided_root_sign_flip_mean",
+        "n_units": 8,
+        "n_zero_effect_units": 3,
+        "p_fraction": "7/16",
+        "p_value": 0.4375,
+        "tail_assignments": 112,
+        "total_assignments": 256
+      },
+      "zero_roots": 3
+    },
+    {
+      "arm": "C_analytic_ord",
+      "baseline": "D_analytic_mech",
+      "bootstrap_95": {
+        "approximate": true,
+        "confidence_level": 0.95,
+        "draws": 10000,
+        "familywise_adjusted": false,
+        "lower": 0.002197265625,
+        "method": "seeded_percentile_bootstrap_of_model_roots",
+        "scope": "descriptive development interval; small-root coverage is unestablished",
+        "seed": 20261127,
+        "upper": 0.0556640625
+      },
+      "endpoint": "d31",
+      "exceeds_5pp_floor": false,
+      "mean_effect": 0.02880859375,
+      "negative_roots": 3,
+      "per_root_effect": [
+        -0.01953125,
+        0.091796875,
+        0.060546875,
+        -0.01171875,
+        0.02734375,
+        0.041015625,
+        -0.015625,
+        0.056640625
+      ],
+      "positive_roots": 5,
+      "sign_flip": {
+        "assumptions": "independent roots and joint null invariant to independently reversing each root effect",
+        "method": "exact_two_sided_root_sign_flip_mean",
+        "n_units": 8,
+        "n_zero_effect_units": 0,
+        "p_fraction": "13/128",
+        "p_value": 0.1015625,
+        "tail_assignments": 26,
+        "total_assignments": 256
+      },
+      "zero_roots": 0
+    },
+    {
+      "arm": "E_full16_gate",
+      "baseline": "D_analytic_mech",
+      "bootstrap_95": {
+        "approximate": true,
+        "confidence_level": 0.95,
+        "draws": 10000,
+        "familywise_adjusted": false,
+        "lower": -0.00634765625,
+        "method": "seeded_percentile_bootstrap_of_model_roots",
+        "scope": "descriptive development interval; small-root coverage is unestablished",
+        "seed": 20261127,
+        "upper": 0.008544921875
+      },
+      "endpoint": "d31",
+      "exceeds_5pp_floor": false,
+      "mean_effect": 0.000244140625,
+      "negative_roots": 3,
+      "per_root_effect": [
+        -0.0078125,
+        -0.015625,
+        0.0,
+        0.0,
+        -0.00390625,
+        0.00390625,
+        0.025390625,
+        0.0
+      ],
+      "positive_roots": 2,
+      "sign_flip": {
+        "assumptions": "independent roots and joint null invariant to independently reversing each root effect",
+        "method": "exact_two_sided_root_sign_flip_mean",
+        "n_units": 8,
+        "n_zero_effect_units": 3,
+        "p_fraction": "1",
+        "p_value": 1.0,
+        "tail_assignments": 256,
+        "total_assignments": 256
+      },
+      "zero_roots": 3
+    },
+    {
+      "arm": "F_early12_gate",
+      "baseline": "E_full16_gate",
+      "bootstrap_95": {
+        "approximate": true,
+        "confidence_level": 0.95,
+        "draws": 10000,
+        "familywise_adjusted": false,
+        "lower": -0.009765625,
+        "method": "seeded_percentile_bootstrap_of_model_roots",
+        "scope": "descriptive development interval; small-root coverage is unestablished",
+        "seed": 20261127,
+        "upper": 0.01856079101562491
+      },
+      "endpoint": "d31",
+      "exceeds_5pp_floor": false,
+      "mean_effect": 0.003173828125,
+      "negative_roots": 3,
+      "per_root_effect": [
+        -0.009765625,
+        0.048828125,
+        0.0,
+        0.0,
+        0.021484375,
+        -0.01171875,
+        -0.0234375,
+        0.0
+      ],
+      "positive_roots": 2,
+      "sign_flip": {
+        "assumptions": "independent roots and joint null invariant to independently reversing each root effect",
+        "method": "exact_two_sided_root_sign_flip_mean",
+        "n_units": 8,
+        "n_zero_effect_units": 3,
+        "p_fraction": "13/16",
+        "p_value": 0.8125,
+        "tail_assignments": 208,
+        "total_assignments": 256
+      },
+      "zero_roots": 3
+    },
+    {
+      "arm": "G_joint_full16",
+      "baseline": "E_full16_gate",
+      "bootstrap_95": {
+        "approximate": true,
+        "confidence_level": 0.95,
+        "draws": 10000,
+        "familywise_adjusted": false,
+        "lower": -0.033447265625,
+        "method": "seeded_percentile_bootstrap_of_model_roots",
+        "scope": "descriptive development interval; small-root coverage is unestablished",
+        "seed": 20261127,
+        "upper": 0.025146484375
+      },
+      "endpoint": "d31",
+      "exceeds_5pp_floor": false,
+      "mean_effect": -0.00341796875,
+      "negative_roots": 4,
+      "per_root_effect": [
+        -0.033203125,
+        0.05078125,
+        0.046875,
+        -0.009765625,
+        0.013671875,
+        -0.07421875,
+        -0.046875,
+        0.025390625
+      ],
+      "positive_roots": 4,
+      "sign_flip": {
+        "assumptions": "independent roots and joint null invariant to independently reversing each root effect",
+        "method": "exact_two_sided_root_sign_flip_mean",
+        "n_units": 8,
+        "n_zero_effect_units": 0,
+        "p_fraction": "55/64",
+        "p_value": 0.859375,
+        "tail_assignments": 220,
+        "total_assignments": 256
+      },
+      "zero_roots": 0
+    },
+    {
+      "arm": "H_joint_early12",
+      "baseline": "F_early12_gate",
+      "bootstrap_95": {
+        "approximate": true,
+        "confidence_level": 0.95,
+        "draws": 10000,
+        "familywise_adjusted": false,
+        "lower": -0.03564453125,
+        "method": "seeded_percentile_bootstrap_of_model_roots",
+        "scope": "descriptive development interval; small-root coverage is unestablished",
+        "seed": 20261127,
+        "upper": 0.0078125
+      },
+      "endpoint": "d31",
+      "exceeds_5pp_floor": false,
+      "mean_effect": -0.01416015625,
+      "negative_roots": 6,
+      "per_root_effect": [
+        -0.0234375,
+        -0.00390625,
+        0.046875,
+        -0.009765625,
+        -0.0078125,
+        -0.0625,
+        -0.052734375,
+        0.0
+      ],
+      "positive_roots": 1,
+      "sign_flip": {
+        "assumptions": "independent roots and joint null invariant to independently reversing each root effect",
+        "method": "exact_two_sided_root_sign_flip_mean",
+        "n_units": 8,
+        "n_zero_effect_units": 1,
+        "p_fraction": "17/64",
+        "p_value": 0.265625,
+        "tail_assignments": 68,
+        "total_assignments": 256
+      },
+      "zero_roots": 1
+    },
+    {
+      "arm": "D_analytic_mech",
+      "baseline": "I_shuffled",
+      "bootstrap_95": {
+        "approximate": true,
+        "confidence_level": 0.95,
+        "draws": 10000,
+        "familywise_adjusted": false,
+        "lower": -0.0302734375,
+        "method": "seeded_percentile_bootstrap_of_model_roots",
+        "scope": "descriptive development interval; small-root coverage is unestablished",
+        "seed": 20261127,
+        "upper": 0.03369140625
+      },
+      "endpoint": "d31",
+      "exceeds_5pp_floor": false,
+      "mean_effect": 0.0029296875,
+      "negative_roots": 3,
+      "per_root_effect": [
+        0.0,
+        -0.083984375,
+        0.005859375,
+        0.05859375,
+        -0.037109375,
+        0.060546875,
+        0.037109375,
+        -0.017578125
+      ],
+      "positive_roots": 4,
+      "sign_flip": {
+        "assumptions": "independent roots and joint null invariant to independently reversing each root effect",
+        "method": "exact_two_sided_root_sign_flip_mean",
+        "n_units": 8,
+        "n_zero_effect_units": 1,
+        "p_fraction": "7/8",
+        "p_value": 0.875,
+        "tail_assignments": 224,
+        "total_assignments": 256
+      },
+      "zero_roots": 1
+    },
+    {
+      "arm": "J_observer_only",
+      "baseline": "A_uniform_reinvest",
+      "bootstrap_95": {
+        "approximate": true,
+        "confidence_level": 0.95,
+        "draws": 10000,
+        "familywise_adjusted": false,
+        "lower": -0.060546875,
+        "method": "seeded_percentile_bootstrap_of_model_roots",
+        "scope": "descriptive development interval; small-root coverage is unestablished",
+        "seed": 20261127,
+        "upper": -0.009765625
+      },
+      "endpoint": "d31",
+      "exceeds_5pp_floor": false,
+      "mean_effect": -0.037353515625,
+      "negative_roots": 7,
+      "per_root_effect": [
+        -0.0390625,
+        -0.029296875,
+        -0.07421875,
+        -0.029296875,
+        0.04296875,
+        -0.0703125,
+        -0.07421875,
+        -0.025390625
+      ],
+      "positive_roots": 1,
+      "sign_flip": {
+        "assumptions": "independent roots and joint null invariant to independently reversing each root effect",
+        "method": "exact_two_sided_root_sign_flip_mean",
+        "n_units": 8,
+        "n_zero_effect_units": 0,
+        "p_fraction": "3/64",
+        "p_value": 0.046875,
+        "tail_assignments": 12,
+        "total_assignments": 256
+      },
+      "zero_roots": 0
+    }
+  ],
+  "secondary_endpoints_vs_A": {
+    "bind31": [
+      {
+        "arm": "D_analytic_mech",
+        "baseline": "A_uniform_reinvest",
+        "bootstrap_95": {
+          "approximate": true,
+          "confidence_level": 0.95,
+          "draws": 10000,
+          "familywise_adjusted": false,
+          "lower": -0.0576171875,
+          "method": "seeded_percentile_bootstrap_of_model_roots",
+          "scope": "descriptive development interval; small-root coverage is unestablished",
+          "seed": 20261127,
+          "upper": 0.02587890625
+        },
+        "endpoint": "bind31",
+        "exceeds_5pp_floor": false,
+        "mean_effect": -0.0166015625,
+        "negative_roots": 5,
+        "per_root_effect": [
+          0.06640625,
+          -0.09375,
+          0.07421875,
+          -0.02734375,
+          -0.03515625,
+          0.0234375,
+          -0.09375,
+          -0.046875
+        ],
+        "positive_roots": 3,
+        "sign_flip": {
+          "assumptions": "independent roots and joint null invariant to independently reversing each root effect",
+          "method": "exact_two_sided_root_sign_flip_mean",
+          "n_units": 8,
+          "n_zero_effect_units": 0,
+          "p_fraction": "63/128",
+          "p_value": 0.4921875,
+          "tail_assignments": 126,
+          "total_assignments": 256
+        },
+        "zero_roots": 0
+      },
+      {
+        "arm": "E_full16_gate",
+        "baseline": "A_uniform_reinvest",
+        "bootstrap_95": {
+          "approximate": true,
+          "confidence_level": 0.95,
+          "draws": 10000,
+          "familywise_adjusted": false,
+          "lower": -0.0625,
+          "method": "seeded_percentile_bootstrap_of_model_roots",
+          "scope": "descriptive development interval; small-root coverage is unestablished",
+          "seed": 20261127,
+          "upper": 0.02685546875
+        },
+        "endpoint": "bind31",
+        "exceeds_5pp_floor": false,
+        "mean_effect": -0.0185546875,
+        "negative_roots": 5,
+        "per_root_effect": [
+          0.078125,
+          -0.10546875,
+          0.07421875,
+          -0.02734375,
+          -0.02734375,
+          0.0078125,
+          -0.1015625,
+          -0.046875
+        ],
+        "positive_roots": 3,
+        "sign_flip": {
+          "assumptions": "independent roots and joint null invariant to independently reversing each root effect",
+          "method": "exact_two_sided_root_sign_flip_mean",
+          "n_units": 8,
+          "n_zero_effect_units": 0,
+          "p_fraction": "1/2",
+          "p_value": 0.5,
+          "tail_assignments": 128,
+          "total_assignments": 256
+        },
+        "zero_roots": 0
+      },
+      {
+        "arm": "F_early12_gate",
+        "baseline": "A_uniform_reinvest",
+        "bootstrap_95": {
+          "approximate": true,
+          "confidence_level": 0.95,
+          "draws": 10000,
+          "familywise_adjusted": false,
+          "lower": -0.04736328125,
+          "method": "seeded_percentile_bootstrap_of_model_roots",
+          "scope": "descriptive development interval; small-root coverage is unestablished",
+          "seed": 20261127,
+          "upper": 0.02783203125
+        },
+        "endpoint": "bind31",
+        "exceeds_5pp_floor": false,
+        "mean_effect": -0.009765625,
+        "negative_roots": 4,
+        "per_root_effect": [
+          0.0546875,
+          -0.0546875,
+          0.07421875,
+          -0.02734375,
+          0.0234375,
+          0.0,
+          -0.1015625,
+          -0.046875
+        ],
+        "positive_roots": 3,
+        "sign_flip": {
+          "assumptions": "independent roots and joint null invariant to independently reversing each root effect",
+          "method": "exact_two_sided_root_sign_flip_mean",
+          "n_units": 8,
+          "n_zero_effect_units": 1,
+          "p_fraction": "43/64",
+          "p_value": 0.671875,
+          "tail_assignments": 172,
+          "total_assignments": 256
+        },
+        "zero_roots": 1
+      },
+      {
+        "arm": "G_joint_full16",
+        "baseline": "A_uniform_reinvest",
+        "bootstrap_95": {
+          "approximate": true,
+          "confidence_level": 0.95,
+          "draws": 10000,
+          "familywise_adjusted": false,
+          "lower": -0.10986328125,
+          "method": "seeded_percentile_bootstrap_of_model_roots",
+          "scope": "descriptive development interval; small-root coverage is unestablished",
+          "seed": 20261127,
+          "upper": 0.0146484375
+        },
+        "endpoint": "bind31",
+        "exceeds_5pp_floor": false,
+        "mean_effect": -0.04345703125,
+        "negative_roots": 6,
+        "per_root_effect": [
+          -0.01953125,
+          -0.01171875,
+          0.07421875,
+          -0.04296875,
+          0.05859375,
+          -0.06640625,
+          -0.234375,
+          -0.10546875
+        ],
+        "positive_roots": 2,
+        "sign_flip": {
+          "assumptions": "independent roots and joint null invariant to independently reversing each root effect",
+          "method": "exact_two_sided_root_sign_flip_mean",
+          "n_units": 8,
+          "n_zero_effect_units": 0,
+          "p_fraction": "17/64",
+          "p_value": 0.265625,
+          "tail_assignments": 68,
+          "total_assignments": 256
+        },
+        "zero_roots": 0
+      },
+      {
+        "arm": "H_joint_early12",
+        "baseline": "A_uniform_reinvest",
+        "bootstrap_95": {
+          "approximate": true,
+          "confidence_level": 0.95,
+          "draws": 10000,
+          "familywise_adjusted": false,
+          "lower": -0.11376953125,
+          "method": "seeded_percentile_bootstrap_of_model_roots",
+          "scope": "descriptive development interval; small-root coverage is unestablished",
+          "seed": 20261127,
+          "upper": 0.013671875
+        },
+        "endpoint": "bind31",
+        "exceeds_5pp_floor": false,
+        "mean_effect": -0.04736328125,
+        "negative_roots": 5,
+        "per_root_effect": [
+          -0.05078125,
+          0.01171875,
+          0.07421875,
+          -0.04296875,
+          0.05859375,
+          -0.06640625,
+          -0.22265625,
+          -0.140625
+        ],
+        "positive_roots": 3,
+        "sign_flip": {
+          "assumptions": "independent roots and joint null invariant to independently reversing each root effect",
+          "method": "exact_two_sided_root_sign_flip_mean",
+          "n_units": 8,
+          "n_zero_effect_units": 0,
+          "p_fraction": "1/4",
+          "p_value": 0.25,
+          "tail_assignments": 64,
+          "total_assignments": 256
+        },
+        "zero_roots": 0
+      }
+    ],
+    "d127": [
+      {
+        "arm": "D_analytic_mech",
+        "baseline": "A_uniform_reinvest",
+        "bootstrap_95": {
+          "approximate": true,
+          "confidence_level": 0.95,
+          "draws": 10000,
+          "familywise_adjusted": false,
+          "lower": -0.019287109375,
+          "method": "seeded_percentile_bootstrap_of_model_roots",
+          "scope": "descriptive development interval; small-root coverage is unestablished",
+          "seed": 20261127,
+          "upper": 0.01806640625
+        },
+        "endpoint": "d127",
+        "exceeds_5pp_floor": false,
+        "mean_effect": -0.00048828125,
+        "negative_roots": 4,
+        "per_root_effect": [
+          -0.04296875,
+          -0.001953125,
+          -0.017578125,
+          0.037109375,
+          0.037109375,
+          -0.029296875,
+          0.01171875,
+          0.001953125
+        ],
+        "positive_roots": 4,
+        "sign_flip": {
+          "assumptions": "independent roots and joint null invariant to independently reversing each root effect",
+          "method": "exact_two_sided_root_sign_flip_mean",
+          "n_units": 8,
+          "n_zero_effect_units": 0,
+          "p_fraction": "127/128",
+          "p_value": 0.9921875,
+          "tail_assignments": 254,
+          "total_assignments": 256
+        },
+        "zero_roots": 0
+      },
+      {
+        "arm": "E_full16_gate",
+        "baseline": "A_uniform_reinvest",
+        "bootstrap_95": {
+          "approximate": true,
+          "confidence_level": 0.95,
+          "draws": 10000,
+          "familywise_adjusted": false,
+          "lower": -0.016357421875,
+          "method": "seeded_percentile_bootstrap_of_model_roots",
+          "scope": "descriptive development interval; small-root coverage is unestablished",
+          "seed": 20261127,
+          "upper": 0.0166015625
+        },
+        "endpoint": "d127",
+        "exceeds_5pp_floor": false,
+        "mean_effect": 0.0009765625,
+        "negative_roots": 3,
+        "per_root_effect": [
+          -0.046875,
+          0.0078125,
+          -0.017578125,
+          0.037109375,
+          0.021484375,
+          -0.005859375,
+          0.009765625,
+          0.001953125
+        ],
+        "positive_roots": 5,
+        "sign_flip": {
+          "assumptions": "independent roots and joint null invariant to independently reversing each root effect",
+          "method": "exact_two_sided_root_sign_flip_mean",
+          "n_units": 8,
+          "n_zero_effect_units": 0,
+          "p_fraction": "119/128",
+          "p_value": 0.9296875,
+          "tail_assignments": 238,
+          "total_assignments": 256
+        },
+        "zero_roots": 0
+      },
+      {
+        "arm": "F_early12_gate",
+        "baseline": "A_uniform_reinvest",
+        "bootstrap_95": {
+          "approximate": true,
+          "confidence_level": 0.95,
+          "draws": 10000,
+          "familywise_adjusted": false,
+          "lower": -0.02685546875,
+          "method": "seeded_percentile_bootstrap_of_model_roots",
+          "scope": "descriptive development interval; small-root coverage is unestablished",
+          "seed": 20261127,
+          "upper": 0.01904296875
+        },
+        "endpoint": "d127",
+        "exceeds_5pp_floor": false,
+        "mean_effect": -0.003173828125,
+        "negative_roots": 4,
+        "per_root_effect": [
+          -0.056640625,
+          -0.015625,
+          -0.017578125,
+          0.037109375,
+          0.041015625,
+          -0.0390625,
+          0.0234375,
+          0.001953125
+        ],
+        "positive_roots": 4,
+        "sign_flip": {
+          "assumptions": "independent roots and joint null invariant to independently reversing each root effect",
+          "method": "exact_two_sided_root_sign_flip_mean",
+          "n_units": 8,
+          "n_zero_effect_units": 0,
+          "p_fraction": "107/128",
+          "p_value": 0.8359375,
+          "tail_assignments": 214,
+          "total_assignments": 256
+        },
+        "zero_roots": 0
+      },
+      {
+        "arm": "G_joint_full16",
+        "baseline": "A_uniform_reinvest",
+        "bootstrap_95": {
+          "approximate": true,
+          "confidence_level": 0.95,
+          "draws": 10000,
+          "familywise_adjusted": false,
+          "lower": -0.044677734375,
+          "method": "seeded_percentile_bootstrap_of_model_roots",
+          "scope": "descriptive development interval; small-root coverage is unestablished",
+          "seed": 20261127,
+          "upper": 0.008056640625
+        },
+        "endpoint": "d127",
+        "exceeds_5pp_floor": false,
+        "mean_effect": -0.01904296875,
+        "negative_roots": 6,
+        "per_root_effect": [
+          -0.068359375,
+          -0.013671875,
+          -0.009765625,
+          0.033203125,
+          0.04296875,
+          -0.033203125,
+          -0.072265625,
+          -0.03125
+        ],
+        "positive_roots": 2,
+        "sign_flip": {
+          "assumptions": "independent roots and joint null invariant to independently reversing each root effect",
+          "method": "exact_two_sided_root_sign_flip_mean",
+          "n_units": 8,
+          "n_zero_effect_units": 0,
+          "p_fraction": "31/128",
+          "p_value": 0.2421875,
+          "tail_assignments": 62,
+          "total_assignments": 256
+        },
+        "zero_roots": 0
+      },
+      {
+        "arm": "H_joint_early12",
+        "baseline": "A_uniform_reinvest",
+        "bootstrap_95": {
+          "approximate": true,
+          "confidence_level": 0.95,
+          "draws": 10000,
+          "familywise_adjusted": false,
+          "lower": -0.0400390625,
+          "method": "seeded_percentile_bootstrap_of_model_roots",
+          "scope": "descriptive development interval; small-root coverage is unestablished",
+          "seed": 20261127,
+          "upper": 0.01220703125
+        },
+        "endpoint": "d127",
+        "exceeds_5pp_floor": false,
+        "mean_effect": -0.013916015625,
+        "negative_roots": 5,
+        "per_root_effect": [
+          -0.078125,
+          0.00390625,
+          -0.009765625,
+          0.033203125,
+          0.04296875,
+          -0.033203125,
+          -0.056640625,
+          -0.013671875
+        ],
+        "positive_roots": 3,
+        "sign_flip": {
+          "assumptions": "independent roots and joint null invariant to independently reversing each root effect",
+          "method": "exact_two_sided_root_sign_flip_mean",
+          "n_units": 8,
+          "n_zero_effect_units": 0,
+          "p_fraction": "49/128",
+          "p_value": 0.3828125,
+          "tail_assignments": 98,
+          "total_assignments": 256
+        },
+        "zero_roots": 0
+      }
+    ],
+    "d63": [
+      {
+        "arm": "D_analytic_mech",
+        "baseline": "A_uniform_reinvest",
+        "bootstrap_95": {
+          "approximate": true,
+          "confidence_level": 0.95,
+          "draws": 10000,
+          "familywise_adjusted": false,
+          "lower": -0.020751953125,
+          "method": "seeded_percentile_bootstrap_of_model_roots",
+          "scope": "descriptive development interval; small-root coverage is unestablished",
+          "seed": 20261127,
+          "upper": -0.0009765625
+        },
+        "endpoint": "d63",
+        "exceeds_5pp_floor": false,
+        "mean_effect": -0.0107421875,
+        "negative_roots": 6,
+        "per_root_effect": [
+          -0.0234375,
+          -0.033203125,
+          -0.00390625,
+          -0.001953125,
+          0.009765625,
+          -0.0078125,
+          0.001953125,
+          -0.02734375
+        ],
+        "positive_roots": 2,
+        "sign_flip": {
+          "assumptions": "independent roots and joint null invariant to independently reversing each root effect",
+          "method": "exact_two_sided_root_sign_flip_mean",
+          "n_units": 8,
+          "n_zero_effect_units": 0,
+          "p_fraction": "1/8",
+          "p_value": 0.125,
+          "tail_assignments": 32,
+          "total_assignments": 256
+        },
+        "zero_roots": 0
+      },
+      {
+        "arm": "E_full16_gate",
+        "baseline": "A_uniform_reinvest",
+        "bootstrap_95": {
+          "approximate": true,
+          "confidence_level": 0.95,
+          "draws": 10000,
+          "familywise_adjusted": false,
+          "lower": -0.0224609375,
+          "method": "seeded_percentile_bootstrap_of_model_roots",
+          "scope": "descriptive development interval; small-root coverage is unestablished",
+          "seed": 20261127,
+          "upper": 0.000244140625
+        },
+        "endpoint": "d63",
+        "exceeds_5pp_floor": false,
+        "mean_effect": -0.0107421875,
+        "negative_roots": 6,
+        "per_root_effect": [
+          -0.021484375,
+          -0.041015625,
+          -0.00390625,
+          -0.001953125,
+          0.0,
+          0.01171875,
+          -0.001953125,
+          -0.02734375
+        ],
+        "positive_roots": 1,
+        "sign_flip": {
+          "assumptions": "independent roots and joint null invariant to independently reversing each root effect",
+          "method": "exact_two_sided_root_sign_flip_mean",
+          "n_units": 8,
+          "n_zero_effect_units": 1,
+          "p_fraction": "9/64",
+          "p_value": 0.140625,
+          "tail_assignments": 36,
+          "total_assignments": 256
+        },
+        "zero_roots": 1
+      },
+      {
+        "arm": "F_early12_gate",
+        "baseline": "A_uniform_reinvest",
+        "bootstrap_95": {
+          "approximate": true,
+          "confidence_level": 0.95,
+          "draws": 10000,
+          "familywise_adjusted": false,
+          "lower": -0.0283203125,
+          "method": "seeded_percentile_bootstrap_of_model_roots",
+          "scope": "descriptive development interval; small-root coverage is unestablished",
+          "seed": 20261127,
+          "upper": -0.001708984375
+        },
+        "endpoint": "d63",
+        "exceeds_5pp_floor": false,
+        "mean_effect": -0.014892578125,
+        "negative_roots": 6,
+        "per_root_effect": [
+          -0.03515625,
+          -0.046875,
+          -0.00390625,
+          -0.001953125,
+          0.01171875,
+          -0.01953125,
+          0.00390625,
+          -0.02734375
+        ],
+        "positive_roots": 2,
+        "sign_flip": {
+          "assumptions": "independent roots and joint null invariant to independently reversing each root effect",
+          "method": "exact_two_sided_root_sign_flip_mean",
+          "n_units": 8,
+          "n_zero_effect_units": 0,
+          "p_fraction": "3/32",
+          "p_value": 0.09375,
+          "tail_assignments": 24,
+          "total_assignments": 256
+        },
+        "zero_roots": 0
+      },
+      {
+        "arm": "G_joint_full16",
+        "baseline": "A_uniform_reinvest",
+        "bootstrap_95": {
+          "approximate": true,
+          "confidence_level": 0.95,
+          "draws": 10000,
+          "familywise_adjusted": false,
+          "lower": -0.045654296875,
+          "method": "seeded_percentile_bootstrap_of_model_roots",
+          "scope": "descriptive development interval; small-root coverage is unestablished",
+          "seed": 20261127,
+          "upper": 0.004638671875
+        },
+        "endpoint": "d63",
+        "exceeds_5pp_floor": false,
+        "mean_effect": -0.021484375,
+        "negative_roots": 5,
+        "per_root_effect": [
+          -0.052734375,
+          -0.044921875,
+          0.021484375,
+          0.005859375,
+          0.041015625,
+          -0.021484375,
+          -0.0625,
+          -0.05859375
+        ],
+        "positive_roots": 3,
+        "sign_flip": {
+          "assumptions": "independent roots and joint null invariant to independently reversing each root effect",
+          "method": "exact_two_sided_root_sign_flip_mean",
+          "n_units": 8,
+          "n_zero_effect_units": 0,
+          "p_fraction": "3/16",
+          "p_value": 0.1875,
+          "tail_assignments": 48,
+          "total_assignments": 256
+        },
+        "zero_roots": 0
+      },
+      {
+        "arm": "H_joint_early12",
+        "baseline": "A_uniform_reinvest",
+        "bootstrap_95": {
+          "approximate": true,
+          "confidence_level": 0.95,
+          "draws": 10000,
+          "familywise_adjusted": false,
+          "lower": -0.046630859375,
+          "method": "seeded_percentile_bootstrap_of_model_roots",
+          "scope": "descriptive development interval; small-root coverage is unestablished",
+          "seed": 20261127,
+          "upper": 0.00439453125
+        },
+        "endpoint": "d63",
+        "exceeds_5pp_floor": false,
+        "mean_effect": -0.022216796875,
+        "negative_roots": 5,
+        "per_root_effect": [
+          -0.060546875,
+          -0.046875,
+          0.021484375,
+          0.005859375,
+          0.041015625,
+          -0.021484375,
+          -0.056640625,
+          -0.060546875
+        ],
+        "positive_roots": 3,
+        "sign_flip": {
+          "assumptions": "independent roots and joint null invariant to independently reversing each root effect",
+          "method": "exact_two_sided_root_sign_flip_mean",
+          "n_units": 8,
+          "n_zero_effect_units": 0,
+          "p_fraction": "3/16",
+          "p_value": 0.1875,
+          "tail_assignments": 48,
+          "total_assignments": 256
+        },
+        "zero_roots": 0
+      }
+    ],
+    "transport": [
+      {
+        "arm": "D_analytic_mech",
+        "baseline": "A_uniform_reinvest",
+        "bootstrap_95": {
+          "approximate": true,
+          "confidence_level": 0.95,
+          "draws": 10000,
+          "familywise_adjusted": false,
+          "lower": -0.08854166666666666,
+          "method": "seeded_percentile_bootstrap_of_model_roots",
+          "scope": "descriptive development interval; small-root coverage is unestablished",
+          "seed": 20261127,
+          "upper": 0.036458333333333336
+        },
+        "endpoint": "transport",
+        "exceeds_5pp_floor": false,
+        "mean_effect": -0.0234375,
+        "negative_roots": 4,
+        "per_root_effect": [
+          0.0625,
+          -0.08333333333333333,
+          -0.14583333333333334,
+          -0.020833333333333332,
+          0.041666666666666664,
+          0.08333333333333333,
+          0.041666666666666664,
+          -0.16666666666666666
+        ],
+        "positive_roots": 4,
+        "sign_flip": {
+          "assumptions": "independent roots and joint null invariant to independently reversing each root effect",
+          "method": "exact_two_sided_root_sign_flip_mean",
+          "n_units": 8,
+          "n_zero_effect_units": 0,
+          "p_fraction": "71/128",
+          "p_value": 0.5546875,
+          "tail_assignments": 142,
+          "total_assignments": 256
+        },
+        "zero_roots": 0
+      },
+      {
+        "arm": "E_full16_gate",
+        "baseline": "A_uniform_reinvest",
+        "bootstrap_95": {
+          "approximate": true,
+          "confidence_level": 0.95,
+          "draws": 10000,
+          "familywise_adjusted": false,
+          "lower": -0.08333333333333334,
+          "method": "seeded_percentile_bootstrap_of_model_roots",
+          "scope": "descriptive development interval; small-root coverage is unestablished",
+          "seed": 20261127,
+          "upper": 0.04947916666666667
+        },
+        "endpoint": "transport",
+        "exceeds_5pp_floor": false,
+        "mean_effect": -0.015625,
+        "negative_roots": 4,
+        "per_root_effect": [
+          0.10416666666666667,
+          -0.0625,
+          -0.14583333333333334,
+          -0.020833333333333332,
+          0.0,
+          0.10416666666666667,
+          0.0625,
+          -0.16666666666666666
+        ],
+        "positive_roots": 3,
+        "sign_flip": {
+          "assumptions": "independent roots and joint null invariant to independently reversing each root effect",
+          "method": "exact_two_sided_root_sign_flip_mean",
+          "n_units": 8,
+          "n_zero_effect_units": 1,
+          "p_fraction": "47/64",
+          "p_value": 0.734375,
+          "tail_assignments": 188,
+          "total_assignments": 256
+        },
+        "zero_roots": 1
+      },
+      {
+        "arm": "F_early12_gate",
+        "baseline": "A_uniform_reinvest",
+        "bootstrap_95": {
+          "approximate": true,
+          "confidence_level": 0.95,
+          "draws": 10000,
+          "familywise_adjusted": false,
+          "lower": -0.08333333333333333,
+          "method": "seeded_percentile_bootstrap_of_model_roots",
+          "scope": "descriptive development interval; small-root coverage is unestablished",
+          "seed": 20261127,
+          "upper": 0.03385416666666667
+        },
+        "endpoint": "transport",
+        "exceeds_5pp_floor": false,
+        "mean_effect": -0.020833333333333332,
+        "negative_roots": 4,
+        "per_root_effect": [
+          0.041666666666666664,
+          -0.041666666666666664,
+          -0.14583333333333334,
+          -0.020833333333333332,
+          0.0625,
+          0.041666666666666664,
+          0.0625,
+          -0.16666666666666666
+        ],
+        "positive_roots": 4,
+        "sign_flip": {
+          "assumptions": "independent roots and joint null invariant to independently reversing each root effect",
+          "method": "exact_two_sided_root_sign_flip_mean",
+          "n_units": 8,
+          "n_zero_effect_units": 0,
+          "p_fraction": "37/64",
+          "p_value": 0.578125,
+          "tail_assignments": 148,
+          "total_assignments": 256
+        },
+        "zero_roots": 0
+      },
+      {
+        "arm": "G_joint_full16",
+        "baseline": "A_uniform_reinvest",
+        "bootstrap_95": {
+          "approximate": true,
+          "confidence_level": 0.95,
+          "draws": 10000,
+          "familywise_adjusted": false,
+          "lower": -0.10416666666666667,
+          "method": "seeded_percentile_bootstrap_of_model_roots",
+          "scope": "descriptive development interval; small-root coverage is unestablished",
+          "seed": 20261127,
+          "upper": -0.0234375
+        },
+        "endpoint": "transport",
+        "exceeds_5pp_floor": false,
+        "mean_effect": -0.06510416666666667,
+        "negative_roots": 7,
+        "per_root_effect": [
+          -0.08333333333333333,
+          -0.041666666666666664,
+          -0.10416666666666667,
+          -0.020833333333333332,
+          0.041666666666666664,
+          -0.041666666666666664,
+          -0.125,
+          -0.14583333333333334
+        ],
+        "positive_roots": 1,
+        "sign_flip": {
+          "assumptions": "independent roots and joint null invariant to independently reversing each root effect",
+          "method": "exact_two_sided_root_sign_flip_mean",
+          "n_units": 8,
+          "n_zero_effect_units": 0,
+          "p_fraction": "5/128",
+          "p_value": 0.0390625,
+          "tail_assignments": 10,
+          "total_assignments": 256
+        },
+        "zero_roots": 0
+      },
+      {
+        "arm": "H_joint_early12",
+        "baseline": "A_uniform_reinvest",
+        "bootstrap_95": {
+          "approximate": true,
+          "confidence_level": 0.95,
+          "draws": 10000,
+          "familywise_adjusted": false,
+          "lower": -0.09635416666666667,
+          "method": "seeded_percentile_bootstrap_of_model_roots",
+          "scope": "descriptive development interval; small-root coverage is unestablished",
+          "seed": 20261127,
+          "upper": -0.015625
+        },
+        "endpoint": "transport",
+        "exceeds_5pp_floor": false,
+        "mean_effect": -0.057291666666666664,
+        "negative_roots": 6,
+        "per_root_effect": [
+          0.0,
+          -0.10416666666666667,
+          -0.10416666666666667,
+          -0.020833333333333332,
+          0.041666666666666664,
+          -0.041666666666666664,
+          -0.08333333333333333,
+          -0.14583333333333334
+        ],
+        "positive_roots": 1,
+        "sign_flip": {
+          "assumptions": "independent roots and joint null invariant to independently reversing each root effect",
+          "method": "exact_two_sided_root_sign_flip_mean",
+          "n_units": 8,
+          "n_zero_effect_units": 1,
+          "p_fraction": "1/16",
+          "p_value": 0.0625,
+          "tail_assignments": 16,
+          "total_assignments": 256
+        },
+        "zero_roots": 1
+      }
+    ]
+  },
+  "source_sha256": {
+    "adamw_screen.py": "123d8c860d2c34225d4f314cb4c8c6f2752a1c03bbe7b5505191bc9ac9963e96",
+    "batch_screen.py": "fc3b32404e1c5a2cf66d1731abe487dca76a1dc93bfa5c8ee275f3cc679adb79",
+    "cache.py": "49db8e3ad5408966636a602aa0ce86dbc03d13ceca0e0875d4f68e5250d2ff09",
+    "campaign.py": "dc65ffe94b66e5a8cd9ad7cdc9e9d6dc8a4e012c94bc31db351f008b2a3b5852",
+    "custody.py": "64866ae9a09a8294c9584991ca46d59a90bb7f66959e2b1c2fbcd504d86d8226",
+    "data.py": "ac641be6d5d8b25144c069575a2962f3cad818560b0499297bc773e75e8e300f",
+    "memory_cap.py": "865aba40d1b0fdde27bbc8e9083335373db58b4a80fde0fcf4f15e3e6bb34e6f",
+    "model.py": "650923b61272c3ba7d09a04575c0538c478755328e4de0e65cd6f6cae4dd85b1",
+    "native_screen.py": "a02d5f83e78d88b231f83eec9de26881ca6227ba6e7b800a963bcee277f28d85",
+    "pilot.py": "3c7c0e45b59f5498e42297d84204742d48d43b0aa00f5e949343d5c39408b4a9",
+    "reference.py": "e77865b43798cf635850d12008d66e957551550498f4580d21dbc0ddbeae242d",
+    "scheduler.py": "812ac9e65c848e2781ff4449ad39274d89088fb59341fcc23fd6de81bf958a39",
+    "signal_bank.py": "c2ed1232577982c14812a1e0f1c2d2549a8f9261f37d8ccfbda3579216aa5f3b",
+    "transaction.py": "2259db449624cc09f9f6afa5b65460837f39fad1b50138dd88a8b4e0dfc7640d"
+  },
+  "warmup_sha256": {
+    "28301": "ccd3b27acf87c61341f730dc76db07bced753daf04bba6dc9fa9734c0958b541",
+    "28302": "3631c5858b5db48e1f08ef87fe723c3bc7587654270c419daa720188f83b2e4f",
+    "28303": "9accd9bc4d662bdb9492017953feee6449de16aea576ea847c5dd9548bb4eabb",
+    "28304": "6e21f50c8c6de01f9341e432d467968e0863e4d0d496f962721125284dc1c3eb",
+    "28305": "66542420e68d61c12155391c7265ef369be6d32c6c1ae7c2fde83546c063f41f",
+    "28306": "5cb83e6b71266cd12eb52ac62c774e825779c3431e9cea6c12700766c7b94610",
+    "28307": "3ad64c27f526a5763d72d5b942e8f44888fee6df3ecc36a33e3062fec1732db9",
+    "28308": "733ef2e2001635326edfe6322c03c35b1876492942e9898ee15d0bd6267262ae"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "arm": "D_analytic_mech",
+  "definition": "per_candidate = candidate_gradient + analytic_scoring; per_attempt = acceptance_step + feedback_eval + verification; base = everything else in the arm CPU (feedback gradient, proposal, materialization, controller, provenance, custody, unattributed)",
+  "per_attempt": 0.08308316929133858,
+  "per_candidate": 0.02871555118110236,
+  "per_window_base": 0.08986220472440945,
+  "roots": [
+    28301,
+    28302,
+    28303,
+    28304,
+    28305,
+    28306,
+    28307,
+    28308
+  ]
+}

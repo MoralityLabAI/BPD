@@ -1,0 +1,67 @@
+{
+  "action_counts": {
+    "ABSTAIN": 2935,
+    "ACQUIRE_12": 11470,
+    "ACQUIRE_16": 9779,
+    "ACQUIRE_4": 11470,
+    "ACQUIRE_8": 11470,
+    "REINVEST_CPU": 14858,
+    "SELECT_BATCH": 8535,
+    "SWAP_EDGE": 712,
+    "VERIFY_BATCH": 7236
+  },
+  "action_vocabulary": [
+    "ACQUIRE_4",
+    "ACQUIRE_8",
+    "ACQUIRE_12",
+    "ACQUIRE_16",
+    "ABSTAIN",
+    "SELECT_BATCH",
+    "SWAP_EDGE",
+    "VERIFY_BATCH",
+    "REINVEST_CPU"
+  ],
+  "controller_model": "Q(s,a) = E[dU + gamma V(s') | s,a] - lambda C(s,a), resource-bounded sequential acquisition",
+  "counts": {
+    "audited_abstentions": 697,
+    "candidates": 183520,
+    "measured_individual_labels": 9136,
+    "stage_decisions": 44189,
+    "unaudited_abstentions": 2238,
+    "windows": 26328
+  },
+  "evidence_class": "DEVELOPMENT_ONLY",
+  "files": {
+    "acquisition_stages_v2.jsonl": {
+      "bytes": 23861380,
+      "sha256": "176e89e9b9b8cd9f476b4c4c452f374f5fa5f60d3cb651f2686b6767f9c68d93"
+    },
+    "horizon_outcomes_v2.jsonl": {
+      "bytes": 33895,
+      "sha256": "7f2cb4577d5c3013b840e42bc0f3cb43c4c6bc39ef1a6890538a58c50db87bfe"
+    },
+    "trajectories_v2.jsonl": {
+      "bytes": 151138196,
+      "sha256": "3cfd266068c68f4d8b29beec56848a72d926d178a2db091ac5d1c9fb62fdd3bc"
+    }
+  },
+  "label_kinds": {
+    "horizon": "end-of-budget EVAL accuracy per root/arm in horizon_outcomes_v2.jsonl, never a decision label",
+    "individual": "per-candidate predicted gain; realized gain only for B_transactional probes",
+    "joint": "predicted joint minibatch gain and committed/rolled-back/audited actual feedback gain"
+  },
+  "missingness": "null + status; unaudited abstentions and unacquired candidates are missing, never zero",
+  "roots": [
+    28301,
+    28302,
+    28303,
+    28304,
+    28305,
+    28306,
+    28307,
+    28308
+  ],
+  "schema": "bpd-trm-curate03b-datagoblin-v2",
+  "split": "train",
+  "unit_costs_sha256": "000a2cc4a7045b9aa89491c20560d9ebc67f5194e70ae94cabf3653e74b82bd9"
+}
