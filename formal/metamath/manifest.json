@@ -32,6 +32,60 @@
       ],
       "statement": "|- ( A = C <-> B = C )",
       "proof_steps": 189
+    },
+    {
+      "metamath_label": "ml-bpd-energy-loss-one",
+      "source": "mechinterp/bpd/theory/EnergyFiberRank.lean",
+      "source_blob": "572695738d33b46ee9800cd433267bd599e0150d",
+      "lean_declaration": "BPD.EnergyFiberRank.energy_fiber_loses_at_most_one_dimension",
+      "scope": "natural arithmetic translation",
+      "mapping": "A=dim,B=presentRank,C=jointRank. B<=A,C<=A ensure Nat subtraction equals field subtraction. One-scalar-row premise C<=B+1 retained. Rank theorem remains a premise.",
+      "hypotheses": [
+        "|- A e. NN0",
+        "|- B e. NN0",
+        "|- C e. NN0",
+        "|- B <_ A",
+        "|- C <_ A",
+        "|- C <_ ( B + 1 )"
+      ],
+      "statement": "|- ( A - B ) <_ ( ( A - C ) + 1 )",
+      "proof_steps": 221
+    },
+    {
+      "metamath_label": "ml-bpd-delayed-positive",
+      "source": "mechinterp/bpd/theory/EnergyFiberRank.lean",
+      "source_blob": "572695738d33b46ee9800cd433267bd599e0150d",
+      "lean_declaration": "BPD.EnergyFiberRank.delayed_rank_positive_implies_nonempty_fiber",
+      "scope": "natural arithmetic translation",
+      "mapping": "A=dim,C=jointRank,D=futureRestrictedRank. C<=A ensures subtraction agrees with Nat. Other rank-ledger fields unused.",
+      "hypotheses": [
+        "|- A e. NN0",
+        "|- C e. NN0",
+        "|- D e. NN0",
+        "|- C <_ A",
+        "|- D <_ ( A - C )",
+        "|- 0 < D"
+      ],
+      "statement": "|- 0 < ( A - C )",
+      "proof_steps": 41
+    },
+    {
+      "metamath_label": "ml-bpd-spare-dim",
+      "source": "mechinterp/bpd/theory/EnergyFiberRank.lean",
+      "source_blob": "572695738d33b46ee9800cd433267bd599e0150d",
+      "lean_declaration": "BPD.EnergyFiberRank.positive_delayed_rank_requires_spare_dimension",
+      "scope": "natural arithmetic translation",
+      "mapping": "Same rank ledger interpretation as delayed positivity. Conclusion C<A.",
+      "hypotheses": [
+        "|- A e. NN0",
+        "|- C e. NN0",
+        "|- D e. NN0",
+        "|- C <_ A",
+        "|- D <_ ( A - C )",
+        "|- 0 < D"
+      ],
+      "statement": "|- C < A",
+      "proof_steps": 62
     }
   ]
 }
