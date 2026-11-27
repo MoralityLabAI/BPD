@@ -1,77 +1,16 @@
 {
-  "status": [
-    {
-      "id": 140532721110,
-      "name": "wide-cpu (512, 6, binding, closed_loop)",
-      "status": "completed",
-      "conclusion": "success"
-    },
-    {
-      "id": 140532721165,
-      "name": "wide-cpu (512, 12, binding, closed_loop)",
-      "status": "completed",
-      "conclusion": "success"
-    },
-    {
-      "id": 140532721185,
-      "name": "wide-cpu (1024, 6, binding, closed_loop)",
-      "status": "in_progress",
-      "conclusion": null
-    },
-    {
-      "id": 140532721188,
-      "name": "wide-cpu (512, 6, full, closed_loop)",
-      "status": "completed",
-      "conclusion": "success"
-    },
-    {
-      "id": 140532721205,
-      "name": "wide-cpu (512, 12, full, closed_loop)",
-      "status": "completed",
-      "conclusion": "success"
-    },
-    {
-      "id": 140532721207,
-      "name": "wide-cpu (1024, 12, binding, closed_loop)",
-      "status": "in_progress",
-      "conclusion": null
-    },
-    {
-      "id": 140532721214,
-      "name": "wide-cpu (1024, 12, full, closed_loop)",
-      "status": "in_progress",
-      "conclusion": null
-    },
-    {
-      "id": 140532721237,
-      "name": "wide-cpu (512, 12, binding, clean_window)",
-      "status": "completed",
-      "conclusion": "success"
-    },
-    {
-      "id": 140532721254,
-      "name": "wide-cpu (1024, 12, binding, clean_window)",
-      "status": "completed",
-      "conclusion": "success"
-    },
-    {
-      "id": 140532721293,
-      "name": "wide-cpu (1024, 6, full, closed_loop)",
-      "status": "in_progress",
-      "conclusion": null
-    }
-  ],
+  "status": "PARTIAL_COMPLETED_JOBS_PASS",
   "head": "3aaafa37dc754883d006fc53e8f9e4de44620e31",
   "run_id": 46006681126,
   "scope": "Actual hosted job log summaries and artifact IDs; completed successful jobs only. Pending jobs not inferred.",
   "totals": {
-    "campaigns": 44,
-    "paired_steps": 88,
-    "tensors": 26264,
-    "exact": 26264,
-    "scalars": 12084,
+    "campaigns": 52,
+    "paired_steps": 104,
+    "tensors": 30920,
+    "exact": 30920,
+    "scalars": 14220,
     "failures": 0,
-    "greedy": 288,
+    "greedy": 320,
     "greedy_failures": 0
   },
   "results": [
@@ -3932,6 +3871,828 @@
           ]
         }
       ]
+    },
+    {
+      "job_id": 140532721185,
+      "name": "wide-cpu (1024, 6, binding, closed_loop)",
+      "width": 1024,
+      "passes": 6,
+      "cap_mode": "binding",
+      "cap_bytes": 15728640,
+      "regime": "closed_loop",
+      "artifact": {
+        "id": 15202108079,
+        "digest": "sha256:54267f27f6442f293d83f0a7b8e126fdafe291205ad5f3f90ca1d1ba537c7673",
+        "size": 2542
+      },
+      "done": {
+        "campaigns": 8,
+        "paired_steps": 16
+      },
+      "stats": {
+        "first_fit": {
+          "roots": 2,
+          "pairs": 4,
+          "reference_ms": 15878.502164000054,
+          "cached_ms": 14939.49140299992,
+          "ratios": [
+            1.1072154066340478,
+            1.0316321512868045,
+            1.061333302752332,
+            1.0515179098563168
+          ],
+          "tensors": 1164,
+          "exact": 1164,
+          "scalars": 534,
+          "failures": 0,
+          "greedy": 8,
+          "greedy_failures": 0,
+          "reconstruction_count": [
+            62,
+            62,
+            62,
+            62
+          ],
+          "mask_only_calls": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "peak_process_rss_kib": 1405820,
+          "speedup": 1.062854265628586,
+          "faster_pairs": 4
+        },
+        "exact": {
+          "roots": 2,
+          "pairs": 4,
+          "reference_ms": 15492.064400999994,
+          "cached_ms": 14912.442586999987,
+          "ratios": [
+            1.0506580383113173,
+            0.9984716345939647,
+            1.0570301150250767,
+            1.0531636865472433
+          ],
+          "tensors": 1164,
+          "exact": 1164,
+          "scalars": 534,
+          "failures": 0,
+          "greedy": 8,
+          "greedy_failures": 0,
+          "reconstruction_count": [
+            62,
+            62,
+            62,
+            62
+          ],
+          "mask_only_calls": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "peak_process_rss_kib": 1405820,
+          "speedup": 1.038868334990627,
+          "faster_pairs": 3
+        },
+        "step_exact": {
+          "roots": 2,
+          "pairs": 4,
+          "reference_ms": 15358.386225999937,
+          "cached_ms": 14555.169895000006,
+          "ratios": [
+            1.0168868027015572,
+            1.0839395072551565,
+            1.067359615828908,
+            1.0544644653651254
+          ],
+          "tensors": 1164,
+          "exact": 1164,
+          "scalars": 534,
+          "failures": 0,
+          "greedy": 8,
+          "greedy_failures": 0,
+          "reconstruction_count": [
+            62,
+            62,
+            62,
+            62
+          ],
+          "mask_only_calls": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "peak_process_rss_kib": 1405820,
+          "speedup": 1.0551842635155946,
+          "faster_pairs": 4
+        },
+        "pgd_step": {
+          "roots": 2,
+          "pairs": 4,
+          "reference_ms": 15272.894791000057,
+          "cached_ms": 12860.77284899983,
+          "ratios": [
+            1.2031265764742285,
+            1.1429796494823172,
+            1.201675925993231,
+            1.203554024684568
+          ],
+          "tensors": 1164,
+          "exact": 1164,
+          "scalars": 534,
+          "failures": 0,
+          "greedy": 8,
+          "greedy_failures": 0,
+          "reconstruction_count": [
+            38,
+            38,
+            38,
+            38
+          ],
+          "mask_only_calls": [
+            24,
+            24,
+            24,
+            24
+          ],
+          "peak_process_rss_kib": 1405924,
+          "speedup": 1.187556531035988,
+          "faster_pairs": 4
+        }
+      },
+      "rows": [
+        {
+          "width": 1024,
+          "regime": "closed_loop",
+          "n_passes": 6,
+          "cap_mode": "binding",
+          "root": 0,
+          "policy": "first_fit",
+          "checks": {
+            "tensors": 582,
+            "exact": 582,
+            "scalars": 267,
+            "failures": 0,
+            "greedy": 4,
+            "greedy_failures": 0
+          },
+          "maxima": {
+            "bpd_state": 0,
+            "ci_state": 0,
+            "component_grad": 0,
+            "clean_cache": 0,
+            "pgd_ascent_gradients": 0,
+            "optimizer": 0,
+            "ci_grad": 0,
+            "pgd": 0,
+            "eval_ci": 0,
+            "clean_readout": 0,
+            "masked_readout": 0,
+            "masked_boundary": 0
+          },
+          "failures": [],
+          "selected_names": [
+            "layers.0.down_proj",
+            "layers.0.o_proj"
+          ],
+          "cap_bytes": 15728640,
+          "optimal_value": 2348810240,
+          "first_fit_value": 1090519040,
+          "selected_bytes": 15728640,
+          "process_peak_rss_kib": 1386296,
+          "reconstruction_count": [
+            62,
+            62
+          ],
+          "cross_scope_hits": [
+            0,
+            0
+          ],
+          "mask_only_calls": [
+            0,
+            0
+          ],
+          "pgd_ascent_calls": [
+            3,
+            3
+          ],
+          "reference_ms": 4081.633206500015,
+          "cached_ms": 3818.087643499979,
+          "raw_ms": [
+            [
+              4182.897721000018,
+              3777.8536099999656
+            ],
+            [
+              3980.368692000013,
+              3858.321676999992
+            ]
+          ]
+        },
+        {
+          "width": 1024,
+          "regime": "closed_loop",
+          "n_passes": 6,
+          "cap_mode": "binding",
+          "root": 0,
+          "policy": "exact",
+          "checks": {
+            "tensors": 582,
+            "exact": 582,
+            "scalars": 267,
+            "failures": 0,
+            "greedy": 4,
+            "greedy_failures": 0
+          },
+          "maxima": {
+            "bpd_state": 0,
+            "ci_state": 0,
+            "component_grad": 0,
+            "clean_cache": 0,
+            "pgd_ascent_gradients": 0,
+            "optimizer": 0,
+            "ci_grad": 0,
+            "pgd": 0,
+            "eval_ci": 0,
+            "clean_readout": 0,
+            "masked_readout": 0,
+            "masked_boundary": 0
+          },
+          "failures": [],
+          "selected_names": [
+            "layers.1.down_proj",
+            "layers.1.o_proj"
+          ],
+          "cap_bytes": 15728640,
+          "optimal_value": 2348810240,
+          "first_fit_value": 1090519040,
+          "selected_bytes": 15728640,
+          "process_peak_rss_kib": 1386296,
+          "reconstruction_count": [
+            62,
+            62
+          ],
+          "cross_scope_hits": [
+            0,
+            0
+          ],
+          "mask_only_calls": [
+            0,
+            0
+          ],
+          "pgd_ascent_calls": [
+            3,
+            3
+          ],
+          "reference_ms": 3958.2891299999974,
+          "cached_ms": 3866.2345134999896,
+          "raw_ms": [
+            [
+              3944.5630989999927,
+              3754.373882999971
+            ],
+            [
+              3972.0151610000016,
+              3978.095144000008
+            ]
+          ]
+        },
+        {
+          "width": 1024,
+          "regime": "closed_loop",
+          "n_passes": 6,
+          "cap_mode": "binding",
+          "root": 0,
+          "policy": "step_exact",
+          "checks": {
+            "tensors": 582,
+            "exact": 582,
+            "scalars": 267,
+            "failures": 0,
+            "greedy": 4,
+            "greedy_failures": 0
+          },
+          "maxima": {
+            "bpd_state": 0,
+            "ci_state": 0,
+            "component_grad": 0,
+            "clean_cache": 0,
+            "pgd_ascent_gradients": 0,
+            "optimizer": 0,
+            "ci_grad": 0,
+            "pgd": 0,
+            "eval_ci": 0,
+            "clean_readout": 0,
+            "masked_readout": 0,
+            "masked_boundary": 0
+          },
+          "failures": [],
+          "selected_names": [
+            "layers.1.down_proj",
+            "layers.1.o_proj"
+          ],
+          "cap_bytes": 15728640,
+          "optimal_value": 2348810240,
+          "first_fit_value": 1090519040,
+          "selected_bytes": 15728640,
+          "process_peak_rss_kib": 1405820,
+          "reconstruction_count": [
+            62,
+            62
+          ],
+          "cross_scope_hits": [
+            0,
+            0
+          ],
+          "mask_only_calls": [
+            0,
+            0
+          ],
+          "pgd_ascent_calls": [
+            3,
+            3
+          ],
+          "reference_ms": 3905.741001999985,
+          "cached_ms": 3720.756151000018,
+          "raw_ms": [
+            [
+              3862.1512720000055,
+              3798.0149429999983
+            ],
+            [
+              3949.3307319999644,
+              3643.497359000037
+            ]
+          ]
+        },
+        {
+          "width": 1024,
+          "regime": "closed_loop",
+          "n_passes": 6,
+          "cap_mode": "binding",
+          "root": 0,
+          "policy": "pgd_step",
+          "checks": {
+            "tensors": 582,
+            "exact": 582,
+            "scalars": 267,
+            "failures": 0,
+            "greedy": 4,
+            "greedy_failures": 0
+          },
+          "maxima": {
+            "bpd_state": 0,
+            "ci_state": 0,
+            "component_grad": 0,
+            "clean_cache": 0,
+            "pgd_ascent_gradients": 0,
+            "optimizer": 0,
+            "ci_grad": 0,
+            "pgd": 0,
+            "eval_ci": 0,
+            "clean_readout": 0,
+            "masked_readout": 0,
+            "masked_boundary": 0
+          },
+          "failures": [],
+          "selected_names": [
+            "layers.1.down_proj",
+            "layers.1.o_proj"
+          ],
+          "cap_bytes": 15728640,
+          "optimal_value": 7985954816,
+          "first_fit_value": 3707764736,
+          "selected_bytes": 15728640,
+          "process_peak_rss_kib": 1405820,
+          "reconstruction_count": [
+            38,
+            38
+          ],
+          "cross_scope_hits": [
+            24,
+            24
+          ],
+          "mask_only_calls": [
+            24,
+            24
+          ],
+          "pgd_ascent_calls": [
+            3,
+            3
+          ],
+          "reference_ms": 3833.8675175000108,
+          "cached_ms": 3268.4466354999986,
+          "raw_ms": [
+            [
+              3924.5944830000212,
+              3261.996334999992
+            ],
+            [
+              3743.140552,
+              3274.8969360000046
+            ]
+          ]
+        },
+        {
+          "width": 1024,
+          "regime": "closed_loop",
+          "n_passes": 6,
+          "cap_mode": "binding",
+          "root": 1,
+          "policy": "first_fit",
+          "checks": {
+            "tensors": 582,
+            "exact": 582,
+            "scalars": 267,
+            "failures": 0,
+            "greedy": 4,
+            "greedy_failures": 0
+          },
+          "maxima": {
+            "bpd_state": 0,
+            "ci_state": 0,
+            "component_grad": 0,
+            "clean_cache": 0,
+            "pgd_ascent_gradients": 0,
+            "optimizer": 0,
+            "ci_grad": 0,
+            "pgd": 0,
+            "eval_ci": 0,
+            "clean_readout": 0,
+            "masked_readout": 0,
+            "masked_boundary": 0
+          },
+          "failures": [],
+          "selected_names": [
+            "layers.0.down_proj",
+            "layers.0.o_proj"
+          ],
+          "cap_bytes": 15728640,
+          "optimal_value": 2348810240,
+          "first_fit_value": 1090519040,
+          "selected_bytes": 15728640,
+          "process_peak_rss_kib": 1405820,
+          "reconstruction_count": [
+            62,
+            62
+          ],
+          "cross_scope_hits": [
+            0,
+            0
+          ],
+          "mask_only_calls": [
+            0,
+            0
+          ],
+          "pgd_ascent_calls": [
+            3,
+            3
+          ],
+          "reference_ms": 3857.6178755000115,
+          "cached_ms": 3651.658057999981,
+          "raw_ms": [
+            [
+              3856.767998999999,
+              3633.8895509999816
+            ],
+            [
+              3858.467752000024,
+              3669.4265649999807
+            ]
+          ]
+        },
+        {
+          "width": 1024,
+          "regime": "closed_loop",
+          "n_passes": 6,
+          "cap_mode": "binding",
+          "root": 1,
+          "policy": "exact",
+          "checks": {
+            "tensors": 582,
+            "exact": 582,
+            "scalars": 267,
+            "failures": 0,
+            "greedy": 4,
+            "greedy_failures": 0
+          },
+          "maxima": {
+            "bpd_state": 0,
+            "ci_state": 0,
+            "component_grad": 0,
+            "clean_cache": 0,
+            "pgd_ascent_gradients": 0,
+            "optimizer": 0,
+            "ci_grad": 0,
+            "pgd": 0,
+            "eval_ci": 0,
+            "clean_readout": 0,
+            "masked_readout": 0,
+            "masked_boundary": 0
+          },
+          "failures": [],
+          "selected_names": [
+            "layers.1.down_proj",
+            "layers.1.o_proj"
+          ],
+          "cap_bytes": 15728640,
+          "optimal_value": 2348810240,
+          "first_fit_value": 1090519040,
+          "selected_bytes": 15728640,
+          "process_peak_rss_kib": 1405820,
+          "reconstruction_count": [
+            62,
+            62
+          ],
+          "cross_scope_hits": [
+            0,
+            0
+          ],
+          "mask_only_calls": [
+            0,
+            0
+          ],
+          "pgd_ascent_calls": [
+            3,
+            3
+          ],
+          "reference_ms": 3787.7430704999997,
+          "cached_ms": 3589.986780000004,
+          "raw_ms": [
+            [
+              3772.385744000019,
+              3568.853611999998
+            ],
+            [
+              3803.10039699998,
+              3611.1199480000096
+            ]
+          ]
+        },
+        {
+          "width": 1024,
+          "regime": "closed_loop",
+          "n_passes": 6,
+          "cap_mode": "binding",
+          "root": 1,
+          "policy": "step_exact",
+          "checks": {
+            "tensors": 582,
+            "exact": 582,
+            "scalars": 267,
+            "failures": 0,
+            "greedy": 4,
+            "greedy_failures": 0
+          },
+          "maxima": {
+            "bpd_state": 0,
+            "ci_state": 0,
+            "component_grad": 0,
+            "clean_cache": 0,
+            "pgd_ascent_gradients": 0,
+            "optimizer": 0,
+            "ci_grad": 0,
+            "pgd": 0,
+            "eval_ci": 0,
+            "clean_readout": 0,
+            "masked_readout": 0,
+            "masked_boundary": 0
+          },
+          "failures": [],
+          "selected_names": [
+            "layers.1.down_proj",
+            "layers.1.o_proj"
+          ],
+          "cap_bytes": 15728640,
+          "optimal_value": 2348810240,
+          "first_fit_value": 1090519040,
+          "selected_bytes": 15728640,
+          "process_peak_rss_kib": 1405820,
+          "reconstruction_count": [
+            62,
+            62
+          ],
+          "cross_scope_hits": [
+            0,
+            0
+          ],
+          "mask_only_calls": [
+            0,
+            0
+          ],
+          "pgd_ascent_calls": [
+            3,
+            3
+          ],
+          "reference_ms": 3773.4521109999832,
+          "cached_ms": 3556.8287964999854,
+          "raw_ms": [
+            [
+              3791.3852620000057,
+              3552.1160870000017
+            ],
+            [
+              3755.5189599999608,
+              3561.541505999969
+            ]
+          ]
+        },
+        {
+          "width": 1024,
+          "regime": "closed_loop",
+          "n_passes": 6,
+          "cap_mode": "binding",
+          "root": 1,
+          "policy": "pgd_step",
+          "checks": {
+            "tensors": 582,
+            "exact": 582,
+            "scalars": 267,
+            "failures": 0,
+            "greedy": 4,
+            "greedy_failures": 0
+          },
+          "maxima": {
+            "bpd_state": 0,
+            "ci_state": 0,
+            "component_grad": 0,
+            "clean_cache": 0,
+            "pgd_ascent_gradients": 0,
+            "optimizer": 0,
+            "ci_grad": 0,
+            "pgd": 0,
+            "eval_ci": 0,
+            "clean_readout": 0,
+            "masked_readout": 0,
+            "masked_boundary": 0
+          },
+          "failures": [],
+          "selected_names": [
+            "layers.1.down_proj",
+            "layers.1.o_proj"
+          ],
+          "cap_bytes": 15728640,
+          "optimal_value": 7985954816,
+          "first_fit_value": 3707764736,
+          "selected_bytes": 15728640,
+          "process_peak_rss_kib": 1405924,
+          "reconstruction_count": [
+            38,
+            38
+          ],
+          "cross_scope_hits": [
+            24,
+            24
+          ],
+          "mask_only_calls": [
+            24,
+            24
+          ],
+          "pgd_ascent_calls": [
+            3,
+            3
+          ],
+          "reference_ms": 3802.5798780000173,
+          "cached_ms": 3161.9397889999163,
+          "raw_ms": [
+            [
+              3820.4387179999912,
+              3179.2587629998934
+            ],
+            [
+              3784.7210380000433,
+              3144.6208149999393
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "status_snapshot": [
+    {
+      "id": 140532721110,
+      "name": "wide-cpu (512, 6, binding, closed_loop)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140532721165,
+      "name": "wide-cpu (512, 12, binding, closed_loop)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140532721185,
+      "name": "wide-cpu (1024, 6, binding, closed_loop)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140532721188,
+      "name": "wide-cpu (512, 6, full, closed_loop)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140532721205,
+      "name": "wide-cpu (512, 12, full, closed_loop)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140532721207,
+      "name": "wide-cpu (1024, 12, binding, closed_loop)",
+      "status": "in_progress",
+      "conclusion": null
+    },
+    {
+      "id": 140532721214,
+      "name": "wide-cpu (1024, 12, full, closed_loop)",
+      "status": "in_progress",
+      "conclusion": null
+    },
+    {
+      "id": 140532721237,
+      "name": "wide-cpu (512, 12, binding, clean_window)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140532721254,
+      "name": "wide-cpu (1024, 12, binding, clean_window)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140532721293,
+      "name": "wide-cpu (1024, 6, full, closed_loop)",
+      "status": "in_progress",
+      "conclusion": null
+    }
+  ],
+  "statuses": [
+    {
+      "id": 140532721110,
+      "name": "wide-cpu (512, 6, binding, closed_loop)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140532721165,
+      "name": "wide-cpu (512, 12, binding, closed_loop)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140532721185,
+      "name": "wide-cpu (1024, 6, binding, closed_loop)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140532721188,
+      "name": "wide-cpu (512, 6, full, closed_loop)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140532721205,
+      "name": "wide-cpu (512, 12, full, closed_loop)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140532721207,
+      "name": "wide-cpu (1024, 12, binding, closed_loop)",
+      "status": "in_progress",
+      "conclusion": null
+    },
+    {
+      "id": 140532721214,
+      "name": "wide-cpu (1024, 12, full, closed_loop)",
+      "status": "in_progress",
+      "conclusion": null
+    },
+    {
+      "id": 140532721237,
+      "name": "wide-cpu (512, 12, binding, clean_window)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140532721254,
+      "name": "wide-cpu (1024, 12, binding, clean_window)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 140532721293,
+      "name": "wide-cpu (1024, 6, full, closed_loop)",
+      "status": "in_progress",
+      "conclusion": null
     }
   ]
 }
