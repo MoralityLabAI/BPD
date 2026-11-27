@@ -543,6 +543,7 @@ def run_arm(arm: str, task: str, root: int, warm: ComponentTRM,
                     'predicted_joint_initial': pred_init,
                     'predicted_joint_final': pred_final,
                     'selected_indices': [order.index(c) for c in chosen_c],
+                    'cpu_to_proposal': charged_cpu() - c0,
                 }
                 with custody.transaction() as txn:
                     with ledger.timed('acceptance_step'):
@@ -574,6 +575,7 @@ def run_arm(arm: str, task: str, root: int, warm: ComponentTRM,
             if abstain:
                 abstained += 1
                 actions.append('ABSTAIN')
+                rec['cpu_to_proposal'] = charged_cpu() - c0
                 do_audit, u = audit_draw(root, f'{task}:{arm}', win, AUDIT_PROB)
                 audit_info = None
                 if do_audit:
@@ -665,6 +667,7 @@ def run_arm(arm: str, task: str, root: int, warm: ComponentTRM,
                 else:
                     ranked = sorted(range(4), key=lambda i: (-scores_k4[i], i))
                     pick = sorted(ranked[:2])
+            rec['cpu_to_proposal'] = charged_cpu() - c0
             x_b = torch.cat([cands[i][0] for i in pick], dim=0)
             y_b = torch.cat([cands[i][1] for i in pick], dim=0)
             with ledger.timed('acceptance_step'):
@@ -789,6 +792,7 @@ def run_task_root(task: str, root: int, out_dir: Path, *,
         saved = json.loads(res_path.read_text(encoding='utf-8'))
         if (saved.get('experiment') != EXPERIMENT or saved.get('task') != task or
                 saved.get('root') != root or saved.get('budget_cpu_seconds') != budget_cpu or
+                saved.get('source_sha256') != file_sha256(Path(__file__)) or
                 set(saved.get('arms', {})) != set(arms) or
                 saved.get('warm_steps') != (warm_steps_override if warm_steps_override is not None else TASK_SPECS[task]['warm_steps'])):
             raise RuntimeError('resume recipe mismatch: use a fresh output directory')
@@ -825,6 +829,7 @@ def run_task_root(task: str, root: int, out_dir: Path, *,
 
     result = {
         'experiment': EXPERIMENT,
+        'source_sha256': file_sha256(Path(__file__)),
         'evidence_class': 'DEVELOPMENT_ONLY',
         'task': task,
         'role': TASK_SPECS[task]['role'],
