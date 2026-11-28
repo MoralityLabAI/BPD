@@ -222,14 +222,17 @@ class TiedComponentLinear(nn.Module):
         clean_nobias = F.linear(xf, self.W_target.float()).reshape(-1, self.d_out)
         write_rms = clean_nobias.pow(2).mean(dim=-1).add(self.ablation.eps).sqrt().mean()
         mom = self.ablation.ema_momentum
+        acts_stat = acts_mean.to(dtype=self.mean_comp_acts.dtype)
+        delta_stat = delta_mean.to(dtype=self.mean_delta_out.dtype)
+        rms_stat = write_rms.to(dtype=self.mean_write_rms.dtype)
         if bool(self.calibrated_passes[tau].item()):
-            self.mean_comp_acts[tau].lerp_(acts_mean, mom)
-            self.mean_delta_out[tau].lerp_(delta_mean, mom)
-            self.mean_write_rms[tau].lerp_(write_rms, mom)
+            self.mean_comp_acts[tau].lerp_(acts_stat, mom)
+            self.mean_delta_out[tau].lerp_(delta_stat, mom)
+            self.mean_write_rms[tau].lerp_(rms_stat, mom)
         else:
-            self.mean_comp_acts[tau].copy_(acts_mean)
-            self.mean_delta_out[tau].copy_(delta_mean)
-            self.mean_write_rms[tau].copy_(write_rms)
+            self.mean_comp_acts[tau].copy_(acts_stat)
+            self.mean_delta_out[tau].copy_(delta_stat)
+            self.mean_write_rms[tau].copy_(rms_stat)
             self.calibrated_passes[tau] = True
 
     def _apply_intervention(self, x: Tensor, target_out: Tensor, tau: int) -> Tensor:

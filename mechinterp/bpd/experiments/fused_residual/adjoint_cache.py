@@ -10,6 +10,7 @@ from .cuda_guard import (
     current_stream_token,
     device_and_precision_supported,
     runtime_precision_state,
+    target_storage_dtype,
     validate_cuda_options,
 )
 
@@ -69,6 +70,59 @@ class _Primal(torch.autograd.Function):
         if gu is not None and gu.dtype != u.dtype:
             gu = gu.to(u.dtype)
         return gv, gu, None, None, None, None, None
+
+
+class _SharedCastPrimal(torch.autograd.Function):
+    """FUSE-13: Independent first-order adjoint for shared compute-dtype residual payload.
+
+    Takes compute-dtype factor tensors (vc, uc) obtained through PyTorch's native
+    autocast cast path so ToCopyBackward0 sharing matches native autograd bit-for-bit.
+    """
+
+    @staticmethod
+    def forward(ctx, vc, uc, payload, stats):
+        ctx.save_for_backward(vc, uc)
+        ctx.stats = stats
+        ctx.dev_type = vc.device.type
+        return payload
+
+    @staticmethod
+    @once_differentiable
+    def backward(ctx, g):
+        vc, uc = ctx.saved_tensors
+        ctx.stats.backward_nodes += 1
+        nv, nu = ctx.needs_input_grad[:2]
+        with torch.autocast(ctx.dev_type, enabled=False):
+            dz = (-g.float().T).to(vc.dtype)
+            gv = dz @ uc.T if nv else None
+            gu = vc.T @ dz if nu else None
+        return gv, gu, None, None
+
+
+def _resolve_autocast_factors(v: torch.Tensor, u: torch.Tensor, compute_dtype: torch.dtype):
+    """Obtain (vc, uc) in compute_dtype sharing native autocast ToCopyBackward0 nodes (0 FLOPs)."""
+    if v.dtype == compute_dtype:
+        vc = v
+    elif v.requires_grad:
+        zv = torch.mm(
+            torch.empty((0, v.shape[0]), device=v.device, dtype=v.dtype, requires_grad=True),
+            v,
+        )
+        vc = zv.grad_fn._saved_mat2
+    else:
+        vc = v.to(compute_dtype)
+
+    if u.dtype == compute_dtype:
+        uc = u
+    elif u.requires_grad:
+        zu = torch.mm(
+            u,
+            torch.empty((u.shape[1], 0), device=u.device, dtype=u.dtype, requires_grad=True),
+        )
+        uc = zu.grad_fn._saved_self
+    else:
+        uc = u.to(compute_dtype)
+    return vc, uc
 
 
 _MISSING = object()

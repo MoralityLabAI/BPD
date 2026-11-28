@@ -45,6 +45,12 @@ jobs:
         run: python -m mechinterp.bpd.experiments.fused_residual.validate_fuse11_native --output "$RUNNER_TEMP/fuse11_native.json"
       - name: FUSE-12 CUDA default-off and CPU guard gate
         run: python -m mechinterp.bpd.experiments.fused_residual.validate_fuse12_cuda --cpu-guard-only --output "$RUNNER_TEMP/fuse12_cpu_guard.json"
+      - name: FUSE-13 Stage 0 receipt audit
+        run: python -m mechinterp.bpd.experiments.fused_residual.fuse13_precision_gym --output "$RUNNER_TEMP/fuse13_audit.json"
+      - name: FUSE-13 Stage A native mixed-precision calibration (CPU)
+        run: python -m mechinterp.bpd.experiments.fused_residual.validate_fuse13_stage_a --device cpu --output "$RUNNER_TEMP/fuse13_stage_a_cpu.json"
+      - name: FUSE-13 Stage B/C precision storage and guards (CPU)
+        run: python -m mechinterp.bpd.experiments.fused_residual.validate_fuse13_precision --device cpu --output "$RUNNER_TEMP/fuse13_stage_bc_cpu.json"
       - name: Replay pinned INK06 source receipt
         run: |
           python -m mechinterp.bpd.experiments.inkling_component_flow.run_source_audit \
@@ -65,6 +71,9 @@ jobs:
             ${{ runner.temp }}/fuse10_native.json
             ${{ runner.temp }}/fuse11_native.json
             ${{ runner.temp }}/fuse12_cpu_guard.json
+            ${{ runner.temp }}/fuse13_audit.json
+            ${{ runner.temp }}/fuse13_stage_a_cpu.json
+            ${{ runner.temp }}/fuse13_stage_bc_cpu.json
             ${{ runner.temp }}/ink06_source_replay.json
           if-no-files-found: warn
           retention-days: 90

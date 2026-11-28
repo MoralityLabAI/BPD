@@ -10,28 +10,47 @@ from __future__ import annotations
 import torch
 
 PRECISION_MODES = ("fp32", "tf32", "bf16", "fp16")
+STORAGE_MODES = ("fp32", "compute_dtype")
 
 
-def validate_cuda_options(allow_cuda: bool, precision_mode: str) -> None:
+def validate_cuda_options(
+    allow_cuda: bool,
+    precision_mode: str,
+    storage_mode: str = "fp32",
+) -> None:
     if type(allow_cuda) is not bool:
         raise TypeError("allow_cuda must be bool")
     if precision_mode not in PRECISION_MODES:
         raise ValueError(f"unknown residual cache precision_mode: {precision_mode!r}")
+    if storage_mode not in STORAGE_MODES:
+        raise ValueError(f"unknown residual cache storage_mode: {storage_mode!r}")
     if precision_mode != "fp32" and not allow_cuda:
         raise ValueError("non-fp32 residual cache precision modes require allow_cuda=True")
+    if storage_mode != "fp32" and not allow_cuda:
+        raise ValueError("non-fp32 residual cache storage_mode requires allow_cuda=True")
+
+
+def target_storage_dtype(precision_mode: str, storage_mode: str) -> torch.dtype:
+    if storage_mode == "compute_dtype":
+        if precision_mode == "bf16":
+            return torch.bfloat16
+        if precision_mode == "fp16":
+            return torch.float16
+    return torch.float32
 
 
 def runtime_precision_state(device_type: str) -> tuple[object, ...]:
     """Hashable snapshot of ambient precision/autocast/TF32 state for cache identity."""
     fp32_prec = torch.get_float32_matmul_precision()
+    ac_cache = bool(torch.is_autocast_cache_enabled())
     cpu_ac = bool(torch.is_autocast_enabled("cpu"))
     cpu_ac_dt = str(torch.get_autocast_dtype("cpu")) if cpu_ac else None
     if device_type == "cuda":
         tf32_mm = bool(torch.backends.cuda.matmul.allow_tf32)
         cuda_ac = bool(torch.is_autocast_enabled("cuda"))
         cuda_ac_dt = str(torch.get_autocast_dtype("cuda")) if cuda_ac else None
-        return ("cuda", tf32_mm, fp32_prec, cuda_ac, cuda_ac_dt, cpu_ac, cpu_ac_dt)
-    return (device_type, False, fp32_prec, False, None, cpu_ac, cpu_ac_dt)
+        return ("cuda", tf32_mm, fp32_prec, cuda_ac, cuda_ac_dt, ac_cache, cpu_ac, cpu_ac_dt)
+    return (device_type, False, fp32_prec, False, None, ac_cache, cpu_ac, cpu_ac_dt)
 
 
 def current_stream_token(device: torch.device) -> tuple[str, int, int]:

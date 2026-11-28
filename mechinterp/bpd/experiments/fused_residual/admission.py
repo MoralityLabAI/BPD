@@ -11,10 +11,11 @@ class Site:
     value: int
 
     @classmethod
-    def residual(cls, din: int, dout: int, rank: int, calls: int) -> Site:
-        if any(type(x) is not int or x <= 0 for x in (din, dout, rank)) or type(calls) is not int or calls < 0:
+    def residual(cls, din: int, dout: int, rank: int, calls: int, elem_bytes: int = 4) -> Site:
+        if (any(type(x) is not int or x <= 0 for x in (din, dout, rank, elem_bytes))
+                or type(calls) is not int or calls < 0):
             raise ValueError('invalid residual shape or calls')
-        return cls(4*din*dout, max(0,calls-1)*din*rank*dout)
+        return cls(elem_bytes*din*dout, max(0,calls-1)*din*rank*dout)
 
 
 @dataclass(frozen=True)
