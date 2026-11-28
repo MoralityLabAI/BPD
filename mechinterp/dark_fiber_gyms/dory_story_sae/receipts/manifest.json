@@ -1,0 +1,55 @@
+{
+  "files": {
+    "instrument/dory_readout.cpp": {
+      "bundle_member": "dory_readout.cpp",
+      "sha256": "6aec5b129320c12df9c82ab4e2c14ec2125b470395a49f5e39175dae16692072"
+    },
+    "instrument/dory_story_sae_native.cpp": {
+      "bundle_member": "dory_story_sae_native.cpp",
+      "sha256": "5358233fb17cddf67fddaf8d868737a0fff1969044586583c11046e47d699f54"
+    },
+    "receipts/action_refit.json": {
+      "bundle_member": "action_refit/dory_story_sae_action_refit.json",
+      "sha256": "b498fa6f5cf7b30d89c97e00460f9a10ceec1942fc29dad978dc07d3072f942e"
+    },
+    "receipts/decisions.jsonl": {
+      "bundle_member": "action_refit/dory_story_sae_decisions.jsonl",
+      "sha256": "fa6c8a7604e5383021bfa5789d0082bb695243c4bcae7751d42a53988878d8aa"
+    },
+    "receipts/development.jsonl": {
+      "bundle_member": "development_scores.jsonl",
+      "sha256": "26c1225ef19c6910728414a67f398b47ac74b6fb68fe52f7d637edaf68f07338"
+    },
+    "receipts/power_input.json": {
+      "bundle_member": "power_preflight_input.json",
+      "sha256": "703dbedeff7320a423856a1605fd6d7cfbb5611b952e45f0a097986b52cae9c7"
+    },
+    "receipts/refit_scores.jsonl": {
+      "bundle_member": "action_refit/action_refit_scores.jsonl",
+      "sha256": "c1318bb8273694ad2b5552211f215db90f9bc19c0c01c172395089b15651d7ab"
+    },
+    "receipts/roster.json": {
+      "bundle_member": "cases.jsonl",
+      "projection": "public_case_roster",
+      "sha256": "6b8719bf6ac7238401b38e987fe8facde8c61b4574008321c3cce111d71af4ee"
+    },
+    "receipts/story_one_loop.jsonl": {
+      "bundle_member": "story_arms_l1.scores.jsonl",
+      "sha256": "3479987da0ccd06949353851192e18d2dcaf598e26a2c4d0d33e0d0ddfc3fb1d"
+    },
+    "receipts/story_results.json": {
+      "bundle_member": "dory_story_sae_results.json",
+      "sha256": "6e4022e591643cae1a540874b435ad7834709da9d759f8ae12fa5b114134edbb"
+    },
+    "receipts/story_two_loops.jsonl": {
+      "bundle_member": "story_arms_l2.scores.jsonl",
+      "sha256": "47ace7c600d2da29a79a9ad84bff1fe65414c5b51d968c9a3a86531b090476cd"
+    }
+  },
+  "local_only_source_sha256": {
+    "action_refit/dory_story_sae.py": "04f8370ce1581da5f0cfee4cd2674ae2d9b52c5d2918ad66d1116984c8d61599",
+    "cases.jsonl": "fef9a10841be9e88a1976396186535805b1266a67d0f18a267dd85ff823fc543"
+  },
+  "schema": "bpd-dory-story-sae-receipt-release-v1",
+  "source_bundle_sha256": "145018415452cbad05a42156f24a71858b33132d767b28016ac07c08e9970e00"
+}

@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "experiment_id": "dory-oakhaven-sae-tower-pilot",
+  "independent_unit": "AGN-02 fixture root; two opposite cases aggregated",
+  "alpha": "0.05",
+  "scientific_min_effect": "0.05",
+  "target_effect": "0.125",
+  "measurement_resolution": "0.000001",
+  "sham_quantile": "0.95",
+  "sham_confidence": "0.95",
+  "planned_comparisons": 1,
+  "confirm_units_planned": 59,
+  "pilot_from_development_only": true,
+  "heldout_sealed": false,
+  "units_independent": true,
+  "pilot": [
+    {
+      "unit_id": "agn02-03c1a0cf172650cb74ffd82f",
+      "paired_effect": "-0.02064530830835179",
+      "sham_effects": [
+        "0.020068599706138723",
+        "8.098007517082229e-05"
+      ]
+    },
+    {
+      "unit_id": "agn02-11c0af28af9860115c0b8da8",
+      "paired_effect": "-0.005563625894181495",
+      "sham_effects": [
+        "-0.003142170618783857",
+        "-0.0005836628143082168"
+      ]
+    },
+    {
+      "unit_id": "agn02-1eb308ddd08b84f30592927d",
+      "paired_effect": "-0.01628079911774935",
+      "sham_effects": [
+        "0.008387537667635503",
+        "-0.0022049700859114174"
+      ]
+    },
+    {
+      "unit_id": "agn02-2a74c09c860d35f1a014fe8f",
+      "paired_effect": "-0.00643640356067901",
+      "sham_effects": [
+        "-4.186287317770043e-05",
+        "0.00284680250825764"
+      ]
+    },
+    {
+      "unit_id": "agn02-2c3ff71515415474482f829e",
+      "paired_effect": "-0.032130785626040714",
+      "sham_effects": [
+        "0.019849677725902515",
+        "-7.430968219018785e-05"
+      ]
+    },
+    {
+      "unit_id": "agn02-64a30ff0501667d0b2a1bb5b",
+      "paired_effect": "-0.009638115577042888",
+      "sham_effects": [
+        "7.1103783956250055e-06",
+        "1.6210411059425223e-05"
+      ]
+    },
+    {
+      "unit_id": "agn02-be51578a23d0b0c7f30834f5",
+      "paired_effect": "-0.0386566751363224",
+      "sham_effects": [
+        "0.04056434244298612",
+        "-8.117279276176337e-05"
+      ]
+    },
+    {
+      "unit_id": "agn02-df468cc42eb8f4dc1603aef4",
+      "paired_effect": "-0.010327652512595209",
+      "sham_effects": [
+        "-0.005003602428837128",
+        "0.00554074883873279"
+      ]
+    }
+  ]
+}
