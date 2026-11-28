@@ -76,6 +76,22 @@ class StableNullspace(unittest.TestCase):
         self.assertEqual(float(np.abs(D).max()), 0.0)
 
 
+class RidgeStabilised(unittest.TestCase):
+    def test_ridge_keeps_protection_and_bounds_update_when_new_inputs_are_nearly_in_span(self):
+        rng = np.random.default_rng(11)
+        d, k = 64, 40
+        Xk, _ = keep_matrix(rng, d, k)
+        _, S, Vt = np.linalg.svd(Xk)
+        inside = rng.standard_normal((50, k)) @ Vt[:k]
+        outside = rng.standard_normal((50, d - k)) @ Vt[k:]
+        Xn = inside + 1e-6 * outside
+        R = rng.standard_normal((50, 6))
+        Dp = ns.nullspace_update(Xn, Xk, R)
+        Dr = ns.nullspace_update(Xn, Xk, R, ridge_rel=1e-2)
+        self.assertLess(ns.keep_leak(Xk, Dr), 1e-12)
+        self.assertGreater(np.linalg.norm(Dp), 1e3 * np.linalg.norm(Dr))
+
+
 class LiteralFormInstability(unittest.TestCase):
     def test_literal_pinv_leaks_and_blows_up(self):
         rng = np.random.default_rng(6)

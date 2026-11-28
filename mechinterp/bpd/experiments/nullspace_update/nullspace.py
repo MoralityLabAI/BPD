@@ -49,8 +49,25 @@ def keep_leak(Xk: np.ndarray, D: np.ndarray) -> float:
     return float(np.linalg.norm(Xk64 @ D64) / (np.linalg.norm(Xk64, 2) * nd))
 
 
-def _pinv_solve(A: np.ndarray, R: np.ndarray, rcond: float) -> np.ndarray:
-    return np.linalg.pinv(A, rcond=rcond) @ R
+def _spd_solve(A: np.ndarray, B: np.ndarray) -> np.ndarray:
+    """Solve A X = B for symmetric positive definite A via eigh (np.linalg.solve is slow on this host)."""
+    w, V = np.linalg.eigh(A)
+    return V @ ((V.T @ B) / np.maximum(w, np.finfo(np.float64).tiny)[:, None])
+
+
+def _pinv_solve(A: np.ndarray, R: np.ndarray, rcond: float, ridge_rel: float = 0.0,
+                ref2: float | None = None) -> np.ndarray:
+    """pinv(A) R, or with ridge_rel > 0 the Tikhonov solve with mu = ridge_rel * ref2 (default sigma_max(A)^2)."""
+    if ridge_rel <= 0:
+        return np.linalg.pinv(A, rcond=rcond) @ R
+    U, S, Vt = np.linalg.svd(A, full_matrices=False)
+    mu = ridge_rel * (ref2 if ref2 is not None else (S[0] ** 2 if S.size else 0.0))
+    return Vt.T @ ((S / np.maximum(S ** 2 + mu, np.finfo(np.float64).tiny))[:, None] * (U.T @ R))
+
+
+def _ref2(Xn, ridge_rel):
+    """Ridge reference scale sigma_max(X_new)^2, so a null-space map that sees little of X_new shrinks to zero."""
+    return float(np.linalg.norm(np.asarray(Xn, np.float64), 2) ** 2) if ridge_rel > 0 else None
 
 
 def _truncate(C: np.ndarray, rank: int | None) -> np.ndarray:
@@ -67,9 +84,9 @@ def ordinary_ridge(Xn, R, mu: float = 1e-3):
     X, Rr = np.asarray(Xn, np.float64), np.asarray(R, np.float64)
     m, d = X.shape
     if m < d:
-        D = X.T @ np.linalg.solve(X @ X.T + mu * np.eye(m), Rr)
+        D = X.T @ _spd_solve(X @ X.T + mu * np.eye(m), Rr)
     else:
-        D = np.linalg.solve(X.T @ X + mu * np.eye(d), X.T @ Rr)
+        D = _spd_solve(X.T @ X + mu * np.eye(d), X.T @ Rr)
     return D.astype(_out_dtype(Xn, R))
 
 
@@ -77,11 +94,11 @@ def soft_protected_ridge(Xn, Xk, R, lam: float = 10.0, mu: float = 1e-3):
     """argmin |Xn D - R|^2 + lam |Xk D|^2 + mu |D|^2."""
     X, K, Rr = (np.asarray(a, np.float64) for a in (Xn, Xk, R))
     A = X.T @ X + lam * (K.T @ K) + mu * np.eye(X.shape[1])
-    return np.linalg.solve(A, X.T @ Rr).astype(_out_dtype(Xn, Xk, R))
+    return _spd_solve(A, X.T @ Rr).astype(_out_dtype(Xn, Xk, R))
 
 
 def nullspace_update(Xn, Xk, R, rank: int | None = None, rcond: float = 1e-10,
-                     N: np.ndarray | None = None, tol: float | None = None):
+                     N: np.ndarray | None = None, tol: float | None = None, ridge_rel: float = 0.0):
     """Stable protected update D = N (Xn N)^+ R; with `rank`, rank-r inside null(X_keep).
 
     Empty null space returns zeros. Truncation acts on the coordinates C = (Xn N)^+ R, so the
@@ -93,8 +110,33 @@ def nullspace_update(Xn, Xk, R, rank: int | None = None, rcond: float = 1e-10,
     dt = _out_dtype(Xn, Xk, R)
     if N.shape[1] == 0:
         return np.zeros((np.asarray(Xn).shape[1], d_out), dt)
-    C = _pinv_solve(np.asarray(Xn, np.float64) @ N, np.asarray(R, np.float64), rcond)
+    C = _pinv_solve(np.asarray(Xn, np.float64) @ N, np.asarray(R, np.float64), rcond, ridge_rel, _ref2(Xn, ridge_rel))
     return (N @ _truncate(C, rank)).astype(dt)
+
+
+def nullspace_update_family(Xn, Xk, R, ranks, rcond: float = 1e-10, N: np.ndarray | None = None,
+                            ridge_rel: float = 0.0):
+    """Full and rank-truncated null-space updates from one pinv and one SVD.
+    Returns {None: full, r: rank-r, ...}; identical to calling nullspace_update per rank."""
+    if N is None:
+        N, _ = null_basis(Xk)
+    dt = _out_dtype(Xn, Xk, R)
+    if N.shape[1] == 0:
+        z = np.zeros((np.asarray(Xn).shape[1], np.asarray(R).shape[1]), dt)
+        return {r: z for r in (None, *ranks)}
+    C = _pinv_solve(np.asarray(Xn, np.float64) @ N, np.asarray(R, np.float64), rcond, ridge_rel, _ref2(Xn, ridge_rel))
+    U, S, Vt = np.linalg.svd(C, full_matrices=False)
+    out = {None: (N @ C).astype(dt)}
+    for r in ranks:
+        out[r] = (N @ ((U[:, :r] * S[:r]) @ Vt[:r])).astype(dt)
+    return out
+
+
+def truncated_svd_family(Xn, R, ranks, rcond: float = 1e-10, ridge_rel: float = 0.0):
+    D = _pinv_solve(np.asarray(Xn, np.float64), np.asarray(R, np.float64), rcond, ridge_rel, _ref2(Xn, ridge_rel))
+    U, S, Vt = np.linalg.svd(D, full_matrices=False)
+    dt = _out_dtype(Xn, R)
+    return {r: ((U[:, :r] * S[:r]) @ Vt[:r]).astype(dt) for r in ranks}
 
 
 def truncated_svd_update(Xn, R, rank: int, rcond: float = 1e-10):
@@ -153,10 +195,10 @@ def uniform_rank_allocation(spectra, budget: int):
     return [min(budget // n + (1 if i < budget % n else 0), len(s)) for i, s in enumerate(spectra)]
 
 
-def null_coordinate_spectrum(Xn, Xk, R, rcond: float = 1e-10, tol: float | None = None):
+def null_coordinate_spectrum(Xn, Xk, R, rcond: float = 1e-10, tol: float | None = None, ridge_rel: float = 0.0):
     """Singular values of the full null-space update coordinates (input to rank allocation)."""
     N, _ = null_basis(Xk, tol)
     if N.shape[1] == 0:
         return np.zeros(0)
-    C = _pinv_solve(np.asarray(Xn, np.float64) @ N, np.asarray(R, np.float64), rcond)
+    C = _pinv_solve(np.asarray(Xn, np.float64) @ N, np.asarray(R, np.float64), rcond, ridge_rel, _ref2(Xn, ridge_rel))
     return np.linalg.svd(C, compute_uv=False)
