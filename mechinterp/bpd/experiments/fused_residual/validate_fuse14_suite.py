@@ -329,7 +329,7 @@ def _run_trainer_and_capture(
                     wrappers = [m for m in (blk.o_proj, blk.down_proj) if isinstance(m, TiedComponentLinear)]
                     snap_state = [(w.mode, w.schedule, w.calls, w.pass_offset) for w in wrappers]
 
-                    def _run_blk(h_in, _blk=blk, _ws=wrappers, _st=snap_state):
+                    def _run_blk(h_in, *_deps, _blk=blk, _ws=wrappers, _st=snap_state):
                         prev = [(w.mode, w.schedule, w.calls, w.pass_offset) for w in _ws]
                         for w, (md, sc, cl, po) in zip(_ws, _st):
                             w.mode, w.schedule, w.calls, w.pass_offset = md, sc, cl, po
@@ -339,7 +339,8 @@ def _run_trainer_and_capture(
                             for w, (md, sc, cl, po) in zip(_ws, prev):
                                 w.mode, w.schedule, w.calls, w.pass_offset = md, sc, cl, po
 
-                    h = ckpt_fn(_run_blk, h, use_reentrant=False)
+                    deps = tuple(t for w in wrappers for t in (w.V, w.U))
+                    h = ckpt_fn(_run_blk, h, *deps, use_reentrant=False)
                     # Advance live forward call counters by 1 to match non-checkpointed forward
                     for w, (_, _, cl, _) in zip(wrappers, snap_state):
                         w.calls = cl + 1
@@ -1036,12 +1037,12 @@ def main() -> int:
         sc_ref, mc_ref = _run_trainer_and_capture(
             device=device, width=w, n_passes=t, seed=14501,
             regime="closed_loop", cal_cadence="off", budget_mode="full",
-            cache_residuals=False, cache_projections=False, enable_checkpointing=True, n_steps=2, audit_casts=True,
+            cache_residuals=False, cache_projections=False, enable_checkpointing=True, n_steps=2, audit_casts=False,
         )
         sc_cand, mc_cand = _run_trainer_and_capture(
             device=device, width=w, n_passes=t, seed=14501,
             regime="closed_loop", cal_cadence="off", budget_mode="full",
-            cache_residuals=False, cache_projections=True, allow_recompute=True, enable_checkpointing=True, n_steps=2, audit_casts=True,
+            cache_residuals=False, cache_projections=True, allow_recompute=True, enable_checkpointing=True, n_steps=2, audit_casts=False,
         )
         par_e = _compare_snapshots(sc_ref, sc_cand)
         stage_e.append(

@@ -221,7 +221,7 @@ def run_frontier_arm(
                             wrappers = [m for m in (blk.o_proj, blk.down_proj) if isinstance(m, TiedComponentLinear)]
                             snap_state = [(w.mode, w.schedule, w.calls, w.pass_offset) for w in wrappers]
 
-                            def _run_blk(h_in, _blk=blk, _ws=wrappers, _st=snap_state):
+                            def _run_blk(h_in, *_deps, _blk=blk, _ws=wrappers, _st=snap_state):
                                 prev = [(w.mode, w.schedule, w.calls, w.pass_offset) for w in _ws]
                                 for w, (md, sc, cl, po) in zip(_ws, _st):
                                     w.mode, w.schedule, w.calls, w.pass_offset = md, sc, cl, po
@@ -231,7 +231,8 @@ def run_frontier_arm(
                                     for w, (md, sc, cl, po) in zip(_ws, prev):
                                         w.mode, w.schedule, w.calls, w.pass_offset = md, sc, cl, po
 
-                            h = ckpt_fn(_run_blk, h, use_reentrant=False)
+                            deps = tuple(t for w in wrappers for t in (w.V, w.U))
+                            h = ckpt_fn(_run_blk, h, *deps, use_reentrant=False)
                             for w, (_, _, cl, _) in zip(wrappers, snap_state):
                                 w.calls = cl + 1
                         else:
