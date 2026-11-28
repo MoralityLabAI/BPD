@@ -47,8 +47,8 @@ def byte_and_overflow_compare(ref: torch.Tensor, cand: torch.Tensor) -> dict[str
     assert ref.shape == cand.shape and ref.dtype == cand.dtype, (ref.shape, cand.shape, ref.dtype, cand.dtype)
     a = ref.detach().contiguous()
     b = cand.detach().contiguous()
-    bitwise = bool(torch.equal(a.reshape(-1).view(torch.uint8), b.reshape(-1).view(torch.uint8)))
     if not (a.is_floating_point() or a.is_complex()):
+        bitwise = bool(torch.equal(a, b))
         return {
             "bitwise": bitwise,
             "finite": True,
@@ -60,6 +60,7 @@ def byte_and_overflow_compare(ref: torch.Tensor, cand: torch.Tensor) -> dict[str
             "posinf_masks_equal": True,
             "neginf_masks_equal": True,
         }
+    bitwise = bool(torch.equal(a.reshape(-1).view(torch.uint8), b.reshape(-1).view(torch.uint8)))
     af, bf = a.float(), b.float()
     fin_a = bool(torch.isfinite(af).all().item())
     fin_b = bool(torch.isfinite(bf).all().item())

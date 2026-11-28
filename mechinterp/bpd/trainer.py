@@ -90,6 +90,10 @@ class BPDTrainer:
         allow_cuda_residual_cache: bool = False,
         residual_cache_precision_mode: str = "fp32",
         residual_cache_storage_mode: str = "fp32",
+        cache_frozen_projection_casts: bool = False,
+        projection_cache_max_bytes: int | None = None,
+        projection_cache_targets: str | tuple[str, ...] = "block_projs",
+        projection_cache_allow_recompute: bool = False,
     ) -> None:
         if type(cache_single_backward_residuals) is not bool:
             raise TypeError("cache_single_backward_residuals must be bool")
@@ -128,6 +132,26 @@ class BPDTrainer:
         self.allow_cuda_residual_cache = allow_cuda_residual_cache
         self.residual_cache_precision_mode = residual_cache_precision_mode
         self.residual_cache_storage_mode = residual_cache_storage_mode
+        if type(cache_frozen_projection_casts) is not bool:
+            raise TypeError("cache_frozen_projection_casts must be bool")
+        if projection_cache_max_bytes is not None and (
+            type(projection_cache_max_bytes) is not int or projection_cache_max_bytes < 0
+        ):
+            raise ValueError("projection_cache_max_bytes must be None or a nonnegative integer")
+        if type(projection_cache_allow_recompute) is not bool:
+            raise TypeError("projection_cache_allow_recompute must be bool")
+        if projection_cache_allow_recompute and not cache_frozen_projection_casts:
+            raise ValueError("projection_cache_allow_recompute requires cache_frozen_projection_casts=True")
+        if isinstance(projection_cache_targets, str) and projection_cache_targets not in (
+            "block_projs", "qkv_only", "gate_up_only", "all",
+        ):
+            raise ValueError(f"unknown projection_cache_targets: {projection_cache_targets!r}")
+        self.cache_frozen_projection_casts = cache_frozen_projection_casts
+        self.projection_cache_max_bytes = projection_cache_max_bytes
+        self.projection_cache_targets = projection_cache_targets
+        self.projection_cache_allow_recompute = projection_cache_allow_recompute
+        self.projection_cache_receipt: dict[str, Any] | None = None
+        self._step_projection_pool = None
         self.residual_final_pgd_stats: list[Any] = []
         self.residual_final_pgd_query: dict[str, Any] | None = None
         self.residual_calibration_stats: list[dict[str, Any]] = []
@@ -244,6 +268,28 @@ class BPDTrainer:
             precision_mode=self.residual_cache_precision_mode,
         )
 
+    def _frozen_projection_scope(self):
+        """Experimental FUSE-14: step-local BF16 cast reuse for frozen FP32 linear projections."""
+        if not self.cache_frozen_projection_casts:
+            return nullcontext(None)
+        if self._step_projection_pool is None:
+            from mechinterp.bpd.experiments.fused_residual.projection_cache import (
+                FrozenProjectionCastPool,
+                eligible_frozen_projections,
+            )
+            mods = eligible_frozen_projections(
+                self.bpd_model, targets=self.projection_cache_targets
+            )
+            self._step_projection_pool = FrozenProjectionCastPool(
+                mods,
+                max_bytes=self.projection_cache_max_bytes,
+                allow_cuda=self.allow_cuda_residual_cache,
+                allow_recompute=self.projection_cache_allow_recompute,
+            )
+        if self._step_projection_pool.active:
+            return nullcontext(None)
+        return self._step_projection_pool.scope()
+
     def _finish_residual_step(self):
         pool = self._step_residual_pool
         if pool is not None:
@@ -264,6 +310,13 @@ class BPDTrainer:
                     "stream_checks": pool.stream_checks,
                 }
             self._step_residual_pool = None
+        proj_pool = self._step_projection_pool
+        if proj_pool is not None:
+            try:
+                proj_pool.close()
+            finally:
+                self.projection_cache_receipt = proj_pool.receipt()
+                self._step_projection_pool = None
 
     def _set_lr(self, step: int) -> float:
         if self.cfg.n_steps <= 1:
@@ -441,6 +494,7 @@ class BPDTrainer:
         self.residual_cache_plans = []
         self.residual_step_receipt = None
         self.residual_cuda_receipt = None
+        self.projection_cache_receipt = None
         self._residual_step_disabled = False
         self._residual_planned_calls = 0
         try:
@@ -498,134 +552,140 @@ class BPDTrainer:
 
         total_loss = self.cfg.coeff_faith * loss_faith + loss_min
 
-        # 1. Stochastic mask reconstruction branch
-        loss_stoch_val = 0.0
-        if self.cfg.coeff_stoch > 0.0:
-            share_noise = self.cfg.adversary.scope != "per_pass"
-            stoch_sched = sample_stochastic_schedules(
-                ci_out.lower_leaky,
-                route_subset=True,
-                share_noise_across_passes=share_noise,
-                generator=self.rng,
-            )
-            with self._single_backward_residual_scope(n_passes) as cache_stats:
-                stoch_traj = self.run_masked_rollout(
-                    batch,
-                    stoch_sched,
-                    n_passes=n_passes,
-                    pass_offset=pass_offset,
-                    init_state=init_state,
+        recompute_ctx = (
+            self._frozen_projection_scope()
+            if self.projection_cache_allow_recompute
+            else nullcontext(None)
+        )
+        with recompute_ctx:
+            # 1. Stochastic mask reconstruction branch
+            loss_stoch_val = 0.0
+            if self.cfg.coeff_stoch > 0.0:
+                share_noise = self.cfg.adversary.scope != "per_pass"
+                stoch_sched = sample_stochastic_schedules(
+                    ci_out.lower_leaky,
+                    route_subset=True,
+                    share_noise_across_passes=share_noise,
+                    generator=self.rng,
                 )
-            if cache_stats is not None:
-                self.residual_cache_stats.append(cache_stats)
-            loss_stoch, _ = trajectory_recon_loss(
-                stoch_traj,
-                clean_traj,
-                pass_tolerances=self.pass_tolerances,
-                state_boundary_weight=self.cfg.state_boundary_weight,
-                readout_policy=self.cfg.readout_policy,
-            )
-            total_loss = total_loss + self.cfg.coeff_stoch * loss_stoch
-            loss_stoch_val = float(loss_stoch.detach().item())
-
-        # 2. Persistent PGD adversarial mask reconstruction branch
-        loss_adv_val = 0.0
-        adv_source_grads: dict[str, Tensor] | None = None
-        if self.cfg.coeff_adv > 0.0 and exec_mode == "closed_loop":
-            adv_lr = self.pgd.lr_at(step, self.cfg.n_steps)
-            if self.cfg.adversary.inner_steps > 0:
-                ci_det = {k: v.detach() for k, v in ci_out.lower_leaky.items()}
-
-                def _inner_eval(sched: dict[str, PassMaskSchedule]) -> Tensor:
-                    with self._single_backward_residual_scope(n_passes, mask_only=True) as pgd_cache_stats:
-                        tr = self.run_masked_rollout(
-                            batch, sched, n_passes=n_passes, pass_offset=pass_offset, init_state=init_state
-                        )
-                    if pgd_cache_stats is not None:
-                        self.residual_pgd_cache_stats.append(pgd_cache_stats)
-                    l_rec, _ = trajectory_recon_loss(
-                        tr,
-                        clean_traj,
-                        pass_tolerances=self.pass_tolerances,
-                        state_boundary_weight=self.cfg.state_boundary_weight,
-                        readout_policy=self.cfg.readout_policy,
+                with self._frozen_projection_scope(), self._single_backward_residual_scope(n_passes) as cache_stats:
+                    stoch_traj = self.run_masked_rollout(
+                        batch,
+                        stoch_sched,
+                        n_passes=n_passes,
+                        pass_offset=pass_offset,
+                        init_state=init_state,
                     )
-                    return l_rec
-
-                self.pgd.warmup_inner_steps(ci_det, _inner_eval, lr=adv_lr)
-
-            adv_sched, leaf_sources = self.pgd.build_schedules(
-                ci_out.lower_leaky, requires_grad_sources=True
-            )
-            final_scope = (self._single_backward_residual_scope(n_passes)
-                           if self.cache_pgd_final_residuals else nullcontext(None))
-            with final_scope as final_stats:
-                adv_traj = self.run_masked_rollout(
-                    batch, adv_sched, n_passes=n_passes, pass_offset=pass_offset, init_state=init_state
+                if cache_stats is not None:
+                    self.residual_cache_stats.append(cache_stats)
+                loss_stoch, _ = trajectory_recon_loss(
+                    stoch_traj,
+                    clean_traj,
+                    pass_tolerances=self.pass_tolerances,
+                    state_boundary_weight=self.cfg.state_boundary_weight,
+                    readout_policy=self.cfg.readout_policy,
                 )
-            if final_stats is not None:
-                self.residual_final_pgd_stats.append(final_stats)
-            loss_adv, _ = trajectory_recon_loss(
-                adv_traj,
-                clean_traj,
-                pass_tolerances=self.pass_tolerances,
-                state_boundary_weight=self.cfg.state_boundary_weight,
-                readout_policy=self.cfg.readout_policy,
-            )
-            leaf_list = [leaf_sources[name] for name in self.bpd_model.module_order]
-            # All cached forwards have finished. Source leaves are independent
-            # of V/U, so this retained query must not execute their adjoints.
-            pool = self._step_residual_pool if final_stats is not None else None
-            if pool is not None:
-                pool.seal_forward()
-                adjoints = self.residual_cache_stats + self.residual_final_pgd_stats
-                before = sum(st.backward_nodes for st in adjoints)
-                if before:
-                    raise RuntimeError("factor adjoint ran before retained PGD query")
-            grads_tuple = torch.autograd.grad(
-                loss_adv, leaf_list, retain_graph=True, allow_unused=False
-            )
-            if pool is not None:
-                after = sum(st.backward_nodes for st in adjoints)
-                self.residual_final_pgd_query = {
-                    "factor_nodes_before": before, "factor_nodes_after": after,
-                    "forward_sealed": pool.sealed, "resident_bytes": pool.resident_bytes,
+                total_loss = total_loss + self.cfg.coeff_stoch * loss_stoch
+                loss_stoch_val = float(loss_stoch.detach().item())
+
+            # 2. Persistent PGD adversarial mask reconstruction branch
+            loss_adv_val = 0.0
+            adv_source_grads: dict[str, Tensor] | None = None
+            if self.cfg.coeff_adv > 0.0 and exec_mode == "closed_loop":
+                adv_lr = self.pgd.lr_at(step, self.cfg.n_steps)
+                if self.cfg.adversary.inner_steps > 0:
+                    ci_det = {k: v.detach() for k, v in ci_out.lower_leaky.items()}
+
+                    def _inner_eval(sched: dict[str, PassMaskSchedule]) -> Tensor:
+                        with self._frozen_projection_scope(), self._single_backward_residual_scope(n_passes, mask_only=True) as pgd_cache_stats:
+                            tr = self.run_masked_rollout(
+                                batch, sched, n_passes=n_passes, pass_offset=pass_offset, init_state=init_state
+                            )
+                        if pgd_cache_stats is not None:
+                            self.residual_pgd_cache_stats.append(pgd_cache_stats)
+                        l_rec, _ = trajectory_recon_loss(
+                            tr,
+                            clean_traj,
+                            pass_tolerances=self.pass_tolerances,
+                            state_boundary_weight=self.cfg.state_boundary_weight,
+                            readout_policy=self.cfg.readout_policy,
+                        )
+                        return l_rec
+
+                    self.pgd.warmup_inner_steps(ci_det, _inner_eval, lr=adv_lr)
+
+                adv_sched, leaf_sources = self.pgd.build_schedules(
+                    ci_out.lower_leaky, requires_grad_sources=True
+                )
+                final_scope = (self._single_backward_residual_scope(n_passes)
+                               if self.cache_pgd_final_residuals else nullcontext(None))
+                with self._frozen_projection_scope(), final_scope as final_stats:
+                    adv_traj = self.run_masked_rollout(
+                        batch, adv_sched, n_passes=n_passes, pass_offset=pass_offset, init_state=init_state
+                    )
+                if final_stats is not None:
+                    self.residual_final_pgd_stats.append(final_stats)
+                loss_adv, _ = trajectory_recon_loss(
+                    adv_traj,
+                    clean_traj,
+                    pass_tolerances=self.pass_tolerances,
+                    state_boundary_weight=self.cfg.state_boundary_weight,
+                    readout_policy=self.cfg.readout_policy,
+                )
+                leaf_list = [leaf_sources[name] for name in self.bpd_model.module_order]
+                # All cached forwards have finished. Source leaves are independent
+                # of V/U, so this retained query must not execute their adjoints.
+                pool = self._step_residual_pool if final_stats is not None else None
+                if pool is not None:
+                    pool.seal_forward()
+                    adjoints = self.residual_cache_stats + self.residual_final_pgd_stats
+                    before = sum(st.backward_nodes for st in adjoints)
+                    if before:
+                        raise RuntimeError("factor adjoint ran before retained PGD query")
+                grads_tuple = torch.autograd.grad(
+                    loss_adv, leaf_list, retain_graph=True, allow_unused=False
+                )
+                if pool is not None:
+                    after = sum(st.backward_nodes for st in adjoints)
+                    self.residual_final_pgd_query = {
+                        "factor_nodes_before": before, "factor_nodes_after": after,
+                        "forward_sealed": pool.sealed, "resident_bytes": pool.resident_bytes,
+                    }
+                    if after != before:
+                        pool.poisoned = True
+                        raise RuntimeError("retained PGD source query executed factor adjoint")
+                adv_source_grads = {
+                    name: g.detach() for name, g in zip(self.bpd_model.module_order, grads_tuple)
                 }
-                if after != before:
-                    pool.poisoned = True
-                    raise RuntimeError("retained PGD source query executed factor adjoint")
-            adv_source_grads = {
-                name: g.detach() for name, g in zip(self.bpd_model.module_order, grads_tuple)
-            }
-            total_loss = total_loss + self.cfg.coeff_adv * loss_adv
-            loss_adv_val = float(loss_adv.detach().item())
-        elif self.cfg.coeff_adv > 0.0 and exec_mode == "clean_window":
-            # On variable-length short transplant windows, apply fresh single-step adversarial probe
-            # without mutating full-horizon persistent PGD tensor shapes.
-            stoch_adv = sample_stochastic_schedules(
-                ci_out.lower_leaky,
-                route_subset=False,
-                share_noise_across_passes=True,
-                generator=self.rng,
-            )
-            with self._single_backward_residual_scope(n_passes) as cache_stats:
-                adv_traj = self.run_masked_rollout(
-                    batch, stoch_adv, n_passes=n_passes, pass_offset=pass_offset, init_state=init_state
+                total_loss = total_loss + self.cfg.coeff_adv * loss_adv
+                loss_adv_val = float(loss_adv.detach().item())
+            elif self.cfg.coeff_adv > 0.0 and exec_mode == "clean_window":
+                # On variable-length short transplant windows, apply fresh single-step adversarial probe
+                # without mutating full-horizon persistent PGD tensor shapes.
+                stoch_adv = sample_stochastic_schedules(
+                    ci_out.lower_leaky,
+                    route_subset=False,
+                    share_noise_across_passes=True,
+                    generator=self.rng,
                 )
-            if cache_stats is not None:
-                self.residual_cache_stats.append(cache_stats)
-            loss_adv, _ = trajectory_recon_loss(
-                adv_traj,
-                clean_traj,
-                pass_tolerances=self.pass_tolerances,
-                state_boundary_weight=self.cfg.state_boundary_weight,
-                readout_policy=self.cfg.readout_policy,
-            )
-            total_loss = total_loss + self.cfg.coeff_adv * loss_adv
-            loss_adv_val = float(loss_adv.detach().item())
+                with self._frozen_projection_scope(), self._single_backward_residual_scope(n_passes) as cache_stats:
+                    adv_traj = self.run_masked_rollout(
+                        batch, stoch_adv, n_passes=n_passes, pass_offset=pass_offset, init_state=init_state
+                    )
+                if cache_stats is not None:
+                    self.residual_cache_stats.append(cache_stats)
+                loss_adv, _ = trajectory_recon_loss(
+                    adv_traj,
+                    clean_traj,
+                    pass_tolerances=self.pass_tolerances,
+                    state_boundary_weight=self.cfg.state_boundary_weight,
+                    readout_policy=self.cfg.readout_policy,
+                )
+                total_loss = total_loss + self.cfg.coeff_adv * loss_adv
+                loss_adv_val = float(loss_adv.detach().item())
 
-        total_loss.backward()
-        # Release the owning detached primal pool before any optimizer mutation.
+            total_loss.backward()
+        # Release the owning detached primal & frozen-projection pools before any optimizer mutation.
         self._finish_residual_step()
         if self.cfg.grad_clip_components > 0.0:
             nn.utils.clip_grad_norm_(

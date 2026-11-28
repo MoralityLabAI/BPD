@@ -51,6 +51,10 @@ jobs:
         run: python -m mechinterp.bpd.experiments.fused_residual.validate_fuse13_stage_a --device cpu --output "$RUNNER_TEMP/fuse13_stage_a_cpu.json"
       - name: FUSE-13 Stage B/C precision storage and guards (CPU)
         run: python -m mechinterp.bpd.experiments.fused_residual.validate_fuse13_precision --device cpu --output "$RUNNER_TEMP/fuse13_stage_bc_cpu.json"
+      - name: FUSE-14 standalone frozen projection probe (CPU)
+        run: python -m mechinterp.bpd.experiments.fused_residual.fuse14_projection_probe --device cpu > "$RUNNER_TEMP/fuse14_probe_cpu.json"
+      - name: FUSE-14 Stages A-E trainer integration and guards (CPU)
+        run: python -m mechinterp.bpd.experiments.fused_residual.validate_fuse14_suite --device cpu --output "$RUNNER_TEMP/fuse14_suite_cpu.json"
       - name: Replay pinned INK06 source receipt
         run: |
           python -m mechinterp.bpd.experiments.inkling_component_flow.run_source_audit \
@@ -74,6 +78,8 @@ jobs:
             ${{ runner.temp }}/fuse13_audit.json
             ${{ runner.temp }}/fuse13_stage_a_cpu.json
             ${{ runner.temp }}/fuse13_stage_bc_cpu.json
+            ${{ runner.temp }}/fuse14_probe_cpu.json
+            ${{ runner.temp }}/fuse14_suite_cpu.json
             ${{ runner.temp }}/ink06_source_replay.json
           if-no-files-found: warn
           retention-days: 90
