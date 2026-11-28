@@ -89,6 +89,7 @@ class BPDTrainer:
         cache_pgd_final_residuals: bool = False,
         allow_cuda_residual_cache: bool = False,
         residual_cache_precision_mode: str = "fp32",
+        residual_cache_storage_mode: str = "fp32",
     ) -> None:
         if type(cache_single_backward_residuals) is not bool:
             raise TypeError("cache_single_backward_residuals must be bool")
@@ -118,10 +119,15 @@ class BPDTrainer:
             raise TypeError("allow_cuda_residual_cache must be bool")
         if residual_cache_precision_mode not in ("fp32", "tf32", "bf16", "fp16"):
             raise ValueError("unknown residual_cache_precision_mode")
+        if residual_cache_storage_mode not in ("fp32", "compute_dtype"):
+            raise ValueError("unknown residual_cache_storage_mode")
         if residual_cache_precision_mode != "fp32" and not allow_cuda_residual_cache:
             raise ValueError("non-fp32 residual_cache_precision_mode requires allow_cuda_residual_cache=True")
+        if residual_cache_storage_mode != "fp32" and not allow_cuda_residual_cache:
+            raise ValueError("non-fp32 residual_cache_storage_mode requires allow_cuda_residual_cache=True")
         self.allow_cuda_residual_cache = allow_cuda_residual_cache
         self.residual_cache_precision_mode = residual_cache_precision_mode
+        self.residual_cache_storage_mode = residual_cache_storage_mode
         self.residual_final_pgd_stats: list[Any] = []
         self.residual_final_pgd_query: dict[str, Any] | None = None
         self.residual_calibration_stats: list[dict[str, Any]] = []
@@ -205,6 +211,7 @@ class BPDTrainer:
                 calls, self.residual_cache_max_bytes,
                 allow_cuda=self.allow_cuda_residual_cache,
                 precision_mode=self.residual_cache_precision_mode,
+                storage_mode=self.residual_cache_storage_mode,
             )
         except RuntimeError as exc:
             # Exact planner overflow is a fail-closed reference fallback.
@@ -228,6 +235,7 @@ class BPDTrainer:
                 selected, max_bytes=self.residual_cache_max_bytes,
                 allow_cuda=self.allow_cuda_residual_cache,
                 precision_mode=self.residual_cache_precision_mode,
+                storage_mode=self.residual_cache_storage_mode,
             )
             return self._step_residual_pool.scope(mask_only=mask_only)
         return independent_residuals(
@@ -249,6 +257,9 @@ class BPDTrainer:
                 self.residual_cuda_receipt = {
                     "allow_cuda": pool.allow_cuda,
                     "precision_mode": pool.precision_mode,
+                    "storage_mode": pool.storage_mode,
+                    "storage_dtype": str(pool.storage_dtype),
+                    "factor_cast_bytes": pool.factor_cast_bytes,
                     "owner_stream": list(pool.owner_stream) if pool.owner_stream is not None else None,
                     "stream_checks": pool.stream_checks,
                 }
@@ -290,6 +301,7 @@ class BPDTrainer:
                         calls=passes, max_bytes=self.residual_cache_max_bytes,
                         allow_cuda=self.allow_cuda_residual_cache,
                         precision_mode=self.residual_cache_precision_mode,
+                        storage_mode=self.residual_cache_storage_mode,
                     )
                 if not self._residual_step_active:
                     self.residual_calibration_stats = []

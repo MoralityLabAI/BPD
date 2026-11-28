@@ -12,11 +12,12 @@ from types import MethodType
 
 import torch
 
-from .adjoint_cache import Stats, _Primal, _key
+from .adjoint_cache import Stats, _Primal, _SharedCastPrimal, _key, _resolve_autocast_factors
 from .admission import Site, select
 from .cuda_guard import (
     current_stream_token,
     device_and_precision_supported,
+    target_storage_dtype,
     validate_cuda_options,
 )
 
@@ -24,8 +25,14 @@ from .cuda_guard import (
 _MISSING = object()
 
 
-def supported(w, *, allow_cuda: bool = False, precision_mode: str = "fp32"):
-    validate_cuda_options(allow_cuda, precision_mode)
+def supported(
+    w,
+    *,
+    allow_cuda: bool = False,
+    precision_mode: str = "fp32",
+    storage_mode: str = "fp32",
+):
+    validate_cuda_options(allow_cuda, precision_mode, storage_mode)
     ts = (w.W_target, w.V, w.U)
     return (
         torch.is_grad_enabled()
@@ -46,16 +53,23 @@ def planned_sites(
     max_frontier=65536,
     allow_cuda: bool = False,
     precision_mode: str = "fp32",
+    storage_mode: str = "fp32",
 ):
     """Stable caller order; unsupported sites have zero value and stay native."""
-    validate_cuda_options(allow_cuda, precision_mode)
+    validate_cuda_options(allow_cuda, precision_mode, storage_mode)
     ws = tuple(wrappers)
     if len({id(w) for w in ws}) != len(ws):
         raise ValueError("duplicate wrapper")
+    elem_bytes = target_storage_dtype(precision_mode, storage_mode).itemsize
     sites = tuple(
-        Site.residual(w.d_in, w.d_out, w.C, passes)
-        if supported(w, allow_cuda=allow_cuda, precision_mode=precision_mode)
-        else Site(4 * w.d_in * w.d_out, 0)
+        Site.residual(w.d_in, w.d_out, w.C, passes, elem_bytes=elem_bytes)
+        if supported(
+            w,
+            allow_cuda=allow_cuda,
+            precision_mode=precision_mode,
+            storage_mode=storage_mode,
+        )
+        else Site(elem_bytes * w.d_in * w.d_out, 0)
         for w in ws
     )
     plan = select(sites, cap, "exact", max_frontier=max_frontier)
@@ -88,8 +102,9 @@ class StepResidualPool:
         max_bytes,
         allow_cuda: bool = False,
         precision_mode: str = "fp32",
+        storage_mode: str = "fp32",
     ):
-        validate_cuda_options(allow_cuda, precision_mode)
+        validate_cuda_options(allow_cuda, precision_mode, storage_mode)
         self.ws = tuple(wrappers)
         if type(max_bytes) is not int or max_bytes < 0:
             raise ValueError("invalid cache cap")
@@ -98,12 +113,15 @@ class StepResidualPool:
         self.max_bytes = max_bytes
         self.allow_cuda = allow_cuda
         self.precision_mode = precision_mode
+        self.storage_mode = storage_mode
+        self.storage_dtype = target_storage_dtype(precision_mode, storage_mode)
         self.owner_stream: tuple[str, int, int] | None = None
         self.stream_checks = 0
         self.entries = {}
         self.slots = {id(w): i for i, w in enumerate(self.ws)}
         self.resident_bytes = 0
         self.peak_bytes = 0
+        self.factor_cast_bytes = 0
         self.scope_count = 0
         self.active = False
         self.closed = False
@@ -205,19 +223,25 @@ class StepResidualPool:
                     self_w,
                     allow_cuda=self.allow_cuda,
                     precision_mode=self.precision_mode,
+                    storage_mode=self.storage_mode,
                 ):
                     return bypass()
                 self._check_stream(self_w.W_target.device)
+                use_low = (
+                    self.storage_mode == "compute_dtype"
+                    and self.storage_dtype != torch.float32
+                )
                 if old is None:
-                    n = self_w.W_target.numel() * 4
-                    if self.resident_bytes+n > self.max_bytes:
+                    n = self_w.W_target.numel() * self.storage_dtype.itemsize
+                    if self.resident_bytes + n > self.max_bytes:
                         stats.cap_rejections += 1
                         return bypass()
                     with torch.no_grad():
-                        p = original()
-                    if (p.dtype != torch.float32
+                        raw_p = original()
+                        p = raw_p.to(self.storage_dtype) if use_low else raw_p
+                    if (p.dtype != self.storage_dtype
                             or p.device != self_w.W_target.device
-                            or p.numel()*p.element_size() != n
+                            or p.numel() * p.element_size() != n
                             or p.untyped_storage().nbytes() != n):
                         self.poisoned = True
                         raise RuntimeError("unexpected residual storage size")
@@ -227,8 +251,12 @@ class StepResidualPool:
                         self.poisoned = True
                         raise RuntimeError("unexpected cross-site storage alias")
                     self.entries[wid] = (_key(self_w), p, p._version,
-                                         (self_w.W_target,self_w.V,self_w.U), ordinal)
+                                         (self_w.W_target, self_w.V, self_w.U), ordinal)
                     self.resident_bytes += n
+                    if use_low:
+                        self.factor_cast_bytes += (
+                            (self_w.V.numel() + self_w.U.numel()) * self.storage_dtype.itemsize
+                        )
                     self.peak_bytes = max(self.peak_bytes, self.resident_bytes)
                     stats.misses += 1
                     stats.reconstructions += 1
@@ -242,6 +270,12 @@ class StepResidualPool:
                     # Keep all input/mask dependencies in the native F.linear.
                     value = p
                     stats.mask_only_calls += 1
+                elif use_low:
+                    vc, uc = _resolve_autocast_factors(
+                        self_w.V, self_w.U, self.storage_dtype
+                    )
+                    value = _SharedCastPrimal.apply(vc, uc, p, stats)
+                    stats.independent_calls += 1
                 else:
                     dev_type = self_w.V.device.type
                     ac_enabled = bool(torch.is_autocast_enabled(dev_type))

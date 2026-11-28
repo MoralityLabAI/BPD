@@ -1,0 +1,111 @@
+{
+  "base": "f0d042b25306e4efcbb1d35b266d2ab85fb7bb49",
+  "checks": {
+    "50_unique_cells": true,
+    "fp32_gate": true,
+    "fp32_stress": true,
+    "mixed_arm_counts": true,
+    "status_matrix": true,
+    "tf32_stress": true
+  },
+  "frontier": [
+    {
+      "cell_id": "frontier__fp32__w4096_p24_closed_loop_k2_caloff_binding",
+      "parity_arms": []
+    },
+    {
+      "cell_id": "frontier__fp32__w4096_p24_closed_loop_k2_caloff_full",
+      "parity_arms": []
+    }
+  ],
+  "input_sha256": {
+    "fuse12_cuda_receipts.jsonl": "ed55034145ad669411ff1763fe606338977200d85ee39845d44519196f84b5e4",
+    "receipt_fuse12_cuda_validate.json": "4b885f72ea840d5c98a8de25fe7079c25755beeb2f504cf70de159193dce05f1"
+  },
+  "interpretation": "nonfinite_parity_tensors counts matching nonfinite cases, not finite passes; FUSE-12 executive arm-G failures differ in denominator from all-arm totals",
+  "mixed_trainer": {
+    "bf16": {
+      "all_candidate_failures": 154,
+      "per_arm": {
+        "C": {
+          "bitwise_exact": 131,
+          "failures": 50,
+          "tensors": 192
+        },
+        "F": {
+          "bitwise_exact": 130,
+          "failures": 52,
+          "tensors": 192
+        },
+        "G": {
+          "bitwise_exact": 130,
+          "failures": 52,
+          "tensors": 192
+        }
+      }
+    },
+    "fp16": {
+      "all_candidate_failures": 126,
+      "per_arm": {
+        "C": {
+          "bitwise_exact": 132,
+          "failures": 42,
+          "tensors": 192
+        },
+        "F": {
+          "bitwise_exact": 132,
+          "failures": 42,
+          "tensors": 192
+        },
+        "G": {
+          "bitwise_exact": 132,
+          "failures": 42,
+          "tensors": 192
+        }
+      }
+    }
+  },
+  "pass": true,
+  "status_counts": {
+    "bf16/native_autocast_error": 2,
+    "bf16/ok": 2,
+    "fp16/native_autocast_error": 2,
+    "fp16/ok": 2,
+    "fp32/ok": 38,
+    "tf32/ok": 4
+  },
+  "stress": {
+    "bf16": {
+      "bitwise_exact": 1344,
+      "cases": 96,
+      "failures": 192,
+      "nonfinite_parity_tensors": 0,
+      "tensors": 1536,
+      "within_tol": 1344
+    },
+    "fp16": {
+      "bitwise_exact": 1032,
+      "cases": 96,
+      "failures": 144,
+      "nonfinite_parity_tensors": 384,
+      "tensors": 1536,
+      "within_tol": 1008
+    },
+    "fp32": {
+      "bitwise_exact": 1536,
+      "cases": 96,
+      "failures": 0,
+      "nonfinite_parity_tensors": 0,
+      "tensors": 1536,
+      "within_tol": 1536
+    },
+    "tf32": {
+      "bitwise_exact": 1536,
+      "cases": 96,
+      "failures": 0,
+      "nonfinite_parity_tensors": 0,
+      "tensors": 1536,
+      "within_tol": 1536
+    }
+  }
+}

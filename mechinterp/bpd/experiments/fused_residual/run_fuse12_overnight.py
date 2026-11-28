@@ -69,9 +69,44 @@ def render_results_markdown(
     lines.append("   - Width `2048`, `T=24`: peak allocated VRAM drops from `7,189.8 MiB` (Arm A) -> `1,638.1 MiB` (Arm G, **4.39x reduction**, `-5,552 MiB`), with `1.082x` step speedup (`1,453.3 ms -> 1,343.6 ms`).")
     lines.append("   - Width `4096`, `T=24`: native Arm A allocates **`26,573.9 MiB`** (`28,120 MiB` reserved), spilling over PCIe under WDDM (`56.57 s/step`, `4.39 kJ/step`). Arm F/G holds peak allocated VRAM at **`4,757.6 MiB`** (`5,122 MiB` NVML, **5.59x reduction**, zero spill), cutting step latency to **`3.14 s/step`** (**`18.00x` speedup**, 95% CI `[17.63, 18.12]`) and step energy by **18.2x** (`4,388 J -> 242 J/step`).")
     lines.append("   - At small/medium widths (`64–1024`), GPU step time is dominated by Python/autograd dispatch (`site_recon_ms = 0.03–0.22 ms`), so full-step speedups remain near `0.90–1.08x` (with isolated calibration wins like `w=512, p=6, cal=1`: `1.412x`). Cache planner overhead is negligible (`0.15–0.59 ms`).")
-    lines.append("3. **FUSE-12B Mixed Precision Verdict (No Silent Tolerance Loosening):**")
-    lines.append("   - **TF32 (`PASS`):** `1,536/1,536` stress tensors bitwise exact (`max_abs=0.0`, `failures=0`), `2/2` parity-audited trainer cells bitwise exact (`182/182`, `192/192`), and **3.20x peak VRAM reduction** at `w=2048, T=12` (`3,892 -> 1,218 MiB`).")
-    lines.append("   - **BF16 & FP16 CUDA Autocast (`HOLD — keep on reference path`):** Three independent mechanisms block admission without loosening tolerances: (a) native `TiedComponentLinear.observe_clean_pass` (`components.py:226`) raises `RuntimeError` in `lerp_` under CUDA BF16/FP16 autocast with `pass_mean`; (b) PyTorch's `AutoDispatchBelowAutocast` thread-local guard inside plain `Function.backward()` causes `_Primal.backward` to execute `g_V, g_U` in FP32 while native `MmBackward0` executes in BF16/FP16 (`1,344/1,344` forward/PGD/input/mask tensors bitwise exact, `192` BF16 / `144` FP16 failures on `g_V, g_U`, and `52` BF16 / `42` FP16 trainer parity failures at `w=512`, `max_abs=7.81e-2` / `7.81e-3`); (c) under autocast, `F.linear(xf, delta_w)` casts FP32 `delta_w` into a fresh per-pass BF16/FP16 copy saved by autograd, negating the `O(T)` VRAM collapse (`w=2048, T=12`: `6,317 -> 6,445 MiB`, `0.85–0.97x` slower).")
+    lines.append("3. **FUSE-12B Mixed Precision Verdict (No Silent Tolerance Loosening — Counts Computed Directly from Receipts):**")
+    if val and "fuse12b_stress" in val:
+        tf32_st = val["fuse12b_stress"]["tf32"]
+        bf16_st = val["fuse12b_stress"]["bf16"]
+        fp16_st = val["fuse12b_stress"]["fp16"]
+        mp_arm_counts: dict[str, dict[str, int]] = {}
+        for r in receipts:
+            pm = r.get("precision_mode")
+            if pm in ("bf16", "fp16") and r.get("status") == "ok" and r.get("width") == 512:
+                mp_arm_counts[pm] = {
+                    k: int(v["parity"]["failures"])
+                    for k, v in r.get("arms", {}).items()
+                    if v.get("parity")
+                }
+        bf16_arms = mp_arm_counts.get("bf16", {})
+        fp16_arms = mp_arm_counts.get("fp16", {})
+        bf16_arm_str = ", ".join(f"{k}={v}" for k, v in sorted(bf16_arms.items()))
+        fp16_arm_str = ", ".join(f"{k}={v}" for k, v in sorted(fp16_arms.items()))
+        lines.append(
+            f"   - **TF32 (`PASS`):** `{tf32_st['bitwise_exact']}/{tf32_st['tensors']}` stress tensors bitwise exact "
+            f"(`max_abs={tf32_st['max_abs_err']:.1f}`, `failures={tf32_st['failures']}`), `2/2` parity-audited trainer cells bitwise exact (`182/182`, `192/192`), "
+            f"and **3.20x peak VRAM reduction** at `w=2048, T=12` (`3,892 -> 1,218 MiB`)."
+        )
+        lines.append(
+            f"   - **BF16 & FP16 CUDA Autocast (`HOLD — keep on reference path`):** Three independent mechanisms block admission without loosening tolerances: "
+            f"(a) native `TiedComponentLinear.observe_clean_pass` (`components.py:226`) raises `RuntimeError` in `lerp_` under CUDA BF16/FP16 autocast with `pass_mean` (`2` BF16 + `2` FP16 cells recorded as `native_autocast_error`); "
+            f"(b) PyTorch's `AutoDispatchBelowAutocast` thread-local guard inside plain `Function.backward()` causes `_Primal.backward` to execute `g_V, g_U` in FP32 while native `MmBackward0` executes in BF16/FP16 "
+            f"(stress: BF16 `{bf16_st['bitwise_exact']}/{bf16_st['tensors']}` finite bitwise, `{bf16_st['failures']}` failures, `{bf16_st['nonfinite_parity_tensors']}` nonfinite; "
+            f"FP16 `{fp16_st['bitwise_exact']}/{fp16_st['tensors']}` bitwise, `{fp16_st['within_tol']}/{fp16_st['tensors']}` finite within tol, `{fp16_st['nonfinite_parity_tensors']}` matching nonfinite outcomes [not finite passes], `{fp16_st['failures']}` failures; "
+            f"w=512 trainer parity failures: BF16 `{bf16_arm_str}` [total `{sum(bf16_arms.values())}`], FP16 `{fp16_arm_str}` [total `{sum(fp16_arms.values())}`]); "
+            f"(c) under autocast, `F.linear(xf, delta_w)` casts FP32 `delta_w` into a fresh per-pass BF16/FP16 copy saved by autograd, negating the `O(T)` VRAM collapse (`w=2048, T=12`: `6,317 -> 6,445 MiB`, `0.85–0.97x` slower)."
+        )
+        w4096_parity = [
+            r["cell_id"] for r in receipts
+            if r.get("width") == 4096 and any(v.get("parity") for v in r.get("arms", {}).values())
+        ]
+        if not w4096_parity:
+            lines.append("   - **Frontier Parity Gap (Tracked in FUSE-13 Stage D):** Width `4096` (`T=24`) benchmark cells did not run full trainer parity validation (`parity_arms=[]`); full parity validation at width `4096` remains open and is scheduled in FUSE-13.")
     lines.append("4. **FUSE-12C DataGoblin Curriculum (50-cell / 283-row / 706-site dataset):** Under strict group holdouts across widths `64–4096` and depths `6–24`, a naive raw-ms Ridge model fails (`0.331` width / `0.349` depth oracle fraction) due to 5-order-of-magnitude WDDM-spill leverage, whereas a log-space physical Ridge predictor achieves **`0.9194`** (width holdout) / **`0.9209`** (depth holdout) of oracle step savings (`0.9242` / `0.9256` on direct reconstruction savings), closely matching `exact_saved_mac` (`0.9364` / `0.9505`) and `density` (`0.9379` / `0.9439`). A compact logistic worth-caching classifier (`speedup >= 1.03x OR vram_saved >= 256 MiB`) achieves `71.6%` width-holdout and `66.3%` depth-holdout accuracy.")
     lines.append("")
 

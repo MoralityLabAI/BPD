@@ -16,12 +16,19 @@ from .adjoint_cache import _key
 from .cuda_guard import (
     current_stream_token,
     device_and_precision_supported,
+    target_storage_dtype,
     validate_cuda_options,
 )
 
 
-def _supported(w, *, allow_cuda: bool = False, precision_mode: str = "fp32"):
-    validate_cuda_options(allow_cuda, precision_mode)
+def _supported(
+    w,
+    *,
+    allow_cuda: bool = False,
+    precision_mode: str = "fp32",
+    storage_mode: str = "fp32",
+):
+    validate_cuda_options(allow_cuda, precision_mode, storage_mode)
     if type(w) is not TiedComponentLinear:
         return False
     ts = (w.W_target, w.V, w.U)
@@ -46,13 +53,14 @@ def calibration_residuals(
     max_bytes,
     allow_cuda: bool = False,
     precision_mode: str = "fp32",
+    storage_mode: str = "fp32",
 ):
     """Cache only original materialized residuals for one clean rollout.
 
     Planner values assume one residual request per site per pass. Actual
     hits/misses are measured. Cap is cached payload only, not total memory.
     """
-    validate_cuda_options(allow_cuda, precision_mode)
+    validate_cuda_options(allow_cuda, precision_mode, storage_mode)
     named = tuple(named_wrappers)
     if type(calls) is not int or calls < 0:
         raise ValueError("invalid planned calls")
@@ -62,15 +70,23 @@ def calibration_residuals(
         raise ValueError("duplicate wrapper")
     if any(getattr(w, "_residual_cache_active", False) for _, w in named):
         raise RuntimeError("nested residual scope")
+    storage_dt = target_storage_dtype(precision_mode, storage_mode)
+    elem_bytes = storage_dt.itemsize
+    use_low = storage_mode == "compute_dtype" and storage_dt != torch.float32
     stats = dict(status="empty", planned_calls=calls, selected=[], planned_bytes=0,
                  planned_saved_macs=0, calls=0, hits=0, misses=0, bypasses=0,
                  reconstructions=0, peak_bytes=0, resident_bytes=0, closed=False)
     eligible = [(name, w) for name, w in named
-                if _supported(w, allow_cuda=allow_cuda, precision_mode=precision_mode)
+                if _supported(
+                    w,
+                    allow_cuda=allow_cuda,
+                    precision_mode=precision_mode,
+                    storage_mode=storage_mode,
+                )
                 and "weight_delta" not in w.__dict__
                 and "reconstructed_weight" not in w.__dict__]
     try:
-        plan = select([Site.residual(w.d_in, w.d_out, w.C, calls)
+        plan = select([Site.residual(w.d_in, w.d_out, w.C, calls, elem_bytes=elem_bytes)
                        for _, w in eligible], max_bytes, "exact")
     except RuntimeError as exc:
         if str(exc) != "frontier limit exceeded":
@@ -118,7 +134,12 @@ def calibration_residuals(
             old = entries.get(wid)
             if old is not None:
                 verify(self_w, old)
-            if not _supported(self_w, allow_cuda=allow_cuda, precision_mode=precision_mode):
+            if not _supported(
+                self_w,
+                allow_cuda=allow_cuda,
+                precision_mode=precision_mode,
+                storage_mode=storage_mode,
+            ):
                 stats["bypasses"] += 1
                 stats["reconstructions"] += 1
                 return original()
@@ -126,15 +147,16 @@ def calibration_residuals(
             if old is not None:
                 stats["hits"] += 1
                 return old[1]
-            n = self_w.W_target.numel() * 4
+            n = self_w.W_target.numel() * elem_bytes
             if stats["resident_bytes"] + n > max_bytes:
                 stats["bypasses"] += 1
                 stats["reconstructions"] += 1
                 return original()
-            p = original()
+            raw_p = original()
+            p = raw_p.to(storage_dt) if use_low else raw_p
             if (p.requires_grad or p.is_inference()
                     or p.shape != self_w.W_target.shape
-                    or p.dtype != torch.float32 or p.device != self_w.W_target.device
+                    or p.dtype != storage_dt or p.device != self_w.W_target.device
                     or p.numel() * p.element_size() != n
                     or p.untyped_storage().nbytes() != n
                     or any(p.untyped_storage().data_ptr() == e[1].untyped_storage().data_ptr()

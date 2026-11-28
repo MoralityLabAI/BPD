@@ -1,0 +1,1089 @@
+{
+  "status": "experimental_non_correctness_path",
+  "correctness_path": false,
+  "validated_modes_for_safety_gate": [
+    "bf16",
+    "fp32",
+    "tf32"
+  ],
+  "total_dataset_rows": 303,
+  "total_site_samples": 706,
+  "hardware_families": [
+    "NVIDIA GeForce RTX 5080 Laptop GPU"
+  ],
+  "dataset_families": [
+    "synthetic_mini_trm"
+  ],
+  "checkpoint_holdout_status": "blocked_single_family_synthetic_only",
+  "hardware_holdout_status": "blocked_single_gpu_rtx5080",
+  "leave_one_width_out": {
+    "groups": [
+      "64",
+      "128",
+      "256",
+      "512",
+      "1024",
+      "2048",
+      "4096"
+    ],
+    "aggregate_oracle_fraction_step_ms": {
+      "physical_plus_learned_gated": 0.9591031559385478,
+      "physical_plus_learned": 0.9667643109861135,
+      "physical_prior": 0.9779556781758448,
+      "fuse12c_log_ridge": 0.9194255127001868,
+      "exact_saved_mac": 0.9363842342460099,
+      "density": 0.9379214882137804,
+      "first_fit": 0.9330775922344432
+    },
+    "aggregate_oracle_fraction_recon_ms": {
+      "physical_plus_learned_gated": 0.9560267900307944,
+      "physical_plus_learned": 0.97238086638693,
+      "physical_prior": 0.9801263753954287,
+      "fuse12c_log_ridge": 0.9242432420385142,
+      "exact_saved_mac": 0.922591046133591,
+      "density": 0.9284296460750893,
+      "first_fit": 0.9359726813589981
+    },
+    "worst_case_regret_step_ms": {
+      "physical_plus_learned_gated": 234.3428950050038,
+      "physical_plus_learned": 234.3428950050038,
+      "physical_prior": 234.3428950050038,
+      "fuse12c_log_ridge": 26275.66031429627,
+      "exact_saved_mac": 234.3428950050038,
+      "density": 26510.003209301274,
+      "first_fit": 26275.66031429627
+    },
+    "worst_case_regret_recon_ms": {
+      "physical_plus_learned_gated": 216.86411265545757,
+      "physical_plus_learned": 216.86411265545757,
+      "physical_prior": 216.86411265545757,
+      "fuse12c_log_ridge": 24315.854587246577,
+      "exact_saved_mac": 216.86411265545757,
+      "density": 24532.718699902034,
+      "first_fit": 24315.854587246577
+    },
+    "mean_unsafe_admission_rate": {
+      "physical_plus_learned_gated": 0.0,
+      "physical_plus_learned": 0.01617826617826618,
+      "physical_prior": 0.01617826617826618,
+      "fuse12c_log_ridge": 0.01617826617826618,
+      "exact_saved_mac": 0.01617826617826618,
+      "density": 0.01617826617826618,
+      "first_fit": 0.01617826617826618
+    },
+    "folds": {
+      "64": {
+        "n_train_sites": 674,
+        "n_test_sites": 32,
+        "prior_recon_mae_ms": 0.49773771542653744,
+        "physical_plus_learned_recon_mae_ms": 0.15558593136594137,
+        "fuse12c_log_ridge_recon_mae_ms": 0.6797799846820032,
+        "budget_decisions": 33,
+        "abstention_rate": 0.0,
+        "mean_oracle_fraction_step_ms": {
+          "physical_plus_learned_gated": 0.9113057006904992,
+          "physical_plus_learned": 0.9113057006904992,
+          "physical_prior": 1.0,
+          "fuse12c_log_ridge": 0.9260880839087493,
+          "exact_saved_mac": 0.9755942132980465,
+          "density": 0.9909638132955875,
+          "first_fit": 1.0
+        },
+        "mean_oracle_fraction_recon_ms": {
+          "physical_plus_learned_gated": 0.9435581731666813,
+          "physical_plus_learned": 0.9435581731666813,
+          "physical_prior": 1.0,
+          "fuse12c_log_ridge": 0.9391435427222227,
+          "exact_saved_mac": 0.9223452241301482,
+          "density": 0.9712484968495967,
+          "first_fit": 1.0
+        },
+        "worst_case_regret_step_ms": {
+          "physical_plus_learned_gated": 6.972620069758213,
+          "physical_plus_learned": 6.972620069758213,
+          "physical_prior": 0.0,
+          "fuse12c_log_ridge": 6.591688294571005,
+          "exact_saved_mac": 0.20191901351834096,
+          "density": 0.049743971270282294,
+          "first_fit": 0.0
+        },
+        "worst_case_regret_recon_ms": {
+          "physical_plus_learned_gated": 0.455299985333113,
+          "physical_plus_learned": 0.455299985333113,
+          "physical_prior": 0.0,
+          "fuse12c_log_ridge": 1.2683875575021375,
+          "exact_saved_mac": 1.2683875575021375,
+          "density": 0.3124749528069515,
+          "first_fit": 0.0
+        },
+        "unsafe_admission_rate": {
+          "physical_plus_learned_gated": 0.0,
+          "physical_plus_learned": 0.0,
+          "physical_prior": 0.0,
+          "fuse12c_log_ridge": 0.0,
+          "exact_saved_mac": 0.0,
+          "density": 0.0,
+          "first_fit": 0.0
+        }
+      },
+      "128": {
+        "n_train_sites": 616,
+        "n_test_sites": 90,
+        "prior_recon_mae_ms": 0.4388246592212853,
+        "physical_plus_learned_recon_mae_ms": 0.18193502952676227,
+        "fuse12c_log_ridge_recon_mae_ms": 0.4593628003580952,
+        "budget_decisions": 93,
+        "abstention_rate": 0.0,
+        "mean_oracle_fraction_step_ms": {
+          "physical_plus_learned_gated": 0.9681761132213493,
+          "physical_plus_learned": 0.9681761132213493,
+          "physical_prior": 0.9899990212509748,
+          "fuse12c_log_ridge": 0.9604672485588421,
+          "exact_saved_mac": 0.9613429777139149,
+          "density": 0.9868553539917713,
+          "first_fit": 0.9899990212509748
+        },
+        "mean_oracle_fraction_recon_ms": {
+          "physical_plus_learned_gated": 0.9740300181892717,
+          "physical_plus_learned": 0.9740300181892717,
+          "physical_prior": 0.987655340447569,
+          "fuse12c_log_ridge": 0.9531459906913309,
+          "exact_saved_mac": 0.9357500529181358,
+          "density": 0.9732251782876485,
+          "first_fit": 0.987655340447569
+        },
+        "worst_case_regret_step_ms": {
+          "physical_plus_learned_gated": 2.18938274800702,
+          "physical_plus_learned": 2.18938274800702,
+          "physical_prior": 0.10321810942276777,
+          "fuse12c_log_ridge": 2.18938274800702,
+          "exact_saved_mac": 0.34374325340669165,
+          "density": 0.10321810942276777,
+          "first_fit": 0.10321810942276777
+        },
+        "worst_case_regret_recon_ms": {
+          "physical_plus_learned_gated": 0.23127496751840226,
+          "physical_plus_learned": 0.23127496751840226,
+          "physical_prior": 0.23127496751840226,
+          "fuse12c_log_ridge": 1.5406250204250682,
+          "exact_saved_mac": 1.5406250204250682,
+          "density": 0.623500000074273,
+          "first_fit": 0.23127496751840226
+        },
+        "unsafe_admission_rate": {
+          "physical_plus_learned_gated": 0.0,
+          "physical_plus_learned": 0.0,
+          "physical_prior": 0.0,
+          "fuse12c_log_ridge": 0.0,
+          "exact_saved_mac": 0.0,
+          "density": 0.0,
+          "first_fit": 0.0
+        }
+      },
+      "256": {
+        "n_train_sites": 626,
+        "n_test_sites": 80,
+        "prior_recon_mae_ms": 0.7828007599384842,
+        "physical_plus_learned_recon_mae_ms": 0.3445624179057244,
+        "fuse12c_log_ridge_recon_mae_ms": 1.221874739894226,
+        "budget_decisions": 87,
+        "abstention_rate": 0.0,
+        "mean_oracle_fraction_step_ms": {
+          "physical_plus_learned_gated": 0.919681638827754,
+          "physical_plus_learned": 0.919681638827754,
+          "physical_prior": 0.919681638827754,
+          "fuse12c_log_ridge": 0.9056614020338634,
+          "exact_saved_mac": 0.8468369950967458,
+          "density": 0.8604076551121707,
+          "first_fit": 0.919681638827754
+        },
+        "mean_oracle_fraction_recon_ms": {
+          "physical_plus_learned_gated": 0.9605416310204722,
+          "physical_plus_learned": 0.9605416310204722,
+          "physical_prior": 0.9605416310204722,
+          "fuse12c_log_ridge": 0.9270831652271588,
+          "exact_saved_mac": 0.8497906375300723,
+          "density": 0.873610464466991,
+          "first_fit": 0.9605416310204722
+        },
+        "worst_case_regret_step_ms": {
+          "physical_plus_learned_gated": 4.606415787147148,
+          "physical_plus_learned": 4.606415787147148,
+          "physical_prior": 4.606415787147148,
+          "fuse12c_log_ridge": 16.143695890027118,
+          "exact_saved_mac": 16.143695890027118,
+          "density": 8.672386176873648,
+          "first_fit": 4.606415787147148
+        },
+        "worst_case_regret_recon_ms": {
+          "physical_plus_learned_gated": 0.4842999951506499,
+          "physical_plus_learned": 0.4842999951506499,
+          "physical_prior": 0.4842999951506499,
+          "fuse12c_log_ridge": 2.513862618798157,
+          "exact_saved_mac": 6.386850018316181,
+          "density": 3.43101295948145,
+          "first_fit": 0.4842999951506499
+        },
+        "unsafe_admission_rate": {
+          "physical_plus_learned_gated": 0.0,
+          "physical_plus_learned": 0.0,
+          "physical_prior": 0.0,
+          "fuse12c_log_ridge": 0.0,
+          "exact_saved_mac": 0.0,
+          "density": 0.0,
+          "first_fit": 0.0
+        }
+      },
+      "512": {
+        "n_train_sites": 524,
+        "n_test_sites": 182,
+        "prior_recon_mae_ms": 2.036773767349849,
+        "physical_plus_learned_recon_mae_ms": 1.2945180177361004,
+        "fuse12c_log_ridge_recon_mae_ms": 2.9839598380763106,
+        "budget_decisions": 162,
+        "abstention_rate": 0.05555555555555555,
+        "mean_oracle_fraction_step_ms": {
+          "physical_plus_learned_gated": 0.9315284298540621,
+          "physical_plus_learned": 0.9851565151870224,
+          "physical_prior": 0.9851565151870224,
+          "fuse12c_log_ridge": 0.8708906805124963,
+          "exact_saved_mac": 0.8666466166412706,
+          "density": 0.9271695873763826,
+          "first_fit": 0.9851565151870224
+        },
+        "mean_oracle_fraction_recon_ms": {
+          "physical_plus_learned_gated": 0.9380062257197519,
+          "physical_plus_learned": 0.9886549729786588,
+          "physical_prior": 0.9886549729786588,
+          "fuse12c_log_ridge": 0.8729996951775427,
+          "exact_saved_mac": 0.824353099541244,
+          "density": 0.8706208165667564,
+          "first_fit": 0.9886549729786588
+        },
+        "worst_case_regret_step_ms": {
+          "physical_plus_learned_gated": 37.191295356658685,
+          "physical_plus_learned": 8.371819575976076,
+          "physical_prior": 8.371819575976076,
+          "fuse12c_log_ridge": 126.84324608826785,
+          "exact_saved_mac": 126.84324608826785,
+          "density": 110.33429749854179,
+          "first_fit": 8.371819575976076
+        },
+        "worst_case_regret_recon_ms": {
+          "physical_plus_learned_gated": 22.141224457300268,
+          "physical_plus_learned": 4.984024744771887,
+          "physical_prior": 4.984024744771887,
+          "fuse12c_log_ridge": 13.053449885774171,
+          "exact_saved_mac": 13.053449885774171,
+          "density": 11.354512498655822,
+          "first_fit": 4.984024744771887
+        },
+        "unsafe_admission_rate": {
+          "physical_plus_learned_gated": 0.0,
+          "physical_plus_learned": 0.05555555555555555,
+          "physical_prior": 0.05555555555555555,
+          "fuse12c_log_ridge": 0.05555555555555555,
+          "exact_saved_mac": 0.05555555555555555,
+          "density": 0.05555555555555555,
+          "first_fit": 0.05555555555555555
+        }
+      },
+      "1024": {
+        "n_train_sites": 580,
+        "n_test_sites": 126,
+        "prior_recon_mae_ms": 3.148916356019448,
+        "physical_plus_learned_recon_mae_ms": 0.7890328703908467,
+        "fuse12c_log_ridge_recon_mae_ms": 4.012172227498427,
+        "budget_decisions": 126,
+        "abstention_rate": 0.0,
+        "mean_oracle_fraction_step_ms": {
+          "physical_plus_learned_gated": 0.9895752399014741,
+          "physical_plus_learned": 0.9895752399014741,
+          "physical_prior": 0.9573976028904672,
+          "fuse12c_log_ridge": 0.9602164991305253,
+          "exact_saved_mac": 0.9060138955821404,
+          "density": 0.9271182131203277,
+          "first_fit": 0.9938565299516618
+        },
+        "mean_oracle_fraction_recon_ms": {
+          "physical_plus_learned_gated": 0.9588641584257276,
+          "physical_plus_learned": 0.9588641584257276,
+          "physical_prior": 0.9430155723936026,
+          "fuse12c_log_ridge": 0.9791481963041181,
+          "exact_saved_mac": 0.9388479779227389,
+          "density": 0.9503991595696449,
+          "first_fit": 0.9673405165326521
+        },
+        "worst_case_regret_step_ms": {
+          "physical_plus_learned_gated": 0.4978382124503158,
+          "physical_plus_learned": 0.4978382124503158,
+          "physical_prior": 20.81339288810966,
+          "fuse12c_log_ridge": 5.7567858459193495,
+          "exact_saved_mac": 20.81339288810966,
+          "density": 12.68141650172906,
+          "first_fit": 0.1507441544687258
+        },
+        "worst_case_regret_recon_ms": {
+          "physical_plus_learned_gated": 2.220750102424063,
+          "physical_plus_learned": 2.220750102424063,
+          "physical_prior": 12.573463125590933,
+          "fuse12c_log_ridge": 3.477699909126386,
+          "exact_saved_mac": 12.573463125590933,
+          "density": 7.660900057089748,
+          "first_fit": 2.1505498480109964
+        },
+        "unsafe_admission_rate": {
+          "physical_plus_learned_gated": 0.0,
+          "physical_plus_learned": 0.0,
+          "physical_prior": 0.0,
+          "fuse12c_log_ridge": 0.0,
+          "exact_saved_mac": 0.0,
+          "density": 0.0,
+          "first_fit": 0.0
+        }
+      },
+      "2048": {
+        "n_train_sites": 528,
+        "n_test_sites": 178,
+        "prior_recon_mae_ms": 11.081115942265892,
+        "physical_plus_learned_recon_mae_ms": 8.685503142019613,
+        "fuse12c_log_ridge_recon_mae_ms": 8.217898802471215,
+        "budget_decisions": 156,
+        "abstention_rate": 0.057692307692307696,
+        "mean_oracle_fraction_step_ms": {
+          "physical_plus_learned_gated": 0.9952000276847439,
+          "physical_plus_learned": 0.9952000276847439,
+          "physical_prior": 0.9952000276847439,
+          "fuse12c_log_ridge": 0.9114045371362663,
+          "exact_saved_mac": 1.0,
+          "density": 0.9743114290848024,
+          "first_fit": 0.8165103616715044
+        },
+        "mean_oracle_fraction_recon_ms": {
+          "physical_plus_learned_gated": 0.9189323823037047,
+          "physical_plus_learned": 0.9827621695377472,
+          "physical_prior": 0.9827621695377472,
+          "fuse12c_log_ridge": 0.8969319665266609,
+          "exact_saved_mac": 0.9887953895028466,
+          "density": 0.961279041269566,
+          "first_fit": 0.8212772297814503
+        },
+        "worst_case_regret_step_ms": {
+          "physical_plus_learned_gated": 1.7058964408256152,
+          "physical_plus_learned": 1.7058964408256152,
+          "physical_prior": 1.7058964408256152,
+          "fuse12c_log_ridge": 23.304389003166094,
+          "exact_saved_mac": 0.0,
+          "density": 11.3274914527274,
+          "first_fit": 23.304389003166094
+        },
+        "worst_case_regret_recon_ms": {
+          "physical_plus_learned_gated": 67.44511263968889,
+          "physical_plus_learned": 20.212661867844872,
+          "physical_prior": 20.212661867844872,
+          "fuse12c_log_ridge": 54.34597508065053,
+          "exact_saved_mac": 7.431788282701746,
+          "density": 23.39670014407602,
+          "first_fit": 54.34597508065053
+        },
+        "unsafe_admission_rate": {
+          "physical_plus_learned_gated": 0.0,
+          "physical_plus_learned": 0.057692307692307696,
+          "physical_prior": 0.057692307692307696,
+          "fuse12c_log_ridge": 0.057692307692307696,
+          "exact_saved_mac": 0.057692307692307696,
+          "density": 0.057692307692307696,
+          "first_fit": 0.057692307692307696
+        }
+      },
+      "4096": {
+        "n_train_sites": 688,
+        "n_test_sites": 18,
+        "prior_recon_mae_ms": 10388.787168201517,
+        "physical_plus_learned_recon_mae_ms": 10395.717765376761,
+        "fuse12c_log_ridge_recon_mae_ms": 10522.748634926573,
+        "budget_decisions": 18,
+        "abstention_rate": 0.0,
+        "mean_oracle_fraction_step_ms": {
+          "physical_plus_learned_gated": 0.9982549413899515,
+          "physical_plus_learned": 0.9982549413899515,
+          "physical_prior": 0.9982549413899515,
+          "fuse12c_log_ridge": 0.9012501376205649,
+          "exact_saved_mac": 0.9982549413899515,
+          "density": 0.8986243655154211,
+          "first_fit": 0.8263390787521848
+        },
+        "mean_oracle_fraction_recon_ms": {
+          "physical_plus_learned_gated": 0.9982549413899514,
+          "physical_plus_learned": 0.9982549413899514,
+          "physical_prior": 0.9982549413899514,
+          "fuse12c_log_ridge": 0.9012501376205649,
+          "exact_saved_mac": 0.9982549413899514,
+          "density": 0.898624365515421,
+          "first_fit": 0.8263390787521848
+        },
+        "worst_case_regret_step_ms": {
+          "physical_plus_learned_gated": 234.3428950050038,
+          "physical_plus_learned": 234.3428950050038,
+          "physical_prior": 234.3428950050038,
+          "fuse12c_log_ridge": 26275.66031429627,
+          "exact_saved_mac": 234.3428950050038,
+          "density": 26510.003209301274,
+          "first_fit": 26275.66031429627
+        },
+        "worst_case_regret_recon_ms": {
+          "physical_plus_learned_gated": 216.86411265545757,
+          "physical_plus_learned": 216.86411265545757,
+          "physical_prior": 216.86411265545757,
+          "fuse12c_log_ridge": 24315.854587246577,
+          "exact_saved_mac": 216.86411265545757,
+          "density": 24532.718699902034,
+          "first_fit": 24315.854587246577
+        },
+        "unsafe_admission_rate": {
+          "physical_plus_learned_gated": 0.0,
+          "physical_plus_learned": 0.0,
+          "physical_prior": 0.0,
+          "fuse12c_log_ridge": 0.0,
+          "exact_saved_mac": 0.0,
+          "density": 0.0,
+          "first_fit": 0.0
+        }
+      }
+    }
+  },
+  "leave_one_depth_out": {
+    "groups": [
+      "6",
+      "12",
+      "24"
+    ],
+    "aggregate_oracle_fraction_step_ms": {
+      "physical_plus_learned_gated": 0.9328620957678524,
+      "physical_plus_learned": 0.9424587005116453,
+      "physical_prior": 0.9850388021727227,
+      "fuse12c_log_ridge": 0.9208855722525805,
+      "exact_saved_mac": 0.9504635864746384,
+      "density": 0.9438844806886945,
+      "first_fit": 0.8969093797761883
+    },
+    "aggregate_oracle_fraction_recon_ms": {
+      "physical_plus_learned_gated": 0.923416802996969,
+      "physical_plus_learned": 0.9406391223722872,
+      "physical_prior": 0.9838918568005703,
+      "fuse12c_log_ridge": 0.9256356117693441,
+      "exact_saved_mac": 0.9354300991763738,
+      "density": 0.9309695755677944,
+      "first_fit": 0.9053498625550076
+    },
+    "worst_case_regret_step_ms": {
+      "physical_plus_learned_gated": 26510.003209301274,
+      "physical_plus_learned": 26510.003209301274,
+      "physical_prior": 234.3428950050038,
+      "fuse12c_log_ridge": 26275.66031429627,
+      "exact_saved_mac": 234.3428950050038,
+      "density": 26510.003209301274,
+      "first_fit": 26275.66031429627
+    },
+    "worst_case_regret_recon_ms": {
+      "physical_plus_learned_gated": 24532.718699902034,
+      "physical_plus_learned": 24532.718699902034,
+      "physical_prior": 216.86411265545757,
+      "fuse12c_log_ridge": 24315.854587246577,
+      "exact_saved_mac": 216.86411265545757,
+      "density": 24532.718699902034,
+      "first_fit": 24315.854587246577
+    },
+    "mean_unsafe_admission_rate": {
+      "physical_plus_learned_gated": 0.0,
+      "physical_plus_learned": 0.01694915254237288,
+      "physical_prior": 0.01694915254237288,
+      "fuse12c_log_ridge": 0.01694915254237288,
+      "exact_saved_mac": 0.01694915254237288,
+      "density": 0.01694915254237288,
+      "first_fit": 0.01694915254237288
+    },
+    "folds": {
+      "6": {
+        "n_train_sites": 432,
+        "n_test_sites": 274,
+        "prior_recon_mae_ms": 1.1438255819464729,
+        "physical_plus_learned_recon_mae_ms": 0.6557019330143165,
+        "fuse12c_log_ridge_recon_mae_ms": 0.982891452275402,
+        "budget_decisions": 276,
+        "abstention_rate": 0.0,
+        "mean_oracle_fraction_step_ms": {
+          "physical_plus_learned_gated": 0.9654646415532026,
+          "physical_plus_learned": 0.9654646415532026,
+          "physical_prior": 0.9835816322388,
+          "fuse12c_log_ridge": 0.9499827484628646,
+          "exact_saved_mac": 0.961114662316118,
+          "density": 0.9673892619844564,
+          "first_fit": 0.9591117271573177
+        },
+        "mean_oracle_fraction_recon_ms": {
+          "physical_plus_learned_gated": 0.9748945738746968,
+          "physical_plus_learned": 0.9748945738746968,
+          "physical_prior": 0.984988282493266,
+          "fuse12c_log_ridge": 0.943921873817239,
+          "exact_saved_mac": 0.9098528739752604,
+          "density": 0.9213006651663856,
+          "first_fit": 0.9729017354131259
+        },
+        "worst_case_regret_step_ms": {
+          "physical_plus_learned_gated": 6.972620069758213,
+          "physical_plus_learned": 6.972620069758213,
+          "physical_prior": 4.606415787147148,
+          "fuse12c_log_ridge": 12.775021594421418,
+          "exact_saved_mac": 4.606415787147148,
+          "density": 4.606415787147148,
+          "first_fit": 4.606415787147148
+        },
+        "worst_case_regret_recon_ms": {
+          "physical_plus_learned_gated": 0.4842999951506499,
+          "physical_plus_learned": 0.4842999951506499,
+          "physical_prior": 1.1422375464462675,
+          "fuse12c_log_ridge": 8.112387553410372,
+          "exact_saved_mac": 5.880474938749103,
+          "density": 5.880474938749103,
+          "first_fit": 8.112387553410372
+        },
+        "unsafe_admission_rate": {
+          "physical_plus_learned_gated": 0.0,
+          "physical_plus_learned": 0.0,
+          "physical_prior": 0.0,
+          "fuse12c_log_ridge": 0.0,
+          "exact_saved_mac": 0.0,
+          "density": 0.0,
+          "first_fit": 0.0
+        }
+      },
+      "12": {
+        "n_train_sites": 322,
+        "n_test_sites": 384,
+        "prior_recon_mae_ms": 4.528494495502083,
+        "physical_plus_learned_recon_mae_ms": 2.8683520437601113,
+        "fuse12c_log_ridge_recon_mae_ms": 8.132965999163815,
+        "budget_decisions": 354,
+        "abstention_rate": 0.05084745762711865,
+        "mean_oracle_fraction_step_ms": {
+          "physical_plus_learned_gated": 0.939526756225978,
+          "physical_plus_learned": 0.9683165704573566,
+          "physical_prior": 0.9723279827384811,
+          "fuse12c_log_ridge": 0.900532357241266,
+          "exact_saved_mac": 0.8910693055669101,
+          "density": 0.9224571350272094,
+          "first_fit": 0.9017374379514861
+        },
+        "mean_oracle_fraction_recon_ms": {
+          "physical_plus_learned_gated": 0.9134027123769357,
+          "physical_plus_learned": 0.9650696705028904,
+          "physical_prior": 0.9673584642969253,
+          "fuse12c_log_ridge": 0.9275594639551134,
+          "exact_saved_mac": 0.897108599942341,
+          "density": 0.9258549548364451,
+          "first_fit": 0.9303342843961029
+        },
+        "worst_case_regret_step_ms": {
+          "physical_plus_learned_gated": 37.191295356658685,
+          "physical_plus_learned": 20.81339288810966,
+          "physical_prior": 20.81339288810966,
+          "fuse12c_log_ridge": 117.38596229452637,
+          "exact_saved_mac": 126.84324608826785,
+          "density": 110.33429749854179,
+          "first_fit": 23.304389003166094
+        },
+        "worst_case_regret_recon_ms": {
+          "physical_plus_learned_gated": 67.44511263968889,
+          "physical_plus_learned": 20.212661867844872,
+          "physical_prior": 20.212661867844872,
+          "fuse12c_log_ridge": 34.866787267674226,
+          "exact_saved_mac": 13.053449885774171,
+          "density": 16.529587584955152,
+          "first_fit": 34.866787267674226
+        },
+        "unsafe_admission_rate": {
+          "physical_plus_learned_gated": 0.0,
+          "physical_plus_learned": 0.05084745762711865,
+          "physical_prior": 0.05084745762711865,
+          "fuse12c_log_ridge": 0.05084745762711865,
+          "exact_saved_mac": 0.05084745762711865,
+          "density": 0.05084745762711865,
+          "first_fit": 0.05084745762711865
+        }
+      },
+      "24": {
+        "n_train_sites": 658,
+        "n_test_sites": 48,
+        "prior_recon_mae_ms": 3912.578327982485,
+        "physical_plus_learned_recon_mae_ms": 3910.83934730643,
+        "fuse12c_log_ridge_recon_mae_ms": 3970.6874973981444,
+        "budget_decisions": 45,
+        "abstention_rate": 0.0,
+        "mean_oracle_fraction_step_ms": {
+          "physical_plus_learned_gated": 0.8935948895243767,
+          "physical_plus_learned": 0.8935948895243767,
+          "physical_prior": 0.999206791540887,
+          "fuse12c_log_ridge": 0.912141611053611,
+          "exact_saved_mac": 0.999206791540887,
+          "density": 0.9418070450544175,
+          "first_fit": 0.8298789742197612
+        },
+        "mean_oracle_fraction_recon_ms": {
+          "physical_plus_learned_gated": 0.8819531227392745,
+          "physical_plus_learned": 0.8819531227392745,
+          "physical_prior": 0.9993288236115198,
+          "fuse12c_log_ridge": 0.9054254975356798,
+          "exact_saved_mac": 0.9993288236115198,
+          "density": 0.9457531067005523,
+          "first_fit": 0.8128135678557942
+        },
+        "worst_case_regret_step_ms": {
+          "physical_plus_learned_gated": 26510.003209301274,
+          "physical_plus_learned": 26510.003209301274,
+          "physical_prior": 234.3428950050038,
+          "fuse12c_log_ridge": 26275.66031429627,
+          "exact_saved_mac": 234.3428950050038,
+          "density": 26510.003209301274,
+          "first_fit": 26275.66031429627
+        },
+        "worst_case_regret_recon_ms": {
+          "physical_plus_learned_gated": 24532.718699902034,
+          "physical_plus_learned": 24532.718699902034,
+          "physical_prior": 216.86411265545757,
+          "fuse12c_log_ridge": 24315.854587246577,
+          "exact_saved_mac": 216.86411265545757,
+          "density": 24532.718699902034,
+          "first_fit": 24315.854587246577
+        },
+        "unsafe_admission_rate": {
+          "physical_plus_learned_gated": 0.0,
+          "physical_plus_learned": 0.0,
+          "physical_prior": 0.0,
+          "fuse12c_log_ridge": 0.0,
+          "exact_saved_mac": 0.0,
+          "density": 0.0,
+          "first_fit": 0.0
+        }
+      }
+    }
+  },
+  "leave_one_precision_out": {
+    "groups": [
+      "bf16",
+      "fp16",
+      "fp32",
+      "tf32"
+    ],
+    "aggregate_oracle_fraction_step_ms": {
+      "physical_plus_learned_gated": 0.6440403096242687,
+      "physical_plus_learned": 0.9479327931777101,
+      "physical_prior": 0.9485001554735657,
+      "fuse12c_log_ridge": 0.9482526762046464,
+      "exact_saved_mac": 0.9351732843924706,
+      "density": 0.9559510119719241,
+      "first_fit": 0.9221973969613231
+    },
+    "aggregate_oracle_fraction_recon_ms": {
+      "physical_plus_learned_gated": 0.7164780392892367,
+      "physical_plus_learned": 0.9554377206217772,
+      "physical_prior": 0.955577136507488,
+      "fuse12c_log_ridge": 0.9134309216674388,
+      "exact_saved_mac": 0.8969916655190349,
+      "density": 0.9167469010933902,
+      "first_fit": 0.9253376453467934
+    },
+    "worst_case_regret_step_ms": {
+      "physical_plus_learned_gated": 234.3428950050038,
+      "physical_plus_learned": 234.3428950050038,
+      "physical_prior": 234.3428950050038,
+      "fuse12c_log_ridge": 26275.66031429627,
+      "exact_saved_mac": 234.3428950050038,
+      "density": 26510.003209301274,
+      "first_fit": 26275.66031429627
+    },
+    "worst_case_regret_recon_ms": {
+      "physical_plus_learned_gated": 216.86411265545757,
+      "physical_plus_learned": 216.86411265545757,
+      "physical_prior": 216.86411265545757,
+      "fuse12c_log_ridge": 24315.854587246577,
+      "exact_saved_mac": 216.86411265545757,
+      "density": 24532.718699902034,
+      "first_fit": 24315.854587246577
+    },
+    "mean_unsafe_admission_rate": {
+      "physical_plus_learned_gated": 0.0,
+      "physical_plus_learned": 0.25,
+      "physical_prior": 0.25,
+      "fuse12c_log_ridge": 0.25,
+      "exact_saved_mac": 0.25,
+      "density": 0.25,
+      "first_fit": 0.25
+    },
+    "folds": {
+      "bf16": {
+        "n_train_sites": 682,
+        "n_test_sites": 24,
+        "prior_recon_mae_ms": 9.800586610452205,
+        "physical_plus_learned_recon_mae_ms": 4.433098373760893,
+        "fuse12c_log_ridge_recon_mae_ms": 6.501808794763025,
+        "budget_decisions": 18,
+        "abstention_rate": 0.0,
+        "mean_oracle_fraction_step_ms": {
+          "physical_plus_learned_gated": null,
+          "physical_plus_learned": null,
+          "physical_prior": null,
+          "fuse12c_log_ridge": null,
+          "exact_saved_mac": null,
+          "density": null,
+          "first_fit": null
+        },
+        "mean_oracle_fraction_recon_ms": {
+          "physical_plus_learned_gated": 0.9289699589157677,
+          "physical_plus_learned": 0.9289699589157677,
+          "physical_prior": 0.9289699589157677,
+          "fuse12c_log_ridge": 0.8827331643018197,
+          "exact_saved_mac": 0.8746267803843095,
+          "density": 0.9076585371365915,
+          "first_fit": 0.8705340352275595
+        },
+        "worst_case_regret_step_ms": {
+          "physical_plus_learned_gated": null,
+          "physical_plus_learned": null,
+          "physical_prior": null,
+          "fuse12c_log_ridge": null,
+          "exact_saved_mac": null,
+          "density": null,
+          "first_fit": null
+        },
+        "worst_case_regret_recon_ms": {
+          "physical_plus_learned_gated": 20.212661867844872,
+          "physical_plus_learned": 20.212661867844872,
+          "physical_prior": 20.212661867844872,
+          "fuse12c_log_ridge": 34.866787267674226,
+          "exact_saved_mac": 11.182712223671842,
+          "density": 16.529587584955152,
+          "first_fit": 34.866787267674226
+        },
+        "unsafe_admission_rate": {
+          "physical_plus_learned_gated": 0.0,
+          "physical_plus_learned": 0.0,
+          "physical_prior": 0.0,
+          "fuse12c_log_ridge": 0.0,
+          "exact_saved_mac": 0.0,
+          "density": 0.0,
+          "first_fit": 0.0
+        }
+      },
+      "fp16": {
+        "n_train_sites": 682,
+        "n_test_sites": 24,
+        "prior_recon_mae_ms": 7.6650240500548295,
+        "physical_plus_learned_recon_mae_ms": 4.668404684477654,
+        "fuse12c_log_ridge_recon_mae_ms": 2.648919088207054,
+        "budget_decisions": 18,
+        "abstention_rate": 1.0,
+        "mean_oracle_fraction_step_ms": {
+          "physical_plus_learned_gated": 0.0,
+          "physical_plus_learned": 0.9116774506603239,
+          "physical_prior": 0.9116774506603239,
+          "fuse12c_log_ridge": 1.0,
+          "exact_saved_mac": 0.9590408369894852,
+          "density": 0.9763836776906641,
+          "first_fit": 0.9116774506603239
+        },
+        "mean_oracle_fraction_recon_ms": {
+          "physical_plus_learned_gated": 0.0,
+          "physical_plus_learned": 0.955838725330162,
+          "physical_prior": 0.955838725330162,
+          "fuse12c_log_ridge": 0.9048093341706155,
+          "exact_saved_mac": 0.8917509696003745,
+          "density": 0.8920408510813146,
+          "first_fit": 0.9478781780194099
+        },
+        "worst_case_regret_step_ms": {
+          "physical_plus_learned_gated": 37.191295356658685,
+          "physical_plus_learned": 8.371819575976076,
+          "physical_prior": 8.371819575976076,
+          "fuse12c_log_ridge": 0.0,
+          "exact_saved_mac": 3.1453162418745677,
+          "density": 1.2103081093514874,
+          "first_fit": 8.371819575976076
+        },
+        "worst_case_regret_recon_ms": {
+          "physical_plus_learned_gated": 67.44511263968889,
+          "physical_plus_learned": 4.984024744771887,
+          "physical_prior": 4.984024744771887,
+          "fuse12c_log_ridge": 7.261425344040617,
+          "exact_saved_mac": 7.431788282701746,
+          "density": 7.431788282701746,
+          "first_fit": 4.984024744771887
+        },
+        "unsafe_admission_rate": {
+          "physical_plus_learned_gated": 0.0,
+          "physical_plus_learned": 1.0,
+          "physical_prior": 1.0,
+          "fuse12c_log_ridge": 1.0,
+          "exact_saved_mac": 1.0,
+          "density": 1.0,
+          "first_fit": 1.0
+        }
+      },
+      "fp32": {
+        "n_train_sites": 90,
+        "n_test_sites": 616,
+        "prior_recon_mae_ms": 307.2648893421288,
+        "physical_plus_learned_recon_mae_ms": 306.86796872060796,
+        "fuse12c_log_ridge_recon_mae_ms": 312.5111732392606,
+        "budget_decisions": 603,
+        "abstention_rate": 0.0,
+        "mean_oracle_fraction_step_ms": {
+          "physical_plus_learned_gated": 0.9819998309739032,
+          "physical_plus_learned": 0.9819998309739032,
+          "physical_prior": 0.9837019178614701,
+          "fuse12c_log_ridge": 0.933918477980529,
+          "exact_saved_mac": 0.9422026550219683,
+          "density": 0.9480392717621887,
+          "first_fit": 0.922279612480963
+        },
+        "mean_oracle_fraction_recon_ms": {
+          "physical_plus_learned_gated": 0.9793619011662358,
+          "physical_plus_learned": 0.9793619011662358,
+          "physical_prior": 0.9799195647090789,
+          "fuse12c_log_ridge": 0.9418278420820221,
+          "exact_saved_mac": 0.9101215599857214,
+          "density": 0.9258470910200837,
+          "first_fit": 0.9428440412214818
+        },
+        "worst_case_regret_step_ms": {
+          "physical_plus_learned_gated": 234.3428950050038,
+          "physical_plus_learned": 234.3428950050038,
+          "physical_prior": 234.3428950050038,
+          "fuse12c_log_ridge": 26275.66031429627,
+          "exact_saved_mac": 234.3428950050038,
+          "density": 26510.003209301274,
+          "first_fit": 26275.66031429627
+        },
+        "worst_case_regret_recon_ms": {
+          "physical_plus_learned_gated": 216.86411265545757,
+          "physical_plus_learned": 216.86411265545757,
+          "physical_prior": 216.86411265545757,
+          "fuse12c_log_ridge": 24315.854587246577,
+          "exact_saved_mac": 216.86411265545757,
+          "density": 24532.718699902034,
+          "first_fit": 24315.854587246577
+        },
+        "unsafe_admission_rate": {
+          "physical_plus_learned_gated": 0.0,
+          "physical_plus_learned": 0.0,
+          "physical_prior": 0.0,
+          "fuse12c_log_ridge": 0.0,
+          "exact_saved_mac": 0.0,
+          "density": 0.0,
+          "first_fit": 0.0
+        }
+      },
+      "tf32": {
+        "n_train_sites": 664,
+        "n_test_sites": 42,
+        "prior_recon_mae_ms": 3.8515082924251294,
+        "physical_plus_learned_recon_mae_ms": 2.558719155337141,
+        "fuse12c_log_ridge_recon_mae_ms": 3.511874427566379,
+        "budget_decisions": 36,
+        "abstention_rate": 0.0,
+        "mean_oracle_fraction_step_ms": {
+          "physical_plus_learned_gated": 0.9501210978989031,
+          "physical_plus_learned": 0.9501210978989031,
+          "physical_prior": 0.9501210978989031,
+          "fuse12c_log_ridge": 0.9108395506334103,
+          "exact_saved_mac": 0.9042763611659582,
+          "density": 0.9434300864629195,
+          "first_fit": 0.9326351277426822
+        },
+        "mean_oracle_fraction_recon_ms": {
+          "physical_plus_learned_gated": 0.9575802970749434,
+          "physical_plus_learned": 0.9575802970749434,
+          "physical_prior": 0.9575802970749434,
+          "fuse12c_log_ridge": 0.924353346115298,
+          "exact_saved_mac": 0.9114673521057343,
+          "density": 0.9414411251355708,
+          "first_fit": 0.9400943269187224
+        },
+        "worst_case_regret_step_ms": {
+          "physical_plus_learned_gated": 1.7058964408256152,
+          "physical_plus_learned": 1.7058964408256152,
+          "physical_prior": 1.7058964408256152,
+          "fuse12c_log_ridge": 9.01527493519692,
+          "exact_saved_mac": 10.179598468411143,
+          "density": 7.644426345083222,
+          "first_fit": 2.6403156457090393
+        },
+        "worst_case_regret_recon_ms": {
+          "physical_plus_learned_gated": 8.817549958621385,
+          "physical_plus_learned": 8.817549958621385,
+          "physical_prior": 8.817549958621385,
+          "fuse12c_log_ridge": 13.647437532199547,
+          "exact_saved_mac": 2.5082374959310982,
+          "density": 7.814550048351521,
+          "first_fit": 13.647437532199547
+        },
+        "unsafe_admission_rate": {
+          "physical_plus_learned_gated": 0.0,
+          "physical_plus_learned": 0.0,
+          "physical_prior": 0.0,
+          "fuse12c_log_ridge": 0.0,
+          "exact_saved_mac": 0.0,
+          "density": 0.0,
+          "first_fit": 0.0
+        }
+      }
+    }
+  },
+  "safe_admission_classifier": {
+    "leave_one_width_out": {
+      "criterion": "(speedup_cuda >= 1.03 OR vram_saved_mib >= 256) AND safe_admissible",
+      "n_eval": 225,
+      "accuracy": 0.7244444444444444,
+      "false_rejection_rate": 0.3695652173913043,
+      "unsafe_admission_rate": 0.0,
+      "brier_score": 0.201106,
+      "ece": 0.059051,
+      "folds": {
+        "1024": {
+          "n_test": 42,
+          "accuracy": 0.42857142857142855,
+          "false_rejection_rate": 0.4782608695652174,
+          "unsafe_admission_rate": 0.0,
+          "brier_score": 0.31642,
+          "ece": 0.268688
+        },
+        "128": {
+          "n_test": 31,
+          "accuracy": 0.8387096774193549,
+          "false_rejection_rate": 1.0,
+          "unsafe_admission_rate": 0.0,
+          "brier_score": 0.154301,
+          "ece": 0.115946
+        },
+        "2048": {
+          "n_test": 52,
+          "accuracy": 0.9230769230769231,
+          "false_rejection_rate": 0.06818181818181818,
+          "unsafe_admission_rate": 0.0,
+          "brier_score": 0.1364,
+          "ece": 0.305876
+        },
+        "256": {
+          "n_test": 29,
+          "accuracy": 0.9310344827586207,
+          "false_rejection_rate": 1.0,
+          "unsafe_admission_rate": 0.0,
+          "brier_score": 0.107047,
+          "ece": 0.180697
+        },
+        "4096": {
+          "n_test": 6,
+          "accuracy": 1.0,
+          "false_rejection_rate": 0.0,
+          "unsafe_admission_rate": 0.0,
+          "brier_score": 0.0,
+          "ece": 0.0
+        },
+        "512": {
+          "n_test": 54,
+          "accuracy": 0.5740740740740741,
+          "false_rejection_rate": 0.75,
+          "unsafe_admission_rate": 0.0,
+          "brier_score": 0.245085,
+          "ece": 0.252351
+        },
+        "64": {
+          "n_test": 11,
+          "accuracy": 0.6363636363636364,
+          "false_rejection_rate": 1.0,
+          "unsafe_admission_rate": 0.0,
+          "brier_score": 0.340384,
+          "ece": 0.326408
+        }
+      }
+    },
+    "leave_one_depth_out": {
+      "criterion": "(speedup_cuda >= 1.03 OR vram_saved_mib >= 256) AND safe_admissible",
+      "n_eval": 225,
+      "accuracy": 0.6533333333333333,
+      "false_rejection_rate": 0.34782608695652173,
+      "unsafe_admission_rate": 0.0,
+      "brier_score": 0.24275,
+      "ece": 0.199866,
+      "folds": {
+        "12": {
+          "n_test": 118,
+          "accuracy": 0.559322033898305,
+          "false_rejection_rate": 0.2653061224489796,
+          "unsafe_admission_rate": 0.0,
+          "brier_score": 0.28233,
+          "ece": 0.229189
+        },
+        "24": {
+          "n_test": 15,
+          "accuracy": 1.0,
+          "false_rejection_rate": 0.0,
+          "unsafe_admission_rate": 0.0,
+          "brier_score": 0.000665,
+          "ece": 0.01954
+        },
+        "6": {
+          "n_test": 92,
+          "accuracy": 0.717391304347826,
+          "false_rejection_rate": 0.59375,
+          "unsafe_admission_rate": 0.0,
+          "brier_score": 0.231454,
+          "ece": 0.23887
+        }
+      }
+    },
+    "leave_one_precision_out": {
+      "criterion": "(speedup_cuda >= 1.03 OR vram_saved_mib >= 256) AND safe_admissible",
+      "n_eval": 225,
+      "accuracy": 0.6177777777777778,
+      "false_rejection_rate": 0.9021739130434783,
+      "unsafe_admission_rate": 0.0,
+      "brier_score": 0.287108,
+      "ece": 0.303061,
+      "folds": {
+        "bf16": {
+          "n_test": 6,
+          "accuracy": 0.5,
+          "false_rejection_rate": 0.0,
+          "unsafe_admission_rate": 0.0,
+          "brier_score": 0.321337,
+          "ece": 0.484696
+        },
+        "fp16": {
+          "n_test": 6,
+          "accuracy": 1.0,
+          "false_rejection_rate": 0.0,
+          "unsafe_admission_rate": 0.0,
+          "brier_score": 0.0,
+          "ece": 0.0
+        },
+        "fp32": {
+          "n_test": 201,
+          "accuracy": 0.6169154228855721,
+          "false_rejection_rate": 0.8953488372093024,
+          "unsafe_admission_rate": 0.0,
+          "brier_score": 0.292665,
+          "ece": 0.316885
+        },
+        "tf32": {
+          "n_test": 12,
+          "accuracy": 0.5,
+          "false_rejection_rate": 1.0,
+          "unsafe_admission_rate": 0.0,
+          "brier_score": 0.320459,
+          "ece": 0.377439
+        }
+      }
+    }
+  }
+}
