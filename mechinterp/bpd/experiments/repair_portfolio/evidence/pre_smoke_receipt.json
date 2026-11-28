@@ -1,0 +1,18 @@
+{
+  "phase": "before_engineering_smoke",
+  "status": "MISSING_EMPIRICAL_PILOT_INPUTS",
+  "official_planner_evaluable": false,
+  "exit_status": 1,
+  "error": "ValueError: pilot worlds required",
+  "development_roots_measured": 0,
+  "matched_sham_roots_measured": 0,
+  "estimated_power": null,
+  "estimated_resolution": null,
+  "root_decision": "ENGINEERING_PILOT_ONLY",
+  "scope": "Run one root to check instrument wiring and gather development observations; no scientific success gate is evaluated. No effect or sham value was invented.",
+  "planned_comparisons": 2,
+  "scientific_floor": 0.05,
+  "confirmation_cohort_allocated": false,
+  "script_sha256": "c2621a7900930f81ed53799ce439ee1c8f2d7006918a04ef57b5381630d15494",
+  "created_utc": "2026-11-25T15:09:47.789510+00:00"
+}

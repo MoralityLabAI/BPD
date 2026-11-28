@@ -1,0 +1,53 @@
+{
+  "evidence_class": "PILOT_ONLY_ENGINEERING",
+  "scientific_floor": 0.05,
+  "n_independent_pilot_units": 1,
+  "smoke_root": 17000,
+  "planned_engineering_roots": [
+    17001,
+    17002,
+    17003,
+    17004
+  ],
+  "confirmation_cohort_allocated": false,
+  "population_power_available": false,
+  "calibrated_sham_floor_available": false,
+  "identity_control_accuracy_difference": "0",
+  "external_support_bound": 1,
+  "outputs": [
+    {
+      "contrast": "beam-minus-multistart",
+      "exit_status": 2,
+      "decision": "REDESIGN_OR_PILOT_ONLY",
+      "reasons": [
+        "too_few_pilot_worlds",
+        "target_below_mechanistic_variation_floor",
+        "pilot_effect_not_above_mechanistic_variation_floor",
+        "confirmation_underpowered"
+      ],
+      "pilot_worlds": 1,
+      "approx_worlds_for_80pct_power": null
+    },
+    {
+      "contrast": "beam-minus-greedy",
+      "exit_status": 2,
+      "decision": "REDESIGN_OR_PILOT_ONLY",
+      "reasons": [
+        "too_few_pilot_worlds",
+        "target_below_mechanistic_variation_floor",
+        "pilot_effect_not_above_mechanistic_variation_floor",
+        "confirmation_underpowered"
+      ],
+      "pilot_worlds": 1,
+      "approx_worlds_for_80pct_power": null
+    }
+  ],
+  "smoke_headroom": 0,
+  "scope": "Zero smoke errors leave repair headroom absent in this one model. Four preset engineering roots test reproducibility of wiring and record headroom without changing damage or selecting roots. All roots remain in the report.",
+  "official_preflight_source": {
+    "repository": "MoralityLabAI/EvalMath",
+    "commit": "43f08e55975e68a5ac0d5caf20df12370f3d2299",
+    "git_blob_sha": "0ff062f76f5534d9f18425f986ae3e750397f50c",
+    "sha256": "c2621a7900930f81ed53799ce439ee1c8f2d7006918a04ef57b5381630d15494"
+  }
+}

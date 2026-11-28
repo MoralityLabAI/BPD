@@ -1,0 +1,1537 @@
+{
+  "artifact_hashes": {
+    "audit.json": "3dc2398a884d4c9db3ca693f665ca0c9a8d32015f364ba21628b40ceba41b7f3",
+    "calibration_traces.npz": "5a63db08ee2665606cbc009fd3356e4b43e19717f63dbf1fd387dbd1eded601c",
+    "checkpoint.pt": "48df826d134e0269194cbabef63be87c948391a9f9faf52caf7eff9fce6ecd18",
+    "events.json": "98903c48a87a2c91b5b68a51c5dffe0abb71a2f0ae10b0ef348a9842647b9a93",
+    "search.json": "63e7cf9f1c8e47c72acacee9cc3e8b6d14056593663b60f60922103f17ed51a6",
+    "terminal_traces.npz": "f5dc41c839e6f5d88eecfd38406b7d8024b3964ec482dced3612446da2163703",
+    "training.json": "fae102c77f2e55f717dd1f0bb7c224c5b4507baceed1af4421a68d6f03ba3661"
+  },
+  "audit": {
+    "all_open_delta_one_max_head_error": 9.5367431640625e-07,
+    "baseline_error_headroom": 0,
+    "diagnostic_calls_separate_from_search_budget": true,
+    "engineering_identities_pass": true,
+    "frozen_during_search": true,
+    "full_operator_parity_pass": true,
+    "full_precision_online_clean_class_agreement": 1.0,
+    "gauge_identity_pass": true,
+    "headroom_status": "INSTRUMENT_HEADROOM_ABSENT",
+    "logical_calibration_calls_per_arm": 172,
+    "nonzero_adversary_executed": true,
+    "online_ci_exact_input_audit": true,
+    "online_reached_vs_clean_input_max_difference": 0.03280824422836304,
+    "pgd_expected_update_count": 240,
+    "pgd_update_count": 240,
+    "physical_calibration_calls": 496,
+    "proposal_label_access": "proposals accepts four integer codes; deployment Features.labels raises",
+    "residual_policy": "delta_mask=0 with zero ablation removes target residual exactly",
+    "shared_factor_identity_all_rollouts": true,
+    "simultaneous_factor_ci_permutation_max_head_error": 9.5367431640625e-07,
+    "source_validation_accuracy": 1.0,
+    "task_fidelity_status": "PASS",
+    "task_fidelity_threshold": 0.95,
+    "terminal_diagnostic_rollout_calls": 11,
+    "terminal_generation_follows_all_selection": true
+  },
+  "elapsed_seconds": 8.659192180999526,
+  "evidence_class": "PILOT_ONLY_ENGINEERING",
+  "metrics": {
+    "all_open_delta_one": {
+      "accuracy": 1.0,
+      "ce": 0.00012960837921127677,
+      "correct": 256,
+      "corruption": 0,
+      "net_repair": 0,
+      "per_pass": [
+        {
+          "all_head_max_abs_error": 7.152557373046875e-07,
+          "all_head_rms_error": 2.0566841385516454e-07,
+          "clean_to_output_kl": -9.413270163349807e-11,
+          "pass_index": 0,
+          "predicted_class_agreement": 1.0,
+          "state_displacement_vs_clean": {
+            "maximum": 4.08645831839749e-07,
+            "mean": 2.0356318855552225e-07,
+            "minimum": 1.043081283569336e-07,
+            "rms": 2.0910965861938305e-07
+          },
+          "state_norm": {
+            "maximum": 3.139468193054199,
+            "mean": 2.6672038305550814,
+            "minimum": 2.1859347820281982,
+            "rms": 2.6797265331861433
+          },
+          "state_rms": {
+            "maximum": 0.7848670482635498,
+            "mean": 0.666800957173109,
+            "minimum": 0.5464836955070496,
+            "rms": 0.6699316327850456
+          }
+        },
+        {
+          "all_head_max_abs_error": 9.5367431640625e-07,
+          "all_head_rms_error": 1.4408736603854777e-07,
+          "clean_to_output_kl": -9.578343451721594e-09,
+          "pass_index": 1,
+          "predicted_class_agreement": 1.0,
+          "state_displacement_vs_clean": {
+            "maximum": 2.795705711378105e-07,
+            "mean": 9.97838078831137e-08,
+            "minimum": 0.0,
+            "rms": 1.089548524112985e-07
+          },
+          "state_norm": {
+            "maximum": 3.886321544647217,
+            "mean": 3.739563782699406,
+            "minimum": 3.470430850982666,
+            "rms": 3.7409811174067245
+          },
+          "state_rms": {
+            "maximum": 0.9715803861618042,
+            "mean": 0.9348909454420209,
+            "minimum": 0.8676077127456665,
+            "rms": 0.9352452791203146
+          }
+        },
+        {
+          "all_head_max_abs_error": 4.76837158203125e-07,
+          "all_head_rms_error": 8.815646168613966e-08,
+          "clean_to_output_kl": -1.6886843923202832e-08,
+          "pass_index": 2,
+          "predicted_class_agreement": 1.0,
+          "state_displacement_vs_clean": {
+            "maximum": 2.0647654253025394e-07,
+            "mean": 6.260124416068713e-08,
+            "minimum": 0.0,
+            "rms": 7.45945193032934e-08
+          },
+          "state_norm": {
+            "maximum": 3.9266183376312256,
+            "mean": 3.850222174078226,
+            "minimum": 3.728971481323242,
+            "rms": 3.850658889746595
+          },
+          "state_rms": {
+            "maximum": 0.9816545844078064,
+            "mean": 0.9625555428210646,
+            "minimum": 0.9322428703308105,
+            "rms": 0.9626647217460927
+          }
+        }
+      ],
+      "recovery": 0
+    },
+    "beam": {
+      "accuracy": 1.0,
+      "ce": 0.00013007584493607283,
+      "correct": 256,
+      "corruption": 0,
+      "net_repair": 0,
+      "per_pass": [
+        {
+          "all_head_max_abs_error": 0.17737174034118652,
+          "all_head_rms_error": 0.06996345520019531,
+          "clean_to_output_kl": 3.103663766523823e-05,
+          "gate_sum": {
+            "maximum": 5.917235374450684,
+            "mean": 5.839696288108826,
+            "minimum": 5.782482147216797,
+            "rms": 5.839929148816365
+          },
+          "local_write_displacement_vs_clean_operator": {
+            "maximum": 0.9496188759803772,
+            "mean": 0.6973797868704423,
+            "minimum": 0.46447622776031494,
+            "rms": 0.7063950400146048
+          },
+          "local_write_displacement_vs_unbiased_gate": {
+            "maximum": 0.3917059302330017,
+            "mean": 0.33479950902983546,
+            "minimum": 0.2767610251903534,
+            "rms": 0.3358390670945249
+          },
+          "local_write_norm": {
+            "maximum": 4.995144367218018,
+            "mean": 3.658173393458128,
+            "minimum": 2.739356279373169,
+            "rms": 3.702924516045311
+          },
+          "pass_index": 0,
+          "predicted_class_agreement": 1.0,
+          "state_displacement_vs_clean": {
+            "maximum": 0.5052334666252136,
+            "mean": 0.3623446577694267,
+            "minimum": 0.2737829089164734,
+            "rms": 0.36952775434357144
+          },
+          "state_norm": {
+            "maximum": 3.0996577739715576,
+            "mean": 2.6839199140667915,
+            "minimum": 2.2364728450775146,
+            "rms": 2.6937760121641885
+          },
+          "state_rms": {
+            "maximum": 0.7749144434928894,
+            "mean": 0.6709799782838672,
+            "minimum": 0.5591182112693787,
+            "rms": 0.6734440028053591
+          }
+        },
+        {
+          "all_head_max_abs_error": 0.04835224151611328,
+          "all_head_rms_error": 0.019142188131809235,
+          "clean_to_output_kl": 9.59762473939918e-08,
+          "gate_sum": {
+            "maximum": 5.919314384460449,
+            "mean": 5.83076724037528,
+            "minimum": 5.765153884887695,
+            "rms": 5.831032828217111
+          },
+          "local_write_displacement_vs_clean_operator": {
+            "maximum": 1.3115471601486206,
+            "mean": 1.0388277499005198,
+            "minimum": 0.6991027593612671,
+            "rms": 1.0493402527464966
+          },
+          "local_write_displacement_vs_unbiased_gate": {
+            "maximum": 0.4438514709472656,
+            "mean": 0.398678814410232,
+            "minimum": 0.3508506417274475,
+            "rms": 0.3996620919271581
+          },
+          "local_write_norm": {
+            "maximum": 8.019996643066406,
+            "mean": 6.269852075725794,
+            "minimum": 4.83998966217041,
+            "rms": 6.322484856098757
+          },
+          "pass_index": 1,
+          "predicted_class_agreement": 1.0,
+          "state_displacement_vs_clean": {
+            "maximum": 0.25847724080085754,
+            "mean": 0.1524003465019632,
+            "minimum": 0.061090968549251556,
+            "rms": 0.16980222162689218
+          },
+          "state_norm": {
+            "maximum": 3.873507022857666,
+            "mean": 3.7339075058698654,
+            "minimum": 3.4753472805023193,
+            "rms": 3.7351835052452373
+          },
+          "state_rms": {
+            "maximum": 0.9683767557144165,
+            "mean": 0.9334768764674664,
+            "minimum": 0.8688368201255798,
+            "rms": 0.9337958763113093
+          }
+        },
+        {
+          "all_head_max_abs_error": 0.021437644958496094,
+          "all_head_rms_error": 0.010739856399595737,
+          "clean_to_output_kl": 2.2990320758253802e-10,
+          "gate_sum": {
+            "maximum": 5.924435138702393,
+            "mean": 5.8408938236534595,
+            "minimum": 5.787295341491699,
+            "rms": 5.841103325305669
+          },
+          "local_write_displacement_vs_clean_operator": {
+            "maximum": 1.377174735069275,
+            "mean": 1.1709214397706091,
+            "minimum": 0.8727644681930542,
+            "rms": 1.1779502630033638
+          },
+          "local_write_displacement_vs_unbiased_gate": {
+            "maximum": 0.4755498766899109,
+            "mean": 0.4207234187051654,
+            "minimum": 0.35510703921318054,
+            "rms": 0.42231024106458687
+          },
+          "local_write_norm": {
+            "maximum": 8.58875560760498,
+            "mean": 7.231044681742787,
+            "minimum": 6.143547058105469,
+            "rms": 7.262578841267563
+          },
+          "pass_index": 2,
+          "predicted_class_agreement": 1.0,
+          "state_displacement_vs_clean": {
+            "maximum": 0.241146057844162,
+            "mean": 0.12136037753953133,
+            "minimum": 0.04076451063156128,
+            "rms": 0.1455337543619863
+          },
+          "state_norm": {
+            "maximum": 3.919445514678955,
+            "mean": 3.8477566493675113,
+            "minimum": 3.728438377380371,
+            "rms": 3.8481504792645067
+          },
+          "state_rms": {
+            "maximum": 0.9798613786697388,
+            "mean": 0.9619391618762165,
+            "minimum": 0.9321095943450928,
+            "rms": 0.9620376193435278
+          }
+        }
+      ],
+      "recovery": 0
+    },
+    "ci_permutation_unmatched": {
+      "accuracy": 1.0,
+      "ce": 0.12243896722793579,
+      "correct": 256,
+      "corruption": 0,
+      "net_repair": 0,
+      "per_pass": [
+        {
+          "all_head_max_abs_error": 3.770434856414795,
+          "all_head_rms_error": 2.5293960571289062,
+          "clean_to_output_kl": 0.31448885798454285,
+          "gate_sum": {
+            "maximum": 3.850440502166748,
+            "mean": 3.79927789978683,
+            "minimum": 3.747292995452881,
+            "rms": 3.799452804027524
+          },
+          "local_write_displacement_vs_clean_operator": {
+            "maximum": 4.453064441680908,
+            "mean": 2.9834864446893334,
+            "minimum": 2.099602460861206,
+            "rms": 3.0425450413077972
+          },
+          "local_write_displacement_vs_unbiased_gate": {
+            "maximum": 4.629246711730957,
+            "mean": 3.1161634363234043,
+            "minimum": 2.1737935543060303,
+            "rms": 3.177188954854837
+          },
+          "local_write_norm": {
+            "maximum": 1.0557736158370972,
+            "mean": 0.8180496750865132,
+            "minimum": 0.5475679636001587,
+            "rms": 0.8334974552281679
+          },
+          "pass_index": 0,
+          "predicted_class_agreement": 1.0,
+          "state_displacement_vs_clean": {
+            "maximum": 2.8477396965026855,
+            "mean": 2.1758709265850484,
+            "minimum": 1.6629008054733276,
+            "rms": 2.2007470372605127
+          },
+          "state_norm": {
+            "maximum": 1.0462884902954102,
+            "mean": 0.832997061079368,
+            "minimum": 0.6025705933570862,
+            "rms": 0.8479678963655958
+          },
+          "state_rms": {
+            "maximum": 0.26157212257385254,
+            "mean": 0.208249265269842,
+            "minimum": 0.15064264833927155,
+            "rms": 0.21199197409139894
+          }
+        },
+        {
+          "all_head_max_abs_error": 4.79494047164917,
+          "all_head_rms_error": 3.3405632972717285,
+          "clean_to_output_kl": 0.19045370817184448,
+          "gate_sum": {
+            "maximum": 3.8514199256896973,
+            "mean": 3.795522387139499,
+            "minimum": 3.726379156112671,
+            "rms": 3.7957549754562008
+          },
+          "local_write_displacement_vs_clean_operator": {
+            "maximum": 4.721038818359375,
+            "mean": 3.363973794505,
+            "minimum": 2.548682689666748,
+            "rms": 3.4091741668917535
+          },
+          "local_write_displacement_vs_unbiased_gate": {
+            "maximum": 4.920068740844727,
+            "mean": 3.525206101126969,
+            "minimum": 2.6596760749816895,
+            "rms": 3.572070862341356
+          },
+          "local_write_norm": {
+            "maximum": 1.133433222770691,
+            "mean": 0.8632723961491138,
+            "minimum": 0.5484881401062012,
+            "rms": 0.8848092601987911
+          },
+          "pass_index": 1,
+          "predicted_class_agreement": 1.0,
+          "state_displacement_vs_clean": {
+            "maximum": 3.5284245014190674,
+            "mean": 2.7848720578476787,
+            "minimum": 2.1387782096862793,
+            "rms": 2.8479762698454953
+          },
+          "state_norm": {
+            "maximum": 1.818801999092102,
+            "mean": 1.2491845698095858,
+            "minimum": 0.6457680463790894,
+            "rms": 1.3360724859165416
+          },
+          "state_rms": {
+            "maximum": 0.4547004997730255,
+            "mean": 0.3122961422195658,
+            "minimum": 0.16144201159477234,
+            "rms": 0.3340181213568089
+          }
+        },
+        {
+          "all_head_max_abs_error": 4.9163899421691895,
+          "all_head_rms_error": 3.02336049079895,
+          "clean_to_output_kl": 0.12158312648534775,
+          "gate_sum": {
+            "maximum": 3.864428997039795,
+            "mean": 3.7959893625229597,
+            "minimum": 3.720959424972534,
+            "rms": 3.796257292616786
+          },
+          "local_write_displacement_vs_clean_operator": {
+            "maximum": 4.966582775115967,
+            "mean": 3.75025088340044,
+            "minimum": 2.629934787750244,
+            "rms": 3.7920876820944103
+          },
+          "local_write_displacement_vs_unbiased_gate": {
+            "maximum": 5.183038234710693,
+            "mean": 3.935583951883018,
+            "minimum": 2.7471370697021484,
+            "rms": 3.9797215811375524
+          },
+          "local_write_norm": {
+            "maximum": 1.2302448749542236,
+            "mean": 0.9195682413410395,
+            "minimum": 0.5529177784919739,
+            "rms": 0.9497648818877558
+          },
+          "pass_index": 2,
+          "predicted_class_agreement": 1.0,
+          "state_displacement_vs_clean": {
+            "maximum": 3.5983195304870605,
+            "mean": 2.462943601887673,
+            "minimum": 1.5447626113891602,
+            "rms": 2.602140755316072
+          },
+          "state_norm": {
+            "maximum": 2.4545581340789795,
+            "mean": 1.6293229449074715,
+            "minimum": 0.7064399123191833,
+            "rms": 1.7863107902640372
+          },
+          "state_rms": {
+            "maximum": 0.6136395335197449,
+            "mean": 0.4073307362268679,
+            "minimum": 0.17660997807979584,
+            "rms": 0.4465776975660093
+          }
+        }
+      ],
+      "recovery": 0
+    },
+    "clean": {
+      "accuracy": 1.0,
+      "ce": 0.00012960837921127677,
+      "correct": 256,
+      "corruption": 0,
+      "net_repair": 0,
+      "per_pass": [
+        {
+          "all_head_max_abs_error": 0.0,
+          "all_head_rms_error": 0.0,
+          "clean_to_output_kl": 2.523847797419876e-10,
+          "pass_index": 0,
+          "predicted_class_agreement": 1.0,
+          "state_displacement_vs_clean": {
+            "maximum": 0.0,
+            "mean": 0.0,
+            "minimum": 0.0,
+            "rms": 0.0
+          },
+          "state_norm": {
+            "maximum": 3.13946795463562,
+            "mean": 2.6672038231045008,
+            "minimum": 2.1859347820281982,
+            "rms": 2.679726525763916
+          },
+          "state_rms": {
+            "maximum": 0.784866988658905,
+            "mean": 0.6668009553104639,
+            "minimum": 0.5464836955070496,
+            "rms": 0.6699316309294889
+          }
+        },
+        {
+          "all_head_max_abs_error": 0.0,
+          "all_head_rms_error": 0.0,
+          "clean_to_output_kl": -9.586074156686664e-09,
+          "pass_index": 1,
+          "predicted_class_agreement": 1.0,
+          "state_displacement_vs_clean": {
+            "maximum": 0.0,
+            "mean": 0.0,
+            "minimum": 0.0,
+            "rms": 0.0
+          },
+          "state_norm": {
+            "maximum": 3.886321544647217,
+            "mean": 3.739563767798245,
+            "minimum": 3.470430850982666,
+            "rms": 3.7409811027938766
+          },
+          "state_rms": {
+            "maximum": 0.9715803861618042,
+            "mean": 0.9348909417167306,
+            "minimum": 0.8676077127456665,
+            "rms": 0.9352452754671027
+          }
+        },
+        {
+          "all_head_max_abs_error": 0.0,
+          "all_head_rms_error": 0.0,
+          "clean_to_output_kl": -1.6885024933799286e-08,
+          "pass_index": 2,
+          "predicted_class_agreement": 1.0,
+          "state_displacement_vs_clean": {
+            "maximum": 0.0,
+            "mean": 0.0,
+            "minimum": 0.0,
+            "rms": 0.0
+          },
+          "state_norm": {
+            "maximum": 3.9266183376312256,
+            "mean": 3.8502221815288067,
+            "minimum": 3.728971481323242,
+            "rms": 3.850658897174482
+          },
+          "state_rms": {
+            "maximum": 0.9816545844078064,
+            "mean": 0.9625555446837097,
+            "minimum": 0.9322428703308105,
+            "rms": 0.9626647236030644
+          }
+        }
+      ],
+      "recovery": 0
+    },
+    "fp_all_open": {
+      "accuracy": 1.0,
+      "ce": 0.00012960837921127677,
+      "correct": 256,
+      "corruption": 0,
+      "net_repair": 0,
+      "per_pass": [
+        {
+          "all_head_max_abs_error": 5.7220458984375e-06,
+          "all_head_rms_error": 3.009001602549688e-06,
+          "clean_to_output_kl": 1.686203177087009e-09,
+          "pass_index": 0,
+          "predicted_class_agreement": 1.0,
+          "state_displacement_vs_clean": {
+            "maximum": 1.6800291632534936e-05,
+            "mean": 1.495137422224957e-05,
+            "minimum": 1.2064236216247082e-05,
+            "rms": 1.4997806972887312e-05
+          },
+          "state_norm": {
+            "maximum": 3.1394660472869873,
+            "mean": 2.6672039460390806,
+            "minimum": 2.1859328746795654,
+            "rms": 2.6797266799701207
+          },
+          "state_rms": {
+            "maximum": 0.7848665118217468,
+            "mean": 0.6668009862769395,
+            "minimum": 0.5464832186698914,
+            "rms": 0.6699316697264037
+          }
+        },
+        {
+          "all_head_max_abs_error": 1.9073486328125e-06,
+          "all_head_rms_error": 8.173256560439768e-07,
+          "clean_to_output_kl": -9.511040843790397e-09,
+          "pass_index": 1,
+          "predicted_class_agreement": 1.0,
+          "state_displacement_vs_clean": {
+            "maximum": 1.3078432857582811e-05,
+            "mean": 6.035123382375218e-06,
+            "minimum": 2.9730711048614467e-06,
+            "rms": 7.0710488025089545e-06
+          },
+          "state_norm": {
+            "maximum": 3.886322498321533,
+            "mean": 3.7395639019086957,
+            "minimum": 3.4704298973083496,
+            "rms": 3.7409812519889165
+          },
+          "state_rms": {
+            "maximum": 0.9715806245803833,
+            "mean": 0.9348909752443433,
+            "minimum": 0.8676074743270874,
+            "rms": 0.9352453127670308
+          }
+        },
+        {
+          "all_head_max_abs_error": 2.384185791015625e-06,
+          "all_head_rms_error": 7.271858066815184e-07,
+          "clean_to_output_kl": -1.6801351421236177e-08,
+          "pass_index": 2,
+          "predicted_class_agreement": 1.0,
+          "state_displacement_vs_clean": {
+            "maximum": 1.2615792911674362e-05,
+            "mean": 4.7199430945887855e-06,
+            "minimum": 1.3709068298339844e-06,
+            "rms": 6.248532562343071e-06
+          },
+          "state_norm": {
+            "maximum": 3.926618814468384,
+            "mean": 3.850222460925579,
+            "minimum": 3.728971481323242,
+            "rms": 3.8506591790057825
+          },
+          "state_rms": {
+            "maximum": 0.981654703617096,
+            "mean": 0.9625556147657335,
+            "minimum": 0.9322428703308105,
+            "rms": 0.962664794284645
+          }
+        }
+      ],
+      "recovery": 0
+    },
+    "full_precision_bpd": {
+      "accuracy": 1.0,
+      "ce": 0.00013132320600561798,
+      "correct": 256,
+      "corruption": 0,
+      "net_repair": 0,
+      "per_pass": [
+        {
+          "all_head_max_abs_error": 0.15267229080200195,
+          "all_head_rms_error": 0.07905156910419464,
+          "clean_to_output_kl": 2.74523081316147e-05,
+          "gate_sum": {
+            "maximum": 3.850440502166748,
+            "mean": 3.7992778792977333,
+            "minimum": 3.7472925186157227,
+            "rms": 3.7994527835028435
+          },
+          "local_write_displacement_vs_clean_operator": {
+            "maximum": 0.7815486192703247,
+            "mean": 0.6291155458893627,
+            "minimum": 0.529562771320343,
+            "rms": 0.6330747475450452
+          },
+          "local_write_displacement_vs_unbiased_gate": {
+            "maximum": 0.0,
+            "mean": 0.0,
+            "minimum": 0.0,
+            "rms": 0.0
+          },
+          "local_write_norm": {
+            "maximum": 4.765048503875732,
+            "mean": 3.4450839711353183,
+            "minimum": 2.5678648948669434,
+            "rms": 3.4902252141789183
+          },
+          "pass_index": 0,
+          "predicted_class_agreement": 1.0,
+          "state_displacement_vs_clean": {
+            "maximum": 0.5182421803474426,
+            "mean": 0.40168043778976426,
+            "minimum": 0.24257339537143707,
+            "rms": 0.4116547528954521
+          },
+          "state_norm": {
+            "maximum": 3.1130504608154297,
+            "mean": 2.6411498952656984,
+            "minimum": 2.166923999786377,
+            "rms": 2.652386253738506
+          },
+          "state_rms": {
+            "maximum": 0.7782626152038574,
+            "mean": 0.660287472885102,
+            "minimum": 0.5417309999465942,
+            "rms": 0.6630965623751752
+          }
+        },
+        {
+          "all_head_max_abs_error": 0.06230592727661133,
+          "all_head_rms_error": 0.029893485829234123,
+          "clean_to_output_kl": 2.4967289391497616e-07,
+          "gate_sum": {
+            "maximum": 3.8592357635498047,
+            "mean": 3.7905449690297246,
+            "minimum": 3.7265896797180176,
+            "rms": 3.7907924143787324
+          },
+          "local_write_displacement_vs_clean_operator": {
+            "maximum": 0.7536760568618774,
+            "mean": 0.6411288727540523,
+            "minimum": 0.5335671901702881,
+            "rms": 0.6451311598422246
+          },
+          "local_write_displacement_vs_unbiased_gate": {
+            "maximum": 0.0,
+            "mean": 0.0,
+            "minimum": 0.0,
+            "rms": 0.0
+          },
+          "local_write_norm": {
+            "maximum": 7.642303943634033,
+            "mean": 5.915478656068444,
+            "minimum": 4.539737701416016,
+            "rms": 5.969342902310091
+          },
+          "pass_index": 1,
+          "predicted_class_agreement": 1.0,
+          "state_displacement_vs_clean": {
+            "maximum": 0.18722042441368103,
+            "mean": 0.11874184786574915,
+            "minimum": 0.0794529840350151,
+            "rms": 0.12247555731658094
+          },
+          "state_norm": {
+            "maximum": 3.852850914001465,
+            "mean": 3.731428598985076,
+            "minimum": 3.4924709796905518,
+            "rms": 3.7323965258787
+          },
+          "state_rms": {
+            "maximum": 0.9632127285003662,
+            "mean": 0.9328571492806077,
+            "minimum": 0.8731177449226379,
+            "rms": 0.9330991310146688
+          }
+        },
+        {
+          "all_head_max_abs_error": 0.03000926971435547,
+          "all_head_rms_error": 0.016446257010102272,
+          "clean_to_output_kl": 4.6897525862732437e-08,
+          "gate_sum": {
+            "maximum": 3.876178741455078,
+            "mean": 3.807987323962152,
+            "minimum": 3.747110366821289,
+            "rms": 3.8081477281058134
+          },
+          "local_write_displacement_vs_clean_operator": {
+            "maximum": 0.7752215266227722,
+            "mean": 0.6492062082979828,
+            "minimum": 0.48668399453163147,
+            "rms": 0.6563418332675248
+          },
+          "local_write_displacement_vs_unbiased_gate": {
+            "maximum": 0.0,
+            "mean": 0.0,
+            "minimum": 0.0,
+            "rms": 0.0
+          },
+          "local_write_norm": {
+            "maximum": 8.237814903259277,
+            "mean": 6.893600707873702,
+            "minimum": 5.853937149047852,
+            "rms": 6.925936852057645
+          },
+          "pass_index": 2,
+          "predicted_class_agreement": 1.0,
+          "state_displacement_vs_clean": {
+            "maximum": 0.1148037388920784,
+            "mean": 0.06902804308629129,
+            "minimum": 0.03614015504717827,
+            "rms": 0.07303627376903327
+          },
+          "state_norm": {
+            "maximum": 3.9026334285736084,
+            "mean": 3.8411963218823075,
+            "minimum": 3.74070405960083,
+            "rms": 3.8415011543621422
+          },
+          "state_rms": {
+            "maximum": 0.9756583571434021,
+            "mean": 0.9602990802377462,
+            "minimum": 0.9351760149002075,
+            "rms": 0.9603752883560626
+          }
+        }
+      ],
+      "recovery": 0
+    },
+    "gauge": {
+      "accuracy": 1.0,
+      "ce": 0.00013089066487737,
+      "correct": 256,
+      "corruption": 0,
+      "net_repair": 0,
+      "per_pass": [
+        {
+          "all_head_max_abs_error": 0.24181151390075684,
+          "all_head_rms_error": 0.10432359576225281,
+          "clean_to_output_kl": 6.906316411914304e-05,
+          "gate_sum": {
+            "maximum": 3.850440502166748,
+            "mean": 3.79927789978683,
+            "minimum": 3.747292995452881,
+            "rms": 3.799452804027524
+          },
+          "local_write_displacement_vs_clean_operator": {
+            "maximum": 1.0359777212142944,
+            "mean": 0.7923169359564781,
+            "minimum": 0.6147930026054382,
+            "rms": 0.7981810541226877
+          },
+          "local_write_displacement_vs_unbiased_gate": {
+            "maximum": 0.0,
+            "mean": 0.0,
+            "minimum": 0.0,
+            "rms": 0.0
+          },
+          "local_write_norm": {
+            "maximum": 4.998944282531738,
+            "mean": 3.6408432656899095,
+            "minimum": 2.713148355484009,
+            "rms": 3.686261562946477
+          },
+          "pass_index": 0,
+          "predicted_class_agreement": 1.0,
+          "state_displacement_vs_clean": {
+            "maximum": 0.6162832379341125,
+            "mean": 0.4511297164717689,
+            "minimum": 0.31064650416374207,
+            "rms": 0.460622366234076
+          },
+          "state_norm": {
+            "maximum": 3.094395637512207,
+            "mean": 2.676520557142794,
+            "minimum": 2.226715087890625,
+            "rms": 2.6857423874761115
+          },
+          "state_rms": {
+            "maximum": 0.7735989093780518,
+            "mean": 0.6691301390528679,
+            "minimum": 0.5566787719726562,
+            "rms": 0.6714355966290968
+          }
+        },
+        {
+          "all_head_max_abs_error": 0.08266592025756836,
+          "all_head_rms_error": 0.03543663024902344,
+          "clean_to_output_kl": 3.8566685134355794e-07,
+          "gate_sum": {
+            "maximum": 3.8603200912475586,
+            "mean": 3.7914929250255227,
+            "minimum": 3.726106882095337,
+            "rms": 3.791743170118022
+          },
+          "local_write_displacement_vs_clean_operator": {
+            "maximum": 1.337388277053833,
+            "mean": 1.0795577850658447,
+            "minimum": 0.7461878657341003,
+            "rms": 1.0905940048120475
+          },
+          "local_write_displacement_vs_unbiased_gate": {
+            "maximum": 0.0,
+            "mean": 0.0,
+            "minimum": 0.0,
+            "rms": 0.0
+          },
+          "local_write_norm": {
+            "maximum": 8.0221586227417,
+            "mean": 6.268584048375487,
+            "minimum": 4.8536810874938965,
+            "rms": 6.320803868377974
+          },
+          "pass_index": 1,
+          "predicted_class_agreement": 1.0,
+          "state_displacement_vs_clean": {
+            "maximum": 0.2804569900035858,
+            "mean": 0.16373024487984367,
+            "minimum": 0.07125826925039291,
+            "rms": 0.1786322828342558
+          },
+          "state_norm": {
+            "maximum": 3.854855537414551,
+            "mean": 3.729443113319576,
+            "minimum": 3.4920687675476074,
+            "rms": 3.730460715901743
+          },
+          "state_rms": {
+            "maximum": 0.9637138843536377,
+            "mean": 0.932360778329894,
+            "minimum": 0.8730171918869019,
+            "rms": 0.9326151789754358
+          }
+        },
+        {
+          "all_head_max_abs_error": 0.037018775939941406,
+          "all_head_rms_error": 0.017845362424850464,
+          "clean_to_output_kl": 5.172921646590112e-08,
+          "gate_sum": {
+            "maximum": 3.878903388977051,
+            "mean": 3.80923564825207,
+            "minimum": 3.748722553253174,
+            "rms": 3.8093938022331404
+          },
+          "local_write_displacement_vs_clean_operator": {
+            "maximum": 1.40975821018219,
+            "mean": 1.2073939631227404,
+            "minimum": 0.8839693069458008,
+            "rms": 1.2165304748902697
+          },
+          "local_write_displacement_vs_unbiased_gate": {
+            "maximum": 0.0,
+            "mean": 0.0,
+            "minimum": 0.0,
+            "rms": 0.0
+          },
+          "local_write_norm": {
+            "maximum": 8.60462474822998,
+            "mean": 7.230658978223801,
+            "minimum": 6.153932571411133,
+            "rms": 7.2626193288228995
+          },
+          "pass_index": 2,
+          "predicted_class_agreement": 1.0,
+          "state_displacement_vs_clean": {
+            "maximum": 0.24581100046634674,
+            "mean": 0.11302363277354743,
+            "minimum": 0.04395030811429024,
+            "rms": 0.1353369240637207
+          },
+          "state_norm": {
+            "maximum": 3.9058499336242676,
+            "mean": 3.8418696764856577,
+            "minimum": 3.737785577774048,
+            "rms": 3.842191465676625
+          },
+          "state_rms": {
+            "maximum": 0.9764624834060669,
+            "mean": 0.9604674188885838,
+            "minimum": 0.934446394443512,
+            "rms": 0.9605478661840934
+          }
+        }
+      ],
+      "recovery": 0
+    },
+    "greedy": {
+      "accuracy": 1.0,
+      "ce": 0.0001300372096011415,
+      "correct": 256,
+      "corruption": 0,
+      "net_repair": 0,
+      "per_pass": [
+        {
+          "all_head_max_abs_error": 0.17418885231018066,
+          "all_head_rms_error": 0.0706615149974823,
+          "clean_to_output_kl": 3.2265466870740056e-05,
+          "gate_sum": {
+            "maximum": 6.648676872253418,
+            "mean": 6.549034250900149,
+            "minimum": 6.462157726287842,
+            "rms": 6.549399114879897
+          },
+          "local_write_displacement_vs_clean_operator": {
+            "maximum": 0.9404195547103882,
+            "mean": 0.673495183349587,
+            "minimum": 0.4552574157714844,
+            "rms": 0.6826055735586379
+          },
+          "local_write_displacement_vs_unbiased_gate": {
+            "maximum": 0.3878842294216156,
+            "mean": 0.32200486247893423,
+            "minimum": 0.2536447048187256,
+            "rms": 0.32353278438508304
+          },
+          "local_write_norm": {
+            "maximum": 5.0008673667907715,
+            "mean": 3.6552620651200414,
+            "minimum": 2.739643096923828,
+            "rms": 3.7003986814167003
+          },
+          "pass_index": 0,
+          "predicted_class_agreement": 1.0,
+          "state_displacement_vs_clean": {
+            "maximum": 0.4920450747013092,
+            "mean": 0.34893218451179564,
+            "minimum": 0.25939977169036865,
+            "rms": 0.35631709850093707
+          },
+          "state_norm": {
+            "maximum": 3.0992512702941895,
+            "mean": 2.685764011926949,
+            "minimum": 2.2348861694335938,
+            "rms": 2.695562467037885
+          },
+          "state_rms": {
+            "maximum": 0.7748128175735474,
+            "mean": 0.6714410029817373,
+            "minimum": 0.5587215423583984,
+            "rms": 0.6738906167594713
+          }
+        },
+        {
+          "all_head_max_abs_error": 0.046770572662353516,
+          "all_head_rms_error": 0.01916925050318241,
+          "clean_to_output_kl": 9.948377055479796e-08,
+          "gate_sum": {
+            "maximum": 6.655701160430908,
+            "mean": 6.537620523944497,
+            "minimum": 6.43749475479126,
+            "rms": 6.5380718194197645
+          },
+          "local_write_displacement_vs_clean_operator": {
+            "maximum": 1.3140885829925537,
+            "mean": 1.0200523717794567,
+            "minimum": 0.7027257084846497,
+            "rms": 1.0307812300074999
+          },
+          "local_write_displacement_vs_unbiased_gate": {
+            "maximum": 0.4389652907848358,
+            "mean": 0.3879315046360716,
+            "minimum": 0.3424009084701538,
+            "rms": 0.3891942763515688
+          },
+          "local_write_norm": {
+            "maximum": 8.024564743041992,
+            "mean": 6.269723923876882,
+            "minimum": 4.839183330535889,
+            "rms": 6.322552440364669
+          },
+          "pass_index": 1,
+          "predicted_class_agreement": 1.0,
+          "state_displacement_vs_clean": {
+            "maximum": 0.2680037319660187,
+            "mean": 0.1497209200897487,
+            "minimum": 0.0556931309401989,
+            "rms": 0.16863385759512187
+          },
+          "state_norm": {
+            "maximum": 3.8738858699798584,
+            "mean": 3.734347947873175,
+            "minimum": 3.4731788635253906,
+            "rms": 3.7356452281234813
+          },
+          "state_rms": {
+            "maximum": 0.9684714674949646,
+            "mean": 0.9335869867354631,
+            "minimum": 0.8682947158813477,
+            "rms": 0.933911306792524
+          }
+        },
+        {
+          "all_head_max_abs_error": 0.02003002166748047,
+          "all_head_rms_error": 0.00994199886918068,
+          "clean_to_output_kl": 4.5932893044664524e-09,
+          "gate_sum": {
+            "maximum": 6.667803764343262,
+            "mean": 6.55282636359334,
+            "minimum": 6.467474937438965,
+            "rms": 6.553202334502012
+          },
+          "local_write_displacement_vs_clean_operator": {
+            "maximum": 1.3823184967041016,
+            "mean": 1.1532137680333108,
+            "minimum": 0.8799998760223389,
+            "rms": 1.160346890730592
+          },
+          "local_write_displacement_vs_unbiased_gate": {
+            "maximum": 0.46992695331573486,
+            "mean": 0.4105216480093077,
+            "minimum": 0.35185477137565613,
+            "rms": 0.41225642975333127
+          },
+          "local_write_norm": {
+            "maximum": 8.59637451171875,
+            "mean": 7.229552675038576,
+            "minimum": 6.142024517059326,
+            "rms": 7.261450787563527
+          },
+          "pass_index": 2,
+          "predicted_class_agreement": 1.0,
+          "state_displacement_vs_clean": {
+            "maximum": 0.24641931056976318,
+            "mean": 0.11744501782231964,
+            "minimum": 0.036427151411771774,
+            "rms": 0.14229707566375008
+          },
+          "state_norm": {
+            "maximum": 3.9193525314331055,
+            "mean": 3.8475373554974794,
+            "minimum": 3.727498769760132,
+            "rms": 3.8479408782390743
+          },
+          "state_rms": {
+            "maximum": 0.9798381328582764,
+            "mean": 0.9618843386415392,
+            "minimum": 0.931874692440033,
+            "rms": 0.961985219324101
+          }
+        }
+      ],
+      "recovery": 0
+    },
+    "multistart": {
+      "accuracy": 1.0,
+      "ce": 0.0001300372096011415,
+      "correct": 256,
+      "corruption": 0,
+      "net_repair": 0,
+      "per_pass": [
+        {
+          "all_head_max_abs_error": 0.17418885231018066,
+          "all_head_rms_error": 0.0706615149974823,
+          "clean_to_output_kl": 3.2265466870740056e-05,
+          "gate_sum": {
+            "maximum": 6.648676872253418,
+            "mean": 6.549034250900149,
+            "minimum": 6.462157726287842,
+            "rms": 6.549399114879897
+          },
+          "local_write_displacement_vs_clean_operator": {
+            "maximum": 0.9404195547103882,
+            "mean": 0.673495183349587,
+            "minimum": 0.4552574157714844,
+            "rms": 0.6826055735586379
+          },
+          "local_write_displacement_vs_unbiased_gate": {
+            "maximum": 0.3878842294216156,
+            "mean": 0.32200486247893423,
+            "minimum": 0.2536447048187256,
+            "rms": 0.32353278438508304
+          },
+          "local_write_norm": {
+            "maximum": 5.0008673667907715,
+            "mean": 3.6552620651200414,
+            "minimum": 2.739643096923828,
+            "rms": 3.7003986814167003
+          },
+          "pass_index": 0,
+          "predicted_class_agreement": 1.0,
+          "state_displacement_vs_clean": {
+            "maximum": 0.4920450747013092,
+            "mean": 0.34893218451179564,
+            "minimum": 0.25939977169036865,
+            "rms": 0.35631709850093707
+          },
+          "state_norm": {
+            "maximum": 3.0992512702941895,
+            "mean": 2.685764011926949,
+            "minimum": 2.2348861694335938,
+            "rms": 2.695562467037885
+          },
+          "state_rms": {
+            "maximum": 0.7748128175735474,
+            "mean": 0.6714410029817373,
+            "minimum": 0.5587215423583984,
+            "rms": 0.6738906167594713
+          }
+        },
+        {
+          "all_head_max_abs_error": 0.046770572662353516,
+          "all_head_rms_error": 0.01916925050318241,
+          "clean_to_output_kl": 9.948377055479796e-08,
+          "gate_sum": {
+            "maximum": 6.655701160430908,
+            "mean": 6.537620523944497,
+            "minimum": 6.43749475479126,
+            "rms": 6.5380718194197645
+          },
+          "local_write_displacement_vs_clean_operator": {
+            "maximum": 1.3140885829925537,
+            "mean": 1.0200523717794567,
+            "minimum": 0.7027257084846497,
+            "rms": 1.0307812300074999
+          },
+          "local_write_displacement_vs_unbiased_gate": {
+            "maximum": 0.4389652907848358,
+            "mean": 0.3879315046360716,
+            "minimum": 0.3424009084701538,
+            "rms": 0.3891942763515688
+          },
+          "local_write_norm": {
+            "maximum": 8.024564743041992,
+            "mean": 6.269723923876882,
+            "minimum": 4.839183330535889,
+            "rms": 6.322552440364669
+          },
+          "pass_index": 1,
+          "predicted_class_agreement": 1.0,
+          "state_displacement_vs_clean": {
+            "maximum": 0.2680037319660187,
+            "mean": 0.1497209200897487,
+            "minimum": 0.0556931309401989,
+            "rms": 0.16863385759512187
+          },
+          "state_norm": {
+            "maximum": 3.8738858699798584,
+            "mean": 3.734347947873175,
+            "minimum": 3.4731788635253906,
+            "rms": 3.7356452281234813
+          },
+          "state_rms": {
+            "maximum": 0.9684714674949646,
+            "mean": 0.9335869867354631,
+            "minimum": 0.8682947158813477,
+            "rms": 0.933911306792524
+          }
+        },
+        {
+          "all_head_max_abs_error": 0.02003002166748047,
+          "all_head_rms_error": 0.00994199886918068,
+          "clean_to_output_kl": 4.5932893044664524e-09,
+          "gate_sum": {
+            "maximum": 6.667803764343262,
+            "mean": 6.55282636359334,
+            "minimum": 6.467474937438965,
+            "rms": 6.553202334502012
+          },
+          "local_write_displacement_vs_clean_operator": {
+            "maximum": 1.3823184967041016,
+            "mean": 1.1532137680333108,
+            "minimum": 0.8799998760223389,
+            "rms": 1.160346890730592
+          },
+          "local_write_displacement_vs_unbiased_gate": {
+            "maximum": 0.46992695331573486,
+            "mean": 0.4105216480093077,
+            "minimum": 0.35185477137565613,
+            "rms": 0.41225642975333127
+          },
+          "local_write_norm": {
+            "maximum": 8.59637451171875,
+            "mean": 7.229552675038576,
+            "minimum": 6.142024517059326,
+            "rms": 7.261450787563527
+          },
+          "pass_index": 2,
+          "predicted_class_agreement": 1.0,
+          "state_displacement_vs_clean": {
+            "maximum": 0.24641931056976318,
+            "mean": 0.11744501782231964,
+            "minimum": 0.036427151411771774,
+            "rms": 0.14229707566375008
+          },
+          "state_norm": {
+            "maximum": 3.9193525314331055,
+            "mean": 3.8475373554974794,
+            "minimum": 3.727498769760132,
+            "rms": 3.8479408782390743
+          },
+          "state_rms": {
+            "maximum": 0.9798381328582764,
+            "mean": 0.9618843386415392,
+            "minimum": 0.931874692440033,
+            "rms": 0.961985219324101
+          }
+        }
+      ],
+      "recovery": 0
+    },
+    "quantized": {
+      "accuracy": 1.0,
+      "ce": 0.00013089066487737,
+      "correct": 256,
+      "corruption": 0,
+      "net_repair": 0,
+      "per_pass": [
+        {
+          "all_head_max_abs_error": 0.24181175231933594,
+          "all_head_rms_error": 0.104323610663414,
+          "clean_to_output_kl": 6.906276394147426e-05,
+          "gate_sum": {
+            "maximum": 3.850440502166748,
+            "mean": 3.7992778792977333,
+            "minimum": 3.7472925186157227,
+            "rms": 3.7994527835028435
+          },
+          "local_write_displacement_vs_clean_operator": {
+            "maximum": 1.0359777212142944,
+            "mean": 0.7923169378191233,
+            "minimum": 0.6147929430007935,
+            "rms": 0.798181055472905
+          },
+          "local_write_displacement_vs_unbiased_gate": {
+            "maximum": 0.0,
+            "mean": 0.0,
+            "minimum": 0.0,
+            "rms": 0.0
+          },
+          "local_write_norm": {
+            "maximum": 4.998944282531738,
+            "mean": 3.6408432740718126,
+            "minimum": 2.713148355484009,
+            "rms": 3.686261572038733
+          },
+          "pass_index": 0,
+          "predicted_class_agreement": 1.0,
+          "state_displacement_vs_clean": {
+            "maximum": 0.6162831783294678,
+            "mean": 0.4511297137942165,
+            "minimum": 0.31064650416374207,
+            "rms": 0.4606223632712314
+          },
+          "state_norm": {
+            "maximum": 3.094395637512207,
+            "mean": 2.6765205562114716,
+            "minimum": 2.226715087890625,
+            "rms": 2.685742386604038
+          },
+          "state_rms": {
+            "maximum": 0.7735989093780518,
+            "mean": 0.6691301390528679,
+            "minimum": 0.5566787719726562,
+            "rms": 0.6714355966510095
+          }
+        },
+        {
+          "all_head_max_abs_error": 0.08266592025756836,
+          "all_head_rms_error": 0.03543662652373314,
+          "clean_to_output_kl": 3.8567003457501414e-07,
+          "gate_sum": {
+            "maximum": 3.8603203296661377,
+            "mean": 3.7914928421378136,
+            "minimum": 3.7261061668395996,
+            "rms": 3.7917430874189146
+          },
+          "local_write_displacement_vs_clean_operator": {
+            "maximum": 1.3373883962631226,
+            "mean": 1.0795577731914818,
+            "minimum": 0.7461879849433899,
+            "rms": 1.0905939929496413
+          },
+          "local_write_displacement_vs_unbiased_gate": {
+            "maximum": 0.0,
+            "mean": 0.0,
+            "minimum": 0.0,
+            "rms": 0.0
+          },
+          "local_write_norm": {
+            "maximum": 8.022159576416016,
+            "mean": 6.268584039062262,
+            "minimum": 4.853681564331055,
+            "rms": 6.320803857503939
+          },
+          "pass_index": 1,
+          "predicted_class_agreement": 1.0,
+          "state_displacement_vs_clean": {
+            "maximum": 0.2804570198059082,
+            "mean": 0.16373024342465214,
+            "minimum": 0.07125826925039291,
+            "rms": 0.17863228111207624
+          },
+          "state_norm": {
+            "maximum": 3.854855537414551,
+            "mean": 3.7294431077316403,
+            "minimum": 3.4920687675476074,
+            "rms": 3.7304607103597034
+          },
+          "state_rms": {
+            "maximum": 0.9637138843536377,
+            "mean": 0.9323607769329101,
+            "minimum": 0.8730171918869019,
+            "rms": 0.9326151775899258
+          }
+        },
+        {
+          "all_head_max_abs_error": 0.037018775939941406,
+          "all_head_rms_error": 0.017845362424850464,
+          "clean_to_output_kl": 5.172921646590112e-08,
+          "gate_sum": {
+            "maximum": 3.8789026737213135,
+            "mean": 3.809235661290586,
+            "minimum": 3.748722553253174,
+            "rms": 3.8093938152089355
+          },
+          "local_write_displacement_vs_clean_operator": {
+            "maximum": 1.40975821018219,
+            "mean": 1.207393952878192,
+            "minimum": 0.883969247341156,
+            "rms": 1.2165304646635589
+          },
+          "local_write_displacement_vs_unbiased_gate": {
+            "maximum": 0.0,
+            "mean": 0.0,
+            "minimum": 0.0,
+            "rms": 0.0
+          },
+          "local_write_norm": {
+            "maximum": 8.60462474822998,
+            "mean": 7.230658937245607,
+            "minimum": 6.153932571411133,
+            "rms": 7.262619288386978
+          },
+          "pass_index": 2,
+          "predicted_class_agreement": 1.0,
+          "state_displacement_vs_clean": {
+            "maximum": 0.24581100046634674,
+            "mean": 0.11302363334107213,
+            "minimum": 0.04395030811429024,
+            "rms": 0.13533692545536488
+          },
+          "state_norm": {
+            "maximum": 3.9058499336242676,
+            "mean": 3.841869675554335,
+            "minimum": 3.737785577774048,
+            "rms": 3.8421914647223954
+          },
+          "state_rms": {
+            "maximum": 0.9764624834060669,
+            "mean": 0.9604674186557531,
+            "minimum": 0.934446394443512,
+            "rms": 0.9605478659455359
+          }
+        }
+      ],
+      "recovery": 0
+    },
+    "quantized_all_open": {
+      "accuracy": 1.0,
+      "ce": 0.00013118908100295812,
+      "correct": 256,
+      "corruption": 0,
+      "net_repair": 0,
+      "per_pass": [
+        {
+          "all_head_max_abs_error": 0.12636423110961914,
+          "all_head_rms_error": 0.062705397605896,
+          "clean_to_output_kl": 1.8401344277663156e-05,
+          "pass_index": 0,
+          "predicted_class_agreement": 1.0,
+          "state_displacement_vs_clean": {
+            "maximum": 0.5026286244392395,
+            "mean": 0.34240013151429594,
+            "minimum": 0.21068726480007172,
+            "rms": 0.3566793153771212
+          },
+          "state_norm": {
+            "maximum": 3.083699941635132,
+            "mean": 2.695795458741486,
+            "minimum": 2.257901906967163,
+            "rms": 2.7053309765480114
+          },
+          "state_rms": {
+            "maximum": 0.770924985408783,
+            "mean": 0.6739488644525409,
+            "minimum": 0.5644754767417908,
+            "rms": 0.6763327439145335
+          }
+        },
+        {
+          "all_head_max_abs_error": 0.03901171684265137,
+          "all_head_rms_error": 0.01916038617491722,
+          "clean_to_output_kl": 1.017378963297233e-07,
+          "pass_index": 1,
+          "predicted_class_agreement": 1.0,
+          "state_displacement_vs_clean": {
+            "maximum": 0.4231952428817749,
+            "mean": 0.19734729288029484,
+            "minimum": 0.035028669983148575,
+            "rms": 0.24436315674222098
+          },
+          "state_norm": {
+            "maximum": 3.880279779434204,
+            "mean": 3.7271210458129644,
+            "minimum": 3.432617425918579,
+            "rms": 3.7288519989351463
+          },
+          "state_rms": {
+            "maximum": 0.970069944858551,
+            "mean": 0.9317802609875798,
+            "minimum": 0.8581543564796448,
+            "rms": 0.9322129992779419
+          }
+        },
+        {
+          "all_head_max_abs_error": 0.030422449111938477,
+          "all_head_rms_error": 0.013045045547187328,
+          "clean_to_output_kl": 1.2375522828733665e-08,
+          "pass_index": 2,
+          "predicted_class_agreement": 1.0,
+          "state_displacement_vs_clean": {
+            "maximum": 0.3416914939880371,
+            "mean": 0.15160741127328947,
+            "minimum": 0.021857066079974174,
+            "rms": 0.196767843558949
+          },
+          "state_norm": {
+            "maximum": 3.921508312225342,
+            "mean": 3.8436035457998514,
+            "minimum": 3.701960563659668,
+            "rms": 3.844110066367149
+          },
+          "state_rms": {
+            "maximum": 0.9803770780563354,
+            "mean": 0.9609008859843016,
+            "minimum": 0.925490140914917,
+            "rms": 0.9610275161251313
+          }
+        }
+      ],
+      "recovery": 0
+    }
+  },
+  "operator": {
+    "code_max": 3,
+    "code_min": -3,
+    "fp_factor_frobenius_error": 6.422211299650371e-05,
+    "permutation": [
+      3,
+      6,
+      13,
+      10,
+      8,
+      1,
+      7,
+      4,
+      15,
+      9,
+      0,
+      5,
+      11,
+      2,
+      12,
+      14
+    ],
+    "quantization_factor_delta_l2": 1.2964372930342205,
+    "quantization_operator_delta_frobenius": 1.1547877788543701,
+    "quantization_scale_u": 0.21336406469345093,
+    "quantization_scale_v": 0.19248312711715698,
+    "quantized_factor_frobenius_error": 1.1547815799713135,
+    "residual_disabled": true,
+    "target_frobenius": 3.661571979522705
+  },
+  "root": 17003,
+  "selected_calibration_ce": {
+    "beam": 0.00012807841994799674,
+    "greedy": 0.0001280821452382952,
+    "multistart": 0.0001280821452382952
+  },
+  "selected_codes": {
+    "beam": [
+      2,
+      2,
+      -2,
+      -1
+    ],
+    "greedy": [
+      2,
+      2,
+      0,
+      -1
+    ],
+    "multistart": [
+      2,
+      2,
+      0,
+      -1
+    ]
+  }
+}

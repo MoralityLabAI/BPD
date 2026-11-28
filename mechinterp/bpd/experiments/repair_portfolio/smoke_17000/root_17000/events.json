@@ -1,0 +1,41 @@
+[
+  {
+    "event": "training_start",
+    "root": 17000
+  },
+  {
+    "event": "calibration_labels_accessed",
+    "n": 64
+  },
+  {
+    "candidate_calls": 496,
+    "codes": {
+      "beam": [
+        0,
+        -2,
+        -2,
+        0
+      ],
+      "greedy": [
+        0,
+        -2,
+        -2,
+        0
+      ],
+      "multistart": [
+        0,
+        -2,
+        -2,
+        0
+      ]
+    },
+    "event": "all_policies_selected"
+  },
+  {
+    "event": "terminal_created_after_selection",
+    "n": 256
+  },
+  {
+    "event": "terminal_labels_accessed_after_selection"
+  }
+]
