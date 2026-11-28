@@ -4,6 +4,9 @@
 
 ## Models, resources, Python
 
+The [Dory Q4 Oakhaven SAE tower pilot](dory_story_sae/README.md) includes fixed-dose
+one- versus two-pass action interventions, an action-position refit, and an offline receipt audit.
+
 | Gym / Module | Compute | Local hardware |
 | --- | --- | --- |
 | `arg03_roster`: fresh algebraic public split, isolated `EvalMath` grader, and dev-only calibration fit | CPU | Any |
