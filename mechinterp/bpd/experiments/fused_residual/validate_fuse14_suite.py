@@ -339,8 +339,13 @@ def _run_trainer_and_capture(
                             for w, (md, sc, cl, po) in zip(_ws, prev):
                                 w.mode, w.schedule, w.calls, w.pass_offset = md, sc, cl, po
 
-                    deps = tuple(t for w in wrappers for t in (w.V, w.U))
-                    h = ckpt_fn(_run_blk, h, *deps, use_reentrant=False)
+                    deps_list = [t for w in wrappers for t in (w.V, w.U)]
+                    for w in wrappers:
+                        if w.schedule is not None:
+                            deps_list.append(w.schedule.comp_mask)
+                            if w.schedule.delta_mask is not None:
+                                deps_list.append(w.schedule.delta_mask)
+                    h = ckpt_fn(_run_blk, h, *deps_list, use_reentrant=False)
                     # Advance live forward call counters by 1 to match non-checkpointed forward
                     for w, (_, _, cl, _) in zip(wrappers, snap_state):
                         w.calls = cl + 1
@@ -1099,4 +1104,11 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    try:
+        sys.exit(main())
+    except BaseException as _exc:
+        import traceback
+        tb_last = traceback.format_exc().strip().splitlines()
+        msg = " | ".join(tb_last[-4:])
+        print(f"::error::{msg}", flush=True)
+        raise
