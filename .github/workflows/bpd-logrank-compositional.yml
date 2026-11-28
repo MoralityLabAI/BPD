@@ -1,0 +1,23 @@
+name: LOGRANK-BPD native compositional smoke
+on:
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/logrank_bpd_01/native_compositional.py'
+      - 'mechinterp/bpd/experiments/logrank_bpd_01/native_learned_replay.py'
+      - 'mechinterp/bpd/experiments/logrank_bpd_01/learned_fixture.json'
+      - '.github/workflows/bpd-logrank-compositional.yml'
+permissions:
+  contents: read
+jobs:
+  native-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install numpy
+      - run: pip install torch --index-url https://download.pytorch.org/whl/cpu
+      - run: python -m mechinterp.bpd.experiments.logrank_bpd_01.native_compositional
+      - run: python -m mechinterp.bpd.experiments.logrank_bpd_01.native_learned_replay
