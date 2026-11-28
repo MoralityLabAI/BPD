@@ -1,0 +1,30 @@
+name: BPD-COL-01 exact observer calibration
+
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/experiments/collatz_observability/**'
+      - '.github/workflows/bpd-collatz-observability.yml'
+      - '.gitattributes'
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/collatz_observability/**'
+      - '.github/workflows/bpd-collatz-observability.yml'
+      - '.gitattributes'
+
+permissions:
+  contents: read
+
+jobs:
+  exact-finite-calibration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check independent finite-map and observer witnesses
+        run: python -S -m unittest discover -s mechinterp/bpd/experiments/collatz_observability/tests -v
+      - name: Replay all 172 parameters and 44204 odd states
+        run: python -S mechinterp/bpd/experiments/collatz_observability/audit.py --check mechinterp/bpd/experiments/collatz_observability/results/exact_receipt.json

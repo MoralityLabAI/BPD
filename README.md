@@ -63,3 +63,26 @@ Provenance hashes linking back to `MoralityLabAI/LoopedTransformers` and `Morali
 
 Use the [EvalMath mechanistic-power agent skill](https://github.com/MoralityLabAI/EvalMath/tree/main/skills/evalmath-mechinterp-power) before planning a causal intervention, probe or small held-out evaluation. Its independent-root, matched-sham and effect-floor preflight keeps shallow 64-outcome sweeps from being mistaken for measured mechanisms. The [FSI-03 native TRM audit](mechinterp/FSI03_NATIVE_VARIATION_AUDIT.md) shows why delayed-logit change must be checked against a matched random direction on actual task outcomes. Retain the ARG-03-N sealed test restrictions.
 
+## Exact arithmetic calibration for observable state
+
+[BPD-COL-01](mechinterp/bpd/experiments/collatz_observability/README.md) brings
+the split-Collatz finite oracle into the BPD program. It enumerates 172
+parameters and 44,204 odd states, with exact observer refinement, basin
+ceilings, reachable donor controls and a rational linear-rank fixture. The
+study separates a conserved observer's self-closure from task sufficiency and
+uses branch readouts to construct genuine delayed-visible effects. Its
+[native handoff](mechinterp/bpd/experiments/collatz_observability/BPD_APPLICATION.md)
+connects these finite checks to EFD-01, CQ08 and DT03. Evidence is confined to
+the declared arithmetic systems and their specified one-hot embedding.
+
+## Nanbeige mechinterp gym for a 4-GiB RTX 3050
+
+[BPD-COL-02](mechinterp/bpd/experiments/collatz_3050/README.md) runs controlled
+prefix-state interventions through the pinned Nanbeige4.2-3B native recurrence.
+Its streamed backend loads one physical decoder layer at a time, with 1.75-GiB
+Torch CUDA and 2.75-GiB added-RSS limits. A Windows launcher prepares trace or
+arithmetic tasks, checks the local model, and records every completed control,
+failure and source-parameter summary. Native-code CPU fixtures cover complete
+BF16 head parity and the eight-forward intervention pipeline. Pretrained
+checkpoint behavior and RTX 3050 memory/latency require the local hardware run.
+

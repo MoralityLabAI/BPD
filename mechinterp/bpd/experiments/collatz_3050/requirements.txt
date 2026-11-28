@@ -1,0 +1,10 @@
+# Install the appropriate torch==2.6.0 wheel separately (CUDA 12.4 on Windows).
+transformers==4.46.3
+accelerate==1.1.1
+safetensors==0.5.3
+huggingface_hub==0.36.2
+tokenizers==0.20.3
+sentencepiece==0.2.0
+protobuf==5.29.3
+psutil==6.1.0
+numpy==2.3.5

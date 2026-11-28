@@ -1,0 +1,84 @@
+name: BPD-COL-02 native Nanbeige gym
+
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/experiments/collatz_3050/**'
+      - 'mechinterp/bpd/experiments/collatz_observability/collatz_core.py'
+      - '.github/workflows/bpd-collatz-3050.yml'
+      - '.gitattributes'
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/collatz_3050/**'
+      - 'mechinterp/bpd/experiments/collatz_observability/collatz_core.py'
+      - '.github/workflows/bpd-collatz-3050.yml'
+      - '.gitattributes'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  native-code-and-controls:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      BPD_COL3050_SOURCE_DIR: .nanbeige-test-source
+      OMP_NUM_THREADS: '2'
+      MKL_NUM_THREADS: '2'
+      TOKENIZERS_PARALLELISM: 'false'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: mechinterp/bpd/experiments/collatz_3050/requirements.txt
+      - name: Check exact cases and root-level scoring without model packages
+        run: |
+          python -S -m unittest discover -s mechinterp/bpd/experiments/collatz_3050/tests -p test_cases.py -v
+          python -S -m unittest discover -s mechinterp/bpd/experiments/collatz_3050/tests -p test_scoring.py -v
+      - name: Install the pinned CPU validation runtime
+        run: |
+          python -m pip install torch==2.6.0 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install -r mechinterp/bpd/experiments/collatz_3050/requirements.txt
+      - name: Fetch and verify official code and tokenizer without checkpoint weights
+        run: |
+          python mechinterp/bpd/experiments/collatz_3050/run_gym.py fetch-test-source --output "$BPD_COL3050_SOURCE_DIR"
+      - name: Check native BF16 parity, interventions and complete runner
+        run: |
+          python - <<'PY'
+          import unittest
+          import torch, transformers, safetensors, psutil
+          suite = unittest.defaultTestLoader.discover('mechinterp/bpd/experiments/collatz_3050/tests')
+          result = unittest.TextTestRunner(verbosity=2).run(suite)
+          if result.skipped:
+              raise SystemExit('Native validation must run every test: ' + repr(result.skipped))
+          raise SystemExit(0 if result.wasSuccessful() else 1)
+          PY
+
+  windows-launcher:
+    runs-on: windows-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Parse and exercise the launcher in Windows PowerShell
+        shell: powershell
+        run: |
+          $Gym = Join-Path $env:GITHUB_WORKSPACE 'mechinterp/bpd/experiments/collatz_3050'
+          $Launcher = Join-Path $Gym 'run_3050.ps1'
+          $Tokens = $null
+          $ParseErrors = $null
+          [System.Management.Automation.Language.Parser]::ParseFile($Launcher, [ref]$Tokens, [ref]$ParseErrors) | Out-Null
+          if ($ParseErrors.Count -gt 0) { $ParseErrors | Format-List; exit 1 }
+          python -m venv (Join-Path $Gym '.venv')
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          Set-Location $env:RUNNER_TEMP
+          & $Launcher -Action Prepare -Tier trace -Roots 1 -RunDir 'gym path with spaces'
+          $Manifest = Join-Path $env:RUNNER_TEMP 'gym path with spaces/input_manifest.json'
+          if (-not (Test-Path $Manifest)) { throw 'Relative output path did not follow PowerShell location' }
+          $Data = Get-Content $Manifest -Raw | ConvertFrom-Json
+          if ($Data.n_roots -ne 1 -or $Data.n_cases -ne 1) { throw 'Unexpected prepared case count' }
