@@ -217,7 +217,19 @@ def _compare_snapshots(snap_a: dict[str, Any], snap_b: dict[str, Any]) -> dict[s
                 if len(counts["failure_examples"]) < 12:
                     counts["failure_examples"].append({"path": path, **cm})
         elif isinstance(u, dict):
-            assert u.keys() == v.keys(), path
+            if u.keys() != v.keys():
+                counts["failures"] += 1
+                if len(counts["failure_examples"]) < 12:
+                    counts["failure_examples"].append(
+                        {
+                            "path": path,
+                            "only_in_ref": sorted(set(u) - set(v))[:8],
+                            "only_in_cand": sorted(set(v) - set(u))[:8],
+                        }
+                    )
+                for k in sorted(set(u) & set(v)):
+                    _cmp(u[k], v[k], f"{path}/{k}")
+                return
             for k in u:
                 _cmp(u[k], v[k], f"{path}/{k}")
         elif isinstance(u, (list, tuple)):
@@ -1100,13 +1112,23 @@ def main() -> int:
         ),
     }
     print("FUSE14_SUITE_DONE", json.dumps(summary), flush=True)
+    if not stage_a["trainer_cast_audit"]["parity"]["finite_bitwise_pass"]:
+        raise AssertionError(f"Stage A parity failed: {stage_a['trainer_cast_audit']['parity']['failure_examples'][:3]}")
+    if not stage_b["both_block_projs"]["parity_vs_arm_g"]["finite_bitwise_pass"]:
+        raise AssertionError(f"Stage B both_block_projs parity failed: {stage_b['both_block_projs']['parity_vs_arm_g']['failure_examples'][:3]}")
+    for c in stage_d:
+        if not c["parity"]["finite_bitwise_pass"]:
+            raise AssertionError(f"Stage D parity failed w={c['width']} t={c['visits']}: {c['parity']['failure_examples'][:3]}")
+    for c in stage_e:
+        if not c["parity"]["finite_bitwise_pass"]:
+            raise AssertionError(f"Stage E parity failed w={c['width']} t={c['visits']}: {c['parity']['failure_examples'][:3]}")
     return 0
 
 
 if __name__ == "__main__":
     try:
         sys.exit(main())
-    except BaseException as _exc:
+    except Exception as _exc:
         import traceback
         tb_last = traceback.format_exc().strip().splitlines()
         msg = " | ".join(tb_last[-4:])
