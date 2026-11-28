@@ -1,10 +1,17 @@
 """FUSE-05: experimental cached primal, independent first-order adjoints."""
 from __future__ import annotations
-from contextlib import contextmanager
+from contextlib import contextmanager, nullcontext
 from dataclasses import dataclass
 from types import MethodType
 import torch
 from torch.autograd.function import once_differentiable
+
+from .cuda_guard import (
+    current_stream_token,
+    device_and_precision_supported,
+    runtime_precision_state,
+    validate_cuda_options,
+)
 
 
 @dataclass
@@ -24,9 +31,12 @@ class Stats:
 
 class _Primal(torch.autograd.Function):
     @staticmethod
-    def forward(ctx, v, u, primal, mode, stats):
+    def forward(ctx, v, u, primal, mode, stats, ac_enabled=False, ac_dtype=None):
         ctx.save_for_backward(v, u)
         ctx.mode, ctx.stats = mode, stats
+        ctx.dev_type = v.device.type
+        ctx.ac_enabled = bool(ac_enabled)
+        ctx.ac_dtype = ac_dtype
         return primal
 
     @staticmethod
@@ -37,49 +47,72 @@ class _Primal(torch.autograd.Function):
         nv, nu = ctx.needs_input_grad[:2]
         if ctx.mode == 'residual':
             g = (-g).T
-        if ctx.mode == 'replay':
-            ctx.stats.backward_replays += 1
-            with torch.enable_grad():
-                a = v.detach().requires_grad_(nv)
-                b = u.detach().requires_grad_(nu)
-                z = a @ b
-                grads = iter(torch.autograd.grad(z, tuple(t for t in (a,b) if t.requires_grad), g))
-                gv = next(grads) if nv else None
-                gu = next(grads) if nu else None
-        else:
-            gv = g @ u.T if nv else None
-            gu = v.T @ g if nu else None
-        return gv, gu, None, None, None
+        ac_ctx = (
+            torch.amp.autocast(ctx.dev_type, enabled=True, dtype=ctx.ac_dtype)
+            if ctx.ac_enabled else nullcontext()
+        )
+        with ac_ctx:
+            if ctx.mode == 'replay':
+                ctx.stats.backward_replays += 1
+                with torch.enable_grad():
+                    a = v.detach().requires_grad_(nv)
+                    b = u.detach().requires_grad_(nu)
+                    z = a @ b
+                    grads = iter(torch.autograd.grad(z, tuple(t for t in (a,b) if t.requires_grad), g))
+                    gv = next(grads) if nv else None
+                    gu = next(grads) if nu else None
+            else:
+                gv = g @ u.T if nv else None
+                gu = v.T @ g if nu else None
+        if gv is not None and gv.dtype != v.dtype:
+            gv = gv.to(v.dtype)
+        if gu is not None and gu.dtype != u.dtype:
+            gu = gu.to(u.dtype)
+        return gv, gu, None, None, None, None, None
 
 
 _MISSING = object()
 
 
 def _key(w):
-    return tuple((id(t), t._version, tuple(t.shape), t.stride(), t.dtype, t.device,
-                  t.requires_grad) for t in (w.W_target, w.V, w.U))
+    ts = (w.W_target, w.V, w.U)
+    return (
+        tuple((id(t), t._version, tuple(t.shape), t.stride(), t.dtype, t.device,
+               t.requires_grad) for t in ts),
+        runtime_precision_state(w.W_target.device.type),
+    )
 
 
 @contextmanager
-def independent_residuals(wrappers, *, variant='product', max_bytes=16*1024**2):
+def independent_residuals(
+    wrappers,
+    *,
+    variant='product',
+    max_bytes=16*1024**2,
+    allow_cuda: bool = False,
+    precision_mode: str = 'fp32',
+):
     """Single fixed-weight, first-order forward graph, backward after exit.
 
-    CPU float32 only. No checkpointing, reentry, concurrent calls, .data writes,
-    external mutation of returned tensors or reuse of autograd graphs.
+    CPU float32 by default; experimental CUDA requires allow_cuda=True and
+    single sequential stream ownership. No checkpointing, reentry, concurrent
+    calls, .data writes, external mutation of returned tensors or graph reuse.
     Numeric cached primal payload cap excludes all other memory.
     """
+    validate_cuda_options(allow_cuda, precision_mode)
     if variant not in ('residual','product','replay') or type(max_bytes) is not int or max_bytes<0:
         raise ValueError('invalid cache contract')
     ws=list(wrappers)
     if len({id(w) for w in ws})!=len(ws):raise ValueError('duplicate wrapper')
     if any(getattr(w,'_residual_cache_active',False) for w in ws):raise RuntimeError('nested residual scope')
     if any(getattr(w,'use_fused_residual',False) for w in ws):raise ValueError('disable fusion')
-    stats=Stats();entries={};originals=[];active=True
+    stats=Stats();entries={};originals=[];active=True;owner_stream=None
     def consumed(g):
         if active:stats.consumed=True
         return g
     def build(w,original):
         def get(self):
+            nonlocal owner_stream
             stats.calls+=1
             if stats.consumed:raise RuntimeError('backward consumed scope')
             if getattr(self,'use_fused_residual',False):raise RuntimeError('fusion enabled')
@@ -90,21 +123,41 @@ def independent_residuals(wrappers, *, variant='product', max_bytes=16*1024**2):
             if old is not None and (any(t.is_inference() for t in ts) or old[0]!=_key(self) or old[2]!=old[1]._version):
                 stats.consumed=True
                 raise RuntimeError('parameter or cached primal mutated')
-            if (not torch.is_grad_enabled() or torch.is_inference_mode_enabled() or torch.is_autocast_enabled('cpu')
-                or torch.get_float32_matmul_precision()!='highest' or self.W_target.requires_grad
-                or not all(t.dtype==torch.float32 and t.device.type=='cpu' and t.ndim==2 and t.is_contiguous() and not t.is_inference() for t in ts)):
+            if old is not None and self.W_target.device.type == 'cuda':
+                tok = current_stream_token(self.W_target.device)
+                if owner_stream is not None and tok != owner_stream:
+                    stats.consumed=True
+                    raise RuntimeError('CUDA stream ownership violation')
+            if (not torch.is_grad_enabled() or torch.is_inference_mode_enabled()
+                or self.W_target.requires_grad
+                or not device_and_precision_supported(
+                    ts, allow_cuda=allow_cuda, precision_mode=precision_mode)):
                 return bypass()
+            if self.W_target.device.type == 'cuda':
+                tok = current_stream_token(self.W_target.device)
+                if owner_stream is None:
+                    owner_stream = tok
+                elif tok != owner_stream:
+                    stats.consumed=True
+                    raise RuntimeError('CUDA stream ownership violation')
             if old is None:
-                n=self.W_target.numel()*self.W_target.element_size()
+                n=self.W_target.numel()*4
                 if stats.resident_bytes+n>max_bytes:
                     stats.cap_rejections+=1;return bypass()
                 with torch.no_grad():p=original() if variant=='residual' else self.V@self.U
-                if p.numel()*p.element_size()!=n:raise RuntimeError('unexpected primal size')
+                expected_n = p.numel()*p.element_size()
+                if variant=='residual' and (p.dtype != torch.float32 or expected_n != n):
+                    raise RuntimeError('unexpected primal size')
+                if variant!='residual' and expected_n != self.W_target.numel()*p.element_size():
+                    raise RuntimeError('unexpected primal size')
                 entries[id(self)]=(_key(self),p,p._version)
-                stats.misses+=1;stats.reconstructions+=1;stats.resident_bytes+=n;stats.peak_bytes=max(stats.peak_bytes,stats.resident_bytes)
+                stats.misses+=1;stats.reconstructions+=1;stats.resident_bytes+=expected_n;stats.peak_bytes=max(stats.peak_bytes,stats.resident_bytes)
             else:
                 stats.hits+=1;p=old[1]
-            value=_Primal.apply(self.V,self.U,p,variant,stats)
+            dev_type = self.V.device.type
+            ac_enabled = bool(torch.is_autocast_enabled(dev_type))
+            ac_dtype = torch.get_autocast_dtype(dev_type) if ac_enabled else None
+            value=_Primal.apply(self.V,self.U,p,variant,stats,ac_enabled,ac_dtype)
             if value.requires_grad:value.register_hook(consumed)
             return value if variant=='residual' else self.W_target.float()-value.T
         return MethodType(get,w)

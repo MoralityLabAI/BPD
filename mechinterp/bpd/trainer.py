@@ -87,6 +87,8 @@ class BPDTrainer:
         cache_pgd_mask_residuals: bool = False,
         cache_calibration_residuals: bool = False,
         cache_pgd_final_residuals: bool = False,
+        allow_cuda_residual_cache: bool = False,
+        residual_cache_precision_mode: str = "fp32",
     ) -> None:
         if type(cache_single_backward_residuals) is not bool:
             raise TypeError("cache_single_backward_residuals must be bool")
@@ -112,6 +114,14 @@ class BPDTrainer:
                                               and residual_cache_policy == "step_exact"):
             raise ValueError("retained PGD cache requires enabled step_exact cache")
         self.cache_pgd_final_residuals = cache_pgd_final_residuals
+        if type(allow_cuda_residual_cache) is not bool:
+            raise TypeError("allow_cuda_residual_cache must be bool")
+        if residual_cache_precision_mode not in ("fp32", "tf32", "bf16", "fp16"):
+            raise ValueError("unknown residual_cache_precision_mode")
+        if residual_cache_precision_mode != "fp32" and not allow_cuda_residual_cache:
+            raise ValueError("non-fp32 residual_cache_precision_mode requires allow_cuda_residual_cache=True")
+        self.allow_cuda_residual_cache = allow_cuda_residual_cache
+        self.residual_cache_precision_mode = residual_cache_precision_mode
         self.residual_final_pgd_stats: list[Any] = []
         self.residual_final_pgd_query: dict[str, Any] | None = None
         self.residual_calibration_stats: list[dict[str, Any]] = []
@@ -119,6 +129,7 @@ class BPDTrainer:
         self.residual_cache_stats: list[Any] = []
         self.residual_cache_plans: list[dict[str, Any]] = []
         self.residual_step_receipt: dict[str, Any] | None = None
+        self.residual_cuda_receipt: dict[str, Any] | None = None
         self._step_residual_pool = None
         self._residual_step_active = False
         self._residual_step_disabled = False
@@ -173,6 +184,8 @@ class BPDTrainer:
             return independent_residuals(
                 self.bpd_model.wrappers.values(), variant="residual",
                 max_bytes=self.residual_cache_max_bytes,
+                allow_cuda=self.allow_cuda_residual_cache,
+                precision_mode=self.residual_cache_precision_mode,
             )
         from dataclasses import asdict
         from mechinterp.bpd.experiments.fused_residual.step_cache import (
@@ -190,6 +203,8 @@ class BPDTrainer:
             selected, plan = planned_sites(
                 [self.bpd_model.wrappers[n] for n in names],
                 calls, self.residual_cache_max_bytes,
+                allow_cuda=self.allow_cuda_residual_cache,
+                precision_mode=self.residual_cache_precision_mode,
             )
         except RuntimeError as exc:
             # Exact planner overflow is a fail-closed reference fallback.
@@ -211,10 +226,14 @@ class BPDTrainer:
         if step:
             self._step_residual_pool = StepResidualPool(
                 selected, max_bytes=self.residual_cache_max_bytes,
+                allow_cuda=self.allow_cuda_residual_cache,
+                precision_mode=self.residual_cache_precision_mode,
             )
             return self._step_residual_pool.scope(mask_only=mask_only)
         return independent_residuals(
             selected, variant="residual", max_bytes=self.residual_cache_max_bytes,
+            allow_cuda=self.allow_cuda_residual_cache,
+            precision_mode=self.residual_cache_precision_mode,
         )
 
     def _finish_residual_step(self):
@@ -226,6 +245,13 @@ class BPDTrainer:
                 "scopes": pool.scope_count, "sealed": pool.sealed,
                 "poisoned": pool.poisoned, "closed": pool.closed,
             }
+            if pool.allow_cuda or pool.owner_stream is not None:
+                self.residual_cuda_receipt = {
+                    "allow_cuda": pool.allow_cuda,
+                    "precision_mode": pool.precision_mode,
+                    "owner_stream": list(pool.owner_stream) if pool.owner_stream is not None else None,
+                    "stream_checks": pool.stream_checks,
+                }
             self._step_residual_pool = None
 
     def _set_lr(self, step: int) -> float:
@@ -262,6 +288,8 @@ class BPDTrainer:
                         [(name, self.bpd_model.wrappers[name])
                          for name in self.bpd_model.module_order],
                         calls=passes, max_bytes=self.residual_cache_max_bytes,
+                        allow_cuda=self.allow_cuda_residual_cache,
+                        precision_mode=self.residual_cache_precision_mode,
                     )
                 if not self._residual_step_active:
                     self.residual_calibration_stats = []
@@ -400,6 +428,7 @@ class BPDTrainer:
         self.residual_final_pgd_query = None
         self.residual_cache_plans = []
         self.residual_step_receipt = None
+        self.residual_cuda_receipt = None
         self._residual_step_disabled = False
         self._residual_planned_calls = 0
         try:

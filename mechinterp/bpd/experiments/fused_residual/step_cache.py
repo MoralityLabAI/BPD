@@ -14,34 +14,50 @@ import torch
 
 from .adjoint_cache import Stats, _Primal, _key
 from .admission import Site, select
+from .cuda_guard import (
+    current_stream_token,
+    device_and_precision_supported,
+    validate_cuda_options,
+)
 
 
 _MISSING = object()
 
 
-def supported(w):
+def supported(w, *, allow_cuda: bool = False, precision_mode: str = "fp32"):
+    validate_cuda_options(allow_cuda, precision_mode)
     ts = (w.W_target, w.V, w.U)
     return (
         torch.is_grad_enabled()
         and not torch.is_inference_mode_enabled()
-        and not torch.is_autocast_enabled("cpu")
-        and torch.get_float32_matmul_precision() == "highest"
         and not w.W_target.requires_grad
         and not getattr(w, "use_fused_residual", False)
-        and all(t.dtype == torch.float32 and t.device.type == "cpu"
-                and t.ndim == 2 and t.is_contiguous() and not t.is_inference()
-                for t in ts)
+        and device_and_precision_supported(
+            ts, allow_cuda=allow_cuda, precision_mode=precision_mode
+        )
     )
 
 
-def planned_sites(wrappers, passes, cap, *, max_frontier=65536):
+def planned_sites(
+    wrappers,
+    passes,
+    cap,
+    *,
+    max_frontier=65536,
+    allow_cuda: bool = False,
+    precision_mode: str = "fp32",
+):
     """Stable caller order; unsupported sites have zero value and stay native."""
+    validate_cuda_options(allow_cuda, precision_mode)
     ws = tuple(wrappers)
     if len({id(w) for w in ws}) != len(ws):
         raise ValueError("duplicate wrapper")
-    sites = tuple(Site.residual(w.d_in, w.d_out, w.C, passes)
-                  if supported(w) else Site(4*w.d_in*w.d_out, 0)
-                  for w in ws)
+    sites = tuple(
+        Site.residual(w.d_in, w.d_out, w.C, passes)
+        if supported(w, allow_cuda=allow_cuda, precision_mode=precision_mode)
+        else Site(4 * w.d_in * w.d_out, 0)
+        for w in ws
+    )
     plan = select(sites, cap, "exact", max_frontier=max_frontier)
     return tuple(ws[i] for i in plan.indices), plan
 
@@ -65,13 +81,25 @@ class StepResidualPool:
     unselected native residuals, activations, autograd metadata, or total RSS.
     """
 
-    def __init__(self, wrappers, *, max_bytes):
+    def __init__(
+        self,
+        wrappers,
+        *,
+        max_bytes,
+        allow_cuda: bool = False,
+        precision_mode: str = "fp32",
+    ):
+        validate_cuda_options(allow_cuda, precision_mode)
         self.ws = tuple(wrappers)
         if type(max_bytes) is not int or max_bytes < 0:
             raise ValueError("invalid cache cap")
         if len({id(w) for w in self.ws}) != len(self.ws):
             raise ValueError("duplicate wrapper")
         self.max_bytes = max_bytes
+        self.allow_cuda = allow_cuda
+        self.precision_mode = precision_mode
+        self.owner_stream: tuple[str, int, int] | None = None
+        self.stream_checks = 0
         self.entries = {}
         self.slots = {id(w): i for i, w in enumerate(self.ws)}
         self.resident_bytes = 0
@@ -82,9 +110,21 @@ class StepResidualPool:
         self.sealed = False
         self.poisoned = False
 
+    def _check_stream(self, device: torch.device) -> None:
+        if device.type != "cuda":
+            return
+        tok = current_stream_token(device)
+        if self.owner_stream is None:
+            self.owner_stream = tok
+        elif tok != self.owner_stream:
+            self.poisoned = True
+            raise RuntimeError("CUDA stream ownership violation")
+        self.stream_checks += 1
+
     def _verify(self, w, entry):
         key, p, version, held, first_scope = entry
         ts = (w.W_target, w.V, w.U)
+        self._check_stream(w.W_target.device)
         if (any(a is not b for a, b in zip(ts, held))
                 or any(t.is_inference() for t in ts)
                 or key != _key(w) or version != p._version):
@@ -161,16 +201,24 @@ class StepResidualPool:
                     stats.bypasses += 1
                     stats.reconstructions += 1
                     return original()
-                if not supported(self_w):
+                if not supported(
+                    self_w,
+                    allow_cuda=self.allow_cuda,
+                    precision_mode=self.precision_mode,
+                ):
                     return bypass()
+                self._check_stream(self_w.W_target.device)
                 if old is None:
-                    n = self_w.W_target.numel()*self_w.W_target.element_size()
+                    n = self_w.W_target.numel() * 4
                     if self.resident_bytes+n > self.max_bytes:
                         stats.cap_rejections += 1
                         return bypass()
                     with torch.no_grad():
                         p = original()
-                    if p.numel()*p.element_size() != n or p.untyped_storage().nbytes() != n:
+                    if (p.dtype != torch.float32
+                            or p.device != self_w.W_target.device
+                            or p.numel()*p.element_size() != n
+                            or p.untyped_storage().nbytes() != n):
                         self.poisoned = True
                         raise RuntimeError("unexpected residual storage size")
                     # New storages must be distinct from every live cached site.
@@ -195,7 +243,10 @@ class StepResidualPool:
                     value = p
                     stats.mask_only_calls += 1
                 else:
-                    value = _Primal.apply(self_w.V, self_w.U, p, "residual", stats)
+                    dev_type = self_w.V.device.type
+                    ac_enabled = bool(torch.is_autocast_enabled(dev_type))
+                    ac_dtype = torch.get_autocast_dtype(dev_type) if ac_enabled else None
+                    value = _Primal.apply(self_w.V, self_w.U, p, "residual", stats, ac_enabled, ac_dtype)
                     stats.independent_calls += 1
                 if value.untyped_storage().data_ptr() != p.untyped_storage().data_ptr():
                     self.poisoned = True

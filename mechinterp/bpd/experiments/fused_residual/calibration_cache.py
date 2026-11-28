@@ -13,34 +13,46 @@ import torch
 from mechinterp.bpd.components import TiedComponentLinear
 from .admission import Site, select
 from .adjoint_cache import _key
+from .cuda_guard import (
+    current_stream_token,
+    device_and_precision_supported,
+    validate_cuda_options,
+)
 
 
-def _supported(w):
+def _supported(w, *, allow_cuda: bool = False, precision_mode: str = "fp32"):
+    validate_cuda_options(allow_cuda, precision_mode)
     if type(w) is not TiedComponentLinear:
         return False
     ts = (w.W_target, w.V, w.U)
     return (
         not torch.is_grad_enabled()
         and not torch.is_inference_mode_enabled()
-        and not torch.is_autocast_enabled("cpu")
-        and torch.get_float32_matmul_precision() == "highest"
         and not w.W_target.requires_grad
         and not getattr(w, "use_fused_residual", False)
         and w.mode == "target" and w.update_running_means
         and w.intervention is None
-        and all(t.dtype == torch.float32 and t.device.type == "cpu"
-                and t.ndim == 2 and t.is_contiguous() and not t.is_inference()
-                for t in ts)
+        and device_and_precision_supported(
+            ts, allow_cuda=allow_cuda, precision_mode=precision_mode
+        )
     )
 
 
 @contextmanager
-def calibration_residuals(named_wrappers, *, calls, max_bytes):
+def calibration_residuals(
+    named_wrappers,
+    *,
+    calls,
+    max_bytes,
+    allow_cuda: bool = False,
+    precision_mode: str = "fp32",
+):
     """Cache only original materialized residuals for one clean rollout.
 
     Planner values assume one residual request per site per pass. Actual
     hits/misses are measured. Cap is cached payload only, not total memory.
     """
+    validate_cuda_options(allow_cuda, precision_mode)
     named = tuple(named_wrappers)
     if type(calls) is not int or calls < 0:
         raise ValueError("invalid planned calls")
@@ -54,7 +66,8 @@ def calibration_residuals(named_wrappers, *, calls, max_bytes):
                  planned_saved_macs=0, calls=0, hits=0, misses=0, bypasses=0,
                  reconstructions=0, peak_bytes=0, resident_bytes=0, closed=False)
     eligible = [(name, w) for name, w in named
-                if _supported(w) and "weight_delta" not in w.__dict__
+                if _supported(w, allow_cuda=allow_cuda, precision_mode=precision_mode)
+                and "weight_delta" not in w.__dict__
                 and "reconstructed_weight" not in w.__dict__]
     try:
         plan = select([Site.residual(w.d_in, w.d_out, w.C, calls)
@@ -75,10 +88,22 @@ def calibration_residuals(named_wrappers, *, calls, max_bytes):
     entries = {}
     originals = []
     active = True
+    owner_stream = None
+
+    def check_stream(device):
+        nonlocal owner_stream
+        if device.type != "cuda":
+            return
+        tok = current_stream_token(device)
+        if owner_stream is None:
+            owner_stream = tok
+        elif tok != owner_stream:
+            raise RuntimeError("CUDA stream ownership violation")
 
     def verify(w, entry):
         key, p, version, held = entry
         ts = (w.W_target, w.V, w.U)
+        check_stream(w.W_target.device)
         if (any(a is not b for a, b in zip(ts, held))
                 or any(t.is_inference() for t in ts)
                 or key != _key(w) or p._version != version):
@@ -93,14 +118,15 @@ def calibration_residuals(named_wrappers, *, calls, max_bytes):
             old = entries.get(wid)
             if old is not None:
                 verify(self_w, old)
-            if not _supported(self_w):
+            if not _supported(self_w, allow_cuda=allow_cuda, precision_mode=precision_mode):
                 stats["bypasses"] += 1
                 stats["reconstructions"] += 1
                 return original()
+            check_stream(self_w.W_target.device)
             if old is not None:
                 stats["hits"] += 1
                 return old[1]
-            n = self_w.W_target.numel() * self_w.W_target.element_size()
+            n = self_w.W_target.numel() * 4
             if stats["resident_bytes"] + n > max_bytes:
                 stats["bypasses"] += 1
                 stats["reconstructions"] += 1
@@ -108,7 +134,7 @@ def calibration_residuals(named_wrappers, *, calls, max_bytes):
             p = original()
             if (p.requires_grad or p.is_inference()
                     or p.shape != self_w.W_target.shape
-                    or p.dtype != torch.float32 or p.device.type != "cpu"
+                    or p.dtype != torch.float32 or p.device != self_w.W_target.device
                     or p.numel() * p.element_size() != n
                     or p.untyped_storage().nbytes() != n
                     or any(p.untyped_storage().data_ptr() == e[1].untyped_storage().data_ptr()
