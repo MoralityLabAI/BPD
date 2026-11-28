@@ -85,14 +85,17 @@ def fuse14_bf16_preflight_mib(width: int, n_passes: int, *, arm: str) -> dict[st
     res_mib = (site_elems * 2 + max(width * width, width * inter) * 4) / (1024.0 ** 2)
 
     if arm == "H":
-        # Conservative allocator + activation high-water mark calibrated from measured
-        # FP32 Arm G frontier peaks (w=2048 T=48: 2415 MiB; w=4096 T=24: 4703 MiB;
-        # w=4096 T=48: 6305 MiB; w=6144 T=24: 9316 MiB).
+        # Conservative allocator + activation high-water mark refit directly from measured
+        # RTX 5080 Arm H peaks: (2048,48)=4848 MiB, (4096,24)=10173 MiB.
+        # Note: stochastic rollout (route_subset=True) calls F.linear(xf, self.W_target.float())
+        # in components.py:382, saving n_passes BF16 W_target casts (n_passes * site_elems * 2 B).
         act_mib = (2 * n_passes * 2 * 20 * (4 * width + 3 * inter) * 4 * 2.4) / (1024.0 ** 2)
-        total_est = base_mib + shared_proj_cast_mib + res_mib + act_mib + 750.0
+        routing_w_target_mib = (n_passes * site_elems * 2) / (1024.0 ** 2)
+        total_est = base_mib + shared_proj_cast_mib + res_mib + routing_w_target_mib + act_mib + 750.0
     elif arm == "H_ckpt":
-        # Checkpointing retains only 2 * T boundary states + 1 active block's activations
+        # Checkpointing retains only 2 * T boundary states + 1 active block's activations & casts
         act_mib = (2 * (n_passes * 2 * 20 * width * 4 + 2 * 20 * (4 * width + 3 * inter) * 4 * 3.0)) / (1024.0 ** 2)
+        routing_w_target_mib = 0.0
         total_est = base_mib + shared_proj_cast_mib + act_mib + 750.0
     else:
         raise ValueError(f"unknown arm: {arm}")
@@ -101,6 +104,7 @@ def fuse14_bf16_preflight_mib(width: int, n_passes: int, *, arm: str) -> dict[st
         "base_weights_opt_mib": round(base_mib, 1),
         "shared_proj_cast_mib": round(shared_proj_cast_mib, 1),
         "live_residuals_mib": round(res_mib if arm == "H" else 0.0, 1),
+        "routing_w_target_cast_mib": round(routing_w_target_mib, 1),
         "activations_mib": round(act_mib, 1),
         "total_est_mib": round(total_est, 1),
     }
@@ -231,8 +235,13 @@ def run_frontier_arm(
                                     for w, (md, sc, cl, po) in zip(_ws, prev):
                                         w.mode, w.schedule, w.calls, w.pass_offset = md, sc, cl, po
 
-                            deps = tuple(t for w in wrappers for t in (w.V, w.U))
-                            h = ckpt_fn(_run_blk, h, *deps, use_reentrant=False)
+                            deps_list = [t for w in wrappers for t in (w.V, w.U)]
+                            for w in wrappers:
+                                if w.schedule is not None:
+                                    deps_list.append(w.schedule.comp_mask)
+                                    if w.schedule.delta_mask is not None:
+                                        deps_list.append(w.schedule.delta_mask)
+                            h = ckpt_fn(_run_blk, h, *deps_list, use_reentrant=False)
                             for w, (_, _, cl, _) in zip(wrappers, snap_state):
                                 w.calls = cl + 1
                         else:
@@ -303,7 +312,7 @@ def run_frontier_arm(
             del tr, adapter, bpd, model, batch
             gc.collect()
             torch.cuda.empty_cache()
-    except (torch.cuda.OutOfMemoryError, getattr(torch, "AcceleratorError", RuntimeError)) as exc:
+    except (torch.cuda.OutOfMemoryError, RuntimeError) as exc:
         msg = str(exc)
         if isinstance(exc, RuntimeError) and not (
             isinstance(exc, torch.cuda.OutOfMemoryError)
@@ -350,6 +359,7 @@ def main() -> int:
     p.add_argument("--lease-mib", type=float, default=12288.0)
     p.add_argument("--min-headroom-mib", type=float, default=2048.0)
     p.add_argument("--min-watts", type=float, default=60.0)
+    p.add_argument("--max-width", type=int, default=None)
     args = p.parse_args()
 
     if not args.allow_cuda:
@@ -369,6 +379,8 @@ def main() -> int:
                     pass
 
     for width, n_passes in FRONTIER_SPECS_BF16:
+        if args.max_width is not None and width > args.max_width:
+            continue
         cid = f"fuse14_frontier__bf16__w{width}_p{n_passes}"
         if cid in completed:
             continue

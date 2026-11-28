@@ -1,0 +1,3000 @@
+{
+  "campaign": "FUSE-14",
+  "device": "cuda",
+  "torch": "2.11.0+cu128",
+  "nvml": {
+    "name": "NVIDIA GeForce RTX 5080 Laptop GPU",
+    "driver_version": "577.05",
+    "memory_total_mib": 16303.0,
+    "memory_used_mib": 192.0,
+    "memory_free_mib": 15724.0,
+    "enforced_power_limit_w": 80.0,
+    "default_power_limit_w": 80.0,
+    "power_draw_w": 21.61,
+    "utilization_gpu_pct": 0.0,
+    "utilization_memory_pct": 0.0,
+    "pstate": "P4"
+  },
+  "stage_c_guards": {
+    "default_proj_cache_off": true,
+    "default_proj_recompute_off": true,
+    "default_cuda_cache_off": true,
+    "reject_biased": true,
+    "reject_subclass": true,
+    "reject_parametrized": true,
+    "reject_prepatched": true,
+    "trainable_fallback_and_grad": true,
+    "noncontiguous_fallback": true,
+    "mutation_rejected": true,
+    "weight_replacement_rejected": true,
+    "nested_rejected": true,
+    "closed_no_reentry": true,
+    "restored_after_close": true,
+    "byte_cap_enforced": true,
+    "fp32_and_fp16_hold_fallback": true,
+    "cuda_cross_stream_rejected": true
+  },
+  "stage_a": {
+    "standalone_probe": {
+      "cells": 18,
+      "finite_bitwise": 18,
+      "d12_storages": [
+        [
+          48,
+          2
+        ],
+        [
+          48,
+          2
+        ]
+      ],
+      "guards": {
+        "disabled_or_no_grad_fallback": true,
+        "mutation_rejected": true,
+        "fresh_scope": true,
+        "trainable_fallback": true,
+        "restored": true
+      }
+    },
+    "trainer_cast_audit": {
+      "width": 512,
+      "visits": 12,
+      "fuse13_arm_g": {
+        "step_ms": [
+          4232.85888671875,
+          3737.558837890625
+        ],
+        "peak_allocated_bytes": 434496000,
+        "peak_reserved_bytes": 459276288,
+        "nvml_used_mib": 700.0,
+        "residual_step_receipt": {
+          "peak_bytes": 4194304,
+          "resident_bytes": 0,
+          "scopes": 4,
+          "sealed": true,
+          "poisoned": false,
+          "closed": true
+        },
+        "residual_cuda_receipt": {
+          "allow_cuda": true,
+          "precision_mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "storage_dtype": "torch.bfloat16",
+          "factor_cast_bytes": 524288,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "stream_checks": 396
+        },
+        "projection_cache_receipt": null,
+        "cast_audit": {
+          "total_pack_calls": 188,
+          "unique_storages": 94,
+          "unique_bytes": 223346688,
+          "by_kind": {
+            "gate_up_proj": {
+              "pack_calls": 96,
+              "unique_ptrs": 48,
+              "unique_bytes": 150994944
+            },
+            "qkv_proj": {
+              "pack_calls": 92,
+              "unique_ptrs": 46,
+              "unique_bytes": 72351744
+            }
+          }
+        }
+      },
+      "fuse14_arm_h": {
+        "step_ms": [
+          4262.21875,
+          4165.14990234375
+        ],
+        "peak_allocated_bytes": 215349760,
+        "peak_reserved_bytes": 228589568,
+        "nvml_used_mib": 480.0,
+        "residual_step_receipt": {
+          "peak_bytes": 4194304,
+          "resident_bytes": 0,
+          "scopes": 4,
+          "sealed": true,
+          "poisoned": false,
+          "closed": true
+        },
+        "residual_cuda_receipt": {
+          "allow_cuda": true,
+          "precision_mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "storage_dtype": "torch.bfloat16",
+          "factor_cast_bytes": 524288,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "stream_checks": 396
+        },
+        "projection_cache_receipt": {
+          "sites": [
+            "target_model.layers.0.qkv_proj",
+            "target_model.layers.0.gate_up_proj",
+            "target_model.layers.1.qkv_proj",
+            "target_model.layers.1.gate_up_proj"
+          ],
+          "n_sites": 4,
+          "allow_cuda": true,
+          "allow_recompute": false,
+          "max_bytes": null,
+          "peak_bytes": 9437184,
+          "resident_bytes": 0,
+          "scopes": 4,
+          "hits": 188,
+          "misses": 4,
+          "fallbacks": 0,
+          "cap_rejections": 0,
+          "stream_checks": 412,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "per_site_hits": {
+            "target_model.layers.0.qkv_proj": 47,
+            "target_model.layers.0.gate_up_proj": 47,
+            "target_model.layers.1.qkv_proj": 47,
+            "target_model.layers.1.gate_up_proj": 47
+          },
+          "per_site_misses": {
+            "target_model.layers.0.qkv_proj": 1,
+            "target_model.layers.0.gate_up_proj": 1,
+            "target_model.layers.1.qkv_proj": 1,
+            "target_model.layers.1.gate_up_proj": 1
+          },
+          "per_site_fallbacks": {
+            "target_model.layers.0.qkv_proj": 0,
+            "target_model.layers.0.gate_up_proj": 0,
+            "target_model.layers.1.qkv_proj": 0,
+            "target_model.layers.1.gate_up_proj": 0
+          },
+          "poisoned": false,
+          "closed": true
+        },
+        "cast_audit": {
+          "total_pack_calls": 188,
+          "unique_storages": 4,
+          "unique_bytes": 9437184,
+          "by_kind": {
+            "gate_up_proj": {
+              "pack_calls": 96,
+              "unique_ptrs": 2,
+              "unique_bytes": 6291456
+            },
+            "qkv_proj": {
+              "pack_calls": 92,
+              "unique_ptrs": 2,
+              "unique_bytes": 3145728
+            }
+          }
+        }
+      },
+      "parity": {
+        "tensors": 186,
+        "finite_bitwise": 186,
+        "within_tol": 186,
+        "overflow_parity": 0,
+        "failures": 0,
+        "max_abs": 0.0,
+        "scalars": 39,
+        "scalar_failures": 0,
+        "failure_examples": [],
+        "finite_bitwise_pass": true
+      }
+    }
+  },
+  "stage_b_ablation": {
+    "fuse13_arm_g": {
+      "meta": {
+        "step_ms": [
+          3238.478515625,
+          3609.79052734375
+        ],
+        "peak_allocated_bytes": 434502144,
+        "peak_reserved_bytes": 459276288,
+        "nvml_used_mib": 700.0,
+        "residual_step_receipt": {
+          "peak_bytes": 4194304,
+          "resident_bytes": 0,
+          "scopes": 4,
+          "sealed": true,
+          "poisoned": false,
+          "closed": true
+        },
+        "residual_cuda_receipt": {
+          "allow_cuda": true,
+          "precision_mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "storage_dtype": "torch.bfloat16",
+          "factor_cast_bytes": 524288,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "stream_checks": 396
+        },
+        "projection_cache_receipt": null,
+        "cast_audit": {
+          "total_pack_calls": 188,
+          "unique_storages": 94,
+          "unique_bytes": 223346688,
+          "by_kind": {
+            "gate_up_proj": {
+              "pack_calls": 96,
+              "unique_ptrs": 48,
+              "unique_bytes": 150994944
+            },
+            "qkv_proj": {
+              "pack_calls": 92,
+              "unique_ptrs": 46,
+              "unique_bytes": 72351744
+            }
+          }
+        }
+      },
+      "parity_vs_arm_g": null
+    },
+    "autocast_cache_disabled": {
+      "meta": {
+        "step_ms": [
+          3562.77734375,
+          3571.982666015625
+        ],
+        "peak_allocated_bytes": 459371008,
+        "peak_reserved_bytes": 484442112,
+        "nvml_used_mib": 724.0,
+        "residual_step_receipt": {
+          "peak_bytes": 4194304,
+          "resident_bytes": 0,
+          "scopes": 4,
+          "sealed": true,
+          "poisoned": false,
+          "closed": true
+        },
+        "residual_cuda_receipt": {
+          "allow_cuda": true,
+          "precision_mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "storage_dtype": "torch.bfloat16",
+          "factor_cast_bytes": 524288,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "stream_checks": 396
+        },
+        "projection_cache_receipt": null,
+        "cast_audit": {
+          "total_pack_calls": 188,
+          "unique_storages": 94,
+          "unique_bytes": 223346688,
+          "by_kind": {
+            "gate_up_proj": {
+              "pack_calls": 96,
+              "unique_ptrs": 48,
+              "unique_bytes": 150994944
+            },
+            "qkv_proj": {
+              "pack_calls": 92,
+              "unique_ptrs": 46,
+              "unique_bytes": 72351744
+            }
+          }
+        }
+      },
+      "parity_vs_arm_g": {
+        "tensors": 186,
+        "finite_bitwise": 71,
+        "within_tol": 126,
+        "overflow_parity": 0,
+        "failures": 115,
+        "max_abs": 0.046875,
+        "scalars": 39,
+        "scalar_failures": 5,
+        "failure_examples": [
+          {
+            "path": "trainer/ascent_grads/3/layers.0.down_proj",
+            "bitwise": false,
+            "finite": true,
+            "finite_bitwise": false,
+            "within_tol": false,
+            "overflow_parity": true,
+            "max_abs": 0.0003606081008911133,
+            "nan_masks_equal": true,
+            "posinf_masks_equal": true,
+            "neginf_masks_equal": true
+          },
+          {
+            "path": "trainer/ascent_grads/3/layers.0.o_proj",
+            "bitwise": false,
+            "finite": true,
+            "finite_bitwise": false,
+            "within_tol": false,
+            "overflow_parity": true,
+            "max_abs": 0.001311957836151123,
+            "nan_masks_equal": true,
+            "posinf_masks_equal": true,
+            "neginf_masks_equal": true
+          },
+          {
+            "path": "trainer/ascent_grads/3/layers.1.down_proj",
+            "bitwise": false,
+            "finite": true,
+            "finite_bitwise": false,
+            "within_tol": false,
+            "overflow_parity": true,
+            "max_abs": 0.0015784502029418945,
+            "nan_masks_equal": true,
+            "posinf_masks_equal": true,
+            "neginf_masks_equal": true
+          },
+          {
+            "path": "trainer/ascent_grads/3/layers.1.o_proj",
+            "bitwise": false,
+            "finite": true,
+            "finite_bitwise": false,
+            "within_tol": false,
+            "overflow_parity": true,
+            "max_abs": 7.879966869950294e-05,
+            "nan_masks_equal": true,
+            "posinf_masks_equal": true,
+            "neginf_masks_equal": true
+          },
+          {
+            "path": "trainer/ascent_grads/4/layers.0.down_proj",
+            "bitwise": false,
+            "finite": true,
+            "finite_bitwise": false,
+            "within_tol": false,
+            "overflow_parity": true,
+            "max_abs": 0.0011883974075317383,
+            "nan_masks_equal": true,
+            "posinf_masks_equal": true,
+            "neginf_masks_equal": true
+          },
+          {
+            "path": "trainer/ascent_grads/4/layers.0.o_proj",
+            "bitwise": false,
+            "finite": true,
+            "finite_bitwise": false,
+            "within_tol": false,
+            "overflow_parity": true,
+            "max_abs": 0.00048357248306274414,
+            "nan_masks_equal": true,
+            "posinf_masks_equal": true,
+            "neginf_masks_equal": true
+          },
+          {
+            "path": "trainer/ascent_grads/4/layers.1.down_proj",
+            "bitwise": false,
+            "finite": true,
+            "finite_bitwise": false,
+            "within_tol": false,
+            "overflow_parity": true,
+            "max_abs": 0.0002671480178833008,
+            "nan_masks_equal": true,
+            "posinf_masks_equal": true,
+            "neginf_masks_equal": true
+          },
+          {
+            "path": "trainer/ascent_grads/4/layers.1.o_proj",
+            "bitwise": false,
+            "finite": true,
+            "finite_bitwise": false,
+            "within_tol": false,
+            "overflow_parity": true,
+            "max_abs": 0.00015601515769958496,
+            "nan_masks_equal": true,
+            "posinf_masks_equal": true,
+            "neginf_masks_equal": true
+          },
+          {
+            "path": "trainer/ascent_grads/5/layers.0.down_proj",
+            "bitwise": false,
+            "finite": true,
+            "finite_bitwise": false,
+            "within_tol": false,
+            "overflow_parity": true,
+            "max_abs": 0.00051078200340271,
+            "nan_masks_equal": true,
+            "posinf_masks_equal": true,
+            "neginf_masks_equal": true
+          },
+          {
+            "path": "trainer/ascent_grads/5/layers.0.o_proj",
+            "bitwise": false,
+            "finite": true,
+            "finite_bitwise": false,
+            "within_tol": false,
+            "overflow_parity": true,
+            "max_abs": 0.0007921457290649414,
+            "nan_masks_equal": true,
+            "posinf_masks_equal": true,
+            "neginf_masks_equal": true
+          },
+          {
+            "path": "trainer/ascent_grads/5/layers.1.down_proj",
+            "bitwise": false,
+            "finite": true,
+            "finite_bitwise": false,
+            "within_tol": false,
+            "overflow_parity": true,
+            "max_abs": 0.0007472038269042969,
+            "nan_masks_equal": true,
+            "posinf_masks_equal": true,
+            "neginf_masks_equal": true
+          },
+          {
+            "path": "trainer/ascent_grads/5/layers.1.o_proj",
+            "bitwise": false,
+            "finite": true,
+            "finite_bitwise": false,
+            "within_tol": false,
+            "overflow_parity": true,
+            "max_abs": 0.00035637617111206055,
+            "nan_masks_equal": true,
+            "posinf_masks_equal": true,
+            "neginf_masks_equal": true
+          }
+        ],
+        "finite_bitwise_pass": false
+      }
+    },
+    "explicit_per_call_cast": {
+      "meta": {
+        "step_ms": [
+          3697.415771484375,
+          3805.169677734375
+        ],
+        "peak_allocated_bytes": 434502144,
+        "peak_reserved_bytes": 459276288,
+        "nvml_used_mib": 700.0,
+        "residual_step_receipt": {
+          "peak_bytes": 4194304,
+          "resident_bytes": 0,
+          "scopes": 4,
+          "sealed": true,
+          "poisoned": false,
+          "closed": true
+        },
+        "residual_cuda_receipt": {
+          "allow_cuda": true,
+          "precision_mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "storage_dtype": "torch.bfloat16",
+          "factor_cast_bytes": 524288,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "stream_checks": 396
+        },
+        "projection_cache_receipt": null,
+        "cast_audit": {
+          "total_pack_calls": 188,
+          "unique_storages": 94,
+          "unique_bytes": 223346688,
+          "by_kind": {
+            "gate_up_proj": {
+              "pack_calls": 96,
+              "unique_ptrs": 48,
+              "unique_bytes": 150994944
+            },
+            "qkv_proj": {
+              "pack_calls": 92,
+              "unique_ptrs": 46,
+              "unique_bytes": 72351744
+            }
+          }
+        }
+      },
+      "parity_vs_arm_g": {
+        "tensors": 186,
+        "finite_bitwise": 186,
+        "within_tol": 186,
+        "overflow_parity": 0,
+        "failures": 0,
+        "max_abs": 0.0,
+        "scalars": 39,
+        "scalar_failures": 0,
+        "failure_examples": [],
+        "finite_bitwise_pass": true
+      }
+    },
+    "qkv_only": {
+      "meta": {
+        "step_ms": [
+          3948.176513671875,
+          3927.363525390625
+        ],
+        "peak_allocated_bytes": 362150400,
+        "peak_reserved_bytes": 375390208,
+        "nvml_used_mib": 620.0,
+        "residual_step_receipt": {
+          "peak_bytes": 4194304,
+          "resident_bytes": 0,
+          "scopes": 4,
+          "sealed": true,
+          "poisoned": false,
+          "closed": true
+        },
+        "residual_cuda_receipt": {
+          "allow_cuda": true,
+          "precision_mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "storage_dtype": "torch.bfloat16",
+          "factor_cast_bytes": 524288,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "stream_checks": 396
+        },
+        "projection_cache_receipt": {
+          "sites": [
+            "target_model.layers.0.qkv_proj",
+            "target_model.layers.1.qkv_proj"
+          ],
+          "n_sites": 2,
+          "allow_cuda": true,
+          "allow_recompute": false,
+          "max_bytes": null,
+          "peak_bytes": 3145728,
+          "resident_bytes": 0,
+          "scopes": 4,
+          "hits": 94,
+          "misses": 2,
+          "fallbacks": 0,
+          "cap_rejections": 0,
+          "stream_checks": 206,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "per_site_hits": {
+            "target_model.layers.0.qkv_proj": 47,
+            "target_model.layers.1.qkv_proj": 47
+          },
+          "per_site_misses": {
+            "target_model.layers.0.qkv_proj": 1,
+            "target_model.layers.1.qkv_proj": 1
+          },
+          "per_site_fallbacks": {
+            "target_model.layers.0.qkv_proj": 0,
+            "target_model.layers.1.qkv_proj": 0
+          },
+          "poisoned": false,
+          "closed": true
+        },
+        "cast_audit": {
+          "total_pack_calls": 188,
+          "unique_storages": 50,
+          "unique_bytes": 154140672,
+          "by_kind": {
+            "gate_up_proj": {
+              "pack_calls": 96,
+              "unique_ptrs": 48,
+              "unique_bytes": 150994944
+            },
+            "qkv_proj": {
+              "pack_calls": 92,
+              "unique_ptrs": 2,
+              "unique_bytes": 3145728
+            }
+          }
+        }
+      },
+      "parity_vs_arm_g": {
+        "tensors": 186,
+        "finite_bitwise": 186,
+        "within_tol": 186,
+        "overflow_parity": 0,
+        "failures": 0,
+        "max_abs": 0.0,
+        "scalars": 39,
+        "scalar_failures": 0,
+        "failure_examples": [],
+        "finite_bitwise_pass": true
+      }
+    },
+    "gate_up_only": {
+      "meta": {
+        "step_ms": [
+          3615.03466796875,
+          3673.57275390625
+        ],
+        "peak_allocated_bytes": 286652928,
+        "peak_reserved_bytes": 291504128,
+        "nvml_used_mib": 540.0,
+        "residual_step_receipt": {
+          "peak_bytes": 4194304,
+          "resident_bytes": 0,
+          "scopes": 4,
+          "sealed": true,
+          "poisoned": false,
+          "closed": true
+        },
+        "residual_cuda_receipt": {
+          "allow_cuda": true,
+          "precision_mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "storage_dtype": "torch.bfloat16",
+          "factor_cast_bytes": 524288,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "stream_checks": 396
+        },
+        "projection_cache_receipt": {
+          "sites": [
+            "target_model.layers.0.gate_up_proj",
+            "target_model.layers.1.gate_up_proj"
+          ],
+          "n_sites": 2,
+          "allow_cuda": true,
+          "allow_recompute": false,
+          "max_bytes": null,
+          "peak_bytes": 6291456,
+          "resident_bytes": 0,
+          "scopes": 4,
+          "hits": 94,
+          "misses": 2,
+          "fallbacks": 0,
+          "cap_rejections": 0,
+          "stream_checks": 206,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "per_site_hits": {
+            "target_model.layers.0.gate_up_proj": 47,
+            "target_model.layers.1.gate_up_proj": 47
+          },
+          "per_site_misses": {
+            "target_model.layers.0.gate_up_proj": 1,
+            "target_model.layers.1.gate_up_proj": 1
+          },
+          "per_site_fallbacks": {
+            "target_model.layers.0.gate_up_proj": 0,
+            "target_model.layers.1.gate_up_proj": 0
+          },
+          "poisoned": false,
+          "closed": true
+        },
+        "cast_audit": {
+          "total_pack_calls": 188,
+          "unique_storages": 48,
+          "unique_bytes": 78643200,
+          "by_kind": {
+            "gate_up_proj": {
+              "pack_calls": 96,
+              "unique_ptrs": 2,
+              "unique_bytes": 6291456
+            },
+            "qkv_proj": {
+              "pack_calls": 92,
+              "unique_ptrs": 46,
+              "unique_bytes": 72351744
+            }
+          }
+        }
+      },
+      "parity_vs_arm_g": {
+        "tensors": 186,
+        "finite_bitwise": 186,
+        "within_tol": 186,
+        "overflow_parity": 0,
+        "failures": 0,
+        "max_abs": 0.0,
+        "scalars": 39,
+        "scalar_failures": 0,
+        "failure_examples": [],
+        "finite_bitwise_pass": true
+      }
+    },
+    "both_block_projs": {
+      "meta": {
+        "step_ms": [
+          4102.35693359375,
+          3849.86962890625
+        ],
+        "peak_allocated_bytes": 215349760,
+        "peak_reserved_bytes": 228589568,
+        "nvml_used_mib": 480.0,
+        "residual_step_receipt": {
+          "peak_bytes": 4194304,
+          "resident_bytes": 0,
+          "scopes": 4,
+          "sealed": true,
+          "poisoned": false,
+          "closed": true
+        },
+        "residual_cuda_receipt": {
+          "allow_cuda": true,
+          "precision_mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "storage_dtype": "torch.bfloat16",
+          "factor_cast_bytes": 524288,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "stream_checks": 396
+        },
+        "projection_cache_receipt": {
+          "sites": [
+            "target_model.layers.0.qkv_proj",
+            "target_model.layers.0.gate_up_proj",
+            "target_model.layers.1.qkv_proj",
+            "target_model.layers.1.gate_up_proj"
+          ],
+          "n_sites": 4,
+          "allow_cuda": true,
+          "allow_recompute": false,
+          "max_bytes": null,
+          "peak_bytes": 9437184,
+          "resident_bytes": 0,
+          "scopes": 4,
+          "hits": 188,
+          "misses": 4,
+          "fallbacks": 0,
+          "cap_rejections": 0,
+          "stream_checks": 412,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "per_site_hits": {
+            "target_model.layers.0.qkv_proj": 47,
+            "target_model.layers.0.gate_up_proj": 47,
+            "target_model.layers.1.qkv_proj": 47,
+            "target_model.layers.1.gate_up_proj": 47
+          },
+          "per_site_misses": {
+            "target_model.layers.0.qkv_proj": 1,
+            "target_model.layers.0.gate_up_proj": 1,
+            "target_model.layers.1.qkv_proj": 1,
+            "target_model.layers.1.gate_up_proj": 1
+          },
+          "per_site_fallbacks": {
+            "target_model.layers.0.qkv_proj": 0,
+            "target_model.layers.0.gate_up_proj": 0,
+            "target_model.layers.1.qkv_proj": 0,
+            "target_model.layers.1.gate_up_proj": 0
+          },
+          "poisoned": false,
+          "closed": true
+        },
+        "cast_audit": {
+          "total_pack_calls": 188,
+          "unique_storages": 4,
+          "unique_bytes": 9437184,
+          "by_kind": {
+            "gate_up_proj": {
+              "pack_calls": 96,
+              "unique_ptrs": 2,
+              "unique_bytes": 6291456
+            },
+            "qkv_proj": {
+              "pack_calls": 92,
+              "unique_ptrs": 2,
+              "unique_bytes": 3145728
+            }
+          }
+        }
+      },
+      "parity_vs_arm_g": {
+        "tensors": 186,
+        "finite_bitwise": 186,
+        "within_tol": 186,
+        "overflow_parity": 0,
+        "failures": 0,
+        "max_abs": 0.0,
+        "scalars": 39,
+        "scalar_failures": 0,
+        "failure_examples": [],
+        "finite_bitwise_pass": true
+      }
+    }
+  },
+  "stage_d_parity_matrix": [
+    {
+      "width": 128,
+      "visits": 2,
+      "seed": 14001,
+      "regime": "closed_loop",
+      "cal_cadence": "1",
+      "budget_mode": "full",
+      "fuse13_arm_g": {
+        "step_ms": [
+          349.2904052734375,
+          377.08544921875
+        ],
+        "peak_allocated_bytes": 28136960,
+        "peak_reserved_bytes": 33554432,
+        "nvml_used_mib": 294.0,
+        "residual_step_receipt": {
+          "peak_bytes": 262144,
+          "resident_bytes": 0,
+          "scopes": 4,
+          "sealed": true,
+          "poisoned": false,
+          "closed": true
+        },
+        "residual_cuda_receipt": {
+          "allow_cuda": true,
+          "precision_mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "storage_dtype": "torch.bfloat16",
+          "factor_cast_bytes": 32768,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "stream_checks": 76
+        },
+        "projection_cache_receipt": null,
+        "cast_audit": null
+      },
+      "fuse14_arm_h": {
+        "step_ms": [
+          357.2614440917969,
+          383.9299011230469
+        ],
+        "peak_allocated_bytes": 26564096,
+        "peak_reserved_bytes": 31457280,
+        "nvml_used_mib": 292.0,
+        "residual_step_receipt": {
+          "peak_bytes": 262144,
+          "resident_bytes": 0,
+          "scopes": 4,
+          "sealed": true,
+          "poisoned": false,
+          "closed": true
+        },
+        "residual_cuda_receipt": {
+          "allow_cuda": true,
+          "precision_mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "storage_dtype": "torch.bfloat16",
+          "factor_cast_bytes": 32768,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "stream_checks": 76
+        },
+        "projection_cache_receipt": {
+          "sites": [
+            "target_model.layers.0.qkv_proj",
+            "target_model.layers.0.gate_up_proj",
+            "target_model.layers.1.qkv_proj",
+            "target_model.layers.1.gate_up_proj"
+          ],
+          "n_sites": 4,
+          "allow_cuda": true,
+          "allow_recompute": false,
+          "max_bytes": null,
+          "peak_bytes": 589824,
+          "resident_bytes": 0,
+          "scopes": 4,
+          "hits": 28,
+          "misses": 4,
+          "fallbacks": 0,
+          "cap_rejections": 0,
+          "stream_checks": 92,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "per_site_hits": {
+            "target_model.layers.0.qkv_proj": 7,
+            "target_model.layers.0.gate_up_proj": 7,
+            "target_model.layers.1.qkv_proj": 7,
+            "target_model.layers.1.gate_up_proj": 7
+          },
+          "per_site_misses": {
+            "target_model.layers.0.qkv_proj": 1,
+            "target_model.layers.0.gate_up_proj": 1,
+            "target_model.layers.1.qkv_proj": 1,
+            "target_model.layers.1.gate_up_proj": 1
+          },
+          "per_site_fallbacks": {
+            "target_model.layers.0.qkv_proj": 0,
+            "target_model.layers.0.gate_up_proj": 0,
+            "target_model.layers.1.qkv_proj": 0,
+            "target_model.layers.1.gate_up_proj": 0
+          },
+          "poisoned": false,
+          "closed": true
+        },
+        "cast_audit": null
+      },
+      "parity": {
+        "tensors": 178,
+        "finite_bitwise": 178,
+        "within_tol": 178,
+        "overflow_parity": 0,
+        "failures": 0,
+        "max_abs": 0.0,
+        "scalars": 19,
+        "scalar_failures": 0,
+        "failure_examples": [],
+        "finite_bitwise_pass": true
+      },
+      "vram_saved_alloc_mib": 1.5,
+      "vram_saved_nvml_mib": 2.0
+    },
+    {
+      "width": 128,
+      "visits": 6,
+      "seed": 14001,
+      "regime": "closed_loop",
+      "cal_cadence": "1",
+      "budget_mode": "full",
+      "fuse13_arm_g": {
+        "step_ms": [
+          1472.5101318359375,
+          1326.351806640625
+        ],
+        "peak_allocated_bytes": 41021440,
+        "peak_reserved_bytes": 46137344,
+        "nvml_used_mib": 306.0,
+        "residual_step_receipt": {
+          "peak_bytes": 262144,
+          "resident_bytes": 0,
+          "scopes": 4,
+          "sealed": true,
+          "poisoned": false,
+          "closed": true
+        },
+        "residual_cuda_receipt": {
+          "allow_cuda": true,
+          "precision_mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "storage_dtype": "torch.bfloat16",
+          "factor_cast_bytes": 32768,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "stream_checks": 204
+        },
+        "projection_cache_receipt": null,
+        "cast_audit": null
+      },
+      "fuse14_arm_h": {
+        "step_ms": [
+          1456.9261474609375,
+          1389.5438232421875
+        ],
+        "peak_allocated_bytes": 34729984,
+        "peak_reserved_bytes": 39845888,
+        "nvml_used_mib": 300.0,
+        "residual_step_receipt": {
+          "peak_bytes": 262144,
+          "resident_bytes": 0,
+          "scopes": 4,
+          "sealed": true,
+          "poisoned": false,
+          "closed": true
+        },
+        "residual_cuda_receipt": {
+          "allow_cuda": true,
+          "precision_mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "storage_dtype": "torch.bfloat16",
+          "factor_cast_bytes": 32768,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "stream_checks": 204
+        },
+        "projection_cache_receipt": {
+          "sites": [
+            "target_model.layers.0.qkv_proj",
+            "target_model.layers.0.gate_up_proj",
+            "target_model.layers.1.qkv_proj",
+            "target_model.layers.1.gate_up_proj"
+          ],
+          "n_sites": 4,
+          "allow_cuda": true,
+          "allow_recompute": false,
+          "max_bytes": null,
+          "peak_bytes": 589824,
+          "resident_bytes": 0,
+          "scopes": 4,
+          "hits": 92,
+          "misses": 4,
+          "fallbacks": 0,
+          "cap_rejections": 0,
+          "stream_checks": 220,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "per_site_hits": {
+            "target_model.layers.0.qkv_proj": 23,
+            "target_model.layers.0.gate_up_proj": 23,
+            "target_model.layers.1.qkv_proj": 23,
+            "target_model.layers.1.gate_up_proj": 23
+          },
+          "per_site_misses": {
+            "target_model.layers.0.qkv_proj": 1,
+            "target_model.layers.0.gate_up_proj": 1,
+            "target_model.layers.1.qkv_proj": 1,
+            "target_model.layers.1.gate_up_proj": 1
+          },
+          "per_site_fallbacks": {
+            "target_model.layers.0.qkv_proj": 0,
+            "target_model.layers.0.gate_up_proj": 0,
+            "target_model.layers.1.qkv_proj": 0,
+            "target_model.layers.1.gate_up_proj": 0
+          },
+          "poisoned": false,
+          "closed": true
+        },
+        "cast_audit": null
+      },
+      "parity": {
+        "tensors": 182,
+        "finite_bitwise": 182,
+        "within_tol": 182,
+        "overflow_parity": 0,
+        "failures": 0,
+        "max_abs": 0.0,
+        "scalars": 27,
+        "scalar_failures": 0,
+        "failure_examples": [],
+        "finite_bitwise_pass": true
+      },
+      "vram_saved_alloc_mib": 6.0,
+      "vram_saved_nvml_mib": 6.0
+    },
+    {
+      "width": 128,
+      "visits": 6,
+      "seed": 14002,
+      "regime": "clean_window",
+      "cal_cadence": "50",
+      "budget_mode": "binding",
+      "fuse13_arm_g": {
+        "step_ms": [
+          737.2324829101562,
+          192.32313537597656
+        ],
+        "peak_allocated_bytes": 31950336,
+        "peak_reserved_bytes": 37748736,
+        "nvml_used_mib": 298.0,
+        "residual_step_receipt": {
+          "peak_bytes": 131072,
+          "resident_bytes": 0,
+          "scopes": 2,
+          "sealed": true,
+          "poisoned": false,
+          "closed": true
+        },
+        "residual_cuda_receipt": {
+          "allow_cuda": true,
+          "precision_mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "storage_dtype": "torch.bfloat16",
+          "factor_cast_bytes": 22528,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "stream_checks": 24
+        },
+        "projection_cache_receipt": null,
+        "cast_audit": null
+      },
+      "fuse14_arm_h": {
+        "step_ms": [
+          649.025146484375,
+          185.13644409179688
+        ],
+        "peak_allocated_bytes": 29191680,
+        "peak_reserved_bytes": 33554432,
+        "nvml_used_mib": 294.0,
+        "residual_step_receipt": {
+          "peak_bytes": 131072,
+          "resident_bytes": 0,
+          "scopes": 2,
+          "sealed": true,
+          "poisoned": false,
+          "closed": true
+        },
+        "residual_cuda_receipt": {
+          "allow_cuda": true,
+          "precision_mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "storage_dtype": "torch.bfloat16",
+          "factor_cast_bytes": 22528,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "stream_checks": 24
+        },
+        "projection_cache_receipt": {
+          "sites": [
+            "target_model.layers.0.qkv_proj",
+            "target_model.layers.0.gate_up_proj",
+            "target_model.layers.1.qkv_proj",
+            "target_model.layers.1.gate_up_proj"
+          ],
+          "n_sites": 4,
+          "allow_cuda": true,
+          "allow_recompute": false,
+          "max_bytes": null,
+          "peak_bytes": 589824,
+          "resident_bytes": 0,
+          "scopes": 2,
+          "hits": 20,
+          "misses": 4,
+          "fallbacks": 0,
+          "cap_rejections": 0,
+          "stream_checks": 60,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "per_site_hits": {
+            "target_model.layers.0.qkv_proj": 5,
+            "target_model.layers.0.gate_up_proj": 5,
+            "target_model.layers.1.qkv_proj": 5,
+            "target_model.layers.1.gate_up_proj": 5
+          },
+          "per_site_misses": {
+            "target_model.layers.0.qkv_proj": 1,
+            "target_model.layers.0.gate_up_proj": 1,
+            "target_model.layers.1.qkv_proj": 1,
+            "target_model.layers.1.gate_up_proj": 1
+          },
+          "per_site_fallbacks": {
+            "target_model.layers.0.qkv_proj": 0,
+            "target_model.layers.0.gate_up_proj": 0,
+            "target_model.layers.1.qkv_proj": 0,
+            "target_model.layers.1.gate_up_proj": 0
+          },
+          "poisoned": false,
+          "closed": true
+        },
+        "cast_audit": null
+      },
+      "parity": {
+        "tensors": 154,
+        "finite_bitwise": 154,
+        "within_tol": 154,
+        "overflow_parity": 0,
+        "failures": 0,
+        "max_abs": 0.0,
+        "scalars": 27,
+        "scalar_failures": 0,
+        "failure_examples": [],
+        "finite_bitwise_pass": true
+      },
+      "vram_saved_alloc_mib": 2.630859375,
+      "vram_saved_nvml_mib": 4.0
+    },
+    {
+      "width": 512,
+      "visits": 6,
+      "seed": 14001,
+      "regime": "closed_loop",
+      "cal_cadence": "1",
+      "budget_mode": "binding",
+      "fuse13_arm_g": {
+        "step_ms": [
+          1182.5477294921875,
+          1114.881591796875
+        ],
+        "peak_allocated_bytes": 274316800,
+        "peak_reserved_bytes": 295698432,
+        "nvml_used_mib": 544.0,
+        "residual_step_receipt": {
+          "peak_bytes": 2097152,
+          "resident_bytes": 0,
+          "scopes": 4,
+          "sealed": true,
+          "poisoned": false,
+          "closed": true
+        },
+        "residual_cuda_receipt": {
+          "allow_cuda": true,
+          "precision_mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "storage_dtype": "torch.bfloat16",
+          "factor_cast_bytes": 360448,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "stream_checks": 102
+        },
+        "projection_cache_receipt": null,
+        "cast_audit": null
+      },
+      "fuse14_arm_h": {
+        "step_ms": [
+          1192.521728515625,
+          1245.4930419921875
+        ],
+        "peak_allocated_bytes": 170513920,
+        "peak_reserved_bytes": 190840832,
+        "nvml_used_mib": 444.0,
+        "residual_step_receipt": {
+          "peak_bytes": 2097152,
+          "resident_bytes": 0,
+          "scopes": 4,
+          "sealed": true,
+          "poisoned": false,
+          "closed": true
+        },
+        "residual_cuda_receipt": {
+          "allow_cuda": true,
+          "precision_mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "storage_dtype": "torch.bfloat16",
+          "factor_cast_bytes": 360448,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "stream_checks": 102
+        },
+        "projection_cache_receipt": {
+          "sites": [
+            "target_model.layers.0.qkv_proj",
+            "target_model.layers.0.gate_up_proj",
+            "target_model.layers.1.qkv_proj",
+            "target_model.layers.1.gate_up_proj"
+          ],
+          "n_sites": 4,
+          "allow_cuda": true,
+          "allow_recompute": false,
+          "max_bytes": null,
+          "peak_bytes": 9437184,
+          "resident_bytes": 0,
+          "scopes": 4,
+          "hits": 92,
+          "misses": 4,
+          "fallbacks": 0,
+          "cap_rejections": 0,
+          "stream_checks": 220,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "per_site_hits": {
+            "target_model.layers.0.qkv_proj": 23,
+            "target_model.layers.0.gate_up_proj": 23,
+            "target_model.layers.1.qkv_proj": 23,
+            "target_model.layers.1.gate_up_proj": 23
+          },
+          "per_site_misses": {
+            "target_model.layers.0.qkv_proj": 1,
+            "target_model.layers.0.gate_up_proj": 1,
+            "target_model.layers.1.qkv_proj": 1,
+            "target_model.layers.1.gate_up_proj": 1
+          },
+          "per_site_fallbacks": {
+            "target_model.layers.0.qkv_proj": 0,
+            "target_model.layers.0.gate_up_proj": 0,
+            "target_model.layers.1.qkv_proj": 0,
+            "target_model.layers.1.gate_up_proj": 0
+          },
+          "poisoned": false,
+          "closed": true
+        },
+        "cast_audit": null
+      },
+      "parity": {
+        "tensors": 182,
+        "finite_bitwise": 182,
+        "within_tol": 182,
+        "overflow_parity": 0,
+        "failures": 0,
+        "max_abs": 0.0,
+        "scalars": 27,
+        "scalar_failures": 0,
+        "failure_examples": [],
+        "finite_bitwise_pass": true
+      },
+      "vram_saved_alloc_mib": 98.994140625,
+      "vram_saved_nvml_mib": 100.0
+    },
+    {
+      "width": 512,
+      "visits": 12,
+      "seed": 14001,
+      "regime": "closed_loop",
+      "cal_cadence": "off",
+      "budget_mode": "full",
+      "fuse13_arm_g": {
+        "step_ms": [
+          866.3984985351562,
+          759.5842895507812
+        ],
+        "peak_allocated_bytes": 426422784,
+        "peak_reserved_bytes": 452984832,
+        "nvml_used_mib": 694.0,
+        "residual_step_receipt": {
+          "peak_bytes": 4194304,
+          "resident_bytes": 0,
+          "scopes": 4,
+          "sealed": true,
+          "poisoned": false,
+          "closed": true
+        },
+        "residual_cuda_receipt": {
+          "allow_cuda": true,
+          "precision_mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "storage_dtype": "torch.bfloat16",
+          "factor_cast_bytes": 524288,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "stream_checks": 396
+        },
+        "projection_cache_receipt": null,
+        "cast_audit": null
+      },
+      "fuse14_arm_h": {
+        "step_ms": [
+          922.0507202148438,
+          763.819580078125
+        ],
+        "peak_allocated_bytes": 207270400,
+        "peak_reserved_bytes": 222298112,
+        "nvml_used_mib": 474.0,
+        "residual_step_receipt": {
+          "peak_bytes": 4194304,
+          "resident_bytes": 0,
+          "scopes": 4,
+          "sealed": true,
+          "poisoned": false,
+          "closed": true
+        },
+        "residual_cuda_receipt": {
+          "allow_cuda": true,
+          "precision_mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "storage_dtype": "torch.bfloat16",
+          "factor_cast_bytes": 524288,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "stream_checks": 396
+        },
+        "projection_cache_receipt": {
+          "sites": [
+            "target_model.layers.0.qkv_proj",
+            "target_model.layers.0.gate_up_proj",
+            "target_model.layers.1.qkv_proj",
+            "target_model.layers.1.gate_up_proj"
+          ],
+          "n_sites": 4,
+          "allow_cuda": true,
+          "allow_recompute": false,
+          "max_bytes": null,
+          "peak_bytes": 9437184,
+          "resident_bytes": 0,
+          "scopes": 4,
+          "hits": 188,
+          "misses": 4,
+          "fallbacks": 0,
+          "cap_rejections": 0,
+          "stream_checks": 412,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "per_site_hits": {
+            "target_model.layers.0.qkv_proj": 47,
+            "target_model.layers.0.gate_up_proj": 47,
+            "target_model.layers.1.qkv_proj": 47,
+            "target_model.layers.1.gate_up_proj": 47
+          },
+          "per_site_misses": {
+            "target_model.layers.0.qkv_proj": 1,
+            "target_model.layers.0.gate_up_proj": 1,
+            "target_model.layers.1.qkv_proj": 1,
+            "target_model.layers.1.gate_up_proj": 1
+          },
+          "per_site_fallbacks": {
+            "target_model.layers.0.qkv_proj": 0,
+            "target_model.layers.0.gate_up_proj": 0,
+            "target_model.layers.1.qkv_proj": 0,
+            "target_model.layers.1.gate_up_proj": 0
+          },
+          "poisoned": false,
+          "closed": true
+        },
+        "cast_audit": null
+      },
+      "parity": {
+        "tensors": 186,
+        "finite_bitwise": 186,
+        "within_tol": 186,
+        "overflow_parity": 0,
+        "failures": 0,
+        "max_abs": 0.0,
+        "scalars": 28,
+        "scalar_failures": 0,
+        "failure_examples": [],
+        "finite_bitwise_pass": true
+      },
+      "vram_saved_alloc_mib": 209.0,
+      "vram_saved_nvml_mib": 220.0
+    },
+    {
+      "width": 512,
+      "visits": 12,
+      "seed": 14002,
+      "regime": "clean_window",
+      "cal_cadence": "50",
+      "budget_mode": "full",
+      "fuse13_arm_g": {
+        "step_ms": [
+          2110.9150390625,
+          319.62835693359375
+        ],
+        "peak_allocated_bytes": 251834368,
+        "peak_reserved_bytes": 270532608,
+        "nvml_used_mib": 520.0,
+        "residual_step_receipt": {
+          "peak_bytes": 4194304,
+          "resident_bytes": 0,
+          "scopes": 2,
+          "sealed": true,
+          "poisoned": false,
+          "closed": true
+        },
+        "residual_cuda_receipt": {
+          "allow_cuda": true,
+          "precision_mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "storage_dtype": "torch.bfloat16",
+          "factor_cast_bytes": 524288,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "stream_checks": 96
+        },
+        "projection_cache_receipt": null,
+        "cast_audit": null
+      },
+      "fuse14_arm_h": {
+        "step_ms": [
+          2103.464599609375,
+          341.44464111328125
+        ],
+        "peak_allocated_bytes": 148543488,
+        "peak_reserved_bytes": 165675008,
+        "nvml_used_mib": 420.0,
+        "residual_step_receipt": {
+          "peak_bytes": 4194304,
+          "resident_bytes": 0,
+          "scopes": 2,
+          "sealed": true,
+          "poisoned": false,
+          "closed": true
+        },
+        "residual_cuda_receipt": {
+          "allow_cuda": true,
+          "precision_mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "storage_dtype": "torch.bfloat16",
+          "factor_cast_bytes": 524288,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "stream_checks": 96
+        },
+        "projection_cache_receipt": {
+          "sites": [
+            "target_model.layers.0.qkv_proj",
+            "target_model.layers.0.gate_up_proj",
+            "target_model.layers.1.qkv_proj",
+            "target_model.layers.1.gate_up_proj"
+          ],
+          "n_sites": 4,
+          "allow_cuda": true,
+          "allow_recompute": false,
+          "max_bytes": null,
+          "peak_bytes": 9437184,
+          "resident_bytes": 0,
+          "scopes": 2,
+          "hits": 44,
+          "misses": 4,
+          "fallbacks": 0,
+          "cap_rejections": 0,
+          "stream_checks": 108,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "per_site_hits": {
+            "target_model.layers.0.qkv_proj": 11,
+            "target_model.layers.0.gate_up_proj": 11,
+            "target_model.layers.1.qkv_proj": 11,
+            "target_model.layers.1.gate_up_proj": 11
+          },
+          "per_site_misses": {
+            "target_model.layers.0.qkv_proj": 1,
+            "target_model.layers.0.gate_up_proj": 1,
+            "target_model.layers.1.qkv_proj": 1,
+            "target_model.layers.1.gate_up_proj": 1
+          },
+          "per_site_fallbacks": {
+            "target_model.layers.0.qkv_proj": 0,
+            "target_model.layers.0.gate_up_proj": 0,
+            "target_model.layers.1.qkv_proj": 0,
+            "target_model.layers.1.gate_up_proj": 0
+          },
+          "poisoned": false,
+          "closed": true
+        },
+        "cast_audit": null
+      },
+      "parity": {
+        "tensors": 158,
+        "finite_bitwise": 158,
+        "within_tol": 158,
+        "overflow_parity": 0,
+        "failures": 0,
+        "max_abs": 0.0,
+        "scalars": 39,
+        "scalar_failures": 0,
+        "failure_examples": [],
+        "finite_bitwise_pass": true
+      },
+      "vram_saved_alloc_mib": 98.505859375,
+      "vram_saved_nvml_mib": 100.0
+    },
+    {
+      "width": 1024,
+      "visits": 6,
+      "seed": 14001,
+      "regime": "closed_loop",
+      "cal_cadence": "1",
+      "budget_mode": "binding",
+      "fuse13_arm_g": {
+        "step_ms": [
+          1476.5400390625,
+          1127.0579833984375
+        ],
+        "peak_allocated_bytes": 908670464,
+        "peak_reserved_bytes": 964689920,
+        "nvml_used_mib": 1182.0,
+        "residual_step_receipt": {
+          "peak_bytes": 7864320,
+          "resident_bytes": 0,
+          "scopes": 4,
+          "sealed": true,
+          "poisoned": false,
+          "closed": true
+        },
+        "residual_cuda_receipt": {
+          "allow_cuda": true,
+          "precision_mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "storage_dtype": "torch.bfloat16",
+          "factor_cast_bytes": 1376256,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "stream_checks": 102
+        },
+        "projection_cache_receipt": null,
+        "cast_audit": null
+      },
+      "fuse14_arm_h": {
+        "step_ms": [
+          1241.9027099609375,
+          1241.3631591796875
+        ],
+        "peak_allocated_bytes": 516862976,
+        "peak_reserved_bytes": 553648128,
+        "nvml_used_mib": 790.0,
+        "residual_step_receipt": {
+          "peak_bytes": 7864320,
+          "resident_bytes": 0,
+          "scopes": 4,
+          "sealed": true,
+          "poisoned": false,
+          "closed": true
+        },
+        "residual_cuda_receipt": {
+          "allow_cuda": true,
+          "precision_mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "storage_dtype": "torch.bfloat16",
+          "factor_cast_bytes": 1376256,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "stream_checks": 102
+        },
+        "projection_cache_receipt": {
+          "sites": [
+            "target_model.layers.0.qkv_proj",
+            "target_model.layers.0.gate_up_proj",
+            "target_model.layers.1.qkv_proj",
+            "target_model.layers.1.gate_up_proj"
+          ],
+          "n_sites": 4,
+          "allow_cuda": true,
+          "allow_recompute": false,
+          "max_bytes": null,
+          "peak_bytes": 35651584,
+          "resident_bytes": 0,
+          "scopes": 4,
+          "hits": 92,
+          "misses": 4,
+          "fallbacks": 0,
+          "cap_rejections": 0,
+          "stream_checks": 220,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "per_site_hits": {
+            "target_model.layers.0.qkv_proj": 23,
+            "target_model.layers.0.gate_up_proj": 23,
+            "target_model.layers.1.qkv_proj": 23,
+            "target_model.layers.1.gate_up_proj": 23
+          },
+          "per_site_misses": {
+            "target_model.layers.0.qkv_proj": 1,
+            "target_model.layers.0.gate_up_proj": 1,
+            "target_model.layers.1.qkv_proj": 1,
+            "target_model.layers.1.gate_up_proj": 1
+          },
+          "per_site_fallbacks": {
+            "target_model.layers.0.qkv_proj": 0,
+            "target_model.layers.0.gate_up_proj": 0,
+            "target_model.layers.1.qkv_proj": 0,
+            "target_model.layers.1.gate_up_proj": 0
+          },
+          "poisoned": false,
+          "closed": true
+        },
+        "cast_audit": null
+      },
+      "parity": {
+        "tensors": 182,
+        "finite_bitwise": 182,
+        "within_tol": 182,
+        "overflow_parity": 0,
+        "failures": 0,
+        "max_abs": 0.0,
+        "scalars": 27,
+        "scalar_failures": 0,
+        "failure_examples": [],
+        "finite_bitwise_pass": true
+      },
+      "vram_saved_alloc_mib": 373.65673828125,
+      "vram_saved_nvml_mib": 392.0
+    },
+    {
+      "width": 1024,
+      "visits": 12,
+      "seed": 14001,
+      "regime": "closed_loop",
+      "cal_cadence": "off",
+      "budget_mode": "full",
+      "fuse13_arm_g": {
+        "step_ms": [
+          1019.0457763671875,
+          927.9772338867188
+        ],
+        "peak_allocated_bytes": 1420506624,
+        "peak_reserved_bytes": 1535115264,
+        "nvml_used_mib": 1726.0,
+        "residual_step_receipt": {
+          "peak_bytes": 15728640,
+          "resident_bytes": 0,
+          "scopes": 4,
+          "sealed": true,
+          "poisoned": false,
+          "closed": true
+        },
+        "residual_cuda_receipt": {
+          "allow_cuda": true,
+          "precision_mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "storage_dtype": "torch.bfloat16",
+          "factor_cast_bytes": 1998848,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "stream_checks": 396
+        },
+        "projection_cache_receipt": null,
+        "cast_audit": null
+      },
+      "fuse14_arm_h": {
+        "step_ms": [
+          969.8704833984375,
+          866.2584228515625
+        ],
+        "peak_allocated_bytes": 591083008,
+        "peak_reserved_bytes": 629145600,
+        "nvml_used_mib": 862.0,
+        "residual_step_receipt": {
+          "peak_bytes": 15728640,
+          "resident_bytes": 0,
+          "scopes": 4,
+          "sealed": true,
+          "poisoned": false,
+          "closed": true
+        },
+        "residual_cuda_receipt": {
+          "allow_cuda": true,
+          "precision_mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "storage_dtype": "torch.bfloat16",
+          "factor_cast_bytes": 1998848,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "stream_checks": 396
+        },
+        "projection_cache_receipt": {
+          "sites": [
+            "target_model.layers.0.qkv_proj",
+            "target_model.layers.0.gate_up_proj",
+            "target_model.layers.1.qkv_proj",
+            "target_model.layers.1.gate_up_proj"
+          ],
+          "n_sites": 4,
+          "allow_cuda": true,
+          "allow_recompute": false,
+          "max_bytes": null,
+          "peak_bytes": 35651584,
+          "resident_bytes": 0,
+          "scopes": 4,
+          "hits": 188,
+          "misses": 4,
+          "fallbacks": 0,
+          "cap_rejections": 0,
+          "stream_checks": 412,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "per_site_hits": {
+            "target_model.layers.0.qkv_proj": 47,
+            "target_model.layers.0.gate_up_proj": 47,
+            "target_model.layers.1.qkv_proj": 47,
+            "target_model.layers.1.gate_up_proj": 47
+          },
+          "per_site_misses": {
+            "target_model.layers.0.qkv_proj": 1,
+            "target_model.layers.0.gate_up_proj": 1,
+            "target_model.layers.1.qkv_proj": 1,
+            "target_model.layers.1.gate_up_proj": 1
+          },
+          "per_site_fallbacks": {
+            "target_model.layers.0.qkv_proj": 0,
+            "target_model.layers.0.gate_up_proj": 0,
+            "target_model.layers.1.qkv_proj": 0,
+            "target_model.layers.1.gate_up_proj": 0
+          },
+          "poisoned": false,
+          "closed": true
+        },
+        "cast_audit": null
+      },
+      "parity": {
+        "tensors": 186,
+        "finite_bitwise": 186,
+        "within_tol": 186,
+        "overflow_parity": 0,
+        "failures": 0,
+        "max_abs": 0.0,
+        "scalars": 28,
+        "scalar_failures": 0,
+        "failure_examples": [],
+        "finite_bitwise_pass": true
+      },
+      "vram_saved_alloc_mib": 791.0,
+      "vram_saved_nvml_mib": 864.0
+    },
+    {
+      "width": 1024,
+      "visits": 24,
+      "seed": 14002,
+      "regime": "closed_loop",
+      "cal_cadence": "off",
+      "budget_mode": "full",
+      "fuse13_arm_g": {
+        "step_ms": [
+          2231.5068359375,
+          1985.8843994140625
+        ],
+        "peak_allocated_bytes": 2640698880,
+        "peak_reserved_bytes": 2854223872,
+        "nvml_used_mib": 2984.0,
+        "residual_step_receipt": {
+          "peak_bytes": 15728640,
+          "resident_bytes": 0,
+          "scopes": 4,
+          "sealed": true,
+          "poisoned": false,
+          "closed": true
+        },
+        "residual_cuda_receipt": {
+          "allow_cuda": true,
+          "precision_mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "storage_dtype": "torch.bfloat16",
+          "factor_cast_bytes": 1998848,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "stream_checks": 780
+        },
+        "projection_cache_receipt": null,
+        "cast_audit": null
+      },
+      "fuse14_arm_h": {
+        "step_ms": [
+          2480.023681640625,
+          2352.5703125
+        ],
+        "peak_allocated_bytes": 925447680,
+        "peak_reserved_bytes": 966787072,
+        "nvml_used_mib": 1184.0,
+        "residual_step_receipt": {
+          "peak_bytes": 15728640,
+          "resident_bytes": 0,
+          "scopes": 4,
+          "sealed": true,
+          "poisoned": false,
+          "closed": true
+        },
+        "residual_cuda_receipt": {
+          "allow_cuda": true,
+          "precision_mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "storage_dtype": "torch.bfloat16",
+          "factor_cast_bytes": 1998848,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "stream_checks": 780
+        },
+        "projection_cache_receipt": {
+          "sites": [
+            "target_model.layers.0.qkv_proj",
+            "target_model.layers.0.gate_up_proj",
+            "target_model.layers.1.qkv_proj",
+            "target_model.layers.1.gate_up_proj"
+          ],
+          "n_sites": 4,
+          "allow_cuda": true,
+          "allow_recompute": false,
+          "max_bytes": null,
+          "peak_bytes": 35651584,
+          "resident_bytes": 0,
+          "scopes": 4,
+          "hits": 380,
+          "misses": 4,
+          "fallbacks": 0,
+          "cap_rejections": 0,
+          "stream_checks": 796,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "per_site_hits": {
+            "target_model.layers.0.qkv_proj": 95,
+            "target_model.layers.0.gate_up_proj": 95,
+            "target_model.layers.1.qkv_proj": 95,
+            "target_model.layers.1.gate_up_proj": 95
+          },
+          "per_site_misses": {
+            "target_model.layers.0.qkv_proj": 1,
+            "target_model.layers.0.gate_up_proj": 1,
+            "target_model.layers.1.qkv_proj": 1,
+            "target_model.layers.1.gate_up_proj": 1
+          },
+          "per_site_fallbacks": {
+            "target_model.layers.0.qkv_proj": 0,
+            "target_model.layers.0.gate_up_proj": 0,
+            "target_model.layers.1.qkv_proj": 0,
+            "target_model.layers.1.gate_up_proj": 0
+          },
+          "poisoned": false,
+          "closed": true
+        },
+        "cast_audit": null
+      },
+      "parity": {
+        "tensors": 194,
+        "finite_bitwise": 194,
+        "within_tol": 194,
+        "overflow_parity": 0,
+        "failures": 0,
+        "max_abs": 0.0,
+        "scalars": 40,
+        "scalar_failures": 0,
+        "failure_examples": [],
+        "finite_bitwise_pass": true
+      },
+      "vram_saved_alloc_mib": 1635.791015625,
+      "vram_saved_nvml_mib": 1800.0
+    },
+    {
+      "width": 2048,
+      "visits": 6,
+      "seed": 14001,
+      "regime": "closed_loop",
+      "cal_cadence": "1",
+      "budget_mode": "binding",
+      "fuse13_arm_g": {
+        "step_ms": [
+          1226.383056640625,
+          1152.768798828125
+        ],
+        "peak_allocated_bytes": 3316646912,
+        "peak_reserved_bytes": 3625975808,
+        "nvml_used_mib": 3720.0,
+        "residual_step_receipt": {
+          "peak_bytes": 31457280,
+          "resident_bytes": 0,
+          "scopes": 4,
+          "sealed": true,
+          "poisoned": false,
+          "closed": true
+        },
+        "residual_cuda_receipt": {
+          "allow_cuda": true,
+          "precision_mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "storage_dtype": "torch.bfloat16",
+          "factor_cast_bytes": 5505024,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "stream_checks": 102
+        },
+        "projection_cache_receipt": null,
+        "cast_audit": null
+      },
+      "fuse14_arm_h": {
+        "step_ms": [
+          1253.865966796875,
+          1011.91943359375
+        ],
+        "peak_allocated_bytes": 1800328704,
+        "peak_reserved_bytes": 1906311168,
+        "nvml_used_mib": 2080.0,
+        "residual_step_receipt": {
+          "peak_bytes": 31457280,
+          "resident_bytes": 0,
+          "scopes": 4,
+          "sealed": true,
+          "poisoned": false,
+          "closed": true
+        },
+        "residual_cuda_receipt": {
+          "allow_cuda": true,
+          "precision_mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "storage_dtype": "torch.bfloat16",
+          "factor_cast_bytes": 5505024,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "stream_checks": 102
+        },
+        "projection_cache_receipt": {
+          "sites": [
+            "target_model.layers.0.qkv_proj",
+            "target_model.layers.0.gate_up_proj",
+            "target_model.layers.1.qkv_proj",
+            "target_model.layers.1.gate_up_proj"
+          ],
+          "n_sites": 4,
+          "allow_cuda": true,
+          "allow_recompute": false,
+          "max_bytes": null,
+          "peak_bytes": 142606336,
+          "resident_bytes": 0,
+          "scopes": 4,
+          "hits": 92,
+          "misses": 4,
+          "fallbacks": 0,
+          "cap_rejections": 0,
+          "stream_checks": 220,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "per_site_hits": {
+            "target_model.layers.0.qkv_proj": 23,
+            "target_model.layers.0.gate_up_proj": 23,
+            "target_model.layers.1.qkv_proj": 23,
+            "target_model.layers.1.gate_up_proj": 23
+          },
+          "per_site_misses": {
+            "target_model.layers.0.qkv_proj": 1,
+            "target_model.layers.0.gate_up_proj": 1,
+            "target_model.layers.1.qkv_proj": 1,
+            "target_model.layers.1.gate_up_proj": 1
+          },
+          "per_site_fallbacks": {
+            "target_model.layers.0.qkv_proj": 0,
+            "target_model.layers.0.gate_up_proj": 0,
+            "target_model.layers.1.qkv_proj": 0,
+            "target_model.layers.1.gate_up_proj": 0
+          },
+          "poisoned": false,
+          "closed": true
+        },
+        "cast_audit": null
+      },
+      "parity": {
+        "tensors": 182,
+        "finite_bitwise": 182,
+        "within_tol": 182,
+        "overflow_parity": 0,
+        "failures": 0,
+        "max_abs": 0.0,
+        "scalars": 27,
+        "scalar_failures": 0,
+        "failure_examples": [],
+        "finite_bitwise_pass": true
+      },
+      "vram_saved_alloc_mib": 1446.07373046875,
+      "vram_saved_nvml_mib": 1640.0
+    },
+    {
+      "width": 2048,
+      "visits": 12,
+      "seed": 14001,
+      "regime": "closed_loop",
+      "cal_cadence": "off",
+      "budget_mode": "full",
+      "fuse13_arm_g": {
+        "step_ms": [
+          961.7944946289062,
+          666.6006469726562
+        ],
+        "peak_allocated_bytes": 5201224704,
+        "peak_reserved_bytes": 5444206592,
+        "nvml_used_mib": 5454.0,
+        "residual_step_receipt": {
+          "peak_bytes": 62914560,
+          "resident_bytes": 0,
+          "scopes": 4,
+          "sealed": true,
+          "poisoned": false,
+          "closed": true
+        },
+        "residual_cuda_receipt": {
+          "allow_cuda": true,
+          "precision_mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "storage_dtype": "torch.bfloat16",
+          "factor_cast_bytes": 7995392,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "stream_checks": 396
+        },
+        "projection_cache_receipt": null,
+        "cast_audit": null
+      },
+      "fuse14_arm_h": {
+        "step_ms": [
+          752.8286743164062,
+          727.1461791992188
+        ],
+        "peak_allocated_bytes": 1972203520,
+        "peak_reserved_bytes": 2118123520,
+        "nvml_used_mib": 2282.0,
+        "residual_step_receipt": {
+          "peak_bytes": 62914560,
+          "resident_bytes": 0,
+          "scopes": 4,
+          "sealed": true,
+          "poisoned": false,
+          "closed": true
+        },
+        "residual_cuda_receipt": {
+          "allow_cuda": true,
+          "precision_mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "storage_dtype": "torch.bfloat16",
+          "factor_cast_bytes": 7995392,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "stream_checks": 396
+        },
+        "projection_cache_receipt": {
+          "sites": [
+            "target_model.layers.0.qkv_proj",
+            "target_model.layers.0.gate_up_proj",
+            "target_model.layers.1.qkv_proj",
+            "target_model.layers.1.gate_up_proj"
+          ],
+          "n_sites": 4,
+          "allow_cuda": true,
+          "allow_recompute": false,
+          "max_bytes": null,
+          "peak_bytes": 142606336,
+          "resident_bytes": 0,
+          "scopes": 4,
+          "hits": 188,
+          "misses": 4,
+          "fallbacks": 0,
+          "cap_rejections": 0,
+          "stream_checks": 412,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "per_site_hits": {
+            "target_model.layers.0.qkv_proj": 47,
+            "target_model.layers.0.gate_up_proj": 47,
+            "target_model.layers.1.qkv_proj": 47,
+            "target_model.layers.1.gate_up_proj": 47
+          },
+          "per_site_misses": {
+            "target_model.layers.0.qkv_proj": 1,
+            "target_model.layers.0.gate_up_proj": 1,
+            "target_model.layers.1.qkv_proj": 1,
+            "target_model.layers.1.gate_up_proj": 1
+          },
+          "per_site_fallbacks": {
+            "target_model.layers.0.qkv_proj": 0,
+            "target_model.layers.0.gate_up_proj": 0,
+            "target_model.layers.1.qkv_proj": 0,
+            "target_model.layers.1.gate_up_proj": 0
+          },
+          "poisoned": false,
+          "closed": true
+        },
+        "cast_audit": null
+      },
+      "parity": {
+        "tensors": 186,
+        "finite_bitwise": 186,
+        "within_tol": 186,
+        "overflow_parity": 0,
+        "failures": 0,
+        "max_abs": 0.0,
+        "scalars": 28,
+        "scalar_failures": 0,
+        "failure_examples": [],
+        "finite_bitwise_pass": true
+      },
+      "vram_saved_alloc_mib": 3079.4345703125,
+      "vram_saved_nvml_mib": 3172.0
+    },
+    {
+      "width": 2048,
+      "visits": 12,
+      "seed": 14002,
+      "regime": "clean_window",
+      "cal_cadence": "50",
+      "budget_mode": "full",
+      "fuse13_arm_g": {
+        "step_ms": [
+          1877.247314453125,
+          280.12384033203125
+        ],
+        "peak_allocated_bytes": 2986589696,
+        "peak_reserved_bytes": 3183476736,
+        "nvml_used_mib": 3298.0,
+        "residual_step_receipt": {
+          "peak_bytes": 62914560,
+          "resident_bytes": 0,
+          "scopes": 2,
+          "sealed": true,
+          "poisoned": false,
+          "closed": true
+        },
+        "residual_cuda_receipt": {
+          "allow_cuda": true,
+          "precision_mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "storage_dtype": "torch.bfloat16",
+          "factor_cast_bytes": 7995392,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "stream_checks": 96
+        },
+        "projection_cache_receipt": null,
+        "cast_audit": null
+      },
+      "fuse14_arm_h": {
+        "step_ms": [
+          1881.592529296875,
+          313.6315002441406
+        ],
+        "peak_allocated_bytes": 1468878336,
+        "peak_reserved_bytes": 1545601024,
+        "nvml_used_mib": 1736.0,
+        "residual_step_receipt": {
+          "peak_bytes": 62914560,
+          "resident_bytes": 0,
+          "scopes": 2,
+          "sealed": true,
+          "poisoned": false,
+          "closed": true
+        },
+        "residual_cuda_receipt": {
+          "allow_cuda": true,
+          "precision_mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "storage_dtype": "torch.bfloat16",
+          "factor_cast_bytes": 7995392,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "stream_checks": 96
+        },
+        "projection_cache_receipt": {
+          "sites": [
+            "target_model.layers.0.qkv_proj",
+            "target_model.layers.0.gate_up_proj",
+            "target_model.layers.1.qkv_proj",
+            "target_model.layers.1.gate_up_proj"
+          ],
+          "n_sites": 4,
+          "allow_cuda": true,
+          "allow_recompute": false,
+          "max_bytes": null,
+          "peak_bytes": 142606336,
+          "resident_bytes": 0,
+          "scopes": 2,
+          "hits": 44,
+          "misses": 4,
+          "fallbacks": 0,
+          "cap_rejections": 0,
+          "stream_checks": 108,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "per_site_hits": {
+            "target_model.layers.0.qkv_proj": 11,
+            "target_model.layers.0.gate_up_proj": 11,
+            "target_model.layers.1.qkv_proj": 11,
+            "target_model.layers.1.gate_up_proj": 11
+          },
+          "per_site_misses": {
+            "target_model.layers.0.qkv_proj": 1,
+            "target_model.layers.0.gate_up_proj": 1,
+            "target_model.layers.1.qkv_proj": 1,
+            "target_model.layers.1.gate_up_proj": 1
+          },
+          "per_site_fallbacks": {
+            "target_model.layers.0.qkv_proj": 0,
+            "target_model.layers.0.gate_up_proj": 0,
+            "target_model.layers.1.qkv_proj": 0,
+            "target_model.layers.1.gate_up_proj": 0
+          },
+          "poisoned": false,
+          "closed": true
+        },
+        "cast_audit": null
+      },
+      "parity": {
+        "tensors": 158,
+        "finite_bitwise": 158,
+        "within_tol": 158,
+        "overflow_parity": 0,
+        "failures": 0,
+        "max_abs": 0.0,
+        "scalars": 39,
+        "scalar_failures": 0,
+        "failure_examples": [],
+        "finite_bitwise_pass": true
+      },
+      "vram_saved_alloc_mib": 1447.40234375,
+      "vram_saved_nvml_mib": 1562.0
+    },
+    {
+      "width": 2048,
+      "visits": 24,
+      "seed": 14001,
+      "regime": "closed_loop",
+      "cal_cadence": "off",
+      "budget_mode": "full",
+      "fuse13_arm_g": {
+        "step_ms": [
+          1741.114501953125,
+          1403.8104248046875
+        ],
+        "peak_allocated_bytes": 9659914240,
+        "peak_reserved_bytes": 9974054912,
+        "nvml_used_mib": 9774.0,
+        "residual_step_receipt": {
+          "peak_bytes": 62914560,
+          "resident_bytes": 0,
+          "scopes": 4,
+          "sealed": true,
+          "poisoned": false,
+          "closed": true
+        },
+        "residual_cuda_receipt": {
+          "allow_cuda": true,
+          "precision_mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "storage_dtype": "torch.bfloat16",
+          "factor_cast_bytes": 7995392,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "stream_checks": 780
+        },
+        "projection_cache_receipt": null,
+        "cast_audit": null
+      },
+      "fuse14_arm_h": {
+        "step_ms": [
+          2049.493896484375,
+          2020.57958984375
+        ],
+        "peak_allocated_bytes": 3010292736,
+        "peak_reserved_bytes": 3185573888,
+        "nvml_used_mib": 3300.0,
+        "residual_step_receipt": {
+          "peak_bytes": 62914560,
+          "resident_bytes": 0,
+          "scopes": 4,
+          "sealed": true,
+          "poisoned": false,
+          "closed": true
+        },
+        "residual_cuda_receipt": {
+          "allow_cuda": true,
+          "precision_mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "storage_dtype": "torch.bfloat16",
+          "factor_cast_bytes": 7995392,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "stream_checks": 780
+        },
+        "projection_cache_receipt": {
+          "sites": [
+            "target_model.layers.0.qkv_proj",
+            "target_model.layers.0.gate_up_proj",
+            "target_model.layers.1.qkv_proj",
+            "target_model.layers.1.gate_up_proj"
+          ],
+          "n_sites": 4,
+          "allow_cuda": true,
+          "allow_recompute": false,
+          "max_bytes": null,
+          "peak_bytes": 142606336,
+          "resident_bytes": 0,
+          "scopes": 4,
+          "hits": 380,
+          "misses": 4,
+          "fallbacks": 0,
+          "cap_rejections": 0,
+          "stream_checks": 796,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "per_site_hits": {
+            "target_model.layers.0.qkv_proj": 95,
+            "target_model.layers.0.gate_up_proj": 95,
+            "target_model.layers.1.qkv_proj": 95,
+            "target_model.layers.1.gate_up_proj": 95
+          },
+          "per_site_misses": {
+            "target_model.layers.0.qkv_proj": 1,
+            "target_model.layers.0.gate_up_proj": 1,
+            "target_model.layers.1.qkv_proj": 1,
+            "target_model.layers.1.gate_up_proj": 1
+          },
+          "per_site_fallbacks": {
+            "target_model.layers.0.qkv_proj": 0,
+            "target_model.layers.0.gate_up_proj": 0,
+            "target_model.layers.1.qkv_proj": 0,
+            "target_model.layers.1.gate_up_proj": 0
+          },
+          "poisoned": false,
+          "closed": true
+        },
+        "cast_audit": null
+      },
+      "parity": {
+        "tensors": 194,
+        "finite_bitwise": 194,
+        "within_tol": 194,
+        "overflow_parity": 0,
+        "failures": 0,
+        "max_abs": 0.0,
+        "scalars": 40,
+        "scalar_failures": 0,
+        "failure_examples": [],
+        "finite_bitwise_pass": true
+      },
+      "vram_saved_alloc_mib": 6341.5732421875,
+      "vram_saved_nvml_mib": 6474.0
+    }
+  ],
+  "fp16_hold_confirmation": {
+    "status": "HOLD_CONFIRMED",
+    "receipt": {
+      "sites": [
+        "target_model.layers.0.qkv_proj",
+        "target_model.layers.0.gate_up_proj",
+        "target_model.layers.1.qkv_proj",
+        "target_model.layers.1.gate_up_proj"
+      ],
+      "n_sites": 4,
+      "allow_cuda": true,
+      "allow_recompute": false,
+      "max_bytes": null,
+      "peak_bytes": 0,
+      "resident_bytes": 0,
+      "scopes": 4,
+      "hits": 0,
+      "misses": 0,
+      "fallbacks": 96,
+      "cap_rejections": 0,
+      "stream_checks": 0,
+      "owner_stream": null,
+      "per_site_hits": {
+        "target_model.layers.0.qkv_proj": 0,
+        "target_model.layers.0.gate_up_proj": 0,
+        "target_model.layers.1.qkv_proj": 0,
+        "target_model.layers.1.gate_up_proj": 0
+      },
+      "per_site_misses": {
+        "target_model.layers.0.qkv_proj": 0,
+        "target_model.layers.0.gate_up_proj": 0,
+        "target_model.layers.1.qkv_proj": 0,
+        "target_model.layers.1.gate_up_proj": 0
+      },
+      "per_site_fallbacks": {
+        "target_model.layers.0.qkv_proj": 24,
+        "target_model.layers.0.gate_up_proj": 24,
+        "target_model.layers.1.qkv_proj": 24,
+        "target_model.layers.1.gate_up_proj": 24
+      },
+      "poisoned": false,
+      "closed": true
+    }
+  },
+  "stage_e_checkpointing": [
+    {
+      "width": 512,
+      "visits": 12,
+      "ckpt_native": {
+        "step_ms": [
+          1594.5008544921875,
+          1554.27197265625
+        ],
+        "peak_allocated_bytes": 104243712,
+        "peak_reserved_bytes": 123731968,
+        "nvml_used_mib": 384.0,
+        "residual_step_receipt": null,
+        "residual_cuda_receipt": null,
+        "projection_cache_receipt": null,
+        "cast_audit": null
+      },
+      "ckpt_plus_frozen_proj": {
+        "step_ms": [
+          1613.5108642578125,
+          1577.104248046875
+        ],
+        "peak_allocated_bytes": 108962304,
+        "peak_reserved_bytes": 123731968,
+        "nvml_used_mib": 384.0,
+        "residual_step_receipt": null,
+        "residual_cuda_receipt": null,
+        "projection_cache_receipt": {
+          "sites": [
+            "target_model.layers.0.qkv_proj",
+            "target_model.layers.0.gate_up_proj",
+            "target_model.layers.1.qkv_proj",
+            "target_model.layers.1.gate_up_proj"
+          ],
+          "n_sites": 4,
+          "allow_cuda": true,
+          "allow_recompute": true,
+          "max_bytes": null,
+          "peak_bytes": 9437184,
+          "resident_bytes": 0,
+          "scopes": 1,
+          "hits": 428,
+          "misses": 4,
+          "fallbacks": 0,
+          "cap_rejections": 0,
+          "stream_checks": 868,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "per_site_hits": {
+            "target_model.layers.0.qkv_proj": 107,
+            "target_model.layers.0.gate_up_proj": 107,
+            "target_model.layers.1.qkv_proj": 107,
+            "target_model.layers.1.gate_up_proj": 107
+          },
+          "per_site_misses": {
+            "target_model.layers.0.qkv_proj": 1,
+            "target_model.layers.0.gate_up_proj": 1,
+            "target_model.layers.1.qkv_proj": 1,
+            "target_model.layers.1.gate_up_proj": 1
+          },
+          "per_site_fallbacks": {
+            "target_model.layers.0.qkv_proj": 0,
+            "target_model.layers.0.gate_up_proj": 0,
+            "target_model.layers.1.qkv_proj": 0,
+            "target_model.layers.1.gate_up_proj": 0
+          },
+          "poisoned": false,
+          "closed": true
+        },
+        "cast_audit": null
+      },
+      "parity": {
+        "tensors": 186,
+        "finite_bitwise": 186,
+        "within_tol": 186,
+        "overflow_parity": 0,
+        "failures": 0,
+        "max_abs": 0.0,
+        "scalars": 28,
+        "scalar_failures": 0,
+        "failure_examples": [],
+        "finite_bitwise_pass": true
+      },
+      "vram_saved_alloc_mib": -4.5,
+      "vram_saved_nvml_mib": 0.0
+    },
+    {
+      "width": 2048,
+      "visits": 24,
+      "ckpt_native": {
+        "step_ms": [
+          3586.820068359375,
+          3140.199462890625
+        ],
+        "peak_allocated_bytes": 1191963648,
+        "peak_reserved_bytes": 1291845632,
+        "nvml_used_mib": 1498.0,
+        "residual_step_receipt": null,
+        "residual_cuda_receipt": null,
+        "projection_cache_receipt": null,
+        "cast_audit": null
+      },
+      "ckpt_plus_frozen_proj": {
+        "step_ms": [
+          3146.7587890625,
+          3372.445068359375
+        ],
+        "peak_allocated_bytes": 1265953792,
+        "peak_reserved_bytes": 1335885824,
+        "nvml_used_mib": 1540.0,
+        "residual_step_receipt": null,
+        "residual_cuda_receipt": null,
+        "projection_cache_receipt": {
+          "sites": [
+            "target_model.layers.0.qkv_proj",
+            "target_model.layers.0.gate_up_proj",
+            "target_model.layers.1.qkv_proj",
+            "target_model.layers.1.gate_up_proj"
+          ],
+          "n_sites": 4,
+          "allow_cuda": true,
+          "allow_recompute": true,
+          "max_bytes": null,
+          "peak_bytes": 142606336,
+          "resident_bytes": 0,
+          "scopes": 1,
+          "hits": 860,
+          "misses": 4,
+          "fallbacks": 0,
+          "cap_rejections": 0,
+          "stream_checks": 1732,
+          "owner_stream": [
+            "cuda",
+            0,
+            0
+          ],
+          "per_site_hits": {
+            "target_model.layers.0.qkv_proj": 215,
+            "target_model.layers.0.gate_up_proj": 215,
+            "target_model.layers.1.qkv_proj": 215,
+            "target_model.layers.1.gate_up_proj": 215
+          },
+          "per_site_misses": {
+            "target_model.layers.0.qkv_proj": 1,
+            "target_model.layers.0.gate_up_proj": 1,
+            "target_model.layers.1.qkv_proj": 1,
+            "target_model.layers.1.gate_up_proj": 1
+          },
+          "per_site_fallbacks": {
+            "target_model.layers.0.qkv_proj": 0,
+            "target_model.layers.0.gate_up_proj": 0,
+            "target_model.layers.1.qkv_proj": 0,
+            "target_model.layers.1.gate_up_proj": 0
+          },
+          "poisoned": false,
+          "closed": true
+        },
+        "cast_audit": null
+      },
+      "parity": {
+        "tensors": 194,
+        "finite_bitwise": 194,
+        "within_tol": 194,
+        "overflow_parity": 0,
+        "failures": 0,
+        "max_abs": 0.0,
+        "scalars": 40,
+        "scalar_failures": 0,
+        "failure_examples": [],
+        "finite_bitwise_pass": true
+      },
+      "vram_saved_alloc_mib": -70.5625,
+      "vram_saved_nvml_mib": -42.0
+    }
+  ],
+  "stage_g_pretrained_transfer": {
+    "trm_or_datagoblin": {
+      "status": "blocked_no_local_checkpoint",
+      "reason": "No local gaoxin492/step_21700, yagizdevre/model.pt, complete HRM-Text-1B, or DataGoblin PyTorch checkpoint present; offline/no-download policy respected."
+    },
+    "pretrained_qwen3_4b": {
+      "status": "ok",
+      "source_model": "Qwen/Qwen3-4B (local cached shard 2/3, layers 16-17, no download)",
+      "shard_sha256": "6cd087b316306a68c562436b5492edbcf6e16c6dba3a1308279caa5a58e21ca5",
+      "cells": [
+        {
+          "checkpoint_family": "pretrained_qwen3_4b_block",
+          "layers": [
+            16,
+            17
+          ],
+          "hidden_size": 2560,
+          "intermediate_size": 9728,
+          "visits": 6,
+          "fuse13_arm_g": {
+            "step_ms": [
+              1211.8048095703125,
+              114.77366638183594
+            ],
+            "unique_proj_cast_storages": 120,
+            "unique_proj_cast_bytes": 3145728000,
+            "peak_allocated_bytes": 4563819008,
+            "peak_reserved_bytes": 4693426176,
+            "nvml_used_mib": 4724.0,
+            "proj_receipt": null
+          },
+          "fuse14_arm_h": {
+            "step_ms": [
+              167.5990447998047,
+              112.31241607666016
+            ],
+            "unique_proj_cast_storages": 10,
+            "unique_proj_cast_bytes": 262144000,
+            "peak_allocated_bytes": 1694855168,
+            "peak_reserved_bytes": 1853882368,
+            "nvml_used_mib": 2016.0,
+            "proj_receipt": {
+              "sites": [
+                "target_model.layers.0.q_proj",
+                "target_model.layers.0.k_proj",
+                "target_model.layers.0.v_proj",
+                "target_model.layers.0.gate_proj",
+                "target_model.layers.0.up_proj",
+                "target_model.layers.1.q_proj",
+                "target_model.layers.1.k_proj",
+                "target_model.layers.1.v_proj",
+                "target_model.layers.1.gate_proj",
+                "target_model.layers.1.up_proj"
+              ],
+              "n_sites": 10,
+              "allow_cuda": true,
+              "allow_recompute": false,
+              "max_bytes": null,
+              "peak_bytes": 262144000,
+              "resident_bytes": 0,
+              "scopes": 2,
+              "hits": 110,
+              "misses": 10,
+              "fallbacks": 0,
+              "cap_rejections": 0,
+              "stream_checks": 270,
+              "owner_stream": [
+                "cuda",
+                0,
+                0
+              ],
+              "per_site_hits": {
+                "target_model.layers.0.q_proj": 11,
+                "target_model.layers.0.k_proj": 11,
+                "target_model.layers.0.v_proj": 11,
+                "target_model.layers.0.gate_proj": 11,
+                "target_model.layers.0.up_proj": 11,
+                "target_model.layers.1.q_proj": 11,
+                "target_model.layers.1.k_proj": 11,
+                "target_model.layers.1.v_proj": 11,
+                "target_model.layers.1.gate_proj": 11,
+                "target_model.layers.1.up_proj": 11
+              },
+              "per_site_misses": {
+                "target_model.layers.0.q_proj": 1,
+                "target_model.layers.0.k_proj": 1,
+                "target_model.layers.0.v_proj": 1,
+                "target_model.layers.0.gate_proj": 1,
+                "target_model.layers.0.up_proj": 1,
+                "target_model.layers.1.q_proj": 1,
+                "target_model.layers.1.k_proj": 1,
+                "target_model.layers.1.v_proj": 1,
+                "target_model.layers.1.gate_proj": 1,
+                "target_model.layers.1.up_proj": 1
+              },
+              "per_site_fallbacks": {
+                "target_model.layers.0.q_proj": 0,
+                "target_model.layers.0.k_proj": 0,
+                "target_model.layers.0.v_proj": 0,
+                "target_model.layers.0.gate_proj": 0,
+                "target_model.layers.0.up_proj": 0,
+                "target_model.layers.1.q_proj": 0,
+                "target_model.layers.1.k_proj": 0,
+                "target_model.layers.1.v_proj": 0,
+                "target_model.layers.1.gate_proj": 0,
+                "target_model.layers.1.up_proj": 0
+              },
+              "poisoned": false,
+              "closed": true
+            }
+          },
+          "parity": {
+            "tensors": 71,
+            "finite_bitwise": 71,
+            "within_tol": 71,
+            "overflow_parity": 0,
+            "failures": 0,
+            "max_abs": 0.0,
+            "scalars": 0,
+            "scalar_failures": 0,
+            "failure_examples": [],
+            "finite_bitwise_pass": true
+          },
+          "vram_saved_alloc_mib": 2736.05712890625,
+          "vram_saved_nvml_mib": 2708.0
+        },
+        {
+          "checkpoint_family": "pretrained_qwen3_4b_block",
+          "layers": [
+            16,
+            17
+          ],
+          "hidden_size": 2560,
+          "intermediate_size": 9728,
+          "visits": 12,
+          "fuse13_arm_g": {
+            "step_ms": [
+              410.4832763671875,
+              275.4367370605469
+            ],
+            "unique_proj_cast_storages": 240,
+            "unique_proj_cast_bytes": 6291456000,
+            "peak_allocated_bytes": 7900934144,
+            "peak_reserved_bytes": 8069840896,
+            "nvml_used_mib": 7944.0,
+            "proj_receipt": null
+          },
+          "fuse14_arm_h": {
+            "step_ms": [
+              383.9942321777344,
+              246.7480010986328
+            ],
+            "unique_proj_cast_storages": 10,
+            "unique_proj_cast_bytes": 262144000,
+            "peak_allocated_bytes": 1824884736,
+            "peak_reserved_bytes": 2006974464,
+            "nvml_used_mib": 2162.0,
+            "proj_receipt": {
+              "sites": [
+                "target_model.layers.0.q_proj",
+                "target_model.layers.0.k_proj",
+                "target_model.layers.0.v_proj",
+                "target_model.layers.0.gate_proj",
+                "target_model.layers.0.up_proj",
+                "target_model.layers.1.q_proj",
+                "target_model.layers.1.k_proj",
+                "target_model.layers.1.v_proj",
+                "target_model.layers.1.gate_proj",
+                "target_model.layers.1.up_proj"
+              ],
+              "n_sites": 10,
+              "allow_cuda": true,
+              "allow_recompute": false,
+              "max_bytes": null,
+              "peak_bytes": 262144000,
+              "resident_bytes": 0,
+              "scopes": 2,
+              "hits": 230,
+              "misses": 10,
+              "fallbacks": 0,
+              "cap_rejections": 0,
+              "stream_checks": 510,
+              "owner_stream": [
+                "cuda",
+                0,
+                0
+              ],
+              "per_site_hits": {
+                "target_model.layers.0.q_proj": 23,
+                "target_model.layers.0.k_proj": 23,
+                "target_model.layers.0.v_proj": 23,
+                "target_model.layers.0.gate_proj": 23,
+                "target_model.layers.0.up_proj": 23,
+                "target_model.layers.1.q_proj": 23,
+                "target_model.layers.1.k_proj": 23,
+                "target_model.layers.1.v_proj": 23,
+                "target_model.layers.1.gate_proj": 23,
+                "target_model.layers.1.up_proj": 23
+              },
+              "per_site_misses": {
+                "target_model.layers.0.q_proj": 1,
+                "target_model.layers.0.k_proj": 1,
+                "target_model.layers.0.v_proj": 1,
+                "target_model.layers.0.gate_proj": 1,
+                "target_model.layers.0.up_proj": 1,
+                "target_model.layers.1.q_proj": 1,
+                "target_model.layers.1.k_proj": 1,
+                "target_model.layers.1.v_proj": 1,
+                "target_model.layers.1.gate_proj": 1,
+                "target_model.layers.1.up_proj": 1
+              },
+              "per_site_fallbacks": {
+                "target_model.layers.0.q_proj": 0,
+                "target_model.layers.0.k_proj": 0,
+                "target_model.layers.0.v_proj": 0,
+                "target_model.layers.0.gate_proj": 0,
+                "target_model.layers.0.up_proj": 0,
+                "target_model.layers.1.q_proj": 0,
+                "target_model.layers.1.k_proj": 0,
+                "target_model.layers.1.v_proj": 0,
+                "target_model.layers.1.gate_proj": 0,
+                "target_model.layers.1.up_proj": 0
+              },
+              "poisoned": false,
+              "closed": true
+            }
+          },
+          "parity": {
+            "tensors": 71,
+            "finite_bitwise": 71,
+            "within_tol": 71,
+            "overflow_parity": 0,
+            "failures": 0,
+            "max_abs": 0.0,
+            "scalars": 0,
+            "scalar_failures": 0,
+            "failure_examples": [],
+            "finite_bitwise_pass": true
+          },
+          "vram_saved_alloc_mib": 5794.572265625,
+          "vram_saved_nvml_mib": 5782.0
+        }
+      ]
+    }
+  },
+  "elapsed_seconds": 221.80266440002015
+}

@@ -748,6 +748,9 @@ def stage_g_pretrained_transfer(device: torch.device) -> dict[str, Any]:
             if is_cuda:
                 torch.cuda.empty_cache()
                 torch.cuda.reset_peak_memory_stats(device)
+            torch.manual_seed(14750 + visits)
+            if is_cuda:
+                torch.cuda.manual_seed_all(14750 + visits)
             base = _Qwen3LoopedTransferModel(layers_sd)
             sites = {f"layers.{i}.{n}": 64 for i in range(2) for n in ("o_proj", "down_proj")}
             bpd = BPDModel(base, sites, max_passes=visits, ablation=AblationConfig(mode="zero", sphere_rescale=False), init_svd=False).to(device)
@@ -756,14 +759,17 @@ def stage_g_pretrained_transfer(device: torch.device) -> dict[str, Any]:
             from .step_cache import StepResidualPool
             res_cap = sum(w.W_target.numel() * 2 for w in bpd.wrappers.values())
             proj_mods = eligible_frozen_projections(bpd, targets=("q_proj", "k_proj", "v_proj", "gate_proj", "up_proj"))
-            proj_shapes = {tuple(m.weight.shape): n for n, m in proj_mods}
-            proj_shapes.update({(s[1], s[0]): n for s, n in list(proj_shapes.items())})
+            proj_sigs: set[tuple[tuple[int, int], tuple[int, int]]] = set()
+            for _, m in proj_mods:
+                out_f, in_f = int(m.weight.shape[0]), int(m.weight.shape[1])
+                proj_sigs.add(((out_f, in_f), (in_f, 1)))
+                proj_sigs.add(((in_f, out_f), (1, in_f)))
 
             saved_ptrs: set[int] = set()
             saved_bytes_map: dict[int, int] = {}
 
             def _pack(t: torch.Tensor):
-                if t.dtype == torch.bfloat16 and tuple(t.shape) in proj_shapes:
+                if t.dtype == torch.bfloat16 and (tuple(t.shape), tuple(t.stride())) in proj_sigs:
                     st = t.untyped_storage()
                     ptr = int(st.data_ptr())
                     saved_ptrs.add(ptr)
@@ -889,9 +895,10 @@ def main() -> int:
     p.add_argument("--allow-cuda", action="store_true")
     p.add_argument("--output", type=Path, required=True)
     p.add_argument("--min-watts", type=float, default=60.0)
+    p.add_argument("--stage-g-only", action="store_true")
     args = p.parse_args()
 
-    device = torch.device(args.device)
+    device = torch.device("cuda:0" if args.device == "cuda" else "cpu")
     t0 = time.perf_counter()
 
     if device.type == "cuda":
@@ -903,6 +910,23 @@ def main() -> int:
     else:
         torch.set_num_threads(1)
         snap_nvml = {}
+
+    if args.stage_g_only:
+        if device.type != "cuda" or not args.output.exists():
+            raise RuntimeError("--stage-g-only requires --device cuda and an existing --output receipt")
+        print("[fuse14] Stage G only: pretrained checkpoint transfer (Qwen3-4B) ...", flush=True)
+        existing = json.loads(args.output.read_text(encoding="utf-8"))
+        stage_g = stage_g_pretrained_transfer(device)
+        configure_precision_mode("fp32")
+        existing["stage_g_pretrained_transfer"] = stage_g
+        args.output.write_text(json.dumps(existing, indent=2, allow_nan=False) + "\n", encoding="utf-8")
+        cells = stage_g.get("pretrained_qwen3_4b", {}).get("cells", [])
+        n_ok = sum(int(c["parity"]["finite_bitwise_pass"]) for c in cells)
+        print("FUSE14_STAGE_G_DONE", json.dumps({"stage_g_qwen3_bitwise": f"{n_ok}/{len(cells)}"}), flush=True)
+        for c in cells:
+            if not c["parity"]["finite_bitwise_pass"]:
+                raise AssertionError(f"Stage G parity failed visits={c['visits']}: {c['parity']['failure_examples'][:3]}")
+        return 0
 
     # Stage C: Lifecycle & Fail-Closed Guards
     print("[fuse14] Stage C: lifecycle guards ...", flush=True)

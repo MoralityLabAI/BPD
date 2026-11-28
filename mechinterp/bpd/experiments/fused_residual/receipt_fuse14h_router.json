@@ -1,0 +1,702 @@
+{
+  "status": "experimental_non_correctness_path",
+  "correctness_path": false,
+  "hard_evidence_gate_modes": [
+    "bf16",
+    "fp32",
+    "tf32"
+  ],
+  "fp16_status": "HOLD",
+  "total_fuse13_base_rows": 303,
+  "total_fuse14_routing_rows": 46,
+  "total_site_samples": 706,
+  "checkpoint_families_observed": [
+    "pretrained_qwen3_4b_block",
+    "synthetic_mini_trm"
+  ],
+  "learned_residual_beats_safe_physical_on_all_holdouts": false,
+  "recommended_experimental_router": "safe_physical_prior (hard-evidence-gated)",
+  "leave_one_width_out": {
+    "groups": [
+      "64",
+      "128",
+      "256",
+      "512",
+      "1024",
+      "2048",
+      "4096"
+    ],
+    "mean_safe_oracle_fraction_step_ms": {
+      "safe_physical_prior": 0.978611741251976,
+      "safe_physical_plus_learned": 0.9674203740622447,
+      "safe_exact_saved_mac": 0.9355592858500438,
+      "safe_density": 0.9374820766931172,
+      "ungated_physical_prior_ref": 0.978611741251976
+    },
+    "p95_regret_step_ms": {
+      "safe_physical_prior": 234.3428950050038,
+      "safe_physical_plus_learned": 234.3428950050038,
+      "safe_exact_saved_mac": 234.3428950050038,
+      "safe_density": 26510.003209301274,
+      "ungated_physical_prior_ref": 234.3428950050038
+    },
+    "max_regret_step_ms": {
+      "safe_physical_prior": 234.3428950050038,
+      "safe_physical_plus_learned": 234.3428950050038,
+      "safe_exact_saved_mac": 234.3428950050038,
+      "safe_density": 26510.003209301274,
+      "ungated_physical_prior_ref": 234.3428950050038
+    },
+    "unsafe_admission_rate": {
+      "safe_physical_prior": 0.0,
+      "safe_physical_plus_learned": 0.0,
+      "safe_exact_saved_mac": 0.0,
+      "safe_density": 0.0,
+      "ungated_physical_prior_ref": 0.01617826617826618
+    },
+    "false_rejection_rate": {
+      "safe_physical_prior": 0.0,
+      "safe_physical_plus_learned": 0.0,
+      "safe_exact_saved_mac": 0.0,
+      "safe_density": 0.0,
+      "ungated_physical_prior_ref": 0.0
+    },
+    "folds": {
+      "64": {
+        "total_decisions": 33,
+        "safe_decisions": 33,
+        "mean_safe_oracle_fraction_step_ms": {
+          "safe_physical_prior": 1.0,
+          "safe_physical_plus_learned": 0.9113057006904992,
+          "safe_exact_saved_mac": 0.9755942132980465,
+          "safe_density": 0.9909638132955875,
+          "ungated_physical_prior_ref": 1.0
+        },
+        "p95_regret_step_ms": {
+          "safe_physical_prior": 0.0,
+          "safe_physical_plus_learned": 6.591688294571005,
+          "safe_exact_saved_mac": 0.049743971270282294,
+          "safe_density": 0.029257773869858394,
+          "ungated_physical_prior_ref": 0.0
+        },
+        "max_regret_step_ms": {
+          "safe_physical_prior": 0.0,
+          "safe_physical_plus_learned": 6.972620069758213,
+          "safe_exact_saved_mac": 0.20191901351834096,
+          "safe_density": 0.049743971270282294,
+          "ungated_physical_prior_ref": 0.0
+        },
+        "unsafe_admission_rate": {
+          "safe_physical_prior": 0.0,
+          "safe_physical_plus_learned": 0.0,
+          "safe_exact_saved_mac": 0.0,
+          "safe_density": 0.0,
+          "ungated_physical_prior_ref": 0.0
+        },
+        "false_rejection_rate": {
+          "safe_physical_prior": 0.0,
+          "safe_physical_plus_learned": 0.0,
+          "safe_exact_saved_mac": 0.0,
+          "safe_density": 0.0,
+          "ungated_physical_prior_ref": 0.0
+        }
+      },
+      "128": {
+        "total_decisions": 93,
+        "safe_decisions": 93,
+        "mean_safe_oracle_fraction_step_ms": {
+          "safe_physical_prior": 0.9899990212509748,
+          "safe_physical_plus_learned": 0.9681761132213493,
+          "safe_exact_saved_mac": 0.9613429777139149,
+          "safe_density": 0.9868553539917713,
+          "ungated_physical_prior_ref": 0.9899990212509748
+        },
+        "p95_regret_step_ms": {
+          "safe_physical_prior": 0.03831097585229015,
+          "safe_physical_plus_learned": 1.0337934207220094,
+          "safe_exact_saved_mac": 0.21140128619429988,
+          "safe_density": 0.08612048643446313,
+          "ungated_physical_prior_ref": 0.03831097585229015
+        },
+        "max_regret_step_ms": {
+          "safe_physical_prior": 0.10321810942276777,
+          "safe_physical_plus_learned": 2.18938274800702,
+          "safe_exact_saved_mac": 0.34374325340669165,
+          "safe_density": 0.10321810942276777,
+          "ungated_physical_prior_ref": 0.10321810942276777
+        },
+        "unsafe_admission_rate": {
+          "safe_physical_prior": 0.0,
+          "safe_physical_plus_learned": 0.0,
+          "safe_exact_saved_mac": 0.0,
+          "safe_density": 0.0,
+          "ungated_physical_prior_ref": 0.0
+        },
+        "false_rejection_rate": {
+          "safe_physical_prior": 0.0,
+          "safe_physical_plus_learned": 0.0,
+          "safe_exact_saved_mac": 0.0,
+          "safe_density": 0.0,
+          "ungated_physical_prior_ref": 0.0
+        }
+      },
+      "256": {
+        "total_decisions": 87,
+        "safe_decisions": 87,
+        "mean_safe_oracle_fraction_step_ms": {
+          "safe_physical_prior": 0.919681638827754,
+          "safe_physical_plus_learned": 0.919681638827754,
+          "safe_exact_saved_mac": 0.8468369950967458,
+          "safe_density": 0.8604076551121707,
+          "ungated_physical_prior_ref": 0.919681638827754
+        },
+        "p95_regret_step_ms": {
+          "safe_physical_prior": 3.8382196632512935,
+          "safe_physical_plus_learned": 3.8382196632512935,
+          "safe_exact_saved_mac": 8.672386176873648,
+          "safe_density": 4.606415787147148,
+          "ungated_physical_prior_ref": 3.8382196632512935
+        },
+        "max_regret_step_ms": {
+          "safe_physical_prior": 4.606415787147148,
+          "safe_physical_plus_learned": 4.606415787147148,
+          "safe_exact_saved_mac": 16.143695890027118,
+          "safe_density": 8.672386176873648,
+          "ungated_physical_prior_ref": 4.606415787147148
+        },
+        "unsafe_admission_rate": {
+          "safe_physical_prior": 0.0,
+          "safe_physical_plus_learned": 0.0,
+          "safe_exact_saved_mac": 0.0,
+          "safe_density": 0.0,
+          "ungated_physical_prior_ref": 0.0
+        },
+        "false_rejection_rate": {
+          "safe_physical_prior": 0.0,
+          "safe_physical_plus_learned": 0.0,
+          "safe_exact_saved_mac": 0.0,
+          "safe_density": 0.0,
+          "ungated_physical_prior_ref": 0.0
+        }
+      },
+      "512": {
+        "total_decisions": 162,
+        "safe_decisions": 153,
+        "mean_safe_oracle_fraction_step_ms": {
+          "safe_physical_prior": 0.989748956719941,
+          "safe_physical_plus_learned": 0.989748956719941,
+          "safe_exact_saved_mac": 0.8608719778695072,
+          "safe_density": 0.92409370673174,
+          "ungated_physical_prior_ref": 0.989748956719941
+        },
+        "p95_regret_step_ms": {
+          "safe_physical_prior": 6.535580209378708,
+          "safe_physical_plus_learned": 6.535580209378708,
+          "safe_exact_saved_mac": 108.86171978964877,
+          "safe_density": 78.18622049484898,
+          "ungated_physical_prior_ref": 6.535580209378708
+        },
+        "max_regret_step_ms": {
+          "safe_physical_prior": 7.051664795984607,
+          "safe_physical_plus_learned": 7.051664795984607,
+          "safe_exact_saved_mac": 126.84324608826785,
+          "safe_density": 110.33429749854179,
+          "ungated_physical_prior_ref": 7.051664795984607
+        },
+        "unsafe_admission_rate": {
+          "safe_physical_prior": 0.0,
+          "safe_physical_plus_learned": 0.0,
+          "safe_exact_saved_mac": 0.0,
+          "safe_density": 0.0,
+          "ungated_physical_prior_ref": 0.05555555555555555
+        },
+        "false_rejection_rate": {
+          "safe_physical_prior": 0.0,
+          "safe_physical_plus_learned": 0.0,
+          "safe_exact_saved_mac": 0.0,
+          "safe_density": 0.0,
+          "ungated_physical_prior_ref": 0.0
+        }
+      },
+      "1024": {
+        "total_decisions": 126,
+        "safe_decisions": 126,
+        "mean_safe_oracle_fraction_step_ms": {
+          "safe_physical_prior": 0.9573976028904672,
+          "safe_physical_plus_learned": 0.9895752399014741,
+          "safe_exact_saved_mac": 0.9060138955821404,
+          "safe_density": 0.9271182131203277,
+          "ungated_physical_prior_ref": 0.9573976028904672
+        },
+        "p95_regret_step_ms": {
+          "safe_physical_prior": 13.768524722338242,
+          "safe_physical_plus_learned": 0.1507441544687258,
+          "safe_exact_saved_mac": 13.768524722338242,
+          "safe_density": 8.389040535436838,
+          "ungated_physical_prior_ref": 13.768524722338242
+        },
+        "max_regret_step_ms": {
+          "safe_physical_prior": 20.81339288810966,
+          "safe_physical_plus_learned": 0.4978382124503158,
+          "safe_exact_saved_mac": 20.81339288810966,
+          "safe_density": 12.68141650172906,
+          "ungated_physical_prior_ref": 20.81339288810966
+        },
+        "unsafe_admission_rate": {
+          "safe_physical_prior": 0.0,
+          "safe_physical_plus_learned": 0.0,
+          "safe_exact_saved_mac": 0.0,
+          "safe_density": 0.0,
+          "ungated_physical_prior_ref": 0.0
+        },
+        "false_rejection_rate": {
+          "safe_physical_prior": 0.0,
+          "safe_physical_plus_learned": 0.0,
+          "safe_exact_saved_mac": 0.0,
+          "safe_density": 0.0,
+          "ungated_physical_prior_ref": 0.0
+        }
+      },
+      "2048": {
+        "total_decisions": 156,
+        "safe_decisions": 147,
+        "mean_safe_oracle_fraction_step_ms": {
+          "safe_physical_prior": 0.9952000276847439,
+          "safe_physical_plus_learned": 0.9952000276847439,
+          "safe_exact_saved_mac": 1.0,
+          "safe_density": 0.9743114290848024,
+          "ungated_physical_prior_ref": 0.9952000276847439
+        },
+        "p95_regret_step_ms": {
+          "safe_physical_prior": 0.0,
+          "safe_physical_plus_learned": 0.0,
+          "safe_exact_saved_mac": 0.0,
+          "safe_density": 6.52209784685828,
+          "ungated_physical_prior_ref": 0.0
+        },
+        "max_regret_step_ms": {
+          "safe_physical_prior": 1.7058964408256152,
+          "safe_physical_plus_learned": 1.7058964408256152,
+          "safe_exact_saved_mac": 0.0,
+          "safe_density": 11.3274914527274,
+          "ungated_physical_prior_ref": 1.7058964408256152
+        },
+        "unsafe_admission_rate": {
+          "safe_physical_prior": 0.0,
+          "safe_physical_plus_learned": 0.0,
+          "safe_exact_saved_mac": 0.0,
+          "safe_density": 0.0,
+          "ungated_physical_prior_ref": 0.057692307692307696
+        },
+        "false_rejection_rate": {
+          "safe_physical_prior": 0.0,
+          "safe_physical_plus_learned": 0.0,
+          "safe_exact_saved_mac": 0.0,
+          "safe_density": 0.0,
+          "ungated_physical_prior_ref": 0.0
+        }
+      },
+      "4096": {
+        "total_decisions": 18,
+        "safe_decisions": 18,
+        "mean_safe_oracle_fraction_step_ms": {
+          "safe_physical_prior": 0.9982549413899515,
+          "safe_physical_plus_learned": 0.9982549413899515,
+          "safe_exact_saved_mac": 0.9982549413899515,
+          "safe_density": 0.8986243655154211,
+          "ungated_physical_prior_ref": 0.9982549413899515
+        },
+        "p95_regret_step_ms": {
+          "safe_physical_prior": 234.3428950050038,
+          "safe_physical_plus_learned": 234.3428950050038,
+          "safe_exact_saved_mac": 234.3428950050038,
+          "safe_density": 26510.003209301274,
+          "ungated_physical_prior_ref": 234.3428950050038
+        },
+        "max_regret_step_ms": {
+          "safe_physical_prior": 234.3428950050038,
+          "safe_physical_plus_learned": 234.3428950050038,
+          "safe_exact_saved_mac": 234.3428950050038,
+          "safe_density": 26510.003209301274,
+          "ungated_physical_prior_ref": 234.3428950050038
+        },
+        "unsafe_admission_rate": {
+          "safe_physical_prior": 0.0,
+          "safe_physical_plus_learned": 0.0,
+          "safe_exact_saved_mac": 0.0,
+          "safe_density": 0.0,
+          "ungated_physical_prior_ref": 0.0
+        },
+        "false_rejection_rate": {
+          "safe_physical_prior": 0.0,
+          "safe_physical_plus_learned": 0.0,
+          "safe_exact_saved_mac": 0.0,
+          "safe_density": 0.0,
+          "ungated_physical_prior_ref": 0.0
+        }
+      }
+    }
+  },
+  "leave_one_depth_out": {
+    "groups": [
+      "6",
+      "12",
+      "24"
+    ],
+    "mean_safe_oracle_fraction_step_ms": {
+      "safe_physical_prior": 0.9856980470866157,
+      "safe_physical_plus_learned": 0.9430743431181348,
+      "safe_exact_saved_mac": 0.9497247654809147,
+      "safe_density": 0.9432983226162656,
+      "ungated_physical_prior_ref": 0.9856980470866157
+    },
+    "p95_regret_step_ms": {
+      "safe_physical_prior": 234.25705423619365,
+      "safe_physical_plus_learned": 26500.292485805414,
+      "safe_exact_saved_mac": 234.25705423619365,
+      "safe_density": 26500.292485805414,
+      "ungated_physical_prior_ref": 234.25705423619365
+    },
+    "max_regret_step_ms": {
+      "safe_physical_prior": 234.3428950050038,
+      "safe_physical_plus_learned": 26510.003209301274,
+      "safe_exact_saved_mac": 234.3428950050038,
+      "safe_density": 26510.003209301274,
+      "ungated_physical_prior_ref": 234.3428950050038
+    },
+    "unsafe_admission_rate": {
+      "safe_physical_prior": 0.0,
+      "safe_physical_plus_learned": 0.0,
+      "safe_exact_saved_mac": 0.0,
+      "safe_density": 0.0,
+      "ungated_physical_prior_ref": 0.01694915254237288
+    },
+    "false_rejection_rate": {
+      "safe_physical_prior": 0.0,
+      "safe_physical_plus_learned": 0.0,
+      "safe_exact_saved_mac": 0.0,
+      "safe_density": 0.0,
+      "ungated_physical_prior_ref": 0.0
+    },
+    "folds": {
+      "6": {
+        "total_decisions": 276,
+        "safe_decisions": 276,
+        "mean_safe_oracle_fraction_step_ms": {
+          "safe_physical_prior": 0.9835816322388,
+          "safe_physical_plus_learned": 0.9654646415532026,
+          "safe_exact_saved_mac": 0.961114662316118,
+          "safe_density": 0.9673892619844564,
+          "ungated_physical_prior_ref": 0.9835816322388
+        },
+        "p95_regret_step_ms": {
+          "safe_physical_prior": 0.2507750901771676,
+          "safe_physical_plus_learned": 2.18938274800702,
+          "safe_exact_saved_mac": 0.7370092938742472,
+          "safe_density": 0.7852861056789404,
+          "ungated_physical_prior_ref": 0.2507750901771676
+        },
+        "max_regret_step_ms": {
+          "safe_physical_prior": 4.606415787147148,
+          "safe_physical_plus_learned": 6.972620069758213,
+          "safe_exact_saved_mac": 4.606415787147148,
+          "safe_density": 4.606415787147148,
+          "ungated_physical_prior_ref": 4.606415787147148
+        },
+        "unsafe_admission_rate": {
+          "safe_physical_prior": 0.0,
+          "safe_physical_plus_learned": 0.0,
+          "safe_exact_saved_mac": 0.0,
+          "safe_density": 0.0,
+          "ungated_physical_prior_ref": 0.0
+        },
+        "false_rejection_rate": {
+          "safe_physical_prior": 0.0,
+          "safe_physical_plus_learned": 0.0,
+          "safe_exact_saved_mac": 0.0,
+          "safe_density": 0.0,
+          "ungated_physical_prior_ref": 0.0
+        }
+      },
+      "12": {
+        "total_decisions": 354,
+        "safe_decisions": 336,
+        "mean_safe_oracle_fraction_step_ms": {
+          "safe_physical_prior": 0.9743057174801601,
+          "safe_physical_plus_learned": 0.9701634982768251,
+          "safe_exact_saved_mac": 0.8888528425857392,
+          "safe_density": 0.9206986608099228,
+          "ungated_physical_prior_ref": 0.9743057174801601
+        },
+        "p95_regret_step_ms": {
+          "safe_physical_prior": 6.535580209378708,
+          "safe_physical_plus_learned": 6.535580209378708,
+          "safe_exact_saved_mac": 78.18622049484898,
+          "safe_density": 44.407307409792125,
+          "ungated_physical_prior_ref": 6.535580209378708
+        },
+        "max_regret_step_ms": {
+          "safe_physical_prior": 20.81339288810966,
+          "safe_physical_plus_learned": 20.81339288810966,
+          "safe_exact_saved_mac": 126.84324608826785,
+          "safe_density": 110.33429749854179,
+          "ungated_physical_prior_ref": 20.81339288810966
+        },
+        "unsafe_admission_rate": {
+          "safe_physical_prior": 0.0,
+          "safe_physical_plus_learned": 0.0,
+          "safe_exact_saved_mac": 0.0,
+          "safe_density": 0.0,
+          "ungated_physical_prior_ref": 0.05084745762711865
+        },
+        "false_rejection_rate": {
+          "safe_physical_prior": 0.0,
+          "safe_physical_plus_learned": 0.0,
+          "safe_exact_saved_mac": 0.0,
+          "safe_density": 0.0,
+          "ungated_physical_prior_ref": 0.0
+        }
+      },
+      "24": {
+        "total_decisions": 45,
+        "safe_decisions": 45,
+        "mean_safe_oracle_fraction_step_ms": {
+          "safe_physical_prior": 0.999206791540887,
+          "safe_physical_plus_learned": 0.8935948895243767,
+          "safe_exact_saved_mac": 0.999206791540887,
+          "safe_density": 0.9418070450544175,
+          "ungated_physical_prior_ref": 0.999206791540887
+        },
+        "p95_regret_step_ms": {
+          "safe_physical_prior": 234.25705423619365,
+          "safe_physical_plus_learned": 26500.292485805414,
+          "safe_exact_saved_mac": 234.25705423619365,
+          "safe_density": 26500.292485805414,
+          "ungated_physical_prior_ref": 234.25705423619365
+        },
+        "max_regret_step_ms": {
+          "safe_physical_prior": 234.3428950050038,
+          "safe_physical_plus_learned": 26510.003209301274,
+          "safe_exact_saved_mac": 234.3428950050038,
+          "safe_density": 26510.003209301274,
+          "ungated_physical_prior_ref": 234.3428950050038
+        },
+        "unsafe_admission_rate": {
+          "safe_physical_prior": 0.0,
+          "safe_physical_plus_learned": 0.0,
+          "safe_exact_saved_mac": 0.0,
+          "safe_density": 0.0,
+          "ungated_physical_prior_ref": 0.0
+        },
+        "false_rejection_rate": {
+          "safe_physical_prior": 0.0,
+          "safe_physical_plus_learned": 0.0,
+          "safe_exact_saved_mac": 0.0,
+          "safe_density": 0.0,
+          "ungated_physical_prior_ref": 0.0
+        }
+      }
+    }
+  },
+  "leave_one_precision_out": {
+    "groups": [
+      "bf16",
+      "fp16",
+      "fp32",
+      "tf32"
+    ],
+    "mean_safe_oracle_fraction_step_ms": {
+      "safe_physical_prior": 0.9669115078801866,
+      "safe_physical_plus_learned": 0.9660604644364031,
+      "safe_exact_saved_mac": 0.9232395080939633,
+      "safe_density": 0.945734679112554,
+      "ungated_physical_prior_ref": 0.9669115078801866
+    },
+    "p95_regret_step_ms": {
+      "safe_physical_prior": 3.8382196632512935,
+      "safe_physical_plus_learned": 6.052008134014528,
+      "safe_exact_saved_mac": 16.143695890027118,
+      "safe_density": 11.3274914527274,
+      "ungated_physical_prior_ref": 3.8382196632512935
+    },
+    "max_regret_step_ms": {
+      "safe_physical_prior": 234.3428950050038,
+      "safe_physical_plus_learned": 234.3428950050038,
+      "safe_exact_saved_mac": 234.3428950050038,
+      "safe_density": 26510.003209301274,
+      "ungated_physical_prior_ref": 234.3428950050038
+    },
+    "unsafe_admission_rate": {
+      "safe_physical_prior": 0.0,
+      "safe_physical_plus_learned": 0.0,
+      "safe_exact_saved_mac": 0.0,
+      "safe_density": 0.0,
+      "ungated_physical_prior_ref": 0.25
+    },
+    "false_rejection_rate": {
+      "safe_physical_prior": 0.0,
+      "safe_physical_plus_learned": 0.0,
+      "safe_exact_saved_mac": 0.0,
+      "safe_density": 0.0,
+      "ungated_physical_prior_ref": 0.0
+    },
+    "folds": {
+      "bf16": {
+        "total_decisions": 18,
+        "safe_decisions": 18,
+        "mean_safe_oracle_fraction_step_ms": {
+          "safe_physical_prior": null,
+          "safe_physical_plus_learned": null,
+          "safe_exact_saved_mac": null,
+          "safe_density": null,
+          "ungated_physical_prior_ref": null
+        },
+        "p95_regret_step_ms": {
+          "safe_physical_prior": null,
+          "safe_physical_plus_learned": null,
+          "safe_exact_saved_mac": null,
+          "safe_density": null,
+          "ungated_physical_prior_ref": null
+        },
+        "max_regret_step_ms": {
+          "safe_physical_prior": null,
+          "safe_physical_plus_learned": null,
+          "safe_exact_saved_mac": null,
+          "safe_density": null,
+          "ungated_physical_prior_ref": null
+        },
+        "unsafe_admission_rate": {
+          "safe_physical_prior": 0.0,
+          "safe_physical_plus_learned": 0.0,
+          "safe_exact_saved_mac": 0.0,
+          "safe_density": 0.0,
+          "ungated_physical_prior_ref": 0.0
+        },
+        "false_rejection_rate": {
+          "safe_physical_prior": 0.0,
+          "safe_physical_plus_learned": 0.0,
+          "safe_exact_saved_mac": 0.0,
+          "safe_density": 0.0,
+          "ungated_physical_prior_ref": 0.0
+        }
+      },
+      "fp16": {
+        "total_decisions": 18,
+        "safe_decisions": 0,
+        "mean_safe_oracle_fraction_step_ms": {
+          "safe_physical_prior": null,
+          "safe_physical_plus_learned": null,
+          "safe_exact_saved_mac": null,
+          "safe_density": null,
+          "ungated_physical_prior_ref": null
+        },
+        "p95_regret_step_ms": {
+          "safe_physical_prior": null,
+          "safe_physical_plus_learned": null,
+          "safe_exact_saved_mac": null,
+          "safe_density": null,
+          "ungated_physical_prior_ref": null
+        },
+        "max_regret_step_ms": {
+          "safe_physical_prior": null,
+          "safe_physical_plus_learned": null,
+          "safe_exact_saved_mac": null,
+          "safe_density": null,
+          "ungated_physical_prior_ref": null
+        },
+        "unsafe_admission_rate": {
+          "safe_physical_prior": 0.0,
+          "safe_physical_plus_learned": 0.0,
+          "safe_exact_saved_mac": 0.0,
+          "safe_density": 0.0,
+          "ungated_physical_prior_ref": 1.0
+        },
+        "false_rejection_rate": {
+          "safe_physical_prior": 0.0,
+          "safe_physical_plus_learned": 0.0,
+          "safe_exact_saved_mac": 0.0,
+          "safe_density": 0.0,
+          "ungated_physical_prior_ref": 0.0
+        }
+      },
+      "fp32": {
+        "total_decisions": 603,
+        "safe_decisions": 603,
+        "mean_safe_oracle_fraction_step_ms": {
+          "safe_physical_prior": 0.9837019178614701,
+          "safe_physical_plus_learned": 0.9819998309739032,
+          "safe_exact_saved_mac": 0.9422026550219683,
+          "safe_density": 0.9480392717621887,
+          "ungated_physical_prior_ref": 0.9837019178614701
+        },
+        "p95_regret_step_ms": {
+          "safe_physical_prior": 3.8382196632512935,
+          "safe_physical_plus_learned": 6.052008134014528,
+          "safe_exact_saved_mac": 16.143695890027118,
+          "safe_density": 11.3274914527274,
+          "ungated_physical_prior_ref": 3.8382196632512935
+        },
+        "max_regret_step_ms": {
+          "safe_physical_prior": 234.3428950050038,
+          "safe_physical_plus_learned": 234.3428950050038,
+          "safe_exact_saved_mac": 234.3428950050038,
+          "safe_density": 26510.003209301274,
+          "ungated_physical_prior_ref": 234.3428950050038
+        },
+        "unsafe_admission_rate": {
+          "safe_physical_prior": 0.0,
+          "safe_physical_plus_learned": 0.0,
+          "safe_exact_saved_mac": 0.0,
+          "safe_density": 0.0,
+          "ungated_physical_prior_ref": 0.0
+        },
+        "false_rejection_rate": {
+          "safe_physical_prior": 0.0,
+          "safe_physical_plus_learned": 0.0,
+          "safe_exact_saved_mac": 0.0,
+          "safe_density": 0.0,
+          "ungated_physical_prior_ref": 0.0
+        }
+      },
+      "tf32": {
+        "total_decisions": 36,
+        "safe_decisions": 36,
+        "mean_safe_oracle_fraction_step_ms": {
+          "safe_physical_prior": 0.9501210978989031,
+          "safe_physical_plus_learned": 0.9501210978989031,
+          "safe_exact_saved_mac": 0.9042763611659582,
+          "safe_density": 0.9434300864629195,
+          "ungated_physical_prior_ref": 0.9501210978989031
+        },
+        "p95_regret_step_ms": {
+          "safe_physical_prior": 1.7058964408256152,
+          "safe_physical_plus_learned": 1.7058964408256152,
+          "safe_exact_saved_mac": 10.179598468411143,
+          "safe_density": 7.644426345083222,
+          "ungated_physical_prior_ref": 1.7058964408256152
+        },
+        "max_regret_step_ms": {
+          "safe_physical_prior": 1.7058964408256152,
+          "safe_physical_plus_learned": 1.7058964408256152,
+          "safe_exact_saved_mac": 10.179598468411143,
+          "safe_density": 7.644426345083222,
+          "ungated_physical_prior_ref": 1.7058964408256152
+        },
+        "unsafe_admission_rate": {
+          "safe_physical_prior": 0.0,
+          "safe_physical_plus_learned": 0.0,
+          "safe_exact_saved_mac": 0.0,
+          "safe_density": 0.0,
+          "ungated_physical_prior_ref": 0.0
+        },
+        "false_rejection_rate": {
+          "safe_physical_prior": 0.0,
+          "safe_physical_plus_learned": 0.0,
+          "safe_exact_saved_mac": 0.0,
+          "safe_density": 0.0,
+          "ungated_physical_prior_ref": 0.0
+        }
+      }
+    }
+  }
+}

@@ -69,8 +69,11 @@ def render_fuse14_results(receipts_dir: Path, out_md: Path) -> None:
         aud_h = ta["fuse14_arm_h"]["cast_audit"]
         lines.append(f"| Stage A | CUDA standalone probe (`{sp['finite_bitwise']}/{sp['cells']}`) + trainer per-layer saved-cast audit | **{'PASS' if ta['parity']['finite_bitwise_pass'] else 'FAIL'}** (saved cast storages `{aud_g['unique_storages']} -> {aud_h['unique_storages']}`, `max_abs={ta['parity']['max_abs']:.3e}`) | `receipt_fuse14_suite_cuda.json` |")
         sb = suite["stage_b_ablation"]
-        sb_ok = all(v["parity_vs_arm_g"]["finite_bitwise_pass"] for k, v in sb.items() if k != "fuse13_arm_g")
-        lines.append(f"| Stage B | 6-arm isolation ablation (`qkv_only`, `gate_up_only`, `both`, autocast cache off, per-call cast) | **{'PASS' if sb_ok else 'FAIL'}** (all 5 candidates finite bitwise vs FUSE-13 Arm G) | `receipt_fuse14_suite_cuda.json` |")
+        sb_cands = ("explicit_per_call_cast", "qkv_only", "gate_up_only", "both_block_projs")
+        sb_ok = all(sb[k]["parity_vs_arm_g"]["finite_bitwise_pass"] for k in sb_cands if k in sb)
+        sb_ac_off = sb.get("autocast_cache_disabled", {}).get("parity_vs_arm_g", {})
+        sb_falsified = not sb_ac_off.get("finite_bitwise_pass", True)
+        lines.append(f"| Stage B | 6-arm isolation ablation (`qkv_only`, `gate_up_only`, `both`, autocast cache off, per-call cast) | **{'PASS' if sb_ok else 'FAIL'}** (4/4 valid arms finite bitwise; `autocast_cache_disabled` {'falsified' if sb_falsified else 'matched'}) | `receipt_fuse14_suite_cuda.json` |")
         sc = suite["stage_c_guards"]
         lines.append(f"| Stage C | Step-local trainer integration + fail-closed lifecycle guards | **{'PASS' if all(sc.values()) else 'FAIL'}** ({sum(sc.values())}/{len(sc)} guards pass; defaults off) | `receipt_fuse14_suite_cuda.json` |")
         sd = suite["stage_d_parity_matrix"]
@@ -176,7 +179,7 @@ def render_fuse14_results(receipts_dir: Path, out_md: Path) -> None:
     if frontier:
         lines.append("## Stage F: Reattempting All Five Blocked BF16 Frontier Configurations")
         lines.append("")
-        lines.append("Note: When FUSE-13 Arm G is preflight-blocked, comparison is explicitly **censored** (not a speedup).")
+        lines.append("Note: When FUSE-13 Arm G is preflight-blocked, comparison is explicitly **censored** (not a speedup). Hardware measurements on `(2048, 48)` (`4,848 MiB`) and `(4096, 24)` (`10,173 MiB`) revealed an additional per-pass `W_target` BF16 cast in `TiedComponentLinear.forward` (`components.py:382`, stochastic `routing_mask is not None`, `T * site_elems * 2` bytes); refitting Arm H preflight with this measured term prevents WDDM spill on `(4096, 48)+` while `Arm H + Checkpointing` (`H_ckpt`) eliminates it cleanly.")
         lines.append("")
         lines.append("| Width | Visits | Baseline Comparison | FUSE-13 Arm G | FUSE-14 Arm H (p50 / p95 ms, tok/s) | Arm H Alloc / Res / NVML (MiB) | Arm H Energy (mJ/step) | Arm H+Ckpt (if run) |")
         lines.append("|---:|---:|---|---|---|---|---:|---|")
@@ -252,6 +255,8 @@ def main() -> int:
     p.add_argument("--allow-cuda", action="store_true")
     p.add_argument("--render-only", action="store_true")
     p.add_argument("--min-watts", type=float, default=60.0)
+    p.add_argument("--lease-mib", type=float, default=12288.0)
+    p.add_argument("--max-width", type=int, default=None)
     args = p.parse_args()
 
     receipts_dir = HERE
@@ -276,14 +281,29 @@ def main() -> int:
         ])
         if rc != 0:
             return rc
+    else:
+        ex_suite = json.loads(suite_p.read_text(encoding="utf-8"))
+        q3_cells = (ex_suite.get("stage_g_pretrained_transfer") or {}).get("pretrained_qwen3_4b", {}).get("cells", [])
+        if q3_cells and not all(c["parity"]["finite_bitwise_pass"] for c in q3_cells):
+            rc = _run_sub([
+                py, "-m", "mechinterp.bpd.experiments.fused_residual.validate_fuse14_suite",
+                "--device", "cuda", "--allow-cuda", "--min-watts", str(args.min_watts),
+                "--stage-g-only", "--output", str(suite_p),
+            ])
+            if rc != 0:
+                return rc
 
     # 2. Stage F: All five previously blocked BF16 frontier cells (+ (8192,24) preflight)
     frontier_p = receipts_dir / "receipt_fuse14_frontier.jsonl"
-    rc = _run_sub([
+    f_cmd = [
         py, "-m", "mechinterp.bpd.experiments.fused_residual.bench_fuse14_frontier",
         "--allow-cuda", "--resume", "--min-watts", str(args.min_watts),
+        "--lease-mib", str(args.lease_mib),
         "--output", str(frontier_p),
-    ])
+    ]
+    if args.max_width is not None:
+        f_cmd += ["--max-width", str(args.max_width)]
+    rc = _run_sub(f_cmd)
     if rc != 0:
         return rc
 
