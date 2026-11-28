@@ -1,0 +1,116 @@
+{
+  "scope": "DEVELOPMENT_ONLY",
+  "unit": "fresh model initialization, input encoding and training noise stream",
+  "n_units": 8,
+  "cases_per_root_per_arm": 1024,
+  "source_commit": "402ef7764e11bc7736873d66357b8dc24b996e94",
+  "arms": {
+    "A_task": {
+      "ordinary": {
+        "exact_accuracy": 0.96728515625,
+        "bit_accuracy": 0.9945475260416666,
+        "constraint_accuracy": 0.96728515625
+      },
+      "long_delay": {
+        "exact_accuracy": 0.367919921875,
+        "bit_accuracy": 0.801513671875,
+        "constraint_accuracy": 0.380615234375
+      }
+    },
+    "B_causal": {
+      "ordinary": {
+        "exact_accuracy": 0.962890625,
+        "bit_accuracy": 0.9938151041666666,
+        "constraint_accuracy": 0.962890625
+      },
+      "long_delay": {
+        "exact_accuracy": 0.354248046875,
+        "bit_accuracy": 0.8015950520833333,
+        "constraint_accuracy": 0.370361328125
+      }
+    },
+    "C_rotated": {
+      "ordinary": {
+        "exact_accuracy": 0.967529296875,
+        "bit_accuracy": 0.9945882161458333,
+        "constraint_accuracy": 0.967529296875
+      },
+      "long_delay": {
+        "exact_accuracy": 0.3515625,
+        "bit_accuracy": 0.7953694661458333,
+        "constraint_accuracy": 0.365966796875
+      }
+    }
+  },
+  "paired": [
+    {
+      "seed": 962610,
+      "B_minus_A": -0.02734375,
+      "B_minus_C": -0.046875,
+      "C_minus_A": 0.01953125,
+      "B_recovers_A": 21,
+      "B_corrupts_A": 35
+    },
+    {
+      "seed": 962611,
+      "B_minus_A": 0.017578125,
+      "B_minus_C": 0.0859375,
+      "C_minus_A": -0.068359375,
+      "B_recovers_A": 33,
+      "B_corrupts_A": 24
+    },
+    {
+      "seed": 962612,
+      "B_minus_A": -0.04296875,
+      "B_minus_C": 0.0,
+      "C_minus_A": -0.04296875,
+      "B_recovers_A": 12,
+      "B_corrupts_A": 34
+    },
+    {
+      "seed": 962613,
+      "B_minus_A": -0.015625,
+      "B_minus_C": -0.041015625,
+      "C_minus_A": 0.025390625,
+      "B_recovers_A": 9,
+      "B_corrupts_A": 17
+    },
+    {
+      "seed": 962614,
+      "B_minus_A": -0.046875,
+      "B_minus_C": 0.001953125,
+      "C_minus_A": -0.048828125,
+      "B_recovers_A": 13,
+      "B_corrupts_A": 37
+    },
+    {
+      "seed": 962615,
+      "B_minus_A": -0.01953125,
+      "B_minus_C": -0.013671875,
+      "C_minus_A": -0.005859375,
+      "B_recovers_A": 14,
+      "B_corrupts_A": 24
+    },
+    {
+      "seed": 962616,
+      "B_minus_A": 0.015625,
+      "B_minus_C": -0.037109375,
+      "C_minus_A": 0.052734375,
+      "B_recovers_A": 9,
+      "B_corrupts_A": 1
+    },
+    {
+      "seed": 962617,
+      "B_minus_A": 0.009765625,
+      "B_minus_C": 0.072265625,
+      "C_minus_A": -0.0625,
+      "B_recovers_A": 31,
+      "B_corrupts_A": 26
+    }
+  ],
+  "structural_oracle": {
+    "exact_accuracy": 1.0,
+    "constraint_accuracy": 1.0,
+    "semantic_assignments": 64
+  }
+}
