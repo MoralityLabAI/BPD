@@ -1,0 +1,53 @@
+name: BPD-SUB-01 independent original eight-root artifact audit
+
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/experiments/sub01/AUDIT_LOCK.json'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  audit-original-without-retraining:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - name: Verify source, artifact, original failed CLI and population lock
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json,subprocess
+          root=Path('mechinterp/bpd/experiments/sub01')
+          j=json.loads((root/'AUDIT_LOCK.json').read_text())
+          assert j['study']=='BPD-SUB-01'
+          assert j['original_run_id']==44266927855
+          assert j['original_artifact_id']==14409764910
+          assert j['original_zip_sha256']=='0e94b1d31b7465204c7c5f91ace267acdd70bee236993329758c6ea10a4c535d'
+          assert j['retraining_allowed'] is False
+          for path in ('PROTOCOL.md','test_experiment.py','THEORY.md'):
+              p=str(root/path)
+              subprocess.run(['git','diff','--exit-code',j['source_commit_sha'],'HEAD','--',p],check=True)
+          print('ORIGINAL_SOURCE_UNCHANGED')
+          PY
+      - uses: actions/download-artifact@v4
+        with:
+          name: bpd-sub01-original-eight-root-development
+          run-id: 44266927855
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: /tmp/sub01-original
+      - name: Independently audit receipt created before CLI exception
+        run: |
+          set -o pipefail
+          python mechinterp/bpd/experiments/sub01/audit_original.py \
+            --receipt /tmp/sub01-original/sub01_original_eight.json \
+            --report /tmp/sub01-audit.json | tee /tmp/sub01-audit-log.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bpd-sub01-first-original-independent-audit
+          path: /tmp/sub01-audit.json
