@@ -1,0 +1,31 @@
+{
+  "flags": [],
+  "grid": [
+    {
+      "delay": 31,
+      "ordinary_accuracy_by_root": {
+        "27000": 0.7578125,
+        "27001": 0.828125
+      },
+      "passes": true
+    },
+    {
+      "delay": 63,
+      "ordinary_accuracy_by_root": {
+        "27000": 0.58203125,
+        "27001": 0.6875
+      },
+      "passes": true
+    },
+    {
+      "delay": 127,
+      "ordinary_accuracy_by_root": {
+        "27000": 0.53515625,
+        "27001": 0.59375
+      },
+      "passes": false
+    }
+  ],
+  "headroom_gate_passed": true,
+  "selected_delay": 31
+}

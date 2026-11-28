@@ -1,0 +1,78 @@
+{
+  "binding_n": 256,
+  "calibration_n": 512,
+  "causal_n": 256,
+  "checkpoints": 6000,
+  "delays": [
+    31,
+    63,
+    127
+  ],
+  "doses": [
+    0.75,
+    1.5,
+    3.0
+  ],
+  "ordinary_n": 512,
+  "python": "3.12.14",
+  "recipe": {
+    "auxiliary_gradient_ratio": 0.25,
+    "batch_size": 48,
+    "calibration_n": 512,
+    "causal_n": 256,
+    "components": 32,
+    "evaluation_n": 512,
+    "gradient_clip": 1.0,
+    "group_size": 4,
+    "iid_delay": 2,
+    "intervention_l2": 0.75,
+    "learning_rate": 0.003,
+    "long_delay": 7,
+    "noise": 0.03,
+    "slots": 4,
+    "threads": 1,
+    "train_delays": [
+      1,
+      2,
+      3
+    ],
+    "training_steps": 240,
+    "values": 4,
+    "warmup_steps": 6000,
+    "weight_decay": 0.0001,
+    "width": 32
+  },
+  "roots": [
+    27000,
+    27001
+  ],
+  "scope": "TRAIN-only engineering selection on two exposed roots",
+  "seed_namespace": "BPD-RP-03:admission",
+  "source_hashes": {
+    "mechinterp/bpd/components.py": "388cb539cccb87ae65d56e5fbae175d6aee138df24d1bab43cde755156b748a5",
+    "mechinterp/bpd/config.py": "d5773cdac66f55b8a8c152030d679324f0270954dd3a081176a454d5dc6f1621",
+    "mechinterp/bpd/experiments/training_steering/__init__.py": "6a4a9035e847a9639186b42a9d8d00ac601dc81652f6f672ab24f33a8972948d",
+    "mechinterp/bpd/experiments/training_steering/data.py": "cc5e855b8fde4f672d6051669a88fa32a84d77d5e4afe200c88c431f65330318",
+    "mechinterp/bpd/experiments/training_steering/experiment.py": "b443aaa9a21fbdb7376e945be7e81f0d9bd7e48eeb2f2d68a0d37cc7a9ee1f19",
+    "mechinterp/bpd/experiments/training_steering/model.py": "1581e2b272d9d0e5b65b9547f5826b7fcb8502be290821fa68416b6662422784",
+    "mechinterp/bpd/experiments/training_steering/stats.py": "db1aa3e9a36c49536327db06e8f039207f3179f4d7469caa9cb9d753e3ea336d",
+    "mechinterp/bpd/experiments/training_steering_stability/__init__.py": "6e58a53d6b8b03f3be5a53e26057c70f597fb5121249f1d43954c2e13d4b638d",
+    "mechinterp/bpd/experiments/training_steering_stability/engineering/ADMISSION_PLAN.md": "7985f7c96d16f026e27b642ae2d31d7dc8435b3fc5dc37027c28ef424e8aefe4",
+    "mechinterp/bpd/experiments/training_steering_stability/engineering/admission.py": "6c79213ef27407bf17fcba9a4b22ccca34a699cf21e3ac9fafbb4258d32463ba",
+    "mechinterp/bpd/experiments/training_steering_stability/engineering/extension_results/completion.json": "a85d0ab287775121c526cdda28f85fa0d414e92ecb5d145006eca3360ab65ee5",
+    "mechinterp/bpd/experiments/training_steering_stability/engineering/extension_results/replay_audit.json": "a65e5ecaa70efc4d659abb14b247d5c614fe0e7f2b201ddd580dc93d431df5de",
+    "mechinterp/bpd/experiments/training_steering_stability/engineering/extension_results/root_27000/checkpoint_6000.json": "f18b46dac0776738670030495381232427368d5d613fce9ce02979d9b5527398",
+    "mechinterp/bpd/experiments/training_steering_stability/engineering/extension_results/root_27000/checkpoint_6000.pt": "4dd82a9ea26bd8e5608c276735f60ed0a3868c1185d1d79f68dfb86de7aadd3d",
+    "mechinterp/bpd/experiments/training_steering_stability/engineering/extension_results/root_27001/checkpoint_6000.json": "98bad483688675ddcd34d0df4a44144d5a25a3ca37aa62c8b4791c73417dbcc3",
+    "mechinterp/bpd/experiments/training_steering_stability/engineering/extension_results/root_27001/checkpoint_6000.pt": "7670c70eda2c6b0afb420c06f0e79c95945cb99be9234c0b1f83d7f2e1ff7e81",
+    "mechinterp/bpd/experiments/training_steering_stability/engineering/extension_results/run_manifest.json": "705eb8e0daeb457123d2ef6ab5ff0cfba90640fe1f2e5841bc8f022c14e2321d",
+    "mechinterp/bpd/experiments/training_steering_stability/engineering/extension_results/selection.json": "f8a990130c1a3cc4700f7fe6ca399f39a8856f7218738b70126eef2df8698d9d",
+    "mechinterp/bpd/experiments/training_steering_stability/model.py": "28f8ca0eea629a8260fa4e67017c3bb371b5745110f2ebc2f9248eb3852b0e41",
+    "mechinterp/bpd/experiments/training_steering_stability/planning/provenance.json": "a01ed73da7d5e9325fede9cecd4f86ba105049b7a8b90e94b11b83af924139c1",
+    "mechinterp/bpd/experiments/training_steering_stability/planning/rp02_preflight_input.json": "7ec4666f1c8818c0e0233aee0c5133aa2485f3efdc864dad4d4e4435ad2423a8",
+    "mechinterp/bpd/experiments/training_steering_stability/planning/rp02_preflight_result.json": "b94d0d3d455eae4210978744a68238d2d3098720aba2232f469a21648630c08a"
+  },
+  "started_unix": 1795659878.2123606,
+  "threads": 1,
+  "torch": "2.9.1+cpu"
+}

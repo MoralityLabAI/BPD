@@ -1,0 +1,62 @@
+{
+  "checkpoints": [
+    200,
+    800,
+    2000
+  ],
+  "diagnostic_delays": [
+    2,
+    7
+  ],
+  "git_head": "0f1a9e2068df361225b3c7864c81755133a44e39",
+  "preflight_scope": "Prior RP02 evidence requires redesign; this is the bounded TRAIN-only diagnostic in PLAN.md",
+  "python": "3.12.14",
+  "recipe": {
+    "auxiliary_gradient_ratio": 0.25,
+    "batch_size": 48,
+    "calibration_n": 128,
+    "causal_n": 256,
+    "components": 32,
+    "evaluation_n": 512,
+    "gradient_clip": 1.0,
+    "group_size": 4,
+    "iid_delay": 2,
+    "intervention_l2": 0.75,
+    "learning_rate": 0.003,
+    "long_delay": 7,
+    "noise": 0.03,
+    "slots": 4,
+    "threads": 1,
+    "train_delays": [
+      1,
+      2,
+      3
+    ],
+    "training_steps": 0,
+    "values": 4,
+    "warmup_steps": 2000,
+    "weight_decay": 0.0001,
+    "width": 32
+  },
+  "roots": [
+    27000,
+    27001
+  ],
+  "scope": "TRAIN_ONLY_ENGINEERING",
+  "source_hashes": {
+    "mechinterp/bpd/components.py": "388cb539cccb87ae65d56e5fbae175d6aee138df24d1bab43cde755156b748a5",
+    "mechinterp/bpd/config.py": "d5773cdac66f55b8a8c152030d679324f0270954dd3a081176a454d5dc6f1621",
+    "mechinterp/bpd/experiments/training_steering/__init__.py": "6a4a9035e847a9639186b42a9d8d00ac601dc81652f6f672ab24f33a8972948d",
+    "mechinterp/bpd/experiments/training_steering/data.py": "cc5e855b8fde4f672d6051669a88fa32a84d77d5e4afe200c88c431f65330318",
+    "mechinterp/bpd/experiments/training_steering/experiment.py": "b443aaa9a21fbdb7376e945be7e81f0d9bd7e48eeb2f2d68a0d37cc7a9ee1f19",
+    "mechinterp/bpd/experiments/training_steering/model.py": "1581e2b272d9d0e5b65b9547f5826b7fcb8502be290821fa68416b6662422784",
+    "mechinterp/bpd/experiments/training_steering/stats.py": "db1aa3e9a36c49536327db06e8f039207f3179f4d7469caa9cb9d753e3ea336d",
+    "mechinterp/bpd/experiments/training_steering_stability/engineering/PLAN.md": "9244a9989661620b0759d65e792dfbea8a7775000ad9ddca28b06b83bdbdaf78",
+    "mechinterp/bpd/experiments/training_steering_stability/engineering/learning_curve.py": "1e2f3eb2bd06540c4dfefdd4f1d93625bddf7bc88d82c3fa00ac79cb0f653cd3",
+    "mechinterp/bpd/experiments/training_steering_stability/planning/provenance.json": "a01ed73da7d5e9325fede9cecd4f86ba105049b7a8b90e94b11b83af924139c1",
+    "mechinterp/bpd/experiments/training_steering_stability/planning/rp02_preflight_input.json": "7ec4666f1c8818c0e0233aee0c5133aa2485f3efdc864dad4d4e4435ad2423a8",
+    "mechinterp/bpd/experiments/training_steering_stability/planning/rp02_preflight_result.json": "b94d0d3d455eae4210978744a68238d2d3098720aba2232f469a21648630c08a"
+  },
+  "started_unix": 1795659107.2423575,
+  "torch": "2.9.1+cpu"
+}
