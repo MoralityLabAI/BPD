@@ -195,6 +195,7 @@ def _compare_snapshots(snap_a: dict[str, Any], snap_b: dict[str, Any]) -> dict[s
         "max_abs": 0.0,
         "scalars": 0,
         "scalar_failures": 0,
+        "structure_failures": 0,
         "failure_examples": [],
     }
 
@@ -217,9 +218,17 @@ def _compare_snapshots(snap_a: dict[str, Any], snap_b: dict[str, Any]) -> dict[s
                 if len(counts["failure_examples"]) < 12:
                     counts["failure_examples"].append({"path": path, **cm})
         elif isinstance(u, dict):
-            assert u.keys() == v.keys(), path
+            if u.keys() != v.keys():
+                counts["structure_failures"] += 1
+                if len(counts["failure_examples"]) < 12:
+                    counts["failure_examples"].append({
+                        "path": path,
+                        "missing_in_candidate": sorted(u.keys() - v.keys()),
+                        "extra_in_candidate": sorted(v.keys() - u.keys()),
+                    })
             for k in u:
-                _cmp(u[k], v[k], f"{path}/{k}")
+                if k in v:
+                    _cmp(u[k], v[k], f"{path}/{k}")
         elif isinstance(u, (list, tuple)):
             assert len(u) == len(v), path
             for i, (a, b) in enumerate(zip(u, v)):
@@ -241,6 +250,7 @@ def _compare_snapshots(snap_a: dict[str, Any], snap_b: dict[str, Any]) -> dict[s
     counts["finite_bitwise_pass"] = (
         counts["failures"] == 0
         and counts["scalar_failures"] == 0
+        and counts["structure_failures"] == 0
         and counts["overflow_parity"] == 0
         and counts["finite_bitwise"] == counts["tensors"]
     )
@@ -1094,6 +1104,25 @@ def main() -> int:
             else "skipped"
         ),
     }
+    # Stage B's cache-disabled arm is a diagnostic control, not an admission
+    # candidate. A missing gradient still counts as failed parity in its receipt.
+    native_parity = {
+        "A": stage_a["trainer_cast_audit"]["parity"],
+        **{
+            f"B/{name}": stage_b[name]["parity_vs_arm_g"]
+            for name in ("qkv_only", "gate_up_only", "both_block_projs")
+        },
+        **{f"D/{i}": row["parity"] for i, row in enumerate(stage_d)},
+        **{f"E/{i}": row["parity"] for i, row in enumerate(stage_e)},
+    }
+    failed_native = {
+        name: row["failure_examples"]
+        for name, row in native_parity.items()
+        if not row["finite_bitwise_pass"]
+    }
+    if failed_native:
+        print("FUSE14_NATIVE_PARITY_FAILED", json.dumps(failed_native), flush=True)
+        return 1
     print("FUSE14_SUITE_DONE", json.dumps(summary), flush=True)
     return 0
 
