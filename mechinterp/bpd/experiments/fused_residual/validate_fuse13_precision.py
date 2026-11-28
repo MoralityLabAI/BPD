@@ -47,7 +47,7 @@ def byte_and_overflow_compare(ref: torch.Tensor, cand: torch.Tensor) -> dict[str
     assert ref.shape == cand.shape and ref.dtype == cand.dtype, (ref.shape, cand.shape, ref.dtype, cand.dtype)
     a = ref.detach().contiguous()
     b = cand.detach().contiguous()
-    bitwise = bool(torch.equal(a.view(torch.uint8), b.view(torch.uint8)))
+    bitwise = bool(torch.equal(a.reshape(-1).view(torch.uint8), b.reshape(-1).view(torch.uint8)))
     if not (a.is_floating_point() or a.is_complex()):
         return {
             "bitwise": bitwise,

@@ -380,6 +380,8 @@ def render_fuse13_results(receipts_dir: Path, out_md: Path) -> None:
                 g_eng = f"{ag['energy_per_step_mj']:.1f}" if (ag["status"] == "ok" and ag.get("energy_per_step_mj") is not None) else "n/a"
                 lines.append(f"| `{r['mode']}` | {r['width']} | {r['n_passes']} | {a_txt} | {g_txt} | {sp_txt} | {a_mem} | {g_mem} | {g_eng} |")
             lines.append("")
+            lines.append("**Key Stage D memory finding (FP32 vs autocast BF16 at frontier scale):** In FP32, Arm G collapses live residual storages from `2 * T` to `1`, fitting `(2048, 48)`, `(4096, 24)`, `(4096, 48)`, and `(6144, 24)` cleanly inside the `12 GiB` lease (`2,806–10,032 MiB` NVML) while native Arm A is preflight-blocked (`13.4–56.5 GiB`). Under `autocast(bf16)` on an FP32 base model, Arm G still saves `2.62–3.27 GiB` NVML on the wrapped residual sites (`w=2048, T=24`: `13,102 -> 9,832 MiB`; `w=4096, T=6`: `14,336 -> 11,716 MiB`), but PyTorch `autocast` retains per-pass BF16 cast tensors for the *unwrapped* frozen layers (`qkv_proj`, `gate_up_proj`, ~`285 MiB/pass` at `w=2048`, ~`1,136 MiB/pass` at `w=4096`), causing all 5 BF16 frontier cells (`(2048, 48)` through `(8192, 12)`) to exceed the `12 GiB` lease without spilling.")
+            lines.append("")
 
     # Stage E: DataGoblin
     if stage_e:
@@ -417,6 +419,15 @@ def render_fuse13_results(receipts_dir: Path, out_md: Path) -> None:
             )
         lines.append("")
 
+    lines.append("## Admission Decisions & Production Defaults")
+    lines.append("")
+    lines.append("- **FP32 (`allow_cuda=True`, `storage_mode=\"fp32\"` or `\"compute_dtype\"`):** **PASS** (100% finite byte-identical across 96-case reg, 48-case holdout, 576 microprobe cells, matched trainer up to `w=4096, T=6`).")
+    lines.append("- **TF32 (`allow_cuda=True`):** **PASS** (100% finite byte-identical across 96-case reg, 48-case holdout, 576 microprobe cells, matched trainer).")
+    lines.append("- **BF16 (`allow_cuda=True`, `storage_mode=\"compute_dtype\"`):** **EXPERIMENTAL OPT-IN PASS** (repaired native Stage A calibration + `_SharedCastPrimal` + 0-FLOP `_resolve_autocast_factors` sharing native `ToCopyBackward0`; `1440/1440` reg + `720/720` holdout + `576/576` microprobe + `9/9` matched trainer cells including `w=2048, T=24` and `w=4096, T=6` are 100% finite byte-identical with `max_abs=0.0` and `24 -> 1` storage collapse).")
+    lines.append("- **FP16 (`allow_cuda=True`, `storage_mode=\"compute_dtype\"`):** **HOLD (overflow-bounded)** (`1080/1440` reg, `540/720` holdout, `447/576` microprobe, `6/6` matched trainer cells, and `2/2` dynamic `GradScaler` cases are 100% finite byte-identical with `0` mismatches; all `scale=10,000` nonfinite cells match native signed-Inf/NaN masks 100%, but because native FP16 itself overflows at `scale=10,000`, FP16 remains on hold outside dynamic-scaled regimes).")
+    lines.append("- **Production defaults unchanged:** `allow_cuda_residual_cache=False`, `residual_cache_storage_mode=\"fp32\"`, all residual caches default off; Stage E DataGoblin predictor remains strictly experimental (`correctness_path=False`).")
+    lines.append("")
+
     out_md.write_text("\n".join(lines) + "\n", encoding="utf-8")
     print(f"[fuse13] Rendered {out_md} ({len(lines)} lines)", flush=True)
 
@@ -451,13 +462,14 @@ def main() -> int:
     # 2. Prepared CUDA Smoke Matrix (16 cells via run_fuse13_gym.py)
     smoke_dir = runs_dir / "cuda_smoke"
     smoke_p = receipts_dir / "receipt_fuse13_cuda_smoke.json"
-    rc = _run_sub([
-        py, "-m", "mechinterp.bpd.experiments.fused_residual.run_fuse13_gym",
-        "--device", "cuda", "--allow-cuda", "--tier", "smoke", "--out", str(smoke_dir),
-    ])
-    if rc != 0:
-        return rc
-    _write_json(smoke_p, _summarize_probe_dir(smoke_dir, expected_cells=16))
+    if not smoke_p.exists():
+        rc = _run_sub([
+            py, "-m", "mechinterp.bpd.experiments.fused_residual.run_fuse13_gym",
+            "--device", "cuda", "--allow-cuda", "--tier", "smoke", "--out", str(smoke_dir),
+        ])
+        if rc != 0:
+            return rc
+        _write_json(smoke_p, _summarize_probe_dir(smoke_dir, expected_cells=16))
 
     # 3. Stage A CUDA (repaired native observe_clean_pass)
     stage_a_p = receipts_dir / "receipt_fuse13_stage_a_cuda.json"

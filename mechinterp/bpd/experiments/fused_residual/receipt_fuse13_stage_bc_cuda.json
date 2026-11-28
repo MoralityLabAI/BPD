@@ -1,0 +1,2848 @@
+{
+  "stages": "B_C",
+  "device": "cuda",
+  "torch": "2.11.0+cu128",
+  "nvml": {
+    "name": "NVIDIA GeForce RTX 5080 Laptop GPU",
+    "driver_version": "577.05",
+    "memory_total_mib": 16303.0,
+    "memory_used_mib": 0.0,
+    "memory_free_mib": 15915.0,
+    "enforced_power_limit_w": 80.0,
+    "default_power_limit_w": 80.0,
+    "power_draw_w": 20.52,
+    "utilization_gpu_pct": 0.0,
+    "utilization_memory_pct": 0.0,
+    "pstate": "P4"
+  },
+  "storage_mode_guards": {
+    "storage_modes_enum": true,
+    "reject_compute_dtype_without_cuda": true,
+    "reject_unknown_storage_mode": true,
+    "target_dtype_fp32_default": true,
+    "target_dtype_bf16_compute": true,
+    "target_dtype_fp16_compute": true,
+    "target_dtype_tf32_compute": true
+  },
+  "stage_b_ablation": {
+    "fp32": {
+      "mode": "fp32",
+      "width": 128,
+      "passes": 12,
+      "seed": 4013001,
+      "native_storage": {
+        "reconstructions": 12,
+        "saved_square_calls": 12,
+        "unique_square_storages": 12,
+        "unique_square_bytes": 786432,
+        "saved_square_dtypes": [
+          "torch.float32"
+        ],
+        "peak_allocated_bytes": 18725376
+      },
+      "strategies": {
+        "shared_fp32": {
+          "storage": {
+            "reconstructions": 1,
+            "saved_square_calls": 12,
+            "unique_square_storages": 1,
+            "unique_square_bytes": 65536,
+            "saved_square_dtypes": [
+              "torch.float32"
+            ],
+            "peak_allocated_bytes": 18189824
+          },
+          "finite_bitwise": true,
+          "within_tol": true,
+          "max_abs": 0.0,
+          "g_V_bitwise": true,
+          "g_U_bitwise": true,
+          "g_V_max_abs": 0.0,
+          "g_U_max_abs": 0.0
+        },
+        "shared_compute_per_use_cast": {
+          "storage": {
+            "reconstructions": 1,
+            "saved_square_calls": 12,
+            "unique_square_storages": 1,
+            "unique_square_bytes": 65536,
+            "saved_square_dtypes": [
+              "torch.float32"
+            ],
+            "peak_allocated_bytes": 18362368
+          },
+          "finite_bitwise": true,
+          "within_tol": true,
+          "max_abs": 0.0,
+          "g_V_bitwise": true,
+          "g_U_bitwise": true,
+          "g_V_max_abs": 0.0,
+          "g_U_max_abs": 0.0
+        },
+        "shared_compute_shared_cast": {
+          "storage": {
+            "reconstructions": 1,
+            "saved_square_calls": 12,
+            "unique_square_storages": 1,
+            "unique_square_bytes": 65536,
+            "saved_square_dtypes": [
+              "torch.float32"
+            ],
+            "peak_allocated_bytes": 18211840
+          },
+          "finite_bitwise": true,
+          "within_tol": true,
+          "max_abs": 0.0,
+          "g_V_bitwise": true,
+          "g_U_bitwise": true,
+          "g_V_max_abs": 0.0,
+          "g_U_max_abs": 0.0
+        },
+        "shared_factor_casts_only": {
+          "storage": {
+            "reconstructions": 12,
+            "saved_square_calls": 12,
+            "unique_square_storages": 12,
+            "unique_square_bytes": 786432,
+            "saved_square_dtypes": [
+              "torch.float32"
+            ],
+            "peak_allocated_bytes": 18897920
+          },
+          "finite_bitwise": true,
+          "within_tol": true,
+          "max_abs": 0.0,
+          "g_V_bitwise": true,
+          "g_U_bitwise": true,
+          "g_V_max_abs": 0.0,
+          "g_U_max_abs": 0.0
+        },
+        "native_graph_replay": {
+          "storage": {
+            "reconstructions": 1,
+            "saved_square_calls": 12,
+            "unique_square_storages": 1,
+            "unique_square_bytes": 65536,
+            "saved_square_dtypes": [
+              "torch.float32"
+            ],
+            "peak_allocated_bytes": 18406912
+          },
+          "finite_bitwise": true,
+          "within_tol": true,
+          "max_abs": 0.0,
+          "g_V_bitwise": true,
+          "g_U_bitwise": true,
+          "g_V_max_abs": 0.0,
+          "g_U_max_abs": 0.0
+        }
+      }
+    },
+    "tf32": {
+      "mode": "tf32",
+      "width": 128,
+      "passes": 12,
+      "seed": 4013001,
+      "native_storage": {
+        "reconstructions": 12,
+        "saved_square_calls": 12,
+        "unique_square_storages": 12,
+        "unique_square_bytes": 786432,
+        "saved_square_dtypes": [
+          "torch.float32"
+        ],
+        "peak_allocated_bytes": 18911232
+      },
+      "strategies": {
+        "shared_fp32": {
+          "storage": {
+            "reconstructions": 1,
+            "saved_square_calls": 12,
+            "unique_square_storages": 1,
+            "unique_square_bytes": 65536,
+            "saved_square_dtypes": [
+              "torch.float32"
+            ],
+            "peak_allocated_bytes": 18268672
+          },
+          "finite_bitwise": true,
+          "within_tol": true,
+          "max_abs": 0.0,
+          "g_V_bitwise": true,
+          "g_U_bitwise": true,
+          "g_V_max_abs": 0.0,
+          "g_U_max_abs": 0.0
+        },
+        "shared_compute_per_use_cast": {
+          "storage": {
+            "reconstructions": 1,
+            "saved_square_calls": 12,
+            "unique_square_storages": 1,
+            "unique_square_bytes": 65536,
+            "saved_square_dtypes": [
+              "torch.float32"
+            ],
+            "peak_allocated_bytes": 18441216
+          },
+          "finite_bitwise": true,
+          "within_tol": true,
+          "max_abs": 0.0,
+          "g_V_bitwise": true,
+          "g_U_bitwise": true,
+          "g_V_max_abs": 0.0,
+          "g_U_max_abs": 0.0
+        },
+        "shared_compute_shared_cast": {
+          "storage": {
+            "reconstructions": 1,
+            "saved_square_calls": 12,
+            "unique_square_storages": 1,
+            "unique_square_bytes": 65536,
+            "saved_square_dtypes": [
+              "torch.float32"
+            ],
+            "peak_allocated_bytes": 18613760
+          },
+          "finite_bitwise": true,
+          "within_tol": true,
+          "max_abs": 0.0,
+          "g_V_bitwise": true,
+          "g_U_bitwise": true,
+          "g_V_max_abs": 0.0,
+          "g_U_max_abs": 0.0
+        },
+        "shared_factor_casts_only": {
+          "storage": {
+            "reconstructions": 12,
+            "saved_square_calls": 12,
+            "unique_square_storages": 12,
+            "unique_square_bytes": 786432,
+            "saved_square_dtypes": [
+              "torch.float32"
+            ],
+            "peak_allocated_bytes": 19428864
+          },
+          "finite_bitwise": true,
+          "within_tol": true,
+          "max_abs": 0.0,
+          "g_V_bitwise": true,
+          "g_U_bitwise": true,
+          "g_V_max_abs": 0.0,
+          "g_U_max_abs": 0.0
+        },
+        "native_graph_replay": {
+          "storage": {
+            "reconstructions": 1,
+            "saved_square_calls": 12,
+            "unique_square_storages": 1,
+            "unique_square_bytes": 65536,
+            "saved_square_dtypes": [
+              "torch.float32"
+            ],
+            "peak_allocated_bytes": 18608640
+          },
+          "finite_bitwise": true,
+          "within_tol": true,
+          "max_abs": 0.0,
+          "g_V_bitwise": true,
+          "g_U_bitwise": true,
+          "g_V_max_abs": 0.0,
+          "g_U_max_abs": 0.0
+        }
+      }
+    },
+    "bf16": {
+      "mode": "bf16",
+      "width": 128,
+      "passes": 12,
+      "seed": 4013001,
+      "native_storage": {
+        "reconstructions": 12,
+        "saved_square_calls": 12,
+        "unique_square_storages": 12,
+        "unique_square_bytes": 393216,
+        "saved_square_dtypes": [
+          "torch.bfloat16"
+        ],
+        "peak_allocated_bytes": 18976768
+      },
+      "strategies": {
+        "shared_fp32": {
+          "storage": {
+            "reconstructions": 1,
+            "saved_square_calls": 12,
+            "unique_square_storages": 12,
+            "unique_square_bytes": 393216,
+            "saved_square_dtypes": [
+              "torch.bfloat16"
+            ],
+            "peak_allocated_bytes": 19132928
+          },
+          "finite_bitwise": false,
+          "within_tol": false,
+          "max_abs": 0.8183059692382812,
+          "g_V_bitwise": false,
+          "g_U_bitwise": false,
+          "g_V_max_abs": 0.8183059692382812,
+          "g_U_max_abs": 0.3408527374267578
+        },
+        "shared_compute_per_use_cast": {
+          "storage": {
+            "reconstructions": 1,
+            "saved_square_calls": 12,
+            "unique_square_storages": 1,
+            "unique_square_bytes": 32768,
+            "saved_square_dtypes": [
+              "torch.bfloat16"
+            ],
+            "peak_allocated_bytes": 19027968
+          },
+          "finite_bitwise": false,
+          "within_tol": false,
+          "max_abs": 0.8046875,
+          "g_V_bitwise": false,
+          "g_U_bitwise": false,
+          "g_V_max_abs": 0.8046875,
+          "g_U_max_abs": 0.3515625
+        },
+        "shared_compute_shared_cast": {
+          "storage": {
+            "reconstructions": 1,
+            "saved_square_calls": 12,
+            "unique_square_storages": 1,
+            "unique_square_bytes": 32768,
+            "saved_square_dtypes": [
+              "torch.bfloat16"
+            ],
+            "peak_allocated_bytes": 18831360
+          },
+          "finite_bitwise": true,
+          "within_tol": true,
+          "max_abs": 0.0,
+          "g_V_bitwise": true,
+          "g_U_bitwise": true,
+          "g_V_max_abs": 0.0,
+          "g_U_max_abs": 0.0
+        },
+        "shared_factor_casts_only": {
+          "storage": {
+            "reconstructions": 12,
+            "saved_square_calls": 12,
+            "unique_square_storages": 12,
+            "unique_square_bytes": 393216,
+            "saved_square_dtypes": [
+              "torch.bfloat16"
+            ],
+            "peak_allocated_bytes": 19116544
+          },
+          "finite_bitwise": true,
+          "within_tol": true,
+          "max_abs": 0.0,
+          "g_V_bitwise": true,
+          "g_U_bitwise": true,
+          "g_V_max_abs": 0.0,
+          "g_U_max_abs": 0.0
+        },
+        "native_graph_replay": {
+          "storage": {
+            "reconstructions": 1,
+            "saved_square_calls": 12,
+            "unique_square_storages": 1,
+            "unique_square_bytes": 32768,
+            "saved_square_dtypes": [
+              "torch.bfloat16"
+            ],
+            "peak_allocated_bytes": 18895872
+          },
+          "finite_bitwise": true,
+          "within_tol": true,
+          "max_abs": 0.0,
+          "g_V_bitwise": true,
+          "g_U_bitwise": true,
+          "g_V_max_abs": 0.0,
+          "g_U_max_abs": 0.0
+        }
+      }
+    },
+    "fp16": {
+      "mode": "fp16",
+      "width": 128,
+      "passes": 12,
+      "seed": 4013001,
+      "native_storage": {
+        "reconstructions": 12,
+        "saved_square_calls": 12,
+        "unique_square_storages": 12,
+        "unique_square_bytes": 393216,
+        "saved_square_dtypes": [
+          "torch.float16"
+        ],
+        "peak_allocated_bytes": 19376640
+      },
+      "strategies": {
+        "shared_fp32": {
+          "storage": {
+            "reconstructions": 1,
+            "saved_square_calls": 12,
+            "unique_square_storages": 12,
+            "unique_square_bytes": 393216,
+            "saved_square_dtypes": [
+              "torch.float16"
+            ],
+            "peak_allocated_bytes": 19532800
+          },
+          "finite_bitwise": false,
+          "within_tol": false,
+          "max_abs": 0.09070968627929688,
+          "g_V_bitwise": false,
+          "g_U_bitwise": false,
+          "g_V_max_abs": 0.09070968627929688,
+          "g_U_max_abs": 0.037955284118652344
+        },
+        "shared_compute_per_use_cast": {
+          "storage": {
+            "reconstructions": 1,
+            "saved_square_calls": 12,
+            "unique_square_storages": 1,
+            "unique_square_bytes": 32768,
+            "saved_square_dtypes": [
+              "torch.float16"
+            ],
+            "peak_allocated_bytes": 19427840
+          },
+          "finite_bitwise": false,
+          "within_tol": false,
+          "max_abs": 0.1015625,
+          "g_V_bitwise": false,
+          "g_U_bitwise": false,
+          "g_V_max_abs": 0.1015625,
+          "g_U_max_abs": 0.035888671875
+        },
+        "shared_compute_shared_cast": {
+          "storage": {
+            "reconstructions": 1,
+            "saved_square_calls": 12,
+            "unique_square_storages": 1,
+            "unique_square_bytes": 32768,
+            "saved_square_dtypes": [
+              "torch.float16"
+            ],
+            "peak_allocated_bytes": 19009024
+          },
+          "finite_bitwise": true,
+          "within_tol": true,
+          "max_abs": 0.0,
+          "g_V_bitwise": true,
+          "g_U_bitwise": true,
+          "g_V_max_abs": 0.0,
+          "g_U_max_abs": 0.0
+        },
+        "shared_factor_casts_only": {
+          "storage": {
+            "reconstructions": 12,
+            "saved_square_calls": 12,
+            "unique_square_storages": 12,
+            "unique_square_bytes": 393216,
+            "saved_square_dtypes": [
+              "torch.float16"
+            ],
+            "peak_allocated_bytes": 19269632
+          },
+          "finite_bitwise": true,
+          "within_tol": true,
+          "max_abs": 0.0,
+          "g_V_bitwise": true,
+          "g_U_bitwise": true,
+          "g_V_max_abs": 0.0,
+          "g_U_max_abs": 0.0
+        },
+        "native_graph_replay": {
+          "storage": {
+            "reconstructions": 1,
+            "saved_square_calls": 12,
+            "unique_square_storages": 1,
+            "unique_square_bytes": 32768,
+            "saved_square_dtypes": [
+              "torch.float16"
+            ],
+            "peak_allocated_bytes": 19048960
+          },
+          "finite_bitwise": true,
+          "within_tol": true,
+          "max_abs": 0.0,
+          "g_V_bitwise": true,
+          "g_U_bitwise": true,
+          "g_V_max_abs": 0.0,
+          "g_U_max_abs": 0.0
+        }
+      }
+    }
+  },
+  "stage_c_stress_regression": {
+    "fp32": {
+      "mode": "fp32",
+      "storage_mode": "compute_dtype",
+      "roots": [
+        4012001,
+        4012002,
+        4012003,
+        4012004,
+        4012005,
+        4012006,
+        4012007,
+        4012008
+      ],
+      "cases": 96,
+      "tensors": 1440,
+      "finite_bitwise": 1440,
+      "within_tol": 1440,
+      "overflow_parity_tensors": 0,
+      "failures": 0,
+      "max_abs": 0.0,
+      "joint_factor_nodes": 576,
+      "hits": 768,
+      "admission_pass": true,
+      "failure_examples": [],
+      "cells": [
+        {
+          "mode": "fp32",
+          "storage_mode": "compute_dtype",
+          "scale": 1.0,
+          "target": "ordinary",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 120,
+          "within_tol": 120,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "fp32",
+          "storage_mode": "compute_dtype",
+          "scale": 1.0,
+          "target": "exact",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 120,
+          "within_tol": 120,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "fp32",
+          "storage_mode": "compute_dtype",
+          "scale": 1.0,
+          "target": "near",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 120,
+          "within_tol": 120,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "fp32",
+          "storage_mode": "compute_dtype",
+          "scale": 10.0,
+          "target": "ordinary",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 120,
+          "within_tol": 120,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "fp32",
+          "storage_mode": "compute_dtype",
+          "scale": 10.0,
+          "target": "exact",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 120,
+          "within_tol": 120,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "fp32",
+          "storage_mode": "compute_dtype",
+          "scale": 10.0,
+          "target": "near",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 120,
+          "within_tol": 120,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "fp32",
+          "storage_mode": "compute_dtype",
+          "scale": 100.0,
+          "target": "ordinary",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 120,
+          "within_tol": 120,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "fp32",
+          "storage_mode": "compute_dtype",
+          "scale": 100.0,
+          "target": "exact",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 120,
+          "within_tol": 120,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "fp32",
+          "storage_mode": "compute_dtype",
+          "scale": 100.0,
+          "target": "near",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 120,
+          "within_tol": 120,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "fp32",
+          "storage_mode": "compute_dtype",
+          "scale": 10000.0,
+          "target": "ordinary",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 120,
+          "within_tol": 120,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "fp32",
+          "storage_mode": "compute_dtype",
+          "scale": 10000.0,
+          "target": "exact",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 120,
+          "within_tol": 120,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "fp32",
+          "storage_mode": "compute_dtype",
+          "scale": 10000.0,
+          "target": "near",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 120,
+          "within_tol": 120,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        }
+      ]
+    },
+    "tf32": {
+      "mode": "tf32",
+      "storage_mode": "compute_dtype",
+      "roots": [
+        4012001,
+        4012002,
+        4012003,
+        4012004,
+        4012005,
+        4012006,
+        4012007,
+        4012008
+      ],
+      "cases": 96,
+      "tensors": 1440,
+      "finite_bitwise": 1440,
+      "within_tol": 1440,
+      "overflow_parity_tensors": 0,
+      "failures": 0,
+      "max_abs": 0.0,
+      "joint_factor_nodes": 576,
+      "hits": 768,
+      "admission_pass": true,
+      "failure_examples": [],
+      "cells": [
+        {
+          "mode": "tf32",
+          "storage_mode": "compute_dtype",
+          "scale": 1.0,
+          "target": "ordinary",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 120,
+          "within_tol": 120,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "tf32",
+          "storage_mode": "compute_dtype",
+          "scale": 1.0,
+          "target": "exact",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 120,
+          "within_tol": 120,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "tf32",
+          "storage_mode": "compute_dtype",
+          "scale": 1.0,
+          "target": "near",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 120,
+          "within_tol": 120,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "tf32",
+          "storage_mode": "compute_dtype",
+          "scale": 10.0,
+          "target": "ordinary",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 120,
+          "within_tol": 120,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "tf32",
+          "storage_mode": "compute_dtype",
+          "scale": 10.0,
+          "target": "exact",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 120,
+          "within_tol": 120,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "tf32",
+          "storage_mode": "compute_dtype",
+          "scale": 10.0,
+          "target": "near",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 120,
+          "within_tol": 120,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "tf32",
+          "storage_mode": "compute_dtype",
+          "scale": 100.0,
+          "target": "ordinary",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 120,
+          "within_tol": 120,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "tf32",
+          "storage_mode": "compute_dtype",
+          "scale": 100.0,
+          "target": "exact",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 120,
+          "within_tol": 120,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "tf32",
+          "storage_mode": "compute_dtype",
+          "scale": 100.0,
+          "target": "near",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 120,
+          "within_tol": 120,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "tf32",
+          "storage_mode": "compute_dtype",
+          "scale": 10000.0,
+          "target": "ordinary",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 120,
+          "within_tol": 120,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "tf32",
+          "storage_mode": "compute_dtype",
+          "scale": 10000.0,
+          "target": "exact",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 120,
+          "within_tol": 120,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "tf32",
+          "storage_mode": "compute_dtype",
+          "scale": 10000.0,
+          "target": "near",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 120,
+          "within_tol": 120,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        }
+      ]
+    },
+    "bf16": {
+      "mode": "bf16",
+      "storage_mode": "compute_dtype",
+      "roots": [
+        4012001,
+        4012002,
+        4012003,
+        4012004,
+        4012005,
+        4012006,
+        4012007,
+        4012008
+      ],
+      "cases": 96,
+      "tensors": 1440,
+      "finite_bitwise": 1440,
+      "within_tol": 1440,
+      "overflow_parity_tensors": 0,
+      "failures": 0,
+      "max_abs": 0.0,
+      "joint_factor_nodes": 576,
+      "hits": 768,
+      "admission_pass": true,
+      "failure_examples": [],
+      "cells": [
+        {
+          "mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "scale": 1.0,
+          "target": "ordinary",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 120,
+          "within_tol": 120,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "scale": 1.0,
+          "target": "exact",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 120,
+          "within_tol": 120,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "scale": 1.0,
+          "target": "near",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 120,
+          "within_tol": 120,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "scale": 10.0,
+          "target": "ordinary",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 120,
+          "within_tol": 120,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "scale": 10.0,
+          "target": "exact",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 120,
+          "within_tol": 120,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "scale": 10.0,
+          "target": "near",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 120,
+          "within_tol": 120,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "scale": 100.0,
+          "target": "ordinary",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 120,
+          "within_tol": 120,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "scale": 100.0,
+          "target": "exact",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 120,
+          "within_tol": 120,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "scale": 100.0,
+          "target": "near",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 120,
+          "within_tol": 120,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "scale": 10000.0,
+          "target": "ordinary",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 120,
+          "within_tol": 120,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "scale": 10000.0,
+          "target": "exact",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 120,
+          "within_tol": 120,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "scale": 10000.0,
+          "target": "near",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 120,
+          "within_tol": 120,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        }
+      ]
+    },
+    "fp16": {
+      "mode": "fp16",
+      "storage_mode": "compute_dtype",
+      "roots": [
+        4012001,
+        4012002,
+        4012003,
+        4012004,
+        4012005,
+        4012006,
+        4012007,
+        4012008
+      ],
+      "cases": 96,
+      "tensors": 1440,
+      "finite_bitwise": 1080,
+      "within_tol": 1080,
+      "overflow_parity_tensors": 360,
+      "failures": 0,
+      "max_abs": 0.0,
+      "joint_factor_nodes": 576,
+      "hits": 768,
+      "admission_pass": false,
+      "failure_examples": [],
+      "cells": [
+        {
+          "mode": "fp16",
+          "storage_mode": "compute_dtype",
+          "scale": 1.0,
+          "target": "ordinary",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 120,
+          "within_tol": 120,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "fp16",
+          "storage_mode": "compute_dtype",
+          "scale": 1.0,
+          "target": "exact",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 120,
+          "within_tol": 120,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "fp16",
+          "storage_mode": "compute_dtype",
+          "scale": 1.0,
+          "target": "near",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 120,
+          "within_tol": 120,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "fp16",
+          "storage_mode": "compute_dtype",
+          "scale": 10.0,
+          "target": "ordinary",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 120,
+          "within_tol": 120,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "fp16",
+          "storage_mode": "compute_dtype",
+          "scale": 10.0,
+          "target": "exact",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 120,
+          "within_tol": 120,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "fp16",
+          "storage_mode": "compute_dtype",
+          "scale": 10.0,
+          "target": "near",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 120,
+          "within_tol": 120,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "fp16",
+          "storage_mode": "compute_dtype",
+          "scale": 100.0,
+          "target": "ordinary",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 120,
+          "within_tol": 120,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "fp16",
+          "storage_mode": "compute_dtype",
+          "scale": 100.0,
+          "target": "exact",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 120,
+          "within_tol": 120,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "fp16",
+          "storage_mode": "compute_dtype",
+          "scale": 100.0,
+          "target": "near",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 120,
+          "within_tol": 120,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "fp16",
+          "storage_mode": "compute_dtype",
+          "scale": 10000.0,
+          "target": "ordinary",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 0,
+          "within_tol": 0,
+          "overflow_parity_tensors": 120,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "fp16",
+          "storage_mode": "compute_dtype",
+          "scale": 10000.0,
+          "target": "exact",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 0,
+          "within_tol": 0,
+          "overflow_parity_tensors": 120,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "fp16",
+          "storage_mode": "compute_dtype",
+          "scale": 10000.0,
+          "target": "near",
+          "cases": 8,
+          "tensors": 120,
+          "finite_bitwise": 0,
+          "within_tol": 0,
+          "overflow_parity_tensors": 120,
+          "failures": 0,
+          "max_abs": 0.0
+        }
+      ]
+    }
+  },
+  "stage_c_stress_holdout": {
+    "fp32": {
+      "mode": "fp32",
+      "storage_mode": "compute_dtype",
+      "roots": [
+        4013001,
+        4013002,
+        4013003,
+        4013004
+      ],
+      "cases": 48,
+      "tensors": 720,
+      "finite_bitwise": 720,
+      "within_tol": 720,
+      "overflow_parity_tensors": 0,
+      "failures": 0,
+      "max_abs": 0.0,
+      "joint_factor_nodes": 288,
+      "hits": 384,
+      "admission_pass": true,
+      "failure_examples": [],
+      "cells": [
+        {
+          "mode": "fp32",
+          "storage_mode": "compute_dtype",
+          "scale": 1.0,
+          "target": "ordinary",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 60,
+          "within_tol": 60,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "fp32",
+          "storage_mode": "compute_dtype",
+          "scale": 1.0,
+          "target": "exact",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 60,
+          "within_tol": 60,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "fp32",
+          "storage_mode": "compute_dtype",
+          "scale": 1.0,
+          "target": "near",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 60,
+          "within_tol": 60,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "fp32",
+          "storage_mode": "compute_dtype",
+          "scale": 10.0,
+          "target": "ordinary",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 60,
+          "within_tol": 60,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "fp32",
+          "storage_mode": "compute_dtype",
+          "scale": 10.0,
+          "target": "exact",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 60,
+          "within_tol": 60,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "fp32",
+          "storage_mode": "compute_dtype",
+          "scale": 10.0,
+          "target": "near",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 60,
+          "within_tol": 60,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "fp32",
+          "storage_mode": "compute_dtype",
+          "scale": 100.0,
+          "target": "ordinary",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 60,
+          "within_tol": 60,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "fp32",
+          "storage_mode": "compute_dtype",
+          "scale": 100.0,
+          "target": "exact",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 60,
+          "within_tol": 60,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "fp32",
+          "storage_mode": "compute_dtype",
+          "scale": 100.0,
+          "target": "near",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 60,
+          "within_tol": 60,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "fp32",
+          "storage_mode": "compute_dtype",
+          "scale": 10000.0,
+          "target": "ordinary",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 60,
+          "within_tol": 60,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "fp32",
+          "storage_mode": "compute_dtype",
+          "scale": 10000.0,
+          "target": "exact",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 60,
+          "within_tol": 60,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "fp32",
+          "storage_mode": "compute_dtype",
+          "scale": 10000.0,
+          "target": "near",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 60,
+          "within_tol": 60,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        }
+      ]
+    },
+    "tf32": {
+      "mode": "tf32",
+      "storage_mode": "compute_dtype",
+      "roots": [
+        4013001,
+        4013002,
+        4013003,
+        4013004
+      ],
+      "cases": 48,
+      "tensors": 720,
+      "finite_bitwise": 720,
+      "within_tol": 720,
+      "overflow_parity_tensors": 0,
+      "failures": 0,
+      "max_abs": 0.0,
+      "joint_factor_nodes": 288,
+      "hits": 384,
+      "admission_pass": true,
+      "failure_examples": [],
+      "cells": [
+        {
+          "mode": "tf32",
+          "storage_mode": "compute_dtype",
+          "scale": 1.0,
+          "target": "ordinary",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 60,
+          "within_tol": 60,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "tf32",
+          "storage_mode": "compute_dtype",
+          "scale": 1.0,
+          "target": "exact",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 60,
+          "within_tol": 60,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "tf32",
+          "storage_mode": "compute_dtype",
+          "scale": 1.0,
+          "target": "near",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 60,
+          "within_tol": 60,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "tf32",
+          "storage_mode": "compute_dtype",
+          "scale": 10.0,
+          "target": "ordinary",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 60,
+          "within_tol": 60,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "tf32",
+          "storage_mode": "compute_dtype",
+          "scale": 10.0,
+          "target": "exact",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 60,
+          "within_tol": 60,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "tf32",
+          "storage_mode": "compute_dtype",
+          "scale": 10.0,
+          "target": "near",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 60,
+          "within_tol": 60,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "tf32",
+          "storage_mode": "compute_dtype",
+          "scale": 100.0,
+          "target": "ordinary",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 60,
+          "within_tol": 60,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "tf32",
+          "storage_mode": "compute_dtype",
+          "scale": 100.0,
+          "target": "exact",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 60,
+          "within_tol": 60,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "tf32",
+          "storage_mode": "compute_dtype",
+          "scale": 100.0,
+          "target": "near",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 60,
+          "within_tol": 60,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "tf32",
+          "storage_mode": "compute_dtype",
+          "scale": 10000.0,
+          "target": "ordinary",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 60,
+          "within_tol": 60,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "tf32",
+          "storage_mode": "compute_dtype",
+          "scale": 10000.0,
+          "target": "exact",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 60,
+          "within_tol": 60,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "tf32",
+          "storage_mode": "compute_dtype",
+          "scale": 10000.0,
+          "target": "near",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 60,
+          "within_tol": 60,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        }
+      ]
+    },
+    "bf16": {
+      "mode": "bf16",
+      "storage_mode": "compute_dtype",
+      "roots": [
+        4013001,
+        4013002,
+        4013003,
+        4013004
+      ],
+      "cases": 48,
+      "tensors": 720,
+      "finite_bitwise": 720,
+      "within_tol": 720,
+      "overflow_parity_tensors": 0,
+      "failures": 0,
+      "max_abs": 0.0,
+      "joint_factor_nodes": 288,
+      "hits": 384,
+      "admission_pass": true,
+      "failure_examples": [],
+      "cells": [
+        {
+          "mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "scale": 1.0,
+          "target": "ordinary",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 60,
+          "within_tol": 60,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "scale": 1.0,
+          "target": "exact",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 60,
+          "within_tol": 60,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "scale": 1.0,
+          "target": "near",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 60,
+          "within_tol": 60,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "scale": 10.0,
+          "target": "ordinary",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 60,
+          "within_tol": 60,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "scale": 10.0,
+          "target": "exact",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 60,
+          "within_tol": 60,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "scale": 10.0,
+          "target": "near",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 60,
+          "within_tol": 60,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "scale": 100.0,
+          "target": "ordinary",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 60,
+          "within_tol": 60,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "scale": 100.0,
+          "target": "exact",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 60,
+          "within_tol": 60,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "scale": 100.0,
+          "target": "near",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 60,
+          "within_tol": 60,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "scale": 10000.0,
+          "target": "ordinary",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 60,
+          "within_tol": 60,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "scale": 10000.0,
+          "target": "exact",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 60,
+          "within_tol": 60,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "bf16",
+          "storage_mode": "compute_dtype",
+          "scale": 10000.0,
+          "target": "near",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 60,
+          "within_tol": 60,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        }
+      ]
+    },
+    "fp16": {
+      "mode": "fp16",
+      "storage_mode": "compute_dtype",
+      "roots": [
+        4013001,
+        4013002,
+        4013003,
+        4013004
+      ],
+      "cases": 48,
+      "tensors": 720,
+      "finite_bitwise": 540,
+      "within_tol": 540,
+      "overflow_parity_tensors": 180,
+      "failures": 0,
+      "max_abs": 0.0,
+      "joint_factor_nodes": 288,
+      "hits": 384,
+      "admission_pass": false,
+      "failure_examples": [],
+      "cells": [
+        {
+          "mode": "fp16",
+          "storage_mode": "compute_dtype",
+          "scale": 1.0,
+          "target": "ordinary",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 60,
+          "within_tol": 60,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "fp16",
+          "storage_mode": "compute_dtype",
+          "scale": 1.0,
+          "target": "exact",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 60,
+          "within_tol": 60,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "fp16",
+          "storage_mode": "compute_dtype",
+          "scale": 1.0,
+          "target": "near",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 60,
+          "within_tol": 60,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "fp16",
+          "storage_mode": "compute_dtype",
+          "scale": 10.0,
+          "target": "ordinary",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 60,
+          "within_tol": 60,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "fp16",
+          "storage_mode": "compute_dtype",
+          "scale": 10.0,
+          "target": "exact",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 60,
+          "within_tol": 60,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "fp16",
+          "storage_mode": "compute_dtype",
+          "scale": 10.0,
+          "target": "near",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 60,
+          "within_tol": 60,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "fp16",
+          "storage_mode": "compute_dtype",
+          "scale": 100.0,
+          "target": "ordinary",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 60,
+          "within_tol": 60,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "fp16",
+          "storage_mode": "compute_dtype",
+          "scale": 100.0,
+          "target": "exact",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 60,
+          "within_tol": 60,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "fp16",
+          "storage_mode": "compute_dtype",
+          "scale": 100.0,
+          "target": "near",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 60,
+          "within_tol": 60,
+          "overflow_parity_tensors": 0,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "fp16",
+          "storage_mode": "compute_dtype",
+          "scale": 10000.0,
+          "target": "ordinary",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 0,
+          "within_tol": 0,
+          "overflow_parity_tensors": 60,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "fp16",
+          "storage_mode": "compute_dtype",
+          "scale": 10000.0,
+          "target": "exact",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 0,
+          "within_tol": 0,
+          "overflow_parity_tensors": 60,
+          "failures": 0,
+          "max_abs": 0.0
+        },
+        {
+          "mode": "fp16",
+          "storage_mode": "compute_dtype",
+          "scale": 10000.0,
+          "target": "near",
+          "cases": 4,
+          "tensors": 60,
+          "finite_bitwise": 0,
+          "within_tol": 0,
+          "overflow_parity_tensors": 60,
+          "failures": 0,
+          "max_abs": 0.0
+        }
+      ]
+    }
+  },
+  "stage_c_fp16_gradscaler": {
+    "cases": [
+      {
+        "case": "safe_update",
+        "ref_skipped": false,
+        "cand_skipped": false,
+        "skip_decision_match": true,
+        "scale_after_match": true,
+        "V_bitwise": true,
+        "U_bitwise": true,
+        "V_max_abs": 0.0,
+        "U_max_abs": 0.0
+      },
+      {
+        "case": "overflow_skip",
+        "ref_skipped": true,
+        "cand_skipped": true,
+        "skip_decision_match": true,
+        "scale_after_match": true,
+        "V_bitwise": true,
+        "U_bitwise": true,
+        "V_max_abs": 0.0,
+        "U_max_abs": 0.0
+      }
+    ],
+    "all_match": true
+  },
+  "stage_c_trainer_parity": [
+    {
+      "mode": "fp32",
+      "width": 512,
+      "n_passes": 12,
+      "regime": "closed_loop",
+      "cal_cadence": "1",
+      "budget_mode": "full",
+      "seed": 4013501,
+      "arms": {
+        "A": {
+          "step_ms": [
+            4303.04345703125,
+            3073.369384765625
+          ],
+          "peak_allocated_bytes": 381179392,
+          "peak_reserved_bytes": 421527552,
+          "nvml_used_mib": 652.0,
+          "cap_bytes": 8388608,
+          "payload_peak_bytes": 0,
+          "cuda_receipt": null
+        },
+        "G": {
+          "step_ms": [
+            3032.467529296875,
+            3132.460693359375
+          ],
+          "peak_allocated_bytes": 205106688,
+          "peak_reserved_bytes": 232783872,
+          "nvml_used_mib": 472.0,
+          "cap_bytes": 8388608,
+          "payload_peak_bytes": 8388608,
+          "cuda_receipt": {
+            "allow_cuda": true,
+            "precision_mode": "fp32",
+            "storage_mode": "compute_dtype",
+            "storage_dtype": "torch.float32",
+            "factor_cast_bytes": 0,
+            "owner_stream": [
+              "cuda",
+              0,
+              0
+            ],
+            "stream_checks": 396
+          }
+        }
+      },
+      "parity": {
+        "tensors": 186,
+        "finite_bitwise": 186,
+        "within_tol": 186,
+        "overflow_parity": 0,
+        "failures": 0,
+        "max_abs": 0.0,
+        "scalars": 39,
+        "scalar_failures": 0,
+        "failure_examples": []
+      },
+      "finite_bitwise_pass": true
+    },
+    {
+      "mode": "tf32",
+      "width": 512,
+      "n_passes": 12,
+      "regime": "closed_loop",
+      "cal_cadence": "1",
+      "budget_mode": "full",
+      "seed": 4013502,
+      "arms": {
+        "A": {
+          "step_ms": [
+            3482.658203125,
+            3365.59130859375
+          ],
+          "peak_allocated_bytes": 381185536,
+          "peak_reserved_bytes": 421527552,
+          "nvml_used_mib": 652.0,
+          "cap_bytes": 8388608,
+          "payload_peak_bytes": 0,
+          "cuda_receipt": null
+        },
+        "G": {
+          "step_ms": [
+            3227.482177734375,
+            3179.0263671875
+          ],
+          "peak_allocated_bytes": 205106688,
+          "peak_reserved_bytes": 232783872,
+          "nvml_used_mib": 472.0,
+          "cap_bytes": 8388608,
+          "payload_peak_bytes": 8388608,
+          "cuda_receipt": {
+            "allow_cuda": true,
+            "precision_mode": "tf32",
+            "storage_mode": "compute_dtype",
+            "storage_dtype": "torch.float32",
+            "factor_cast_bytes": 0,
+            "owner_stream": [
+              "cuda",
+              0,
+              0
+            ],
+            "stream_checks": 396
+          }
+        }
+      },
+      "parity": {
+        "tensors": 186,
+        "finite_bitwise": 186,
+        "within_tol": 186,
+        "overflow_parity": 0,
+        "failures": 0,
+        "max_abs": 0.0,
+        "scalars": 39,
+        "scalar_failures": 0,
+        "failure_examples": []
+      },
+      "finite_bitwise_pass": true
+    },
+    {
+      "mode": "bf16",
+      "width": 128,
+      "n_passes": 6,
+      "regime": "closed_loop",
+      "cal_cadence": "1",
+      "budget_mode": "full",
+      "seed": 4013503,
+      "arms": {
+        "A": {
+          "step_ms": [
+            1494.5516357421875,
+            1390.06103515625
+          ],
+          "peak_allocated_bytes": 43741184,
+          "peak_reserved_bytes": 48234496,
+          "nvml_used_mib": 298.0,
+          "cap_bytes": 262144,
+          "payload_peak_bytes": 0,
+          "cuda_receipt": null
+        },
+        "G": {
+          "step_ms": [
+            1484.9180908203125,
+            1416.899169921875
+          ],
+          "peak_allocated_bytes": 41885696,
+          "peak_reserved_bytes": 46137344,
+          "nvml_used_mib": 296.0,
+          "cap_bytes": 262144,
+          "payload_peak_bytes": 262144,
+          "cuda_receipt": {
+            "allow_cuda": true,
+            "precision_mode": "bf16",
+            "storage_mode": "compute_dtype",
+            "storage_dtype": "torch.bfloat16",
+            "factor_cast_bytes": 32768,
+            "owner_stream": [
+              "cuda",
+              0,
+              0
+            ],
+            "stream_checks": 204
+          }
+        }
+      },
+      "parity": {
+        "tensors": 182,
+        "finite_bitwise": 182,
+        "within_tol": 182,
+        "overflow_parity": 0,
+        "failures": 0,
+        "max_abs": 0.0,
+        "scalars": 27,
+        "scalar_failures": 0,
+        "failure_examples": []
+      },
+      "finite_bitwise_pass": true
+    },
+    {
+      "mode": "bf16",
+      "width": 128,
+      "n_passes": 6,
+      "regime": "clean_window",
+      "cal_cadence": "50",
+      "budget_mode": "full",
+      "seed": 4013504,
+      "arms": {
+        "A": {
+          "step_ms": [
+            814.73974609375,
+            197.74234008789062
+          ],
+          "peak_allocated_bytes": 32518144,
+          "peak_reserved_bytes": 37748736,
+          "nvml_used_mib": 288.0,
+          "cap_bytes": 262144,
+          "payload_peak_bytes": 0,
+          "cuda_receipt": null
+        },
+        "G": {
+          "step_ms": [
+            816.5630493164062,
+            229.11334228515625
+          ],
+          "peak_allocated_bytes": 32229376,
+          "peak_reserved_bytes": 37748736,
+          "nvml_used_mib": 288.0,
+          "cap_bytes": 262144,
+          "payload_peak_bytes": 262144,
+          "cuda_receipt": {
+            "allow_cuda": true,
+            "precision_mode": "bf16",
+            "storage_mode": "compute_dtype",
+            "storage_dtype": "torch.bfloat16",
+            "factor_cast_bytes": 32768,
+            "owner_stream": [
+              "cuda",
+              0,
+              0
+            ],
+            "stream_checks": 48
+          }
+        }
+      },
+      "parity": {
+        "tensors": 154,
+        "finite_bitwise": 154,
+        "within_tol": 154,
+        "overflow_parity": 0,
+        "failures": 0,
+        "max_abs": 0.0,
+        "scalars": 27,
+        "scalar_failures": 0,
+        "failure_examples": []
+      },
+      "finite_bitwise_pass": true
+    },
+    {
+      "mode": "bf16",
+      "width": 512,
+      "n_passes": 12,
+      "regime": "closed_loop",
+      "cal_cadence": "1",
+      "budget_mode": "binding",
+      "seed": 4013505,
+      "arms": {
+        "A": {
+          "step_ms": [
+            3958.38623046875,
+            3980.303955078125
+          ],
+          "peak_allocated_bytes": 530440704,
+          "peak_reserved_bytes": 547356672,
+          "nvml_used_mib": 776.0,
+          "cap_bytes": 2097152,
+          "payload_peak_bytes": 0,
+          "cuda_receipt": null
+        },
+        "G": {
+          "step_ms": [
+            4032.868408203125,
+            3816.51513671875
+          ],
+          "peak_allocated_bytes": 491344384,
+          "peak_reserved_bytes": 494927872,
+          "nvml_used_mib": 726.0,
+          "cap_bytes": 2097152,
+          "payload_peak_bytes": 2097152,
+          "cuda_receipt": {
+            "allow_cuda": true,
+            "precision_mode": "bf16",
+            "storage_mode": "compute_dtype",
+            "storage_dtype": "torch.bfloat16",
+            "factor_cast_bytes": 360448,
+            "owner_stream": [
+              "cuda",
+              0,
+              0
+            ],
+            "stream_checks": 198
+          }
+        }
+      },
+      "parity": {
+        "tensors": 186,
+        "finite_bitwise": 186,
+        "within_tol": 186,
+        "overflow_parity": 0,
+        "failures": 0,
+        "max_abs": 0.0,
+        "scalars": 39,
+        "scalar_failures": 0,
+        "failure_examples": []
+      },
+      "finite_bitwise_pass": true
+    },
+    {
+      "mode": "bf16",
+      "width": 512,
+      "n_passes": 12,
+      "regime": "closed_loop",
+      "cal_cadence": "off",
+      "budget_mode": "full",
+      "seed": 4013506,
+      "arms": {
+        "A": {
+          "step_ms": [
+            912.2984619140625,
+            983.3946533203125
+          ],
+          "peak_allocated_bytes": 522367488,
+          "peak_reserved_bytes": 538968064,
+          "nvml_used_mib": 768.0,
+          "cap_bytes": 4194304,
+          "payload_peak_bytes": 0,
+          "cuda_receipt": null
+        },
+        "G": {
+          "step_ms": [
+            1120.630615234375,
+            1045.80615234375
+          ],
+          "peak_allocated_bytes": 434506240,
+          "peak_reserved_bytes": 455081984,
+          "nvml_used_mib": 688.0,
+          "cap_bytes": 4194304,
+          "payload_peak_bytes": 4194304,
+          "cuda_receipt": {
+            "allow_cuda": true,
+            "precision_mode": "bf16",
+            "storage_mode": "compute_dtype",
+            "storage_dtype": "torch.bfloat16",
+            "factor_cast_bytes": 524288,
+            "owner_stream": [
+              "cuda",
+              0,
+              0
+            ],
+            "stream_checks": 396
+          }
+        }
+      },
+      "parity": {
+        "tensors": 186,
+        "finite_bitwise": 186,
+        "within_tol": 186,
+        "overflow_parity": 0,
+        "failures": 0,
+        "max_abs": 0.0,
+        "scalars": 28,
+        "scalar_failures": 0,
+        "failure_examples": []
+      },
+      "finite_bitwise_pass": true
+    },
+    {
+      "mode": "bf16",
+      "width": 1024,
+      "n_passes": 12,
+      "regime": "closed_loop",
+      "cal_cadence": "1",
+      "budget_mode": "binding",
+      "seed": 4013507,
+      "arms": {
+        "A": {
+          "step_ms": [
+            4172.78759765625,
+            4000.87841796875
+          ],
+          "peak_allocated_bytes": 1827458048,
+          "peak_reserved_bytes": 1912602624,
+          "nvml_used_mib": 2078.0,
+          "cap_bytes": 7864320,
+          "payload_peak_bytes": 0,
+          "cuda_receipt": null
+        },
+        "G": {
+          "step_ms": [
+            4432.82080078125,
+            4430.9931640625
+          ],
+          "peak_allocated_bytes": 1639428608,
+          "peak_reserved_bytes": 1730150400,
+          "nvml_used_mib": 1904.0,
+          "cap_bytes": 7864320,
+          "payload_peak_bytes": 7864320,
+          "cuda_receipt": {
+            "allow_cuda": true,
+            "precision_mode": "bf16",
+            "storage_mode": "compute_dtype",
+            "storage_dtype": "torch.bfloat16",
+            "factor_cast_bytes": 1376256,
+            "owner_stream": [
+              "cuda",
+              0,
+              0
+            ],
+            "stream_checks": 198
+          }
+        }
+      },
+      "parity": {
+        "tensors": 186,
+        "finite_bitwise": 186,
+        "within_tol": 186,
+        "overflow_parity": 0,
+        "failures": 0,
+        "max_abs": 0.0,
+        "scalars": 39,
+        "scalar_failures": 0,
+        "failure_examples": []
+      },
+      "finite_bitwise_pass": true
+    },
+    {
+      "mode": "bf16",
+      "width": 2048,
+      "n_passes": 12,
+      "regime": "closed_loop",
+      "cal_cadence": "off",
+      "budget_mode": "full",
+      "seed": 4013508,
+      "arms": {
+        "A": {
+          "step_ms": [
+            1126.7850341796875,
+            872.2412719726562
+          ],
+          "peak_allocated_bytes": 6607393280,
+          "peak_reserved_bytes": 7073693696,
+          "nvml_used_mib": 7000.0,
+          "cap_bytes": 62914560,
+          "payload_peak_bytes": 0,
+          "cuda_receipt": null
+        },
+        "G": {
+          "step_ms": [
+            1210.403564453125,
+            1062.5025634765625
+          ],
+          "peak_allocated_bytes": 5227107328,
+          "peak_reserved_bytes": 5416943616,
+          "nvml_used_mib": 5420.0,
+          "cap_bytes": 62914560,
+          "payload_peak_bytes": 62914560,
+          "cuda_receipt": {
+            "allow_cuda": true,
+            "precision_mode": "bf16",
+            "storage_mode": "compute_dtype",
+            "storage_dtype": "torch.bfloat16",
+            "factor_cast_bytes": 7995392,
+            "owner_stream": [
+              "cuda",
+              0,
+              0
+            ],
+            "stream_checks": 396
+          }
+        }
+      },
+      "parity": {
+        "tensors": 186,
+        "finite_bitwise": 186,
+        "within_tol": 186,
+        "overflow_parity": 0,
+        "failures": 0,
+        "max_abs": 0.0,
+        "scalars": 28,
+        "scalar_failures": 0,
+        "failure_examples": []
+      },
+      "finite_bitwise_pass": true
+    },
+    {
+      "mode": "bf16",
+      "width": 2048,
+      "n_passes": 24,
+      "regime": "closed_loop",
+      "cal_cadence": "off",
+      "budget_mode": "full",
+      "seed": 4013509,
+      "arms": {
+        "A": {
+          "step_ms": [
+            2286.989990234375,
+            1914.2042236328125
+          ],
+          "peak_allocated_bytes": 12578113536,
+          "peak_reserved_bytes": 13472104448,
+          "nvml_used_mib": 13102.0,
+          "cap_bytes": 62914560,
+          "payload_peak_bytes": 0,
+          "cuda_receipt": null
+        },
+        "G": {
+          "step_ms": [
+            2330.758544921875,
+            1997.5177001953125
+          ],
+          "peak_allocated_bytes": 9713805312,
+          "peak_reserved_bytes": 10043260928,
+          "nvml_used_mib": 9832.0,
+          "cap_bytes": 62914560,
+          "payload_peak_bytes": 62914560,
+          "cuda_receipt": {
+            "allow_cuda": true,
+            "precision_mode": "bf16",
+            "storage_mode": "compute_dtype",
+            "storage_dtype": "torch.bfloat16",
+            "factor_cast_bytes": 7995392,
+            "owner_stream": [
+              "cuda",
+              0,
+              0
+            ],
+            "stream_checks": 780
+          }
+        }
+      },
+      "parity": {
+        "tensors": 194,
+        "finite_bitwise": 194,
+        "within_tol": 194,
+        "overflow_parity": 0,
+        "failures": 0,
+        "max_abs": 0.0,
+        "scalars": 40,
+        "scalar_failures": 0,
+        "failure_examples": []
+      },
+      "finite_bitwise_pass": true
+    },
+    {
+      "mode": "fp16",
+      "width": 128,
+      "n_passes": 6,
+      "regime": "closed_loop",
+      "cal_cadence": "1",
+      "budget_mode": "full",
+      "seed": 4013510,
+      "arms": {
+        "A": {
+          "step_ms": [
+            1640.364990234375,
+            1495.2071533203125
+          ],
+          "peak_allocated_bytes": 43747328,
+          "peak_reserved_bytes": 48234496,
+          "nvml_used_mib": 302.0,
+          "cap_bytes": 262144,
+          "payload_peak_bytes": 0,
+          "cuda_receipt": null
+        },
+        "G": {
+          "step_ms": [
+            1494.772705078125,
+            1448.6531982421875
+          ],
+          "peak_allocated_bytes": 41885696,
+          "peak_reserved_bytes": 46137344,
+          "nvml_used_mib": 300.0,
+          "cap_bytes": 262144,
+          "payload_peak_bytes": 262144,
+          "cuda_receipt": {
+            "allow_cuda": true,
+            "precision_mode": "fp16",
+            "storage_mode": "compute_dtype",
+            "storage_dtype": "torch.float16",
+            "factor_cast_bytes": 32768,
+            "owner_stream": [
+              "cuda",
+              0,
+              0
+            ],
+            "stream_checks": 204
+          }
+        }
+      },
+      "parity": {
+        "tensors": 182,
+        "finite_bitwise": 182,
+        "within_tol": 182,
+        "overflow_parity": 0,
+        "failures": 0,
+        "max_abs": 0.0,
+        "scalars": 27,
+        "scalar_failures": 0,
+        "failure_examples": []
+      },
+      "finite_bitwise_pass": true
+    },
+    {
+      "mode": "fp16",
+      "width": 128,
+      "n_passes": 6,
+      "regime": "clean_window",
+      "cal_cadence": "50",
+      "budget_mode": "full",
+      "seed": 4013511,
+      "arms": {
+        "A": {
+          "step_ms": [
+            830.193603515625,
+            216.18284606933594
+          ],
+          "peak_allocated_bytes": 32518144,
+          "peak_reserved_bytes": 37748736,
+          "nvml_used_mib": 292.0,
+          "cap_bytes": 262144,
+          "payload_peak_bytes": 0,
+          "cuda_receipt": null
+        },
+        "G": {
+          "step_ms": [
+            849.4105224609375,
+            220.4672393798828
+          ],
+          "peak_allocated_bytes": 32229376,
+          "peak_reserved_bytes": 37748736,
+          "nvml_used_mib": 292.0,
+          "cap_bytes": 262144,
+          "payload_peak_bytes": 262144,
+          "cuda_receipt": {
+            "allow_cuda": true,
+            "precision_mode": "fp16",
+            "storage_mode": "compute_dtype",
+            "storage_dtype": "torch.float16",
+            "factor_cast_bytes": 32768,
+            "owner_stream": [
+              "cuda",
+              0,
+              0
+            ],
+            "stream_checks": 48
+          }
+        }
+      },
+      "parity": {
+        "tensors": 154,
+        "finite_bitwise": 154,
+        "within_tol": 154,
+        "overflow_parity": 0,
+        "failures": 0,
+        "max_abs": 0.0,
+        "scalars": 27,
+        "scalar_failures": 0,
+        "failure_examples": []
+      },
+      "finite_bitwise_pass": true
+    },
+    {
+      "mode": "fp16",
+      "width": 512,
+      "n_passes": 12,
+      "regime": "closed_loop",
+      "cal_cadence": "1",
+      "budget_mode": "binding",
+      "seed": 4013512,
+      "arms": {
+        "A": {
+          "step_ms": [
+            3866.7861328125,
+            3942.91162109375
+          ],
+          "peak_allocated_bytes": 530440704,
+          "peak_reserved_bytes": 547356672,
+          "nvml_used_mib": 778.0,
+          "cap_bytes": 2097152,
+          "payload_peak_bytes": 0,
+          "cuda_receipt": null
+        },
+        "G": {
+          "step_ms": [
+            4188.8310546875,
+            4120.78271484375
+          ],
+          "peak_allocated_bytes": 491344384,
+          "peak_reserved_bytes": 497025024,
+          "nvml_used_mib": 730.0,
+          "cap_bytes": 2097152,
+          "payload_peak_bytes": 2097152,
+          "cuda_receipt": {
+            "allow_cuda": true,
+            "precision_mode": "fp16",
+            "storage_mode": "compute_dtype",
+            "storage_dtype": "torch.float16",
+            "factor_cast_bytes": 360448,
+            "owner_stream": [
+              "cuda",
+              0,
+              0
+            ],
+            "stream_checks": 198
+          }
+        }
+      },
+      "parity": {
+        "tensors": 186,
+        "finite_bitwise": 186,
+        "within_tol": 186,
+        "overflow_parity": 0,
+        "failures": 0,
+        "max_abs": 0.0,
+        "scalars": 39,
+        "scalar_failures": 0,
+        "failure_examples": []
+      },
+      "finite_bitwise_pass": true
+    },
+    {
+      "mode": "fp16",
+      "width": 512,
+      "n_passes": 12,
+      "regime": "closed_loop",
+      "cal_cadence": "off",
+      "budget_mode": "full",
+      "seed": 4013513,
+      "arms": {
+        "A": {
+          "step_ms": [
+            988.62451171875,
+            1010.9635009765625
+          ],
+          "peak_allocated_bytes": 522367488,
+          "peak_reserved_bytes": 538968064,
+          "nvml_used_mib": 770.0,
+          "cap_bytes": 4194304,
+          "payload_peak_bytes": 0,
+          "cuda_receipt": null
+        },
+        "G": {
+          "step_ms": [
+            1140.609619140625,
+            1086.2266845703125
+          ],
+          "peak_allocated_bytes": 434506240,
+          "peak_reserved_bytes": 455081984,
+          "nvml_used_mib": 690.0,
+          "cap_bytes": 4194304,
+          "payload_peak_bytes": 4194304,
+          "cuda_receipt": {
+            "allow_cuda": true,
+            "precision_mode": "fp16",
+            "storage_mode": "compute_dtype",
+            "storage_dtype": "torch.float16",
+            "factor_cast_bytes": 524288,
+            "owner_stream": [
+              "cuda",
+              0,
+              0
+            ],
+            "stream_checks": 396
+          }
+        }
+      },
+      "parity": {
+        "tensors": 186,
+        "finite_bitwise": 186,
+        "within_tol": 186,
+        "overflow_parity": 0,
+        "failures": 0,
+        "max_abs": 0.0,
+        "scalars": 28,
+        "scalar_failures": 0,
+        "failure_examples": []
+      },
+      "finite_bitwise_pass": true
+    },
+    {
+      "mode": "fp16",
+      "width": 1024,
+      "n_passes": 12,
+      "regime": "closed_loop",
+      "cal_cadence": "1",
+      "budget_mode": "binding",
+      "seed": 4013514,
+      "arms": {
+        "A": {
+          "step_ms": [
+            4153.4267578125,
+            4100.23193359375
+          ],
+          "peak_allocated_bytes": 1827458048,
+          "peak_reserved_bytes": 1912602624,
+          "nvml_used_mib": 2080.0,
+          "cap_bytes": 7864320,
+          "payload_peak_bytes": 0,
+          "cuda_receipt": null
+        },
+        "G": {
+          "step_ms": [
+            4015.24267578125,
+            4127.41552734375
+          ],
+          "peak_allocated_bytes": 1639428608,
+          "peak_reserved_bytes": 1730150400,
+          "nvml_used_mib": 1906.0,
+          "cap_bytes": 7864320,
+          "payload_peak_bytes": 7864320,
+          "cuda_receipt": {
+            "allow_cuda": true,
+            "precision_mode": "fp16",
+            "storage_mode": "compute_dtype",
+            "storage_dtype": "torch.float16",
+            "factor_cast_bytes": 1376256,
+            "owner_stream": [
+              "cuda",
+              0,
+              0
+            ],
+            "stream_checks": 198
+          }
+        }
+      },
+      "parity": {
+        "tensors": 186,
+        "finite_bitwise": 186,
+        "within_tol": 186,
+        "overflow_parity": 0,
+        "failures": 0,
+        "max_abs": 0.0,
+        "scalars": 39,
+        "scalar_failures": 0,
+        "failure_examples": []
+      },
+      "finite_bitwise_pass": true
+    },
+    {
+      "mode": "fp16",
+      "width": 2048,
+      "n_passes": 12,
+      "regime": "closed_loop",
+      "cal_cadence": "off",
+      "budget_mode": "full",
+      "seed": 4013515,
+      "arms": {
+        "A": {
+          "step_ms": [
+            1174.59423828125,
+            938.4232788085938
+          ],
+          "peak_allocated_bytes": 6607393280,
+          "peak_reserved_bytes": 7073693696,
+          "nvml_used_mib": 7002.0,
+          "cap_bytes": 62914560,
+          "payload_peak_bytes": 0,
+          "cuda_receipt": null
+        },
+        "G": {
+          "step_ms": [
+            1201.0975341796875,
+            1102.553466796875
+          ],
+          "peak_allocated_bytes": 5227107328,
+          "peak_reserved_bytes": 5416943616,
+          "nvml_used_mib": 5422.0,
+          "cap_bytes": 62914560,
+          "payload_peak_bytes": 62914560,
+          "cuda_receipt": {
+            "allow_cuda": true,
+            "precision_mode": "fp16",
+            "storage_mode": "compute_dtype",
+            "storage_dtype": "torch.float16",
+            "factor_cast_bytes": 7995392,
+            "owner_stream": [
+              "cuda",
+              0,
+              0
+            ],
+            "stream_checks": 396
+          }
+        }
+      },
+      "parity": {
+        "tensors": 186,
+        "finite_bitwise": 186,
+        "within_tol": 186,
+        "overflow_parity": 0,
+        "failures": 0,
+        "max_abs": 0.0,
+        "scalars": 28,
+        "scalar_failures": 0,
+        "failure_examples": []
+      },
+      "finite_bitwise_pass": true
+    }
+  ],
+  "elapsed_seconds": 248.73044269997627
+}

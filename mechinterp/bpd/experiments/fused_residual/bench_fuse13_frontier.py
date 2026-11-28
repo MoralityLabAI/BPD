@@ -69,16 +69,26 @@ def preflight_estimate_mib(width: int, n_passes: int, *, arm: str, mode: str) ->
     base_mib = (full_model_elems * 4 + factor_elems * 4 * 4) / (1024.0 ** 2)
     # Autograd activations across 2 backward-retaining rollouts (batch=2, seq=20, 2 layers)
     act_mib = (2 * n_passes * 2 * 20 * (4 * width + 3 * inter) * 4 * 2.2) / (1024.0 ** 2)
+    # Under autocast(bf16/fp16), unwrapped layers (qkv_proj, gate_up_proj) save low-dtype
+    # cast tensors per pass across the two backward-retaining rollouts (empirically verified
+    # at w=2048 T=12/24 and w=4096 T=2/6: ~285 MiB/pass at w=2048, ~1136 MiB/pass at w=4096).
+    unwrapped_elems = 2 * (3 * width * width + 2 * width * inter)
+    autocast_unwrapped_mib = (
+        (2 * n_passes * unwrapped_elems * elem_bytes) / (1024.0 ** 2)
+        if mode in ("bf16", "fp16")
+        else 0.0
+    )
     if arm == "A":
         # Native saves one materialized residual per pass per backward rollout
         res_mib = (2 * n_passes * site_elems * elem_bytes) / (1024.0 ** 2)
     else:
         # Arm G shares 1 residual per site (+ 1 transient fp32 reconstruction buffer)
         res_mib = (site_elems * elem_bytes + max(width * width, width * inter) * 4) / (1024.0 ** 2)
-    total_est = base_mib + act_mib + res_mib + 600.0  # allocator fragmentation + cuBLAS workspace
+    total_est = base_mib + act_mib + autocast_unwrapped_mib + res_mib + 600.0
     return {
         "base_weights_opt_mib": round(base_mib, 1),
         "activations_mib": round(act_mib, 1),
+        "autocast_unwrapped_mib": round(autocast_unwrapped_mib, 1),
         "live_residuals_mib": round(res_mib, 1),
         "total_est_mib": round(total_est, 1),
         "single_site_set_mib": round((site_elems * elem_bytes) / (1024.0 ** 2), 1),
@@ -237,10 +247,18 @@ def run_single_arm_frontier(
             del tr, adapter, bpd, model, batch
             gc.collect()
             torch.cuda.empty_cache()
-    except torch.cuda.OutOfMemoryError as exc:
-        torch.cuda.empty_cache()
+    except (torch.cuda.OutOfMemoryError, getattr(torch, "AcceleratorError", RuntimeError)) as exc:
+        msg = str(exc)
+        if isinstance(exc, RuntimeError) and not (
+            isinstance(exc, torch.cuda.OutOfMemoryError)
+            or "out of memory" in msg.lower()
+            or "Insufficient WDDM VRAM headroom" in msg
+        ):
+            raise
         gc.collect()
-        return {"arm": arm, "status": "oom", "preflight": est, "error": str(exc)}
+        torch.cuda.empty_cache()
+        status = "memory_blocked_runtime_headroom" if "Insufficient WDDM VRAM headroom" in msg else "oom"
+        return {"arm": arm, "status": status, "preflight": est, "error": msg}
 
     med_cuda = statistics.median(cuda_ms_vals)
     med_wall = statistics.median(wall_ms_vals)
@@ -270,6 +288,8 @@ def main() -> int:
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--output", type=Path, required=True, help="Resumable JSONL frontier receipt path")
     p.add_argument("--allow-cuda", action="store_true")
+    p.add_argument("--preflight-only-blocked", action="store_true",
+                   help="Record remaining frontier cells whose analytical preflight exceeds lease_mib without touching CUDA")
     p.add_argument("--resume", action="store_true")
     p.add_argument("--lease-mib", type=float, default=12288.0)
     p.add_argument("--min-headroom-mib", type=float, default=2048.0)
@@ -277,9 +297,12 @@ def main() -> int:
     p.add_argument("--modes", default="fp32,bf16")
     args = p.parse_args()
 
-    if not args.allow_cuda:
+    if not args.preflight_only_blocked and not args.allow_cuda:
         p.error("CUDA frontier runner requires --allow-cuda inside VRAMorama lease")
-    device = torch.device("cuda:0")
+    device = torch.device("cuda:0") if not args.preflight_only_blocked else torch.device("cpu")
+    if not args.preflight_only_blocked:
+        torch.cuda.init()
+        torch.cuda.set_device(device)
     modes = [m.strip() for m in args.modes.split(",") if m.strip()]
 
     completed: set[str] = set()
@@ -330,16 +353,25 @@ def main() -> int:
             if cid in completed:
                 continue
             print(f"[frontier] preflight & running {cid} ...", flush=True)
-            arm_a = run_single_arm_frontier(
-                width=width, n_passes=n_passes, arm="A", mode=mode,
-                n_roots=2, warmup_steps=1, timed_steps=2, device=device,
-                lease_limit_mib=args.lease_mib, min_headroom_mib=args.min_headroom_mib, min_watts=args.min_watts,
-            )
-            arm_g = run_single_arm_frontier(
-                width=width, n_passes=n_passes, arm="G", mode=mode,
-                n_roots=2, warmup_steps=1, timed_steps=2, device=device,
-                lease_limit_mib=args.lease_mib, min_headroom_mib=args.min_headroom_mib, min_watts=args.min_watts,
-            )
+            if args.preflight_only_blocked:
+                safe_b = args.lease_mib - args.min_headroom_mib
+                est_a = preflight_estimate_mib(width, n_passes, arm="A", mode=mode)
+                est_g = preflight_estimate_mib(width, n_passes, arm="G", mode=mode)
+                if est_a["total_est_mib"] <= safe_b or est_g["total_est_mib"] <= safe_b:
+                    raise RuntimeError(f"{cid} fits under preflight ({est_a['total_est_mib']}, {est_g['total_est_mib']} <= {safe_b}); run on CUDA!")
+                arm_a = {"arm": "A", "status": "memory_blocked_preflight", "preflight": est_a, "safe_budget_mib": safe_b}
+                arm_g = {"arm": "G", "status": "memory_blocked_preflight", "preflight": est_g, "safe_budget_mib": safe_b}
+            else:
+                arm_a = run_single_arm_frontier(
+                    width=width, n_passes=n_passes, arm="A", mode=mode,
+                    n_roots=2, warmup_steps=1, timed_steps=2, device=device,
+                    lease_limit_mib=args.lease_mib, min_headroom_mib=args.min_headroom_mib, min_watts=args.min_watts,
+                )
+                arm_g = run_single_arm_frontier(
+                    width=width, n_passes=n_passes, arm="G", mode=mode,
+                    n_roots=2, warmup_steps=1, timed_steps=2, device=device,
+                    lease_limit_mib=args.lease_mib, min_headroom_mib=args.min_headroom_mib, min_watts=args.min_watts,
+                )
             speedup = None
             ci95 = None
             if arm_a["status"] == "ok" and arm_g["status"] == "ok":
@@ -366,7 +398,8 @@ def main() -> int:
                 flush=True,
             )
 
-    configure_precision_mode("fp32")
+    if not args.preflight_only_blocked:
+        configure_precision_mode("fp32")
     print("FUSE13_FRONTIER_DONE", json.dumps({"cells_completed": len(completed)}), flush=True)
     return 0
 
