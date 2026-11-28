@@ -1,0 +1,817 @@
+{
+  "elapsed_seconds": 3988.083592800016,
+  "families_1_to_4": {
+    "eval_transition_types": 24,
+    "evals": [
+      {
+        "D_minus_A": -0.021484375,
+        "arm_means": {
+          "A_uniform": 0.92138671875,
+          "B_loss_mined": 0.92333984375,
+          "C_ord_grad": 0.9111328125,
+          "D_mech_grad": 0.89990234375,
+          "E_shuffled": 0.90966796875,
+          "G_cpu_reinvest": 0.935546875
+        },
+        "family": "Family 1: Horizon Ladder",
+        "id": "E01",
+        "metric": "accuracy",
+        "name": "mem_delay_0"
+      },
+      {
+        "D_minus_A": -0.0029296875,
+        "arm_means": {
+          "A_uniform": 0.9873046875,
+          "B_loss_mined": 0.99169921875,
+          "C_ord_grad": 0.98388671875,
+          "D_mech_grad": 0.984375,
+          "E_shuffled": 0.98876953125,
+          "G_cpu_reinvest": 0.99658203125
+        },
+        "family": "Family 1: Horizon Ladder",
+        "id": "E02",
+        "metric": "accuracy",
+        "name": "mem_delay_2"
+      },
+      {
+        "D_minus_A": -0.0126953125,
+        "arm_means": {
+          "A_uniform": 0.94677734375,
+          "B_loss_mined": 0.95849609375,
+          "C_ord_grad": 0.94140625,
+          "D_mech_grad": 0.93408203125,
+          "E_shuffled": 0.94287109375,
+          "G_cpu_reinvest": 0.96533203125
+        },
+        "family": "Family 1: Horizon Ladder",
+        "id": "E03",
+        "metric": "accuracy",
+        "name": "mem_delay_7"
+      },
+      {
+        "D_minus_A": 0.01953125,
+        "arm_means": {
+          "A_uniform": 0.7451171875,
+          "B_loss_mined": 0.77001953125,
+          "C_ord_grad": 0.78759765625,
+          "D_mech_grad": 0.7646484375,
+          "E_shuffled": 0.763671875,
+          "G_cpu_reinvest": 0.7734375
+        },
+        "family": "Family 1: Horizon Ladder",
+        "id": "E04",
+        "metric": "accuracy",
+        "name": "mem_delay_15"
+      },
+      {
+        "D_minus_A": 0.02392578125,
+        "arm_means": {
+          "A_uniform": 0.45751953125,
+          "B_loss_mined": 0.45361328125,
+          "C_ord_grad": 0.49462890625,
+          "D_mech_grad": 0.4814453125,
+          "E_shuffled": 0.451171875,
+          "G_cpu_reinvest": 0.4697265625
+        },
+        "family": "Family 1: Horizon Ladder",
+        "id": "E05",
+        "metric": "accuracy",
+        "name": "mem_delay_31"
+      },
+      {
+        "D_minus_A": 0.01416015625,
+        "arm_means": {
+          "A_uniform": 0.314453125,
+          "B_loss_mined": 0.317626953125,
+          "C_ord_grad": 0.3310546875,
+          "D_mech_grad": 0.32861328125,
+          "E_shuffled": 0.30908203125,
+          "G_cpu_reinvest": 0.336181640625
+        },
+        "family": "Family 1: Horizon Ladder",
+        "id": "E06",
+        "metric": "accuracy",
+        "name": "mem_delay_63_127_mean"
+      },
+      {
+        "D_minus_A": 0.00390625,
+        "arm_means": {
+          "A_uniform": 0.9775390625,
+          "B_loss_mined": 0.982421875,
+          "C_ord_grad": 0.982421875,
+          "D_mech_grad": 0.9814453125,
+          "E_shuffled": 0.98046875,
+          "G_cpu_reinvest": 0.990234375
+        },
+        "family": "Family 2: Binding & Nuisance",
+        "id": "E07",
+        "metric": "accuracy",
+        "name": "binding_all_distinct_d7"
+      },
+      {
+        "D_minus_A": 0.01171875,
+        "arm_means": {
+          "A_uniform": 0.45703125,
+          "B_loss_mined": 0.4462890625,
+          "C_ord_grad": 0.470703125,
+          "D_mech_grad": 0.46875,
+          "E_shuffled": 0.4345703125,
+          "G_cpu_reinvest": 0.5009765625
+        },
+        "family": "Family 2: Binding & Nuisance",
+        "id": "E08",
+        "metric": "accuracy",
+        "name": "binding_all_distinct_d31"
+      },
+      {
+        "D_minus_A": 0.01904296875,
+        "arm_means": {
+          "A_uniform": 0.4765625,
+          "B_loss_mined": 0.4814453125,
+          "C_ord_grad": 0.49755859375,
+          "D_mech_grad": 0.49560546875,
+          "E_shuffled": 0.4873046875,
+          "G_cpu_reinvest": 0.4912109375
+        },
+        "family": "Family 2: Binding & Nuisance",
+        "id": "E09",
+        "metric": "accuracy",
+        "name": "noise_clean_000_d31"
+      },
+      {
+        "D_minus_A": 0.033203125,
+        "arm_means": {
+          "A_uniform": 0.44580078125,
+          "B_loss_mined": 0.46533203125,
+          "C_ord_grad": 0.47900390625,
+          "D_mech_grad": 0.47900390625,
+          "E_shuffled": 0.451171875,
+          "G_cpu_reinvest": 0.47314453125
+        },
+        "family": "Family 2: Binding & Nuisance",
+        "id": "E10",
+        "metric": "accuracy",
+        "name": "noise_elevated_010_d31"
+      },
+      {
+        "D_minus_A": 0.02490234375,
+        "arm_means": {
+          "A_uniform": 0.41162109375,
+          "B_loss_mined": 0.41845703125,
+          "C_ord_grad": 0.4296875,
+          "D_mech_grad": 0.4365234375,
+          "E_shuffled": 0.40771484375,
+          "G_cpu_reinvest": 0.431640625
+        },
+        "family": "Family 2: Binding & Nuisance",
+        "id": "E11",
+        "metric": "accuracy",
+        "name": "noise_high_020_d31"
+      },
+      {
+        "D_minus_A": 0.035004280507564545,
+        "arm_means": {
+          "A_uniform": 0.913283109664917,
+          "B_loss_mined": 0.9329581931233406,
+          "C_ord_grad": 0.9455645196139812,
+          "D_mech_grad": 0.9482873901724815,
+          "E_shuffled": 0.953860130161047,
+          "G_cpu_reinvest": 0.9637836590409279
+        },
+        "family": "Family 2: Binding & Nuisance",
+        "id": "E12",
+        "metric": "score",
+        "name": "write_order_invariance_1_minus_gap"
+      },
+      {
+        "D_minus_A": 0.01318359375,
+        "arm_means": {
+          "A_uniform": 0.3681640625,
+          "B_loss_mined": 0.3818359375,
+          "C_ord_grad": 0.39892578125,
+          "D_mech_grad": 0.38134765625,
+          "E_shuffled": 0.3837890625,
+          "G_cpu_reinvest": 0.41943359375
+        },
+        "family": "Family 3: Distractor & Stress",
+        "id": "E13",
+        "metric": "accuracy",
+        "name": "distractor_adversarial_same_addr_d31"
+      },
+      {
+        "D_minus_A": 0.0107421875,
+        "arm_means": {
+          "A_uniform": 0.43115234375,
+          "B_loss_mined": 0.4345703125,
+          "C_ord_grad": 0.46630859375,
+          "D_mech_grad": 0.44189453125,
+          "E_shuffled": 0.4375,
+          "G_cpu_reinvest": 0.4619140625
+        },
+        "family": "Family 3: Distractor & Stress",
+        "id": "E14",
+        "metric": "accuracy",
+        "name": "distractor_repeated_value_flood_d31"
+      },
+      {
+        "D_minus_A": 0.02880859375,
+        "arm_means": {
+          "A_uniform": 0.45703125,
+          "B_loss_mined": 0.4501953125,
+          "C_ord_grad": 0.48193359375,
+          "D_mech_grad": 0.48583984375,
+          "E_shuffled": 0.4501953125,
+          "G_cpu_reinvest": 0.4638671875
+        },
+        "family": "Family 3: Distractor & Stress",
+        "id": "E15",
+        "metric": "accuracy",
+        "name": "distractor_zero_silent_d31"
+      },
+      {
+        "D_minus_A": 0.029876142740249634,
+        "arm_means": {
+          "A_uniform": 0.7210315987467766,
+          "B_loss_mined": 0.7666343078017235,
+          "C_ord_grad": 0.7602316290140152,
+          "D_mech_grad": 0.7509077414870262,
+          "E_shuffled": 0.7576745003461838,
+          "G_cpu_reinvest": 0.81439208984375
+        },
+        "family": "Family 3: Distractor & Stress",
+        "id": "E16",
+        "metric": "accuracy",
+        "name": "slot_collision_3of4_minority_d15"
+      },
+      {
+        "D_minus_A": 0.0317595486267237,
+        "arm_means": {
+          "A_uniform": 0.5338180949329399,
+          "B_loss_mined": 0.5334230685657531,
+          "C_ord_grad": 0.5768498865072615,
+          "D_mech_grad": 0.5655776435596636,
+          "E_shuffled": 0.5284866887595854,
+          "G_cpu_reinvest": 0.5400504351237032
+        },
+        "family": "Family 3: Distractor & Stress",
+        "id": "E17",
+        "metric": "score",
+        "name": "calibration_1_minus_ece_d31"
+      },
+      {
+        "D_minus_A": 0.018229166666666685,
+        "arm_means": {
+          "A_uniform": 0.4713541666666667,
+          "B_loss_mined": 0.4817708333333333,
+          "C_ord_grad": 0.53125,
+          "D_mech_grad": 0.48958333333333337,
+          "E_shuffled": 0.5,
+          "G_cpu_reinvest": 0.4635416666666667
+        },
+        "family": "Family 3: Distractor & Stress",
+        "id": "E18",
+        "metric": "accuracy",
+        "name": "transition_shift_eval_edge_acc_d31"
+      },
+      {
+        "D_minus_A": 0.09375000000000006,
+        "arm_means": {
+          "A_uniform": 0.4791666666666667,
+          "B_loss_mined": 0.53125,
+          "C_ord_grad": 0.5208333333333334,
+          "D_mech_grad": 0.5729166666666667,
+          "E_shuffled": 0.5,
+          "G_cpu_reinvest": 0.53125
+        },
+        "family": "Family 4: Causal Selectivity",
+        "id": "E19",
+        "metric": "target_acc",
+        "name": "causal_full_hybrid_oracle_d31"
+      },
+      {
+        "D_minus_A": 0.008967335070849236,
+        "arm_means": {
+          "A_uniform": 0.7043022278054809,
+          "B_loss_mined": 0.7101078579872737,
+          "C_ord_grad": 0.7137276475525407,
+          "D_mech_grad": 0.7132695628763301,
+          "E_shuffled": 0.7112932460650392,
+          "G_cpu_reinvest": 0.7148237228685168
+        },
+        "family": "Family 4: Causal Selectivity",
+        "id": "E20",
+        "metric": "score",
+        "name": "causal_high_minus_low_capacity_ratio"
+      },
+      {
+        "D_minus_A": 0.04166666666666666,
+        "arm_means": {
+          "A_uniform": 0.17708333333333334,
+          "B_loss_mined": 0.22916666666666666,
+          "C_ord_grad": 0.17708333333333331,
+          "D_mech_grad": 0.21875,
+          "E_shuffled": 0.15625,
+          "G_cpu_reinvest": 0.15625000000000003
+        },
+        "family": "Family 4: Causal Selectivity",
+        "id": "E21",
+        "metric": "target_acc",
+        "name": "causal_sccg_zero_col_target_d31"
+      },
+      {
+        "D_minus_A": 0.034213060224089625,
+        "arm_means": {
+          "A_uniform": 0.17025122549019608,
+          "B_loss_mined": 0.22916666666666666,
+          "C_ord_grad": 0.18405883780597737,
+          "D_mech_grad": 0.2044642857142857,
+          "E_shuffled": 0.19097222222222224,
+          "G_cpu_reinvest": 0.16091628959276016
+        },
+        "family": "Family 4: Causal Selectivity",
+        "id": "E22",
+        "metric": "target_minus_cor",
+        "name": "causal_sccg_budget_025_net_selectivity"
+      },
+      {
+        "D_minus_A": 0.004630202521631932,
+        "arm_means": {
+          "A_uniform": 0.7687663632606744,
+          "B_loss_mined": 0.7354536891190282,
+          "C_ord_grad": 0.7701413708943503,
+          "D_mech_grad": 0.7733965657823063,
+          "E_shuffled": 0.7881846200082594,
+          "G_cpu_reinvest": 0.7757260561815581
+        },
+        "family": "Family 4: Causal Selectivity",
+        "id": "E23",
+        "metric": "score",
+        "name": "causal_linear_vs_nonlinear_fidelity"
+      },
+      {
+        "D_minus_A": 0.0015739397761570517,
+        "arm_means": {
+          "A_uniform": 0.8023429529388116,
+          "B_loss_mined": 0.8022423123794457,
+          "C_ord_grad": 0.8171780574236948,
+          "D_mech_grad": 0.8039168927149687,
+          "E_shuffled": 0.8099024755556772,
+          "G_cpu_reinvest": 0.8052551686170417
+        },
+        "family": "Family 4: Causal Selectivity",
+        "id": "E24",
+        "metric": "score",
+        "name": "causal_component_non_cancellation_1_minus_K"
+      }
+    ],
+    "roots_evaluated": [
+      28101,
+      28102,
+      28103,
+      28104,
+      28105,
+      28106,
+      28107,
+      28108
+    ],
+    "train_transition_types": 48
+  },
+  "families_5_to_6": [
+    {
+      "TRM_c1_minus_GRU_pp": 0.29296875,
+      "TRM_c2_minus_c1_pp": -0.68359375,
+      "curated_minus_uniform_pp": -1.5625,
+      "family": "Family 5: Algorithmic State-Tracking",
+      "id": "E25",
+      "models": {
+        "GRU_w32": {
+          "cpu_seconds": 13.8125,
+          "eval_acc": 0.5068359375,
+          "train_acc": 0.505859375
+        },
+        "TRM_c1_curated": {
+          "cpu_seconds": 35.6640625,
+          "eval_acc": 0.494140625,
+          "train_acc": 0.494140625
+        },
+        "TRM_c1_uniform": {
+          "cpu_seconds": 30.0546875,
+          "eval_acc": 0.509765625,
+          "train_acc": 0.498046875
+        },
+        "TRM_c2_uniform": {
+          "cpu_seconds": 42.171875,
+          "eval_acc": 0.5029296875,
+          "train_acc": 0.490234375
+        }
+      },
+      "name": "parity_mod2",
+      "roots": [
+        29000,
+        29001
+      ],
+      "steps": 450,
+      "trm_appropriate_headroom": true
+    },
+    {
+      "TRM_c1_minus_GRU_pp": 0.09765625,
+      "TRM_c2_minus_c1_pp": 0.0,
+      "curated_minus_uniform_pp": 0.9765625,
+      "family": "Family 5: Algorithmic State-Tracking",
+      "id": "E26",
+      "models": {
+        "GRU_w32": {
+          "cpu_seconds": 12.6953125,
+          "eval_acc": 0.2412109375,
+          "train_acc": 0.263671875
+        },
+        "TRM_c1_curated": {
+          "cpu_seconds": 37.859375,
+          "eval_acc": 0.251953125,
+          "train_acc": 0.24609375
+        },
+        "TRM_c1_uniform": {
+          "cpu_seconds": 24.953125,
+          "eval_acc": 0.2421875,
+          "train_acc": 0.267578125
+        },
+        "TRM_c2_uniform": {
+          "cpu_seconds": 35.890625,
+          "eval_acc": 0.2421875,
+          "train_acc": 0.267578125
+        }
+      },
+      "name": "mod4_accumulator",
+      "roots": [
+        29000,
+        29001
+      ],
+      "steps": 450,
+      "trm_appropriate_headroom": false
+    },
+    {
+      "TRM_c1_minus_GRU_pp": -5.2734375,
+      "TRM_c2_minus_c1_pp": -1.3671875,
+      "curated_minus_uniform_pp": -22.94921875,
+      "family": "Family 5: Algorithmic State-Tracking",
+      "id": "E27",
+      "models": {
+        "GRU_w32": {
+          "cpu_seconds": 19.21875,
+          "eval_acc": 0.517578125,
+          "train_acc": 0.81640625
+        },
+        "TRM_c1_curated": {
+          "cpu_seconds": 46.3203125,
+          "eval_acc": 0.2353515625,
+          "train_acc": 0.59765625
+        },
+        "TRM_c1_uniform": {
+          "cpu_seconds": 33.0859375,
+          "eval_acc": 0.46484375,
+          "train_acc": 0.56640625
+        },
+        "TRM_c2_uniform": {
+          "cpu_seconds": 41.0078125,
+          "eval_acc": 0.451171875,
+          "train_acc": 0.681640625
+        }
+      },
+      "name": "copy_retrieve_2slot",
+      "roots": [
+        29000,
+        29001
+      ],
+      "steps": 450,
+      "trm_appropriate_headroom": true
+    },
+    {
+      "TRM_c1_minus_GRU_pp": -2.9296875,
+      "TRM_c2_minus_c1_pp": -0.29296875,
+      "curated_minus_uniform_pp": -3.41796875,
+      "family": "Family 5: Algorithmic State-Tracking",
+      "id": "E28",
+      "models": {
+        "GRU_w32": {
+          "cpu_seconds": 14.0546875,
+          "eval_acc": 0.4453125,
+          "train_acc": 0.47265625
+        },
+        "TRM_c1_curated": {
+          "cpu_seconds": 32.71875,
+          "eval_acc": 0.3818359375,
+          "train_acc": 0.46484375
+        },
+        "TRM_c1_uniform": {
+          "cpu_seconds": 17.2734375,
+          "eval_acc": 0.416015625,
+          "train_acc": 0.474609375
+        },
+        "TRM_c2_uniform": {
+          "cpu_seconds": 25.4296875,
+          "eval_acc": 0.4130859375,
+          "train_acc": 0.4921875
+        }
+      },
+      "name": "dynamic_overwrite_register",
+      "roots": [
+        29000,
+        29001
+      ],
+      "steps": 450,
+      "trm_appropriate_headroom": true
+    },
+    {
+      "TRM_c1_minus_GRU_pp": -58.203125,
+      "TRM_c2_minus_c1_pp": 6.0546875,
+      "curated_minus_uniform_pp": 12.59765625,
+      "family": "Family 5: Algorithmic State-Tracking",
+      "id": "E29",
+      "models": {
+        "GRU_w32": {
+          "cpu_seconds": 16.5078125,
+          "eval_acc": 1.0,
+          "train_acc": 1.0
+        },
+        "TRM_c1_curated": {
+          "cpu_seconds": 43.96875,
+          "eval_acc": 0.5439453125,
+          "train_acc": 0.984375
+        },
+        "TRM_c1_uniform": {
+          "cpu_seconds": 29.078125,
+          "eval_acc": 0.41796875,
+          "train_acc": 0.998046875
+        },
+        "TRM_c2_uniform": {
+          "cpu_seconds": 43.65625,
+          "eval_acc": 0.478515625,
+          "train_acc": 0.94140625
+        }
+      },
+      "name": "dyck1_bounded_depth",
+      "roots": [
+        29000,
+        29001
+      ],
+      "steps": 450,
+      "trm_appropriate_headroom": true
+    },
+    {
+      "TRM_c1_minus_GRU_pp": -1.66015625,
+      "TRM_c2_minus_c1_pp": 1.26953125,
+      "curated_minus_uniform_pp": -0.48828125,
+      "family": "Family 5: Algorithmic State-Tracking",
+      "id": "E30",
+      "models": {
+        "GRU_w32": {
+          "cpu_seconds": 21.484375,
+          "eval_acc": 0.9921875,
+          "train_acc": 0.99609375
+        },
+        "TRM_c1_curated": {
+          "cpu_seconds": 57.6015625,
+          "eval_acc": 0.970703125,
+          "train_acc": 0.998046875
+        },
+        "TRM_c1_uniform": {
+          "cpu_seconds": 39.2890625,
+          "eval_acc": 0.9755859375,
+          "train_acc": 1.0
+        },
+        "TRM_c2_uniform": {
+          "cpu_seconds": 58.421875,
+          "eval_acc": 0.98828125,
+          "train_acc": 0.998046875
+        }
+      },
+      "name": "majority_vote_4sym",
+      "roots": [
+        29000,
+        29001
+      ],
+      "steps": 450,
+      "trm_appropriate_headroom": false
+    },
+    {
+      "TRM_c1_minus_GRU_pp": -8.59375,
+      "TRM_c2_minus_c1_pp": 3.41796875,
+      "curated_minus_uniform_pp": -2.34375,
+      "family": "Family 6: Iterative TRM Reasoning",
+      "id": "E31",
+      "models": {
+        "GRU_w32": {
+          "cpu_seconds": 17.34375,
+          "eval_acc": 0.7099609375,
+          "train_acc": 0.767578125
+        },
+        "TRM_c1_curated": {
+          "cpu_seconds": 41.984375,
+          "eval_acc": 0.6005859375,
+          "train_acc": 0.6015625
+        },
+        "TRM_c1_uniform": {
+          "cpu_seconds": 30.046875,
+          "eval_acc": 0.6240234375,
+          "train_acc": 0.63671875
+        },
+        "TRM_c2_uniform": {
+          "cpu_seconds": 42.7734375,
+          "eval_acc": 0.658203125,
+          "train_acc": 0.6484375
+        }
+      },
+      "name": "2hop_pointer_chase",
+      "roots": [
+        29000,
+        29001
+      ],
+      "steps": 450,
+      "trm_appropriate_headroom": true
+    },
+    {
+      "TRM_c1_minus_GRU_pp": 0.0,
+      "TRM_c2_minus_c1_pp": 0.0,
+      "curated_minus_uniform_pp": 0.0,
+      "family": "Family 6: Iterative TRM Reasoning",
+      "id": "E32",
+      "models": {
+        "GRU_w32": {
+          "cpu_seconds": 18.9765625,
+          "eval_acc": 1.0,
+          "train_acc": 1.0
+        },
+        "TRM_c1_curated": {
+          "cpu_seconds": 39.515625,
+          "eval_acc": 1.0,
+          "train_acc": 1.0
+        },
+        "TRM_c1_uniform": {
+          "cpu_seconds": 31.9609375,
+          "eval_acc": 1.0,
+          "train_acc": 1.0
+        },
+        "TRM_c2_uniform": {
+          "cpu_seconds": 30.8828125,
+          "eval_acc": 1.0,
+          "train_acc": 1.0
+        }
+      },
+      "name": "latin4_1blank",
+      "roots": [
+        29000,
+        29001
+      ],
+      "steps": 450,
+      "trm_appropriate_headroom": false
+    },
+    {
+      "TRM_c1_minus_GRU_pp": 0.0,
+      "TRM_c2_minus_c1_pp": 0.0,
+      "curated_minus_uniform_pp": 0.0,
+      "family": "Family 6: Iterative TRM Reasoning",
+      "id": "E33",
+      "models": {
+        "GRU_w32": {
+          "cpu_seconds": 16.5703125,
+          "eval_acc": 1.0,
+          "train_acc": 1.0
+        },
+        "TRM_c1_curated": {
+          "cpu_seconds": 49.359375,
+          "eval_acc": 1.0,
+          "train_acc": 1.0
+        },
+        "TRM_c1_uniform": {
+          "cpu_seconds": 27.5546875,
+          "eval_acc": 1.0,
+          "train_acc": 1.0
+        },
+        "TRM_c2_uniform": {
+          "cpu_seconds": 37.59375,
+          "eval_acc": 1.0,
+          "train_acc": 1.0
+        }
+      },
+      "name": "latin4_2blank_coupled",
+      "roots": [
+        29000,
+        29001
+      ],
+      "steps": 450,
+      "trm_appropriate_headroom": false
+    },
+    {
+      "TRM_c1_minus_GRU_pp": 0.0,
+      "TRM_c2_minus_c1_pp": 0.0,
+      "curated_minus_uniform_pp": 0.0,
+      "family": "Family 6: Iterative TRM Reasoning",
+      "id": "E34",
+      "models": {
+        "GRU_w32": {
+          "cpu_seconds": 21.7265625,
+          "eval_acc": 1.0,
+          "train_acc": 1.0
+        },
+        "TRM_c1_curated": {
+          "cpu_seconds": 55.1875,
+          "eval_acc": 1.0,
+          "train_acc": 1.0
+        },
+        "TRM_c1_uniform": {
+          "cpu_seconds": 36.0078125,
+          "eval_acc": 1.0,
+          "train_acc": 1.0
+        },
+        "TRM_c2_uniform": {
+          "cpu_seconds": 52.8046875,
+          "eval_acc": 1.0,
+          "train_acc": 1.0
+        }
+      },
+      "name": "argmin4_index",
+      "roots": [
+        29000,
+        29001
+      ],
+      "steps": 450,
+      "trm_appropriate_headroom": false
+    },
+    {
+      "TRM_c1_minus_GRU_pp": 0.0,
+      "TRM_c2_minus_c1_pp": 0.0,
+      "curated_minus_uniform_pp": 0.0,
+      "family": "Family 6: Iterative TRM Reasoning",
+      "id": "E35",
+      "models": {
+        "GRU_w32": {
+          "cpu_seconds": 19.0625,
+          "eval_acc": 1.0,
+          "train_acc": 1.0
+        },
+        "TRM_c1_curated": {
+          "cpu_seconds": 52.3359375,
+          "eval_acc": 1.0,
+          "train_acc": 1.0
+        },
+        "TRM_c1_uniform": {
+          "cpu_seconds": 34.5703125,
+          "eval_acc": 1.0,
+          "train_acc": 1.0
+        },
+        "TRM_c2_uniform": {
+          "cpu_seconds": 50.09375,
+          "eval_acc": 1.0,
+          "train_acc": 1.0
+        }
+      },
+      "name": "cellular_rule90_2step",
+      "roots": [
+        29000,
+        29001
+      ],
+      "steps": 450,
+      "trm_appropriate_headroom": false
+    },
+    {
+      "TRM_c1_minus_GRU_pp": 0.78125,
+      "TRM_c2_minus_c1_pp": 0.390625,
+      "curated_minus_uniform_pp": 0.87890625,
+      "family": "Family 6: Iterative TRM Reasoning",
+      "id": "E36",
+      "models": {
+        "GRU_w32": {
+          "cpu_seconds": 21.421875,
+          "eval_acc": 0.2421875,
+          "train_acc": 0.25390625
+        },
+        "TRM_c1_curated": {
+          "cpu_seconds": 47.1953125,
+          "eval_acc": 0.2587890625,
+          "train_acc": 0.26171875
+        },
+        "TRM_c1_uniform": {
+          "cpu_seconds": 40.4921875,
+          "eval_acc": 0.25,
+          "train_acc": 0.283203125
+        },
+        "TRM_c2_uniform": {
+          "cpu_seconds": 50.828125,
+          "eval_acc": 0.25390625,
+          "train_acc": 0.26953125
+        }
+      },
+      "name": "dfa_4state_extrap",
+      "roots": [
+        29000,
+        29001
+      ],
+      "steps": 450,
+      "trm_appropriate_headroom": false
+    }
+  ],
+  "schema_version": 1,
+  "sealed_cohorts_touched": false,
+  "suite": "BPD-TRM-CURATE-02-36-low-difficulty-evals",
+  "total_evals": 36
+}

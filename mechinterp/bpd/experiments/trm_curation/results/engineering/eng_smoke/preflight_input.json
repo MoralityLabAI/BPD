@@ -1,0 +1,32 @@
+{
+  "alpha": "0.05",
+  "confirm_units_planned": 8,
+  "experiment_id": "BPD-TRM-CURATE-02-development",
+  "heldout_sealed": false,
+  "independent_unit": "independently initialized TRM model root with paired curation descendants",
+  "measurement_resolution": "1/512",
+  "pilot": [
+    {
+      "paired_effect": "20/512",
+      "sham_effects": [
+        "0/512"
+      ],
+      "unit_id": "28000"
+    },
+    {
+      "paired_effect": "-24/512",
+      "sham_effects": [
+        "-24/512"
+      ],
+      "unit_id": "28001"
+    }
+  ],
+  "pilot_from_development_only": true,
+  "planned_comparisons": 5,
+  "schema_version": 1,
+  "scientific_min_effect": "0.05",
+  "sham_confidence": "0.95",
+  "sham_quantile": "0.95",
+  "target_effect": "0.10",
+  "units_independent": true
+}
