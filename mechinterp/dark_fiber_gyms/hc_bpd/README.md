@@ -1,0 +1,24 @@
+# Horizon-conditioned BPD (HC-BPD)
+
+## Motivation and scope
+PR #190 (merge d7457b8) found fixed-dose first-pass donor effects attenuated by an extra recurrent pass on one Oakhaven root. The action-position refit was exploratory. This campaign separates behavioral readout decay from residual transport and tests generalization. State-space interventions are proxies; parameter-level attribution requires its own experiment.
+
+## HC-BPD-01: sealed replication
+Use Dory 4B Q4_K_M and the pinned native reader from dory_story_sae. Lock model, reader, runtime, prompts, dictionary, roster, intervention algorithm and scorer hashes before opening test roots. Use 16 disjoint calibration roots, 32 development roots, and 64 fresh sealed test roots (expand only under a new registration). Split by generator family and root ancestry; quarantine Oakhaven and all exposed refit cases. Generate paired worlds with independently verified opposite actions and irrelevant cue changes. Fit action-position and prompt-only top-8/96 dictionaries with equal sample counts and fixed seeds on calibration only. Tune on dev only. Freeze sites, dose, rank and analysis. The primary site is the end of pass two; paired donor directions are averaged within root.
+
+Arms: clean, same-value write, direct donor, action SAE, prompt SAE, rank-matched PCA/Haar, donor-orthogonal sham. Fix spherical chord length at 5% of recipient norm, verify direction and dose, retain full-head digests. Compare identical pass-one writes across one/two-pass budgets; abort a pair on mismatch. Report fixed-prefix and free-generation results separately; score malformed actions as failures. Retain every assigned root including failures.
+
+Primary statistic per root: mean over predeclared directions/cues of 0.5*(tanh(action SAE donor margin/4)-tanh(sham donor margin/4)). Require root bootstrap 95% lower bound >0.05 and calibrated sham tail (predeclared absolute bound 0.05 with at least 64 independent sham roots; report exceedances and exact binomial upper bound). Require all same-value writes to reproduce full heads. Report direct donor feasibility and free-generation action accuracy/flips; margin evidence alone cannot support a gameplay claim. If the sham gate or controls fail, redesign; do not reuse sealed roots. No optional stopping. Bootstrap 10000 resamples with fixed seed 19001; report root counts, point estimates and intervals. These are proposed thresholds, to be frozen before collection, not established power guarantees.
+
+## Follow-ups
+- HC-BPD-02: native supported loop budgets, crossed edit site and readout horizon; report signed margins and absolute magnitudes, use ratios only above a predeclared early-effect floor. Separate clean trajectory drift from intervention effects.
+- HC-BPD-03: paired clean/edited residual differences, norm survival and cross-fitted linear probes; compare transported donor directions via JVP or finite differences against random matched tangents. Distinguish loss of decodable donor information from reduced head sensitivity. Test fresh downstream rescue and dose dependence. Call repair a hypothesis until competing explanations are tested.
+- HC-BPD-04: repeat frozen protocol within each model (Dory, Inkling 2 Mini, DataGoblin); normalize by within-model direct donor control, never assume matching layer numbers or feature coordinates.
+- HC-BPD-05: fit horizon-conditioned dictionaries on calibration; compare shared SAE, separate pass SAE and horizon-conditioned SAE at matched parameter and compute budgets. Measure reconstruction and held-out causal effect separately.
+- HC-BPD-06: train stopping policy on dev-only features and compare fixed depth, confidence and compute-matched policies on sealed roots. Report accuracy, visits, latency, calibration and regret. Causal interventions are offline labels; online policy must use available clean activations only.
+- HC-BPD-07: match parameter perturbations to state-space effects with budget-matched controls; compare predictive and intervention agreement across horizons. Report identifiability limits from shared parameters.
+
+## Execution and custody
+CPU-only scorer and receipt tests first; no model download or GPU reservation implicitly. Native runner must preflight supported depth, exact checkpoint/runtime hashes and actual memory, acquire local GPU lease, and fail closed if unsupported. Route optional language-model rollouts through local Inky Mini; Dory intervention trials require Dory. Keep raw prompts and activation dumps local, publish compact source-locked receipts and root-level EvalMath inputs. Export DataGoblin decision records only after grading; seal test traces away from pretraining and post-training corpora. Report wall time, VRAM, RAM, failures and provenance. Stage 01 is the release gate for confirmatory claims; later exploratory stages may develop on disjoint dev data.
+
+No new native inference results are claimed by this registration.
