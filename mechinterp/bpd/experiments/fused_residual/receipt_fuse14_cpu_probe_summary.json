@@ -1,0 +1,49 @@
+{
+  "status": "cpu_proxy_only",
+  "device": "cpu",
+  "torch": "2.10.0+cpu",
+  "widths": [
+    16,
+    32,
+    64
+  ],
+  "visits": [
+    2,
+    6,
+    12
+  ],
+  "seeds": [
+    14001,
+    14002
+  ],
+  "cells": 18,
+  "finite_bitwise_cells": 18,
+  "storage_counts_first_width": [
+    {
+      "visits": 2,
+      "native": 8,
+      "shared": 2
+    },
+    {
+      "visits": 6,
+      "native": 24,
+      "shared": 2
+    },
+    {
+      "visits": 12,
+      "native": 48,
+      "shared": 2
+    }
+  ],
+  "guards": {
+    "disabled_or_no_grad_fallback": true,
+    "mutation_rejected": true,
+    "fresh_scope": true,
+    "trainable_fallback": true,
+    "restored": true
+  },
+  "cuda": "not_run",
+  "native_trainer": "not_run",
+  "checkpoint": "not_run",
+  "source": "local CPU execution; aggregate receipt, not a full raw log"
+}
