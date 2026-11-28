@@ -1,0 +1,8 @@
+{
+  "scope": "Logging-only amendment after engineering run, before development freeze",
+  "original_source": "provenance/experiment_smoke.py.txt",
+  "original_sha256": "47e876dff633fc7240517a776cb2c22fb85ee02948fb639e7ebb147fa7294069",
+  "amended_sha256": "b443aaa9a21fbdb7376e945be7e81f0d9bd7e48eeb2f2d68a0d37cc7a9ee1f19",
+  "change": "Detach three physical-dose tensors before reporting scalar values and add the independent auditor to the source-hash inventory. Training losses, data generation, gradients, optimizer steps and recipe values are unchanged.",
+  "smoke_results_preserved": true
+}

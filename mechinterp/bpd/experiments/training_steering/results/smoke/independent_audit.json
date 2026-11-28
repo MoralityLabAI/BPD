@@ -1,0 +1,39 @@
+{
+  "aggregate_statistics_match": true,
+  "causal_case_conditions_replayed": 3072,
+  "checks": 45439,
+  "current_source_check_skipped": true,
+  "experiment": "BPD-RP-02",
+  "generator_scope": "shared deterministic input generator with independent raw-input label and semantic-partition checks",
+  "maximum_scalar_comparison_error": 1.7881393432617188e-07,
+  "n_roots": 2,
+  "ordinary_case_conditions_replayed": 6144,
+  "prediction_bits_match": true,
+  "roots": [
+    {
+      "artifact_hashes_verified": 5,
+      "attribution_candidates_replayed": 8,
+      "causal_case_conditions_replayed": 1536,
+      "checkpoint_hashes_verified": 4,
+      "ordinary_case_conditions_replayed": 3072,
+      "root": 26000,
+      "training_rows_checked": 720,
+      "verdict": "PASS"
+    },
+    {
+      "artifact_hashes_verified": 5,
+      "attribution_candidates_replayed": 8,
+      "causal_case_conditions_replayed": 1536,
+      "checkpoint_hashes_verified": 4,
+      "ordinary_case_conditions_replayed": 3072,
+      "root": 26001,
+      "training_rows_checked": 720,
+      "verdict": "PASS"
+    }
+  ],
+  "scalar_tolerance": 1e-05,
+  "schema_version": 1,
+  "scope": "independent saved-checkpoint recurrence replay and training-receipt audit; optimizer trajectories are not replayed",
+  "source_hashes_checked": 0,
+  "verdict": "PASS"
+}
