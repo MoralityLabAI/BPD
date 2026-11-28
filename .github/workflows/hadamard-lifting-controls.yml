@@ -1,0 +1,27 @@
+name: Hadamard lifting exact controls
+on:
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/hadamard_mod9_lifting/**'
+      - 'mechinterp/bpd/experiments/hadamard_mod27_lifting/**'
+      - 'mechinterp/bpd/experiments/hadamard_conditional_integer/**'
+      - '.github/workflows/hadamard-lifting-controls.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  exact-controls:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Compile and run both assertion-enabled integer controls
+        run: |
+          set -euo pipefail
+          src=mechinterp/bpd/experiments
+          c++ -std=c++20 -O2 "$src/hadamard_mod9_lifting/test_lift.cpp" -o "$RUNNER_TEMP/had-mod9"
+          c++ -std=c++20 -O2 "$src/hadamard_mod27_lifting/test_module.cpp" -o "$RUNNER_TEMP/had-mod27"
+          "$RUNNER_TEMP/had-mod9"
+          "$RUNNER_TEMP/had-mod27"
