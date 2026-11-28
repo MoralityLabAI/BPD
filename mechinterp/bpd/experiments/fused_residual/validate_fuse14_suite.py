@@ -372,30 +372,34 @@ def _run_trainer_and_capture(
                     _dst[_k] = pin.grad.detach().cpu().clone()
                 hooks.append(param.register_post_accumulate_grad_hook(_cap))
 
-    # Optional Stage A saved-tensor cast audit by shape/layer
-    proj_shapes = {}
+    # Optional Stage A saved-tensor cast audit by exact (shape, stride) of frozen projections.
+    # Disambiguates qkv_proj [3*D, D] (saved transposed as [D, 3*D] stride (1, D)) from
+    # down_proj [D, inter] (saved transposed as [inter, D] stride (1, inter)).
+    proj_sigs: dict[tuple[tuple[int, int], tuple[int, int]], str] = {}
     for nm, mod in eligible_frozen_projections(tr.bpd_model, targets="block_projs"):
-        w_shape = tuple(mod.weight.shape)
-        t_shape = (w_shape[1], w_shape[0])
-        proj_shapes[w_shape] = nm.split(".")[-1]
-        proj_shapes[t_shape] = nm.split(".")[-1]
+        out_f, in_f = int(mod.weight.shape[0]), int(mod.weight.shape[1])
+        kind = nm.split(".")[-1]
+        proj_sigs[((out_f, in_f), (in_f, 1))] = kind
+        proj_sigs[((in_f, out_f), (1, in_f))] = kind
     audit_events: list[dict[str, Any]] = []
     saved_ptrs: dict[int, dict[str, Any]] = {}
 
     def _pack(t: torch.Tensor):
-        if t.dtype == torch.bfloat16 and tuple(t.shape) in proj_shapes:
-            st = t.untyped_storage()
-            ptr = int(st.data_ptr())
-            rec = {
-                "kind": proj_shapes[tuple(t.shape)],
-                "shape": list(t.shape),
-                "stride": list(t.stride()),
-                "dtype": str(t.dtype),
-                "nbytes": int(st.nbytes()),
-                "ptr": ptr,
-            }
-            audit_events.append(rec)
-            saved_ptrs[ptr] = rec
+        if t.dtype == torch.bfloat16 and t.ndim == 2:
+            sig = (tuple(t.shape), tuple(t.stride()))
+            if sig in proj_sigs:
+                st = t.untyped_storage()
+                ptr = int(st.data_ptr())
+                rec = {
+                    "kind": proj_sigs[sig],
+                    "shape": list(t.shape),
+                    "stride": list(t.stride()),
+                    "dtype": str(t.dtype),
+                    "nbytes": int(st.nbytes()),
+                    "ptr": ptr,
+                }
+                audit_events.append(rec)
+                saved_ptrs[ptr] = rec
         return t
 
     step_ms: list[float] = []
