@@ -1,0 +1,37 @@
+name: BPD NC09-FC05 excluded full smoke
+
+on:
+  push:
+    branches: ['research/bpd-nc09-fc05-independent-calibration-20261118']
+    paths:
+      - 'mechinterp/bpd/experiments/nc09_fixed12/full_tangent_calibration_fc05/FULL_SMOKE_LOCK.json'
+
+permissions:
+  contents: read
+
+jobs:
+  excluded-15999:
+    if: github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check pytest==9.2.0 numpy==2.3.5 scipy==1.17.0
+      - run: python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Train the first excluded source and check frozen-sampler agreement
+        run: |
+          python -m mechinterp.bpd.experiments.nc09_fixed12.full_tangent_calibration_fc05.runner --phase smoke --out-dir /tmp/nc09-fc05-smoke --run-url "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+      - name: Preserve the first full smoke including failures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bpd-nc09-fc05-excluded-15999-${{ github.run_id }}
+          path: /tmp/nc09-fc05-smoke/
+          retention-days: 90
+          if-no-files-found: warn
+

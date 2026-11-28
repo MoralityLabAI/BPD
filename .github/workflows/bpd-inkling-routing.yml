@@ -1,0 +1,65 @@
+name: BPD Inkling loop routing source-only math
+
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/experiments/inkling_routing/**'
+      - '.github/workflows/bpd-inkling-routing.yml'
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/inkling_routing/**'
+      - '.github/workflows/bpd-inkling-routing.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  exact-routing-algebra:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate pure-stdlib attribution, L2 dose and physical-null contracts
+        run: python -m unittest discover -s mechinterp/bpd/experiments/inkling_routing -p 'test_routing_math.py' -v
+      - name: Validate raw writer-to-reader tangent and radial null
+        run: python -m unittest discover -s mechinterp/bpd/experiments/inkling_routing -p 'test_reader_tangent.py' -v
+
+  native-development:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      OMP_NUM_THREADS: '2'
+      MKL_NUM_THREADS: '2'
+      OPENBLAS_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned PyTorch CPU
+        run: python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Native recurrent tensor hook and continuation unit tests
+        run: python -m unittest discover -s mechinterp/bpd/experiments/inkling_routing -p 'test_native_model.py' -v
+      - name: Verify tangent prediction against actual native reader and physical patch
+        run: python -m unittest discover -s mechinterp/bpd/experiments/inkling_routing -p 'test_reader_tangent_native.py' -v
+      - name: Train source model and run new synthetic development roots
+        run: python mechinterp/bpd/experiments/inkling_routing/run_native_dev.py --out "$RUNNER_TEMP/inkbpd02_native_development.json"
+      - name: Byte-identical deterministic CPU replay
+        run: python mechinterp/bpd/experiments/inkling_routing/run_native_dev.py --out "$RUNNER_TEMP/inkbpd02_native_development.json" --check
+      - name: Strong direct gate competence controls on new development roots
+        run: python mechinterp/bpd/experiments/inkling_routing/run_gate_control.py --out "$RUNNER_TEMP/inkbpd03_gate_dev.json"
+      - name: Reproduce direct gate competence controls
+        run: python mechinterp/bpd/experiments/inkling_routing/run_gate_control.py --out "$RUNNER_TEMP/inkbpd03_gate_dev.json" --check
+      - name: Preserve development evidence and all admission outcomes
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ink-bpd02-native-dev
+          path: |
+            ${{ runner.temp }}/inkbpd02_native_development.json
+            ${{ runner.temp }}/inkbpd03_gate_dev.json
+          if-no-files-found: warn
+          retention-days: 90

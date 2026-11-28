@@ -1,0 +1,47 @@
+{
+  "archived_output_equal": true,
+  "bpd_parent_commit": "402ef7764e11bc7736873d66357b8dc24b996e94",
+  "evalmath_commit": "958b3fc797cdc8fda927eff153d056b5e65be861",
+  "evalmath_script": "skills/evalmath-mechinterp-power/scripts/preflight.py",
+  "evalmath_script_sha256": "c2621a7900930f81ed53799ce439ee1c8f2d7006918a04ef57b5381630d15494",
+  "new_ink_bpd06_scientific_preflight": "PENDING_NEW_INDEPENDENT_DEVELOPMENT_EFFECTS_AND_MATCHED_SHAMS",
+  "result": {
+    "approx_resolvable_effect": 0.08253041846275455,
+    "approx_worlds_for_80pct_power": 6,
+    "decision": "REDESIGN_OR_PILOT_ONLY",
+    "experiment_id": "BPD-RP-03-hidden-state-steering-development",
+    "independent_unit": "independently trained model root with four paired descendants",
+    "limits": "Normal-based power is planning only. A zero-effect zero-variance pilot cannot support extrapolating a hypothetical positive effect. Root and sham independence, symmetry, readout sealing, and the scientific effect floor require independent audits. Repeated outcomes within a root are never additional worlds.",
+    "mean_pilot_effect": 0.001220703125,
+    "mechanistic_variation_floor": 0.05,
+    "minimum_exact_sign_test_roots": 6,
+    "observed_worst_sham": 0.052734375,
+    "order_statistic_rank": null,
+    "pilot_world_sigma": 0.028436731540711056,
+    "pilot_worlds": 8,
+    "planned_comparisons": 3,
+    "planned_confirmation_worlds": 8,
+    "reasons": [
+      "heldout_unsealed",
+      "sham_quantile_uncalibrated",
+      "pilot_effect_not_above_mechanistic_variation_floor"
+    ],
+    "schema": "EvalMath/mechinterp-power-preflight/v1",
+    "target_effect": 0.1,
+    "upper_sham_quantile": null
+  },
+  "review_date": "2026-11-26",
+  "schema": "bpd/goodfire-review-archived-preflight-recheck/v1",
+  "scope": "Replay of archived RP03 planning inputs; zero new outcomes, training updates or confirmation roots",
+  "source_inputs": {
+    "preflight_input.json": {
+      "path": "mechinterp/bpd/experiments/training_steering_stability/results/development/preflight_input.json",
+      "sha256": "e48cbe0414b6aa8fdd719dec793ee56f46549518838dd643164fd5cc11837fcc"
+    },
+    "preflight_result.json": {
+      "path": "mechinterp/bpd/experiments/training_steering_stability/results/development/preflight_result.json",
+      "sha256": "863eced943ec9df62411939b74bf8877de9808ff47013805c4189c04fd10da5f"
+    }
+  },
+  "strict_exit_code": 2
+}

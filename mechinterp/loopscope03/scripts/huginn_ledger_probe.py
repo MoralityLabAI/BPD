@@ -27,6 +27,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 import time
 from pathlib import Path
@@ -45,7 +46,18 @@ from mechinterp.loopscope02.scripts import trm_sudoku as TS  # noqa: E402
 
 RESULTS_DIR = REPO_ROOT / "mechinterp" / "loopscope03" / "results"
 HUGINN_SNAP = Path(
-    r"C:\Users\patri\.cache\huggingface\hub\models--tomg-group-umd--huginn-0125\snapshots\bb6621b65e90b6a4b9b29ef88dc83866d450470c"
+    os.environ.get(
+        "HUGINN_SNAPSHOT_DIR",
+        str(
+            Path.home()
+            / ".cache"
+            / "huggingface"
+            / "hub"
+            / "models--tomg-group-umd--huginn-0125"
+            / "snapshots"
+            / "bb6621b65e90b6a4b9b29ef88dc83866d450470c"
+        ),
+    )
 )
 
 

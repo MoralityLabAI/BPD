@@ -1,0 +1,3370 @@
+{
+  "analysis_selection_pairs_exposed": true,
+  "checkpoint_sha256": {
+    "results/development/root_962610_A_task.pt": "900994d5f70851390c49bef4d63c7231919519d506050a85a69e33c10d10b9f3",
+    "results/development/root_962610_B_causal.pt": "b924e536b0f3128ecab6eacffbee947defc658f4a438d2fc49b25634c6cb41e9",
+    "results/development/root_962610_C_rotated.pt": "f17dbd5d9cb5435e79b860048cac872f102e55783393456105e4587b7ad6eae8",
+    "results/development/root_962610_warmup.pt": "be533822ab5e3df2ab48c6d4bde31b73b57f85a944a2a966ce8fcdb22b4082a0",
+    "results/development/root_962611_A_task.pt": "5f6e21725c971e6c867b2dd52655194d282a1a6de69aa202412eca3d746ae2f9",
+    "results/development/root_962611_B_causal.pt": "e7f1921b6e28b84753fdc8b88a7f673970d8f17bc453bf4ccc23d8421d78c632",
+    "results/development/root_962611_C_rotated.pt": "8b3f70691a0d085f49bce875b5ba3e24c9347d80c3c81b5fc687698ea032a615",
+    "results/development/root_962611_warmup.pt": "9241c37f387ad146b8f93241259aeec3880120076c6da5102a909a9bc263f9e7",
+    "results/development/root_962612_A_task.pt": "cfdd1608d7ccc0cd90c075756485ca42cdbbd3e0fa1c4a75ce0d58603442a33a",
+    "results/development/root_962612_B_causal.pt": "625a375f495c55f94ff5bbe22e79b8a64bea1d2e2a368335325ba26ff6717bee",
+    "results/development/root_962612_C_rotated.pt": "95d7064475b2fc4b66c5b39766e879be7d0e3176d56e9c1fd5023eaef3661a8e",
+    "results/development/root_962612_warmup.pt": "9a72e88779118ed427b1de2cb456b74eb4934c4128a8d741a58bee732c760a16",
+    "results/development/root_962613_A_task.pt": "5fde18a44ac7d24e5610df42ac440fb90033e7be9f0e5863302f1684a8e97834",
+    "results/development/root_962613_B_causal.pt": "94ed1d2beb0cbe64dd0537887344aba8fd7d80df0362128cf3c234c7fa07a51b",
+    "results/development/root_962613_C_rotated.pt": "fb020b7cc993dac2129588a21f17b205ffface3a9fee50b841fb127b7ac57376",
+    "results/development/root_962613_warmup.pt": "cf253c62e12312270659f6558fe69a206254fc0ce1d8715b5340bd1b1896511c",
+    "results/development/root_962614_A_task.pt": "37dd80e29d3dc4fcec6fdd270660856f4059f5d489cffe27cb2a41c9f6f9e2c1",
+    "results/development/root_962614_B_causal.pt": "dfacf779d3bbc76b5cb22f64e9250f6e9fe88cc53cde6ac419d4fb643b70cddf",
+    "results/development/root_962614_C_rotated.pt": "b214d4870c99f2a8c3a977baf68f9a37ea5ebbbda6b6dafa968c974b3e1347e6",
+    "results/development/root_962614_warmup.pt": "fae8b93dc6ad98b646619a8e3620401bd3e54bb9cc041c35507cebcb071f2507",
+    "results/development/root_962615_A_task.pt": "ed6418b95291efa344b880f42ba77c87ef748df9f10b2e7719664918faae1b7e",
+    "results/development/root_962615_B_causal.pt": "ef94fd1a896b3af9baaebe1d20d429f8ad102633256c0f8363274498843de879",
+    "results/development/root_962615_C_rotated.pt": "0cb7eaa90dd6efb676e3badecb4a586bf0233d657fa4c461786b89201fd98ccf",
+    "results/development/root_962615_warmup.pt": "c6f6d245637427201fb8bb43070c9a61cec8e6cef7099a6f54645a208c5faa8b",
+    "results/development/root_962616_A_task.pt": "8ab49b96519d1dce9420dff4adb69e3350497a5385ab18217832d8fa7125589a",
+    "results/development/root_962616_B_causal.pt": "3bf7f5a790ef85b4746a8522cf90ca4dd951d2e6740c5fc1a4ab23dd20bf3926",
+    "results/development/root_962616_C_rotated.pt": "c37f94e2ad76e5171e001603b3d022a41cddb5a58df3a64e67b5bde4e7f7714c",
+    "results/development/root_962616_warmup.pt": "ee9db0ebcc7518be8b3b9564c529d984821c3a6f17b04566034381933576cfcb",
+    "results/development/root_962617_A_task.pt": "44b9ae98b4860747a44ec10f76eeaf6c713ed6cedda69f7dc82970c40a087cdd",
+    "results/development/root_962617_B_causal.pt": "cfd78f9ebeb721fb50125b18c704f8cd3016a9cb1be363d550626ca734d35c4d",
+    "results/development/root_962617_C_rotated.pt": "2614c5189f18214522bf00061d379c20c17a22e76e7968f5309f58c853d0264c",
+    "results/development/root_962617_warmup.pt": "bb9caf3dc489564f87c25e6ccc701659d789e9af9890992834beba2ed2166fa2"
+  },
+  "diagnostic_source_sha256": "984d97a177e5c348ada0d1368ef818a9e119f47bac393dcea129ac7e745f8749",
+  "frozen_cross_slot_overlap_min_mean_max": [
+    0.20866715908050537,
+    0.4420661497861147,
+    1.0
+  ],
+  "group_collision_roots": [
+    962612,
+    962614
+  ],
+  "metric_definitions": {
+    "BCE_advantage": "loss with other-slot projector minus loss with own-slot projector; positive favors own",
+    "captured_difference_energy": "mean ||(h_donor-h_recipient)P||^2 / ||h_donor-h_recipient||^2",
+    "cross_slot_overlap": "trace(P_slot0 P_slot1)/4",
+    "span_overlap": "trace(P_frozen P_current)/4: mean squared principal cosine"
+  },
+  "purpose": "Review frozen-projector geometry and cycle-bit slot selectivity without training or checkpoint selection",
+  "roots": [
+    {
+      "frozen_cross_slot_overlap": 0.20866715908050537,
+      "phases": {
+        "A_task": {
+          "current_cross_slot_overlap": 0.2079561948776245,
+          "frozen_to_current_spans": [
+            {
+              "mean_squared_principal_cosine": 0.9981229901313782,
+              "minimum_squared_principal_cosine": 0.995805561542511,
+              "squared_principal_cosines": [
+                0.995805561542511,
+                0.9977836012840271,
+                0.9993822574615479,
+                0.9995210766792297
+              ]
+            },
+            {
+              "mean_squared_principal_cosine": 0.9974492788314819,
+              "minimum_squared_principal_cosine": 0.994918704032898,
+              "squared_principal_cosines": [
+                0.994918704032898,
+                0.9964309930801392,
+                0.9991687536239624,
+                0.9992792010307312
+              ]
+            }
+          ],
+          "source_pairs_by_slot": [
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.9459656476974487,
+                  "edited_bit_accuracy": 0.0694444477558136,
+                  "mean_captured_difference_energy": 0.2762208878993988,
+                  "unaffected_bit_accuracy": 0.9513888955116272
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.6990561485290527,
+                  "edited_bit_accuracy": 0.1736111044883728,
+                  "mean_captured_difference_energy": 0.38938093185424805,
+                  "unaffected_bit_accuracy": 0.96875
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.938978672027588,
+                  "edited_bit_accuracy": 0.0694444477558136,
+                  "mean_captured_difference_energy": 0.27565208077430725,
+                  "unaffected_bit_accuracy": 0.9548611044883728
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.6921789646148682,
+                  "edited_bit_accuracy": 0.1736111044883728,
+                  "mean_captured_difference_energy": 0.39134684205055237,
+                  "unaffected_bit_accuracy": 0.9722222089767456
+                }
+              },
+              "minimum_donor_difference_norm": 2.455580234527588,
+              "slot": 0
+            },
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.8357388973236084,
+                  "edited_bit_accuracy": 0.0486111119389534,
+                  "mean_captured_difference_energy": 0.32075610756874084,
+                  "unaffected_bit_accuracy": 0.9895833134651184
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.03125,
+                  "donor_target_BCE": 1.4100282192230225,
+                  "edited_bit_accuracy": 0.2291666716337204,
+                  "mean_captured_difference_energy": 0.42431437969207764,
+                  "unaffected_bit_accuracy": 0.9826388955116272
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.8390456438064575,
+                  "edited_bit_accuracy": 0.0416666679084301,
+                  "mean_captured_difference_energy": 0.3140042722225189,
+                  "unaffected_bit_accuracy": 0.9930555820465088
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.03125,
+                  "donor_target_BCE": 1.409132957458496,
+                  "edited_bit_accuracy": 0.2256944477558136,
+                  "mean_captured_difference_energy": 0.4230158030986786,
+                  "unaffected_bit_accuracy": 0.9722222089767456
+                }
+              },
+              "minimum_donor_difference_norm": 1.742139458656311,
+              "slot": 1
+            }
+          ]
+        },
+        "B_causal": {
+          "current_cross_slot_overlap": 0.21245187520980835,
+          "frozen_to_current_spans": [
+            {
+              "mean_squared_principal_cosine": 0.9979019165039062,
+              "minimum_squared_principal_cosine": 0.9958183765411377,
+              "squared_principal_cosines": [
+                0.9958183765411377,
+                0.997604489326477,
+                0.9985906481742859,
+                0.9995940327644348
+              ]
+            },
+            {
+              "mean_squared_principal_cosine": 0.9963141679763794,
+              "minimum_squared_principal_cosine": 0.9903493523597717,
+              "squared_principal_cosines": [
+                0.9903493523597717,
+                0.9966585040092468,
+                0.9984051585197449,
+                0.9998442530632019
+              ]
+            }
+          ],
+          "source_pairs_by_slot": [
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.7752399444580078,
+                  "edited_bit_accuracy": 0.0833333358168602,
+                  "mean_captured_difference_energy": 0.26279452443122864,
+                  "unaffected_bit_accuracy": 0.9618055820465088
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.4604772329330444,
+                  "edited_bit_accuracy": 0.2118055522441864,
+                  "mean_captured_difference_energy": 0.3773951530456543,
+                  "unaffected_bit_accuracy": 0.9722222089767456
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.7723571062088013,
+                  "edited_bit_accuracy": 0.09375,
+                  "mean_captured_difference_energy": 0.257411390542984,
+                  "unaffected_bit_accuracy": 0.9618055820465088
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.460425615310669,
+                  "edited_bit_accuracy": 0.2118055522441864,
+                  "mean_captured_difference_energy": 0.37939631938934326,
+                  "unaffected_bit_accuracy": 0.96875
+                }
+              },
+              "minimum_donor_difference_norm": 2.389756441116333,
+              "slot": 0
+            },
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.7010682821273804,
+                  "edited_bit_accuracy": 0.0555555559694767,
+                  "mean_captured_difference_energy": 0.31595245003700256,
+                  "unaffected_bit_accuracy": 0.9930555820465088
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0520833320915699,
+                  "donor_target_BCE": 1.1651581525802612,
+                  "edited_bit_accuracy": 0.3263888955116272,
+                  "mean_captured_difference_energy": 0.3713550567626953,
+                  "unaffected_bit_accuracy": 0.9513888955116272
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.7099264860153198,
+                  "edited_bit_accuracy": 0.0555555559694767,
+                  "mean_captured_difference_energy": 0.315447062253952,
+                  "unaffected_bit_accuracy": 0.9930555820465088
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0520833320915699,
+                  "donor_target_BCE": 1.130403995513916,
+                  "edited_bit_accuracy": 0.3402777910232544,
+                  "mean_captured_difference_energy": 0.3949737548828125,
+                  "unaffected_bit_accuracy": 0.9548611044883728
+                }
+              },
+              "minimum_donor_difference_norm": 1.5590680837631226,
+              "slot": 1
+            }
+          ]
+        },
+        "C_rotated": {
+          "current_cross_slot_overlap": 0.21214811503887177,
+          "frozen_to_current_spans": [
+            {
+              "mean_squared_principal_cosine": 0.9976531863212585,
+              "minimum_squared_principal_cosine": 0.9954336881637573,
+              "squared_principal_cosines": [
+                0.9954336881637573,
+                0.9964449405670166,
+                0.9990125298500061,
+                0.9997223019599915
+              ]
+            },
+            {
+              "mean_squared_principal_cosine": 0.9970581531524658,
+              "minimum_squared_principal_cosine": 0.9936896562576294,
+              "squared_principal_cosines": [
+                0.9936896562576294,
+                0.9969815611839294,
+                0.9982222318649292,
+                0.9993405342102051
+              ]
+            }
+          ],
+          "source_pairs_by_slot": [
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.7229775190353394,
+                  "edited_bit_accuracy": 0.0659722238779068,
+                  "mean_captured_difference_energy": 0.28400829434394836,
+                  "unaffected_bit_accuracy": 0.9583333134651184
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.4762324094772339,
+                  "edited_bit_accuracy": 0.1944444477558136,
+                  "mean_captured_difference_energy": 0.3955768644809723,
+                  "unaffected_bit_accuracy": 0.9548611044883728
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.7207698822021484,
+                  "edited_bit_accuracy": 0.0659722238779068,
+                  "mean_captured_difference_energy": 0.27543094754219055,
+                  "unaffected_bit_accuracy": 0.9583333134651184
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.4780220985412598,
+                  "edited_bit_accuracy": 0.1909722238779068,
+                  "mean_captured_difference_energy": 0.3973497450351715,
+                  "unaffected_bit_accuracy": 0.9548611044883728
+                }
+              },
+              "minimum_donor_difference_norm": 2.520550012588501,
+              "slot": 0
+            },
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.7070671319961548,
+                  "edited_bit_accuracy": 0.03125,
+                  "mean_captured_difference_energy": 0.33123698830604553,
+                  "unaffected_bit_accuracy": 0.9930555820465088
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.3365421295166016,
+                  "edited_bit_accuracy": 0.2013888955116272,
+                  "mean_captured_difference_energy": 0.4215996265411377,
+                  "unaffected_bit_accuracy": 0.9583333134651184
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.710033893585205,
+                  "edited_bit_accuracy": 0.0347222238779068,
+                  "mean_captured_difference_energy": 0.3234668970108032,
+                  "unaffected_bit_accuracy": 0.9930555820465088
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.3412178754806519,
+                  "edited_bit_accuracy": 0.2013888955116272,
+                  "mean_captured_difference_energy": 0.4215935170650482,
+                  "unaffected_bit_accuracy": 0.9583333134651184
+                }
+              },
+              "minimum_donor_difference_norm": 1.8082373142242432,
+              "slot": 1
+            }
+          ]
+        },
+        "warmup": {
+          "current_cross_slot_overlap": 0.20866715908050537,
+          "frozen_to_current_spans": [
+            {
+              "mean_squared_principal_cosine": 1.0000001192092896,
+              "minimum_squared_principal_cosine": 0.9999996423721313,
+              "squared_principal_cosines": [
+                0.9999996423721313,
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            {
+              "mean_squared_principal_cosine": 0.9999997019767761,
+              "minimum_squared_principal_cosine": 1.0,
+              "squared_principal_cosines": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ]
+            }
+          ],
+          "source_pairs_by_slot": [
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.636961579322815,
+                  "edited_bit_accuracy": 0.0625,
+                  "mean_captured_difference_energy": 0.2825797200202942,
+                  "unaffected_bit_accuracy": 0.9548611044883728
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.398843765258789,
+                  "edited_bit_accuracy": 0.1805555522441864,
+                  "mean_captured_difference_energy": 0.41433537006378174,
+                  "unaffected_bit_accuracy": 0.9583333134651184
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.636961579322815,
+                  "edited_bit_accuracy": 0.0625,
+                  "mean_captured_difference_energy": 0.2825797200202942,
+                  "unaffected_bit_accuracy": 0.9548611044883728
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.398843765258789,
+                  "edited_bit_accuracy": 0.1805555522441864,
+                  "mean_captured_difference_energy": 0.41433537006378174,
+                  "unaffected_bit_accuracy": 0.9583333134651184
+                }
+              },
+              "minimum_donor_difference_norm": 2.542935609817505,
+              "slot": 0
+            },
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.5739346742630005,
+                  "edited_bit_accuracy": 0.0451388880610466,
+                  "mean_captured_difference_energy": 0.30791762471199036,
+                  "unaffected_bit_accuracy": 0.9791666865348816
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.2130049467086792,
+                  "edited_bit_accuracy": 0.2326388955116272,
+                  "mean_captured_difference_energy": 0.4340631067752838,
+                  "unaffected_bit_accuracy": 0.9756944179534912
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.5739346742630005,
+                  "edited_bit_accuracy": 0.0451388880610466,
+                  "mean_captured_difference_energy": 0.30791762471199036,
+                  "unaffected_bit_accuracy": 0.9791666865348816
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.2130049467086792,
+                  "edited_bit_accuracy": 0.2326388955116272,
+                  "mean_captured_difference_energy": 0.4340631067752838,
+                  "unaffected_bit_accuracy": 0.9756944179534912
+                }
+              },
+              "minimum_donor_difference_norm": 1.7998820543289185,
+              "slot": 1
+            }
+          ]
+        }
+      },
+      "seed": 962610,
+      "selected_components": [
+        [
+          0,
+          1,
+          2,
+          3
+        ],
+        [
+          12,
+          13,
+          14,
+          15
+        ]
+      ],
+      "selected_group_indices": [
+        0,
+        3
+      ],
+      "shared_component_count": 0
+    },
+    {
+      "frozen_cross_slot_overlap": 0.3274689316749573,
+      "phases": {
+        "A_task": {
+          "current_cross_slot_overlap": 0.32277271151542664,
+          "frozen_to_current_spans": [
+            {
+              "mean_squared_principal_cosine": 0.9974111914634705,
+              "minimum_squared_principal_cosine": 0.9923649430274963,
+              "squared_principal_cosines": [
+                0.9923649430274963,
+                0.9984287023544312,
+                0.9991230964660645,
+                0.9997278451919556
+              ]
+            },
+            {
+              "mean_squared_principal_cosine": 0.9979819655418396,
+              "minimum_squared_principal_cosine": 0.9954180717468262,
+              "squared_principal_cosines": [
+                0.9954180717468262,
+                0.9970486760139465,
+                0.9996047616004944,
+                0.9998570680618286
+              ]
+            }
+          ],
+          "source_pairs_by_slot": [
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.8913342952728271,
+                  "edited_bit_accuracy": 0.1458333283662796,
+                  "mean_captured_difference_energy": 0.4242824614048004,
+                  "unaffected_bit_accuracy": 0.9861111044883728
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.8587915897369385,
+                  "edited_bit_accuracy": 0.1388888955116272,
+                  "mean_captured_difference_energy": 0.4748355448246002,
+                  "unaffected_bit_accuracy": 0.9826388955116272
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.8924250602722168,
+                  "edited_bit_accuracy": 0.1527777761220932,
+                  "mean_captured_difference_energy": 0.42397966980934143,
+                  "unaffected_bit_accuracy": 0.9861111044883728
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.8513197898864746,
+                  "edited_bit_accuracy": 0.1423611044883728,
+                  "mean_captured_difference_energy": 0.4763495922088623,
+                  "unaffected_bit_accuracy": 0.9826388955116272
+                }
+              },
+              "minimum_donor_difference_norm": 2.974777936935425,
+              "slot": 0
+            },
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0416666679084301,
+                  "donor_target_BCE": 1.499490737915039,
+                  "edited_bit_accuracy": 0.1875,
+                  "mean_captured_difference_energy": 0.33438071608543396,
+                  "unaffected_bit_accuracy": 0.9826388955116272
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0833333358168602,
+                  "donor_target_BCE": 1.3738446235656738,
+                  "edited_bit_accuracy": 0.2291666716337204,
+                  "mean_captured_difference_energy": 0.48881152272224426,
+                  "unaffected_bit_accuracy": 0.96875
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0625,
+                  "donor_target_BCE": 1.4857068061828613,
+                  "edited_bit_accuracy": 0.2083333283662796,
+                  "mean_captured_difference_energy": 0.35035204887390137,
+                  "unaffected_bit_accuracy": 0.9826388955116272
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0833333358168602,
+                  "donor_target_BCE": 1.3573557138442993,
+                  "edited_bit_accuracy": 0.2361111044883728,
+                  "mean_captured_difference_energy": 0.4963896572589874,
+                  "unaffected_bit_accuracy": 0.9652777910232544
+                }
+              },
+              "minimum_donor_difference_norm": 1.448022484779358,
+              "slot": 1
+            }
+          ]
+        },
+        "B_causal": {
+          "current_cross_slot_overlap": 0.3266448974609375,
+          "frozen_to_current_spans": [
+            {
+              "mean_squared_principal_cosine": 0.9974666833877563,
+              "minimum_squared_principal_cosine": 0.9936932325363159,
+              "squared_principal_cosines": [
+                0.9936932325363159,
+                0.9980930685997009,
+                0.9986996650695801,
+                0.9993801116943359
+              ]
+            },
+            {
+              "mean_squared_principal_cosine": 0.9979926943778992,
+              "minimum_squared_principal_cosine": 0.9955968856811523,
+              "squared_principal_cosines": [
+                0.9955968856811523,
+                0.9975929260253906,
+                0.9989780783653259,
+                0.9998027682304382
+              ]
+            }
+          ],
+          "source_pairs_by_slot": [
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.6404961347579956,
+                  "edited_bit_accuracy": 0.1770833283662796,
+                  "mean_captured_difference_energy": 0.4088799059391022,
+                  "unaffected_bit_accuracy": 0.9791666865348816
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.5819783210754395,
+                  "edited_bit_accuracy": 0.1666666716337204,
+                  "mean_captured_difference_energy": 0.4563632309436798,
+                  "unaffected_bit_accuracy": 0.9618055820465088
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.6361585855484009,
+                  "edited_bit_accuracy": 0.1805555522441864,
+                  "mean_captured_difference_energy": 0.4122203588485718,
+                  "unaffected_bit_accuracy": 0.9791666865348816
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.5680460929870605,
+                  "edited_bit_accuracy": 0.1770833283662796,
+                  "mean_captured_difference_energy": 0.461971253156662,
+                  "unaffected_bit_accuracy": 0.9652777910232544
+                }
+              },
+              "minimum_donor_difference_norm": 2.845393419265747,
+              "slot": 0
+            },
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0625,
+                  "donor_target_BCE": 1.3292323350906372,
+                  "edited_bit_accuracy": 0.2222222238779068,
+                  "mean_captured_difference_energy": 0.2982684075832367,
+                  "unaffected_bit_accuracy": 0.9583333134651184
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.1041666641831398,
+                  "donor_target_BCE": 1.0859346389770508,
+                  "edited_bit_accuracy": 0.3090277910232544,
+                  "mean_captured_difference_energy": 0.47258296608924866,
+                  "unaffected_bit_accuracy": 0.9583333134651184
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0729166641831398,
+                  "donor_target_BCE": 1.3093847036361694,
+                  "edited_bit_accuracy": 0.2326388955116272,
+                  "mean_captured_difference_energy": 0.3172539174556732,
+                  "unaffected_bit_accuracy": 0.9513888955116272
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.1041666641831398,
+                  "donor_target_BCE": 1.0612919330596924,
+                  "edited_bit_accuracy": 0.3125,
+                  "mean_captured_difference_energy": 0.4875735938549042,
+                  "unaffected_bit_accuracy": 0.9583333134651184
+                }
+              },
+              "minimum_donor_difference_norm": 1.4154548645019531,
+              "slot": 1
+            }
+          ]
+        },
+        "C_rotated": {
+          "current_cross_slot_overlap": 0.3206387460231781,
+          "frozen_to_current_spans": [
+            {
+              "mean_squared_principal_cosine": 0.9981243014335632,
+              "minimum_squared_principal_cosine": 0.9960529208183289,
+              "squared_principal_cosines": [
+                0.9960529208183289,
+                0.9975553154945374,
+                0.9992221593856812,
+                0.999666690826416
+              ]
+            },
+            {
+              "mean_squared_principal_cosine": 0.9983497262001038,
+              "minimum_squared_principal_cosine": 0.9968861937522888,
+              "squared_principal_cosines": [
+                0.9968861937522888,
+                0.9976620078086853,
+                0.9993651509284973,
+                0.9994858503341675
+              ]
+            }
+          ],
+          "source_pairs_by_slot": [
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.7148025035858154,
+                  "edited_bit_accuracy": 0.15625,
+                  "mean_captured_difference_energy": 0.418570876121521,
+                  "unaffected_bit_accuracy": 0.9861111044883728
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.6635154485702515,
+                  "edited_bit_accuracy": 0.1527777761220932,
+                  "mean_captured_difference_energy": 0.47634759545326233,
+                  "unaffected_bit_accuracy": 0.96875
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.7243461608886719,
+                  "edited_bit_accuracy": 0.15625,
+                  "mean_captured_difference_energy": 0.4115780293941498,
+                  "unaffected_bit_accuracy": 0.9861111044883728
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.662804365158081,
+                  "edited_bit_accuracy": 0.1527777761220932,
+                  "mean_captured_difference_energy": 0.47571733593940735,
+                  "unaffected_bit_accuracy": 0.96875
+                }
+              },
+              "minimum_donor_difference_norm": 2.8921563625335693,
+              "slot": 0
+            },
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.02083333395421505,
+                  "donor_target_BCE": 1.3640657663345337,
+                  "edited_bit_accuracy": 0.1805555522441864,
+                  "mean_captured_difference_energy": 0.3232717216014862,
+                  "unaffected_bit_accuracy": 0.9826388955116272
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0729166641831398,
+                  "donor_target_BCE": 1.2374815940856934,
+                  "edited_bit_accuracy": 0.2465277761220932,
+                  "mean_captured_difference_energy": 0.48988091945648193,
+                  "unaffected_bit_accuracy": 0.9722222089767456
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.02083333395421505,
+                  "donor_target_BCE": 1.3466185331344604,
+                  "edited_bit_accuracy": 0.1875,
+                  "mean_captured_difference_energy": 0.34125351905822754,
+                  "unaffected_bit_accuracy": 0.9826388955116272
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0729166641831398,
+                  "donor_target_BCE": 1.2286261320114136,
+                  "edited_bit_accuracy": 0.2534722089767456,
+                  "mean_captured_difference_energy": 0.5014151930809021,
+                  "unaffected_bit_accuracy": 0.9722222089767456
+                }
+              },
+              "minimum_donor_difference_norm": 1.5055465698242188,
+              "slot": 1
+            }
+          ]
+        },
+        "warmup": {
+          "current_cross_slot_overlap": 0.3274689316749573,
+          "frozen_to_current_spans": [
+            {
+              "mean_squared_principal_cosine": 0.9999998807907104,
+              "minimum_squared_principal_cosine": 0.9999996423721313,
+              "squared_principal_cosines": [
+                0.9999996423721313,
+                0.9999998807907104,
+                1.0,
+                1.0
+              ]
+            },
+            {
+              "mean_squared_principal_cosine": 1.0,
+              "minimum_squared_principal_cosine": 0.9999997019767761,
+              "squared_principal_cosines": [
+                0.9999997019767761,
+                0.9999997615814209,
+                1.0,
+                1.0
+              ]
+            }
+          ],
+          "source_pairs_by_slot": [
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.4569138288497925,
+                  "edited_bit_accuracy": 0.1736111044883728,
+                  "mean_captured_difference_energy": 0.4431816637516022,
+                  "unaffected_bit_accuracy": 0.9756944179534912
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.431175708770752,
+                  "edited_bit_accuracy": 0.1875,
+                  "mean_captured_difference_energy": 0.5070636868476868,
+                  "unaffected_bit_accuracy": 0.9548611044883728
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.4569138288497925,
+                  "edited_bit_accuracy": 0.1736111044883728,
+                  "mean_captured_difference_energy": 0.4431816637516022,
+                  "unaffected_bit_accuracy": 0.9756944179534912
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.431175708770752,
+                  "edited_bit_accuracy": 0.1875,
+                  "mean_captured_difference_energy": 0.5070636868476868,
+                  "unaffected_bit_accuracy": 0.9548611044883728
+                }
+              },
+              "minimum_donor_difference_norm": 2.850480318069458,
+              "slot": 0
+            },
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0520833320915699,
+                  "donor_target_BCE": 1.383160948753357,
+                  "edited_bit_accuracy": 0.1770833283662796,
+                  "mean_captured_difference_energy": 0.3429986238479614,
+                  "unaffected_bit_accuracy": 0.9409722089767456
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0729166641831398,
+                  "donor_target_BCE": 1.2211642265319824,
+                  "edited_bit_accuracy": 0.21875,
+                  "mean_captured_difference_energy": 0.49627685546875,
+                  "unaffected_bit_accuracy": 0.9305555820465088
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0520833320915699,
+                  "donor_target_BCE": 1.383160948753357,
+                  "edited_bit_accuracy": 0.1770833283662796,
+                  "mean_captured_difference_energy": 0.3429986238479614,
+                  "unaffected_bit_accuracy": 0.9409722089767456
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0729166641831398,
+                  "donor_target_BCE": 1.2211642265319824,
+                  "edited_bit_accuracy": 0.21875,
+                  "mean_captured_difference_energy": 0.49627685546875,
+                  "unaffected_bit_accuracy": 0.9305555820465088
+                }
+              },
+              "minimum_donor_difference_norm": 1.576181173324585,
+              "slot": 1
+            }
+          ]
+        }
+      },
+      "seed": 962611,
+      "selected_components": [
+        [
+          4,
+          5,
+          6,
+          7
+        ],
+        [
+          8,
+          9,
+          10,
+          11
+        ]
+      ],
+      "selected_group_indices": [
+        1,
+        2
+      ],
+      "shared_component_count": 0
+    },
+    {
+      "frozen_cross_slot_overlap": 0.9999997019767761,
+      "phases": {
+        "A_task": {
+          "current_cross_slot_overlap": 0.9999999403953552,
+          "frozen_to_current_spans": [
+            {
+              "mean_squared_principal_cosine": 0.9986591935157776,
+              "minimum_squared_principal_cosine": 0.9972528219223022,
+              "squared_principal_cosines": [
+                0.9972528219223022,
+                0.9985377192497253,
+                0.9991873502731323,
+                0.999660313129425
+              ]
+            },
+            {
+              "mean_squared_principal_cosine": 0.9986591935157776,
+              "minimum_squared_principal_cosine": 0.9972528219223022,
+              "squared_principal_cosines": [
+                0.9972528219223022,
+                0.9985377192497253,
+                0.9991873502731323,
+                0.999660313129425
+              ]
+            }
+          ],
+          "source_pairs_by_slot": [
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.8114209175109863,
+                  "edited_bit_accuracy": 0.0868055522441864,
+                  "mean_captured_difference_energy": 0.39312174916267395,
+                  "unaffected_bit_accuracy": 0.9583333134651184
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.8114209175109863,
+                  "edited_bit_accuracy": 0.0868055522441864,
+                  "mean_captured_difference_energy": 0.39312174916267395,
+                  "unaffected_bit_accuracy": 0.9583333134651184
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.8101747035980225,
+                  "edited_bit_accuracy": 0.09375,
+                  "mean_captured_difference_energy": 0.4009449779987335,
+                  "unaffected_bit_accuracy": 0.9583333134651184
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.8101747035980225,
+                  "edited_bit_accuracy": 0.09375,
+                  "mean_captured_difference_energy": 0.4009449779987335,
+                  "unaffected_bit_accuracy": 0.9583333134651184
+                }
+              },
+              "minimum_donor_difference_norm": 2.2752509117126465,
+              "slot": 0
+            },
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.3238396644592285,
+                  "edited_bit_accuracy": 0.3125,
+                  "mean_captured_difference_energy": 0.5347198247909546,
+                  "unaffected_bit_accuracy": 0.9583333134651184
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.3238396644592285,
+                  "edited_bit_accuracy": 0.3125,
+                  "mean_captured_difference_energy": 0.5347198247909546,
+                  "unaffected_bit_accuracy": 0.9583333134651184
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.323962688446045,
+                  "edited_bit_accuracy": 0.3194444477558136,
+                  "mean_captured_difference_energy": 0.525164783000946,
+                  "unaffected_bit_accuracy": 0.9583333134651184
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.323962688446045,
+                  "edited_bit_accuracy": 0.3194444477558136,
+                  "mean_captured_difference_energy": 0.525164783000946,
+                  "unaffected_bit_accuracy": 0.9583333134651184
+                }
+              },
+              "minimum_donor_difference_norm": 1.5933270454406738,
+              "slot": 1
+            }
+          ]
+        },
+        "B_causal": {
+          "current_cross_slot_overlap": 0.9999997615814209,
+          "frozen_to_current_spans": [
+            {
+              "mean_squared_principal_cosine": 0.998426616191864,
+              "minimum_squared_principal_cosine": 0.996579647064209,
+              "squared_principal_cosines": [
+                0.996579647064209,
+                0.9985724687576294,
+                0.9989492297172546,
+                0.9996067881584167
+              ]
+            },
+            {
+              "mean_squared_principal_cosine": 0.998426616191864,
+              "minimum_squared_principal_cosine": 0.996579647064209,
+              "squared_principal_cosines": [
+                0.996579647064209,
+                0.9985724687576294,
+                0.9989492297172546,
+                0.9996067881584167
+              ]
+            }
+          ],
+          "source_pairs_by_slot": [
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.010416666977107525,
+                  "donor_target_BCE": 1.6492044925689697,
+                  "edited_bit_accuracy": 0.1388888955116272,
+                  "mean_captured_difference_energy": 0.37490829825401306,
+                  "unaffected_bit_accuracy": 0.9583333134651184
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.010416666977107525,
+                  "donor_target_BCE": 1.6492044925689697,
+                  "edited_bit_accuracy": 0.1388888955116272,
+                  "mean_captured_difference_energy": 0.37490829825401306,
+                  "unaffected_bit_accuracy": 0.9583333134651184
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.010416666977107525,
+                  "donor_target_BCE": 1.6436856985092163,
+                  "edited_bit_accuracy": 0.1423611044883728,
+                  "mean_captured_difference_energy": 0.3899475038051605,
+                  "unaffected_bit_accuracy": 0.9583333134651184
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.010416666977107525,
+                  "donor_target_BCE": 1.6436856985092163,
+                  "edited_bit_accuracy": 0.1423611044883728,
+                  "mean_captured_difference_energy": 0.3899475038051605,
+                  "unaffected_bit_accuracy": 0.9583333134651184
+                }
+              },
+              "minimum_donor_difference_norm": 2.176022529602051,
+              "slot": 0
+            },
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.010416666977107525,
+                  "donor_target_BCE": 1.0903377532958984,
+                  "edited_bit_accuracy": 0.3819444477558136,
+                  "mean_captured_difference_energy": 0.5142200589179993,
+                  "unaffected_bit_accuracy": 0.9583333134651184
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.010416666977107525,
+                  "donor_target_BCE": 1.0903377532958984,
+                  "edited_bit_accuracy": 0.3819444477558136,
+                  "mean_captured_difference_energy": 0.5142200589179993,
+                  "unaffected_bit_accuracy": 0.9583333134651184
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.010416666977107525,
+                  "donor_target_BCE": 1.0852106809616089,
+                  "edited_bit_accuracy": 0.3888888955116272,
+                  "mean_captured_difference_energy": 0.5128499865531921,
+                  "unaffected_bit_accuracy": 0.9583333134651184
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.010416666977107525,
+                  "donor_target_BCE": 1.0852106809616089,
+                  "edited_bit_accuracy": 0.3888888955116272,
+                  "mean_captured_difference_energy": 0.5128499865531921,
+                  "unaffected_bit_accuracy": 0.9583333134651184
+                }
+              },
+              "minimum_donor_difference_norm": 1.5331064462661743,
+              "slot": 1
+            }
+          ]
+        },
+        "C_rotated": {
+          "current_cross_slot_overlap": 0.9999997615814209,
+          "frozen_to_current_spans": [
+            {
+              "mean_squared_principal_cosine": 0.9983254075050354,
+              "minimum_squared_principal_cosine": 0.9967387914657593,
+              "squared_principal_cosines": [
+                0.9967387914657593,
+                0.9982143044471741,
+                0.9988126158714294,
+                0.9995374083518982
+              ]
+            },
+            {
+              "mean_squared_principal_cosine": 0.9983254075050354,
+              "minimum_squared_principal_cosine": 0.9967387914657593,
+              "squared_principal_cosines": [
+                0.9967387914657593,
+                0.9982143044471741,
+                0.9988126158714294,
+                0.9995374083518982
+              ]
+            }
+          ],
+          "source_pairs_by_slot": [
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.7396653890609741,
+                  "edited_bit_accuracy": 0.0902777761220932,
+                  "mean_captured_difference_energy": 0.40192726254463196,
+                  "unaffected_bit_accuracy": 0.9583333134651184
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.7396653890609741,
+                  "edited_bit_accuracy": 0.0902777761220932,
+                  "mean_captured_difference_energy": 0.40192726254463196,
+                  "unaffected_bit_accuracy": 0.9583333134651184
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.7428025007247925,
+                  "edited_bit_accuracy": 0.0902777761220932,
+                  "mean_captured_difference_energy": 0.40567609667778015,
+                  "unaffected_bit_accuracy": 0.9583333134651184
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.7428025007247925,
+                  "edited_bit_accuracy": 0.0902777761220932,
+                  "mean_captured_difference_energy": 0.40567609667778015,
+                  "unaffected_bit_accuracy": 0.9583333134651184
+                }
+              },
+              "minimum_donor_difference_norm": 2.3200392723083496,
+              "slot": 0
+            },
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.2694432735443115,
+                  "edited_bit_accuracy": 0.3125,
+                  "mean_captured_difference_energy": 0.5370534658432007,
+                  "unaffected_bit_accuracy": 0.9444444179534912
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.2694432735443115,
+                  "edited_bit_accuracy": 0.3125,
+                  "mean_captured_difference_energy": 0.5370534658432007,
+                  "unaffected_bit_accuracy": 0.9444444179534912
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.2712863683700562,
+                  "edited_bit_accuracy": 0.3159722089767456,
+                  "mean_captured_difference_energy": 0.5257962942123413,
+                  "unaffected_bit_accuracy": 0.9444444179534912
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.2712863683700562,
+                  "edited_bit_accuracy": 0.3159722089767456,
+                  "mean_captured_difference_energy": 0.5257962942123413,
+                  "unaffected_bit_accuracy": 0.9444444179534912
+                }
+              },
+              "minimum_donor_difference_norm": 1.522467851638794,
+              "slot": 1
+            }
+          ]
+        },
+        "warmup": {
+          "current_cross_slot_overlap": 0.9999997019767761,
+          "frozen_to_current_spans": [
+            {
+              "mean_squared_principal_cosine": 0.9999997019767761,
+              "minimum_squared_principal_cosine": 0.9999996423721313,
+              "squared_principal_cosines": [
+                0.9999996423721313,
+                0.9999998807907104,
+                1.0,
+                1.0
+              ]
+            },
+            {
+              "mean_squared_principal_cosine": 0.9999997019767761,
+              "minimum_squared_principal_cosine": 0.9999996423721313,
+              "squared_principal_cosines": [
+                0.9999996423721313,
+                0.9999998807907104,
+                1.0,
+                1.0
+              ]
+            }
+          ],
+          "source_pairs_by_slot": [
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.5176148414611816,
+                  "edited_bit_accuracy": 0.0763888880610466,
+                  "mean_captured_difference_energy": 0.42781221866607666,
+                  "unaffected_bit_accuracy": 0.9513888955116272
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.5176148414611816,
+                  "edited_bit_accuracy": 0.0763888880610466,
+                  "mean_captured_difference_energy": 0.42781221866607666,
+                  "unaffected_bit_accuracy": 0.9513888955116272
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.5176148414611816,
+                  "edited_bit_accuracy": 0.0763888880610466,
+                  "mean_captured_difference_energy": 0.42781221866607666,
+                  "unaffected_bit_accuracy": 0.9513888955116272
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.5176148414611816,
+                  "edited_bit_accuracy": 0.0763888880610466,
+                  "mean_captured_difference_energy": 0.42781221866607666,
+                  "unaffected_bit_accuracy": 0.9513888955116272
+                }
+              },
+              "minimum_donor_difference_norm": 2.437929630279541,
+              "slot": 0
+            },
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.154144287109375,
+                  "edited_bit_accuracy": 0.3020833432674408,
+                  "mean_captured_difference_energy": 0.5423316955566406,
+                  "unaffected_bit_accuracy": 0.9409722089767456
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.154144287109375,
+                  "edited_bit_accuracy": 0.3020833432674408,
+                  "mean_captured_difference_energy": 0.5423316955566406,
+                  "unaffected_bit_accuracy": 0.9409722089767456
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.154144287109375,
+                  "edited_bit_accuracy": 0.3020833432674408,
+                  "mean_captured_difference_energy": 0.5423316955566406,
+                  "unaffected_bit_accuracy": 0.9409722089767456
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.154144287109375,
+                  "edited_bit_accuracy": 0.3020833432674408,
+                  "mean_captured_difference_energy": 0.5423316955566406,
+                  "unaffected_bit_accuracy": 0.9409722089767456
+                }
+              },
+              "minimum_donor_difference_norm": 1.8128876686096191,
+              "slot": 1
+            }
+          ]
+        }
+      },
+      "seed": 962612,
+      "selected_components": [
+        [
+          4,
+          5,
+          6,
+          7
+        ],
+        [
+          4,
+          5,
+          6,
+          7
+        ]
+      ],
+      "selected_group_indices": [
+        1,
+        1
+      ],
+      "shared_component_count": 4
+    },
+    {
+      "frozen_cross_slot_overlap": 0.23062272369861603,
+      "phases": {
+        "A_task": {
+          "current_cross_slot_overlap": 0.2328859120607376,
+          "frozen_to_current_spans": [
+            {
+              "mean_squared_principal_cosine": 0.9982134103775024,
+              "minimum_squared_principal_cosine": 0.9967204928398132,
+              "squared_principal_cosines": [
+                0.9967204928398132,
+                0.9975900650024414,
+                0.9987934231758118,
+                0.999751091003418
+              ]
+            },
+            {
+              "mean_squared_principal_cosine": 0.9986134171485901,
+              "minimum_squared_principal_cosine": 0.9974377751350403,
+              "squared_principal_cosines": [
+                0.9974377751350403,
+                0.998077392578125,
+                0.9993212819099426,
+                0.9996177554130554
+              ]
+            }
+          ],
+          "source_pairs_by_slot": [
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 2.199086904525757,
+                  "edited_bit_accuracy": 0.0625,
+                  "mean_captured_difference_energy": 0.35407066345214844,
+                  "unaffected_bit_accuracy": 0.9305555820465088
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 2.093607187271118,
+                  "edited_bit_accuracy": 0.0729166641831398,
+                  "mean_captured_difference_energy": 0.30588576197624207,
+                  "unaffected_bit_accuracy": 0.9201388955116272
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 2.2119300365448,
+                  "edited_bit_accuracy": 0.0625,
+                  "mean_captured_difference_energy": 0.347741961479187,
+                  "unaffected_bit_accuracy": 0.9444444179534912
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 2.0896711349487305,
+                  "edited_bit_accuracy": 0.0729166641831398,
+                  "mean_captured_difference_energy": 0.3085775673389435,
+                  "unaffected_bit_accuracy": 0.9236111044883728
+                }
+              },
+              "minimum_donor_difference_norm": 2.912254571914673,
+              "slot": 0
+            },
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.6153496503829956,
+                  "edited_bit_accuracy": 0.1944444477558136,
+                  "mean_captured_difference_energy": 0.5795273184776306,
+                  "unaffected_bit_accuracy": 0.9895833134651184
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.549452304840088,
+                  "edited_bit_accuracy": 0.2083333283662796,
+                  "mean_captured_difference_energy": 0.3895510137081146,
+                  "unaffected_bit_accuracy": 0.9930555820465088
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.6199172735214233,
+                  "edited_bit_accuracy": 0.1979166716337204,
+                  "mean_captured_difference_energy": 0.580393373966217,
+                  "unaffected_bit_accuracy": 0.9895833134651184
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.5422136783599854,
+                  "edited_bit_accuracy": 0.2222222238779068,
+                  "mean_captured_difference_energy": 0.395237535238266,
+                  "unaffected_bit_accuracy": 0.9930555820465088
+                }
+              },
+              "minimum_donor_difference_norm": 1.4160984754562378,
+              "slot": 1
+            }
+          ]
+        },
+        "B_causal": {
+          "current_cross_slot_overlap": 0.23605555295944214,
+          "frozen_to_current_spans": [
+            {
+              "mean_squared_principal_cosine": 0.9981770515441895,
+              "minimum_squared_principal_cosine": 0.9966583251953125,
+              "squared_principal_cosines": [
+                0.9966583251953125,
+                0.9977709054946899,
+                0.9988187551498413,
+                0.9994612336158752
+              ]
+            },
+            {
+              "mean_squared_principal_cosine": 0.9983612298965454,
+              "minimum_squared_principal_cosine": 0.9970436692237854,
+              "squared_principal_cosines": [
+                0.9970436692237854,
+                0.9980050325393677,
+                0.9986128211021423,
+                0.9997840523719788
+              ]
+            }
+          ],
+          "source_pairs_by_slot": [
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 2.066511631011963,
+                  "edited_bit_accuracy": 0.1145833358168602,
+                  "mean_captured_difference_energy": 0.33019542694091797,
+                  "unaffected_bit_accuracy": 0.8854166865348816
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.010416666977107525,
+                  "donor_target_BCE": 1.8769307136535645,
+                  "edited_bit_accuracy": 0.1284722238779068,
+                  "mean_captured_difference_energy": 0.3048632740974426,
+                  "unaffected_bit_accuracy": 0.9097222089767456
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 2.095442771911621,
+                  "edited_bit_accuracy": 0.1006944477558136,
+                  "mean_captured_difference_energy": 0.32637158036231995,
+                  "unaffected_bit_accuracy": 0.8819444179534912
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.8786569833755493,
+                  "edited_bit_accuracy": 0.125,
+                  "mean_captured_difference_energy": 0.308400422334671,
+                  "unaffected_bit_accuracy": 0.9236111044883728
+                }
+              },
+              "minimum_donor_difference_norm": 2.8725497722625732,
+              "slot": 0
+            },
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.02083333395421505,
+                  "donor_target_BCE": 1.490797996520996,
+                  "edited_bit_accuracy": 0.2222222238779068,
+                  "mean_captured_difference_energy": 0.5726036429405212,
+                  "unaffected_bit_accuracy": 0.9965277910232544
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.2782127857208252,
+                  "edited_bit_accuracy": 0.2986111044883728,
+                  "mean_captured_difference_energy": 0.3690888583660126,
+                  "unaffected_bit_accuracy": 1.0
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.02083333395421505,
+                  "donor_target_BCE": 1.5006136894226074,
+                  "edited_bit_accuracy": 0.2222222238779068,
+                  "mean_captured_difference_energy": 0.573900043964386,
+                  "unaffected_bit_accuracy": 0.9965277910232544
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.2666068077087402,
+                  "edited_bit_accuracy": 0.2986111044883728,
+                  "mean_captured_difference_energy": 0.3847540318965912,
+                  "unaffected_bit_accuracy": 1.0
+                }
+              },
+              "minimum_donor_difference_norm": 1.1878464221954346,
+              "slot": 1
+            }
+          ]
+        },
+        "C_rotated": {
+          "current_cross_slot_overlap": 0.2363244891166687,
+          "frozen_to_current_spans": [
+            {
+              "mean_squared_principal_cosine": 0.9982165694236755,
+              "minimum_squared_principal_cosine": 0.9970759153366089,
+              "squared_principal_cosines": [
+                0.9970759153366089,
+                0.9979632496833801,
+                0.9987067580223083,
+                0.9991216659545898
+              ]
+            },
+            {
+              "mean_squared_principal_cosine": 0.9983389377593994,
+              "minimum_squared_principal_cosine": 0.9972566962242126,
+              "squared_principal_cosines": [
+                0.9972566962242126,
+                0.9978218674659729,
+                0.9986990690231323,
+                0.9995779991149902
+              ]
+            }
+          ],
+          "source_pairs_by_slot": [
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 2.212132692337036,
+                  "edited_bit_accuracy": 0.0694444477558136,
+                  "mean_captured_difference_energy": 0.3491809666156769,
+                  "unaffected_bit_accuracy": 0.90625
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 2.078381061553955,
+                  "edited_bit_accuracy": 0.0798611119389534,
+                  "mean_captured_difference_energy": 0.3068754971027374,
+                  "unaffected_bit_accuracy": 0.9305555820465088
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 2.2289295196533203,
+                  "edited_bit_accuracy": 0.0694444477558136,
+                  "mean_captured_difference_energy": 0.34401893615722656,
+                  "unaffected_bit_accuracy": 0.9097222089767456
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 2.0783214569091797,
+                  "edited_bit_accuracy": 0.0798611119389534,
+                  "mean_captured_difference_energy": 0.3103485405445099,
+                  "unaffected_bit_accuracy": 0.9305555820465088
+                }
+              },
+              "minimum_donor_difference_norm": 2.834240436553955,
+              "slot": 0
+            },
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.02083333395421505,
+                  "donor_target_BCE": 1.5779269933700562,
+                  "edited_bit_accuracy": 0.1979166716337204,
+                  "mean_captured_difference_energy": 0.5684710144996643,
+                  "unaffected_bit_accuracy": 0.9895833134651184
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.453073263168335,
+                  "edited_bit_accuracy": 0.2638888955116272,
+                  "mean_captured_difference_energy": 0.37652596831321716,
+                  "unaffected_bit_accuracy": 0.9965277910232544
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.02083333395421505,
+                  "donor_target_BCE": 1.5795531272888184,
+                  "edited_bit_accuracy": 0.1944444477558136,
+                  "mean_captured_difference_energy": 0.5729824304580688,
+                  "unaffected_bit_accuracy": 0.9895833134651184
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.4519985914230347,
+                  "edited_bit_accuracy": 0.2743055522441864,
+                  "mean_captured_difference_energy": 0.3856567144393921,
+                  "unaffected_bit_accuracy": 0.9965277910232544
+                }
+              },
+              "minimum_donor_difference_norm": 1.3108690977096558,
+              "slot": 1
+            }
+          ]
+        },
+        "warmup": {
+          "current_cross_slot_overlap": 0.23062272369861603,
+          "frozen_to_current_spans": [
+            {
+              "mean_squared_principal_cosine": 0.9999996423721313,
+              "minimum_squared_principal_cosine": 0.9999995231628418,
+              "squared_principal_cosines": [
+                0.9999995231628418,
+                0.9999998807907104,
+                1.0,
+                1.0
+              ]
+            },
+            {
+              "mean_squared_principal_cosine": 1.0,
+              "minimum_squared_principal_cosine": 0.9999998211860657,
+              "squared_principal_cosines": [
+                0.9999998211860657,
+                1.0,
+                1.0,
+                1.0
+              ]
+            }
+          ],
+          "source_pairs_by_slot": [
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.808452844619751,
+                  "edited_bit_accuracy": 0.0520833320915699,
+                  "mean_captured_difference_energy": 0.3602798879146576,
+                  "unaffected_bit_accuracy": 0.9131944179534912
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.6881037950515747,
+                  "edited_bit_accuracy": 0.0868055522441864,
+                  "mean_captured_difference_energy": 0.3031069040298462,
+                  "unaffected_bit_accuracy": 0.9236111044883728
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.808452844619751,
+                  "edited_bit_accuracy": 0.0520833320915699,
+                  "mean_captured_difference_energy": 0.3602798879146576,
+                  "unaffected_bit_accuracy": 0.9131944179534912
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.6881037950515747,
+                  "edited_bit_accuracy": 0.0868055522441864,
+                  "mean_captured_difference_energy": 0.3031069040298462,
+                  "unaffected_bit_accuracy": 0.9236111044883728
+                }
+              },
+              "minimum_donor_difference_norm": 2.7099263668060303,
+              "slot": 0
+            },
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.3305859565734863,
+                  "edited_bit_accuracy": 0.2048611044883728,
+                  "mean_captured_difference_energy": 0.5819161534309387,
+                  "unaffected_bit_accuracy": 0.9895833134651184
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.3141450881958008,
+                  "edited_bit_accuracy": 0.2083333283662796,
+                  "mean_captured_difference_energy": 0.4184497594833374,
+                  "unaffected_bit_accuracy": 0.9895833134651184
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.3305859565734863,
+                  "edited_bit_accuracy": 0.2048611044883728,
+                  "mean_captured_difference_energy": 0.5819161534309387,
+                  "unaffected_bit_accuracy": 0.9895833134651184
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.3141450881958008,
+                  "edited_bit_accuracy": 0.2083333283662796,
+                  "mean_captured_difference_energy": 0.4184497594833374,
+                  "unaffected_bit_accuracy": 0.9895833134651184
+                }
+              },
+              "minimum_donor_difference_norm": 1.4102638959884644,
+              "slot": 1
+            }
+          ]
+        }
+      },
+      "seed": 962613,
+      "selected_components": [
+        [
+          12,
+          13,
+          14,
+          15
+        ],
+        [
+          0,
+          1,
+          2,
+          3
+        ]
+      ],
+      "selected_group_indices": [
+        3,
+        0
+      ],
+      "shared_component_count": 0
+    },
+    {
+      "frozen_cross_slot_overlap": 1.0,
+      "phases": {
+        "A_task": {
+          "current_cross_slot_overlap": 1.0000001192092896,
+          "frozen_to_current_spans": [
+            {
+              "mean_squared_principal_cosine": 0.9956349730491638,
+              "minimum_squared_principal_cosine": 0.9907630681991577,
+              "squared_principal_cosines": [
+                0.9907630681991577,
+                0.9950786828994751,
+                0.9979139566421509,
+                0.9987846612930298
+              ]
+            },
+            {
+              "mean_squared_principal_cosine": 0.9956349730491638,
+              "minimum_squared_principal_cosine": 0.9907630681991577,
+              "squared_principal_cosines": [
+                0.9907630681991577,
+                0.9950786828994751,
+                0.9979139566421509,
+                0.9987846612930298
+              ]
+            }
+          ],
+          "source_pairs_by_slot": [
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.8822879791259766,
+                  "edited_bit_accuracy": 0.0972222238779068,
+                  "mean_captured_difference_energy": 0.36647024750709534,
+                  "unaffected_bit_accuracy": 0.9444444179534912
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.8822879791259766,
+                  "edited_bit_accuracy": 0.0972222238779068,
+                  "mean_captured_difference_energy": 0.36647024750709534,
+                  "unaffected_bit_accuracy": 0.9444444179534912
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.879728078842163,
+                  "edited_bit_accuracy": 0.1006944477558136,
+                  "mean_captured_difference_energy": 0.36998483538627625,
+                  "unaffected_bit_accuracy": 0.9444444179534912
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.879728078842163,
+                  "edited_bit_accuracy": 0.1006944477558136,
+                  "mean_captured_difference_energy": 0.36998483538627625,
+                  "unaffected_bit_accuracy": 0.9444444179534912
+                }
+              },
+              "minimum_donor_difference_norm": 3.055408477783203,
+              "slot": 0
+            },
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0833333358168602,
+                  "donor_target_BCE": 1.132475733757019,
+                  "edited_bit_accuracy": 0.3229166567325592,
+                  "mean_captured_difference_energy": 0.5313348174095154,
+                  "unaffected_bit_accuracy": 0.9756944179534912
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0833333358168602,
+                  "donor_target_BCE": 1.132475733757019,
+                  "edited_bit_accuracy": 0.3229166567325592,
+                  "mean_captured_difference_energy": 0.5313348174095154,
+                  "unaffected_bit_accuracy": 0.9756944179534912
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0833333358168602,
+                  "donor_target_BCE": 1.135931134223938,
+                  "edited_bit_accuracy": 0.3263888955116272,
+                  "mean_captured_difference_energy": 0.5374154448509216,
+                  "unaffected_bit_accuracy": 0.9756944179534912
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0833333358168602,
+                  "donor_target_BCE": 1.135931134223938,
+                  "edited_bit_accuracy": 0.3263888955116272,
+                  "mean_captured_difference_energy": 0.5374154448509216,
+                  "unaffected_bit_accuracy": 0.9756944179534912
+                }
+              },
+              "minimum_donor_difference_norm": 1.2435686588287354,
+              "slot": 1
+            }
+          ]
+        },
+        "B_causal": {
+          "current_cross_slot_overlap": 1.0,
+          "frozen_to_current_spans": [
+            {
+              "mean_squared_principal_cosine": 0.994897723197937,
+              "minimum_squared_principal_cosine": 0.9893975257873535,
+              "squared_principal_cosines": [
+                0.9893975257873535,
+                0.9943414330482483,
+                0.9971300959587097,
+                0.9987217783927917
+              ]
+            },
+            {
+              "mean_squared_principal_cosine": 0.994897723197937,
+              "minimum_squared_principal_cosine": 0.9893975257873535,
+              "squared_principal_cosines": [
+                0.9893975257873535,
+                0.9943414330482483,
+                0.9971300959587097,
+                0.9987217783927917
+              ]
+            }
+          ],
+          "source_pairs_by_slot": [
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.5920655727386475,
+                  "edited_bit_accuracy": 0.15625,
+                  "mean_captured_difference_energy": 0.3427063226699829,
+                  "unaffected_bit_accuracy": 0.9513888955116272
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.5920655727386475,
+                  "edited_bit_accuracy": 0.15625,
+                  "mean_captured_difference_energy": 0.3427063226699829,
+                  "unaffected_bit_accuracy": 0.9513888955116272
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.5861090421676636,
+                  "edited_bit_accuracy": 0.15625,
+                  "mean_captured_difference_energy": 0.35560932755470276,
+                  "unaffected_bit_accuracy": 0.9513888955116272
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.5861090421676636,
+                  "edited_bit_accuracy": 0.15625,
+                  "mean_captured_difference_energy": 0.35560932755470276,
+                  "unaffected_bit_accuracy": 0.9513888955116272
+                }
+              },
+              "minimum_donor_difference_norm": 2.630415916442871,
+              "slot": 0
+            },
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.1145833358168602,
+                  "donor_target_BCE": 0.8513457775115967,
+                  "edited_bit_accuracy": 0.4097222089767456,
+                  "mean_captured_difference_energy": 0.4948955476284027,
+                  "unaffected_bit_accuracy": 0.9756944179534912
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.1145833358168602,
+                  "donor_target_BCE": 0.8513457775115967,
+                  "edited_bit_accuracy": 0.4097222089767456,
+                  "mean_captured_difference_energy": 0.4948955476284027,
+                  "unaffected_bit_accuracy": 0.9756944179534912
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.1145833358168602,
+                  "donor_target_BCE": 0.8574735522270203,
+                  "edited_bit_accuracy": 0.40625,
+                  "mean_captured_difference_energy": 0.5053247809410095,
+                  "unaffected_bit_accuracy": 0.9722222089767456
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.1145833358168602,
+                  "donor_target_BCE": 0.8574735522270203,
+                  "edited_bit_accuracy": 0.40625,
+                  "mean_captured_difference_energy": 0.5053247809410095,
+                  "unaffected_bit_accuracy": 0.9722222089767456
+                }
+              },
+              "minimum_donor_difference_norm": 1.2912465333938599,
+              "slot": 1
+            }
+          ]
+        },
+        "C_rotated": {
+          "current_cross_slot_overlap": 1.0,
+          "frozen_to_current_spans": [
+            {
+              "mean_squared_principal_cosine": 0.9945841431617737,
+              "minimum_squared_principal_cosine": 0.9890522956848145,
+              "squared_principal_cosines": [
+                0.9890522956848145,
+                0.9931337833404541,
+                0.9972639083862305,
+                0.9988870024681091
+              ]
+            },
+            {
+              "mean_squared_principal_cosine": 0.9945841431617737,
+              "minimum_squared_principal_cosine": 0.9890522956848145,
+              "squared_principal_cosines": [
+                0.9890522956848145,
+                0.9931337833404541,
+                0.9972639083862305,
+                0.9988870024681091
+              ]
+            }
+          ],
+          "source_pairs_by_slot": [
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.7588962316513062,
+                  "edited_bit_accuracy": 0.1076388880610466,
+                  "mean_captured_difference_energy": 0.3714311122894287,
+                  "unaffected_bit_accuracy": 0.9375
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.7588962316513062,
+                  "edited_bit_accuracy": 0.1076388880610466,
+                  "mean_captured_difference_energy": 0.3714311122894287,
+                  "unaffected_bit_accuracy": 0.9375
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.7546639442443848,
+                  "edited_bit_accuracy": 0.1111111119389534,
+                  "mean_captured_difference_energy": 0.37725362181663513,
+                  "unaffected_bit_accuracy": 0.9444444179534912
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.7546639442443848,
+                  "edited_bit_accuracy": 0.1111111119389534,
+                  "mean_captured_difference_energy": 0.37725362181663513,
+                  "unaffected_bit_accuracy": 0.9444444179534912
+                }
+              },
+              "minimum_donor_difference_norm": 3.209770917892456,
+              "slot": 0
+            },
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.09375,
+                  "donor_target_BCE": 1.0406016111373901,
+                  "edited_bit_accuracy": 0.3541666567325592,
+                  "mean_captured_difference_energy": 0.5266422033309937,
+                  "unaffected_bit_accuracy": 0.9756944179534912
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.09375,
+                  "donor_target_BCE": 1.0406016111373901,
+                  "edited_bit_accuracy": 0.3541666567325592,
+                  "mean_captured_difference_energy": 0.5266422033309937,
+                  "unaffected_bit_accuracy": 0.9756944179534912
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.09375,
+                  "donor_target_BCE": 1.0419673919677734,
+                  "edited_bit_accuracy": 0.34375,
+                  "mean_captured_difference_energy": 0.5317613482475281,
+                  "unaffected_bit_accuracy": 0.9652777910232544
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.09375,
+                  "donor_target_BCE": 1.0419673919677734,
+                  "edited_bit_accuracy": 0.34375,
+                  "mean_captured_difference_energy": 0.5317613482475281,
+                  "unaffected_bit_accuracy": 0.9652777910232544
+                }
+              },
+              "minimum_donor_difference_norm": 1.3472453355789185,
+              "slot": 1
+            }
+          ]
+        },
+        "warmup": {
+          "current_cross_slot_overlap": 1.0,
+          "frozen_to_current_spans": [
+            {
+              "mean_squared_principal_cosine": 1.0,
+              "minimum_squared_principal_cosine": 0.9999997615814209,
+              "squared_principal_cosines": [
+                0.9999997615814209,
+                0.9999998211860657,
+                0.9999999403953552,
+                1.0
+              ]
+            },
+            {
+              "mean_squared_principal_cosine": 1.0,
+              "minimum_squared_principal_cosine": 0.9999997615814209,
+              "squared_principal_cosines": [
+                0.9999997615814209,
+                0.9999998211860657,
+                0.9999999403953552,
+                1.0
+              ]
+            }
+          ],
+          "source_pairs_by_slot": [
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.5658953189849854,
+                  "edited_bit_accuracy": 0.1319444477558136,
+                  "mean_captured_difference_energy": 0.3736388385295868,
+                  "unaffected_bit_accuracy": 0.9131944179534912
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.5658953189849854,
+                  "edited_bit_accuracy": 0.1319444477558136,
+                  "mean_captured_difference_energy": 0.3736388385295868,
+                  "unaffected_bit_accuracy": 0.9131944179534912
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.5658953189849854,
+                  "edited_bit_accuracy": 0.1319444477558136,
+                  "mean_captured_difference_energy": 0.3736388385295868,
+                  "unaffected_bit_accuracy": 0.9131944179534912
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.5658953189849854,
+                  "edited_bit_accuracy": 0.1319444477558136,
+                  "mean_captured_difference_energy": 0.3736388385295868,
+                  "unaffected_bit_accuracy": 0.9131944179534912
+                }
+              },
+              "minimum_donor_difference_norm": 3.1372978687286377,
+              "slot": 0
+            },
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0729166641831398,
+                  "donor_target_BCE": 0.9662611484527588,
+                  "edited_bit_accuracy": 0.3229166567325592,
+                  "mean_captured_difference_energy": 0.5594859719276428,
+                  "unaffected_bit_accuracy": 0.9791666865348816
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0729166641831398,
+                  "donor_target_BCE": 0.9662611484527588,
+                  "edited_bit_accuracy": 0.3229166567325592,
+                  "mean_captured_difference_energy": 0.5594859719276428,
+                  "unaffected_bit_accuracy": 0.9791666865348816
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0729166641831398,
+                  "donor_target_BCE": 0.9662611484527588,
+                  "edited_bit_accuracy": 0.3229166567325592,
+                  "mean_captured_difference_energy": 0.5594859719276428,
+                  "unaffected_bit_accuracy": 0.9791666865348816
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0729166641831398,
+                  "donor_target_BCE": 0.9662611484527588,
+                  "edited_bit_accuracy": 0.3229166567325592,
+                  "mean_captured_difference_energy": 0.5594859719276428,
+                  "unaffected_bit_accuracy": 0.9791666865348816
+                }
+              },
+              "minimum_donor_difference_norm": 1.3447983264923096,
+              "slot": 1
+            }
+          ]
+        }
+      },
+      "seed": 962614,
+      "selected_components": [
+        [
+          0,
+          1,
+          2,
+          3
+        ],
+        [
+          0,
+          1,
+          2,
+          3
+        ]
+      ],
+      "selected_group_indices": [
+        0,
+        0
+      ],
+      "shared_component_count": 4
+    },
+    {
+      "frozen_cross_slot_overlap": 0.25712573528289795,
+      "phases": {
+        "A_task": {
+          "current_cross_slot_overlap": 0.2526881694793701,
+          "frozen_to_current_spans": [
+            {
+              "mean_squared_principal_cosine": 0.9988496899604797,
+              "minimum_squared_principal_cosine": 0.9978138208389282,
+              "squared_principal_cosines": [
+                0.9978138208389282,
+                0.998417317867279,
+                0.9994744658470154,
+                0.9996928572654724
+              ]
+            },
+            {
+              "mean_squared_principal_cosine": 0.9983773231506348,
+              "minimum_squared_principal_cosine": 0.9963899254798889,
+              "squared_principal_cosines": [
+                0.9963899254798889,
+                0.9981504678726196,
+                0.9992905855178833,
+                0.9996788501739502
+              ]
+            }
+          ],
+          "source_pairs_by_slot": [
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.9394471645355225,
+                  "edited_bit_accuracy": 0.1284722238779068,
+                  "mean_captured_difference_energy": 0.20980589091777802,
+                  "unaffected_bit_accuracy": 0.8611111044883728
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.8634257316589355,
+                  "edited_bit_accuracy": 0.0868055522441864,
+                  "mean_captured_difference_energy": 0.5090903639793396,
+                  "unaffected_bit_accuracy": 0.9479166865348816
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.9438468217849731,
+                  "edited_bit_accuracy": 0.1284722238779068,
+                  "mean_captured_difference_energy": 0.20469273626804352,
+                  "unaffected_bit_accuracy": 0.8611111044883728
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.8634573221206665,
+                  "edited_bit_accuracy": 0.0902777761220932,
+                  "mean_captured_difference_energy": 0.5080346465110779,
+                  "unaffected_bit_accuracy": 0.9444444179534912
+                }
+              },
+              "minimum_donor_difference_norm": 2.812485694885254,
+              "slot": 0
+            },
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.8555848598480225,
+                  "edited_bit_accuracy": 0.125,
+                  "mean_captured_difference_energy": 0.2082286924123764,
+                  "unaffected_bit_accuracy": 0.9270833134651184
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.03125,
+                  "donor_target_BCE": 1.2087702751159668,
+                  "edited_bit_accuracy": 0.3715277910232544,
+                  "mean_captured_difference_energy": 0.45788800716400146,
+                  "unaffected_bit_accuracy": 0.8715277910232544
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.8416792154312134,
+                  "edited_bit_accuracy": 0.1354166716337204,
+                  "mean_captured_difference_energy": 0.21300488710403442,
+                  "unaffected_bit_accuracy": 0.9305555820465088
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.03125,
+                  "donor_target_BCE": 1.2099179029464722,
+                  "edited_bit_accuracy": 0.3819444477558136,
+                  "mean_captured_difference_energy": 0.4604223072528839,
+                  "unaffected_bit_accuracy": 0.8645833134651184
+                }
+              },
+              "minimum_donor_difference_norm": 1.7147903442382812,
+              "slot": 1
+            }
+          ]
+        },
+        "B_causal": {
+          "current_cross_slot_overlap": 0.24931678175926208,
+          "frozen_to_current_spans": [
+            {
+              "mean_squared_principal_cosine": 0.9987528920173645,
+              "minimum_squared_principal_cosine": 0.9971097707748413,
+              "squared_principal_cosines": [
+                0.9971097707748413,
+                0.9984248280525208,
+                0.9995713829994202,
+                0.9999057650566101
+              ]
+            },
+            {
+              "mean_squared_principal_cosine": 0.9986076354980469,
+              "minimum_squared_principal_cosine": 0.9970024824142456,
+              "squared_principal_cosines": [
+                0.9970024824142456,
+                0.9985595345497131,
+                0.9992493987083435,
+                0.9996194243431091
+              ]
+            }
+          ],
+          "source_pairs_by_slot": [
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.7592902183532715,
+                  "edited_bit_accuracy": 0.1423611044883728,
+                  "mean_captured_difference_energy": 0.20219199359416962,
+                  "unaffected_bit_accuracy": 0.8715277910232544
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.010416666977107525,
+                  "donor_target_BCE": 1.5362943410873413,
+                  "edited_bit_accuracy": 0.1909722238779068,
+                  "mean_captured_difference_energy": 0.4919762909412384,
+                  "unaffected_bit_accuracy": 0.9305555820465088
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.010416666977107525,
+                  "donor_target_BCE": 1.7619187831878662,
+                  "edited_bit_accuracy": 0.1458333283662796,
+                  "mean_captured_difference_energy": 0.197382390499115,
+                  "unaffected_bit_accuracy": 0.8715277910232544
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.010416666977107525,
+                  "donor_target_BCE": 1.5297372341156006,
+                  "edited_bit_accuracy": 0.1979166716337204,
+                  "mean_captured_difference_energy": 0.5002034902572632,
+                  "unaffected_bit_accuracy": 0.9270833134651184
+                }
+              },
+              "minimum_donor_difference_norm": 2.637249708175659,
+              "slot": 0
+            },
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.716206431388855,
+                  "edited_bit_accuracy": 0.1319444477558136,
+                  "mean_captured_difference_energy": 0.20771880447864532,
+                  "unaffected_bit_accuracy": 0.9131944179534912
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0833333358168602,
+                  "donor_target_BCE": 0.9874939322471619,
+                  "edited_bit_accuracy": 0.4652777910232544,
+                  "mean_captured_difference_energy": 0.438759446144104,
+                  "unaffected_bit_accuracy": 0.8645833134651184
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.6964918375015259,
+                  "edited_bit_accuracy": 0.1319444477558136,
+                  "mean_captured_difference_energy": 0.21463942527770996,
+                  "unaffected_bit_accuracy": 0.9097222089767456
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0833333358168602,
+                  "donor_target_BCE": 0.9814202785491943,
+                  "edited_bit_accuracy": 0.4756944477558136,
+                  "mean_captured_difference_energy": 0.44194963574409485,
+                  "unaffected_bit_accuracy": 0.8611111044883728
+                }
+              },
+              "minimum_donor_difference_norm": 1.5772665739059448,
+              "slot": 1
+            }
+          ]
+        },
+        "C_rotated": {
+          "current_cross_slot_overlap": 0.2538774907588959,
+          "frozen_to_current_spans": [
+            {
+              "mean_squared_principal_cosine": 0.9987506866455078,
+              "minimum_squared_principal_cosine": 0.9971691966056824,
+              "squared_principal_cosines": [
+                0.9971691966056824,
+                0.9985140562057495,
+                0.999576985836029,
+                0.9997428059577942
+              ]
+            },
+            {
+              "mean_squared_principal_cosine": 0.998666524887085,
+              "minimum_squared_principal_cosine": 0.9969359040260315,
+              "squared_principal_cosines": [
+                0.9969359040260315,
+                0.9987481832504272,
+                0.9992403984069824,
+                0.9997414350509644
+              ]
+            }
+          ],
+          "source_pairs_by_slot": [
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.7116084098815918,
+                  "edited_bit_accuracy": 0.1493055522441864,
+                  "mean_captured_difference_energy": 0.2068682163953781,
+                  "unaffected_bit_accuracy": 0.8680555820465088
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.6159110069274902,
+                  "edited_bit_accuracy": 0.1354166716337204,
+                  "mean_captured_difference_energy": 0.5053660273551941,
+                  "unaffected_bit_accuracy": 0.9236111044883728
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.7155604362487793,
+                  "edited_bit_accuracy": 0.1493055522441864,
+                  "mean_captured_difference_energy": 0.20262117683887482,
+                  "unaffected_bit_accuracy": 0.8611111044883728
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.6159719228744507,
+                  "edited_bit_accuracy": 0.1354166716337204,
+                  "mean_captured_difference_energy": 0.5058834552764893,
+                  "unaffected_bit_accuracy": 0.9166666865348816
+                }
+              },
+              "minimum_donor_difference_norm": 2.647918462753296,
+              "slot": 0
+            },
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.6220515966415405,
+                  "edited_bit_accuracy": 0.1631944477558136,
+                  "mean_captured_difference_energy": 0.21494917571544647,
+                  "unaffected_bit_accuracy": 0.9131944179534912
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.03125,
+                  "donor_target_BCE": 1.0982335805892944,
+                  "edited_bit_accuracy": 0.4201388955116272,
+                  "mean_captured_difference_energy": 0.45158061385154724,
+                  "unaffected_bit_accuracy": 0.8715277910232544
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.6136326789855957,
+                  "edited_bit_accuracy": 0.1840277761220932,
+                  "mean_captured_difference_energy": 0.22215868532657623,
+                  "unaffected_bit_accuracy": 0.90625
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.03125,
+                  "donor_target_BCE": 1.0967583656311035,
+                  "edited_bit_accuracy": 0.4201388955116272,
+                  "mean_captured_difference_energy": 0.45413145422935486,
+                  "unaffected_bit_accuracy": 0.8715277910232544
+                }
+              },
+              "minimum_donor_difference_norm": 1.5637767314910889,
+              "slot": 1
+            }
+          ]
+        },
+        "warmup": {
+          "current_cross_slot_overlap": 0.25712573528289795,
+          "frozen_to_current_spans": [
+            {
+              "mean_squared_principal_cosine": 0.9999997615814209,
+              "minimum_squared_principal_cosine": 0.999999463558197,
+              "squared_principal_cosines": [
+                0.999999463558197,
+                0.9999995231628418,
+                0.9999998211860657,
+                0.9999998807907104
+              ]
+            },
+            {
+              "mean_squared_principal_cosine": 0.9999997615814209,
+              "minimum_squared_principal_cosine": 0.9999997019767761,
+              "squared_principal_cosines": [
+                0.9999997019767761,
+                0.9999998211860657,
+                0.9999998807907104,
+                1.0
+              ]
+            }
+          ],
+          "source_pairs_by_slot": [
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.552255392074585,
+                  "edited_bit_accuracy": 0.1597222238779068,
+                  "mean_captured_difference_energy": 0.1978926807641983,
+                  "unaffected_bit_accuracy": 0.8680555820465088
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.462353229522705,
+                  "edited_bit_accuracy": 0.1041666641831398,
+                  "mean_captured_difference_energy": 0.515727698802948,
+                  "unaffected_bit_accuracy": 0.9375
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.552255392074585,
+                  "edited_bit_accuracy": 0.1597222238779068,
+                  "mean_captured_difference_energy": 0.1978926807641983,
+                  "unaffected_bit_accuracy": 0.8680555820465088
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.462353229522705,
+                  "edited_bit_accuracy": 0.1041666641831398,
+                  "mean_captured_difference_energy": 0.515727698802948,
+                  "unaffected_bit_accuracy": 0.9375
+                }
+              },
+              "minimum_donor_difference_norm": 2.6045114994049072,
+              "slot": 0
+            },
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.5958600044250488,
+                  "edited_bit_accuracy": 0.1180555522441864,
+                  "mean_captured_difference_energy": 0.2194342017173767,
+                  "unaffected_bit_accuracy": 0.8958333134651184
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0520833320915699,
+                  "donor_target_BCE": 1.0425105094909668,
+                  "edited_bit_accuracy": 0.4097222089767456,
+                  "mean_captured_difference_energy": 0.4678187072277069,
+                  "unaffected_bit_accuracy": 0.8645833134651184
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.5958600044250488,
+                  "edited_bit_accuracy": 0.1180555522441864,
+                  "mean_captured_difference_energy": 0.2194342017173767,
+                  "unaffected_bit_accuracy": 0.8958333134651184
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0520833320915699,
+                  "donor_target_BCE": 1.0425105094909668,
+                  "edited_bit_accuracy": 0.4097222089767456,
+                  "mean_captured_difference_energy": 0.4678187072277069,
+                  "unaffected_bit_accuracy": 0.8645833134651184
+                }
+              },
+              "minimum_donor_difference_norm": 1.6925982236862183,
+              "slot": 1
+            }
+          ]
+        }
+      },
+      "seed": 962615,
+      "selected_components": [
+        [
+          8,
+          9,
+          10,
+          11
+        ],
+        [
+          0,
+          1,
+          2,
+          3
+        ]
+      ],
+      "selected_group_indices": [
+        2,
+        0
+      ],
+      "shared_component_count": 0
+    },
+    {
+      "frozen_cross_slot_overlap": 0.234157532453537,
+      "phases": {
+        "A_task": {
+          "current_cross_slot_overlap": 0.23710350692272186,
+          "frozen_to_current_spans": [
+            {
+              "mean_squared_principal_cosine": 0.998617947101593,
+              "minimum_squared_principal_cosine": 0.9974053502082825,
+              "squared_principal_cosines": [
+                0.9974053502082825,
+                0.9983780980110168,
+                0.9988494515419006,
+                0.9998394250869751
+              ]
+            },
+            {
+              "mean_squared_principal_cosine": 0.9985499978065491,
+              "minimum_squared_principal_cosine": 0.9967721104621887,
+              "squared_principal_cosines": [
+                0.9967721104621887,
+                0.9984502196311951,
+                0.9991379380226135,
+                0.9998388886451721
+              ]
+            }
+          ],
+          "source_pairs_by_slot": [
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.5024775266647339,
+                  "edited_bit_accuracy": 0.1319444477558136,
+                  "mean_captured_difference_energy": 0.325909286737442,
+                  "unaffected_bit_accuracy": 0.9513888955116272
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.4673100709915161,
+                  "edited_bit_accuracy": 0.1319444477558136,
+                  "mean_captured_difference_energy": 0.40615662932395935,
+                  "unaffected_bit_accuracy": 0.9513888955116272
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.5169159173965454,
+                  "edited_bit_accuracy": 0.1180555522441864,
+                  "mean_captured_difference_energy": 0.33044514060020447,
+                  "unaffected_bit_accuracy": 0.9444444179534912
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.4600251913070679,
+                  "edited_bit_accuracy": 0.1319444477558136,
+                  "mean_captured_difference_energy": 0.4110347330570221,
+                  "unaffected_bit_accuracy": 0.9513888955116272
+                }
+              },
+              "minimum_donor_difference_norm": 2.5927019119262695,
+              "slot": 0
+            },
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.6593595743179321,
+                  "edited_bit_accuracy": 0.2916666567325592,
+                  "mean_captured_difference_energy": 0.392924427986145,
+                  "unaffected_bit_accuracy": 0.8368055820465088
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.5061663389205933,
+                  "edited_bit_accuracy": 0.3472222089767456,
+                  "mean_captured_difference_energy": 0.540604293346405,
+                  "unaffected_bit_accuracy": 0.8645833134651184
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.6595979928970337,
+                  "edited_bit_accuracy": 0.2986111044883728,
+                  "mean_captured_difference_energy": 0.39273372292518616,
+                  "unaffected_bit_accuracy": 0.8368055820465088
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.5061440467834473,
+                  "edited_bit_accuracy": 0.3472222089767456,
+                  "mean_captured_difference_energy": 0.5378463268280029,
+                  "unaffected_bit_accuracy": 0.8645833134651184
+                }
+              },
+              "minimum_donor_difference_norm": 1.4753931760787964,
+              "slot": 1
+            }
+          ]
+        },
+        "B_causal": {
+          "current_cross_slot_overlap": 0.2384118139743805,
+          "frozen_to_current_spans": [
+            {
+              "mean_squared_principal_cosine": 0.9983983039855957,
+              "minimum_squared_principal_cosine": 0.9972056150436401,
+              "squared_principal_cosines": [
+                0.9972056150436401,
+                0.9975438714027405,
+                0.9992183446884155,
+                0.9996259212493896
+              ]
+            },
+            {
+              "mean_squared_principal_cosine": 0.9980345964431763,
+              "minimum_squared_principal_cosine": 0.9966399073600769,
+              "squared_principal_cosines": [
+                0.9966399073600769,
+                0.9970113039016724,
+                0.9988353848457336,
+                0.9996514320373535
+              ]
+            }
+          ],
+          "source_pairs_by_slot": [
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.3896484375,
+                  "edited_bit_accuracy": 0.1527777761220932,
+                  "mean_captured_difference_energy": 0.3234311044216156,
+                  "unaffected_bit_accuracy": 0.9305555820465088
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.326398253440857,
+                  "edited_bit_accuracy": 0.1631944477558136,
+                  "mean_captured_difference_energy": 0.4030895233154297,
+                  "unaffected_bit_accuracy": 0.9375
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.393690586090088,
+                  "edited_bit_accuracy": 0.15625,
+                  "mean_captured_difference_energy": 0.33073750138282776,
+                  "unaffected_bit_accuracy": 0.9305555820465088
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.3249214887619019,
+                  "edited_bit_accuracy": 0.1597222238779068,
+                  "mean_captured_difference_energy": 0.40850186347961426,
+                  "unaffected_bit_accuracy": 0.9340277910232544
+                }
+              },
+              "minimum_donor_difference_norm": 2.4505650997161865,
+              "slot": 0
+            },
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.02083333395421505,
+                  "donor_target_BCE": 1.3246879577636719,
+                  "edited_bit_accuracy": 0.3229166567325592,
+                  "mean_captured_difference_energy": 0.36737504601478577,
+                  "unaffected_bit_accuracy": 0.8715277910232544
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0520833320915699,
+                  "donor_target_BCE": 1.1503963470458984,
+                  "edited_bit_accuracy": 0.4513888955116272,
+                  "mean_captured_difference_energy": 0.5289708971977234,
+                  "unaffected_bit_accuracy": 0.875
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.02083333395421505,
+                  "donor_target_BCE": 1.3412959575653076,
+                  "edited_bit_accuracy": 0.3159722089767456,
+                  "mean_captured_difference_energy": 0.36981308460235596,
+                  "unaffected_bit_accuracy": 0.875
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0520833320915699,
+                  "donor_target_BCE": 1.1430301666259766,
+                  "edited_bit_accuracy": 0.4548611044883728,
+                  "mean_captured_difference_energy": 0.5359287261962891,
+                  "unaffected_bit_accuracy": 0.8715277910232544
+                }
+              },
+              "minimum_donor_difference_norm": 1.4606828689575195,
+              "slot": 1
+            }
+          ]
+        },
+        "C_rotated": {
+          "current_cross_slot_overlap": 0.23931626975536346,
+          "frozen_to_current_spans": [
+            {
+              "mean_squared_principal_cosine": 0.9981213212013245,
+              "minimum_squared_principal_cosine": 0.996549129486084,
+              "squared_principal_cosines": [
+                0.996549129486084,
+                0.9977352619171143,
+                0.9988003969192505,
+                0.9993999004364014
+              ]
+            },
+            {
+              "mean_squared_principal_cosine": 0.9985711574554443,
+              "minimum_squared_principal_cosine": 0.9966762661933899,
+              "squared_principal_cosines": [
+                0.9966762661933899,
+                0.9988633990287781,
+                0.9992797374725342,
+                0.999464750289917
+              ]
+            }
+          ],
+          "source_pairs_by_slot": [
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.3085952997207642,
+                  "edited_bit_accuracy": 0.1319444477558136,
+                  "mean_captured_difference_energy": 0.3296110928058624,
+                  "unaffected_bit_accuracy": 0.9444444179534912
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.320013403892517,
+                  "edited_bit_accuracy": 0.1388888955116272,
+                  "mean_captured_difference_energy": 0.4036073386669159,
+                  "unaffected_bit_accuracy": 0.9513888955116272
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.311759114265442,
+                  "edited_bit_accuracy": 0.125,
+                  "mean_captured_difference_energy": 0.3384781777858734,
+                  "unaffected_bit_accuracy": 0.9409722089767456
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.3155083656311035,
+                  "edited_bit_accuracy": 0.1354166716337204,
+                  "mean_captured_difference_energy": 0.41100558638572693,
+                  "unaffected_bit_accuracy": 0.9444444179534912
+                }
+              },
+              "minimum_donor_difference_norm": 2.6463980674743652,
+              "slot": 0
+            },
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.427503228187561,
+                  "edited_bit_accuracy": 0.25,
+                  "mean_captured_difference_energy": 0.3939061164855957,
+                  "unaffected_bit_accuracy": 0.8333333134651184
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.2702107429504395,
+                  "edited_bit_accuracy": 0.3298611044883728,
+                  "mean_captured_difference_energy": 0.5517153143882751,
+                  "unaffected_bit_accuracy": 0.8680555820465088
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.4288870096206665,
+                  "edited_bit_accuracy": 0.25,
+                  "mean_captured_difference_energy": 0.39628109335899353,
+                  "unaffected_bit_accuracy": 0.8333333134651184
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.2712140083312988,
+                  "edited_bit_accuracy": 0.3298611044883728,
+                  "mean_captured_difference_energy": 0.5509896278381348,
+                  "unaffected_bit_accuracy": 0.8680555820465088
+                }
+              },
+              "minimum_donor_difference_norm": 1.475317358970642,
+              "slot": 1
+            }
+          ]
+        },
+        "warmup": {
+          "current_cross_slot_overlap": 0.234157532453537,
+          "frozen_to_current_spans": [
+            {
+              "mean_squared_principal_cosine": 1.0,
+              "minimum_squared_principal_cosine": 0.9999992847442627,
+              "squared_principal_cosines": [
+                0.9999992847442627,
+                0.9999994039535522,
+                0.9999999403953552,
+                1.0
+              ]
+            },
+            {
+              "mean_squared_principal_cosine": 1.0,
+              "minimum_squared_principal_cosine": 0.9999996423721313,
+              "squared_principal_cosines": [
+                0.9999996423721313,
+                0.9999997615814209,
+                1.0,
+                1.0
+              ]
+            }
+          ],
+          "source_pairs_by_slot": [
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.2913979291915894,
+                  "edited_bit_accuracy": 0.1666666716337204,
+                  "mean_captured_difference_energy": 0.3426578938961029,
+                  "unaffected_bit_accuracy": 0.9236111044883728
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.2488688230514526,
+                  "edited_bit_accuracy": 0.15625,
+                  "mean_captured_difference_energy": 0.41401389241218567,
+                  "unaffected_bit_accuracy": 0.9131944179534912
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.2913979291915894,
+                  "edited_bit_accuracy": 0.1666666716337204,
+                  "mean_captured_difference_energy": 0.3426578938961029,
+                  "unaffected_bit_accuracy": 0.9236111044883728
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.2488688230514526,
+                  "edited_bit_accuracy": 0.15625,
+                  "mean_captured_difference_energy": 0.41401389241218567,
+                  "unaffected_bit_accuracy": 0.9131944179534912
+                }
+              },
+              "minimum_donor_difference_norm": 2.4744715690612793,
+              "slot": 0
+            },
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.3502527475357056,
+                  "edited_bit_accuracy": 0.3159722089767456,
+                  "mean_captured_difference_energy": 0.4156045913696289,
+                  "unaffected_bit_accuracy": 0.8229166865348816
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.010416666977107525,
+                  "donor_target_BCE": 1.2320380210876465,
+                  "edited_bit_accuracy": 0.3541666567325592,
+                  "mean_captured_difference_energy": 0.5821206569671631,
+                  "unaffected_bit_accuracy": 0.8506944179534912
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.3502527475357056,
+                  "edited_bit_accuracy": 0.3159722089767456,
+                  "mean_captured_difference_energy": 0.4156045913696289,
+                  "unaffected_bit_accuracy": 0.8229166865348816
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.010416666977107525,
+                  "donor_target_BCE": 1.2320380210876465,
+                  "edited_bit_accuracy": 0.3541666567325592,
+                  "mean_captured_difference_energy": 0.5821206569671631,
+                  "unaffected_bit_accuracy": 0.8506944179534912
+                }
+              },
+              "minimum_donor_difference_norm": 1.6189885139465332,
+              "slot": 1
+            }
+          ]
+        }
+      },
+      "seed": 962616,
+      "selected_components": [
+        [
+          8,
+          9,
+          10,
+          11
+        ],
+        [
+          0,
+          1,
+          2,
+          3
+        ]
+      ],
+      "selected_group_indices": [
+        2,
+        0
+      ],
+      "shared_component_count": 0
+    },
+    {
+      "frozen_cross_slot_overlap": 0.2784874141216278,
+      "phases": {
+        "A_task": {
+          "current_cross_slot_overlap": 0.2896355986595154,
+          "frozen_to_current_spans": [
+            {
+              "mean_squared_principal_cosine": 0.9982466101646423,
+              "minimum_squared_principal_cosine": 0.9958090782165527,
+              "squared_principal_cosines": [
+                0.9958090782165527,
+                0.9986938238143921,
+                0.9990434050559998,
+                0.9994396567344666
+              ]
+            },
+            {
+              "mean_squared_principal_cosine": 0.9984065890312195,
+              "minimum_squared_principal_cosine": 0.9971152544021606,
+              "squared_principal_cosines": [
+                0.9971152544021606,
+                0.9976068139076233,
+                0.999139666557312,
+                0.9997645020484924
+              ]
+            }
+          ],
+          "source_pairs_by_slot": [
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 2.090579032897949,
+                  "edited_bit_accuracy": 0.0694444477558136,
+                  "mean_captured_difference_energy": 0.414946585893631,
+                  "unaffected_bit_accuracy": 0.84375
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.010416666977107525,
+                  "donor_target_BCE": 1.9456865787506104,
+                  "edited_bit_accuracy": 0.1041666641831398,
+                  "mean_captured_difference_energy": 0.4470037519931793,
+                  "unaffected_bit_accuracy": 0.8298611044883728
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 2.0930209159851074,
+                  "edited_bit_accuracy": 0.0729166641831398,
+                  "mean_captured_difference_energy": 0.41007480025291443,
+                  "unaffected_bit_accuracy": 0.8402777910232544
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.010416666977107525,
+                  "donor_target_BCE": 1.937806487083435,
+                  "edited_bit_accuracy": 0.0972222238779068,
+                  "mean_captured_difference_energy": 0.4418264329433441,
+                  "unaffected_bit_accuracy": 0.8368055820465088
+                }
+              },
+              "minimum_donor_difference_norm": 2.526448965072632,
+              "slot": 0
+            },
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.4561432600021362,
+                  "edited_bit_accuracy": 0.15625,
+                  "mean_captured_difference_energy": 0.4923553764820099,
+                  "unaffected_bit_accuracy": 0.8993055820465088
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.3315672874450684,
+                  "edited_bit_accuracy": 0.2673611044883728,
+                  "mean_captured_difference_energy": 0.5105768442153931,
+                  "unaffected_bit_accuracy": 0.84375
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.4573373794555664,
+                  "edited_bit_accuracy": 0.1527777761220932,
+                  "mean_captured_difference_energy": 0.494632750749588,
+                  "unaffected_bit_accuracy": 0.8993055820465088
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.3253846168518066,
+                  "edited_bit_accuracy": 0.2777777910232544,
+                  "mean_captured_difference_energy": 0.5121098160743713,
+                  "unaffected_bit_accuracy": 0.8368055820465088
+                }
+              },
+              "minimum_donor_difference_norm": 2.020172119140625,
+              "slot": 1
+            }
+          ]
+        },
+        "B_causal": {
+          "current_cross_slot_overlap": 0.2824564576148987,
+          "frozen_to_current_spans": [
+            {
+              "mean_squared_principal_cosine": 0.9982138276100159,
+              "minimum_squared_principal_cosine": 0.9966501593589783,
+              "squared_principal_cosines": [
+                0.9966501593589783,
+                0.9979703426361084,
+                0.9988310933113098,
+                0.9994038939476013
+              ]
+            },
+            {
+              "mean_squared_principal_cosine": 0.9985861778259277,
+              "minimum_squared_principal_cosine": 0.9975335597991943,
+              "squared_principal_cosines": [
+                0.9975335597991943,
+                0.9985100626945496,
+                0.9986742734909058,
+                0.9996272325515747
+              ]
+            }
+          ],
+          "source_pairs_by_slot": [
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.02083333395421505,
+                  "donor_target_BCE": 1.8453707695007324,
+                  "edited_bit_accuracy": 0.0902777761220932,
+                  "mean_captured_difference_energy": 0.4180567264556885,
+                  "unaffected_bit_accuracy": 0.8333333134651184
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.02083333395421505,
+                  "donor_target_BCE": 1.619971513748169,
+                  "edited_bit_accuracy": 0.1770833283662796,
+                  "mean_captured_difference_energy": 0.4182387590408325,
+                  "unaffected_bit_accuracy": 0.8194444179534912
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.02083333395421505,
+                  "donor_target_BCE": 1.8491120338439941,
+                  "edited_bit_accuracy": 0.0902777761220932,
+                  "mean_captured_difference_energy": 0.4122163951396942,
+                  "unaffected_bit_accuracy": 0.8333333134651184
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.02083333395421505,
+                  "donor_target_BCE": 1.6025941371917725,
+                  "edited_bit_accuracy": 0.1840277761220932,
+                  "mean_captured_difference_energy": 0.42279505729675293,
+                  "unaffected_bit_accuracy": 0.8229166865348816
+                }
+              },
+              "minimum_donor_difference_norm": 2.453094005584717,
+              "slot": 0
+            },
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.1868051290512085,
+                  "edited_bit_accuracy": 0.2361111044883728,
+                  "mean_captured_difference_energy": 0.48199954628944397,
+                  "unaffected_bit_accuracy": 0.90625
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0520833320915699,
+                  "donor_target_BCE": 1.0615205764770508,
+                  "edited_bit_accuracy": 0.3576388955116272,
+                  "mean_captured_difference_energy": 0.4804476797580719,
+                  "unaffected_bit_accuracy": 0.8541666865348816
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.1820167303085327,
+                  "edited_bit_accuracy": 0.2291666716337204,
+                  "mean_captured_difference_energy": 0.48924967646598816,
+                  "unaffected_bit_accuracy": 0.90625
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0520833320915699,
+                  "donor_target_BCE": 1.0459446907043457,
+                  "edited_bit_accuracy": 0.3611111044883728,
+                  "mean_captured_difference_energy": 0.4928862750530243,
+                  "unaffected_bit_accuracy": 0.8541666865348816
+                }
+              },
+              "minimum_donor_difference_norm": 1.968260407447815,
+              "slot": 1
+            }
+          ]
+        },
+        "C_rotated": {
+          "current_cross_slot_overlap": 0.2901934087276459,
+          "frozen_to_current_spans": [
+            {
+              "mean_squared_principal_cosine": 0.9980160593986511,
+              "minimum_squared_principal_cosine": 0.9961051940917969,
+              "squared_principal_cosines": [
+                0.9961051940917969,
+                0.9976205825805664,
+                0.9987503886222839,
+                0.999588131904602
+              ]
+            },
+            {
+              "mean_squared_principal_cosine": 0.9975170493125916,
+              "minimum_squared_principal_cosine": 0.9939398765563965,
+              "squared_principal_cosines": [
+                0.9939398765563965,
+                0.9980396628379822,
+                0.9984480738639832,
+                0.9996399879455566
+              ]
+            }
+          ],
+          "source_pairs_by_slot": [
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.7820892333984375,
+                  "edited_bit_accuracy": 0.0659722238779068,
+                  "mean_captured_difference_energy": 0.41456660628318787,
+                  "unaffected_bit_accuracy": 0.8229166865348816
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.7227835655212402,
+                  "edited_bit_accuracy": 0.09375,
+                  "mean_captured_difference_energy": 0.4374968707561493,
+                  "unaffected_bit_accuracy": 0.8229166865348816
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.7829257249832153,
+                  "edited_bit_accuracy": 0.0659722238779068,
+                  "mean_captured_difference_energy": 0.405240923166275,
+                  "unaffected_bit_accuracy": 0.8229166865348816
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.7155596017837524,
+                  "edited_bit_accuracy": 0.09375,
+                  "mean_captured_difference_energy": 0.43689727783203125,
+                  "unaffected_bit_accuracy": 0.8263888955116272
+                }
+              },
+              "minimum_donor_difference_norm": 2.625113010406494,
+              "slot": 0
+            },
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.3044779300689697,
+                  "edited_bit_accuracy": 0.1458333283662796,
+                  "mean_captured_difference_energy": 0.5127508044242859,
+                  "unaffected_bit_accuracy": 0.9166666865348816
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.2428070306777954,
+                  "edited_bit_accuracy": 0.2430555522441864,
+                  "mean_captured_difference_energy": 0.5187218189239502,
+                  "unaffected_bit_accuracy": 0.84375
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.308363914489746,
+                  "edited_bit_accuracy": 0.1423611044883728,
+                  "mean_captured_difference_energy": 0.5171918272972107,
+                  "unaffected_bit_accuracy": 0.9166666865348816
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.2436811923980713,
+                  "edited_bit_accuracy": 0.2430555522441864,
+                  "mean_captured_difference_energy": 0.52727872133255,
+                  "unaffected_bit_accuracy": 0.8402777910232544
+                }
+              },
+              "minimum_donor_difference_norm": 1.9812507629394531,
+              "slot": 1
+            }
+          ]
+        },
+        "warmup": {
+          "current_cross_slot_overlap": 0.2784874141216278,
+          "frozen_to_current_spans": [
+            {
+              "mean_squared_principal_cosine": 0.9999999403953552,
+              "minimum_squared_principal_cosine": 0.9999996423721313,
+              "squared_principal_cosines": [
+                0.9999996423721313,
+                0.9999997615814209,
+                1.0,
+                1.0
+              ]
+            },
+            {
+              "mean_squared_principal_cosine": 1.000000238418579,
+              "minimum_squared_principal_cosine": 0.9999997615814209,
+              "squared_principal_cosines": [
+                0.9999997615814209,
+                0.9999998807907104,
+                1.0,
+                1.0
+              ]
+            }
+          ],
+          "source_pairs_by_slot": [
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.7479703426361084,
+                  "edited_bit_accuracy": 0.0416666679084301,
+                  "mean_captured_difference_energy": 0.445779949426651,
+                  "unaffected_bit_accuracy": 0.8472222089767456
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.6291732788085938,
+                  "edited_bit_accuracy": 0.0694444477558136,
+                  "mean_captured_difference_energy": 0.4396152198314667,
+                  "unaffected_bit_accuracy": 0.875
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.7479703426361084,
+                  "edited_bit_accuracy": 0.0416666679084301,
+                  "mean_captured_difference_energy": 0.445779949426651,
+                  "unaffected_bit_accuracy": 0.8472222089767456
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.0,
+                  "donor_target_BCE": 1.6291732788085938,
+                  "edited_bit_accuracy": 0.0694444477558136,
+                  "mean_captured_difference_energy": 0.4396152198314667,
+                  "unaffected_bit_accuracy": 0.875
+                }
+              },
+              "minimum_donor_difference_norm": 3.1021692752838135,
+              "slot": 0
+            },
+            {
+              "by_projector": {
+                "current_other": {
+                  "donor_exact_accuracy": 0.03125,
+                  "donor_target_BCE": 1.2423648834228516,
+                  "edited_bit_accuracy": 0.2604166567325592,
+                  "mean_captured_difference_energy": 0.49470773339271545,
+                  "unaffected_bit_accuracy": 0.7916666865348816
+                },
+                "current_own": {
+                  "donor_exact_accuracy": 0.03125,
+                  "donor_target_BCE": 1.199243187904358,
+                  "edited_bit_accuracy": 0.3298611044883728,
+                  "mean_captured_difference_energy": 0.5211570858955383,
+                  "unaffected_bit_accuracy": 0.7291666865348816
+                },
+                "frozen_other": {
+                  "donor_exact_accuracy": 0.03125,
+                  "donor_target_BCE": 1.2423648834228516,
+                  "edited_bit_accuracy": 0.2604166567325592,
+                  "mean_captured_difference_energy": 0.49470773339271545,
+                  "unaffected_bit_accuracy": 0.7916666865348816
+                },
+                "frozen_own": {
+                  "donor_exact_accuracy": 0.03125,
+                  "donor_target_BCE": 1.199243187904358,
+                  "edited_bit_accuracy": 0.3298611044883728,
+                  "mean_captured_difference_energy": 0.5211570858955383,
+                  "unaffected_bit_accuracy": 0.7291666865348816
+                }
+              },
+              "minimum_donor_difference_norm": 1.9093334674835205,
+              "slot": 1
+            }
+          ]
+        }
+      },
+      "seed": 962617,
+      "selected_components": [
+        [
+          0,
+          1,
+          2,
+          3
+        ],
+        [
+          8,
+          9,
+          10,
+          11
+        ]
+      ],
+      "selected_group_indices": [
+        0,
+        2
+      ],
+      "shared_component_count": 0
+    }
+  ],
+  "scope": "POST_HOC_DIAGNOSTIC",
+  "selection_note": "At warmup, selecting the minimum donor-target BCE among candidates guarantees a nonnegative own-projector BCE advantage over another candidate on these same pairs.",
+  "source_cases": "The 96 training-stream pairs per slot used by discovery: streams 30000 and 30001, delay 2. Selection data reused; these are descriptive measurements, not independent validation.",
+  "summary": {
+    "A_task": {
+      "current_own_BCE_advantage_over_other": 0.13642819970846176,
+      "current_own_minus_other_capture": 0.06316816434264183,
+      "frozen_other_donor_exact": 0.009114583488553762,
+      "frozen_own_BCE_advantage_over_other": 0.1409871205687523,
+      "frozen_own_donor_exact": 0.014973958663176745,
+      "frozen_own_minus_other_capture": 0.06403023842722178,
+      "frozen_to_current_overlap_min_mean_max": [
+        0.9956349730491638,
+        0.997964296489954,
+        0.9988496899604797
+      ],
+      "mean_current_cross_slot_overlap": 0.4428802691400051,
+      "minimum_squared_principal_cosine_over_all_slots": 0.9907630681991577
+    },
+    "B_causal": {
+      "current_own_BCE_advantage_over_other": 0.19341177865862846,
+      "current_own_minus_other_capture": 0.05772897228598595,
+      "frozen_other_donor_exact": 0.017578125174622983,
+      "frozen_own_BCE_advantage_over_other": 0.20345811545848846,
+      "frozen_own_donor_exact": 0.03190104168606922,
+      "frozen_own_minus_other_capture": 0.0626682247966528,
+      "frozen_to_current_overlap_min_mean_max": [
+        0.994897723197937,
+        0.9977159909904003,
+        0.9987528920173645
+      ],
+      "mean_current_cross_slot_overlap": 0.44316714257001877,
+      "minimum_squared_principal_cosine_over_all_slots": 0.9893975257873535
+    },
+    "C_rotated": {
+      "current_own_BCE_advantage_over_other": 0.12125706672668457,
+      "current_own_minus_other_capture": 0.06174391135573387,
+      "frozen_other_donor_exact": 0.008463541744276881,
+      "frozen_own_BCE_advantage_over_other": 0.12323100119829178,
+      "frozen_own_donor_exact": 0.012369791511446238,
+      "frozen_own_minus_other_capture": 0.0642227828502655,
+      "frozen_to_current_overlap_min_mean_max": [
+        0.9945841431617737,
+        0.997700173407793,
+        0.9987506866455078
+      ],
+      "mean_current_cross_slot_overlap": 0.4440622851252556,
+      "minimum_squared_principal_cosine_over_all_slots": 0.9890522956848145
+    },
+    "warmup": {
+      "current_own_BCE_advantage_over_other": 0.11809290945529938,
+      "current_own_minus_other_capture": 0.06742488872259855,
+      "frozen_other_donor_exact": 0.009765624767169356,
+      "frozen_own_BCE_advantage_over_other": 0.11809290945529938,
+      "frozen_own_donor_exact": 0.014973957964684814,
+      "frozen_own_minus_other_capture": 0.06742488872259855,
+      "frozen_to_current_overlap_min_mean_max": [
+        0.9999996423721313,
+        0.9999999031424522,
+        1.000000238418579
+      ],
+      "mean_current_cross_slot_overlap": 0.4420661497861147,
+      "minimum_squared_principal_cosine_over_all_slots": 0.9999992847442627
+    }
+  },
+  "training_source_sha256": {
+    "pilot.py": "f2c19064d4aa991857646d0e72ad75f707ac3f0e97f920213e9f60551efcb070",
+    "test_pilot.py": "eace7e9a11999ee762c5a39b80f6ce956e1ae9026eb4c10004d5a20198867562",
+    "vendor/evalmath_preflight.py": "34fafe934679bc5f085e885e8382f17a752907e2014b9a3d1dffd34585d81426",
+    "vendor/mechinterp/bpd/components.py": "a2f2edc3fa3bda488e15fd83ac0ad67e396558bbda168381b1aea08709f77c5a",
+    "vendor/mechinterp/bpd/config.py": "1a3771aca4ba9b310ebf34fb573984f0f23707acf67d553f22cfce7f5954f508",
+    "vendor/mechinterp/bpd/experiments/training_steering/model.py": "53b2ce7344c3d369bce0bed9977b28f428a9f045d3cb0343e9e6b41d81e92e98",
+    "vendor/mechinterp/bpd/experiments/training_steering_stability/model.py": "ae7ab69013ff1e71465475e2d48d00cda58a50c23bfbfe5a2351b04ff1b48472"
+  }
+}

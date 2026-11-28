@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "tests": 5,
+  "checks": [
+    "enumerated structural oracle on 64 semantic assignments",
+    "native full-component versus dense VU parity and inert W_target buffer",
+    "matched physical patch norm and projector idempotence",
+    "causal gradient influence and task-only optimizer identity",
+    "normalized patch derivative versus central finite difference"
+  ],
+  "test_source_sha256": "eace7e9a11999ee762c5a39b80f6ce956e1ae9026eb4c10004d5a20198867562",
+  "scope": "engineering unit checks; no claim of trained-population generalization"
+}

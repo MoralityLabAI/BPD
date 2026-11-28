@@ -1,0 +1,67 @@
+{
+  "allocation": {
+    "status": "finite_integrity_pass",
+    "family": "allocation",
+    "rows": 936,
+    "paired_populations": 72,
+    "certificates": 321,
+    "injections": 0,
+    "injections_per_arm": {
+      "serial": 0,
+      "round_robin": 0,
+      "best": 0,
+      "ldt_best": 0,
+      "ucb": 0,
+      "ucb_transfer": 0,
+      "mlp": 0,
+      "no_ldt": 0,
+      "trm": 0,
+      "fixed": 0,
+      "sham": 0,
+      "live": 0,
+      "trm_transfer": 0
+    },
+    "rows_with_injections": 0,
+    "maximum_injections_per_row": 0,
+    "genesis_source_rows_verified": 0,
+    "lineage_limit": "Generation and slot references are checked. Block-zero source rows can be reconstructed. Later source rows need archived snapshots or flip logs, which these receipts omit; full source-row provenance and independent ancestry remain unverified."
+  },
+  "exact": {
+    "status": "finite_integrity_pass",
+    "family": "exact",
+    "rows": 480,
+    "paired_populations": 96,
+    "certificates": 184,
+    "injections": 0,
+    "injections_per_arm": {
+      "best": 0,
+      "archive16": 0,
+      "archive64": 0,
+      "archive128": 0,
+      "random64": 0
+    },
+    "rows_with_injections": 0,
+    "maximum_injections_per_row": 0,
+    "genesis_source_rows_verified": 0,
+    "lineage_limit": "Generation and slot references are checked. Block-zero source rows can be reconstructed. Later source rows need archived snapshots or flip logs, which these receipts omit; full source-row provenance and independent ancestry remain unverified."
+  },
+  "near": {
+    "status": "finite_integrity_pass",
+    "family": "near",
+    "rows": 360,
+    "paired_populations": 72,
+    "certificates": 125,
+    "injections": 278,
+    "injections_per_arm": {
+      "best": 0,
+      "exact64": 0,
+      "near64_noinject": 0,
+      "near64": 133,
+      "random_near64": 145
+    },
+    "rows_with_injections": 122,
+    "maximum_injections_per_row": 6,
+    "genesis_source_rows_verified": 481,
+    "lineage_limit": "Generation and slot references are checked. Block-zero source rows can be reconstructed. Later source rows need archived snapshots or flip logs, which these receipts omit; full source-row provenance and independent ancestry remain unverified."
+  }
+}

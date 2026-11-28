@@ -1,0 +1,66 @@
+{
+  "all_roots_retained": true,
+  "arms": {
+    "beam": {
+      "accuracy": 1.0,
+      "correct": 1024,
+      "corruption": 0,
+      "net_repair": 0,
+      "recovery": 0
+    },
+    "ci_permutation_unmatched": {
+      "accuracy": 0.9111328125,
+      "correct": 933,
+      "corruption": 91,
+      "net_repair": -91,
+      "recovery": 0
+    },
+    "clean": {
+      "accuracy": 1.0,
+      "correct": 1024,
+      "corruption": 0,
+      "net_repair": 0,
+      "recovery": 0
+    },
+    "full_precision_bpd": {
+      "accuracy": 1.0,
+      "correct": 1024,
+      "corruption": 0,
+      "net_repair": 0,
+      "recovery": 0
+    },
+    "greedy": {
+      "accuracy": 1.0,
+      "correct": 1024,
+      "corruption": 0,
+      "net_repair": 0,
+      "recovery": 0
+    },
+    "multistart": {
+      "accuracy": 1.0,
+      "correct": 1024,
+      "corruption": 0,
+      "net_repair": 0,
+      "recovery": 0
+    },
+    "quantized": {
+      "accuracy": 1.0,
+      "correct": 1024,
+      "corruption": 0,
+      "net_repair": 0,
+      "recovery": 0
+    }
+  },
+  "evidence_class": "PILOT_ONLY_ENGINEERING",
+  "independent_unit": "independently trained source model seed",
+  "populations_inference": "No confidence interval, p-value, power, or confirmation claim",
+  "roots": [
+    17001,
+    17002,
+    17003,
+    17004
+  ],
+  "roots_with_error_headroom": 0,
+  "total_terminal_cases": 1024,
+  "within_root_terminal_cases": 256
+}

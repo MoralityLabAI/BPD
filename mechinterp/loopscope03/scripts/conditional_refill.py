@@ -31,6 +31,7 @@ import argparse
 import copy
 import json
 import math
+import os
 import sys
 import time
 from pathlib import Path
@@ -50,8 +51,9 @@ from mechinterp.loopscope02.scripts import sudoku_prop as SP             # noqa:
 from mechinterp.loopscope02.scripts import trm_sudoku as TS              # noqa: E402
 
 RESULTS_DIR = REPO_ROOT / "mechinterp" / "loopscope03" / "results"
+# Public archive: https://huggingface.co/datasets/AlephFunk/loopscope03-trm-trajectories-and-probes
 DEFAULT_CACHE_DIR = Path(
-    r"C:\Users\patri\.gemini\antigravity\brain\683081f5-5cee-4346-8423-d0c90341cef0\scratch\loopscope03_models"
+    os.environ.get("LOOPSCOPE03_CACHE_DIR", str(REPO_ROOT / ".cache" / "loopscope03_models"))
 )
 
 # Precompute row, col, and box peer index tables [81, 8] for fast vectorized peer features

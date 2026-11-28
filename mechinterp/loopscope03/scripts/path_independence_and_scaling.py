@@ -36,6 +36,7 @@ import hashlib
 import io
 import json
 import math
+import os
 import sys
 import time
 import urllib.request
@@ -57,8 +58,9 @@ from mechinterp.loopscope03.scripts import conditional_refill as CR      # noqa:
 from mechinterp.loopscope03.scripts import resume_and_fork as RF         # noqa: E402
 
 RESULTS_DIR = REPO_ROOT / "mechinterp" / "loopscope03" / "results"
+# Public archive: https://huggingface.co/datasets/AlephFunk/loopscope03-trm-trajectories-and-probes
 DEFAULT_CACHE_DIR = Path(
-    r"C:\Users\patri\.gemini\antigravity\brain\683081f5-5cee-4346-8423-d0c90341cef0\scratch\loopscope03_models"
+    os.environ.get("LOOPSCOPE03_CACHE_DIR", str(REPO_ROOT / ".cache" / "loopscope03_models"))
 )
 SUDOKU_EXTREME_FULL_TRAIN_URL = (
     "https://huggingface.co/datasets/sapientinc/sudoku-extreme/resolve/main/train.csv"

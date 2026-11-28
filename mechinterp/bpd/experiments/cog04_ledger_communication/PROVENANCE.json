@@ -1,0 +1,30 @@
+{
+  "BPD": {
+    "base_commit": "6d3ca23a817095f38789751004594777f54cf7d8",
+    "factor_api": "mechinterp/bpd/components.py",
+    "repository": "MoralityLabAI/BPD",
+    "sha256": "388cb539cccb87ae65d56e5fbae175d6aee138df24d1bab43cde755156b748a5"
+  },
+  "DataGoblin": {
+    "commit": "ae0dbecffc1d246778ee47d8f3d8ec59b5948f2b",
+    "path": "src/datagoblin/training_gym/rlt_gym/cogentic_ledger.py",
+    "repository": "MoralityLabAI/DataGoblin",
+    "sha256": "eb6bf1605a293c6b8871e0f14c7eb6fd4af99609d97516ef29d21b712eb001dc",
+    "tree": "d9bdf20d5fb5e8c7318067da8a86dc466b83b21b",
+    "url": "https://github.com/MoralityLabAI/DataGoblin/blob/ae0dbecffc1d246778ee47d8f3d8ec59b5948f2b/src/datagoblin/training_gym/rlt_gym/cogentic_ledger.py",
+    "vendored_path": "vendor/ledger.py"
+  },
+  "EvalMath": {
+    "commit": "9b8657d2feb31526e66fb4dfe4556c228424ff7f",
+    "path": "skills/evalmath-mechinterp-power/scripts/preflight.py",
+    "repository": "MoralityLabAI/EvalMath",
+    "sha256": "c2621a7900930f81ed53799ce439ee1c8f2d7006918a04ef57b5381630d15494",
+    "vendored_path": "vendor/preflight.py"
+  },
+  "motivation": {
+    "commit": "4a7bc8ab0bc7",
+    "path": "cogentic_research_papers/logrank_conjecture/README.md",
+    "repository": "google-research/google-research",
+    "use": "research motivation; no theorem assumption or paper traces used"
+  }
+}

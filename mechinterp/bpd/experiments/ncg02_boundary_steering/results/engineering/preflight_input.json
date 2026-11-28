@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "experiment_id": "NCG-02-engineering",
+  "independent_unit": "fresh model initialization, input encoding and training noise stream",
+  "alpha": "0.05",
+  "scientific_min_effect": "0.05",
+  "target_effect": "0.10",
+  "measurement_resolution": "0.001953125",
+  "sham_quantile": "0.95",
+  "sham_confidence": "0.95",
+  "planned_comparisons": 2,
+  "confirm_units_planned": 64,
+  "pilot_from_development_only": true,
+  "heldout_sealed": false,
+  "units_independent": true,
+  "pilot": [
+    {
+      "unit_id": "962600",
+      "paired_effect": "-0.060546875",
+      "sham_effects": [
+        "-0.033203125"
+      ]
+    },
+    {
+      "unit_id": "962601",
+      "paired_effect": "-0.017578125",
+      "sham_effects": [
+        "-0.025390625"
+      ]
+    }
+  ]
+}

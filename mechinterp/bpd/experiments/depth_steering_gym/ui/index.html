@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="color-scheme" content="dark"/>
+<title>TRM Depth Lab · BPD Research Gym</title>
+<style>
+:root{--bg:#0a101a;--panel:#121c2b;--line:#293748;--line2:#1e2b3b;--ink:#eff5fa;--muted:#96aabd;--soft:#6d859e;--mint:#6ee3c2;--yellow:#f1c27a;--blue:#78aaff;--purple:#bc9bfa;--danger:#ef969d;--radius:15px}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;font-size:14px}button,input,select{font:inherit}
+button{cursor:pointer}a{color:var(--mint);text-decoration:none}a:hover{text-decoration:underline}
+.shell{display:grid;grid-template-columns:230px minmax(0,1fr);min-height:100vh}
+aside{position:sticky;top:0;height:100vh;border-right:1px solid var(--line);background:#0e1723;padding:26px 17px;display:flex;flex-direction:column;gap:22px}
+.brand{display:flex;gap:10px;align-items:center;padding:0 9px}.brand-icon{width:35px;height:35px;border:1px solid var(--mint);display:grid;place-items:center;border-radius:11px;color:var(--mint);font-weight:900;font-size:20px;transform:rotate(-8deg)}.brand strong{font-size:13px;letter-spacing:.10em}.brand small{display:block;margin-top:3px;color:var(--muted);font-size:10px;letter-spacing:.16em}
+.nav-label,.eyebrow{font-size:10px;letter-spacing:.17em;color:var(--soft);font-weight:750;text-transform:uppercase}.nav-label{padding:0 13px;margin-top:6px}
+.nav{display:grid;gap:6px}.nav button{background:transparent;border:1px solid transparent;color:var(--muted);padding:12px 14px;border-radius:10px;text-align:left;display:flex;gap:12px;align-items:center;width:100%}.nav button:hover,.nav button.active{background:#1a2b3b;border-color:#2a3d50;color:var(--ink)}.nav button.active:before{content:"";width:4px;height:18px;background:var(--mint);border-radius:4px;margin-left:-9px}.nav-symbol{font-family:monospace;color:var(--mint);font-size:17px;min-width:18px}
+.aside-foot{margin-top:auto;padding:16px 13px;background:#152435;border:1px solid #2b4152;border-radius:12px}.aside-foot p{margin:10px 0 3px;color:var(--muted);font-size:12px;line-height:1.6}.dot{width:7px;height:7px;border-radius:100%;background:var(--mint);display:inline-block;box-shadow:0 0 12px #6ee3c288;margin-right:7px}
+main{padding:35px clamp(20px,4.2vw,66px) 64px;max-width:1600px;width:100%}.topline{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}.topline .tag{font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:8px 12px}.header{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin:24px 0 29px;flex-wrap:wrap}
+h1{font-size:clamp(30px,3.1vw,48px);letter-spacing:-.045em;font-weight:700;margin:7px 0 8px}.lead{font-size:14px;line-height:1.7;color:var(--muted);max-width:710px;margin:0}h2{font-size:20px;letter-spacing:-.02em;margin:0}h3{font-size:15px;margin:0 0 5px}small,.small{font-size:12px}.muted{color:var(--muted)}.pale{color:var(--soft)}.btn{border:1px solid #35485d;background:#213248;color:var(--ink);border-radius:9px;padding:10px 14px;min-height:40px}.btn:hover{background:#293e56}.btn-accent{background:var(--mint);color:#0b2930;font-weight:700;border-color:var(--mint)}.btn-accent:hover{background:#93edcf}.btn-quiet{background:transparent}
+.grid-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.metric,.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius)}.metric{padding:20px 21px}.metric .value{font-variant-numeric:tabular-nums;font-weight:720;font-size:clamp(21px,2.4vw,31px);letter-spacing:-.045em;margin:11px 0 5px}.metric .detail{font-size:11px;color:var(--muted);line-height:1.4}.metric .label{color:#acc1d0;font-size:11px;font-weight:650;letter-spacing:.025em}
+.panel{padding:23px}.section-head{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;margin:32px 0 15px}.section-head p{margin:5px 0 0;color:var(--muted);font-size:12px}.row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.split{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.pill{display:inline-flex;align-items:center;gap:5px;padding:5px 10px;border:1px solid #345668;background:#173344;border-radius:999px;color:var(--mint);font-size:10px;font-weight:750;letter-spacing:.04em}.warn{color:var(--yellow);background:#3b3127;border-color:#64513e}.danger{color:var(--danger);border-color:#69444f;background:#35232f}.card-note{border-top:1px solid var(--line);padding-top:14px;margin-top:18px;color:var(--muted);font-size:12px;line-height:1.7}.field{display:flex;flex-direction:column;gap:7px}.field label{font-size:11px;font-weight:670;color:var(--muted)}select,input[type="number"]{background:#0e1723;color:var(--ink);border:1px solid #345066;border-radius:8px;padding:9px 11px;min-height:39px;outline:none}select:focus,input:focus{border-color:var(--mint)}.controls{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end}.controls .field{min-width:125px}.controls input{width:125px}
+.chart-wrap{padding:18px 0 4px;min-height:225px}.legend{display:flex;gap:15px;align-items:center;flex-wrap:wrap;color:var(--muted);font-size:11px}.key{width:9px;height:9px;border-radius:3px;display:inline-block;margin-right:5px}.axis{font-size:11px;fill:#8fa8bd}.barline{border-bottom:1px solid var(--line2);display:grid;grid-template-columns:130px 1fr 55px;align-items:center;gap:10px;padding:10px 0;font-size:12px}.track{height:9px;background:#263647;border-radius:99px;overflow:hidden}.fill{height:100%;border-radius:99px}.table-scroll{overflow:auto}table{border-collapse:collapse;width:100%;font-size:12px}th{text-align:left;color:var(--soft);font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:650;padding:12px 9px}td{border-top:1px solid var(--line2);padding:13px 9px;color:#d4e2ee;font-variant-numeric:tabular-nums}td strong{color:var(--ink)}tr:hover td{background:#182738}
+.view{display:none}.view.active{display:block}.section-stack{display:grid;gap:20px}
+.task-grid{display:grid;grid-template-columns:repeat(4,42px);gap:2px;width:max-content;background:#526478;padding:2px;border-radius:6px}.task-grid span{width:42px;height:42px;background:#1b2b3e;display:grid;place-items:center;font-weight:670;font-size:17px;color:#f4fbff}.task-grid span.given{background:#345567;color:var(--mint)}.task-grid span.host{background:#284454;color:#daecf9}.task-grid span:nth-child(2),.task-grid span:nth-child(6),.task-grid span:nth-child(10),.task-grid span:nth-child(14){border-right:2px solid #71879b}.task-grid span:nth-child(n+5):nth-child(-n+8){border-bottom:2px solid #71879b}.task-grid span:nth-child(n+1):nth-child(-n+4){border-bottom:2px solid #71879b}
+.sudoku-display{display:flex;gap:25px;align-items:center;flex-wrap:wrap;margin-top:16px}.fixture-dim{color:var(--soft);font-size:11px;max-width:260px;line-height:1.65}
+.arc-pairs{display:flex;gap:18px;flex-wrap:wrap;margin:18px 0}.arc-pair{border:1px solid var(--line);padding:12px;border-radius:11px}.arc-pair-title{color:var(--soft);font-size:10px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px}.arc-small{display:grid;grid-template-columns:repeat(4,24px);gap:2px}.arc-cell{width:24px;height:24px;border-radius:2px;border:1px solid #ffffff18}
+.arc-arrow{color:var(--mint);padding:22px 5px 0}.stateline{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}.state-item{padding:11px 14px;background:#182738;border:1px solid var(--line);border-radius:9px;min-width:91px}.state-item strong{display:block;font-size:19px;margin-top:4px}.action-buttons{display:flex;gap:8px;flex-wrap:wrap;margin:19px 0}.action-buttons button{padding:12px 15px;border-radius:9px;border:1px solid #365164;color:#d9eaf8;background:#203247}.action-buttons button:hover{border-color:var(--mint)}.action-buttons button:disabled{opacity:.3;cursor:not-allowed}.action-buttons button.suggested{border-color:var(--mint);background:#214842}.timeline{display:flex;gap:8px;flex-wrap:wrap}.event{font-size:11px;padding:7px 10px;border-radius:7px;color:var(--muted);border:1px solid var(--line)}
+.hardware-table td:first-child{font-weight:650}.resource{display:flex;justify-content:space-between;margin:15px 0;gap:15px;align-items:baseline}.resource strong{font-size:20px;font-variant-numeric:tabular-nums}.callout{padding:16px 18px;background:#1a2838;border-left:3px solid var(--yellow);border-radius:0 10px 10px 0;color:#c4d5e2;line-height:1.7;font-size:12px}
+.footer{border-top:1px solid var(--line);margin-top:43px;padding-top:18px;font-size:11px;color:var(--soft);display:flex;gap:20px;justify-content:space-between;flex-wrap:wrap}
+@media(max-width:1050px){.grid-4{grid-template-columns:repeat(2,1fr)}.grid-2{grid-template-columns:1fr}}
+@media(max-width:730px){.shell{grid-template-columns:1fr}aside{height:auto;position:static;padding:15px;display:block}.brand{margin-bottom:12px}.nav{display:flex;overflow:auto}.nav-label,.aside-foot{display:none}.nav button{width:auto;white-space:nowrap;font-size:12px}main{padding:22px 16px 40px}.grid-4{grid-template-columns:1fr 1fr}.metric{padding:15px}.header{margin-top:16px}.panel{padding:17px}.barline{grid-template-columns:90px 1fr 43px}.task-grid{grid-template-columns:repeat(4,36px)}.task-grid span{height:36px;width:36px}}
+</style>
+</head>
+<body>
+<div class="shell">
+<aside>
+  <div class="brand"><div class="brand-icon">↻</div><div><strong>LOOPED LAB</strong><small>BPD RESEARCH GYM</small></div></div>
+  <div class="nav-label">Workspace</div>
+  <nav class="nav" aria-label="Research dashboard sections">
+    <button class="active" data-view="overview"><span class="nav-symbol">▤</span> Overview</button>
+    <button data-view="tasks"><span class="nav-symbol">▦</span> Task explorer</button>
+    <button data-view="causal"><span class="nav-symbol">◎</span> Causal diagnostics</button>
+    <button data-view="compute"><span class="nav-symbol">◇</span> Compute planning</button>
+  </nav>
+  <div class="aside-foot"><span class="dot"></span><strong>Archived evidence</strong><p>Read-only research viewer. The protected ARG-03-N set is sealed and unavailable to this app.</p></div>
+</aside>
+<main>
+  <div class="topline"><span class="eyebrow">MECHANISTIC INTERPRETABILITY / DT03</span><span class="tag">LOCALHOST · ENGINEERING DATA</span></div>
+  <header class="header"><div><h1>TRM Depth Lab <span style="color:var(--mint)">↗</span></h1><p class="lead">Explore recurrent depth, task correctness, protected-state interventions and new synthetic fixtures. All original DT02 measurements remain immutable.</p></div><a class="btn btn-quiet" href="https://github.com/MoralityLabAI/BPD/tree/main/mechinterp/bpd/experiments/depth_steering_gym" target="_blank" rel="noopener">View source ↗</a></header>
+  <div class="grid-4">
+    <div class="metric"><div class="label">ARCHIVED NATIVE MODELS</div><div class="value" id="metric-models">6</div><div class="detail">14,082 parameters each</div></div>
+    <div class="metric"><div class="label">SUDOKU EXACT SOLVES</div><div class="value" id="metric-sudoku">0 / 64</div><div class="detail">Per root at unseen depth</div></div>
+    <div class="metric"><div class="label">STORY TERMINAL SUCCESS</div><div class="value" id="metric-story">0 / 16</div><div class="detail">Per root, 12-step rollout</div></div>
+    <div class="metric"><div class="label">PROTECTED HEAD DRIFT</div><div class="value" id="metric-drift" style="color:var(--mint);font-size:26px">2.4e−7</div><div class="detail">Max softmax change, engineering test</div></div>
+  </div>
+  <section id="view-overview" class="view active">
+    <div class="section-head"><div><h2>Archived depth-transfer evidence</h2><p>Frozen DT02-A run · supervised ACT 2 / 4 / 6 · unseen ACT 8 / 12</p></div><span class="pill warn">Competence gate failed</span></div>
+    <div class="grid-2">
+      <div class="panel">
+        <div class="split"><h3>Task performance</h3><div class="controls"><div class="field"><label for="ov-root">Model root</label><select id="ov-root"><option>901</option><option>902</option></select></div><div class="field"><label for="ov-depth">Unseen depth</label><select id="ov-depth"><option>8</option><option>12</option></select></div></div></div>
+        <div id="performance-bars" style="margin-top:19px"></div>
+        <div class="card-note">Token accuracy measures predictions across output cells. Exact task correctness requires an entire valid answer. Action labels and terminal endings are shown separately.</div>
+      </div>
+      <div class="panel">
+        <div class="split"><h3>Research evidence boundary</h3><span class="pill danger">Scientific hold</span></div>
+        <div style="margin:21px 0" class="callout">The six archived checkpoints are CPU-trained engineering baselines. The mini-TRMs did not solve a heldout Sudoku or ARC grid, and the original interventions did not demonstrate causal improvement.</div>
+        <div class="resource"><span class="muted">Independent training roots</span><strong>2</strong></div>
+        <div class="resource"><span class="muted">Heldout boards / family / root</span><strong>64</strong></div>
+        <div class="resource"><span class="muted">Native recurrent probes</span><strong>H / L</strong></div>
+        <div class="resource"><span class="muted">Protected science roots accessed</span><strong>0</strong></div>
+      </div>
+    </div>
+    <div class="section-head"><div><h2>Per-family archive</h2><p>All six checkpoints and both unseen depths</p></div><span class="small muted">Read-only SHA-verified receipt</span></div>
+    <div class="panel table-scroll"><table><thead><tr><th>Root</th><th>Task</th><th>Depth</th><th>Token / action accuracy</th><th>Exact outcome</th><th>Train loss</th></tr></thead><tbody id="archive-table"></tbody></table></div>
+  </section>
+  <section id="view-tasks" class="view">
+    <div class="section-head"><div><h2>Task explorer</h2><p>Fresh deterministic UI fixtures. These seeds are excluded from registered research cohorts.</p></div><span class="pill">Synthetic fixtures</span></div>
+    <div class="panel">
+      <div class="controls"><div class="field"><label for="task-select">World</label><select id="task-select"><option value="sudoku">Sudoku 4×4</option><option value="arc">ARC-style transformations</option><option value="story">Hidden-ending storyworld</option></select></div><div class="field"><label for="task-seed">Fixture seed</label><input id="task-seed" type="number" min="0" max="1000000" value="42"/></div><div class="field" id="arc-split-field"><label for="arc-split">ARC program split</label><select id="arc-split"><option value="train">Training rules</option><option value="heldout">Heldout rules</option></select></div><div class="field" id="story-horizon-field" style="display:none"><label for="story-horizon">Horizon</label><select id="story-horizon"><option>7</option><option>8</option><option selected>12</option><option>16</option></select></div><button id="task-refresh" class="btn btn-accent">Generate fixture</button></div>
+      <div id="task-body" style="padding-top:18px"></div>
+      <div class="card-note">The human viewer can reveal synthetic host gold for inspection. Model inputs contain only each task's public view. Nothing here samples or opens the sealed evaluation set.</div>
+    </div>
+  </section>
+  <section id="view-causal" class="view">
+    <div class="section-head"><div><h2>Protected-state intervention diagnostics</h2><p>Historical mini-TRM Sudoku donor agreement and full-head readout conservation</p></div><span class="pill warn">Engineering comparison only</span></div>
+    <div class="panel">
+      <div class="split"><div class="controls"><div class="field"><label for="causal-root">Source root</label><select id="causal-root"><option>901</option><option>902</option></select></div><div class="field"><label for="causal-metric">Measure</label><select id="causal-metric"><option value="donor_token_agreement">Donor token agreement</option><option value="logit_mse">Donor logit MSE</option><option value="edit_norm">Physical edit norm</option></select></div></div><span class="pill danger">No matched Jacobian sham</span></div>
+      <div id="steer-chart" class="chart-wrap" aria-label="Archived steering results"></div>
+      <div class="legend"><span><i class="key" style="background:var(--muted)"></i> No edit</span><span><i class="key" style="background:var(--mint)"></i> Full protected dark</span><span><i class="key" style="background:var(--blue)"></i> Physical SVD rank 8</span></div>
+      <div id="causal-details" class="card-note"></div>
+    </div>
+    <div class="section-head"><h2>What the repair changes</h2></div>
+    <div class="grid-2">
+      <div class="panel"><h3>Full-coordinate causal Jacobian</h3><p class="muted" style="line-height:1.8">DT03 differentiates every cell and class against the full physical state, rather than summing normalized class probabilities. The native H/L continuation retains the receiver's declared input.</p></div>
+      <div class="panel"><h3>Outcome and physical control</h3><p class="muted" style="line-height:1.8">Whole-case recovery, delivered intervention dose and full signed-task-Jacobian controls form the future measurement contract. Trained-model causal evidence has yet to be collected.</p></div>
+    </div>
+  </section>
+  <section id="view-compute" class="view">
+    <div class="section-head"><div><h2>Compute planning</h2><p>Resource sizing for a compact 14K model and a full 7M Attention-TRM</p></div><span class="pill warn">Estimates · not GPU measurements</span></div>
+    <div class="grid-2">
+      <div class="panel">
+        <h3>Activation state footprint</h3>
+        <p class="small muted">Lower bound for storing one H/L recurrent boundary state. Backpropagation, attention workspace and dense Jacobians require additional memory.</p>
+        <div class="controls" style="margin-top:19px"><div class="field"><label for="hw-model">Model</label><select id="hw-model"><option value="mini">14K Mini TRM</option><option value="full" selected>7M Full TRM</option></select></div><div class="field"><label for="hw-batch">Batch</label><select id="hw-batch"><option>1</option><option>2</option><option selected>4</option><option>8</option><option>16</option><option>32</option></select></div><div class="field"><label for="hw-precision">State dtype</label><select id="hw-precision"><option value="2">BF16 / FP16</option><option value="4">FP32</option></select></div></div>
+        <div class="resource"><span class="muted">H + L state, per boundary</span><strong id="hw-state">–</strong></div>
+        <div class="resource"><span class="muted">Dense full-output FP32 Jacobian, batch 1</span><strong id="hw-jac">–</strong></div>
+        <div class="resource"><span class="muted">Parameter storage, BF16 only</span><strong id="hw-param">–</strong></div>
+        <div class="card-note">Use chunked Jacobian-vector products, frozen checkpoint inference, and activation checkpointing for recurrent training. Test peak reserved VRAM and host RSS on the target device.</div>
+      </div>
+      <div class="panel">
+        <h3>Planning envelopes</h3>
+        <div class="table-scroll hardware-table" style="margin-top:12px"><table><thead><tr><th>Configuration</th><th>System DRAM</th><th>VRAM</th></tr></thead><tbody><tr><td>14K mini gym</td><td>2–8 GB</td><td>Below 3 GB</td></tr><tr><td>Frozen 7M inference</td><td>8–16 GB</td><td>2–5 GB</td></tr><tr><td>7M training / probes</td><td>16–32 GB</td><td>6–16+ GB</td></tr></tbody></table></div>
+        <div class="callout" style="margin-top:19px">RTX 5080 16 GB VRAM: use BF16, short batches and streamed activations. 32 GB system RAM is a useful starting point; 64 GB gives more room for parallel root archives and CPU analysis.</div>
+      </div>
+    </div>
+  </section>
+  <div class="footer"><span id="foot-sha">Archive integrity: checking…</span><span>DT03 UI v1 · readonly · <a href="https://github.com/MoralityLabAI/BPD/pull/113" target="_blank" rel="noopener">Gym source audit ↗</a></span></div>
+</main>
+</div>
+<script>
+"use strict";
+const byId = id => document.getElementById(id);
+const fmt = (n, digits=1) => Number.isFinite(Number(n)) ? (Number(n)*100).toFixed(digits)+"%" : "–";
+const num = (n, digits=4) => Number.isFinite(Number(n)) ? Number(n).toFixed(digits) : "–";
+const safe = s => String(s).replace(/[&<>"']/g, x=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[x]));
+const colors=["#253548","#4f9fd6","#e0b25b","#72c1ad","#ba8de3","#f17f80","#f4ddbb","#758caa","#9dba80","#eab8ca"];
+let archive=null, storyActions=[], currentTask=null, showGold=false, busy=false;
+async function api(path){ const response=await fetch(path,{cache:"no-store"});const x=await response.json();if(!response.ok)throw Error(x.error||"Request failed");return x; }
+function setView(name){document.querySelectorAll(".view").forEach(e=>e.classList.toggle("active",e.id==="view-"+name));document.querySelectorAll(".nav button").forEach(e=>e.classList.toggle("active",e.dataset.view===name));}
+document.querySelectorAll(".nav button").forEach(e=>e.addEventListener("click",()=>setView(e.dataset.view)));
+function familyRow(root,fam){return archive.roots.find(x=>x.seed==root).families[fam];}
+function performance(){
+ const seed=+byId("ov-root").value, depth=byId("ov-depth").value;
+ const entries=[["Sudoku cell accuracy","sudoku4","token_accuracy"],["ARC cell accuracy","arc_style","token_accuracy"],["Story action labels","storyworld","token_accuracy"]];
+ byId("performance-bars").innerHTML=entries.map((entry,i)=>{let v=familyRow(seed,entry[1]).depths[depth][entry[2]];let pct=Math.max(0,Math.min(100,v*100));return '<div class="barline"><span>'+safe(entry[0])+'</span><div class="track"><div class="fill" style="background:'+["var(--mint)","var(--blue)","var(--purple)"][i]+';width:'+pct+'%"></div></div><strong>'+fmt(v)+'</strong></div>';}).join("");
+}
+function archiveTable(){
+ const html=[];
+ for(const root of archive.roots){for(const [name,entry] of Object.entries(root.families)){for(const depth of ["8","12"]){
+   const r=entry.depths[depth];const task=name==="sudoku4"?"Sudoku 4×4":name==="arc_style"?"ARC-style":"Storyworld";
+   let exact=name==="storyworld" ? ((r.host_ending_success_rate===undefined)?"Action proxy":"Ending "+fmt(r.host_ending_success_rate)) : fmt(r.exact_task_accuracy);
+   html.push("<tr><td>"+root.seed+"</td><td><strong>"+task+"</strong></td><td>"+depth+"</td><td>"+fmt(r.token_accuracy)+"</td><td>"+safe(exact)+"</td><td>"+num(entry.train_loss,4)+"</td></tr>");
+ }}}
+ byId("archive-table").innerHTML=html.join("");
+}
+function gridSudoku(rows, given=false){
+ return '<div class="task-grid" role="img" aria-label="4 by 4 Sudoku puzzle">'+rows.flat().map(v=>'<span class="'+(given&&v?"given":"host")+'">'+(v?String(v):"·")+"</span>").join("")+"</div>";
+}
+function arcGrid(rows){
+ return '<div class="arc-small">'+rows.flat().map(v=>'<span class="arc-cell" title="Color '+v+'" style="background:'+colors[v]+'"></span>').join("")+"</div>";
+}
+function taskControls(){
+ const type=byId("task-select").value;
+ byId("arc-split-field").style.display=type==="arc"?"flex":"none";
+ byId("story-horizon-field").style.display=type==="story"?"flex":"none";
+}
+function renderTask(data){
+ currentTask=data;
+ const area=byId("task-body");
+ if(data.task==="sudoku"){
+  const puzzle=data.public.givens,gold=data.host_gold.solution;
+  area.innerHTML='<div class="split"><div><h3>Unique-solution puzzle</h3><p class="small muted">6 unknown cells · group '+safe(data.metadata.canonical_group)+'</p></div><button id="reveal-gold" class="btn">'+(showGold?"Hide host solution":"Reveal host solution")+'</button></div><div class="sudoku-display">'+gridSudoku(puzzle,true)+(showGold?'<div><div class="eyebrow" style="margin-bottom:10px">HOST SOLUTION</div>'+gridSudoku(gold,false)+'</div>':'<p class="fixture-dim">Gold is held by the synthetic host. Choose reveal to inspect the exact solved board.</p>')+'</div>';
+  byId("reveal-gold").onclick=()=>{showGold=!showGold;renderTask(data);};
+ }else if(data.task==="arc"){
+  const rows=data.public.train,query=data.public.test[0].input;
+  area.innerHTML='<div class="split"><h3>Public demonstrations and query</h3><span class="pill">'+safe(data.metadata.program_split)+' family · '+data.metadata.input_token_length+' tokens</span></div><div class="arc-pairs">'+rows.map((pair,i)=>'<div class="arc-pair"><div class="arc-pair-title">Demo '+(i+1)+'</div><div class="row">'+arcGrid(pair.input)+'<span class="arc-arrow">→</span>'+arcGrid(pair.output)+'</div></div>').join("")+'</div><div class="split"><div><div class="eyebrow" style="margin-bottom:9px">QUERY INPUT</div>'+arcGrid(query)+'</div><div><button id="reveal-gold" class="btn">'+(showGold?"Hide host answer":"Reveal host answer")+'</button>'+(showGold?'<div style="margin-top:9px">'+arcGrid(data.host_gold.answer)+'</div>':'')+'</div></div>';
+  byId("reveal-gold").onclick=()=>{showGold=!showGold;renderTask(data);};
+ }else{
+   const s=data.public,m=data.metadata,ended=s.terminal;
+   const stats=[["DAY",s.day+" / "+m.horizon],["TRUST",s.trust],["EVIDENCE",s.evidence],["STABILITY",s.stability],["TOKEN",s.token?"YES":"NO"]];
+   area.innerHTML='<div class="split"><div><h3>Public-state story simulation</h3><p class="small muted">Hidden cause is host-only until terminal grading.</p></div><button id="story-reset" class="btn btn-quiet">Reset story ↺</button></div><div class="stateline">'+stats.map(k=>'<div class="state-item"><span class="eyebrow">'+safe(k[0])+'</span><strong>'+safe(k[1])+'</strong></div>').join("")+'</div><p class="small muted" style="margin-top:16px">Suggested public teacher action: <strong style="color:var(--mint)">'+safe(m.public_teacher_suggestion||"None / terminal")+'</strong></p><div class="action-buttons">'+m.available_actions.map(a=>'<button data-action="'+safe(a)+'" '+(ended?"disabled":"")+' class="'+(a===m.public_teacher_suggestion?"suggested":"")+'">'+safe(a)+'</button>').join("")+'</div><div class="timeline">'+m.actions.map(a=>'<span class="event">'+a.step+". "+safe(a.action)+'</span>').join("")+'</div>'+(ended?'<div class="callout" style="margin-top:18px">HOST ENDING: <strong>'+safe(data.host_gold.ending)+'</strong> · '+(data.host_gold.success?"Terminal success":"Unfinished")+'</div>':'');
+   byId("story-reset").onclick=()=>{storyActions=[];refreshTask();};
+   area.querySelectorAll("[data-action]").forEach(e=>e.onclick=()=>{storyActions.push(e.dataset.action);refreshTask();});
+ }
+}
+async function refreshTask(){
+ if(busy)return;
+ busy=true;
+ const type=byId("task-select").value, seed=byId("task-seed").value;
+ const horizon=byId("story-horizon").value, split=byId("arc-split").value;
+ const path="/api/fixture?task="+encodeURIComponent(type)+"&seed="+encodeURIComponent(seed)+"&horizon="+horizon+"&split="+encodeURIComponent(split)+"&actions="+encodeURIComponent(storyActions.join(","));
+ try{byId("task-body").innerHTML='<p class="small muted">Loading synthetic fixture…</p>';renderTask(await api(path));}
+ catch(e){if(type==="story"&&storyActions.length)storyActions.pop();byId("task-body").innerHTML='<div class="callout">'+safe(e.message)+'</div>';}
+ finally{busy=false;}
+}
+byId("task-select").onchange=()=>{storyActions=[];showGold=false;taskControls();refreshTask();};
+byId("task-seed").onchange=()=>{storyActions=[];showGold=false;refreshTask();};
+byId("arc-split").onchange=()=>{showGold=false;refreshTask();};
+byId("story-horizon").onchange=()=>{storyActions=[];refreshTask();};
+byId("task-refresh").onclick=()=>{storyActions=[];showGold=false;refreshTask();};
+function causalChart(){
+ const seed=+byId("causal-root").value, metric=byId("causal-metric").value;
+ const steer=familyRow(seed,"sudoku4").steering;
+ const arms=[["zero","No edit","var(--muted)"],["full_dark","Full protected dark","var(--mint)"],["physical_svd8_dark","Physical SVD rank8","var(--blue)"]];
+ const depths=["4","8","12"], values=depths.map(d=>arms.map(a=>steer.depths[d][a[0]][metric]));
+ let min=Math.min(...values.flat()),max=Math.max(...values.flat());
+ if(metric==="donor_token_agreement"){min=0;max=Math.max(.35,max*1.1);}
+ else {min=Math.min(0,min);max=Math.max(max*1.1,.01);}
+ const X=i=>67+i*245, Y=v=>190-(v-min)/(max-min)*155;
+ const segments=arms.map((a,j)=>'<polyline fill="none" stroke="'+a[2]+'" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" points="'+depths.map((d,i)=>X(i)+","+Y(values[i][j])).join(" ")+'"/>'+depths.map((d,i)=>'<circle cx="'+X(i)+'" cy="'+Y(values[i][j])+'" r="5" fill="'+a[2]+'"/>').join("")).join("");
+ const ticks=[0,.25,.5,.75,1].map(p=>'<line x1="55" y1="'+(190-p*155)+'" x2="567" y2="'+(190-p*155)+'" stroke="#293748"/><text x="48" y="'+(194-p*155)+'" text-anchor="end" class="axis">'+(metric==="donor_token_agreement"?Math.round((min+(max-min)*p)*100)+"%":num(min+(max-min)*p,2))+'</text>').join("");
+ byId("steer-chart").innerHTML='<svg style="width:100%;min-height:205px" viewBox="0 0 600 240" role="img" aria-label="Depth transfer of three native steering arms">'+ticks+segments+depths.map((d,i)=>'<text x="'+X(i)+'" y="217" text-anchor="middle" class="axis">ACT '+d+'</text>').join("")+'</svg>';
+ byId("causal-details").textContent="All "+steer.n+" source-only donor pairs are reused across arms and depths. Maximum original full-softmax protection error: "+steer.protected_all_vocab_max_error.toExponential(2)+". The three arms do not provide a registered mechanism comparison.";
+}
+function bytes(n){if(n>=1024**2)return (n/(1024**2)).toFixed(1)+" MiB";if(n>=1024)return (n/1024).toFixed(1)+" KiB";return Math.round(n)+" B";}
+function resourceEstimate(){
+ const full=byId("hw-model").value==="full",batch=+byId("hw-batch").value,bpp=+byId("hw-precision").value,seq=full?97:17,d=full?512:32,params=full?7000000:14082,out=full?729:64;
+ byId("hw-state").textContent=bytes(batch*2*seq*d*bpp);
+ byId("hw-jac").textContent=bytes(out*2*seq*d*4);
+ byId("hw-param").textContent=bytes(params*2);
+}
+["hw-model","hw-batch","hw-precision"].forEach(x=>byId(x).onchange=resourceEstimate);
+["ov-root","ov-depth"].forEach(x=>byId(x).onchange=performance);
+["causal-root","causal-metric"].forEach(x=>byId(x).onchange=causalChart);
+async function init(){
+ try{
+  archive=await api("/api/overview");
+  byId("foot-sha").textContent="Archive verified · SHA-256 "+archive.archive_sha256.slice(0,14)+"…";
+  performance();archiveTable();causalChart();taskControls();resourceEstimate();refreshTask();
+ }catch(err){
+  byId("foot-sha").textContent="Archive verification unavailable";
+  byId("performance-bars").innerHTML='<div class="callout">'+safe(err.message)+'</div>';
+  byId("archive-table").innerHTML='<tr><td colspan="6">Archived data could not be loaded.</td></tr>';
+ }
+}
+init();
+</script>
+</body>
+</html>

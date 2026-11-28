@@ -1,0 +1,52 @@
+name: BPD NBR02 native CQ06 transported risk
+on:
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/nbr02_cq06/**'
+      - '.github/workflows/bpd-nbr02-cq06-native-risk.yml'
+permissions:
+  contents: read
+env:
+  OMP_NUM_THREADS: '1'
+  MKL_NUM_THREADS: '1'
+  OPENBLAS_NUM_THREADS: '1'
+  PYTHONUNBUFFERED: '1'
+jobs:
+  native-development:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          python -m pip install numpy==1.26.4
+          python -m pip install torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Verify frozen CQ06 source
+        run: |
+          test "$(git hash-object mechinterp/bpd/theory/cq06_nonlinear_feedback/experiment.py)" = 6f9e03268ea5c3d8a706ee547b8e76da296e86e7
+          python -m compileall -q mechinterp/bpd/experiments/nbr02_cq06
+      - name: Excluded-root derivative and native-mask preflight
+        run: python -m mechinterp.bpd.experiments.nbr02_cq06.run --self-test
+      - name: Train and evaluate eight fresh development roots
+        run: python -m mechinterp.bpd.experiments.nbr02_cq06.run --out result/roots
+      - name: Independent receipt audit
+        run: python mechinterp/bpd/experiments/nbr02_cq06/audit.py --input result/roots --out result/audit.json
+      - name: Retain provenance
+        if: always()
+        run: |
+          mkdir -p result
+          git rev-parse HEAD > result/workflow-commit.txt
+          printf '%s\n' "${{ github.run_id }}" > result/run-id.txt
+          printf '%s\n' "${{ github.run_attempt }}" > result/run-attempt.txt
+          if test ! -f result/audit.json; then
+            printf '{"engineering_gate":"INCOMPLETE"}\n' > result/incomplete.json
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bpd-nbr02-native-cq06
+          path: result/
+          retention-days: 90
+          if-no-files-found: error

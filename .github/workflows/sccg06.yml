@@ -1,0 +1,26 @@
+name: SCCG06 dynamic quotient atlas
+on:
+  push:
+    paths:
+      - 'mechinterp/bpd/experiments/sccg01/dynamic_atlas.py'
+      - '.github/workflows/sccg06.yml'
+  pull_request:
+    paths:
+      - 'mechinterp/bpd/experiments/sccg01/dynamic_atlas.py'
+      - '.github/workflows/sccg06.yml'
+permissions:
+  contents: read
+jobs:
+  exact:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: python mechinterp/bpd/experiments/sccg01/dynamic_atlas.py --output sccg06_receipt.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sccg06-receipt
+          path: sccg06_receipt.json

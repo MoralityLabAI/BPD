@@ -1,0 +1,21 @@
+{
+  "frozen_sampler_agreement": {
+    "error": "",
+    "error_type": "AssertionError",
+    "passed": false,
+    "traceback": "Traceback (most recent call last):\n  File \"/home/runner/work/BPD/BPD/mechinterp/bpd/experiments/nc09_fixed12/full_tangent_calibration_fc05/runner.py\", line 172, in execute\n    comparison = compare_frozen_sampler(\n                 ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/BPD/BPD/mechinterp/bpd/experiments/nc09_fixed12/full_tangent_calibration_fc05/runner.py\", line 87, in compare_frozen_sampler\n    assert selected_hashes == recorded_hashes\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+  },
+  "passed": false,
+  "root": 15999,
+  "root_json_sha256": "e7c00303308e44606cc05b64ad31057dbbea5339d6b48ccff37f47ff31a825bc",
+  "scientific_confirmation_models_evaluated": 0,
+  "source_manifest_sha256": "c0951817b3be4b201af5a1d1a68c41e51f93c0f914107e8c0c3985e61c69a573",
+  "study": "BPD-NC09-FC05",
+  "technical_admission_errors": [
+    "source_rank12_optimum_missing_or_invalid",
+    "source_arm_admission:dp12",
+    "source_arm_admission:flat3",
+    "source_arm_admission:flat3_dose",
+    "source_arm_admission:flat4"
+  ]
+}

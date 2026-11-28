@@ -19,6 +19,20 @@ does not thereby repair clean reasoning. Observational probes and exact
 linear-algebraic BPD witnesses belong to different evidence classes from
 native model-causal claims.
 
+NC09 Fixed12 scientific confirmation remains **SEALED** after the independent
+FC05 calibration completed 59/59 fresh roots and 472 matched shams. Its registered
+result is **FULL_TANGENT_CALIBRATION_PILOT_ONLY**. Mean sham-minus-DP12 task NLL
+was 0.008083953 nats, with marginal root-bootstrap 95% interval
+[0.005644242, 0.010486967], below the registered 0.020 mean requirement.
+The independent rootwise 95/95 sham floor is 0.058183573 nats, and pinned
+EvalMath returned **REDESIGN_OR_PILOT_ONLY**. Read
+`mechinterp/bpd/experiments/nc09_fixed12/full_tangent_calibration_fc05/RESULTS_20261118.md`
+and its original evidence receipts before new NC09 work. Preserve all 59 original
+root outcomes, the failed first smoke and the separate successful replay audit.
+FC05 trained zero scientific confirmation models. Further scientific work needs
+a prospective aggregate-null coverage contract and a separately authorized
+confirmation release. Earlier FC01, FC02, FC03 and FC04 verdicts stay unchanged.
+
 AMM11's 128 reserved confirmation model roots are **SEALED**.
 Its preregistered new 64-model DEVELOPMENT experiment tested
 full learned BPD strategy-memory against a **strong analytical

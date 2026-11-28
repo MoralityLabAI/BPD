@@ -1,0 +1,114 @@
+name: BPD-SF05B Stage 2-B excluded-root recurrent source-closure ablation
+
+on:
+  push:
+    branches:
+      - "research/bpd-sf05b-stage2b-*"
+    paths:
+      - ".github/workflows/bpd-sf05b-stage2b.yml"
+  pull_request:
+    paths:
+      - "mechinterp/bpd/theory/sf05b_stage2b_closure/**"
+      - ".github/workflows/bpd-sf05b-stage2b.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  frozen-four-arm-excluded-roots:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pinned CPU torch
+        run: python -m pip install "torch==2.5.1"
+      - name: Verify source SHA lock, four arms and reserved-root exclusion
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json,subprocess
+          from pathlib import Path
+          root=Path('mechinterp/bpd/theory/sf05b_stage2b_closure')
+          lock=json.loads((root/'LOCK.json').read_text())
+          assert lock['status']=='CODE_HASHES_FROZEN_BEFORE_EXCLUDED_ROOT_4_ARM_HELDOUT_EVALUATION'
+          assert lock['excluded_roots']==[901,902]
+          assert lock['new_calibration_roots']==0 and lock['new_confirmation_roots']==0
+          assert lock['arms']=={'baseline':[0,0],'current_only':[1,0],'public_only':[0,1],'joint':[1,1]}
+          for p,sha in lock['files'].items():
+              actual=subprocess.check_output(['git','hash-object',str(root/p)],text=True).strip()
+              assert actual==sha,(p,actual,sha)
+          for p,sha in lock['upstream_source_blobs'].items():
+              actual=subprocess.check_output(['git','hash-object',p],text=True).strip()
+              assert actual==sha,(p,actual,sha)
+          print('SF05B Stage2-B source HASH LOCK verified before eight teacher ablations')
+          PY
+      - name: Train-only objective baseline parity, no heldout unit tests
+        run: python -m unittest discover -s mechinterp/bpd/theory/sf05b_stage2b_closure/tests -v
+      - name: Native baseline physical BPD seven-call numerical parity
+        run: python -m mechinterp.bpd.theory.sf05b_stage1.native_parity
+      - name: Train four objective arms on excluded roots and evaluate source-disjoint histories
+        shell: bash
+        run: |
+          python -m mechinterp.bpd.theory.sf05b_stage2b_closure.experiment \
+            --roots 901 902 --samples 512 --shams 16 \
+            --teacher-updates 2600 --factor-updates 450 \
+            --policy-updates 240 --out /tmp/sf05b_stage2b_excluded_raw.json \
+            > /tmp/sf05b_stage2b_stdout.json
+      - name: Report all objectives including failed teacher/public gates
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json,math
+          x=json.load(open('/tmp/sf05b_stage2b_excluded_raw.json'))
+          assert x['roots']==[901,902]
+          assert x['arms']==['baseline','current_only','public_only','joint']
+          assert len(x['rows'])==8
+          for row in x['rows']:
+              assert row['seed'] in (901,902)
+              assert row['policy_training']['training_family']=='train'
+              assert row['policy_training']['inference_uses_oracle'] is False
+              for name in ('authorized_unconditional','authorized_high_contrast','public_U'):
+                  c=row['cohorts'][name]
+                  assert c['retained']==512 and c['ladder']['generated']==512
+                  assert c['scores']['bpd_full_raw']['prequery_readout_max_error']<=1e-6
+                  if name=='public_U': assert c['ladder']['authorized_role_count']==0
+                  else: assert c['ladder']['authorized_role_count']==512
+              pub=row['cohorts']['public_U']
+              ua=row['cohorts']['authorized_unconditional']
+              hc=row['cohorts']['authorized_high_contrast']
+              clean_current_max=max(ua['ladder']['after_clean_then_boundary_count'],
+                                    hc['ladder']['after_clean_then_boundary_count'])
+              targets={
+                  'ood_mae':row['heldout_competence']['mae']<=.12,
+                  'public_model_mae':pub['clean_public_recipient_mae']<=.05,
+                  'clean_current_100':clean_current_max>=100,
+                  'clean_source_public_stable':pub['clean_public_source_tag_change_mean']<=.02,
+                  'learned_public_stable':pub['scores']['bpd_full_learned']['public_abs_mean']<=.02,
+              }
+              print('SF05B_STAGE2B='+json.dumps({
+                  'seed':row['seed'],'arm':row['arm'],
+                  'train_closure':row['train_closure'],
+                  'ood_mae':row['heldout_competence']['mae'],
+                  'source_public_delta':pub['clean_public_source_tag_change_mean'],
+                  'public_model_mae':pub['clean_public_recipient_mae'],
+                  'public_learned_delta':pub['scores']['bpd_full_learned']['public_abs_mean'],
+                  'unconditional_clean_current':ua['ladder']['after_clean_then_boundary_count'],
+                  'unconditional_eligible':ua['ladder']['all_model_filters_count'],
+                  'contrast_clean_current':hc['ladder']['after_clean_then_boundary_count'],
+                  'contrast_eligible':hc['ladder']['all_model_filters_count'],
+                  'factor_mse':ua['factor_physical_mse'],
+                  'development_targets':targets,
+              }))
+          print('SF05B Stage2-B four objectives x two excluded roots complete; scientific inference=none')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sf05b-stage2b-closure-eight-arm-excluded-raw
+          path: |
+            /tmp/sf05b_stage2b_excluded_raw.json
+            /tmp/sf05b_stage2b_stdout.json

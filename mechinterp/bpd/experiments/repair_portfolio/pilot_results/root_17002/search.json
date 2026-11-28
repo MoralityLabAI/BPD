@@ -1,0 +1,8968 @@
+{
+  "candidates": [
+    {
+      "arm": "common",
+      "code": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "edit": "initial",
+      "id": "c0000",
+      "padded": false,
+      "parent": null,
+      "score": 0.00018078832363244146,
+      "slot": 0,
+      "stage": "initial"
+    },
+    {
+      "arm": "common",
+      "code": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "edit": "noop",
+      "id": "c0001",
+      "padded": false,
+      "parent": "c0000",
+      "score": 0.00018078832363244146,
+      "slot": 0,
+      "stage": "bootstrap"
+    },
+    {
+      "arm": "common",
+      "code": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "edit": "group_0:+1",
+      "id": "c0002",
+      "padded": false,
+      "parent": "c0000",
+      "score": 0.00018099132284987718,
+      "slot": 1,
+      "stage": "bootstrap"
+    },
+    {
+      "arm": "common",
+      "code": [
+        -1,
+        0,
+        0,
+        0
+      ],
+      "edit": "group_0:-1",
+      "id": "c0003",
+      "padded": false,
+      "parent": "c0000",
+      "score": 0.0002190420200349763,
+      "slot": 2,
+      "stage": "bootstrap"
+    },
+    {
+      "arm": "common",
+      "code": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "edit": "group_1:+1",
+      "id": "c0004",
+      "padded": false,
+      "parent": "c0000",
+      "score": 0.0001809242821764201,
+      "slot": 3,
+      "stage": "bootstrap"
+    },
+    {
+      "arm": "common",
+      "code": [
+        0,
+        -1,
+        0,
+        0
+      ],
+      "edit": "group_1:-1",
+      "id": "c0005",
+      "padded": false,
+      "parent": "c0000",
+      "score": 0.00018067659402731806,
+      "slot": 4,
+      "stage": "bootstrap"
+    },
+    {
+      "arm": "common",
+      "code": [
+        0,
+        0,
+        1,
+        0
+      ],
+      "edit": "group_2:+1",
+      "id": "c0006",
+      "padded": false,
+      "parent": "c0000",
+      "score": 0.0001806207001209259,
+      "slot": 5,
+      "stage": "bootstrap"
+    },
+    {
+      "arm": "common",
+      "code": [
+        0,
+        0,
+        -1,
+        0
+      ],
+      "edit": "group_2:-1",
+      "id": "c0007",
+      "padded": false,
+      "parent": "c0000",
+      "score": 0.00018095035920850933,
+      "slot": 6,
+      "stage": "bootstrap"
+    },
+    {
+      "arm": "common",
+      "code": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "edit": "group_3:+1",
+      "id": "c0008",
+      "padded": false,
+      "parent": "c0000",
+      "score": 0.00018067473138216883,
+      "slot": 7,
+      "stage": "bootstrap"
+    },
+    {
+      "arm": "common",
+      "code": [
+        0,
+        0,
+        0,
+        -1
+      ],
+      "edit": "group_3:-1",
+      "id": "c0009",
+      "padded": false,
+      "parent": "c0000",
+      "score": 0.00018092985555995256,
+      "slot": 8,
+      "stage": "bootstrap"
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        0,
+        1,
+        0
+      ],
+      "edit": "noop",
+      "id": "c0010",
+      "padded": false,
+      "parent": "c0006",
+      "score": 0.0001806207001209259,
+      "slot": 0,
+      "stage": 0
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "edit": "group_0:+1",
+      "id": "c0011",
+      "padded": false,
+      "parent": "c0006",
+      "score": 0.00018080879817716777,
+      "slot": 1,
+      "stage": 0
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        -1,
+        0,
+        1,
+        0
+      ],
+      "edit": "group_0:-1",
+      "id": "c0012",
+      "padded": false,
+      "parent": "c0006",
+      "score": 0.00021892839868087322,
+      "slot": 2,
+      "stage": 0
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        1,
+        1,
+        0
+      ],
+      "edit": "group_1:+1",
+      "id": "c0013",
+      "padded": false,
+      "parent": "c0006",
+      "score": 0.00018075667321681976,
+      "slot": 3,
+      "stage": 0
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -1,
+        1,
+        0
+      ],
+      "edit": "group_1:-1",
+      "id": "c0014",
+      "padded": false,
+      "parent": "c0006",
+      "score": 0.00018049964273814112,
+      "slot": 4,
+      "stage": 0
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        0,
+        2,
+        0
+      ],
+      "edit": "group_2:+1",
+      "id": "c0015",
+      "padded": false,
+      "parent": "c0006",
+      "score": 0.0001804829080356285,
+      "slot": 5,
+      "stage": 0
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "edit": "group_2:-1",
+      "id": "c0016",
+      "padded": false,
+      "parent": "c0006",
+      "score": 0.00018078832363244146,
+      "slot": 6,
+      "stage": 0
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "edit": "group_3:+1",
+      "id": "c0017",
+      "padded": false,
+      "parent": "c0006",
+      "score": 0.00018051083316095173,
+      "slot": 7,
+      "stage": 0
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        0,
+        1,
+        -1
+      ],
+      "edit": "group_3:-1",
+      "id": "c0018",
+      "padded": false,
+      "parent": "c0006",
+      "score": 0.000180760383955203,
+      "slot": 8,
+      "stage": 0
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        0,
+        2,
+        0
+      ],
+      "edit": "noop",
+      "id": "c0019",
+      "padded": false,
+      "parent": "c0015",
+      "score": 0.0001804829080356285,
+      "slot": 0,
+      "stage": 1
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        1,
+        0,
+        2,
+        0
+      ],
+      "edit": "group_0:+1",
+      "id": "c0020",
+      "padded": false,
+      "parent": "c0015",
+      "score": 0.0001806747168302536,
+      "slot": 1,
+      "stage": 1
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        -1,
+        0,
+        2,
+        0
+      ],
+      "edit": "group_0:-1",
+      "id": "c0021",
+      "padded": false,
+      "parent": "c0015",
+      "score": 0.00021890975767746568,
+      "slot": 2,
+      "stage": 1
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        1,
+        2,
+        0
+      ],
+      "edit": "group_1:+1",
+      "id": "c0022",
+      "padded": false,
+      "parent": "c0015",
+      "score": 0.00018061512673739344,
+      "slot": 3,
+      "stage": 1
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -1,
+        2,
+        0
+      ],
+      "edit": "group_1:-1",
+      "id": "c0023",
+      "padded": false,
+      "parent": "c0015",
+      "score": 0.00018036371329799294,
+      "slot": 4,
+      "stage": 1
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        0,
+        2,
+        0
+      ],
+      "edit": "group_2:+1",
+      "id": "c0024",
+      "padded": true,
+      "parent": "c0015",
+      "score": 0.0001804829080356285,
+      "slot": 5,
+      "stage": 1
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        0,
+        1,
+        0
+      ],
+      "edit": "group_2:-1",
+      "id": "c0025",
+      "padded": false,
+      "parent": "c0015",
+      "score": 0.0001806207001209259,
+      "slot": 6,
+      "stage": 1
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        0,
+        2,
+        1
+      ],
+      "edit": "group_3:+1",
+      "id": "c0026",
+      "padded": false,
+      "parent": "c0015",
+      "score": 0.0001803674385882914,
+      "slot": 7,
+      "stage": 1
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        0,
+        2,
+        -1
+      ],
+      "edit": "group_3:-1",
+      "id": "c0027",
+      "padded": false,
+      "parent": "c0015",
+      "score": 0.0001806151121854782,
+      "slot": 8,
+      "stage": 1
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -1,
+        2,
+        0
+      ],
+      "edit": "noop",
+      "id": "c0028",
+      "padded": false,
+      "parent": "c0023",
+      "score": 0.00018036371329799294,
+      "slot": 0,
+      "stage": 2
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        1,
+        -1,
+        2,
+        0
+      ],
+      "edit": "group_0:+1",
+      "id": "c0029",
+      "padded": false,
+      "parent": "c0023",
+      "score": 0.00018052571977023035,
+      "slot": 1,
+      "stage": 2
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        -1,
+        -1,
+        2,
+        0
+      ],
+      "edit": "group_0:-1",
+      "id": "c0030",
+      "padded": false,
+      "parent": "c0023",
+      "score": 0.00021904197637923062,
+      "slot": 2,
+      "stage": 2
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        0,
+        2,
+        0
+      ],
+      "edit": "group_1:+1",
+      "id": "c0031",
+      "padded": false,
+      "parent": "c0023",
+      "score": 0.0001804829080356285,
+      "slot": 3,
+      "stage": 2
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        0
+      ],
+      "edit": "group_1:-1",
+      "id": "c0032",
+      "padded": false,
+      "parent": "c0023",
+      "score": 0.00018033206288237125,
+      "slot": 4,
+      "stage": 2
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -1,
+        2,
+        0
+      ],
+      "edit": "group_2:+1",
+      "id": "c0033",
+      "padded": true,
+      "parent": "c0023",
+      "score": 0.00018036371329799294,
+      "slot": 5,
+      "stage": 2
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -1,
+        1,
+        0
+      ],
+      "edit": "group_2:-1",
+      "id": "c0034",
+      "padded": false,
+      "parent": "c0023",
+      "score": 0.00018049964273814112,
+      "slot": 6,
+      "stage": 2
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -1,
+        2,
+        1
+      ],
+      "edit": "group_3:+1",
+      "id": "c0035",
+      "padded": false,
+      "parent": "c0023",
+      "score": 0.0001802277547540143,
+      "slot": 7,
+      "stage": 2
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -1,
+        2,
+        -1
+      ],
+      "edit": "group_3:-1",
+      "id": "c0036",
+      "padded": false,
+      "parent": "c0023",
+      "score": 0.00018051454389933497,
+      "slot": 8,
+      "stage": 2
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -1,
+        2,
+        1
+      ],
+      "edit": "noop",
+      "id": "c0037",
+      "padded": false,
+      "parent": "c0035",
+      "score": 0.0001802277547540143,
+      "slot": 0,
+      "stage": 3
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        1,
+        -1,
+        2,
+        1
+      ],
+      "edit": "group_0:+1",
+      "id": "c0038",
+      "padded": false,
+      "parent": "c0035",
+      "score": 0.00018041212751995772,
+      "slot": 1,
+      "stage": 3
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        -1,
+        -1,
+        2,
+        1
+      ],
+      "edit": "group_0:-1",
+      "id": "c0039",
+      "padded": false,
+      "parent": "c0035",
+      "score": 0.0002186136698583141,
+      "slot": 2,
+      "stage": 3
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        0,
+        2,
+        1
+      ],
+      "edit": "group_1:+1",
+      "id": "c0040",
+      "padded": false,
+      "parent": "c0035",
+      "score": 0.0001803674385882914,
+      "slot": 3,
+      "stage": 3
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        1
+      ],
+      "edit": "group_1:-1",
+      "id": "c0041",
+      "padded": false,
+      "parent": "c0035",
+      "score": 0.000180183065822348,
+      "slot": 4,
+      "stage": 3
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -1,
+        2,
+        1
+      ],
+      "edit": "group_2:+1",
+      "id": "c0042",
+      "padded": true,
+      "parent": "c0035",
+      "score": 0.0001802277547540143,
+      "slot": 5,
+      "stage": 3
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -1,
+        1,
+        1
+      ],
+      "edit": "group_2:-1",
+      "id": "c0043",
+      "padded": false,
+      "parent": "c0035",
+      "score": 0.00018036931578535587,
+      "slot": 6,
+      "stage": 3
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_3:+1",
+      "id": "c0044",
+      "padded": false,
+      "parent": "c0035",
+      "score": 0.0001801197649911046,
+      "slot": 7,
+      "stage": 3
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -1,
+        2,
+        0
+      ],
+      "edit": "group_3:-1",
+      "id": "c0045",
+      "padded": false,
+      "parent": "c0035",
+      "score": 0.00018036371329799294,
+      "slot": 8,
+      "stage": 3
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -1,
+        2,
+        2
+      ],
+      "edit": "noop",
+      "id": "c0046",
+      "padded": false,
+      "parent": "c0044",
+      "score": 0.0001801197649911046,
+      "slot": 0,
+      "stage": 4
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        1,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_0:+1",
+      "id": "c0047",
+      "padded": false,
+      "parent": "c0044",
+      "score": 0.0001803209015633911,
+      "slot": 1,
+      "stage": 4
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        -1,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_0:-1",
+      "id": "c0048",
+      "padded": false,
+      "parent": "c0044",
+      "score": 0.00021828780882060528,
+      "slot": 2,
+      "stage": 4
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        0,
+        2,
+        2
+      ],
+      "edit": "group_1:+1",
+      "id": "c0049",
+      "padded": false,
+      "parent": "c0044",
+      "score": 0.00018028737395070493,
+      "slot": 3,
+      "stage": 4
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_1:-1",
+      "id": "c0050",
+      "padded": false,
+      "parent": "c0044",
+      "score": 0.0001800750760594383,
+      "slot": 4,
+      "stage": 4
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_2:+1",
+      "id": "c0051",
+      "padded": true,
+      "parent": "c0044",
+      "score": 0.0001801197649911046,
+      "slot": 5,
+      "stage": 4
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -1,
+        1,
+        2
+      ],
+      "edit": "group_2:-1",
+      "id": "c0052",
+      "padded": false,
+      "parent": "c0044",
+      "score": 0.00018026317411568016,
+      "slot": 6,
+      "stage": 4
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_3:+1",
+      "id": "c0053",
+      "padded": true,
+      "parent": "c0044",
+      "score": 0.0001801197649911046,
+      "slot": 7,
+      "stage": 4
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -1,
+        2,
+        1
+      ],
+      "edit": "group_3:-1",
+      "id": "c0054",
+      "padded": false,
+      "parent": "c0044",
+      "score": 0.0001802277547540143,
+      "slot": 8,
+      "stage": 4
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "noop",
+      "id": "c0055",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 0,
+      "stage": 5
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        1,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_0:+1",
+      "id": "c0056",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.0001802668848540634,
+      "slot": 1,
+      "stage": 5
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        -1,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_0:-1",
+      "id": "c0057",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.00021830083278473467,
+      "slot": 2,
+      "stage": 5
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_1:+1",
+      "id": "c0058",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.0001801197649911046,
+      "slot": 3,
+      "stage": 5
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_1:-1",
+      "id": "c0059",
+      "padded": true,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 4,
+      "stage": 5
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_2:+1",
+      "id": "c0060",
+      "padded": true,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 5,
+      "stage": 5
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        1,
+        2
+      ],
+      "edit": "group_2:-1",
+      "id": "c0061",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.00018021847063209862,
+      "slot": 6,
+      "stage": 5
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_3:+1",
+      "id": "c0062",
+      "padded": true,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 7,
+      "stage": 5
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        1
+      ],
+      "edit": "group_3:-1",
+      "id": "c0063",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.000180183065822348,
+      "slot": 8,
+      "stage": 5
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "noop",
+      "id": "c0064",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 0,
+      "stage": 6
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        1,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_0:+1",
+      "id": "c0065",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.0001802668848540634,
+      "slot": 1,
+      "stage": 6
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        -1,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_0:-1",
+      "id": "c0066",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.00021830083278473467,
+      "slot": 2,
+      "stage": 6
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_1:+1",
+      "id": "c0067",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.0001801197649911046,
+      "slot": 3,
+      "stage": 6
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_1:-1",
+      "id": "c0068",
+      "padded": true,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 4,
+      "stage": 6
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_2:+1",
+      "id": "c0069",
+      "padded": true,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 5,
+      "stage": 6
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        1,
+        2
+      ],
+      "edit": "group_2:-1",
+      "id": "c0070",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.00018021847063209862,
+      "slot": 6,
+      "stage": 6
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_3:+1",
+      "id": "c0071",
+      "padded": true,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 7,
+      "stage": 6
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        1
+      ],
+      "edit": "group_3:-1",
+      "id": "c0072",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.000180183065822348,
+      "slot": 8,
+      "stage": 6
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "noop",
+      "id": "c0073",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 0,
+      "stage": 7
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        1,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_0:+1",
+      "id": "c0074",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.0001802668848540634,
+      "slot": 1,
+      "stage": 7
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        -1,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_0:-1",
+      "id": "c0075",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.00021830083278473467,
+      "slot": 2,
+      "stage": 7
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_1:+1",
+      "id": "c0076",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.0001801197649911046,
+      "slot": 3,
+      "stage": 7
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_1:-1",
+      "id": "c0077",
+      "padded": true,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 4,
+      "stage": 7
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_2:+1",
+      "id": "c0078",
+      "padded": true,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 5,
+      "stage": 7
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        1,
+        2
+      ],
+      "edit": "group_2:-1",
+      "id": "c0079",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.00018021847063209862,
+      "slot": 6,
+      "stage": 7
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_3:+1",
+      "id": "c0080",
+      "padded": true,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 7,
+      "stage": 7
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        1
+      ],
+      "edit": "group_3:-1",
+      "id": "c0081",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.000180183065822348,
+      "slot": 8,
+      "stage": 7
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "noop",
+      "id": "c0082",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 0,
+      "stage": 8
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        1,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_0:+1",
+      "id": "c0083",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.0001802668848540634,
+      "slot": 1,
+      "stage": 8
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        -1,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_0:-1",
+      "id": "c0084",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.00021830083278473467,
+      "slot": 2,
+      "stage": 8
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_1:+1",
+      "id": "c0085",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.0001801197649911046,
+      "slot": 3,
+      "stage": 8
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_1:-1",
+      "id": "c0086",
+      "padded": true,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 4,
+      "stage": 8
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_2:+1",
+      "id": "c0087",
+      "padded": true,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 5,
+      "stage": 8
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        1,
+        2
+      ],
+      "edit": "group_2:-1",
+      "id": "c0088",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.00018021847063209862,
+      "slot": 6,
+      "stage": 8
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_3:+1",
+      "id": "c0089",
+      "padded": true,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 7,
+      "stage": 8
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        1
+      ],
+      "edit": "group_3:-1",
+      "id": "c0090",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.000180183065822348,
+      "slot": 8,
+      "stage": 8
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "noop",
+      "id": "c0091",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 0,
+      "stage": 9
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        1,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_0:+1",
+      "id": "c0092",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.0001802668848540634,
+      "slot": 1,
+      "stage": 9
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        -1,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_0:-1",
+      "id": "c0093",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.00021830083278473467,
+      "slot": 2,
+      "stage": 9
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_1:+1",
+      "id": "c0094",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.0001801197649911046,
+      "slot": 3,
+      "stage": 9
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_1:-1",
+      "id": "c0095",
+      "padded": true,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 4,
+      "stage": 9
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_2:+1",
+      "id": "c0096",
+      "padded": true,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 5,
+      "stage": 9
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        1,
+        2
+      ],
+      "edit": "group_2:-1",
+      "id": "c0097",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.00018021847063209862,
+      "slot": 6,
+      "stage": 9
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_3:+1",
+      "id": "c0098",
+      "padded": true,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 7,
+      "stage": 9
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        1
+      ],
+      "edit": "group_3:-1",
+      "id": "c0099",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.000180183065822348,
+      "slot": 8,
+      "stage": 9
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "noop",
+      "id": "c0100",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 0,
+      "stage": 10
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        1,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_0:+1",
+      "id": "c0101",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.0001802668848540634,
+      "slot": 1,
+      "stage": 10
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        -1,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_0:-1",
+      "id": "c0102",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.00021830083278473467,
+      "slot": 2,
+      "stage": 10
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_1:+1",
+      "id": "c0103",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.0001801197649911046,
+      "slot": 3,
+      "stage": 10
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_1:-1",
+      "id": "c0104",
+      "padded": true,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 4,
+      "stage": 10
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_2:+1",
+      "id": "c0105",
+      "padded": true,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 5,
+      "stage": 10
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        1,
+        2
+      ],
+      "edit": "group_2:-1",
+      "id": "c0106",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.00018021847063209862,
+      "slot": 6,
+      "stage": 10
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_3:+1",
+      "id": "c0107",
+      "padded": true,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 7,
+      "stage": 10
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        1
+      ],
+      "edit": "group_3:-1",
+      "id": "c0108",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.000180183065822348,
+      "slot": 8,
+      "stage": 10
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "noop",
+      "id": "c0109",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 0,
+      "stage": 11
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        1,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_0:+1",
+      "id": "c0110",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.0001802668848540634,
+      "slot": 1,
+      "stage": 11
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        -1,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_0:-1",
+      "id": "c0111",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.00021830083278473467,
+      "slot": 2,
+      "stage": 11
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_1:+1",
+      "id": "c0112",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.0001801197649911046,
+      "slot": 3,
+      "stage": 11
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_1:-1",
+      "id": "c0113",
+      "padded": true,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 4,
+      "stage": 11
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_2:+1",
+      "id": "c0114",
+      "padded": true,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 5,
+      "stage": 11
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        1,
+        2
+      ],
+      "edit": "group_2:-1",
+      "id": "c0115",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.00018021847063209862,
+      "slot": 6,
+      "stage": 11
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_3:+1",
+      "id": "c0116",
+      "padded": true,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 7,
+      "stage": 11
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        1
+      ],
+      "edit": "group_3:-1",
+      "id": "c0117",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.000180183065822348,
+      "slot": 8,
+      "stage": 11
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "noop",
+      "id": "c0118",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 0,
+      "stage": 12
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        1,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_0:+1",
+      "id": "c0119",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.0001802668848540634,
+      "slot": 1,
+      "stage": 12
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        -1,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_0:-1",
+      "id": "c0120",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.00021830083278473467,
+      "slot": 2,
+      "stage": 12
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_1:+1",
+      "id": "c0121",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.0001801197649911046,
+      "slot": 3,
+      "stage": 12
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_1:-1",
+      "id": "c0122",
+      "padded": true,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 4,
+      "stage": 12
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_2:+1",
+      "id": "c0123",
+      "padded": true,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 5,
+      "stage": 12
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        1,
+        2
+      ],
+      "edit": "group_2:-1",
+      "id": "c0124",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.00018021847063209862,
+      "slot": 6,
+      "stage": 12
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_3:+1",
+      "id": "c0125",
+      "padded": true,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 7,
+      "stage": 12
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        1
+      ],
+      "edit": "group_3:-1",
+      "id": "c0126",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.000180183065822348,
+      "slot": 8,
+      "stage": 12
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "noop",
+      "id": "c0127",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 0,
+      "stage": 13
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        1,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_0:+1",
+      "id": "c0128",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.0001802668848540634,
+      "slot": 1,
+      "stage": 13
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        -1,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_0:-1",
+      "id": "c0129",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.00021830083278473467,
+      "slot": 2,
+      "stage": 13
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_1:+1",
+      "id": "c0130",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.0001801197649911046,
+      "slot": 3,
+      "stage": 13
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_1:-1",
+      "id": "c0131",
+      "padded": true,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 4,
+      "stage": 13
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_2:+1",
+      "id": "c0132",
+      "padded": true,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 5,
+      "stage": 13
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        1,
+        2
+      ],
+      "edit": "group_2:-1",
+      "id": "c0133",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.00018021847063209862,
+      "slot": 6,
+      "stage": 13
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_3:+1",
+      "id": "c0134",
+      "padded": true,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 7,
+      "stage": 13
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        1
+      ],
+      "edit": "group_3:-1",
+      "id": "c0135",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.000180183065822348,
+      "slot": 8,
+      "stage": 13
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "noop",
+      "id": "c0136",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 0,
+      "stage": 14
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        1,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_0:+1",
+      "id": "c0137",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.0001802668848540634,
+      "slot": 1,
+      "stage": 14
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        -1,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_0:-1",
+      "id": "c0138",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.00021830083278473467,
+      "slot": 2,
+      "stage": 14
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_1:+1",
+      "id": "c0139",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.0001801197649911046,
+      "slot": 3,
+      "stage": 14
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_1:-1",
+      "id": "c0140",
+      "padded": true,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 4,
+      "stage": 14
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_2:+1",
+      "id": "c0141",
+      "padded": true,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 5,
+      "stage": 14
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        1,
+        2
+      ],
+      "edit": "group_2:-1",
+      "id": "c0142",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.00018021847063209862,
+      "slot": 6,
+      "stage": 14
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_3:+1",
+      "id": "c0143",
+      "padded": true,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 7,
+      "stage": 14
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        1
+      ],
+      "edit": "group_3:-1",
+      "id": "c0144",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.000180183065822348,
+      "slot": 8,
+      "stage": 14
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "noop",
+      "id": "c0145",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 0,
+      "stage": 15
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        1,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_0:+1",
+      "id": "c0146",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.0001802668848540634,
+      "slot": 1,
+      "stage": 15
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        -1,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_0:-1",
+      "id": "c0147",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.00021830083278473467,
+      "slot": 2,
+      "stage": 15
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_1:+1",
+      "id": "c0148",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.0001801197649911046,
+      "slot": 3,
+      "stage": 15
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_1:-1",
+      "id": "c0149",
+      "padded": true,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 4,
+      "stage": 15
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_2:+1",
+      "id": "c0150",
+      "padded": true,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 5,
+      "stage": 15
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        1,
+        2
+      ],
+      "edit": "group_2:-1",
+      "id": "c0151",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.00018021847063209862,
+      "slot": 6,
+      "stage": 15
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_3:+1",
+      "id": "c0152",
+      "padded": true,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 7,
+      "stage": 15
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        1
+      ],
+      "edit": "group_3:-1",
+      "id": "c0153",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.000180183065822348,
+      "slot": 8,
+      "stage": 15
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "noop",
+      "id": "c0154",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 0,
+      "stage": 16
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        1,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_0:+1",
+      "id": "c0155",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.0001802668848540634,
+      "slot": 1,
+      "stage": 16
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        -1,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_0:-1",
+      "id": "c0156",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.00021830083278473467,
+      "slot": 2,
+      "stage": 16
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_1:+1",
+      "id": "c0157",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.0001801197649911046,
+      "slot": 3,
+      "stage": 16
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_1:-1",
+      "id": "c0158",
+      "padded": true,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 4,
+      "stage": 16
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_2:+1",
+      "id": "c0159",
+      "padded": true,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 5,
+      "stage": 16
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        1,
+        2
+      ],
+      "edit": "group_2:-1",
+      "id": "c0160",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.00018021847063209862,
+      "slot": 6,
+      "stage": 16
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_3:+1",
+      "id": "c0161",
+      "padded": true,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 7,
+      "stage": 16
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        1
+      ],
+      "edit": "group_3:-1",
+      "id": "c0162",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.000180183065822348,
+      "slot": 8,
+      "stage": 16
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "noop",
+      "id": "c0163",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 0,
+      "stage": 17
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        1,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_0:+1",
+      "id": "c0164",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.0001802668848540634,
+      "slot": 1,
+      "stage": 17
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        -1,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_0:-1",
+      "id": "c0165",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.00021830083278473467,
+      "slot": 2,
+      "stage": 17
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_1:+1",
+      "id": "c0166",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.0001801197649911046,
+      "slot": 3,
+      "stage": 17
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_1:-1",
+      "id": "c0167",
+      "padded": true,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 4,
+      "stage": 17
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_2:+1",
+      "id": "c0168",
+      "padded": true,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 5,
+      "stage": 17
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        1,
+        2
+      ],
+      "edit": "group_2:-1",
+      "id": "c0169",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.00018021847063209862,
+      "slot": 6,
+      "stage": 17
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_3:+1",
+      "id": "c0170",
+      "padded": true,
+      "parent": "c0050",
+      "score": 0.0001800750760594383,
+      "slot": 7,
+      "stage": 17
+    },
+    {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        1
+      ],
+      "edit": "group_3:-1",
+      "id": "c0171",
+      "padded": false,
+      "parent": "c0050",
+      "score": 0.000180183065822348,
+      "slot": 8,
+      "stage": 17
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        0,
+        1,
+        0
+      ],
+      "edit": "noop",
+      "id": "c0172",
+      "padded": false,
+      "parent": "c0006",
+      "score": 0.0001806207001209259,
+      "slot": 0,
+      "stage": "round_0:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "edit": "group_0:+1",
+      "id": "c0173",
+      "padded": false,
+      "parent": "c0006",
+      "score": 0.00018080879817716777,
+      "slot": 1,
+      "stage": "round_0:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        -1,
+        0,
+        1,
+        0
+      ],
+      "edit": "group_0:-1",
+      "id": "c0174",
+      "padded": false,
+      "parent": "c0006",
+      "score": 0.00021892839868087322,
+      "slot": 2,
+      "stage": "round_0:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        1,
+        1,
+        0
+      ],
+      "edit": "group_1:+1",
+      "id": "c0175",
+      "padded": false,
+      "parent": "c0006",
+      "score": 0.00018075667321681976,
+      "slot": 3,
+      "stage": "round_0:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        1,
+        0
+      ],
+      "edit": "group_1:-1",
+      "id": "c0176",
+      "padded": false,
+      "parent": "c0006",
+      "score": 0.00018049964273814112,
+      "slot": 4,
+      "stage": "round_0:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        0,
+        2,
+        0
+      ],
+      "edit": "group_2:+1",
+      "id": "c0177",
+      "padded": false,
+      "parent": "c0006",
+      "score": 0.0001804829080356285,
+      "slot": 5,
+      "stage": "round_0:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "edit": "group_2:-1",
+      "id": "c0178",
+      "padded": false,
+      "parent": "c0006",
+      "score": 0.00018078832363244146,
+      "slot": 6,
+      "stage": "round_0:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "edit": "group_3:+1",
+      "id": "c0179",
+      "padded": false,
+      "parent": "c0006",
+      "score": 0.00018051083316095173,
+      "slot": 7,
+      "stage": "round_0:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        0,
+        1,
+        -1
+      ],
+      "edit": "group_3:-1",
+      "id": "c0180",
+      "padded": false,
+      "parent": "c0006",
+      "score": 0.000180760383955203,
+      "slot": 8,
+      "stage": "round_0:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "edit": "noop",
+      "id": "c0181",
+      "padded": false,
+      "parent": "c0008",
+      "score": 0.00018067473138216883,
+      "slot": 0,
+      "stage": "round_0:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "edit": "group_0:+1",
+      "id": "c0182",
+      "padded": false,
+      "parent": "c0008",
+      "score": 0.00018088702927343547,
+      "slot": 1,
+      "stage": "round_0:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        -1,
+        0,
+        0,
+        1
+      ],
+      "edit": "group_0:-1",
+      "id": "c0183",
+      "padded": false,
+      "parent": "c0008",
+      "score": 0.00021865658345632255,
+      "slot": 2,
+      "stage": "round_0:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        1,
+        0,
+        1
+      ],
+      "edit": "group_1:+1",
+      "id": "c0184",
+      "padded": false,
+      "parent": "c0008",
+      "score": 0.00018083488976117224,
+      "slot": 3,
+      "stage": "round_0:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        0,
+        1
+      ],
+      "edit": "group_1:-1",
+      "id": "c0185",
+      "padded": false,
+      "parent": "c0008",
+      "score": 0.00018054249812848866,
+      "slot": 4,
+      "stage": "round_0:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "edit": "group_2:+1",
+      "id": "c0186",
+      "padded": false,
+      "parent": "c0008",
+      "score": 0.00018051083316095173,
+      "slot": 5,
+      "stage": "round_0:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        0,
+        -1,
+        1
+      ],
+      "edit": "group_2:-1",
+      "id": "c0187",
+      "padded": false,
+      "parent": "c0008",
+      "score": 0.00018083488976117224,
+      "slot": 6,
+      "stage": "round_0:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        0,
+        0,
+        2
+      ],
+      "edit": "group_3:+1",
+      "id": "c0188",
+      "padded": false,
+      "parent": "c0008",
+      "score": 0.00018059652938973159,
+      "slot": 7,
+      "stage": "round_0:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "edit": "group_3:-1",
+      "id": "c0189",
+      "padded": false,
+      "parent": "c0008",
+      "score": 0.00018078832363244146,
+      "slot": 8,
+      "stage": "round_0:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        0,
+        0
+      ],
+      "edit": "noop",
+      "id": "c0190",
+      "padded": false,
+      "parent": "c0005",
+      "score": 0.00018067659402731806,
+      "slot": 0,
+      "stage": "round_0:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        1,
+        -1,
+        0,
+        0
+      ],
+      "edit": "group_0:+1",
+      "id": "c0191",
+      "padded": false,
+      "parent": "c0005",
+      "score": 0.00018084603652823716,
+      "slot": 1,
+      "stage": "round_0:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        -1,
+        -1,
+        0,
+        0
+      ],
+      "edit": "group_0:-1",
+      "id": "c0192",
+      "padded": false,
+      "parent": "c0005",
+      "score": 0.00021918911079410464,
+      "slot": 2,
+      "stage": "round_0:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "edit": "group_1:+1",
+      "id": "c0193",
+      "padded": false,
+      "parent": "c0005",
+      "score": 0.00018078832363244146,
+      "slot": 3,
+      "stage": "round_0:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -2,
+        0,
+        0
+      ],
+      "edit": "group_1:-1",
+      "id": "c0194",
+      "padded": false,
+      "parent": "c0005",
+      "score": 0.0001806430664146319,
+      "slot": 4,
+      "stage": "round_0:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        1,
+        0
+      ],
+      "edit": "group_2:+1",
+      "id": "c0195",
+      "padded": false,
+      "parent": "c0005",
+      "score": 0.00018049964273814112,
+      "slot": 5,
+      "stage": "round_0:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        -1,
+        0
+      ],
+      "edit": "group_2:-1",
+      "id": "c0196",
+      "padded": false,
+      "parent": "c0005",
+      "score": 0.00018083675240632147,
+      "slot": 6,
+      "stage": "round_0:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        0,
+        1
+      ],
+      "edit": "group_3:+1",
+      "id": "c0197",
+      "padded": false,
+      "parent": "c0005",
+      "score": 0.00018054249812848866,
+      "slot": 7,
+      "stage": "round_0:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        0,
+        -1
+      ],
+      "edit": "group_3:-1",
+      "id": "c0198",
+      "padded": false,
+      "parent": "c0005",
+      "score": 0.00018083113536704332,
+      "slot": 8,
+      "stage": "round_0:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        0,
+        2,
+        0
+      ],
+      "edit": "noop",
+      "id": "c0199",
+      "padded": false,
+      "parent": "c0177",
+      "score": 0.0001804829080356285,
+      "slot": 0,
+      "stage": "round_1:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        1,
+        0,
+        2,
+        0
+      ],
+      "edit": "group_0:+1",
+      "id": "c0200",
+      "padded": false,
+      "parent": "c0177",
+      "score": 0.0001806747168302536,
+      "slot": 1,
+      "stage": "round_1:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        -1,
+        0,
+        2,
+        0
+      ],
+      "edit": "group_0:-1",
+      "id": "c0201",
+      "padded": false,
+      "parent": "c0177",
+      "score": 0.00021890975767746568,
+      "slot": 2,
+      "stage": "round_1:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        1,
+        2,
+        0
+      ],
+      "edit": "group_1:+1",
+      "id": "c0202",
+      "padded": false,
+      "parent": "c0177",
+      "score": 0.00018061512673739344,
+      "slot": 3,
+      "stage": "round_1:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        2,
+        0
+      ],
+      "edit": "group_1:-1",
+      "id": "c0203",
+      "padded": false,
+      "parent": "c0177",
+      "score": 0.00018036371329799294,
+      "slot": 4,
+      "stage": "round_1:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        0,
+        2,
+        0
+      ],
+      "edit": "group_2:+1",
+      "id": "c0204",
+      "padded": true,
+      "parent": "c0177",
+      "score": 0.0001804829080356285,
+      "slot": 5,
+      "stage": "round_1:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        0,
+        1,
+        0
+      ],
+      "edit": "group_2:-1",
+      "id": "c0205",
+      "padded": false,
+      "parent": "c0177",
+      "score": 0.0001806207001209259,
+      "slot": 6,
+      "stage": "round_1:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        0,
+        2,
+        1
+      ],
+      "edit": "group_3:+1",
+      "id": "c0206",
+      "padded": false,
+      "parent": "c0177",
+      "score": 0.0001803674385882914,
+      "slot": 7,
+      "stage": "round_1:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        0,
+        2,
+        -1
+      ],
+      "edit": "group_3:-1",
+      "id": "c0207",
+      "padded": false,
+      "parent": "c0177",
+      "score": 0.0001806151121854782,
+      "slot": 8,
+      "stage": "round_1:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "edit": "noop",
+      "id": "c0208",
+      "padded": false,
+      "parent": "c0186",
+      "score": 0.00018051083316095173,
+      "slot": 0,
+      "stage": "round_1:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        1,
+        0,
+        1,
+        1
+      ],
+      "edit": "group_0:+1",
+      "id": "c0209",
+      "padded": false,
+      "parent": "c0186",
+      "score": 0.00018072502280119807,
+      "slot": 1,
+      "stage": "round_1:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        -1,
+        0,
+        1,
+        1
+      ],
+      "edit": "group_0:-1",
+      "id": "c0210",
+      "padded": false,
+      "parent": "c0186",
+      "score": 0.0002185541088692844,
+      "slot": 2,
+      "stage": "round_1:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        1,
+        1,
+        1
+      ],
+      "edit": "group_1:+1",
+      "id": "c0211",
+      "padded": false,
+      "parent": "c0186",
+      "score": 0.0001806728687370196,
+      "slot": 3,
+      "stage": "round_1:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        1,
+        1
+      ],
+      "edit": "group_1:-1",
+      "id": "c0212",
+      "padded": false,
+      "parent": "c0186",
+      "score": 0.00018036931578535587,
+      "slot": 4,
+      "stage": "round_1:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        0,
+        2,
+        1
+      ],
+      "edit": "group_2:+1",
+      "id": "c0213",
+      "padded": false,
+      "parent": "c0186",
+      "score": 0.0001803674385882914,
+      "slot": 5,
+      "stage": "round_1:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "edit": "group_2:-1",
+      "id": "c0214",
+      "padded": false,
+      "parent": "c0186",
+      "score": 0.00018067473138216883,
+      "slot": 6,
+      "stage": "round_1:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        0,
+        1,
+        2
+      ],
+      "edit": "group_3:+1",
+      "id": "c0215",
+      "padded": false,
+      "parent": "c0186",
+      "score": 0.00018042705778498203,
+      "slot": 7,
+      "stage": "round_1:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        0,
+        1,
+        0
+      ],
+      "edit": "group_3:-1",
+      "id": "c0216",
+      "padded": false,
+      "parent": "c0186",
+      "score": 0.0001806207001209259,
+      "slot": 8,
+      "stage": "round_1:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        1,
+        0
+      ],
+      "edit": "noop",
+      "id": "c0217",
+      "padded": false,
+      "parent": "c0195",
+      "score": 0.00018049964273814112,
+      "slot": 0,
+      "stage": "round_1:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        1,
+        -1,
+        1,
+        0
+      ],
+      "edit": "group_0:+1",
+      "id": "c0218",
+      "padded": false,
+      "parent": "c0195",
+      "score": 0.00018067657947540283,
+      "slot": 1,
+      "stage": "round_1:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        -1,
+        -1,
+        1,
+        0
+      ],
+      "edit": "group_0:-1",
+      "id": "c0219",
+      "padded": false,
+      "parent": "c0195",
+      "score": 0.0002190829545725137,
+      "slot": 2,
+      "stage": "round_1:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        0,
+        1,
+        0
+      ],
+      "edit": "group_1:+1",
+      "id": "c0220",
+      "padded": false,
+      "parent": "c0195",
+      "score": 0.0001806207001209259,
+      "slot": 3,
+      "stage": "round_1:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -2,
+        1,
+        0
+      ],
+      "edit": "group_1:-1",
+      "id": "c0221",
+      "padded": false,
+      "parent": "c0195",
+      "score": 0.00018047359480988234,
+      "slot": 4,
+      "stage": "round_1:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        2,
+        0
+      ],
+      "edit": "group_2:+1",
+      "id": "c0222",
+      "padded": false,
+      "parent": "c0195",
+      "score": 0.00018036371329799294,
+      "slot": 5,
+      "stage": "round_1:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        0,
+        0
+      ],
+      "edit": "group_2:-1",
+      "id": "c0223",
+      "padded": false,
+      "parent": "c0195",
+      "score": 0.00018067659402731806,
+      "slot": 6,
+      "stage": "round_1:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        1,
+        1
+      ],
+      "edit": "group_3:+1",
+      "id": "c0224",
+      "padded": false,
+      "parent": "c0195",
+      "score": 0.00018036931578535587,
+      "slot": 7,
+      "stage": "round_1:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        1,
+        -1
+      ],
+      "edit": "group_3:-1",
+      "id": "c0225",
+      "padded": false,
+      "parent": "c0195",
+      "score": 0.00018065981566905975,
+      "slot": 8,
+      "stage": "round_1:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        2,
+        0
+      ],
+      "edit": "noop",
+      "id": "c0226",
+      "padded": false,
+      "parent": "c0203",
+      "score": 0.00018036371329799294,
+      "slot": 0,
+      "stage": "round_2:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        1,
+        -1,
+        2,
+        0
+      ],
+      "edit": "group_0:+1",
+      "id": "c0227",
+      "padded": false,
+      "parent": "c0203",
+      "score": 0.00018052571977023035,
+      "slot": 1,
+      "stage": "round_2:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        -1,
+        -1,
+        2,
+        0
+      ],
+      "edit": "group_0:-1",
+      "id": "c0228",
+      "padded": false,
+      "parent": "c0203",
+      "score": 0.00021904197637923062,
+      "slot": 2,
+      "stage": "round_2:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        0,
+        2,
+        0
+      ],
+      "edit": "group_1:+1",
+      "id": "c0229",
+      "padded": false,
+      "parent": "c0203",
+      "score": 0.0001804829080356285,
+      "slot": 3,
+      "stage": "round_2:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -2,
+        2,
+        0
+      ],
+      "edit": "group_1:-1",
+      "id": "c0230",
+      "padded": false,
+      "parent": "c0203",
+      "score": 0.00018033206288237125,
+      "slot": 4,
+      "stage": "round_2:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        2,
+        0
+      ],
+      "edit": "group_2:+1",
+      "id": "c0231",
+      "padded": true,
+      "parent": "c0203",
+      "score": 0.00018036371329799294,
+      "slot": 5,
+      "stage": "round_2:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        1,
+        0
+      ],
+      "edit": "group_2:-1",
+      "id": "c0232",
+      "padded": false,
+      "parent": "c0203",
+      "score": 0.00018049964273814112,
+      "slot": 6,
+      "stage": "round_2:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        2,
+        1
+      ],
+      "edit": "group_3:+1",
+      "id": "c0233",
+      "padded": false,
+      "parent": "c0203",
+      "score": 0.0001802277547540143,
+      "slot": 7,
+      "stage": "round_2:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        2,
+        -1
+      ],
+      "edit": "group_3:-1",
+      "id": "c0234",
+      "padded": false,
+      "parent": "c0203",
+      "score": 0.00018051454389933497,
+      "slot": 8,
+      "stage": "round_2:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        0,
+        2,
+        1
+      ],
+      "edit": "noop",
+      "id": "c0235",
+      "padded": false,
+      "parent": "c0213",
+      "score": 0.0001803674385882914,
+      "slot": 0,
+      "stage": "round_2:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        1,
+        0,
+        2,
+        1
+      ],
+      "edit": "group_0:+1",
+      "id": "c0236",
+      "padded": false,
+      "parent": "c0213",
+      "score": 0.00018057602574117482,
+      "slot": 1,
+      "stage": "round_2:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        -1,
+        0,
+        2,
+        1
+      ],
+      "edit": "group_0:-1",
+      "id": "c0237",
+      "padded": false,
+      "parent": "c0213",
+      "score": 0.00021852432109881192,
+      "slot": 2,
+      "stage": "round_2:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        1,
+        2,
+        1
+      ],
+      "edit": "group_1:+1",
+      "id": "c0238",
+      "padded": false,
+      "parent": "c0213",
+      "score": 0.00018053691019304097,
+      "slot": 3,
+      "stage": "round_2:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        2,
+        1
+      ],
+      "edit": "group_1:-1",
+      "id": "c0239",
+      "padded": false,
+      "parent": "c0213",
+      "score": 0.0001802277547540143,
+      "slot": 4,
+      "stage": "round_2:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        0,
+        2,
+        1
+      ],
+      "edit": "group_2:+1",
+      "id": "c0240",
+      "padded": true,
+      "parent": "c0213",
+      "score": 0.0001803674385882914,
+      "slot": 5,
+      "stage": "round_2:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "edit": "group_2:-1",
+      "id": "c0241",
+      "padded": false,
+      "parent": "c0213",
+      "score": 0.00018051083316095173,
+      "slot": 6,
+      "stage": "round_2:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        0,
+        2,
+        2
+      ],
+      "edit": "group_3:+1",
+      "id": "c0242",
+      "padded": false,
+      "parent": "c0213",
+      "score": 0.00018028737395070493,
+      "slot": 7,
+      "stage": "round_2:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        0,
+        2,
+        0
+      ],
+      "edit": "group_3:-1",
+      "id": "c0243",
+      "padded": false,
+      "parent": "c0213",
+      "score": 0.0001804829080356285,
+      "slot": 8,
+      "stage": "round_2:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        2,
+        0
+      ],
+      "edit": "noop",
+      "id": "c0244",
+      "padded": false,
+      "parent": "c0222",
+      "score": 0.00018036371329799294,
+      "slot": 0,
+      "stage": "round_2:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        1,
+        -1,
+        2,
+        0
+      ],
+      "edit": "group_0:+1",
+      "id": "c0245",
+      "padded": false,
+      "parent": "c0222",
+      "score": 0.00018052571977023035,
+      "slot": 1,
+      "stage": "round_2:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        -1,
+        -1,
+        2,
+        0
+      ],
+      "edit": "group_0:-1",
+      "id": "c0246",
+      "padded": false,
+      "parent": "c0222",
+      "score": 0.00021904197637923062,
+      "slot": 2,
+      "stage": "round_2:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        0,
+        2,
+        0
+      ],
+      "edit": "group_1:+1",
+      "id": "c0247",
+      "padded": false,
+      "parent": "c0222",
+      "score": 0.0001804829080356285,
+      "slot": 3,
+      "stage": "round_2:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -2,
+        2,
+        0
+      ],
+      "edit": "group_1:-1",
+      "id": "c0248",
+      "padded": false,
+      "parent": "c0222",
+      "score": 0.00018033206288237125,
+      "slot": 4,
+      "stage": "round_2:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        2,
+        0
+      ],
+      "edit": "group_2:+1",
+      "id": "c0249",
+      "padded": true,
+      "parent": "c0222",
+      "score": 0.00018036371329799294,
+      "slot": 5,
+      "stage": "round_2:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        1,
+        0
+      ],
+      "edit": "group_2:-1",
+      "id": "c0250",
+      "padded": false,
+      "parent": "c0222",
+      "score": 0.00018049964273814112,
+      "slot": 6,
+      "stage": "round_2:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        2,
+        1
+      ],
+      "edit": "group_3:+1",
+      "id": "c0251",
+      "padded": false,
+      "parent": "c0222",
+      "score": 0.0001802277547540143,
+      "slot": 7,
+      "stage": "round_2:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        2,
+        -1
+      ],
+      "edit": "group_3:-1",
+      "id": "c0252",
+      "padded": false,
+      "parent": "c0222",
+      "score": 0.00018051454389933497,
+      "slot": 8,
+      "stage": "round_2:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        2,
+        1
+      ],
+      "edit": "noop",
+      "id": "c0253",
+      "padded": false,
+      "parent": "c0233",
+      "score": 0.0001802277547540143,
+      "slot": 0,
+      "stage": "round_3:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        1,
+        -1,
+        2,
+        1
+      ],
+      "edit": "group_0:+1",
+      "id": "c0254",
+      "padded": false,
+      "parent": "c0233",
+      "score": 0.00018041212751995772,
+      "slot": 1,
+      "stage": "round_3:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        -1,
+        -1,
+        2,
+        1
+      ],
+      "edit": "group_0:-1",
+      "id": "c0255",
+      "padded": false,
+      "parent": "c0233",
+      "score": 0.0002186136698583141,
+      "slot": 2,
+      "stage": "round_3:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        0,
+        2,
+        1
+      ],
+      "edit": "group_1:+1",
+      "id": "c0256",
+      "padded": false,
+      "parent": "c0233",
+      "score": 0.0001803674385882914,
+      "slot": 3,
+      "stage": "round_3:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -2,
+        2,
+        1
+      ],
+      "edit": "group_1:-1",
+      "id": "c0257",
+      "padded": false,
+      "parent": "c0233",
+      "score": 0.000180183065822348,
+      "slot": 4,
+      "stage": "round_3:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        2,
+        1
+      ],
+      "edit": "group_2:+1",
+      "id": "c0258",
+      "padded": true,
+      "parent": "c0233",
+      "score": 0.0001802277547540143,
+      "slot": 5,
+      "stage": "round_3:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        1,
+        1
+      ],
+      "edit": "group_2:-1",
+      "id": "c0259",
+      "padded": false,
+      "parent": "c0233",
+      "score": 0.00018036931578535587,
+      "slot": 6,
+      "stage": "round_3:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_3:+1",
+      "id": "c0260",
+      "padded": false,
+      "parent": "c0233",
+      "score": 0.0001801197649911046,
+      "slot": 7,
+      "stage": "round_3:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        2,
+        0
+      ],
+      "edit": "group_3:-1",
+      "id": "c0261",
+      "padded": false,
+      "parent": "c0233",
+      "score": 0.00018036371329799294,
+      "slot": 8,
+      "stage": "round_3:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        2,
+        1
+      ],
+      "edit": "noop",
+      "id": "c0262",
+      "padded": false,
+      "parent": "c0239",
+      "score": 0.0001802277547540143,
+      "slot": 0,
+      "stage": "round_3:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        1,
+        -1,
+        2,
+        1
+      ],
+      "edit": "group_0:+1",
+      "id": "c0263",
+      "padded": false,
+      "parent": "c0239",
+      "score": 0.00018041212751995772,
+      "slot": 1,
+      "stage": "round_3:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        -1,
+        -1,
+        2,
+        1
+      ],
+      "edit": "group_0:-1",
+      "id": "c0264",
+      "padded": false,
+      "parent": "c0239",
+      "score": 0.0002186136698583141,
+      "slot": 2,
+      "stage": "round_3:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        0,
+        2,
+        1
+      ],
+      "edit": "group_1:+1",
+      "id": "c0265",
+      "padded": false,
+      "parent": "c0239",
+      "score": 0.0001803674385882914,
+      "slot": 3,
+      "stage": "round_3:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -2,
+        2,
+        1
+      ],
+      "edit": "group_1:-1",
+      "id": "c0266",
+      "padded": false,
+      "parent": "c0239",
+      "score": 0.000180183065822348,
+      "slot": 4,
+      "stage": "round_3:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        2,
+        1
+      ],
+      "edit": "group_2:+1",
+      "id": "c0267",
+      "padded": true,
+      "parent": "c0239",
+      "score": 0.0001802277547540143,
+      "slot": 5,
+      "stage": "round_3:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        1,
+        1
+      ],
+      "edit": "group_2:-1",
+      "id": "c0268",
+      "padded": false,
+      "parent": "c0239",
+      "score": 0.00018036931578535587,
+      "slot": 6,
+      "stage": "round_3:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_3:+1",
+      "id": "c0269",
+      "padded": false,
+      "parent": "c0239",
+      "score": 0.0001801197649911046,
+      "slot": 7,
+      "stage": "round_3:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        2,
+        0
+      ],
+      "edit": "group_3:-1",
+      "id": "c0270",
+      "padded": false,
+      "parent": "c0239",
+      "score": 0.00018036371329799294,
+      "slot": 8,
+      "stage": "round_3:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        2,
+        1
+      ],
+      "edit": "noop",
+      "id": "c0271",
+      "padded": false,
+      "parent": "c0251",
+      "score": 0.0001802277547540143,
+      "slot": 0,
+      "stage": "round_3:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        1,
+        -1,
+        2,
+        1
+      ],
+      "edit": "group_0:+1",
+      "id": "c0272",
+      "padded": false,
+      "parent": "c0251",
+      "score": 0.00018041212751995772,
+      "slot": 1,
+      "stage": "round_3:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        -1,
+        -1,
+        2,
+        1
+      ],
+      "edit": "group_0:-1",
+      "id": "c0273",
+      "padded": false,
+      "parent": "c0251",
+      "score": 0.0002186136698583141,
+      "slot": 2,
+      "stage": "round_3:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        0,
+        2,
+        1
+      ],
+      "edit": "group_1:+1",
+      "id": "c0274",
+      "padded": false,
+      "parent": "c0251",
+      "score": 0.0001803674385882914,
+      "slot": 3,
+      "stage": "round_3:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -2,
+        2,
+        1
+      ],
+      "edit": "group_1:-1",
+      "id": "c0275",
+      "padded": false,
+      "parent": "c0251",
+      "score": 0.000180183065822348,
+      "slot": 4,
+      "stage": "round_3:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        2,
+        1
+      ],
+      "edit": "group_2:+1",
+      "id": "c0276",
+      "padded": true,
+      "parent": "c0251",
+      "score": 0.0001802277547540143,
+      "slot": 5,
+      "stage": "round_3:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        1,
+        1
+      ],
+      "edit": "group_2:-1",
+      "id": "c0277",
+      "padded": false,
+      "parent": "c0251",
+      "score": 0.00018036931578535587,
+      "slot": 6,
+      "stage": "round_3:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_3:+1",
+      "id": "c0278",
+      "padded": false,
+      "parent": "c0251",
+      "score": 0.0001801197649911046,
+      "slot": 7,
+      "stage": "round_3:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        2,
+        0
+      ],
+      "edit": "group_3:-1",
+      "id": "c0279",
+      "padded": false,
+      "parent": "c0251",
+      "score": 0.00018036371329799294,
+      "slot": 8,
+      "stage": "round_3:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        2,
+        2
+      ],
+      "edit": "noop",
+      "id": "c0280",
+      "padded": false,
+      "parent": "c0260",
+      "score": 0.0001801197649911046,
+      "slot": 0,
+      "stage": "round_4:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        1,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_0:+1",
+      "id": "c0281",
+      "padded": false,
+      "parent": "c0260",
+      "score": 0.0001803209015633911,
+      "slot": 1,
+      "stage": "round_4:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        -1,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_0:-1",
+      "id": "c0282",
+      "padded": false,
+      "parent": "c0260",
+      "score": 0.00021828780882060528,
+      "slot": 2,
+      "stage": "round_4:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        0,
+        2,
+        2
+      ],
+      "edit": "group_1:+1",
+      "id": "c0283",
+      "padded": false,
+      "parent": "c0260",
+      "score": 0.00018028737395070493,
+      "slot": 3,
+      "stage": "round_4:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_1:-1",
+      "id": "c0284",
+      "padded": false,
+      "parent": "c0260",
+      "score": 0.0001800750760594383,
+      "slot": 4,
+      "stage": "round_4:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_2:+1",
+      "id": "c0285",
+      "padded": true,
+      "parent": "c0260",
+      "score": 0.0001801197649911046,
+      "slot": 5,
+      "stage": "round_4:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        1,
+        2
+      ],
+      "edit": "group_2:-1",
+      "id": "c0286",
+      "padded": false,
+      "parent": "c0260",
+      "score": 0.00018026317411568016,
+      "slot": 6,
+      "stage": "round_4:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_3:+1",
+      "id": "c0287",
+      "padded": true,
+      "parent": "c0260",
+      "score": 0.0001801197649911046,
+      "slot": 7,
+      "stage": "round_4:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        2,
+        1
+      ],
+      "edit": "group_3:-1",
+      "id": "c0288",
+      "padded": false,
+      "parent": "c0260",
+      "score": 0.0001802277547540143,
+      "slot": 8,
+      "stage": "round_4:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        2,
+        2
+      ],
+      "edit": "noop",
+      "id": "c0289",
+      "padded": false,
+      "parent": "c0269",
+      "score": 0.0001801197649911046,
+      "slot": 0,
+      "stage": "round_4:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        1,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_0:+1",
+      "id": "c0290",
+      "padded": false,
+      "parent": "c0269",
+      "score": 0.0001803209015633911,
+      "slot": 1,
+      "stage": "round_4:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        -1,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_0:-1",
+      "id": "c0291",
+      "padded": false,
+      "parent": "c0269",
+      "score": 0.00021828780882060528,
+      "slot": 2,
+      "stage": "round_4:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        0,
+        2,
+        2
+      ],
+      "edit": "group_1:+1",
+      "id": "c0292",
+      "padded": false,
+      "parent": "c0269",
+      "score": 0.00018028737395070493,
+      "slot": 3,
+      "stage": "round_4:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_1:-1",
+      "id": "c0293",
+      "padded": false,
+      "parent": "c0269",
+      "score": 0.0001800750760594383,
+      "slot": 4,
+      "stage": "round_4:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_2:+1",
+      "id": "c0294",
+      "padded": true,
+      "parent": "c0269",
+      "score": 0.0001801197649911046,
+      "slot": 5,
+      "stage": "round_4:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        1,
+        2
+      ],
+      "edit": "group_2:-1",
+      "id": "c0295",
+      "padded": false,
+      "parent": "c0269",
+      "score": 0.00018026317411568016,
+      "slot": 6,
+      "stage": "round_4:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_3:+1",
+      "id": "c0296",
+      "padded": true,
+      "parent": "c0269",
+      "score": 0.0001801197649911046,
+      "slot": 7,
+      "stage": "round_4:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        2,
+        1
+      ],
+      "edit": "group_3:-1",
+      "id": "c0297",
+      "padded": false,
+      "parent": "c0269",
+      "score": 0.0001802277547540143,
+      "slot": 8,
+      "stage": "round_4:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        2,
+        2
+      ],
+      "edit": "noop",
+      "id": "c0298",
+      "padded": false,
+      "parent": "c0278",
+      "score": 0.0001801197649911046,
+      "slot": 0,
+      "stage": "round_4:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        1,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_0:+1",
+      "id": "c0299",
+      "padded": false,
+      "parent": "c0278",
+      "score": 0.0001803209015633911,
+      "slot": 1,
+      "stage": "round_4:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        -1,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_0:-1",
+      "id": "c0300",
+      "padded": false,
+      "parent": "c0278",
+      "score": 0.00021828780882060528,
+      "slot": 2,
+      "stage": "round_4:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        0,
+        2,
+        2
+      ],
+      "edit": "group_1:+1",
+      "id": "c0301",
+      "padded": false,
+      "parent": "c0278",
+      "score": 0.00018028737395070493,
+      "slot": 3,
+      "stage": "round_4:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_1:-1",
+      "id": "c0302",
+      "padded": false,
+      "parent": "c0278",
+      "score": 0.0001800750760594383,
+      "slot": 4,
+      "stage": "round_4:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_2:+1",
+      "id": "c0303",
+      "padded": true,
+      "parent": "c0278",
+      "score": 0.0001801197649911046,
+      "slot": 5,
+      "stage": "round_4:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        1,
+        2
+      ],
+      "edit": "group_2:-1",
+      "id": "c0304",
+      "padded": false,
+      "parent": "c0278",
+      "score": 0.00018026317411568016,
+      "slot": 6,
+      "stage": "round_4:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_3:+1",
+      "id": "c0305",
+      "padded": true,
+      "parent": "c0278",
+      "score": 0.0001801197649911046,
+      "slot": 7,
+      "stage": "round_4:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        2,
+        1
+      ],
+      "edit": "group_3:-1",
+      "id": "c0306",
+      "padded": false,
+      "parent": "c0278",
+      "score": 0.0001802277547540143,
+      "slot": 8,
+      "stage": "round_4:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "noop",
+      "id": "c0307",
+      "padded": false,
+      "parent": "c0284",
+      "score": 0.0001800750760594383,
+      "slot": 0,
+      "stage": "round_5:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        1,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_0:+1",
+      "id": "c0308",
+      "padded": false,
+      "parent": "c0284",
+      "score": 0.0001802668848540634,
+      "slot": 1,
+      "stage": "round_5:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        -1,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_0:-1",
+      "id": "c0309",
+      "padded": false,
+      "parent": "c0284",
+      "score": 0.00021830083278473467,
+      "slot": 2,
+      "stage": "round_5:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_1:+1",
+      "id": "c0310",
+      "padded": false,
+      "parent": "c0284",
+      "score": 0.0001801197649911046,
+      "slot": 3,
+      "stage": "round_5:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_1:-1",
+      "id": "c0311",
+      "padded": true,
+      "parent": "c0284",
+      "score": 0.0001800750760594383,
+      "slot": 4,
+      "stage": "round_5:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_2:+1",
+      "id": "c0312",
+      "padded": true,
+      "parent": "c0284",
+      "score": 0.0001800750760594383,
+      "slot": 5,
+      "stage": "round_5:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -2,
+        1,
+        2
+      ],
+      "edit": "group_2:-1",
+      "id": "c0313",
+      "padded": false,
+      "parent": "c0284",
+      "score": 0.00018021847063209862,
+      "slot": 6,
+      "stage": "round_5:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_3:+1",
+      "id": "c0314",
+      "padded": true,
+      "parent": "c0284",
+      "score": 0.0001800750760594383,
+      "slot": 7,
+      "stage": "round_5:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -2,
+        2,
+        1
+      ],
+      "edit": "group_3:-1",
+      "id": "c0315",
+      "padded": false,
+      "parent": "c0284",
+      "score": 0.000180183065822348,
+      "slot": 8,
+      "stage": "round_5:path_0"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "noop",
+      "id": "c0316",
+      "padded": false,
+      "parent": "c0293",
+      "score": 0.0001800750760594383,
+      "slot": 0,
+      "stage": "round_5:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        1,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_0:+1",
+      "id": "c0317",
+      "padded": false,
+      "parent": "c0293",
+      "score": 0.0001802668848540634,
+      "slot": 1,
+      "stage": "round_5:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        -1,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_0:-1",
+      "id": "c0318",
+      "padded": false,
+      "parent": "c0293",
+      "score": 0.00021830083278473467,
+      "slot": 2,
+      "stage": "round_5:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_1:+1",
+      "id": "c0319",
+      "padded": false,
+      "parent": "c0293",
+      "score": 0.0001801197649911046,
+      "slot": 3,
+      "stage": "round_5:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_1:-1",
+      "id": "c0320",
+      "padded": true,
+      "parent": "c0293",
+      "score": 0.0001800750760594383,
+      "slot": 4,
+      "stage": "round_5:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_2:+1",
+      "id": "c0321",
+      "padded": true,
+      "parent": "c0293",
+      "score": 0.0001800750760594383,
+      "slot": 5,
+      "stage": "round_5:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -2,
+        1,
+        2
+      ],
+      "edit": "group_2:-1",
+      "id": "c0322",
+      "padded": false,
+      "parent": "c0293",
+      "score": 0.00018021847063209862,
+      "slot": 6,
+      "stage": "round_5:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_3:+1",
+      "id": "c0323",
+      "padded": true,
+      "parent": "c0293",
+      "score": 0.0001800750760594383,
+      "slot": 7,
+      "stage": "round_5:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -2,
+        2,
+        1
+      ],
+      "edit": "group_3:-1",
+      "id": "c0324",
+      "padded": false,
+      "parent": "c0293",
+      "score": 0.000180183065822348,
+      "slot": 8,
+      "stage": "round_5:path_1"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "noop",
+      "id": "c0325",
+      "padded": false,
+      "parent": "c0302",
+      "score": 0.0001800750760594383,
+      "slot": 0,
+      "stage": "round_5:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        1,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_0:+1",
+      "id": "c0326",
+      "padded": false,
+      "parent": "c0302",
+      "score": 0.0001802668848540634,
+      "slot": 1,
+      "stage": "round_5:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        -1,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_0:-1",
+      "id": "c0327",
+      "padded": false,
+      "parent": "c0302",
+      "score": 0.00021830083278473467,
+      "slot": 2,
+      "stage": "round_5:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_1:+1",
+      "id": "c0328",
+      "padded": false,
+      "parent": "c0302",
+      "score": 0.0001801197649911046,
+      "slot": 3,
+      "stage": "round_5:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_1:-1",
+      "id": "c0329",
+      "padded": true,
+      "parent": "c0302",
+      "score": 0.0001800750760594383,
+      "slot": 4,
+      "stage": "round_5:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_2:+1",
+      "id": "c0330",
+      "padded": true,
+      "parent": "c0302",
+      "score": 0.0001800750760594383,
+      "slot": 5,
+      "stage": "round_5:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -2,
+        1,
+        2
+      ],
+      "edit": "group_2:-1",
+      "id": "c0331",
+      "padded": false,
+      "parent": "c0302",
+      "score": 0.00018021847063209862,
+      "slot": 6,
+      "stage": "round_5:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_3:+1",
+      "id": "c0332",
+      "padded": true,
+      "parent": "c0302",
+      "score": 0.0001800750760594383,
+      "slot": 7,
+      "stage": "round_5:path_2"
+    },
+    {
+      "arm": "multistart",
+      "code": [
+        0,
+        -2,
+        2,
+        1
+      ],
+      "edit": "group_3:-1",
+      "id": "c0333",
+      "padded": false,
+      "parent": "c0302",
+      "score": 0.000180183065822348,
+      "slot": 8,
+      "stage": "round_5:path_2"
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        0,
+        1,
+        0
+      ],
+      "edit": "noop",
+      "id": "c0334",
+      "padded": false,
+      "parent": "c0006",
+      "score": 0.0001806207001209259,
+      "slot": 0,
+      "stage": 0
+    },
+    {
+      "arm": "beam",
+      "code": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "edit": "group_0:+1",
+      "id": "c0335",
+      "padded": false,
+      "parent": "c0006",
+      "score": 0.00018080879817716777,
+      "slot": 1,
+      "stage": 0
+    },
+    {
+      "arm": "beam",
+      "code": [
+        -1,
+        0,
+        1,
+        0
+      ],
+      "edit": "group_0:-1",
+      "id": "c0336",
+      "padded": false,
+      "parent": "c0006",
+      "score": 0.00021892839868087322,
+      "slot": 2,
+      "stage": 0
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        1,
+        1,
+        0
+      ],
+      "edit": "group_1:+1",
+      "id": "c0337",
+      "padded": false,
+      "parent": "c0006",
+      "score": 0.00018075667321681976,
+      "slot": 3,
+      "stage": 0
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        1,
+        0
+      ],
+      "edit": "group_1:-1",
+      "id": "c0338",
+      "padded": false,
+      "parent": "c0006",
+      "score": 0.00018049964273814112,
+      "slot": 4,
+      "stage": 0
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        0,
+        2,
+        0
+      ],
+      "edit": "group_2:+1",
+      "id": "c0339",
+      "padded": false,
+      "parent": "c0006",
+      "score": 0.0001804829080356285,
+      "slot": 5,
+      "stage": 0
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "edit": "group_2:-1",
+      "id": "c0340",
+      "padded": false,
+      "parent": "c0006",
+      "score": 0.00018078832363244146,
+      "slot": 6,
+      "stage": 0
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "edit": "group_3:+1",
+      "id": "c0341",
+      "padded": false,
+      "parent": "c0006",
+      "score": 0.00018051083316095173,
+      "slot": 7,
+      "stage": 0
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        0,
+        1,
+        -1
+      ],
+      "edit": "group_3:-1",
+      "id": "c0342",
+      "padded": false,
+      "parent": "c0006",
+      "score": 0.000180760383955203,
+      "slot": 8,
+      "stage": 0
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "edit": "noop",
+      "id": "c0343",
+      "padded": false,
+      "parent": "c0008",
+      "score": 0.00018067473138216883,
+      "slot": 0,
+      "stage": 0
+    },
+    {
+      "arm": "beam",
+      "code": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "edit": "group_0:+1",
+      "id": "c0344",
+      "padded": false,
+      "parent": "c0008",
+      "score": 0.00018088702927343547,
+      "slot": 1,
+      "stage": 0
+    },
+    {
+      "arm": "beam",
+      "code": [
+        -1,
+        0,
+        0,
+        1
+      ],
+      "edit": "group_0:-1",
+      "id": "c0345",
+      "padded": false,
+      "parent": "c0008",
+      "score": 0.00021865658345632255,
+      "slot": 2,
+      "stage": 0
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        1,
+        0,
+        1
+      ],
+      "edit": "group_1:+1",
+      "id": "c0346",
+      "padded": false,
+      "parent": "c0008",
+      "score": 0.00018083488976117224,
+      "slot": 3,
+      "stage": 0
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        0,
+        1
+      ],
+      "edit": "group_1:-1",
+      "id": "c0347",
+      "padded": false,
+      "parent": "c0008",
+      "score": 0.00018054249812848866,
+      "slot": 4,
+      "stage": 0
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "edit": "group_2:+1",
+      "id": "c0348",
+      "padded": false,
+      "parent": "c0008",
+      "score": 0.00018051083316095173,
+      "slot": 5,
+      "stage": 0
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        0,
+        -1,
+        1
+      ],
+      "edit": "group_2:-1",
+      "id": "c0349",
+      "padded": false,
+      "parent": "c0008",
+      "score": 0.00018083488976117224,
+      "slot": 6,
+      "stage": 0
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        0,
+        0,
+        2
+      ],
+      "edit": "group_3:+1",
+      "id": "c0350",
+      "padded": false,
+      "parent": "c0008",
+      "score": 0.00018059652938973159,
+      "slot": 7,
+      "stage": 0
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "edit": "group_3:-1",
+      "id": "c0351",
+      "padded": false,
+      "parent": "c0008",
+      "score": 0.00018078832363244146,
+      "slot": 8,
+      "stage": 0
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        0,
+        0
+      ],
+      "edit": "noop",
+      "id": "c0352",
+      "padded": false,
+      "parent": "c0005",
+      "score": 0.00018067659402731806,
+      "slot": 0,
+      "stage": 0
+    },
+    {
+      "arm": "beam",
+      "code": [
+        1,
+        -1,
+        0,
+        0
+      ],
+      "edit": "group_0:+1",
+      "id": "c0353",
+      "padded": false,
+      "parent": "c0005",
+      "score": 0.00018084603652823716,
+      "slot": 1,
+      "stage": 0
+    },
+    {
+      "arm": "beam",
+      "code": [
+        -1,
+        -1,
+        0,
+        0
+      ],
+      "edit": "group_0:-1",
+      "id": "c0354",
+      "padded": false,
+      "parent": "c0005",
+      "score": 0.00021918911079410464,
+      "slot": 2,
+      "stage": 0
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "edit": "group_1:+1",
+      "id": "c0355",
+      "padded": false,
+      "parent": "c0005",
+      "score": 0.00018078832363244146,
+      "slot": 3,
+      "stage": 0
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -2,
+        0,
+        0
+      ],
+      "edit": "group_1:-1",
+      "id": "c0356",
+      "padded": false,
+      "parent": "c0005",
+      "score": 0.0001806430664146319,
+      "slot": 4,
+      "stage": 0
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        1,
+        0
+      ],
+      "edit": "group_2:+1",
+      "id": "c0357",
+      "padded": false,
+      "parent": "c0005",
+      "score": 0.00018049964273814112,
+      "slot": 5,
+      "stage": 0
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        -1,
+        0
+      ],
+      "edit": "group_2:-1",
+      "id": "c0358",
+      "padded": false,
+      "parent": "c0005",
+      "score": 0.00018083675240632147,
+      "slot": 6,
+      "stage": 0
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        0,
+        1
+      ],
+      "edit": "group_3:+1",
+      "id": "c0359",
+      "padded": false,
+      "parent": "c0005",
+      "score": 0.00018054249812848866,
+      "slot": 7,
+      "stage": 0
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        0,
+        -1
+      ],
+      "edit": "group_3:-1",
+      "id": "c0360",
+      "padded": false,
+      "parent": "c0005",
+      "score": 0.00018083113536704332,
+      "slot": 8,
+      "stage": 0
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        0,
+        2,
+        0
+      ],
+      "edit": "noop",
+      "id": "c0361",
+      "padded": false,
+      "parent": "c0339",
+      "score": 0.0001804829080356285,
+      "slot": 0,
+      "stage": 1
+    },
+    {
+      "arm": "beam",
+      "code": [
+        1,
+        0,
+        2,
+        0
+      ],
+      "edit": "group_0:+1",
+      "id": "c0362",
+      "padded": false,
+      "parent": "c0339",
+      "score": 0.0001806747168302536,
+      "slot": 1,
+      "stage": 1
+    },
+    {
+      "arm": "beam",
+      "code": [
+        -1,
+        0,
+        2,
+        0
+      ],
+      "edit": "group_0:-1",
+      "id": "c0363",
+      "padded": false,
+      "parent": "c0339",
+      "score": 0.00021890975767746568,
+      "slot": 2,
+      "stage": 1
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        1,
+        2,
+        0
+      ],
+      "edit": "group_1:+1",
+      "id": "c0364",
+      "padded": false,
+      "parent": "c0339",
+      "score": 0.00018061512673739344,
+      "slot": 3,
+      "stage": 1
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        2,
+        0
+      ],
+      "edit": "group_1:-1",
+      "id": "c0365",
+      "padded": false,
+      "parent": "c0339",
+      "score": 0.00018036371329799294,
+      "slot": 4,
+      "stage": 1
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        0,
+        2,
+        0
+      ],
+      "edit": "group_2:+1",
+      "id": "c0366",
+      "padded": true,
+      "parent": "c0339",
+      "score": 0.0001804829080356285,
+      "slot": 5,
+      "stage": 1
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        0,
+        1,
+        0
+      ],
+      "edit": "group_2:-1",
+      "id": "c0367",
+      "padded": false,
+      "parent": "c0339",
+      "score": 0.0001806207001209259,
+      "slot": 6,
+      "stage": 1
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        0,
+        2,
+        1
+      ],
+      "edit": "group_3:+1",
+      "id": "c0368",
+      "padded": false,
+      "parent": "c0339",
+      "score": 0.0001803674385882914,
+      "slot": 7,
+      "stage": 1
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        0,
+        2,
+        -1
+      ],
+      "edit": "group_3:-1",
+      "id": "c0369",
+      "padded": false,
+      "parent": "c0339",
+      "score": 0.0001806151121854782,
+      "slot": 8,
+      "stage": 1
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        1,
+        0
+      ],
+      "edit": "noop",
+      "id": "c0370",
+      "padded": false,
+      "parent": "c0338",
+      "score": 0.00018049964273814112,
+      "slot": 0,
+      "stage": 1
+    },
+    {
+      "arm": "beam",
+      "code": [
+        1,
+        -1,
+        1,
+        0
+      ],
+      "edit": "group_0:+1",
+      "id": "c0371",
+      "padded": false,
+      "parent": "c0338",
+      "score": 0.00018067657947540283,
+      "slot": 1,
+      "stage": 1
+    },
+    {
+      "arm": "beam",
+      "code": [
+        -1,
+        -1,
+        1,
+        0
+      ],
+      "edit": "group_0:-1",
+      "id": "c0372",
+      "padded": false,
+      "parent": "c0338",
+      "score": 0.0002190829545725137,
+      "slot": 2,
+      "stage": 1
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        0,
+        1,
+        0
+      ],
+      "edit": "group_1:+1",
+      "id": "c0373",
+      "padded": false,
+      "parent": "c0338",
+      "score": 0.0001806207001209259,
+      "slot": 3,
+      "stage": 1
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -2,
+        1,
+        0
+      ],
+      "edit": "group_1:-1",
+      "id": "c0374",
+      "padded": false,
+      "parent": "c0338",
+      "score": 0.00018047359480988234,
+      "slot": 4,
+      "stage": 1
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        2,
+        0
+      ],
+      "edit": "group_2:+1",
+      "id": "c0375",
+      "padded": false,
+      "parent": "c0338",
+      "score": 0.00018036371329799294,
+      "slot": 5,
+      "stage": 1
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        0,
+        0
+      ],
+      "edit": "group_2:-1",
+      "id": "c0376",
+      "padded": false,
+      "parent": "c0338",
+      "score": 0.00018067659402731806,
+      "slot": 6,
+      "stage": 1
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        1,
+        1
+      ],
+      "edit": "group_3:+1",
+      "id": "c0377",
+      "padded": false,
+      "parent": "c0338",
+      "score": 0.00018036931578535587,
+      "slot": 7,
+      "stage": 1
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        1,
+        -1
+      ],
+      "edit": "group_3:-1",
+      "id": "c0378",
+      "padded": false,
+      "parent": "c0338",
+      "score": 0.00018065981566905975,
+      "slot": 8,
+      "stage": 1
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "edit": "noop",
+      "id": "c0379",
+      "padded": false,
+      "parent": "c0341",
+      "score": 0.00018051083316095173,
+      "slot": 0,
+      "stage": 1
+    },
+    {
+      "arm": "beam",
+      "code": [
+        1,
+        0,
+        1,
+        1
+      ],
+      "edit": "group_0:+1",
+      "id": "c0380",
+      "padded": false,
+      "parent": "c0341",
+      "score": 0.00018072502280119807,
+      "slot": 1,
+      "stage": 1
+    },
+    {
+      "arm": "beam",
+      "code": [
+        -1,
+        0,
+        1,
+        1
+      ],
+      "edit": "group_0:-1",
+      "id": "c0381",
+      "padded": false,
+      "parent": "c0341",
+      "score": 0.0002185541088692844,
+      "slot": 2,
+      "stage": 1
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        1,
+        1,
+        1
+      ],
+      "edit": "group_1:+1",
+      "id": "c0382",
+      "padded": false,
+      "parent": "c0341",
+      "score": 0.0001806728687370196,
+      "slot": 3,
+      "stage": 1
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        1,
+        1
+      ],
+      "edit": "group_1:-1",
+      "id": "c0383",
+      "padded": false,
+      "parent": "c0341",
+      "score": 0.00018036931578535587,
+      "slot": 4,
+      "stage": 1
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        0,
+        2,
+        1
+      ],
+      "edit": "group_2:+1",
+      "id": "c0384",
+      "padded": false,
+      "parent": "c0341",
+      "score": 0.0001803674385882914,
+      "slot": 5,
+      "stage": 1
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "edit": "group_2:-1",
+      "id": "c0385",
+      "padded": false,
+      "parent": "c0341",
+      "score": 0.00018067473138216883,
+      "slot": 6,
+      "stage": 1
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        0,
+        1,
+        2
+      ],
+      "edit": "group_3:+1",
+      "id": "c0386",
+      "padded": false,
+      "parent": "c0341",
+      "score": 0.00018042705778498203,
+      "slot": 7,
+      "stage": 1
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        0,
+        1,
+        0
+      ],
+      "edit": "group_3:-1",
+      "id": "c0387",
+      "padded": false,
+      "parent": "c0341",
+      "score": 0.0001806207001209259,
+      "slot": 8,
+      "stage": 1
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        2,
+        0
+      ],
+      "edit": "noop",
+      "id": "c0388",
+      "padded": false,
+      "parent": "c0365",
+      "score": 0.00018036371329799294,
+      "slot": 0,
+      "stage": 2
+    },
+    {
+      "arm": "beam",
+      "code": [
+        1,
+        -1,
+        2,
+        0
+      ],
+      "edit": "group_0:+1",
+      "id": "c0389",
+      "padded": false,
+      "parent": "c0365",
+      "score": 0.00018052571977023035,
+      "slot": 1,
+      "stage": 2
+    },
+    {
+      "arm": "beam",
+      "code": [
+        -1,
+        -1,
+        2,
+        0
+      ],
+      "edit": "group_0:-1",
+      "id": "c0390",
+      "padded": false,
+      "parent": "c0365",
+      "score": 0.00021904197637923062,
+      "slot": 2,
+      "stage": 2
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        0,
+        2,
+        0
+      ],
+      "edit": "group_1:+1",
+      "id": "c0391",
+      "padded": false,
+      "parent": "c0365",
+      "score": 0.0001804829080356285,
+      "slot": 3,
+      "stage": 2
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -2,
+        2,
+        0
+      ],
+      "edit": "group_1:-1",
+      "id": "c0392",
+      "padded": false,
+      "parent": "c0365",
+      "score": 0.00018033206288237125,
+      "slot": 4,
+      "stage": 2
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        2,
+        0
+      ],
+      "edit": "group_2:+1",
+      "id": "c0393",
+      "padded": true,
+      "parent": "c0365",
+      "score": 0.00018036371329799294,
+      "slot": 5,
+      "stage": 2
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        1,
+        0
+      ],
+      "edit": "group_2:-1",
+      "id": "c0394",
+      "padded": false,
+      "parent": "c0365",
+      "score": 0.00018049964273814112,
+      "slot": 6,
+      "stage": 2
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        2,
+        1
+      ],
+      "edit": "group_3:+1",
+      "id": "c0395",
+      "padded": false,
+      "parent": "c0365",
+      "score": 0.0001802277547540143,
+      "slot": 7,
+      "stage": 2
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        2,
+        -1
+      ],
+      "edit": "group_3:-1",
+      "id": "c0396",
+      "padded": false,
+      "parent": "c0365",
+      "score": 0.00018051454389933497,
+      "slot": 8,
+      "stage": 2
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        0,
+        2,
+        1
+      ],
+      "edit": "noop",
+      "id": "c0397",
+      "padded": false,
+      "parent": "c0368",
+      "score": 0.0001803674385882914,
+      "slot": 0,
+      "stage": 2
+    },
+    {
+      "arm": "beam",
+      "code": [
+        1,
+        0,
+        2,
+        1
+      ],
+      "edit": "group_0:+1",
+      "id": "c0398",
+      "padded": false,
+      "parent": "c0368",
+      "score": 0.00018057602574117482,
+      "slot": 1,
+      "stage": 2
+    },
+    {
+      "arm": "beam",
+      "code": [
+        -1,
+        0,
+        2,
+        1
+      ],
+      "edit": "group_0:-1",
+      "id": "c0399",
+      "padded": false,
+      "parent": "c0368",
+      "score": 0.00021852432109881192,
+      "slot": 2,
+      "stage": 2
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        1,
+        2,
+        1
+      ],
+      "edit": "group_1:+1",
+      "id": "c0400",
+      "padded": false,
+      "parent": "c0368",
+      "score": 0.00018053691019304097,
+      "slot": 3,
+      "stage": 2
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        2,
+        1
+      ],
+      "edit": "group_1:-1",
+      "id": "c0401",
+      "padded": false,
+      "parent": "c0368",
+      "score": 0.0001802277547540143,
+      "slot": 4,
+      "stage": 2
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        0,
+        2,
+        1
+      ],
+      "edit": "group_2:+1",
+      "id": "c0402",
+      "padded": true,
+      "parent": "c0368",
+      "score": 0.0001803674385882914,
+      "slot": 5,
+      "stage": 2
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "edit": "group_2:-1",
+      "id": "c0403",
+      "padded": false,
+      "parent": "c0368",
+      "score": 0.00018051083316095173,
+      "slot": 6,
+      "stage": 2
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        0,
+        2,
+        2
+      ],
+      "edit": "group_3:+1",
+      "id": "c0404",
+      "padded": false,
+      "parent": "c0368",
+      "score": 0.00018028737395070493,
+      "slot": 7,
+      "stage": 2
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        0,
+        2,
+        0
+      ],
+      "edit": "group_3:-1",
+      "id": "c0405",
+      "padded": false,
+      "parent": "c0368",
+      "score": 0.0001804829080356285,
+      "slot": 8,
+      "stage": 2
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        1,
+        1
+      ],
+      "edit": "noop",
+      "id": "c0406",
+      "padded": false,
+      "parent": "c0377",
+      "score": 0.00018036931578535587,
+      "slot": 0,
+      "stage": 2
+    },
+    {
+      "arm": "beam",
+      "code": [
+        1,
+        -1,
+        1,
+        1
+      ],
+      "edit": "group_0:+1",
+      "id": "c0407",
+      "padded": false,
+      "parent": "c0377",
+      "score": 0.00018054994870908558,
+      "slot": 1,
+      "stage": 2
+    },
+    {
+      "arm": "beam",
+      "code": [
+        -1,
+        -1,
+        1,
+        1
+      ],
+      "edit": "group_0:-1",
+      "id": "c0408",
+      "padded": false,
+      "parent": "c0377",
+      "score": 0.0002186565106967464,
+      "slot": 2,
+      "stage": 2
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "edit": "group_1:+1",
+      "id": "c0409",
+      "padded": false,
+      "parent": "c0377",
+      "score": 0.00018051083316095173,
+      "slot": 3,
+      "stage": 2
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -2,
+        1,
+        1
+      ],
+      "edit": "group_1:-1",
+      "id": "c0410",
+      "padded": false,
+      "parent": "c0377",
+      "score": 0.00018032276420854032,
+      "slot": 4,
+      "stage": 2
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        2,
+        1
+      ],
+      "edit": "group_2:+1",
+      "id": "c0411",
+      "padded": false,
+      "parent": "c0377",
+      "score": 0.0001802277547540143,
+      "slot": 5,
+      "stage": 2
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        0,
+        1
+      ],
+      "edit": "group_2:-1",
+      "id": "c0412",
+      "padded": false,
+      "parent": "c0377",
+      "score": 0.00018054249812848866,
+      "slot": 6,
+      "stage": 2
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        1,
+        2
+      ],
+      "edit": "group_3:+1",
+      "id": "c0413",
+      "padded": false,
+      "parent": "c0377",
+      "score": 0.00018026317411568016,
+      "slot": 7,
+      "stage": 2
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        1,
+        0
+      ],
+      "edit": "group_3:-1",
+      "id": "c0414",
+      "padded": false,
+      "parent": "c0377",
+      "score": 0.00018049964273814112,
+      "slot": 8,
+      "stage": 2
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        2,
+        1
+      ],
+      "edit": "noop",
+      "id": "c0415",
+      "padded": false,
+      "parent": "c0395",
+      "score": 0.0001802277547540143,
+      "slot": 0,
+      "stage": 3
+    },
+    {
+      "arm": "beam",
+      "code": [
+        1,
+        -1,
+        2,
+        1
+      ],
+      "edit": "group_0:+1",
+      "id": "c0416",
+      "padded": false,
+      "parent": "c0395",
+      "score": 0.00018041212751995772,
+      "slot": 1,
+      "stage": 3
+    },
+    {
+      "arm": "beam",
+      "code": [
+        -1,
+        -1,
+        2,
+        1
+      ],
+      "edit": "group_0:-1",
+      "id": "c0417",
+      "padded": false,
+      "parent": "c0395",
+      "score": 0.0002186136698583141,
+      "slot": 2,
+      "stage": 3
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        0,
+        2,
+        1
+      ],
+      "edit": "group_1:+1",
+      "id": "c0418",
+      "padded": false,
+      "parent": "c0395",
+      "score": 0.0001803674385882914,
+      "slot": 3,
+      "stage": 3
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -2,
+        2,
+        1
+      ],
+      "edit": "group_1:-1",
+      "id": "c0419",
+      "padded": false,
+      "parent": "c0395",
+      "score": 0.000180183065822348,
+      "slot": 4,
+      "stage": 3
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        2,
+        1
+      ],
+      "edit": "group_2:+1",
+      "id": "c0420",
+      "padded": true,
+      "parent": "c0395",
+      "score": 0.0001802277547540143,
+      "slot": 5,
+      "stage": 3
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        1,
+        1
+      ],
+      "edit": "group_2:-1",
+      "id": "c0421",
+      "padded": false,
+      "parent": "c0395",
+      "score": 0.00018036931578535587,
+      "slot": 6,
+      "stage": 3
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_3:+1",
+      "id": "c0422",
+      "padded": false,
+      "parent": "c0395",
+      "score": 0.0001801197649911046,
+      "slot": 7,
+      "stage": 3
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        2,
+        0
+      ],
+      "edit": "group_3:-1",
+      "id": "c0423",
+      "padded": false,
+      "parent": "c0395",
+      "score": 0.00018036371329799294,
+      "slot": 8,
+      "stage": 3
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        1,
+        2
+      ],
+      "edit": "noop",
+      "id": "c0424",
+      "padded": false,
+      "parent": "c0413",
+      "score": 0.00018026317411568016,
+      "slot": 0,
+      "stage": 3
+    },
+    {
+      "arm": "beam",
+      "code": [
+        1,
+        -1,
+        1,
+        2
+      ],
+      "edit": "group_0:+1",
+      "id": "c0425",
+      "padded": false,
+      "parent": "c0413",
+      "score": 0.00018046241893898696,
+      "slot": 1,
+      "stage": 3
+    },
+    {
+      "arm": "beam",
+      "code": [
+        -1,
+        -1,
+        1,
+        2
+      ],
+      "edit": "group_0:-1",
+      "id": "c0426",
+      "padded": false,
+      "parent": "c0413",
+      "score": 0.0002183101896662265,
+      "slot": 2,
+      "stage": 3
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        0,
+        1,
+        2
+      ],
+      "edit": "group_1:+1",
+      "id": "c0427",
+      "padded": false,
+      "parent": "c0413",
+      "score": 0.00018042705778498203,
+      "slot": 3,
+      "stage": 3
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -2,
+        1,
+        2
+      ],
+      "edit": "group_1:-1",
+      "id": "c0428",
+      "padded": false,
+      "parent": "c0413",
+      "score": 0.00018021847063209862,
+      "slot": 4,
+      "stage": 3
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_2:+1",
+      "id": "c0429",
+      "padded": false,
+      "parent": "c0413",
+      "score": 0.0001801197649911046,
+      "slot": 5,
+      "stage": 3
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        0,
+        2
+      ],
+      "edit": "group_2:-1",
+      "id": "c0430",
+      "padded": false,
+      "parent": "c0413",
+      "score": 0.00018043635645881295,
+      "slot": 6,
+      "stage": 3
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        1,
+        2
+      ],
+      "edit": "group_3:+1",
+      "id": "c0431",
+      "padded": true,
+      "parent": "c0413",
+      "score": 0.00018026317411568016,
+      "slot": 7,
+      "stage": 3
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        1,
+        1
+      ],
+      "edit": "group_3:-1",
+      "id": "c0432",
+      "padded": false,
+      "parent": "c0413",
+      "score": 0.00018036931578535587,
+      "slot": 8,
+      "stage": 3
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        0,
+        2,
+        2
+      ],
+      "edit": "noop",
+      "id": "c0433",
+      "padded": false,
+      "parent": "c0404",
+      "score": 0.00018028737395070493,
+      "slot": 0,
+      "stage": 3
+    },
+    {
+      "arm": "beam",
+      "code": [
+        1,
+        0,
+        2,
+        2
+      ],
+      "edit": "group_0:+1",
+      "id": "c0434",
+      "padded": false,
+      "parent": "c0404",
+      "score": 0.00018052387167699635,
+      "slot": 1,
+      "stage": 3
+    },
+    {
+      "arm": "beam",
+      "code": [
+        -1,
+        0,
+        2,
+        2
+      ],
+      "edit": "group_0:-1",
+      "id": "c0435",
+      "padded": false,
+      "parent": "c0404",
+      "score": 0.0002182245225412771,
+      "slot": 2,
+      "stage": 3
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        1,
+        2,
+        2
+      ],
+      "edit": "group_1:+1",
+      "id": "c0436",
+      "padded": false,
+      "parent": "c0404",
+      "score": 0.00018048663332592696,
+      "slot": 3,
+      "stage": 3
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_1:-1",
+      "id": "c0437",
+      "padded": false,
+      "parent": "c0404",
+      "score": 0.0001801197649911046,
+      "slot": 4,
+      "stage": 3
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        0,
+        2,
+        2
+      ],
+      "edit": "group_2:+1",
+      "id": "c0438",
+      "padded": true,
+      "parent": "c0404",
+      "score": 0.00018028737395070493,
+      "slot": 5,
+      "stage": 3
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        0,
+        1,
+        2
+      ],
+      "edit": "group_2:-1",
+      "id": "c0439",
+      "padded": false,
+      "parent": "c0404",
+      "score": 0.00018042705778498203,
+      "slot": 6,
+      "stage": 3
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        0,
+        2,
+        2
+      ],
+      "edit": "group_3:+1",
+      "id": "c0440",
+      "padded": true,
+      "parent": "c0404",
+      "score": 0.00018028737395070493,
+      "slot": 7,
+      "stage": 3
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        0,
+        2,
+        1
+      ],
+      "edit": "group_3:-1",
+      "id": "c0441",
+      "padded": false,
+      "parent": "c0404",
+      "score": 0.0001803674385882914,
+      "slot": 8,
+      "stage": 3
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        2,
+        2
+      ],
+      "edit": "noop",
+      "id": "c0442",
+      "padded": false,
+      "parent": "c0422",
+      "score": 0.0001801197649911046,
+      "slot": 0,
+      "stage": 4
+    },
+    {
+      "arm": "beam",
+      "code": [
+        1,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_0:+1",
+      "id": "c0443",
+      "padded": false,
+      "parent": "c0422",
+      "score": 0.0001803209015633911,
+      "slot": 1,
+      "stage": 4
+    },
+    {
+      "arm": "beam",
+      "code": [
+        -1,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_0:-1",
+      "id": "c0444",
+      "padded": false,
+      "parent": "c0422",
+      "score": 0.00021828780882060528,
+      "slot": 2,
+      "stage": 4
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        0,
+        2,
+        2
+      ],
+      "edit": "group_1:+1",
+      "id": "c0445",
+      "padded": false,
+      "parent": "c0422",
+      "score": 0.00018028737395070493,
+      "slot": 3,
+      "stage": 4
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_1:-1",
+      "id": "c0446",
+      "padded": false,
+      "parent": "c0422",
+      "score": 0.0001800750760594383,
+      "slot": 4,
+      "stage": 4
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_2:+1",
+      "id": "c0447",
+      "padded": true,
+      "parent": "c0422",
+      "score": 0.0001801197649911046,
+      "slot": 5,
+      "stage": 4
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        1,
+        2
+      ],
+      "edit": "group_2:-1",
+      "id": "c0448",
+      "padded": false,
+      "parent": "c0422",
+      "score": 0.00018026317411568016,
+      "slot": 6,
+      "stage": 4
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_3:+1",
+      "id": "c0449",
+      "padded": true,
+      "parent": "c0422",
+      "score": 0.0001801197649911046,
+      "slot": 7,
+      "stage": 4
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        2,
+        1
+      ],
+      "edit": "group_3:-1",
+      "id": "c0450",
+      "padded": false,
+      "parent": "c0422",
+      "score": 0.0001802277547540143,
+      "slot": 8,
+      "stage": 4
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -2,
+        2,
+        1
+      ],
+      "edit": "noop",
+      "id": "c0451",
+      "padded": false,
+      "parent": "c0419",
+      "score": 0.000180183065822348,
+      "slot": 0,
+      "stage": 4
+    },
+    {
+      "arm": "beam",
+      "code": [
+        1,
+        -2,
+        2,
+        1
+      ],
+      "edit": "group_0:+1",
+      "id": "c0452",
+      "padded": false,
+      "parent": "c0419",
+      "score": 0.00018035813991446048,
+      "slot": 1,
+      "stage": 4
+    },
+    {
+      "arm": "beam",
+      "code": [
+        -1,
+        -2,
+        2,
+        1
+      ],
+      "edit": "group_0:-1",
+      "id": "c0453",
+      "padded": false,
+      "parent": "c0419",
+      "score": 0.00021864904556423426,
+      "slot": 2,
+      "stage": 4
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        2,
+        1
+      ],
+      "edit": "group_1:+1",
+      "id": "c0454",
+      "padded": false,
+      "parent": "c0419",
+      "score": 0.0001802277547540143,
+      "slot": 3,
+      "stage": 4
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -2,
+        2,
+        1
+      ],
+      "edit": "group_1:-1",
+      "id": "c0455",
+      "padded": true,
+      "parent": "c0419",
+      "score": 0.000180183065822348,
+      "slot": 4,
+      "stage": 4
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -2,
+        2,
+        1
+      ],
+      "edit": "group_2:+1",
+      "id": "c0456",
+      "padded": true,
+      "parent": "c0419",
+      "score": 0.000180183065822348,
+      "slot": 5,
+      "stage": 4
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -2,
+        1,
+        1
+      ],
+      "edit": "group_2:-1",
+      "id": "c0457",
+      "padded": false,
+      "parent": "c0419",
+      "score": 0.00018032276420854032,
+      "slot": 6,
+      "stage": 4
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_3:+1",
+      "id": "c0458",
+      "padded": false,
+      "parent": "c0419",
+      "score": 0.0001800750760594383,
+      "slot": 7,
+      "stage": 4
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -2,
+        2,
+        0
+      ],
+      "edit": "group_3:-1",
+      "id": "c0459",
+      "padded": false,
+      "parent": "c0419",
+      "score": 0.00018033206288237125,
+      "slot": 8,
+      "stage": 4
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -2,
+        1,
+        2
+      ],
+      "edit": "noop",
+      "id": "c0460",
+      "padded": false,
+      "parent": "c0428",
+      "score": 0.00018021847063209862,
+      "slot": 0,
+      "stage": 4
+    },
+    {
+      "arm": "beam",
+      "code": [
+        1,
+        -2,
+        1,
+        2
+      ],
+      "edit": "group_0:+1",
+      "id": "c0461",
+      "padded": false,
+      "parent": "c0428",
+      "score": 0.00018041774455923587,
+      "slot": 1,
+      "stage": 4
+    },
+    {
+      "arm": "beam",
+      "code": [
+        -1,
+        -2,
+        1,
+        2
+      ],
+      "edit": "group_0:-1",
+      "id": "c0462",
+      "padded": false,
+      "parent": "c0428",
+      "score": 0.00021833623759448528,
+      "slot": 2,
+      "stage": 4
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        1,
+        2
+      ],
+      "edit": "group_1:+1",
+      "id": "c0463",
+      "padded": false,
+      "parent": "c0428",
+      "score": 0.00018026317411568016,
+      "slot": 3,
+      "stage": 4
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -2,
+        1,
+        2
+      ],
+      "edit": "group_1:-1",
+      "id": "c0464",
+      "padded": true,
+      "parent": "c0428",
+      "score": 0.00018021847063209862,
+      "slot": 4,
+      "stage": 4
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_2:+1",
+      "id": "c0465",
+      "padded": false,
+      "parent": "c0428",
+      "score": 0.0001800750760594383,
+      "slot": 5,
+      "stage": 4
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -2,
+        0,
+        2
+      ],
+      "edit": "group_2:-1",
+      "id": "c0466",
+      "padded": false,
+      "parent": "c0428",
+      "score": 0.00018039727001450956,
+      "slot": 6,
+      "stage": 4
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -2,
+        1,
+        2
+      ],
+      "edit": "group_3:+1",
+      "id": "c0467",
+      "padded": true,
+      "parent": "c0428",
+      "score": 0.00018021847063209862,
+      "slot": 7,
+      "stage": 4
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -2,
+        1,
+        1
+      ],
+      "edit": "group_3:-1",
+      "id": "c0468",
+      "padded": false,
+      "parent": "c0428",
+      "score": 0.00018032276420854032,
+      "slot": 8,
+      "stage": 4
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "noop",
+      "id": "c0469",
+      "padded": false,
+      "parent": "c0446",
+      "score": 0.0001800750760594383,
+      "slot": 0,
+      "stage": 5
+    },
+    {
+      "arm": "beam",
+      "code": [
+        1,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_0:+1",
+      "id": "c0470",
+      "padded": false,
+      "parent": "c0446",
+      "score": 0.0001802668848540634,
+      "slot": 1,
+      "stage": 5
+    },
+    {
+      "arm": "beam",
+      "code": [
+        -1,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_0:-1",
+      "id": "c0471",
+      "padded": false,
+      "parent": "c0446",
+      "score": 0.00021830083278473467,
+      "slot": 2,
+      "stage": 5
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_1:+1",
+      "id": "c0472",
+      "padded": false,
+      "parent": "c0446",
+      "score": 0.0001801197649911046,
+      "slot": 3,
+      "stage": 5
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_1:-1",
+      "id": "c0473",
+      "padded": true,
+      "parent": "c0446",
+      "score": 0.0001800750760594383,
+      "slot": 4,
+      "stage": 5
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_2:+1",
+      "id": "c0474",
+      "padded": true,
+      "parent": "c0446",
+      "score": 0.0001800750760594383,
+      "slot": 5,
+      "stage": 5
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -2,
+        1,
+        2
+      ],
+      "edit": "group_2:-1",
+      "id": "c0475",
+      "padded": false,
+      "parent": "c0446",
+      "score": 0.00018021847063209862,
+      "slot": 6,
+      "stage": 5
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_3:+1",
+      "id": "c0476",
+      "padded": true,
+      "parent": "c0446",
+      "score": 0.0001800750760594383,
+      "slot": 7,
+      "stage": 5
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -2,
+        2,
+        1
+      ],
+      "edit": "group_3:-1",
+      "id": "c0477",
+      "padded": false,
+      "parent": "c0446",
+      "score": 0.000180183065822348,
+      "slot": 8,
+      "stage": 5
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        2,
+        2
+      ],
+      "edit": "noop",
+      "id": "c0478",
+      "padded": false,
+      "parent": "c0422",
+      "score": 0.0001801197649911046,
+      "slot": 0,
+      "stage": 5
+    },
+    {
+      "arm": "beam",
+      "code": [
+        1,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_0:+1",
+      "id": "c0479",
+      "padded": false,
+      "parent": "c0422",
+      "score": 0.0001803209015633911,
+      "slot": 1,
+      "stage": 5
+    },
+    {
+      "arm": "beam",
+      "code": [
+        -1,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_0:-1",
+      "id": "c0480",
+      "padded": false,
+      "parent": "c0422",
+      "score": 0.00021828780882060528,
+      "slot": 2,
+      "stage": 5
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        0,
+        2,
+        2
+      ],
+      "edit": "group_1:+1",
+      "id": "c0481",
+      "padded": false,
+      "parent": "c0422",
+      "score": 0.00018028737395070493,
+      "slot": 3,
+      "stage": 5
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_1:-1",
+      "id": "c0482",
+      "padded": false,
+      "parent": "c0422",
+      "score": 0.0001800750760594383,
+      "slot": 4,
+      "stage": 5
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_2:+1",
+      "id": "c0483",
+      "padded": true,
+      "parent": "c0422",
+      "score": 0.0001801197649911046,
+      "slot": 5,
+      "stage": 5
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        1,
+        2
+      ],
+      "edit": "group_2:-1",
+      "id": "c0484",
+      "padded": false,
+      "parent": "c0422",
+      "score": 0.00018026317411568016,
+      "slot": 6,
+      "stage": 5
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        2,
+        2
+      ],
+      "edit": "group_3:+1",
+      "id": "c0485",
+      "padded": true,
+      "parent": "c0422",
+      "score": 0.0001801197649911046,
+      "slot": 7,
+      "stage": 5
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        2,
+        1
+      ],
+      "edit": "group_3:-1",
+      "id": "c0486",
+      "padded": false,
+      "parent": "c0422",
+      "score": 0.0001802277547540143,
+      "slot": 8,
+      "stage": 5
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -2,
+        2,
+        1
+      ],
+      "edit": "noop",
+      "id": "c0487",
+      "padded": false,
+      "parent": "c0419",
+      "score": 0.000180183065822348,
+      "slot": 0,
+      "stage": 5
+    },
+    {
+      "arm": "beam",
+      "code": [
+        1,
+        -2,
+        2,
+        1
+      ],
+      "edit": "group_0:+1",
+      "id": "c0488",
+      "padded": false,
+      "parent": "c0419",
+      "score": 0.00018035813991446048,
+      "slot": 1,
+      "stage": 5
+    },
+    {
+      "arm": "beam",
+      "code": [
+        -1,
+        -2,
+        2,
+        1
+      ],
+      "edit": "group_0:-1",
+      "id": "c0489",
+      "padded": false,
+      "parent": "c0419",
+      "score": 0.00021864904556423426,
+      "slot": 2,
+      "stage": 5
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -1,
+        2,
+        1
+      ],
+      "edit": "group_1:+1",
+      "id": "c0490",
+      "padded": false,
+      "parent": "c0419",
+      "score": 0.0001802277547540143,
+      "slot": 3,
+      "stage": 5
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -2,
+        2,
+        1
+      ],
+      "edit": "group_1:-1",
+      "id": "c0491",
+      "padded": true,
+      "parent": "c0419",
+      "score": 0.000180183065822348,
+      "slot": 4,
+      "stage": 5
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -2,
+        2,
+        1
+      ],
+      "edit": "group_2:+1",
+      "id": "c0492",
+      "padded": true,
+      "parent": "c0419",
+      "score": 0.000180183065822348,
+      "slot": 5,
+      "stage": 5
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -2,
+        1,
+        1
+      ],
+      "edit": "group_2:-1",
+      "id": "c0493",
+      "padded": false,
+      "parent": "c0419",
+      "score": 0.00018032276420854032,
+      "slot": 6,
+      "stage": 5
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_3:+1",
+      "id": "c0494",
+      "padded": false,
+      "parent": "c0419",
+      "score": 0.0001800750760594383,
+      "slot": 7,
+      "stage": 5
+    },
+    {
+      "arm": "beam",
+      "code": [
+        0,
+        -2,
+        2,
+        0
+      ],
+      "edit": "group_3:-1",
+      "id": "c0495",
+      "padded": false,
+      "parent": "c0419",
+      "score": 0.00018033206288237125,
+      "slot": 8,
+      "stage": 5
+    }
+  ],
+  "logical_calls_per_arm": {
+    "beam": 172,
+    "greedy": 172,
+    "multistart": 172
+  },
+  "physical_counts": {
+    "beam": 162,
+    "common": 10,
+    "greedy": 162,
+    "multistart": 162
+  },
+  "retentions": [
+    {
+      "arm": "common",
+      "pool": [
+        "c0000",
+        "c0001",
+        "c0002",
+        "c0003",
+        "c0004",
+        "c0005",
+        "c0006",
+        "c0007",
+        "c0008",
+        "c0009"
+      ],
+      "selected": [
+        "c0006",
+        "c0008",
+        "c0005"
+      ],
+      "stage": "bootstrap"
+    },
+    {
+      "arm": "greedy",
+      "pool": [
+        "c0006",
+        "c0010",
+        "c0011",
+        "c0012",
+        "c0013",
+        "c0014",
+        "c0015",
+        "c0016",
+        "c0017",
+        "c0018"
+      ],
+      "selected": [
+        "c0015"
+      ],
+      "stage": 0
+    },
+    {
+      "arm": "greedy",
+      "pool": [
+        "c0015",
+        "c0019",
+        "c0020",
+        "c0021",
+        "c0022",
+        "c0023",
+        "c0024",
+        "c0025",
+        "c0026",
+        "c0027"
+      ],
+      "selected": [
+        "c0023"
+      ],
+      "stage": 1
+    },
+    {
+      "arm": "greedy",
+      "pool": [
+        "c0023",
+        "c0028",
+        "c0029",
+        "c0030",
+        "c0031",
+        "c0032",
+        "c0033",
+        "c0034",
+        "c0035",
+        "c0036"
+      ],
+      "selected": [
+        "c0035"
+      ],
+      "stage": 2
+    },
+    {
+      "arm": "greedy",
+      "pool": [
+        "c0035",
+        "c0037",
+        "c0038",
+        "c0039",
+        "c0040",
+        "c0041",
+        "c0042",
+        "c0043",
+        "c0044",
+        "c0045"
+      ],
+      "selected": [
+        "c0044"
+      ],
+      "stage": 3
+    },
+    {
+      "arm": "greedy",
+      "pool": [
+        "c0044",
+        "c0046",
+        "c0047",
+        "c0048",
+        "c0049",
+        "c0050",
+        "c0051",
+        "c0052",
+        "c0053",
+        "c0054"
+      ],
+      "selected": [
+        "c0050"
+      ],
+      "stage": 4
+    },
+    {
+      "arm": "greedy",
+      "pool": [
+        "c0050",
+        "c0055",
+        "c0056",
+        "c0057",
+        "c0058",
+        "c0059",
+        "c0060",
+        "c0061",
+        "c0062",
+        "c0063"
+      ],
+      "selected": [
+        "c0050"
+      ],
+      "stage": 5
+    },
+    {
+      "arm": "greedy",
+      "pool": [
+        "c0050",
+        "c0064",
+        "c0065",
+        "c0066",
+        "c0067",
+        "c0068",
+        "c0069",
+        "c0070",
+        "c0071",
+        "c0072"
+      ],
+      "selected": [
+        "c0050"
+      ],
+      "stage": 6
+    },
+    {
+      "arm": "greedy",
+      "pool": [
+        "c0050",
+        "c0073",
+        "c0074",
+        "c0075",
+        "c0076",
+        "c0077",
+        "c0078",
+        "c0079",
+        "c0080",
+        "c0081"
+      ],
+      "selected": [
+        "c0050"
+      ],
+      "stage": 7
+    },
+    {
+      "arm": "greedy",
+      "pool": [
+        "c0050",
+        "c0082",
+        "c0083",
+        "c0084",
+        "c0085",
+        "c0086",
+        "c0087",
+        "c0088",
+        "c0089",
+        "c0090"
+      ],
+      "selected": [
+        "c0050"
+      ],
+      "stage": 8
+    },
+    {
+      "arm": "greedy",
+      "pool": [
+        "c0050",
+        "c0091",
+        "c0092",
+        "c0093",
+        "c0094",
+        "c0095",
+        "c0096",
+        "c0097",
+        "c0098",
+        "c0099"
+      ],
+      "selected": [
+        "c0050"
+      ],
+      "stage": 9
+    },
+    {
+      "arm": "greedy",
+      "pool": [
+        "c0050",
+        "c0100",
+        "c0101",
+        "c0102",
+        "c0103",
+        "c0104",
+        "c0105",
+        "c0106",
+        "c0107",
+        "c0108"
+      ],
+      "selected": [
+        "c0050"
+      ],
+      "stage": 10
+    },
+    {
+      "arm": "greedy",
+      "pool": [
+        "c0050",
+        "c0109",
+        "c0110",
+        "c0111",
+        "c0112",
+        "c0113",
+        "c0114",
+        "c0115",
+        "c0116",
+        "c0117"
+      ],
+      "selected": [
+        "c0050"
+      ],
+      "stage": 11
+    },
+    {
+      "arm": "greedy",
+      "pool": [
+        "c0050",
+        "c0118",
+        "c0119",
+        "c0120",
+        "c0121",
+        "c0122",
+        "c0123",
+        "c0124",
+        "c0125",
+        "c0126"
+      ],
+      "selected": [
+        "c0050"
+      ],
+      "stage": 12
+    },
+    {
+      "arm": "greedy",
+      "pool": [
+        "c0050",
+        "c0127",
+        "c0128",
+        "c0129",
+        "c0130",
+        "c0131",
+        "c0132",
+        "c0133",
+        "c0134",
+        "c0135"
+      ],
+      "selected": [
+        "c0050"
+      ],
+      "stage": 13
+    },
+    {
+      "arm": "greedy",
+      "pool": [
+        "c0050",
+        "c0136",
+        "c0137",
+        "c0138",
+        "c0139",
+        "c0140",
+        "c0141",
+        "c0142",
+        "c0143",
+        "c0144"
+      ],
+      "selected": [
+        "c0050"
+      ],
+      "stage": 14
+    },
+    {
+      "arm": "greedy",
+      "pool": [
+        "c0050",
+        "c0145",
+        "c0146",
+        "c0147",
+        "c0148",
+        "c0149",
+        "c0150",
+        "c0151",
+        "c0152",
+        "c0153"
+      ],
+      "selected": [
+        "c0050"
+      ],
+      "stage": 15
+    },
+    {
+      "arm": "greedy",
+      "pool": [
+        "c0050",
+        "c0154",
+        "c0155",
+        "c0156",
+        "c0157",
+        "c0158",
+        "c0159",
+        "c0160",
+        "c0161",
+        "c0162"
+      ],
+      "selected": [
+        "c0050"
+      ],
+      "stage": 16
+    },
+    {
+      "arm": "greedy",
+      "pool": [
+        "c0050",
+        "c0163",
+        "c0164",
+        "c0165",
+        "c0166",
+        "c0167",
+        "c0168",
+        "c0169",
+        "c0170",
+        "c0171"
+      ],
+      "selected": [
+        "c0050"
+      ],
+      "stage": 17
+    },
+    {
+      "arm": "multistart",
+      "pool": [
+        "c0006",
+        "c0172",
+        "c0173",
+        "c0174",
+        "c0175",
+        "c0176",
+        "c0177",
+        "c0178",
+        "c0179",
+        "c0180"
+      ],
+      "selected": [
+        "c0177"
+      ],
+      "stage": "round_0:path_0"
+    },
+    {
+      "arm": "multistart",
+      "pool": [
+        "c0008",
+        "c0181",
+        "c0182",
+        "c0183",
+        "c0184",
+        "c0185",
+        "c0186",
+        "c0187",
+        "c0188",
+        "c0189"
+      ],
+      "selected": [
+        "c0186"
+      ],
+      "stage": "round_0:path_1"
+    },
+    {
+      "arm": "multistart",
+      "pool": [
+        "c0005",
+        "c0190",
+        "c0191",
+        "c0192",
+        "c0193",
+        "c0194",
+        "c0195",
+        "c0196",
+        "c0197",
+        "c0198"
+      ],
+      "selected": [
+        "c0195"
+      ],
+      "stage": "round_0:path_2"
+    },
+    {
+      "arm": "multistart",
+      "pool": [
+        "c0177",
+        "c0199",
+        "c0200",
+        "c0201",
+        "c0202",
+        "c0203",
+        "c0204",
+        "c0205",
+        "c0206",
+        "c0207"
+      ],
+      "selected": [
+        "c0203"
+      ],
+      "stage": "round_1:path_0"
+    },
+    {
+      "arm": "multistart",
+      "pool": [
+        "c0186",
+        "c0208",
+        "c0209",
+        "c0210",
+        "c0211",
+        "c0212",
+        "c0213",
+        "c0214",
+        "c0215",
+        "c0216"
+      ],
+      "selected": [
+        "c0213"
+      ],
+      "stage": "round_1:path_1"
+    },
+    {
+      "arm": "multistart",
+      "pool": [
+        "c0195",
+        "c0217",
+        "c0218",
+        "c0219",
+        "c0220",
+        "c0221",
+        "c0222",
+        "c0223",
+        "c0224",
+        "c0225"
+      ],
+      "selected": [
+        "c0222"
+      ],
+      "stage": "round_1:path_2"
+    },
+    {
+      "arm": "multistart",
+      "pool": [
+        "c0203",
+        "c0226",
+        "c0227",
+        "c0228",
+        "c0229",
+        "c0230",
+        "c0231",
+        "c0232",
+        "c0233",
+        "c0234"
+      ],
+      "selected": [
+        "c0233"
+      ],
+      "stage": "round_2:path_0"
+    },
+    {
+      "arm": "multistart",
+      "pool": [
+        "c0213",
+        "c0235",
+        "c0236",
+        "c0237",
+        "c0238",
+        "c0239",
+        "c0240",
+        "c0241",
+        "c0242",
+        "c0243"
+      ],
+      "selected": [
+        "c0239"
+      ],
+      "stage": "round_2:path_1"
+    },
+    {
+      "arm": "multistart",
+      "pool": [
+        "c0222",
+        "c0244",
+        "c0245",
+        "c0246",
+        "c0247",
+        "c0248",
+        "c0249",
+        "c0250",
+        "c0251",
+        "c0252"
+      ],
+      "selected": [
+        "c0251"
+      ],
+      "stage": "round_2:path_2"
+    },
+    {
+      "arm": "multistart",
+      "pool": [
+        "c0233",
+        "c0253",
+        "c0254",
+        "c0255",
+        "c0256",
+        "c0257",
+        "c0258",
+        "c0259",
+        "c0260",
+        "c0261"
+      ],
+      "selected": [
+        "c0260"
+      ],
+      "stage": "round_3:path_0"
+    },
+    {
+      "arm": "multistart",
+      "pool": [
+        "c0239",
+        "c0262",
+        "c0263",
+        "c0264",
+        "c0265",
+        "c0266",
+        "c0267",
+        "c0268",
+        "c0269",
+        "c0270"
+      ],
+      "selected": [
+        "c0269"
+      ],
+      "stage": "round_3:path_1"
+    },
+    {
+      "arm": "multistart",
+      "pool": [
+        "c0251",
+        "c0271",
+        "c0272",
+        "c0273",
+        "c0274",
+        "c0275",
+        "c0276",
+        "c0277",
+        "c0278",
+        "c0279"
+      ],
+      "selected": [
+        "c0278"
+      ],
+      "stage": "round_3:path_2"
+    },
+    {
+      "arm": "multistart",
+      "pool": [
+        "c0260",
+        "c0280",
+        "c0281",
+        "c0282",
+        "c0283",
+        "c0284",
+        "c0285",
+        "c0286",
+        "c0287",
+        "c0288"
+      ],
+      "selected": [
+        "c0284"
+      ],
+      "stage": "round_4:path_0"
+    },
+    {
+      "arm": "multistart",
+      "pool": [
+        "c0269",
+        "c0289",
+        "c0290",
+        "c0291",
+        "c0292",
+        "c0293",
+        "c0294",
+        "c0295",
+        "c0296",
+        "c0297"
+      ],
+      "selected": [
+        "c0293"
+      ],
+      "stage": "round_4:path_1"
+    },
+    {
+      "arm": "multistart",
+      "pool": [
+        "c0278",
+        "c0298",
+        "c0299",
+        "c0300",
+        "c0301",
+        "c0302",
+        "c0303",
+        "c0304",
+        "c0305",
+        "c0306"
+      ],
+      "selected": [
+        "c0302"
+      ],
+      "stage": "round_4:path_2"
+    },
+    {
+      "arm": "multistart",
+      "pool": [
+        "c0284",
+        "c0307",
+        "c0308",
+        "c0309",
+        "c0310",
+        "c0311",
+        "c0312",
+        "c0313",
+        "c0314",
+        "c0315"
+      ],
+      "selected": [
+        "c0284"
+      ],
+      "stage": "round_5:path_0"
+    },
+    {
+      "arm": "multistart",
+      "pool": [
+        "c0293",
+        "c0316",
+        "c0317",
+        "c0318",
+        "c0319",
+        "c0320",
+        "c0321",
+        "c0322",
+        "c0323",
+        "c0324"
+      ],
+      "selected": [
+        "c0293"
+      ],
+      "stage": "round_5:path_1"
+    },
+    {
+      "arm": "multistart",
+      "pool": [
+        "c0302",
+        "c0325",
+        "c0326",
+        "c0327",
+        "c0328",
+        "c0329",
+        "c0330",
+        "c0331",
+        "c0332",
+        "c0333"
+      ],
+      "selected": [
+        "c0302"
+      ],
+      "stage": "round_5:path_2"
+    },
+    {
+      "arm": "multistart",
+      "pool": [
+        "c0284",
+        "c0293",
+        "c0302"
+      ],
+      "selected": [
+        "c0284"
+      ],
+      "stage": "terminal"
+    },
+    {
+      "arm": "beam",
+      "pool": [
+        "c0006",
+        "c0008",
+        "c0005",
+        "c0334",
+        "c0335",
+        "c0336",
+        "c0337",
+        "c0338",
+        "c0339",
+        "c0340",
+        "c0341",
+        "c0342",
+        "c0343",
+        "c0344",
+        "c0345",
+        "c0346",
+        "c0347",
+        "c0348",
+        "c0349",
+        "c0350",
+        "c0351",
+        "c0352",
+        "c0353",
+        "c0354",
+        "c0355",
+        "c0356",
+        "c0357",
+        "c0358",
+        "c0359",
+        "c0360"
+      ],
+      "selected": [
+        "c0339",
+        "c0338",
+        "c0341"
+      ],
+      "stage": 0
+    },
+    {
+      "arm": "beam",
+      "pool": [
+        "c0339",
+        "c0338",
+        "c0341",
+        "c0361",
+        "c0362",
+        "c0363",
+        "c0364",
+        "c0365",
+        "c0366",
+        "c0367",
+        "c0368",
+        "c0369",
+        "c0370",
+        "c0371",
+        "c0372",
+        "c0373",
+        "c0374",
+        "c0375",
+        "c0376",
+        "c0377",
+        "c0378",
+        "c0379",
+        "c0380",
+        "c0381",
+        "c0382",
+        "c0383",
+        "c0384",
+        "c0385",
+        "c0386",
+        "c0387"
+      ],
+      "selected": [
+        "c0365",
+        "c0368",
+        "c0377"
+      ],
+      "stage": 1
+    },
+    {
+      "arm": "beam",
+      "pool": [
+        "c0365",
+        "c0368",
+        "c0377",
+        "c0388",
+        "c0389",
+        "c0390",
+        "c0391",
+        "c0392",
+        "c0393",
+        "c0394",
+        "c0395",
+        "c0396",
+        "c0397",
+        "c0398",
+        "c0399",
+        "c0400",
+        "c0401",
+        "c0402",
+        "c0403",
+        "c0404",
+        "c0405",
+        "c0406",
+        "c0407",
+        "c0408",
+        "c0409",
+        "c0410",
+        "c0411",
+        "c0412",
+        "c0413",
+        "c0414"
+      ],
+      "selected": [
+        "c0395",
+        "c0413",
+        "c0404"
+      ],
+      "stage": 2
+    },
+    {
+      "arm": "beam",
+      "pool": [
+        "c0395",
+        "c0413",
+        "c0404",
+        "c0415",
+        "c0416",
+        "c0417",
+        "c0418",
+        "c0419",
+        "c0420",
+        "c0421",
+        "c0422",
+        "c0423",
+        "c0424",
+        "c0425",
+        "c0426",
+        "c0427",
+        "c0428",
+        "c0429",
+        "c0430",
+        "c0431",
+        "c0432",
+        "c0433",
+        "c0434",
+        "c0435",
+        "c0436",
+        "c0437",
+        "c0438",
+        "c0439",
+        "c0440",
+        "c0441"
+      ],
+      "selected": [
+        "c0422",
+        "c0419",
+        "c0428"
+      ],
+      "stage": 3
+    },
+    {
+      "arm": "beam",
+      "pool": [
+        "c0422",
+        "c0419",
+        "c0428",
+        "c0442",
+        "c0443",
+        "c0444",
+        "c0445",
+        "c0446",
+        "c0447",
+        "c0448",
+        "c0449",
+        "c0450",
+        "c0451",
+        "c0452",
+        "c0453",
+        "c0454",
+        "c0455",
+        "c0456",
+        "c0457",
+        "c0458",
+        "c0459",
+        "c0460",
+        "c0461",
+        "c0462",
+        "c0463",
+        "c0464",
+        "c0465",
+        "c0466",
+        "c0467",
+        "c0468"
+      ],
+      "selected": [
+        "c0446",
+        "c0422",
+        "c0419"
+      ],
+      "stage": 4
+    },
+    {
+      "arm": "beam",
+      "pool": [
+        "c0446",
+        "c0422",
+        "c0419",
+        "c0469",
+        "c0470",
+        "c0471",
+        "c0472",
+        "c0473",
+        "c0474",
+        "c0475",
+        "c0476",
+        "c0477",
+        "c0478",
+        "c0479",
+        "c0480",
+        "c0481",
+        "c0482",
+        "c0483",
+        "c0484",
+        "c0485",
+        "c0486",
+        "c0487",
+        "c0488",
+        "c0489",
+        "c0490",
+        "c0491",
+        "c0492",
+        "c0493",
+        "c0494",
+        "c0495"
+      ],
+      "selected": [
+        "c0446",
+        "c0422",
+        "c0419"
+      ],
+      "stage": 5
+    }
+  ],
+  "selected": {
+    "beam": {
+      "arm": "beam",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_1:-1",
+      "id": "c0446",
+      "padded": false,
+      "parent": "c0422",
+      "score": 0.0001800750760594383,
+      "slot": 4,
+      "stage": 4
+    },
+    "greedy": {
+      "arm": "greedy",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_1:-1",
+      "id": "c0050",
+      "padded": false,
+      "parent": "c0044",
+      "score": 0.0001800750760594383,
+      "slot": 4,
+      "stage": 4
+    },
+    "multistart": {
+      "arm": "multistart",
+      "code": [
+        0,
+        -2,
+        2,
+        2
+      ],
+      "edit": "group_1:-1",
+      "id": "c0284",
+      "padded": false,
+      "parent": "c0260",
+      "score": 0.0001800750760594383,
+      "slot": 4,
+      "stage": "round_4:path_0"
+    }
+  },
+  "tie_policy": "stable raw-score order; parents precede children; earlier slot wins",
+  "total_physical_calls": 496
+}
