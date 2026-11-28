@@ -1,0 +1,94 @@
+{
+  "seed": 2811294711,
+  "fit_roots": 32,
+  "development_roots": 30,
+  "open_response_roots": 10,
+  "suites": {
+    "i3_math": {
+      "fit": 8,
+      "development": 6
+    },
+    "i3_logic": {
+      "fit": 8,
+      "development": 6
+    },
+    "gsm8k": {
+      "fit": 8,
+      "development": 6
+    },
+    "math500": {
+      "fit": 0,
+      "development": 6
+    },
+    "rlt_revision": {
+      "fit": 8,
+      "development": 6
+    }
+  },
+  "grader": "local Math-Verify and upstream I3 Logic leaf verifiers for label truth, exact GSM8K and generated RLT end node",
+  "selector": [
+    31106,
+    1058
+  ],
+  "answer_tokens": {
+    "A": 1349,
+    "B": 1398
+  },
+  "dictionary_sites": [
+    25,
+    45,
+    55
+  ],
+  "intervention_sites": [
+    55,
+    95
+  ],
+  "rank": 8,
+  "dose": 0.05,
+  "development_only": true,
+  "heldout_sealed": false,
+  "primary_contrast": "0.5*(tanh(action-position SAE donor margin/4)-tanh(orthogonal sham donor margin/4))",
+  "primary_location": "first-pass endpoint inside the two-pass decode",
+  "mechanistic_floor": 0.05,
+  "mechanistic_target": 0.125,
+  "arms": [
+    "prompt_sae",
+    "action_sae",
+    "pca",
+    "haar",
+    "donor",
+    "sham",
+    "same_label_donor"
+  ],
+  "estimand": "selector routing when the verified content is presented in opposite positions; open response is scored separately",
+  "sources": {
+    "source_pins": {
+      "intellect_3_rl": "https://huggingface.co/datasets/PrimeIntellect/INTELLECT-3-RL/tree/a9eb9183224cec63fe9a71e7a3a80cff14868624",
+      "gsm8k": "https://github.com/openai/grade-school-math/tree/master/grade_school_math/data",
+      "math500": "https://huggingface.co/datasets/HuggingFaceH4/MATH-500/tree/2343f79f3640c0f795bbf4e3234396cfe9266d0f"
+    },
+    "files_sha256": {
+      "i3_math.parquet": "fce6fa97e44fab1129754409448152e0f2b2c36267b6480def654713e94e06b1",
+      "i3_logic.parquet": "91be0da16cec15ef67c6ec7e4de1371811344507df15d8a412077ce95dc39f41",
+      "gsm8k_train.jsonl": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+      "gsm8k_test.jsonl": "3730d312f6e3440559ace48831e51066acaca737f6eabec99bccb9e4b3c39d14",
+      "math500.jsonl": "35dc41080a3680858b27fa7e0533d2d547825316fc5dafe5d316f4ccc5a06132"
+    },
+    "logic_leaf_source_sha256": {
+      "boolean_expressions": "bce1621550054b0806eb5367dd3dc3a7346b442641e8f314f975cd1567d9df54",
+      "dyck_language": "45244ebefd9f50c6bb847b45c42f28b0f12fb23afede097b4ebc2d24756992ad",
+      "word_sorting": "f2eb538d7ee41838d9b265b6abefa807f3a8183e9373a50730dce03698f94b6d"
+    },
+    "logic_base_source_sha256": {
+      "data.py": "8a95140c9f05488a2fd5551fb926f4c95398caf38b366e359bead4c6c2b90d19",
+      "verifier.py": "ac49bbde814013b361f09c20d83a2dc53644bc27b3c3f5b3573c6043c6bd93f7"
+    },
+    "math_equivalence": "math-verify 0.8.0, uses the i3-math last-box extraction and equivalence rule",
+    "root_count": 48,
+    "answer_and_foil_verified": 48,
+    "seed": 2811294711
+  },
+  "rlt_verifier_sha256": "8593e06e842af5fa490af436ef889c1d6e62ff927620f036132e1535b9a7c841",
+  "model_sha256": "7c70b0d949722201a5af6bc42c1d2552a300901d93d194f13c3fe1fb1cea3cab",
+  "native_reader_sha256": "4f7c84c922ed7bfa894e9f277e03c6ae91b352cefe5843b21ddebb7750394efb"
+}

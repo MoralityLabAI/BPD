@@ -1,0 +1,33 @@
+{
+  "root_count": 15,
+  "fixed_order_full_arm_roots": {
+    "i3_math": [
+      "dory-c5feb66af8f28a62e626adf5",
+      "dory-3724e5659c5575c14ace7f44",
+      "dory-4c800986b77e0fd277519579"
+    ],
+    "i3_logic": [
+      "dory-c7f865a2e062af926ebd3f41",
+      "dory-359356f48a267eb894181c2d",
+      "dory-34bfbc30e75e92c1fc18739e"
+    ],
+    "gsm8k": [
+      "dory-a0dca931c19c0a3b343d6c98",
+      "dory-4c9e57cf852ab90f3c078b6c",
+      "dory-ef81028aca24500528000b5c"
+    ],
+    "math500": [
+      "dory-db4c5186ee8d37f372e85221",
+      "dory-ec5238bc01ecbea79d33e4ba",
+      "dory-31517ee40d7aed1a6babe2a7"
+    ],
+    "rlt_revision": [
+      "beadabd6bdb4c4aa1aeaab03b799f64fe673f320b2ec62dcb202274db36a62fb",
+      "4fbdb71956648768873cf3f60d58f355f004f14cfe69837d1745b4b6c858e10c",
+      "abc85411130969e739ff38187942d4c9c2c92d674411cfb8884e6e91fdefcc42"
+    ]
+  },
+  "all_development_roots_for_primary": 30,
+  "selection_rule": "SHA-256 rank of frozen root ID, independent of native outcomes",
+  "additional_control": "Oakhaven action-position SAE decoder span used zero-shot"
+}

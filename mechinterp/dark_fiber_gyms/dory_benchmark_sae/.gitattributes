@@ -1,0 +1,3 @@
+# Preserve the exact bytes covered by the benchmark release manifest.
+receipts/* -text
+verify_dory_bench_sae.py -text

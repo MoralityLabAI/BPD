@@ -6,6 +6,8 @@
 
 The [Dory Q4 Oakhaven SAE tower pilot](dory_story_sae/README.md) includes fixed-dose
 one- versus two-pass action interventions, an action-position refit, and an offline receipt audit.
+The [Dory benchmark SAE tower pilot](dory_benchmark_sae/README.md) extends the
+matched loop comparison to five math and logic suites and audits original-format activation replays.
 
 | Gym / Module | Compute | Local hardware |
 | --- | --- | --- |

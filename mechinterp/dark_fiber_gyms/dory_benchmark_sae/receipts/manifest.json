@@ -1,0 +1,30 @@
+{
+  "receipt_sha256": {
+    "causal_roster.json": "dbe03bfe6c3894ded88015ab2646e0d26b0c4050a40296b20b9297a715dfcf89",
+    "clean_scores.jsonl": "9cfc8661042018d77674596f26bd844df10d510dc394ff63bb582ff8b5db1fbb",
+    "dory_bench_sae_decisions.jsonl": "817afb73b14cd768231509cb9b61753c6ec7ab7e030b11081e48633cfd8a4284",
+    "dory_bench_sae_results.json": "e17096483f80678e71db379c873a5463545ed22ff44d642d283ac31e1e3d158b",
+    "fit_manifest.json": "6afca2eb24b10d2b62b93468cb7279efb9efd127aa2c745ec1f8cde7f2224bc9",
+    "frozen_arms.json": "03adab80a89ac7ea507b2ed0369c8905a2b613c2f49c099af23bd28859110a3c",
+    "open_activation_geometry.json": "1475f05ce1d1582e0a97c9dd04b88909d81c1b3ee72efea81948d8047fc1d102",
+    "open_grades.json": "dd57e2a0fcae1e4b1ea6cdb55135f607d39b922909e7be400b74675a4ddf75cb",
+    "preflight.json": "6fcbb39e3aa0dfbdf5e9e085bbe1dde9673129fdc17517f9e15fed77e10065d5",
+    "preflight_input.json": "f61db495474dd294b5ece76d193520ffe118112c7a212681aa18a49c643814d0",
+    "primary_scores.jsonl": "08c1ea603e5428f4d8a4d25179d27755b4d7aa5798658c3e9bdf2f38375f678f",
+    "registration.json": "b5ead13fbb91d6009089ee3e5cc2dd6e9997c6bf00f39533adff3ae5b6a0bf49",
+    "source_roster.json": "c537ab0023775b02d8e0489b7b48b4602a404bf173f9c78c7b9812c67e0af9a8",
+    "sweep_l1_scores.jsonl": "2437d3ad4f3c71d01652fcf491844dee44e95d20a46f005f7a88ff8df9135b81",
+    "sweep_l2_scores.jsonl": "143ad6504d901cdfbacae03b774976c8af740266f155ce61fcb90a77803f8c31"
+  },
+  "schema": "bpd-dory-benchmark-sae-receipt-release-v1",
+  "source_bundle_provenance_sha256": {
+    "dory_bench_native.py": "7a42538ebfd2c6e5c1dc9e2cd783c33437f533211aae0a5cd9392ae04f4c8d8d",
+    "dory_bench_sae.py": "e7a443813ebb239ccd99519b03cc0e45898a93fd7d43a40a5f7c06c638bdd68d",
+    "dory_bench_sources.py": "ef7a76b755eb1746500684f5b0fa9351debf56489bad930d21f69f3d66c83221",
+    "dory_readout.cpp": "6aec5b129320c12df9c82ab4e2c14ec2125b470395a49f5e39175dae16692072",
+    "dory_story_sae.py": "04f8370ce1581da5f0cfee4cd2674ae2d9b52c5d2918ad66d1116984c8d61599",
+    "dory_story_sae_native.cpp": "5358233fb17cddf67fddaf8d868737a0fff1969044586583c11046e47d699f54"
+  },
+  "source_bundle_sha256": "b94348ea1eba38f1ffe7a4b89d74f861635dd7a51c5486de773a7846dc7042cf",
+  "source_verifier_sha256": "d99df00d54885a0c399486cfdbb421285e9bea0ecfe901a20e98c5e168bf5e10"
+}
