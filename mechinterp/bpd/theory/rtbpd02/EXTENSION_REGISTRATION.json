@@ -1,0 +1,185 @@
+{
+  "schema": "rtbpd02-extension/v1",
+  "starting_commit": "2a19cafcd02285a0c9946e0819fc6d8ccbcdc31d",
+  "nanbeige_synthesis": "c074e354e8bcd4d26c02104fadd289dfdad8a207",
+  "boundary": {
+    "cpu_only": true,
+    "pretrained_decoder_forwards": 0,
+    "gpu_jobs": 0,
+    "protected_ARG03_access": false,
+    "formal_tests": 0,
+    "readout": "development and finite synthetic only"
+  },
+  "weighted_solver": {
+    "support_relative_cutoff": 1e-12,
+    "default_baseline": "existing exact weighted Eckart–Young problem",
+    "reported_losses": [
+      "effective",
+      "full"
+    ]
+  },
+  "synthetic": {
+    "geometry_seed": 14602,
+    "root_seed": 20261123146,
+    "train_roots": 24,
+    "development_roots": 64,
+    "rank": 2,
+    "physical_dose": 0.25,
+    "occurrence_passes": [
+      1,
+      2
+    ],
+    "same_root_worlds": [
+      "A",
+      "B"
+    ],
+    "branches": [
+      "aligned",
+      "shifted"
+    ],
+    "spectrum": [
+      8,
+      6,
+      4,
+      3,
+      2,
+      1
+    ],
+    "background_diagonal": [
+      0.25,
+      0.35,
+      1.45,
+      1.8,
+      0.7,
+      0.8
+    ],
+    "recurrent_write_scale": 0.08,
+    "initial_reach_scale": [
+      0.25,
+      0.35,
+      1.15,
+      1.5,
+      0.6,
+      0.3
+    ],
+    "shifted_development_scale": [
+      7,
+      5,
+      0.07,
+      0.055,
+      0.25,
+      0.2
+    ],
+    "delayed_reader_mix": [
+      [
+        1,
+        0.2
+      ],
+      [
+        -0.125,
+        0.75
+      ]
+    ],
+    "methods": [
+      "svd",
+      "reach",
+      "reader",
+      "bpd_static",
+      "random"
+    ],
+    "primary": "aligned pass-2 held-out root mean squared fixed future-reader error",
+    "stress": "shifted pass-2 held-out root mean squared write error",
+    "numerical_closure_atol": 1e-11,
+    "directional_score": {
+      "zero_observed": 0,
+      "zero_reference": "unavailable",
+      "zero_atol": 1e-11
+    },
+    "root_generation": {
+      "distribution": "independent standard-normal common and half-contrast planted coordinates",
+      "world_A": "common-minus-half-contrast",
+      "world_B": "common-plus-half-contrast",
+      "scale": "multiply each coordinate of common and half-contrast by registered reach scales",
+      "split_seeds": [
+        0,
+        1
+      ],
+      "shift": "reuse development standard-normal roots with shifted scale",
+      "rank_comparison": "separate per-pass fits",
+      "random_seed_derivation": "geometry RNG after basis, fixed for both passes and splits"
+    }
+  },
+  "archive": {
+    "expected_roots": 8,
+    "fit_split": "calibration",
+    "arm": "focused",
+    "token": "initial last semantic token",
+    "layer_zero_based": 21,
+    "site": "mlp.down_proj",
+    "backends": [
+      "nf4",
+      "bf16"
+    ],
+    "passes": [
+      1,
+      2
+    ],
+    "ranks": [
+      1,
+      2,
+      4
+    ],
+    "target": "the sum of the frozen IO18 T2 rank-eight component operators in each backend",
+    "unmasked_native_qualification": "verify original all-one full-head bit-exact receipt on both fits per backend",
+    "native_affine_check": "BF16 only, independently replay layer-21 down-projection on sealed archive vectors",
+    "evaluation": "leave one complete CAL root out per fold, with both worlds in the same fold",
+    "moments": [
+      "root-balanced reached-state second moment",
+      "paired counterfactual contrast second moment"
+    ],
+    "fixed_reader": "BF16 pass 1 only, K projection composed with continuous Jacobian of both RMS norms at the mean training-fold raw carrier; range restricted to the target write span",
+    "snapshot_revision": "451ed48c3273ecef7ea8faaa43c31ce529763bb1",
+    "max_private_bytes": 536870912,
+    "max_seconds": 420,
+    "minimum_start_available_bytes": 5368709120,
+    "minimum_reserve_bytes": 4294967296,
+    "local_archives": "never upload raw states, fitted arrays, token IDs, prompts or pretrained weights",
+    "source_file_sha256": {
+      "experiments/nan_comp14/SOURCE_MANIFEST.json": "b9a62f0eedaedc3eca4667412873d5c7151b6a4fb1f98b41bf1bc6978649043f",
+      "experiments/nan_comp14/fixtures/public.jsonl": "f6e714cb36b8cdc433eb75ff2bcbde8c1c1f7ebb4d5e6573ea1fdf97f43e5504",
+      "experiments/nan_comp14/fixtures/tokenizer_receipt.json": "a5ebf1eea257928c8e5579e05f1c4fe8698cbc6b0767e50c8511a75dea4f32bf",
+      "experiments/nan_readpath37/registration.json": "45f0f8f145ad28ea9334f27a96825b362238e4bea7aa3650f3f6d33e067cd09a",
+      "experiments/nan_fit16_io18/SOURCE_MANIFEST.json": "7bb76c5c895848cf12643312609a584ca0797bc87e9a05e320b8cfa2d04f4830",
+      "reports/nanbeige_bpd_gym/nan_fit16_io18_progress.json": "67129eba2f7d995638e9a43d35fd1cbcd3eab0a00e6b93274147be18affe321c",
+      "experiments/nan_bpd01/receipts/checkpoint_verification.json": "cd3f3223efe8ecf94155ee5e42ee093ddbf20d91b5d19a1decab30ea39e07fdd",
+      "runs/nan_comp14/audits/bf16.json": "75718b1d3764883f5960794587c0ecf3c6ca3d39a858246812cf971967d3f207",
+      "runs/nan_comp14/audits/nf4.json": "5c579d64d88f18c3feccb58f0e910b6a5022c5ae55693e4f1036cd29aa57b981",
+      "runs/nan_fit16_io18/audits/bf16.json": "539a74689a1942173fbad6ce55f53cac08133149167ba48f8a4af222e63ff93e",
+      "runs/nan_fit16_io18/audits/nf4.json": "d9885205c28fe5fa1ecf6b727ef8ca8580f963ee0b8a909c7eeb4f0f92d17536"
+    },
+    "bf16_affine_coordinates": "float64 affine product, then float32-to-BF16 round-to-nearest ties-to-even. Report elemental equality and numerical residual, without extending the archived all-one parity label",
+    "support_relative_cutoff": 1e-12,
+    "archive_random_seed": 37035,
+    "archive_direction_dose_fraction": 0.25,
+    "direction_zero_atol": 1e-11,
+    "archive_direction_planner": {
+      "scope": "BF16 pass 1, rank 2, exposed CAL only",
+      "paired": "half of fixed-reader cosine minus ordinary-SVD cosine",
+      "sham": "half of seeded random cosine minus ordinary-SVD cosine",
+      "independent_confirmation_units": false
+    }
+  },
+  "evalmath": {
+    "commit": "accf4d9040bee8daeabc6b07003bb484708996c0",
+    "root_metric": "(reader cosine minus SVD cosine)/2 at matched physical dose",
+    "scientific_min_effect": "0.10",
+    "target_effect": "0.25",
+    "measurement_resolution": "0.000001",
+    "quantile": "0.95",
+    "confidence": "0.95",
+    "alpha": "0.05",
+    "planned_comparisons": 1,
+    "nominal_planning_roots": 64,
+    "heldout_sealed": false
+  }
+}
