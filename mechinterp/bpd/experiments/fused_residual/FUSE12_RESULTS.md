@@ -1,7 +1,7 @@
 # FUSE-12 | CUDA Validation, Cumulative Residual Caching Benchmark, Mixed Precision & DataGoblin Curriculum
 
-- **Generated (UTC):** 2026-11-27 23:31:49Z
-- **Branch / Head:** `research/fuse12-cuda-validation-20261127` (`70adf54bfd5e235b9304a05c1f0a6e0b66765d03`)
+- **Generated (UTC):** 2026-11-28 06:11:38Z
+- **Branch / Head:** `research/fuse12-cuda-validation-20261127` (`339fec45df12c4dd9d5dbc1e66de41e5042979e2`)
 - **Base Commit:** `a4cc3d861df531f41d91000d8dd0922a5ef953ec` (FUSE-11 PR #185; PRs #178, #184, #185 all green on `native-cpu` & `cpu-math-and-donor-contrast`)
 - **Prospective Protocol:** [FUSE12_PROTOCOL.md](./FUSE12_PROTOCOL.md) (`1af76590f5043c06884faf2aeab6c68f35c9f6f9`)
 - **Production Defaults:** Unchanged (`allow_cuda_residual_cache=False`, `residual_cache_precision_mode="fp32"`, all residual caches default off).
@@ -14,8 +14,10 @@
    - Width `2048`, `T=24`: peak allocated VRAM drops from `7,189.8 MiB` (Arm A) -> `1,638.1 MiB` (Arm G, **4.39x reduction**, `-5,552 MiB`), with `1.082x` step speedup (`1,453.3 ms -> 1,343.6 ms`).
    - Width `4096`, `T=24`: native Arm A allocates **`26,573.9 MiB`** (`28,120 MiB` reserved), spilling over PCIe under WDDM (`56.57 s/step`, `4.39 kJ/step`). Arm F/G holds peak allocated VRAM at **`4,757.6 MiB`** (`5,122 MiB` NVML, **5.59x reduction**, zero spill), cutting step latency to **`3.14 s/step`** (**`18.00x` speedup**, 95% CI `[17.63, 18.12]`) and step energy by **18.2x** (`4,388 J -> 242 J/step`).
    - At small/medium widths (`64–1024`), GPU step time is dominated by Python/autograd dispatch (`site_recon_ms = 0.03–0.22 ms`), so full-step speedups remain near `0.90–1.08x` (with isolated calibration wins like `w=512, p=6, cal=1`: `1.412x`). Cache planner overhead is negligible (`0.15–0.59 ms`).
-3. **FUSE-12B Mixed Precision Audit (No Silent Tolerance Loosening):** TF32 passes `1,536/1,536` bitwise exact + 4 trainer cells (`0` parity failures). Initial BF16/FP16 stress runs revealed two real mechanisms: (a) PyTorch `torch.autograd.Function.apply` disables autocast before entering `forward()`, causing `_Primal.backward` to run FP32 while native `MmBackward0` ran BF16/FP16 (exact `2^-7 / 2^-10 = 8x` gap on `g_V, g_U` only, while all `1,344/1,344` forward/PGD/input/mask tensors were bitwise exact — now fixed by capturing autocast state outside `_Primal.apply`); (b) native `TiedComponentLinear.observe_clean_pass` (`components.py:226`) raises `RuntimeError: expected dtype float for end but got dtype BFloat16` in `lerp_` on step >= 1 under CUDA BF16/FP16 autocast when `ablation.mode="pass_mean"`.
-4. **FUSE-12C DataGoblin Curriculum:** Exported `267` measured GPU rows (`658` site samples across widths `64–4096` and depths `6–24`). Under strict group holdouts, a naive raw-ms Ridge model fails (`0.334` width / `0.348` depth oracle fraction) due to 5-order-of-magnitude WDDM-spill leverage, whereas a log-space physical Ridge predictor achieves **`0.9192`** (width holdout) / **`0.9220`** (depth holdout) of oracle step savings (`0.9267` / `0.9280` on direct reconstruction savings), closely matching `exact_saved_mac` (`0.9356` / `0.9497`) and `density` (`0.9375` / `0.9433`). A compact logistic worth-caching classifier (`speedup >= 1.03x OR vram_saved >= 256 MiB`) achieves `72.6%` width-holdout and `75.4%` depth-holdout accuracy.
+3. **FUSE-12B Mixed Precision Verdict (No Silent Tolerance Loosening):**
+   - **TF32 (`PASS`):** `1,536/1,536` stress tensors bitwise exact (`max_abs=0.0`, `failures=0`), `2/2` parity-audited trainer cells bitwise exact (`182/182`, `192/192`), and **3.20x peak VRAM reduction** at `w=2048, T=12` (`3,892 -> 1,218 MiB`).
+   - **BF16 & FP16 CUDA Autocast (`HOLD — keep on reference path`):** Three independent mechanisms block admission without loosening tolerances: (a) native `TiedComponentLinear.observe_clean_pass` (`components.py:226`) raises `RuntimeError` in `lerp_` under CUDA BF16/FP16 autocast with `pass_mean`; (b) PyTorch's `AutoDispatchBelowAutocast` thread-local guard inside plain `Function.backward()` causes `_Primal.backward` to execute `g_V, g_U` in FP32 while native `MmBackward0` executes in BF16/FP16 (`1,344/1,344` forward/PGD/input/mask tensors bitwise exact, `192` BF16 / `144` FP16 failures on `g_V, g_U`, and `52` BF16 / `42` FP16 trainer parity failures at `w=512`, `max_abs=7.81e-2` / `7.81e-3`); (c) under autocast, `F.linear(xf, delta_w)` casts FP32 `delta_w` into a fresh per-pass BF16/FP16 copy saved by autograd, negating the `O(T)` VRAM collapse (`w=2048, T=12`: `6,317 -> 6,445 MiB`, `0.85–0.97x` slower).
+4. **FUSE-12C DataGoblin Curriculum (50-cell / 283-row / 706-site dataset):** Under strict group holdouts across widths `64–4096` and depths `6–24`, a naive raw-ms Ridge model fails (`0.331` width / `0.349` depth oracle fraction) due to 5-order-of-magnitude WDDM-spill leverage, whereas a log-space physical Ridge predictor achieves **`0.9194`** (width holdout) / **`0.9209`** (depth holdout) of oracle step savings (`0.9242` / `0.9256` on direct reconstruction savings), closely matching `exact_saved_mac` (`0.9364` / `0.9505`) and `density` (`0.9379` / `0.9439`). A compact logistic worth-caching classifier (`speedup >= 1.03x OR vram_saved >= 256 MiB`) achieves `71.6%` width-holdout and `66.3%` depth-holdout accuracy.
 
 ## 1. Hardware, Preflight & CUDA FP32 Validation Gate
 - **GPU:** `NVIDIA GeForce RTX 5080 Laptop GPU` (SM `12.0`, `60` SMs, `16303.0` MiB NVML / `15,915` MiB WDDM)
@@ -108,20 +110,30 @@
 | `tf32` | 512 | 12 | off | full | 623.6 | 572.9 | 1.088x | 8.00 | 371->193 | 576/576 / 0 |
 | `tf32` | 1024 | 12 | 1 | binding | 2198.0 | 2281.3 | 0.963x | 15.00 | 1160->806 | — |
 | `tf32` | 2048 | 12 | off | full | 651.3 | 651.8 | 0.999x | 120.00 | 3892->1218 | — |
+| `bf16` | 512 | 12 | off | full | 2304.1 | 2724.3 | 0.846x | 8.00 | 509->520 | 391/576 / 154 |
+| `bf16` | 2048 | 12 | off | full | 2348.6 | 2658.7 | 0.883x | 120.00 | 6317->6445 | — |
+| `fp16` | 512 | 12 | off | full | 2420.5 | 2587.3 | 0.936x | 8.00 | 509->520 | 396/576 / 126 |
+| `fp16` | 2048 | 12 | off | full | 2663.6 | 2748.2 | 0.969x | 120.00 | 6317->6445 | — |
+
+### FUSE-12B Native Autocast Incompatibilities Recorded
+- `mixed_precision__bf16__w128_p6_closed_loop_k2_cal1_full`: `native_autocast_error` — `expected dtype float for `end` but got dtype struct c10::BFloat16`
+- `mixed_precision__bf16__w1024_p12_closed_loop_k2_cal1_binding`: `native_autocast_error` — `expected dtype float for `end` but got dtype struct c10::BFloat16`
+- `mixed_precision__fp16__w128_p6_closed_loop_k2_cal1_full`: `native_autocast_error` — `expected dtype float for `end` but got dtype struct c10::Half`
+- `mixed_precision__fp16__w1024_p12_closed_loop_k2_cal1_binding`: `native_autocast_error` — `expected dtype float for `end` but got dtype struct c10::Half`
 
 ## 4. FUSE-12C: DataGoblin Admission-Policy Curriculum & Held-Out Predictor
-- **Dataset:** [`fuse12c_datagoblin_dataset.jsonl`](./fuse12c_datagoblin_dataset.jsonl) (`267` rows, `658` site samples, `source_dataset_kind="synthetic_native_trainer"`).
+- **Dataset:** [`fuse12c_datagoblin_dataset.jsonl`](./fuse12c_datagoblin_dataset.jsonl) (`283` rows, `706` site samples, `source_dataset_kind="synthetic_native_trainer"`).
 - **Widths Observed:** `[64, 128, 256, 512, 1024, 2048, 4096]` | **Recurrence Depths Observed:** `[6, 12, 24]`
 - **Contract:** Strictly experimental and outside the numerical correctness path.
 
 | Holdout Scheme | Metric | Learned Log-Ridge | Learned Raw-Ridge | Exact Saved-MAC | First-Fit | Density |
 |---|---|---:|---:|---:|---:|---:|
-| Leave-One-Width-Family-Out | Oracle Frac (Step ms) | 0.9192 | 0.3344 | 0.9356 | 0.9337 | 0.9375 |
-| Leave-One-Width-Family-Out | Oracle Frac (Direct Recon ms) | 0.9267 | 0.3812 | 0.9237 | 0.9357 | 0.9293 |
-| Leave-One-Recurrence-Depth-Out | Oracle Frac (Step ms) | 0.9220 | 0.3478 | 0.9497 | 0.8968 | 0.9433 |
-| Leave-One-Recurrence-Depth-Out | Oracle Frac (Direct Recon ms) | 0.9280 | 0.3379 | 0.9360 | 0.9062 | 0.9320 |
+| Leave-One-Width-Family-Out | Oracle Frac (Step ms) | 0.9194 | 0.3308 | 0.9364 | 0.9331 | 0.9379 |
+| Leave-One-Width-Family-Out | Oracle Frac (Direct Recon ms) | 0.9242 | 0.3745 | 0.9226 | 0.9360 | 0.9284 |
+| Leave-One-Recurrence-Depth-Out | Oracle Frac (Step ms) | 0.9209 | 0.3494 | 0.9505 | 0.8969 | 0.9439 |
+| Leave-One-Recurrence-Depth-Out | Oracle Frac (Direct Recon ms) | 0.9256 | 0.3379 | 0.9354 | 0.9053 | 0.9310 |
 
-- **Worth-Caching Classifier** (`speedup_cuda >= 1.03 OR vram_saved_mib >= 256`): leave-one-width-out accuracy = `0.726`, leave-one-depth-out accuracy = `0.754`.
+- **Worth-Caching Classifier** (`speedup_cuda >= 1.03 OR vram_saved_mib >= 256`): leave-one-width-out accuracy = `0.716`, leave-one-depth-out accuracy = `0.663`.
 
 ## 5. Artifacts & Reproduction
 - Protocol: [FUSE12_PROTOCOL.md](./FUSE12_PROTOCOL.md)
