@@ -1,0 +1,58 @@
+{
+  "compact_coefficients": [
+    -0.0828,
+    0.1061,
+    -0.0004,
+    -0.0027,
+    0.1234,
+    0.0243,
+    -0.1588,
+    -0.0583,
+    0.004,
+    0.2992
+  ],
+  "experiment": "BPD-AMM-11",
+  "full_coefficients": [
+    0.158,
+    0.1255,
+    -0.0005,
+    0.0023,
+    -0.1939,
+    0.0071,
+    -0.009,
+    0.1416,
+    0.0648,
+    -0.1246,
+    -0.0445,
+    0.0115,
+    -0.0067,
+    0.0057,
+    0.2961,
+    -0.1073,
+    -0.2301,
+    0.0291
+  ],
+  "independent_roots": 64,
+  "pooled_action": 4,
+  "schema": "bpd.amm11.cosine_transfer.v1/training_lock",
+  "source_sha256": {
+    "PROTOCOL.md": "3cdec1745742fd22c10665fdc7aa117dad2f04714490e4b04d7831c20c4e472a",
+    "RUNTIME.json": "45d553342de905f5c12b24573252c7386708f4f90d9e41a9685b0aa3fff73341",
+    "__init__.py": "ebc8c1d4338ace26a14ac2a0d1fe34b506f18c8428f0994496bf389a47f055f5",
+    "case.py": "ab3a293cfdd2bec0d9799fd982fd62475ab021b283761b044790eb33c7b08797",
+    "experiment.py": "d9e018b2f1c1021e386afd0ac761fc5c8bfb740398917a7341aed0c8510a4a82",
+    "models.py": "fd08f118a538e87b107a807932b83a5c954ed55f35de2fc312df8cb9917076f1",
+    "test_experiment.py": "39698b14ac4638efe6e443cd35e7e968099d8cf780c0165acc721fcf8a34b886"
+  },
+  "train_case_bits_sha256": "a82b3079521564cc510e5b6cedd15fc294a9bb88f682a54e6db44608f4969822",
+  "train_mask_hits": {
+    "mask_0": 831,
+    "mask_1": 443,
+    "mask_2": 452,
+    "mask_3": 1463,
+    "mask_4": 1932,
+    "mask_5": 1326
+  },
+  "training_policy_sha256": "eef8c22c96737ee027297b3fbffe58d11df3d13b31a7b9d55a5a0ae98840ab08",
+  "training_rows_sha256": "df620cea574a5812a36f3d9214025dd3ac248f6edc03b62d118b35c9c07e32b6"
+}

@@ -33,6 +33,28 @@ FC05 trained zero scientific confirmation models. Further scientific work needs
 a prospective aggregate-null coverage contract and a separately authorized
 confirmation release. Earlier FC01, FC02, FC03 and FC04 verdicts stay unchanged.
 
+AMM11's 128 reserved confirmation model roots are **SEALED**.
+Its preregistered new 64-model DEVELOPMENT experiment tested
+full learned BPD strategy-memory against a **strong analytical
+`argmax cosine` donor-displacement alignment rule** at the same
+physical intervention dose and identical source-safe first-pass
+information budget. The registered PRIMARY gain was only
++1.935pp, Holm-adjusted exact model-root sign p=.004006,
+95% model-bootstrap [+0.638,+3.241]pp. The entire interval
+fell below the registered +8pp meaningful physical mechanism
+minimum. Matched cosine repeatability was 7.42pp and the
+corrected EvalMath planner returned `REDESIGN_OR_PILOT_ONLY`.
+Only 55/64 models met the preregistered independent teacher/factor
+fidelity criteria (required >=56). All failed-fit roots are
+retained in ITT scoring. Read
+`mechinterp/bpd/experiments/amm11_cosine_transfer/RESULTS.md`,
+`AMENDMENT_PRE_DEV_FEATURE_HASH.md`, and the four
+`results/` receipt locks. Do not run AMM11 `confirmation`,
+construct a release manifest, or treat its nominal root-sign
+significance as a meaningfully resolved learned mechanism.
+It is a synthetic linear recurrent result with a physically
+available first-pass donor displacement reference.
+
 AMM10 is an exploratory **exposed-data analysis only** in
 `mechinterp/bpd/experiments/amm10_exposed_dissection/`.
 The original AMM09R1 frozen 18-feature strategy-memory policy ranks
